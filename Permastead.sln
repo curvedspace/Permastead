@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.6.33815.320
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Permastead", "Permastead\Permastead.csproj", "{66F1E1B2-D450-4630-A6F8-D8102C5F8168}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Permastead.Desktop", "Permastead.Desktop\Permastead.Desktop.csproj", "{7C48D4AD-8C1A-4EEC-9D2D-A8DCDB5E1DBF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{66F1E1B2-D450-4630-A6F8-D8102C5F8168}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{66F1E1B2-D450-4630-A6F8-D8102C5F8168}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{66F1E1B2-D450-4630-A6F8-D8102C5F8168}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{66F1E1B2-D450-4630-A6F8-D8102C5F8168}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7C48D4AD-8C1A-4EEC-9D2D-A8DCDB5E1DBF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7C48D4AD-8C1A-4EEC-9D2D-A8DCDB5E1DBF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7C48D4AD-8C1A-4EEC-9D2D-A8DCDB5E1DBF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7C48D4AD-8C1A-4EEC-9D2D-A8DCDB5E1DBF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {3FDE9842-668A-4709-A45F-2A23AE33FFB7}
+	EndGlobalSection
+EndGlobal
