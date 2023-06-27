@@ -7,11 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Permastead", "Permastead\Pe
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Permastead.Desktop", "Permastead.Desktop\Permastead.Desktop.csproj", "{7C48D4AD-8C1A-4EEC-9D2D-A8DCDB5E1DBF}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Models", "Models", "{B61282D6-D04A-4E65-85C5-513900F0F30C}"
-	ProjectSection(SolutionItems) = preProject
-		Models\Achievement.cs = Models\Achievement.cs
-		Models\AchievementType.cs = Models\AchievementType.cs
-	EndProjectSection
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Models", "Models\Models.csproj", "{EBF342F0-757E-4174-B8CF-E42F92E256AD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +23,10 @@ Global
 		{7C48D4AD-8C1A-4EEC-9D2D-A8DCDB5E1DBF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7C48D4AD-8C1A-4EEC-9D2D-A8DCDB5E1DBF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7C48D4AD-8C1A-4EEC-9D2D-A8DCDB5E1DBF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EBF342F0-757E-4174-B8CF-E42F92E256AD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EBF342F0-757E-4174-B8CF-E42F92E256AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EBF342F0-757E-4174-B8CF-E42F92E256AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EBF342F0-757E-4174-B8CF-E42F92E256AD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
