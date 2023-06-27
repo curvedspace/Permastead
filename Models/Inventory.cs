@@ -32,7 +32,13 @@ public class Inventory
     
     public Person? Author { get; set; }
     
-    public long AuthorId { get { return Author.Id; } }
+    public long AuthorId 
+    { 
+        get
+        {
+            if (Author != null) return Author.Id;
+        } 
+    }
 
     public string StartDateString => this.StartDate.ToShortDateString();
 
