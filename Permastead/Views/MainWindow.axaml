@@ -6,7 +6,7 @@
         xmlns:views="clr-namespace:Permastead.Views"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="Permastead.Views.MainWindow"
-        Icon="/Assets/avalonia-logo.ico"
+        Icon="/Assets/permastead.ico"
         Title="Permastead">
         <views:MainView />
 </Window>
