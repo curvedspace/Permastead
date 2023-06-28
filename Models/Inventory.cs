@@ -36,7 +36,14 @@ public class Inventory
     { 
         get
         {
-            if (Author != null) return Author.Id;
+            if (Author != null)
+            {
+                return Author.Id;
+            }
+            else
+            {
+                return 0;
+            }
         } 
     }
 
