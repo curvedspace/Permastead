@@ -35,7 +35,7 @@ namespace Permastead.ViewModels
                 _factory?.InitLayout(Layout);
                 if (Layout is { } root)
                 {
-                    root.Navigate.Execute("Home");
+                    root.Navigate.Execute("Dashboard");
                 }
             }
 
