@@ -1,7 +1,7 @@
 ﻿
 using System.Data;
 using Microsoft.Data.Sqlite;
-
+using Microsoft.VisualBasic;
 using Models;
 
 namespace DataAccess.Local
@@ -29,8 +29,17 @@ namespace DataAccess.Local
                 else
                 {
                     //create a fresh default database in the user's home folder
-                    CreateDatabase();
-                    rtnValue = true;
+                    if (fi.Directory != null)
+                    {
+	                    fi.Directory.Create();
+	                    CreateDatabase();
+	                    rtnValue = true;
+                    }
+                    else
+                    {
+	                    rtnValue = false;
+                    }
+                    
                 }
             }
             catch (Exception)
@@ -561,8 +570,7 @@ namespace DataAccess.Local
 				AuthorId integer
 			);" +
             "";
-
-
+            
             using (IDbConnection connection = new SqliteConnection(DataConnection.GetLocalDataSource()))
             {
                 connection.Open();
