@@ -1,0 +1,208 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="1000" d:DesignHeight="450"
+             x:Class="Permastead.Views.Views.InventoryView"
+             xmlns:vm="using:Permastead.ViewModels.Views"
+             x:DataType="vm:InventoryViewModel"
+             xmlns:model="using:Models">
+    <!--This is design time only-->
+    <Design.DataContext>
+        <vm:InventoryViewModel/>
+    </Design.DataContext>
+
+ 
+    <Grid ColumnDefinitions="*" RowDefinitions="Auto, Auto, Auto, Auto,*">
+    
+    <WrapPanel Grid.Row="0">
+      <TextBlock FontWeight="Bold" Margin="20,20,20,20">Inventory</TextBlock>
+      <Separator MaxWidth="5" Foreground="Black"></Separator>
+      <TextBlock Name="InventoryCount" Text="{Binding InventoryCount, StringFormat='{}{0} total'}" Margin="20,20,20,20"></TextBlock>
+    </WrapPanel>
+
+    <WrapPanel Grid.Row="1">
+      <Label Margin="10,5,5,5">Description:</Label>
+      <TextBox Text="{Binding CurrentItem.Description, Mode=TwoWay}" Margin="5,0,5,5" ></TextBox>
+
+      <TextBlock Margin="10,5,5,5">Group:</TextBlock>
+      <ComboBox Width="200" ItemsSource="{Binding InventoryGroups, Mode=TwoWay}"
+                 SelectedItem="{Binding CurrentItem.InventoryGroup, Mode=TwoWay}" AutoScrollToSelectedItem="False">
+        <ComboBox.ItemTemplate>
+          <DataTemplate >
+            <TextBlock Text="{Binding Description}" />
+          </DataTemplate>
+        </ComboBox.ItemTemplate>
+      </ComboBox>
+      
+      <TextBlock Margin="10,5,5,5">Type:</TextBlock>
+      <ComboBox Width="200" ItemsSource="{Binding InventoryTypes} "
+                SelectedItem="{Binding CurrentItem.InventoryType, Mode=TwoWay}" AutoScrollToSelectedItem="True">
+        <ComboBox.ItemTemplate>
+          <DataTemplate >
+            <TextBlock Text="{Binding Description, Mode=TwoWay}" />
+          </DataTemplate>
+        </ComboBox.ItemTemplate>
+      </ComboBox>
+      
+      <TextBlock Margin="10,5,5,5">Author:</TextBlock>
+      <ComboBox Width="200" ItemsSource="{Binding People} "
+                SelectedItem="{Binding CurrentItem.Author, Mode=TwoWay}" AutoScrollToSelectedItem="True">
+        <ComboBox.ItemTemplate>
+          <DataTemplate >
+            <TextBlock Text="{Binding FullNameLastFirst, Mode=TwoWay}" />
+          </DataTemplate>
+        </ComboBox.ItemTemplate>
+      </ComboBox>
+      
+      <Label Margin="5,10,5,5">Original Value: </Label>
+      <TextBox Margin="5,7,5,5" Text="{Binding CurrentItem.OriginalValue}"></TextBox>
+      
+      <Label Margin="5,10,5,5">Current Value: </Label>
+      <TextBox Margin="5,7,5,5" Text="{Binding CurrentItem.CurrentValue}"></TextBox>
+      
+      <Label Margin="5,10,5,5">Brand: </Label>
+      <TextBox Margin="5,7,5,5" Text="{Binding CurrentItem.Brand}"></TextBox>
+
+      <Label Margin="5,10,5,5">Room: </Label>
+      <TextBox Margin="5,7,5,5" Text="{Binding CurrentItem.Room}"></TextBox>
+    </WrapPanel>
+      
+    <Panel Grid.Row="2" Height="100" Margin="10,10,30,10">
+      <TextBlock>Notes:</TextBlock>
+      <TextBox Text="{Binding CurrentItem.Notes, Mode=TwoWay}" TextWrapping="Wrap" Height="50" />
+    </Panel>
+      
+    <Panel Grid.Row="3">
+      <WrapPanel>
+        <Button Command="{Binding ResetToDoCommand}" Name="Reset" HorizontalAlignment="Right" Margin="10,0,0,10">Reset</Button>
+        <Button Command="{Binding SaveToDoCommand}" Name="Save" HorizontalAlignment="Right" Margin="10,0,0,10">Save</Button>
+      </WrapPanel>     
+    </Panel>
+       
+      <ScrollViewer Grid.Row="4">
+    <StackPanel >
+      
+      <DataGrid Name="InventoryGrid"
+                ItemsSource="{Binding Inventory}" SelectedItem="{Binding CurrentItem, Mode=TwoWay}"
+                CanUserSortColumns="True" CanUserReorderColumns="True" Margin="30">
+        <DataGrid.Styles>
+          <Style Selector="DataGridCell">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="HorizontalContentAlignment" Value="Left" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+            <Setter Property="FontSize" Value="10" />
+            <Setter Property="Template">
+              <ControlTemplate>
+                <Grid Background="{TemplateBinding Background}" ColumnDefinitions="*,Auto">
+                  <ContentPresenter
+                    Content="{TemplateBinding Content}"
+                    ContentTemplate="{TemplateBinding ContentTemplate}"
+                    HorizontalContentAlignment="Left" HorizontalAlignment="Left"
+                    Margin="{TemplateBinding Padding}"
+                    TextBlock.Foreground="{TemplateBinding Foreground}"
+                    VerticalAlignment="Center" VerticalContentAlignment="Center" />
+
+                  <Rectangle
+                    Grid.Column="1"
+                    HorizontalAlignment="Stretch"
+                    Name="PART_RightGridLine"
+                    Stroke="WhiteSmoke"
+                    StrokeThickness="1"
+                    VerticalAlignment="Stretch" />
+                </Grid>
+              </ControlTemplate>
+            </Setter>
+          </Style>
+        </DataGrid.Styles>
+        <DataGrid.Columns>
+
+          <DataGridTemplateColumn Header="Date">
+            <DataGridTemplateColumn.CellTemplate>
+              <DataTemplate DataType="model:Inventory">
+                <TextBlock Text="{Binding StartDate}" TextAlignment="Left"  Margin="10" />
+              </DataTemplate>
+            </DataGridTemplateColumn.CellTemplate>
+          </DataGridTemplateColumn>
+
+          <DataGridTemplateColumn Header="Description">
+            <DataGridTemplateColumn.CellTemplate>
+              <DataTemplate DataType="model:Inventory">
+                <TextBlock Text="{Binding Description}"  Margin="10" />
+              </DataTemplate>
+            </DataGridTemplateColumn.CellTemplate>
+          </DataGridTemplateColumn>
+
+          <DataGridTemplateColumn Header="Author">
+            <DataGridTemplateColumn.CellTemplate>
+              <DataTemplate DataType="model:Inventory">
+                <TextBlock Text="{Binding Author.LastName}"  Margin="10" />
+              </DataTemplate>
+            </DataGridTemplateColumn.CellTemplate>
+          </DataGridTemplateColumn>
+
+          <DataGridTemplateColumn Header="Group">
+            <DataGridTemplateColumn.CellTemplate>
+              <DataTemplate DataType="model:Inventory">
+                <TextBlock Text="{Binding InventoryGroup.Description}" TextAlignment="Left" TextWrapping="WrapWithOverflow"  Margin="10" />
+              </DataTemplate>
+            </DataGridTemplateColumn.CellTemplate>
+          </DataGridTemplateColumn>
+
+          <DataGridTemplateColumn Header="Brand">
+            <DataGridTemplateColumn.CellTemplate>
+              <DataTemplate DataType="model:Inventory">
+                <TextBlock Text="{Binding Brand}" TextAlignment="Left" TextWrapping="WrapWithOverflow"  Margin="10" />
+              </DataTemplate>
+            </DataGridTemplateColumn.CellTemplate>
+          </DataGridTemplateColumn>
+
+          <DataGridTemplateColumn Header="Room">
+            <DataGridTemplateColumn.CellTemplate>
+              <DataTemplate DataType="model:Inventory">
+                <TextBlock Text="{Binding Room}" TextAlignment="Left" TextWrapping="WrapWithOverflow"  Margin="10" />
+              </DataTemplate>
+            </DataGridTemplateColumn.CellTemplate>
+          </DataGridTemplateColumn>
+
+          <DataGridTemplateColumn Header="Original Value">
+            <DataGridTemplateColumn.CellTemplate>
+              <DataTemplate DataType="model:Inventory">
+                <TextBlock Text="{Binding OriginalValue}" TextAlignment="Right" TextWrapping="WrapWithOverflow"  Margin="10" />
+              </DataTemplate>
+            </DataGridTemplateColumn.CellTemplate>
+          </DataGridTemplateColumn>
+
+          <DataGridTemplateColumn Header="Current Value">
+            <DataGridTemplateColumn.CellTemplate>
+              <DataTemplate DataType="model:Inventory">
+                <TextBlock Text="{Binding CurrentValue}" TextAlignment="Right" TextWrapping="WrapWithOverflow"  Margin="10" />
+              </DataTemplate>
+            </DataGridTemplateColumn.CellTemplate>
+          </DataGridTemplateColumn>
+
+          <DataGridTemplateColumn Header="Type">
+            <DataGridTemplateColumn.CellTemplate>
+              <DataTemplate DataType="model:Inventory">
+                <TextBlock Text="{Binding InventoryType.Description}" TextAlignment="Left" TextWrapping="WrapWithOverflow"  Margin="10" />
+              </DataTemplate>
+            </DataGridTemplateColumn.CellTemplate>
+          </DataGridTemplateColumn>
+
+          <DataGridTemplateColumn Header="Notes">
+            <DataGridTemplateColumn.CellTemplate>
+              <DataTemplate DataType="model:Inventory">
+                <TextBlock Text="{Binding Notes}" TextAlignment="Left" TextWrapping="WrapWithOverflow"  Margin="10" />
+              </DataTemplate>
+            </DataGridTemplateColumn.CellTemplate>
+          </DataGridTemplateColumn>
+
+        </DataGrid.Columns>
+      </DataGrid>
+      
+    </StackPanel>
+      </ScrollViewer>
+    
+  </Grid>
+
+</UserControl>

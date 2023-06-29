@@ -1,0 +1,87 @@
+﻿<UserControl x:Class="Permastead.Views.Views.DashboardView"
+             xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:idc="using:Dock.Model.Controls"
+             xmlns:vm="using:Permastead.ViewModels.Views"
+             mc:Ignorable="d"
+             d:DesignWidth="300" d:DesignHeight="400"
+             xmlns:views="clr-namespace:Permastead.Views.Views"
+             x:DataType="vm:DashboardViewModel" x:CompileBindings="True">
+ <DockPanel>
+      <TextBlock DockPanel.Dock="Top" 
+              Name="DailyQuote"
+              FontSize="32"
+              TextWrapping="WrapWithOverflow"
+              Margin="20,20,20,20"
+              Opacity="0.8"
+              Text="{Binding QuoteViewModel.QuoteText}"
+              TextAlignment="Center">
+      </TextBlock>
+      
+      <Border Classes="Card" Width="200" DockPanel.Dock="Left"> 
+          <StackPanel>
+              <TextBlock Classes="h4" TextAlignment="Center" Margin="5,0,0,10">Level Progress</TextBlock>
+                  <Border Padding="20" Width="200">
+
+                      <TextBlock
+                          Classes="h3"
+                          Margin="0,5,0,0"
+                          Name="TextPercent"
+                          HorizontalAlignment="Center"
+                          Text="{Binding TotalScoreNormalized, StringFormat={}{0:0.00%}}"
+                          VerticalAlignment="Center" />
+                  </Border>
+
+            <TextBlock Classes="h4" TextAlignment="Center" Margin="5,120,0,10">Inventory</TextBlock>
+            <TextBlock
+                Classes="h3"
+                Margin="0,5,0,100"
+                Name="InventoryCount"
+                Text="{Binding InventoryItems.Count}"
+                VerticalAlignment="Center" HorizontalAlignment="Center" />
+            
+          </StackPanel>
+      </Border>
+      
+      <Border Classes="Card" Width="200" DockPanel.Dock="Right"> 
+          <StackPanel>
+            
+            <TextBlock Classes="h4" TextAlignment="Center" Margin="5,0,0,10">Obs/Action Ratio</TextBlock>
+            <Border Padding="20" Width="200">
+                <TextBlock
+                    Classes="h3"
+                    Margin="0,5,0,50"
+                    Name="ObservationActionRatio"
+                    HorizontalAlignment="Center"
+                    Text="{Binding ObservationsToActionRatio, StringFormat={}{0:0.00}}"
+                    VerticalAlignment="Center" />
+            </Border>
+                          
+            <TextBlock Classes="h4" TextAlignment="Center" Margin="5,70,0,0">Plantings</TextBlock>
+            <TextBlock
+              Classes="h3"
+              Margin="0,5,0,0"
+              Name="TextPercent2"
+              Text="{Binding Plantings.Count}"
+              VerticalAlignment="Center" HorizontalAlignment="Center" />
+              
+            </StackPanel>
+      </Border>
+      
+      <!-- <ListBox ItemsSource="{Binding Observations}"> -->
+      <!--     <ListBox.ItemTemplate> -->
+      <!--         <DataTemplate> -->
+      <!--             <Border Background="White" CornerRadius="4" Padding="4"> -->
+      <!--                 <TextBlock Text="{Binding Comment}" TextWrapping="WrapWithOverflow"/> -->
+      <!--             </Border> -->
+      <!--         </DataTemplate> -->
+      <!--     </ListBox.ItemTemplate> -->
+      <!-- </ListBox> -->
+      
+      <views:OpeningView HorizontalAlignment="Center"></views:OpeningView>
+      
+  </DockPanel>
+    
+</UserControl>

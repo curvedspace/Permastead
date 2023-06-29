@@ -1,0 +1,41 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="using:Permastead.ViewModels.Views"
+             mc:Ignorable="d" d:DesignWidth="1000" d:DesignHeight="450"
+             x:CompileBindings="True"
+             x:DataType="vm:OpeningViewModel"
+             x:Class="Permastead.Views.Views.OpeningView">
+
+    <!--This is design time only-->
+    <Design.DataContext>
+        <vm:OpeningViewModel/>
+    </Design.DataContext>
+
+      <Grid ColumnDefinitions="Auto" RowDefinitions="Auto, Auto">
+
+        <TextBlock Grid.Column="0" Grid.Row="0"
+                   Name="UpcomingEvents" 
+                   FontSize="24" 
+                   TextWrapping="WrapWithOverflow" 
+                   Margin="20,20,20,20"
+                   Opacity="0.8"
+                   Text="Recent and Upcoming Events:" 
+                   FontWeight="Bold"
+                   TextAlignment="Center">
+        </TextBlock>
+        
+        <ListBox ItemsSource="{Binding Updates}" Grid.Column="0" Grid.Row="1" HorizontalAlignment="Center">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Border CornerRadius="4" Padding="4">
+                        <TextBlock Text="{Binding }" TextWrapping="WrapWithOverflow" TextAlignment="Center"/>
+                    </Border>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        
+      </Grid>
+
+</UserControl>

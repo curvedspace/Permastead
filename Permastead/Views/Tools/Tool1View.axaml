@@ -1,0 +1,57 @@
+﻿<UserControl x:Class="Permastead.Views.Tools.Tool1View"
+             xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:vm="using:Permastead.ViewModels.Tools"
+             mc:Ignorable="d"
+             d:DesignWidth="300" d:DesignHeight="400"
+             x:DataType="vm:Tool1ViewModel" x:CompileBindings="True">
+  <!--This is design time only-->
+  <Design.DataContext>
+    <vm:Tool1ViewModel/>
+  </Design.DataContext>
+  
+  <Grid Focusable="True">
+    <ScrollViewer>
+    <StackPanel VerticalAlignment="Center" HorizontalAlignment="Left">
+      <WrapPanel HorizontalAlignment="Left">
+        <Button>+</Button>
+        <Button>-</Button>
+        <Button Command="{Binding OpenCommand}" Name="OpenPlantToolbar" HorizontalAlignment="Center" >Open</Button>
+      </WrapPanel>
+      <TextBlock Text="{Binding CurrentItem.Id}" TextAlignment="Center"/>
+      
+      <!--<TextBlock Text="{Binding Id}" Padding="2" />
+      <TextBlock Text="{Binding Title}" Padding="2" />
+      <TextBlock Text="{Binding Context}" Padding="2" />-->
+      
+        <ListBox Name="PlantsListBox" ItemsSource="{Binding Plants}"
+                 DoubleTapped="PlantsListBox_OnDoubleTapped"
+                 SelectedItem="{Binding CurrentItem}">
+          <ListBox.ItemTemplate>
+            <DataTemplate>
+              <Border CornerRadius="4" Padding="1">
+                <TextBlock Text="{Binding Description}" FontSize="10" TextWrapping="WrapWithOverflow"/>
+              </Border>
+            </DataTemplate>
+          </ListBox.ItemTemplate>
+        </ListBox>
+      
+      <!-- <TreeView Margin="10" Items="{Binding Plants}"> -->
+      <!--   <TreeView.ItemTemplate> -->
+      <!--     <TreeDataTemplate ItemsSource="{Binding Description}"> -->
+      <!--       <Border HorizontalAlignment="Left" -->
+      <!--               BorderBrush="Gray" BorderThickness="1" -->
+      <!--               CornerRadius="5" Padding="15 3"> -->
+      <!--         <TextBlock Text="{Binding Description}" /> -->
+      <!--       </Border> -->
+      <!--     </TreeDataTemplate> -->
+      <!--   </TreeView.ItemTemplate> -->
+      <!-- </TreeView> -->
+      
+      <Button Command="{Binding OpenCommand}" Name="OpenPlant" HorizontalAlignment="Center" Margin="20,10,20,20">Open</Button>
+    </StackPanel>
+    </ScrollViewer>
+  </Grid>
+</UserControl>
