@@ -8,7 +8,7 @@
              xmlns:dmc="using:Dock.Model.Controls"
              xmlns:vm="using:Permastead.ViewModels"
              mc:Ignorable="d"
-             d:DesignWidth="1000" d:DesignHeight="550"
+             d:DesignWidth="1000" d:DesignHeight="800"
              x:DataType="vm:MainWindowViewModel" x:CompileBindings="True"
              FontFamily="avares://Avalonia.Fonts.Inter/Assets#Inter">
   <Design.DataContext>
@@ -34,7 +34,7 @@
   </UserControl.Resources>
   <Grid RowDefinitions="Auto,*,25" ColumnDefinitions="Auto,*" Background="Transparent">
     <Panel x:Name="ToolBar" DataContext="{Binding Layout}" Grid.Row="0" Grid.Column="0">
-      <Grid ColumnDefinitions="Auto,Auto,Auto,Auto,Auto,350,Auto,Auto,Auto,200,Auto"
+      <Grid ColumnDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,350,Auto,Auto,Auto,200,Auto"
             HorizontalAlignment="Right"
             Margin="4"
             x:DataType="dmc:IRootDock"
@@ -86,21 +86,25 @@
         </Button>
         
         <Button ToolTip.Tip="Actions View" Command="{Binding Navigate}" CommandParameter="ToDoPage" Grid.Column="4" >
+          <PathIcon Width="24" Height="24" Opacity="0.8" Data="{StaticResource  home_checkmark_regular}"/>
+        </Button>
+        
+        <Button ToolTip.Tip="Inventory View" Command="{Binding Navigate}" CommandParameter="InventoryPage" Grid.Column="5" >
           <PathIcon Width="24" Height="24" Opacity="0.8" Data="{StaticResource  clipboard_letter_regular}"/>
         </Button>
         
-        <Button ToolTip.Tip="Edit Settings" Command="{Binding Navigate}" CommandParameter="SettingsPage" Grid.Column="5">
+        <Button ToolTip.Tip="Edit Settings" Command="{Binding Navigate}" CommandParameter="SettingsPage" Grid.Column="6">
           <PathIcon Width="24" Height="24" Opacity="0.8" Data="{StaticResource edit_settings_regular}"/>
         </Button>
         
-        <TextBlock Grid.Column="6" Text =""></TextBlock>
-        <Button ToolTip.Tip="Workbench View " Command="{Binding Navigate}" CommandParameter="{Binding DefaultDockable}" Grid.Column="7" >
+        <TextBlock Grid.Column="7" Text =""></TextBlock>
+        <Button ToolTip.Tip="Workbench View " Command="{Binding Navigate}" CommandParameter="{Binding DefaultDockable}" Grid.Column="8" >
           <PathIcon Width="24" Height="24" Opacity="0.8" Data="{StaticResource  leaf_two_regular}"/>
         </Button>
         
-        <TextBox x:Name="Id" Text="" Watermark="Search" UseFloatingWatermark="True" Grid.Column="8" Grid.ColumnSpan="2"/>
+        <TextBox x:Name="Id" Text="" Watermark="Search" UseFloatingWatermark="True" Grid.Column="9" Grid.ColumnSpan="2"/>
         <!-- <Button Content="Navigate" Command="{Binding Navigate}" CommandParameter="{Binding #Id.Text}" Grid.Column="9" /> -->
-        <Button x:Name="ThemeButton" Grid.Column="10" Background="Transparent">
+        <Button x:Name="ThemeButton" Grid.Column="11" Background="Transparent">
           <PathIcon Width="24" Height="24" Opacity="0.6" Data="{StaticResource DarkTheme}"/>
         </Button>
       </Grid>

@@ -107,7 +107,7 @@ public class DockFactory : Factory
         {
             IsCollapsable = false,
             ActiveDockable = document1,
-            VisibleDockables = CreateList<IDockable>(document1, document2, document3),
+            VisibleDockables = CreateList<IDockable>(),
             CanCreateDocument = false
         };
 
