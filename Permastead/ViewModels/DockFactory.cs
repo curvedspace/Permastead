@@ -142,6 +142,12 @@ public class DockFactory : Factory
             Title = "ToDoPage"
         };
         
+        var eventsPageView = new EventsPageViewModel()
+        {
+            Id = "EventsPage",
+            Title = "EventsPage"
+        };
+        
         var inventoryPageView = new InventoryPageViewModel()
         {
             Id = "InventoryPage",
@@ -167,7 +173,7 @@ public class DockFactory : Factory
         rootDock.IsCollapsable = false;
         rootDock.ActiveDockable = dashboardView;
         rootDock.DefaultDockable = _homeView;
-        rootDock.VisibleDockables = CreateList<IDockable>(dashboardView, observationsPageView, todoPageView, inventoryPageView, settingsPageView, _homeView);
+        rootDock.VisibleDockables = CreateList<IDockable>(dashboardView, observationsPageView, todoPageView, eventsPageView, inventoryPageView, settingsPageView, _homeView);
         
 
         _documentDock = documentDock;
@@ -194,6 +200,7 @@ public class DockFactory : Factory
             ["Dashboard"] = () => layout,
             ["ObservationsPage"] = () => layout,
             ["ToDoPage"] = () => layout,
+            ["EventsPage"] = () => layout,
             ["InventoryPage"] = () => layout,
             ["SettingsPage"] = () => layout,
             ["Home"] = () => _context
