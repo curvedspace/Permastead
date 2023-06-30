@@ -106,14 +106,14 @@ public partial class ToDoViewModel : ViewModelBase
 
         foreach (var todo in todos)
         {
-            todo.ToDoStatus = _todoStatuses.First(x => x.Id == todo.ToDoStatus.Id);
-            todo.ToDoType = _todoTypes.First(x => x.Id == todo.ToDoType.Id);
-            todo.Assignee = _people.First(x => x.Id == todo.Assignee.Id);
-            todo.Assigner = _people.First(x => x.Id == todo.Assigner.Id);
+            todo.ToDoStatus = TodoStatuses.First(x => x.Id == todo.ToDoStatus.Id);
+            todo.ToDoType = TodoTypes.First(x => x.Id == todo.ToDoType.Id);
+            todo.Assignee = People.First(x => x.Id == todo.Assignee.Id);
+            todo.Assigner = People.First(x => x.Id == todo.Assigner.Id);
             
-            _todos.Add(todo);
+            Todos.Add(todo);
             if (todo.ToDoStatus.Description != "Complete") ActiveToDos = ActiveToDos + 1;
-            ToDoCount = _todos.Count;
+            ToDoCount = Todos.Count;
         }
     }
     

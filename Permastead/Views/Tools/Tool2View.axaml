@@ -16,7 +16,20 @@
       <WrapPanel Grid.Row="0">
         <Button Command="{Binding ExpandTreeNodes}">+</Button>
         <Button Click="ExpandAllNodes">-</Button>
-        <SplitButton>Options</SplitButton>
+        
+        <Button Content="...">
+          <Button.Flyout>
+          <MenuFlyout Placement="Bottom">
+            <MenuItem Header="Add New">
+              <MenuItem Header="Garden Bed" />
+              <MenuItem Header="Garden Bed Type" />
+              <MenuItem Header="Inventory Group" />
+              <MenuItem Header="Inventory Type" />
+              <MenuItem Header="Vendor" />
+            </MenuItem>
+          </MenuFlyout>
+          </Button.Flyout>
+        </Button>
       </WrapPanel>
       
       <Panel VerticalAlignment="Top" HorizontalAlignment="Left" Grid.Row="1">
