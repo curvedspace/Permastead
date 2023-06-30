@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 
 using CommunityToolkit.Mvvm.ComponentModel;
 using Dock.Model.Mvvm.Core;
+
 using Models;
 using Services;
 
@@ -56,7 +57,6 @@ namespace Permastead.ViewModels.Views;
 
             if (scoreBoard.Actions > 0)
             {
-                //ratio = (scoreBoard.Observations - scoreBoard.Actions) / scoreBoard.Observations;
                 ratio = (scoreBoard.Observations / scoreBoard.Actions);
             }
             
@@ -65,7 +65,8 @@ namespace Permastead.ViewModels.Views;
             // get other data
             Plantings = new ObservableCollection<Planting>(Services.PlantingsService.GetPlantings(AppSession.ServiceMode));
             InventoryItems = new ObservableCollection<Inventory>(Services.InventoryService.GetAllInventory(AppSession.ServiceMode));
-            
+           
+
         }
 
         public void GetQuote()

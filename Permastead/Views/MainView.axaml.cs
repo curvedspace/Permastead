@@ -1,4 +1,7 @@
-﻿using Avalonia.Controls;
+﻿using System;
+using System.IO;
+using System.Reflection;
+using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 using Dock.Avalonia;
 

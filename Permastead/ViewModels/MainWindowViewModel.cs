@@ -8,13 +8,13 @@ using Dock.Model.Core;
 
 namespace Permastead.ViewModels
 {
-   
 
-    public class MainWindowViewModel : ObservableObject
+    public partial class MainWindowViewModel : ObservableObject
     {
         private readonly IFactory? _factory;
         private IRootDock? _layout;
-
+        
+        
         public IRootDock? Layout
         {
             get => _layout;
@@ -41,6 +41,7 @@ namespace Permastead.ViewModels
 
             NewLayout = new RelayCommand(ResetLayout);
         }
+
 
         private void DebugFactoryEvents(IFactory factory)
         {

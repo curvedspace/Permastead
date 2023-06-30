@@ -6,7 +6,7 @@
              xmlns:idc="using:Dock.Model.Controls"
              xmlns:vm="using:Permastead.ViewModels.Views"
              mc:Ignorable="d"
-             d:DesignWidth="300" d:DesignHeight="400"
+             d:DesignWidth="1000" d:DesignHeight="800"
              xmlns:views="clr-namespace:Permastead.Views.Views"
              x:DataType="vm:DashboardViewModel" x:CompileBindings="True">
  <DockPanel>
@@ -14,7 +14,7 @@
               Name="DailyQuote"
               FontSize="32"
               TextWrapping="WrapWithOverflow"
-              Margin="20,20,20,20"
+              Margin="100"
               Opacity="0.8"
               Text="{Binding QuoteViewModel.QuoteText}"
               TextAlignment="Center">
@@ -69,19 +69,10 @@
               
             </StackPanel>
       </Border>
-      
-      <!-- <ListBox ItemsSource="{Binding Observations}"> -->
-      <!--     <ListBox.ItemTemplate> -->
-      <!--         <DataTemplate> -->
-      <!--             <Border Background="White" CornerRadius="4" Padding="4"> -->
-      <!--                 <TextBlock Text="{Binding Comment}" TextWrapping="WrapWithOverflow"/> -->
-      <!--             </Border> -->
-      <!--         </DataTemplate> -->
-      <!--     </ListBox.ItemTemplate> -->
-      <!-- </ListBox> -->
-      
+     <StackPanel>
+     <TextBlock TextAlignment="Center" Text="{Binding Statistics}" Margin="50,0,50,50"></TextBlock>
       <views:OpeningView HorizontalAlignment="Center"></views:OpeningView>
-      
+     </StackPanel>
   </DockPanel>
     
 </UserControl>
