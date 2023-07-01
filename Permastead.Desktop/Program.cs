@@ -1,6 +1,7 @@
 ﻿using System;
-
+using System.Runtime.InteropServices;
 using Avalonia;
+using Serilog;
 
 namespace Permastead.Desktop;
 
@@ -15,9 +16,40 @@ class Program
 
     // Avalonia configuration, don't remove; also used by visual designer.
     public static AppBuilder BuildAvaloniaApp()
-        => AppBuilder.Configure<App>()
+    {
+        var appBuilder = AppBuilder.Configure<App>()
             .UsePlatformDetect()
             .WithInterFont()
             .LogToTrace();
+        
+        //create logging 
+        string logFilename = string.Empty;
+        var userFolder = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
+        var isWindows = System.Runtime.InteropServices.RuntimeInformation.IsOSPlatform(OSPlatform.Windows);
+            
+        if (isWindows)
+        {
+            logFilename = userFolder + @"\.config\permastead\log.txt";
+        }
+        else
+        {
+            //linux or macos
+            logFilename = userFolder + @"/.config/permastead/log.txt";
+        }
+            
+        Log.Logger = new LoggerConfiguration()
+            .Enrich.FromLogContext()
+            .MinimumLevel.Information()
+            .WriteTo.Console()
+            .WriteTo.File(logFilename,
+                rollingInterval: RollingInterval.Day,
+                rollOnFileSizeLimit: true)
+            .CreateLogger();
+            
+        Log.Information("Starting Permastead");
+
+        return appBuilder;
+    }
+        
 
 }
