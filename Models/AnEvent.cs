@@ -20,7 +20,7 @@ public class AnEvent
     
     public DateTime CreationDate { get; set; }
 
-    public DateTimeOffset StartDate { get; set; }
+    public DateTime StartDate { get; set; }
     
     public DateTime EndDate { get; set; }
     
@@ -32,7 +32,7 @@ public class AnEvent
     
     public long WarningDays { get; set; }
     
-    public DateTimeOffset? LastTriggerDate { get; set; }
+    public DateTime LastTriggerDate { get; set; }
 
     public DateTime LastUpdatedDate { get; set; }
 
@@ -65,16 +65,16 @@ public class AnEvent
                 switch (Frequency.Code)
                 {
                     case "Y":
-                        rtnDate = LastTriggerDate.Value.Date.AddYears(1);
+                        rtnDate = LastTriggerDate.Date.AddYears(1);
                         break;
                     case "M":
-                        rtnDate = LastTriggerDate.Value.Date.AddMonths(1);
+                        rtnDate = LastTriggerDate.Date.AddMonths(1);
                         break;
                     case "W":
-                        rtnDate = LastTriggerDate.Value.Date.AddDays(7);
+                        rtnDate = LastTriggerDate.Date.AddDays(7);
                         break;
                     case "D":
-                        rtnDate = LastTriggerDate.Value.Date.AddDays(1);
+                        rtnDate = LastTriggerDate.Date.AddDays(1);
                         break;
                 }
             }

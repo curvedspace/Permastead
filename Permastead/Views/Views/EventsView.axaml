@@ -2,7 +2,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             mc:Ignorable="d" d:DesignWidth="1200" d:DesignHeight="850"
              xmlns:vm="using:Permastead.ViewModels.Views"
              xmlns:models="clr-namespace:Models;assembly=Models"
              x:DataType="vm:EventsViewModel"
@@ -24,13 +24,13 @@
     
     <WrapPanel Grid.Row="1">
       
-      <Label Margin="5,20,5,5">Start Date:</Label>
-      <DatePicker Name="StarDate" FontSize="12" SelectedDate="{Binding CurrentItem.StartDate, Mode=TwoWay}">
-      </DatePicker>
+      <Label FontSize="12" Margin="10,10,5,5">Start Date:</Label>
+      <CalendarDatePicker Name="StarDate" FontSize="12" SelectedDate="{Binding CurrentItem.StartDate, Mode=TwoWay}">
+      </CalendarDatePicker>
       
-      <TextBlock Margin="20,20,5,5">Type:</TextBlock>
+      <TextBlock FontSize="12" Margin="10,10,5,5">Type:</TextBlock>
       <ComboBox Width="200" ItemsSource="{Binding EventTypes, Mode=TwoWay}"
-                 SelectedItem="{Binding CurrentItem.AnEventType, Mode=TwoWay}" AutoScrollToSelectedItem="False">
+                 SelectedItem="{Binding CurrentItem.AnEventType, Mode=TwoWay}" AutoScrollToSelectedItem="False" Margin="5">
         <ComboBox.ItemTemplate>
           <DataTemplate >
             <TextBlock Text="{Binding Description}" />
@@ -38,9 +38,9 @@
         </ComboBox.ItemTemplate>
       </ComboBox>
       
-      <TextBlock Margin="10,20,5,5">Frequency:</TextBlock>
+      <TextBlock FontSize="12" Margin="10,10,5,5">Frequency:</TextBlock>
       <ComboBox Width="200" ItemsSource="{Binding Frequencies} "
-                SelectedItem="{Binding CurrentItem.Frequency, Mode=TwoWay}" AutoScrollToSelectedItem="True">
+                SelectedItem="{Binding CurrentItem.Frequency, Mode=TwoWay}" AutoScrollToSelectedItem="True" Margin="5">
         <ComboBox.ItemTemplate>
           <DataTemplate >
             <TextBlock Text="{Binding Description, Mode=TwoWay}" />
@@ -48,9 +48,9 @@
         </ComboBox.ItemTemplate>
       </ComboBox>
       
-      <TextBlock Margin="10,20,5,5">Assigner:</TextBlock>
+      <TextBlock FontSize="12" Margin="10,10,5,5">Assigner:</TextBlock>
       <ComboBox Width="200" ItemsSource="{Binding People} "
-                SelectedItem="{Binding CurrentItem.Assigner, Mode=TwoWay}" AutoScrollToSelectedItem="True">
+                SelectedItem="{Binding CurrentItem.Assigner, Mode=TwoWay}" AutoScrollToSelectedItem="True" Margin="5">
         <ComboBox.ItemTemplate>
           <DataTemplate >
             <TextBlock Text="{Binding FullNameLastFirst, Mode=TwoWay}" />
@@ -58,9 +58,9 @@
         </ComboBox.ItemTemplate>
       </ComboBox>
       
-      <TextBlock Margin="10,20,5,5">Assignee:</TextBlock>
+      <TextBlock FontSize="12" Margin="10,10,5,5">Assignee:</TextBlock>
       <ComboBox Width="200" ItemsSource="{Binding People} "
-                SelectedItem="{Binding CurrentItem.Assignee, Mode=TwoWay}" AutoScrollToSelectedItem="True">
+                SelectedItem="{Binding CurrentItem.Assignee, Mode=TwoWay}" AutoScrollToSelectedItem="True" Margin="5">
         <ComboBox.ItemTemplate>
           <DataTemplate >
             <TextBlock Text="{Binding FullNameLastFirst, Mode=TwoWay}" />
@@ -68,15 +68,15 @@
         </ComboBox.ItemTemplate>
       </ComboBox>
       
-      <Label Margin="5,20,5,5">Last Triggered:</Label>
-      <DatePicker Name = "LastTrigger" FontSize="12" SelectedDate="{Binding CurrentItem.LastTriggerDate, Mode=TwoWay}">
-      </DatePicker>
+      <Label FontSize="12" Margin="5,10,5,5">Last Triggered:</Label>
+      <CalendarDatePicker Name = "LastTrigger" FontSize="12" SelectedDate="{Binding CurrentItem.LastTriggerDate, Mode=TwoWay}">
+      </CalendarDatePicker>
             
-      <Label Margin="5,20,5,5">Warning Days: </Label>
+      <Label FontSize="12" Margin="5,10,5,5">Warning Days: </Label>
       <TextBox Margin="5,7,5,5" Text="{Binding CurrentItem.WarningDays}"></TextBox>
       
       
-      <CheckBox IsThreeState="True" IsChecked="{Binding CurrentItem.ToDoTrigger}">Trigger Action</CheckBox>
+      <CheckBox FontSize="12"  IsThreeState="True" IsChecked="{Binding CurrentItem.ToDoTrigger}">Trigger Action</CheckBox>
 
     </WrapPanel>
       
