@@ -26,4 +26,22 @@ public class GardenBedRepository
             return new List<GardenBed>();
         }
     }
+    
+    public static bool Insert(GardenBed gb)
+    {
+        try
+        {
+            using (IDbConnection db = new SqliteConnection(DataConnection.GetLocalDataSource()))
+            {
+                string sqlQuery = "INSERT INTO GardenBed (Code, Description, LocationId, PermacultureZone, GardenBedTypeId, AuthorId, CreationDate, StartDate, EndDate) " +
+                                  "VALUES(@Code, @Description, @LocationId, @PermacultureZone, @GardenBedTypeId, @AuthorId, CURRENT_DATE, @StartDate, @EndDate);";
+        
+                return (db.Execute(sqlQuery, gb) == 1);
+            }
+        }
+        catch
+        {
+            return false;
+        }
+    }
 }

@@ -683,13 +683,6 @@ namespace DataAccess.Local
             FeedSourceRepository.Insert(fs);
 
             #endregion
-            
-            #region SeedPacket
-            
-            var sp = new SeedPacket() { Description = "Not Available", Instructions = "Not available"};
-            SeedPacketRepository.Insert(sp);
-            
-            #endregion
 
             #region CommentType
 
@@ -823,11 +816,11 @@ namespace DataAccess.Local
             #endregion
             
             #region Plants
+            
+            var p = new Plant { Author = new Person(1), Code = "UNK", Description = "Unknown" };
+            PlantRepository.Insert(p);
 
-            var p = new Plant { Author = new Person(1), Code = "SWEETBASIL", Description = "Sweet Basil" };
-			PlantRepository.Insert(p);
-
-			p = new Plant { Author = new Person(1), Code = "PEPPER", Description = "Pepper" };
+            p = new Plant { Author = new Person(1), Code = "PEPPER", Description = "Pepper" };
             PlantRepository.Insert(p);
 
             p = new Plant { Author = new Person(1), Code = "POTATO", Description = "Potato" };
@@ -1037,6 +1030,13 @@ namespace DataAccess.Local
             gbt = new GardenBedType { Code = "P", Description = "Pot", Author = new Person(1) };
             GardenBedTypeRepository.Insert(gbt);
 
+            var gb = new GardenBed
+            {
+	            Code = "GRD", Description = "Ground", Author = Person.Gaia(), Type = new GardenBedType(1),
+	            PermacultureZone = 0, Location = new Location(1)
+            };
+            GardenBedRepository.Insert(gb);
+            
             #endregion
             
             #region Frequency
@@ -1074,6 +1074,14 @@ namespace DataAccess.Local
             
             et = new AnEventType() { Description = "Financial" };
             AnEventTypeRepository.Insert(et);
+            
+            #endregion
+            
+                        
+            #region SeedPacket
+            
+            var sp = new SeedPacket() { Description = "Not Available", Instructions = "Not available", Author = Person.Gaia(), Vendor = new Vendor(1), Plant = new Plant(1) };
+            SeedPacketRepository.Insert(sp);
             
             #endregion
 

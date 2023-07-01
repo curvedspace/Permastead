@@ -22,5 +22,10 @@ public class Plant : CodeTable
         this.Description = string.Empty;
         this.Author = Person.Anonymous();
     }
+    
+    public Plant(long id) : this()
+    {
+        this.Id = id;
+    }
 
 }

@@ -6,11 +6,15 @@ public class GardenBed : CodeTable
     
     public GardenBedType Type { get; set; }
     
-    public long PermaCultureZone { get; set; }
+    public long PermacultureZone { get; set; }
     
     public Person Author { get; set; }
 
     public long AuthorId => this.Author!.Id;
+    
+    public long LocationId => this.Location!.Id;
+    
+    public long GardenBedTypeId => this.Type!.Id;
 
     public GardenBed()
     {
