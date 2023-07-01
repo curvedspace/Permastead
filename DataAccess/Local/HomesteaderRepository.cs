@@ -1077,7 +1077,6 @@ namespace DataAccess.Local
             
             #endregion
             
-                        
             #region SeedPacket
             
             var sp = new SeedPacket() { Description = "Not Available", Instructions = "Not available", Author = Person.Gaia(), Vendor = new Vendor(1), Plant = new Plant(1) };

@@ -1,7 +1,6 @@
 ﻿using Microsoft.Data.Sqlite;
 
 using System.Data;
-using System.Collections.Generic;
 
 using Models;
 using Dapper;
@@ -14,7 +13,7 @@ namespace DataAccess.Local
         /// Gets a random quote from the local database.
         /// </summary>
         /// <param name="connectionString"></param>
-        /// <returns></returns>
+        /// <returns>A Quote object.</returns>
         public static Quote GetRandomQuote(string connectionString)
         {
             var q = new Quote();
