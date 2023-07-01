@@ -66,7 +66,7 @@
                     Margin="0,5,0,50"
                     Name="Plants"
                     HorizontalAlignment="Center"
-                    Text="{Binding Observations.Count}"
+                    Text="{Binding Plants.Count}"
                     VerticalAlignment="Center" />
             </Border>
                           
@@ -75,7 +75,7 @@
               Classes="h3"
               Margin="0,20,0,0"
               Name="TextPercent2"
-              Text="{Binding Plants.Count}"
+              Text="{Binding Plantings.Count}"
               VerticalAlignment="Center" HorizontalAlignment="Center" />
               
           
