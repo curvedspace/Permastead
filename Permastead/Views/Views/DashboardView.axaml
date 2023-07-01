@@ -33,8 +33,19 @@
                           Text="{Binding TotalScoreNormalized, StringFormat={}{0:0.00%}}"
                           VerticalAlignment="Center" />
                   </Border>
+              
+              <TextBlock Classes="h4" TextAlignment="Center" Margin="5,80,0,10">Obs/Action Ratio</TextBlock>
+              <Border Padding="20" Width="200">
+                  <TextBlock
+                      Classes="h3"
+                      Margin="0,5,0,50"
+                      Name="ObservationActionRatio"
+                      HorizontalAlignment="Center"
+                      Text="{Binding ObservationsToActionRatio, StringFormat={}{0:0.00}}"
+                      VerticalAlignment="Center" />
+              </Border>
 
-            <TextBlock Classes="h4" TextAlignment="Center" Margin="5,120,0,10">Inventory</TextBlock>
+            <TextBlock Classes="h4" TextAlignment="Center" Margin="5,20,0,10">Inventory</TextBlock>
             <TextBlock
                 Classes="h3"
                 Margin="0,5,0,100"
@@ -48,26 +59,35 @@
       <Border Classes="Card" Width="200" DockPanel.Dock="Right"> 
           <StackPanel>
             
-            <TextBlock Classes="h4" TextAlignment="Center" Margin="5,0,0,10">Obs/Action Ratio</TextBlock>
+            <TextBlock Classes="h4" TextAlignment="Center" Margin="5,0,0,10">Plants</TextBlock>
             <Border Padding="20" Width="200">
                 <TextBlock
                     Classes="h3"
                     Margin="0,5,0,50"
-                    Name="ObservationActionRatio"
+                    Name="Plants"
                     HorizontalAlignment="Center"
-                    Text="{Binding ObservationsToActionRatio, StringFormat={}{0:0.00}}"
+                    Text="{Binding Observations.Count}"
                     VerticalAlignment="Center" />
             </Border>
                           
-            <TextBlock Classes="h4" TextAlignment="Center" Margin="5,70,0,0">Plantings</TextBlock>
+            <TextBlock Classes="h4" TextAlignment="Center" Margin="5,30,0,0">Plantings</TextBlock>
             <TextBlock
               Classes="h3"
-              Margin="0,5,0,0"
+              Margin="0,20,0,0"
               Name="TextPercent2"
-              Text="{Binding Plantings.Count}"
+              Text="{Binding Plants.Count}"
               VerticalAlignment="Center" HorizontalAlignment="Center" />
               
-            </StackPanel>
+          
+          <TextBlock Classes="h4" TextAlignment="Center" Margin="5,100,0,0">Seed Types</TextBlock>
+          <TextBlock
+              Classes="h3"
+              Margin="0,20,0,20"
+              Name="Seeds"
+              Text="{Binding SeedPackets.Count}"
+              VerticalAlignment="Center" HorizontalAlignment="Center" />
+          
+          </StackPanel>
       </Border>
      <StackPanel>
      <TextBlock TextAlignment="Center" Text="{Binding Statistics}" Margin="50,0,50,50"></TextBlock>

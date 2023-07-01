@@ -11,7 +11,6 @@
     <Design.DataContext>
         <vm:InventoryViewModel/>
     </Design.DataContext>
-
  
     <Grid ColumnDefinitions="*" RowDefinitions="Auto, Auto, Auto, Auto,*">
     
@@ -55,17 +54,17 @@
         </ComboBox.ItemTemplate>
       </ComboBox>
       
-      <Label Margin="5,10,5,5">Original Value: </Label>
-      <TextBox Margin="5,7,5,5" Text="{Binding CurrentItem.OriginalValue}"></TextBox>
+      <Label Margin="5,0,5,5">Original Value: </Label>
+      <TextBox Margin="5,0,5,5" Text="{Binding CurrentItem.OriginalValue}"></TextBox>
       
-      <Label Margin="5,10,5,5">Current Value: </Label>
-      <TextBox Margin="5,7,5,5" Text="{Binding CurrentItem.CurrentValue}"></TextBox>
+      <Label Margin="5,0,5,5">Current Value: </Label>
+      <TextBox Margin="5,0,5,5" Text="{Binding CurrentItem.CurrentValue}"></TextBox>
       
-      <Label Margin="5,10,5,5">Brand: </Label>
-      <TextBox Margin="5,7,5,5" Text="{Binding CurrentItem.Brand}"></TextBox>
+      <Label Margin="5,0,5,5">Brand: </Label>
+      <TextBox Margin="5,0,5,5" Text="{Binding CurrentItem.Brand}"></TextBox>
 
-      <Label Margin="5,10,5,5">Room: </Label>
-      <TextBox Margin="5,7,5,5" Text="{Binding CurrentItem.Room}"></TextBox>
+      <Label Margin="5,0,5,5">Room: </Label>
+      <TextBox Margin="5,0,5,5" Text="{Binding CurrentItem.Room}"></TextBox>
     </WrapPanel>
       
     <Panel Grid.Row="2" Height="100" Margin="10,10,30,10">

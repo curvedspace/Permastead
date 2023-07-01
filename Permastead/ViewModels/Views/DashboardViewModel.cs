@@ -23,6 +23,12 @@ namespace Permastead.ViewModels.Views;
         [ObservableProperty] 
         private ObservableCollection<Inventory> _inventoryItems = new ObservableCollection<Inventory>();
         
+        [ObservableProperty] 
+        private ObservableCollection<Plant> _plants = new ObservableCollection<Plant>();
+        
+        [ObservableProperty] 
+        private ObservableCollection<SeedPacket> _seedPackets = new ObservableCollection<SeedPacket>();
+        
         [ObservableProperty]
         private string? _statistics;
         
@@ -65,7 +71,8 @@ namespace Permastead.ViewModels.Views;
             // get other data
             Plantings = new ObservableCollection<Planting>(Services.PlantingsService.GetPlantings(AppSession.ServiceMode));
             InventoryItems = new ObservableCollection<Inventory>(Services.InventoryService.GetAllInventory(AppSession.ServiceMode));
-           
+            SeedPackets = new ObservableCollection<SeedPacket>(PlantingsService.GetSeedPackets(AppSession.ServiceMode));
+            Plants = new ObservableCollection<Plant>(PlantingsService.GetPlants(AppSession.ServiceMode));
 
         }
 
