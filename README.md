@@ -1,4 +1,5 @@
 # Permastead
-Desktop software for managing a homestead using permaculture design.
+Desktop software for managing a homestead using permaculture design. It features observations, actions, events and inventory as well as the ability to track your plantings over time.
 
 
+![screenshot1.png](screenshot1.png)
