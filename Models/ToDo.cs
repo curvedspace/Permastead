@@ -11,9 +11,9 @@ public class ToDo
 
     public DateTime StartDate { get; set; }
 
-    public DateTimeOffset DueDate { get; set; }
+    public DateTime DueDate { get; set; }
         
-    public string DisplayDueDate => this.DueDate.DateTime.ToShortDateString();
+    public string DisplayDueDate => this.DueDate.ToShortDateString();
 
     public long DaysUntilDue => new TimeSpan(DueDate.Ticks - DateTime.Now.Ticks).Days + 1;
 
@@ -46,7 +46,7 @@ public class ToDo
 
         this.CreationDate = DateTime.Now;
         this.StartDate = DateTime.Now.Date;
-        this.DueDate = DateTimeOffset.Now.AddDays(30);
+        this.DueDate = DateTime.Now.AddDays(30);
         this.LastUpdatedDate = DateTime.Now;
 
         this.Description = string.Empty;

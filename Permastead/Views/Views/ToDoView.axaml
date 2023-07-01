@@ -27,8 +27,8 @@
     <WrapPanel Grid.Row="1">
       
       <Label Margin="5,20,5,5">Due Date:</Label>
-      <DatePicker FontSize="14" SelectedDate="{Binding CurrentItem.DueDate, Mode=TwoWay}">
-      </DatePicker>
+      <CalendarDatePicker FontSize="14" SelectedDate="{Binding CurrentItem.DueDate, Mode=TwoWay}">
+      </CalendarDatePicker>
       
       <TextBlock Margin="20,20,5,5">Type:</TextBlock>
       <ComboBox Width="200" ItemsSource="{Binding TodoTypes, Mode=TwoWay}"

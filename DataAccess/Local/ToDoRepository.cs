@@ -44,7 +44,7 @@ namespace DataAccess.Local
                         todo.Description = dr[1].ToString();
                         todo.CreationDate = Convert.ToDateTime(dr[2].ToString());
                         todo.StartDate = Convert.ToDateTime(dr[3].ToString());
-                        todo.DueDate = new DateTimeOffset(Convert.ToDateTime(dr[4].ToString()));
+                        todo.DueDate = DateTime.Parse(dr[4].ToString());
                         todo.PercentDone = Convert.ToInt16(dr[5].ToString());
 
                         todo.ToDoType = new ToDoType();
@@ -108,7 +108,7 @@ namespace DataAccess.Local
                         todo.Description = dr[1].ToString();
                         todo.CreationDate = Convert.ToDateTime(dr[2].ToString());
                         todo.StartDate = Convert.ToDateTime(dr[3].ToString());
-                        todo.DueDate = new DateTimeOffset(Convert.ToDateTime(dr[4].ToString()));
+                        todo.DueDate = DateTime.Parse(dr[4].ToString());
                         todo.PercentDone = Convert.ToInt16(dr[5].ToString());
 
                         todo.ToDoType = new ToDoType();
@@ -175,7 +175,7 @@ namespace DataAccess.Local
                         todo.Description = dr[1].ToString();
                         todo.CreationDate = Convert.ToDateTime(dr[2].ToString());
                         todo.StartDate = Convert.ToDateTime(dr[3].ToString());
-                        todo.DueDate = new DateTimeOffset(Convert.ToDateTime(dr[4].ToString()));
+                        todo.DueDate = DateTime.Parse(dr[4].ToString());
                         todo.PercentDone = Convert.ToInt16(dr[5].ToString());
 
                         todo.ToDoType = new ToDoType();
