@@ -68,7 +68,6 @@ public partial class PlantingDocumentViewModel : Document
         }
         else
         {
-            _planting.StartDate = _planting.DisplayStartDate.DateTime;
             var rtnValue = DataAccess.Local.PlantingsRepository.Update(_planting);
             
         }

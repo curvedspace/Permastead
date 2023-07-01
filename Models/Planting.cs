@@ -23,10 +23,7 @@ public class Planting: CodeTable
     public long AuthorId => this.Author!.Id;
 
     public string StartDateString => this.StartDate.ToShortDateString();
-
-    public DateTimeOffset DisplayStartDate => new DateTimeOffset(this.StartDate);
     
-    public DateTimeOffset DisplayEndDate => new DateTimeOffset(EndDate.AddDays(-1));
 
     public Planting()
     {

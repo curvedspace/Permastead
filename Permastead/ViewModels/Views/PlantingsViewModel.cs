@@ -112,7 +112,6 @@ public partial class PlantingsViewModel : ViewModelBase
         }
         else
         {
-            CurrentItem.StartDate = CurrentItem.DisplayStartDate.DateTime;
             var rtnValue = DataAccess.Local.PlantingsRepository.Update(CurrentItem);
             RefreshPlantings();
         }
