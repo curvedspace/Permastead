@@ -231,14 +231,14 @@ public class DockFactory : Factory
                 doc = new PlantDocumentViewModel(currPlant);
                 doc.Title = currPlant.Description.ToString();
                 doc.Context = doc;
-                //(PlantDocumentViewModel)doc.PropertyViewModel.Name = doc.Title;
-                
                 break;
+            
             case "Models.Planting":
                 Planting currPlanting = currentItem as Planting;
                 doc = new PlantingDocumentViewModel(currPlanting);
                 doc.Title = currPlanting.Description;
                 break;
+            
             default:
                 doc = new DocumentViewModel();
                 doc.Title = "Unknown";
@@ -253,8 +253,6 @@ public class DockFactory : Factory
             _toolDock.ActiveDockable.Title = doc.Title;
 
         }
-           
-
-
+        
     }
 }

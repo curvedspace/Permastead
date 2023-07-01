@@ -60,6 +60,56 @@ namespace DataAccess.Local
             }
         }
 
+        public static Plant GetPlantFromId(string connectionString, long id)
+        {
+            Plant plant = new Plant();
+
+            var sql = "SELECT p.Description, p.Species, p.Family, p.Url, p.CreationDate, p.StartDate, p.EndDate, p.AuthorId, " + 
+                "per.FirstName, per.LastName, p.Id, p.code " +
+                "FROM Plant p, Person per " + 
+                "WHERE per.Id = p.AuthorId " +
+                "AND p.Id = @id ";
+
+            using (IDbConnection connection = new SqliteConnection(connectionString))
+            {
+                connection.Open();
+
+                using (IDbCommand command = connection.CreateCommand())
+                {
+                    command.CommandText = sql;
+                    command.Parameters.Add(new SqliteParameter("@id", id));
+                    
+                    var dr = command.ExecuteReader();
+
+                    while (dr.Read())
+                    {
+                        plant = new Plant();
+
+                        plant.Description = dr[0].ToString()!;
+                        plant.Species = dr[1].ToString()!;
+                        plant.Family = dr[2].ToString()!;
+                        plant.Url = dr[3].ToString()!;
+
+                        plant.CreationDate = Convert.ToDateTime(dr[4].ToString());
+                        plant.StartDate = Convert.ToDateTime(dr[5].ToString());
+                        plant.EndDate = Convert.ToDateTime(dr[6].ToString());
+
+                        plant.Author = new Person();
+                        plant.Author.Id = Convert.ToInt64(dr[7].ToString());
+                        plant.Author.FirstName = dr[8].ToString();
+                        plant.Author.LastName = dr[9].ToString();
+
+                        plant.Id = Convert.ToInt64(dr[10].ToString());
+                        plant.Code = dr[11].ToString()!;
+
+                    }
+                }
+            }
+
+            return plant;
+            
+        }
+
         public static bool Insert(Plant plant)
         {
             try

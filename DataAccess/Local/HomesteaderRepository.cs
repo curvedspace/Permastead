@@ -477,6 +477,7 @@ namespace DataAccess.Local
 				OriginalValue REAL,
 				CurrentValue REAL,
 				Quantity INTEGER,
+				ForSale INTEGER,
 				Brand TEXT,
 				Notes TEXT,
 				Room TEXT,

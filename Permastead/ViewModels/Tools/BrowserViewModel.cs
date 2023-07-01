@@ -1,14 +1,17 @@
-﻿using System.Collections.ObjectModel;
-using System.Linq;
+﻿using System;
+using System.Collections.ObjectModel;
+
 using Avalonia.Controls;
-using Avalonia.Controls.Utils;
+
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+
 using Dock.Model.Mvvm.Controls;
-using DynamicData;
+
 using Models;
-using Permastead.ViewModels.Views;
 using Services;
+
+using Permastead.ViewModels.Views;
 
 namespace Permastead.ViewModels.Tools;
 
@@ -17,6 +20,9 @@ public partial class BrowserViewModel : Tool
 
     [ObservableProperty]
     private Planting _currentPlanting;
+    
+    [ObservableProperty]
+    private Plant _currentPlant;
 
     private ObservableCollection<Planting> _plantings;
     private ObservableCollection<Plant> _plants;
@@ -63,21 +69,21 @@ public partial class BrowserViewModel : Tool
         plantingsNode.SubNodes.Add(allPlantings);   
         foreach (var p in _plantings)
         {
-            allPlantings.SubNodes.Add(new Node(p.Id, p.Description));
+            allPlantings.SubNodes.Add(new Node(p.Id, p.Description, NodeType.Planting));
         }
         
         var byBedPlantings = new Node("By Bed", new ObservableCollection<Node>());
         plantingsNode.SubNodes.Add(byBedPlantings);   
         foreach (var gb in _beds)
         {
-            var currentBed = new Node(gb.Id, gb.Code + ": " + gb.Description);
+            var currentBed = new Node(gb.Id, gb.Code + ": " + gb.Description, NodeType.Planting);
             byBedPlantings.SubNodes.Add(currentBed);
             //load up plantings by bed
             foreach (var p in _plantings)
             {
                 if (p.Bed.Id == gb.Id)
                 {
-                    currentBed.SubNodes.Add(new Node(p.Id, p.Description));
+                    currentBed.SubNodes.Add(new Node(p.Id, p.Description, NodeType.Planting));
                 }
             }
         }
@@ -86,22 +92,48 @@ public partial class BrowserViewModel : Tool
         Nodes.Add(plantsNode);
         foreach (var p in _plants)
         {
-            plantsNode.SubNodes.Add(new Node(p.Id, p.Description));
+            plantsNode.SubNodes.Add(new Node(p.Id, p.Description, NodeType.Plant));
         }
         
         Nodes.Add(seedsNode);
         foreach (var p in _seedsPackets)
         {
-            seedsNode.SubNodes.Add(new Node(p.Id, p.Description));
+            seedsNode.SubNodes.Add(new Node(p.Id, p.Description, NodeType.SeedPacket));
         }
         
-        //events
-        Nodes.Add(eventsNode);
-        foreach (var e in _events)
+    }
+
+    
+    [RelayCommand]
+    public void OpenDocument(Node node)
+    {
+        switch (node.Type)
         {
-            eventsNode.SubNodes.Add((new Node(e.Id, e.Description)));
+            case NodeType.Plant:
+                OpenPlant();
+                break;
+            case NodeType.Planting:
+                OpenPlanting();
+                break;
+            default:
+                break;
+        }
+    }
+    
+    [RelayCommand]
+    public void OpenPlant()
+    {
+        if (_selectedNodes != null && _selectedNodes.Count > 0)
+        {
+            if (_selectedNodes[0].Id > 0 ) _currentPlant = PlantService.GetPlantFromId(ServiceMode.Local, _selectedNodes[0].Id);         
+        }
+        else
+        {
+            _currentPlant = new Plant();
         }
 
+        if (_currentPlant != null)
+            this.Dock.OpenDoc(_currentPlant);
     }
     
     [RelayCommand]
@@ -113,7 +145,7 @@ public partial class BrowserViewModel : Tool
         }
         else
         {
-            _currentPlanting = new Planting();
+            _currentPlanting = null;
         }
 
         if (_currentPlanting != null)
@@ -149,7 +181,17 @@ public class Node
     public ObservableCollection<Node>? SubNodes { get; }
     public long Id { get; }
     public string Title { get; }
+    
+    public NodeType Type { get; }
 
+    public Node(long id,string title, NodeType type)
+    {
+        Id = id;
+        Title = title;
+        Type = type;
+        SubNodes = new ObservableCollection<Node>();
+    }
+    
     public Node(long id,string title)
     {
         Id = id;
@@ -168,4 +210,11 @@ public class Node
         Title = title;
         SubNodes = subNodes;
     }
+}
+
+public enum NodeType
+{
+    Plant = 0,
+    Planting,
+    SeedPacket
 }

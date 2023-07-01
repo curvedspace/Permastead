@@ -23,5 +23,17 @@ namespace Services
 
             return plants;
         }
+        
+        public static Plant GetPlantFromId(ServiceMode mode, long id) 
+        {
+            var plant = new Plant();
+
+            if (mode == ServiceMode.Local)
+            {
+                plant = PlantRepository.GetPlantFromId(DataConnection.GetLocalDataSource(), id);
+            }
+
+            return plant;
+        }
     }
 }

@@ -18,12 +18,12 @@ public partial class BrowserView : UserControl
     {
         try
         {
-            ((BrowserViewModel)(this.DataContext)).OpenPlanting();
+            Node node = (Node)TreeBrowser.SelectedItem;
+            ((BrowserViewModel)(this.DataContext)).OpenDocument(node);
         }
         catch (Exception exception)
         {
             Console.WriteLine(exception);
-
         }
 
     }
