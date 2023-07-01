@@ -104,4 +104,17 @@ public class Person
 
         return anon;
     }
+    
+    public static Person Gaia()
+    {
+        var gaia = new Person
+        {
+            Id = 1,
+            FirstName = "Gaia",
+            LastName = "AI",
+            MailingAddress = Address.None()
+        };
+
+        return gaia;
+    }
 }

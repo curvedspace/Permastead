@@ -1037,6 +1037,44 @@ namespace DataAccess.Local
             GardenBedTypeRepository.Insert(gbt);
 
             #endregion
+            
+            #region Frequency
+            
+            var freq = new Frequency() { Code = "Y", Description = "Yearly" };
+            FrequencyRepository.Insert(freq);
+            
+            freq = new Frequency() { Code = "M", Description = "Monthly" };
+            FrequencyRepository.Insert(freq);
+            
+            freq = new Frequency() { Code = "W", Description = "Weekly" };
+            FrequencyRepository.Insert(freq);
+            
+            freq = new Frequency() { Code = "D", Description = "Daily" };
+            FrequencyRepository.Insert(freq);
+            
+            #endregion
+            
+            #region EventTypes
+            
+            var et = new AnEventType() { Description = "Unknown" };
+            AnEventTypeRepository.Insert(et);
+            
+            et = new AnEventType() { Description = "Birthday" };
+            AnEventTypeRepository.Insert(et);
+            
+            et = new AnEventType() { Description = "Anniversary" };
+            AnEventTypeRepository.Insert(et);
+            
+            et = new AnEventType() { Description = "Gardening" };
+            AnEventTypeRepository.Insert(et);
+            
+            et = new AnEventType() { Description = "Household" };
+            AnEventTypeRepository.Insert(et);
+            
+            et = new AnEventType() { Description = "Financial" };
+            AnEventTypeRepository.Insert(et);
+            
+            #endregion
 
         }
 
