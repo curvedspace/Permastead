@@ -13,16 +13,65 @@ namespace DataAccess.Local;
 
 public class SeedPacketRepository
 {
-    public static SeedPacket? GetFromId(long id)
+    public static SeedPacket? GetFromId(string connectionString, long id)
     {
         try
         {
-            using (IDbConnection db = new SqliteConnection(DataConnection.GetLocalDataSource()))
+            SeedPacket packet = new SeedPacket();
+            
+            //get current plantings
+            var currentPackets = PlantingsRepository.GetAllActivePlantingIds(connectionString);
+            
+            using (IDbConnection connection = new SqliteConnection(connectionString))
             {
-                string sqlQuery = "SELECT * FROM SeedPacket WHERE Id = @Id;";
+                string sqlQuery =
+                    "SELECT sp.Id, sp.Description, sp.Instructions, sp.DaysToHarvest, sp.CreationDate, sp.StartDate, sp.EndDate," +
+                    "v.Id, v.Code, v.Description, p.Id, p.FirstName, p.LastName, p2.Id, p2.Code, p2.Description " +
+                    "FROM SeedPacket sp, Vendor v, Person p, Plant p2 " +
+                    "WHERE sp.PlantId = p2.Id AND sp.VendorId = v.Id AND sp.AuthorId = p.Id AND sp.Id = @id";
+                
+                connection.Open();
 
-                return db.QueryFirstOrDefault<SeedPacket>(sqlQuery, new { Id = id });
+                using (IDbCommand command = connection.CreateCommand())
+                {
+                    command.CommandText = sqlQuery;
+                    command.Parameters.Add(new SqliteParameter("@id", id));
+                    
+                    var dr = command.ExecuteReader();
+
+                    while (dr.Read())
+                    {
+                        packet = new SeedPacket();
+
+                        packet.Id = Convert.ToInt64(dr[0].ToString());
+                        packet.Description = dr[1].ToString();
+                        packet.Instructions = dr[2].ToString();
+                        packet.DaysToHarvest = Convert.ToInt32(dr[3].ToString());
+                        packet.CreationDate = Convert.ToDateTime(dr[4].ToString());
+                        packet.StartDate = Convert.ToDateTime(dr[5].ToString());
+                        packet.EndDate = Convert.ToDateTime(dr[6].ToString());
+                        packet.BestByDate = packet.EndDate;
+
+                        packet.Vendor.Id = Convert.ToInt64(dr[7].ToString());
+                        packet.Vendor.Code = dr[8].ToString();
+                        packet.Vendor.Description = dr[9].ToString();
+
+                        packet.Author = new Person();
+                        packet.Author.Id = Convert.ToInt64(dr[10].ToString());
+                        packet.Author.FirstName = dr[11].ToString();
+                        packet.Author.LastName = dr[12].ToString();
+
+                        packet.Plant!.Id = Convert.ToInt64(dr[13].ToString());
+                        packet.Plant.Code = dr[14].ToString();
+                        packet.Plant.Description = dr[15].ToString();
+
+                        packet.IsPlanted = currentPackets.Contains(packet.Id);
+                        
+                    }
+                }
             }
+
+            return packet;
         }
         catch
         {
@@ -101,7 +150,7 @@ public class SeedPacketRepository
                     packet.CreationDate = Convert.ToDateTime(dr[4].ToString());
                     packet.StartDate = Convert.ToDateTime(dr[5].ToString());
                     packet.EndDate = Convert.ToDateTime(dr[6].ToString());
-                    packet.BestByDate = new DateTimeOffset(packet.EndDate);
+                    packet.BestByDate = packet.EndDate;
 
                     packet.Vendor.Id = Convert.ToInt64(dr[7].ToString());
                     packet.Vendor.Code = dr[8].ToString();
@@ -159,7 +208,7 @@ public class SeedPacketRepository
                     packet.CreationDate = Convert.ToDateTime(dr[4].ToString());
                     packet.StartDate = Convert.ToDateTime(dr[5].ToString());
                     packet.EndDate = Convert.ToDateTime(dr[6].ToString());
-                    packet.BestByDate = new DateTimeOffset(packet.EndDate);
+                    packet.BestByDate = packet.EndDate;
 
                     packet.Vendor.Id = Convert.ToInt64(dr[7].ToString());
                     packet.Vendor.Code = dr[8].ToString();

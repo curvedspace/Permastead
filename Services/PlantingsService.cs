@@ -30,6 +30,18 @@ public static class PlantingsService
         return planting;
     }
     
+    public static SeedPacket GetSeedPacketFromId(ServiceMode mode, long id) 
+    {
+        var sp = new SeedPacket();
+
+        if (mode == ServiceMode.Local)
+        {
+            sp = SeedPacketRepository.GetFromId(DataConnection.GetLocalDataSource(), id);
+        }
+
+        return sp;
+    }
+    
     public static List<GardenBed> GetGardenBeds(ServiceMode mode)
     {
         var beds = new List<GardenBed>();

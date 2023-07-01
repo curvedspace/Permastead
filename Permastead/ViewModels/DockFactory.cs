@@ -239,6 +239,12 @@ public class DockFactory : Factory
                 doc.Title = currPlanting.Description;
                 break;
             
+            case "Models.SeedPacket":
+                SeedPacket seedPacket = currentItem as SeedPacket;
+                doc = new SeedPacketDocumentViewModel(seedPacket);
+                doc.Title = seedPacket.Description;
+                break;
+            
             default:
                 doc = new DocumentViewModel();
                 doc.Title = "Unknown";

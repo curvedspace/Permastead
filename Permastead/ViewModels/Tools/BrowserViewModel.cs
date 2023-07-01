@@ -23,6 +23,9 @@ public partial class BrowserViewModel : Tool
     
     [ObservableProperty]
     private Plant _currentPlant;
+    
+    [ObservableProperty]
+    private SeedPacket _currentSeedPacket;
 
     private ObservableCollection<Planting> _plantings;
     private ObservableCollection<Plant> _plants;
@@ -115,6 +118,9 @@ public partial class BrowserViewModel : Tool
             case NodeType.Planting:
                 OpenPlanting();
                 break;
+            case NodeType.SeedPacket:
+                OpenSeedPacket();
+                break;
             default:
                 break;
         }
@@ -153,12 +159,37 @@ public partial class BrowserViewModel : Tool
     }
 
     [RelayCommand]
+    public void OpenSeedPacket()
+    {
+        if (_selectedNodes != null && _selectedNodes.Count > 0)
+        {
+            if (_selectedNodes[0].Id > 0 ) _currentSeedPacket = PlantingsService.GetSeedPacketFromId(ServiceMode.Local, _selectedNodes[0].Id);         
+        }
+        else
+        {
+            _currentSeedPacket = new SeedPacket();
+        }
+
+        if (_currentSeedPacket != null)
+            this.Dock.OpenDoc(_currentSeedPacket);
+    }
+    
+    [RelayCommand]
     public void CreateNewPlanting()
     {
         _currentPlanting = new Planting();
         _currentPlanting.Description = "New Planting";
         
         this.Dock.OpenDoc(_currentPlanting);
+    }
+    
+    [RelayCommand]
+    public void CreateNewSeedPacket()
+    {
+        _currentSeedPacket = new SeedPacket();
+        _currentSeedPacket.Description = "New Seeds";
+        
+        this.Dock.OpenDoc(_currentSeedPacket);
     }
     
     [RelayCommand]

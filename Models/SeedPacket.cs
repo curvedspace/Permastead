@@ -28,7 +28,7 @@ public class SeedPacket
 
     public long AuthorId => this.Author?.Id ?? 0;
 
-    public DateTimeOffset BestByDate { get; set; }
+    public DateTime BestByDate { get; set; }
 
     public DateTime StartDate { get; set; } = DateTime.Today;
 

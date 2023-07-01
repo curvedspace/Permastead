@@ -58,33 +58,34 @@ public partial class PlantingsViewModel : ViewModelBase
     [RelayCommand]
     private void RefreshPlantings()
     {
-        _plantings.Clear();
+        Plantings.Clear();
+        
         var p = Services.PlantingsService.GetPlantings(AppSession.ServiceMode);
 
         foreach (var o in p)
         {
-            o.SeedPacket = _seedPackets.First(x => x.Id == o.SeedPacket.Id);
-            o.Author = _people.First(x => x.Id == o.Author.Id);
-            o.Bed = _beds.First(x => x.Id == o.Bed.Id);
-            o.Plant = _plants.First(x => x.Id == o.Plant.Id);
+            o.SeedPacket = SeedPackets.First(x => x.Id == o.SeedPacket.Id);
+            o.Author = People.First(x => x.Id == o.Author.Id);
+            o.Bed =Beds.First(x => x.Id == o.Bed.Id);
+            o.Plant = Plants.First(x => x.Id == o.Plant.Id);
 
             if (_currentOnly)
             {
-                if (o.IsActive) _plantings.Add(o);
+                if (o.IsActive) Plantings.Add(o);
             }
             else
             {
-                _plantings.Add(o);
+                Plantings.Add(o);
             }
             
         }
 
-        if (_plantings.Count > 0) 
-            _currentItem = _plantings.FirstOrDefault();
+        if (Plantings.Count > 0) 
+            CurrentItem = Plantings.FirstOrDefault();
         else
-            _currentItem = new Planting();
+            CurrentItem = new Planting();
 
-        PlantingCount = _plantings.Count;
+        PlantingCount = Plantings.Count;
 
     }
     

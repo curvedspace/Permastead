@@ -28,7 +28,7 @@
               <MenuItem Header="-" />
               <MenuItem IsEnabled="False" Header="Plant" />
               <MenuItem Header="Planting" Command="{Binding CreateNewPlanting}" />
-              <MenuItem IsEnabled="False" Header="Seed Packet" />
+              <MenuItem Header="Seed Packet" Command="{Binding CreateNewSeedPacket}" />
               <MenuItem Header="-" />
               <MenuItem IsEnabled="False" Header="Vendor" />
             </MenuItem>
