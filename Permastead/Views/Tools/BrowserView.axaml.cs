@@ -7,9 +7,9 @@ using Avalonia.Interactivity;
 
 namespace Permastead.Views.Tools;
 
-public partial class Tool2View : UserControl
+public partial class BrowserView : UserControl
 {
-    public Tool2View()
+    public BrowserView()
     {
         InitializeComponent();
     }
@@ -18,7 +18,7 @@ public partial class Tool2View : UserControl
     {
         try
         {
-            ((Tool2ViewModel)(this.DataContext)).OpenPlanting();
+            ((BrowserViewModel)(this.DataContext)).OpenPlanting();
         }
         catch (Exception exception)
         {

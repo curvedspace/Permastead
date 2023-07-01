@@ -40,7 +40,7 @@ public class DockFactory : Factory
         var document2 = new DocumentViewModel {Id = "Document2", Title = "Document2"};
         var document3 = new PlantDocumentViewModel {Id = "Document3", Title = "Document3", CanClose = true};
         var tool1 = new Tool1ViewModel {Id = "Tool1", Title = "Plants"};
-        var tool2 = new Tool2ViewModel {Id = "Browser", Title = "Browser"};
+        var tool2 = new BrowserViewModel {Id = "Browser", Title = "Browser"};
         var tool3 = new Tool3ViewModel {Id = "Tool3", Title = "Tool3"};
         var tool4 = new Tool4ViewModel {Id = "Tool4", Title = "Tool4"};
         var tool5 = new Tool5ViewModel {Id = "Tool5", Title = "Tool5"};
@@ -250,7 +250,6 @@ public class DockFactory : Factory
             _documentDock.VisibleDockables.Add(doc);
             _documentDock.ActiveDockable = doc;
             
-
             _toolDock.ActiveDockable.Title = doc.Title;
 
         }

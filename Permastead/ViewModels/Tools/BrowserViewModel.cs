@@ -12,7 +12,7 @@ using Services;
 
 namespace Permastead.ViewModels.Tools;
 
-public partial class Tool2ViewModel : Tool
+public partial class BrowserViewModel : Tool
 {
 
     [ObservableProperty]
@@ -32,7 +32,7 @@ public partial class Tool2ViewModel : Tool
     public HomeViewModel Home { get; set; }
     public DockFactory Dock { get; set; }
 
-    public Tool2ViewModel()
+    public BrowserViewModel()
     {
         RefreshData();
     }
@@ -111,11 +111,24 @@ public partial class Tool2ViewModel : Tool
         {
             _currentPlanting = PlantingsService.GetPlantingFromId(ServiceMode.Local, _selectedNodes[0].Id);         
         }
+        else
+        {
+            _currentPlanting = new Planting();
+        }
 
         if (_currentPlanting != null)
             this.Dock.OpenDoc(_currentPlanting);
     }
 
+    [RelayCommand]
+    public void CreateNewPlanting()
+    {
+        _currentPlanting = new Planting();
+        _currentPlanting.Description = "New Planting";
+        
+        this.Dock.OpenDoc(_currentPlanting);
+    }
+    
     [RelayCommand]
     public void ExpandTreeNodes(TreeView treeView)
     {

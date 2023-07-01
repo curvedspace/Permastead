@@ -34,9 +34,9 @@ public partial class PlantingDocumentViewModel : Document
         _planting = planting;
         this.Id = planting.Id.ToString();
 
-        _planting.Plant = _plants.First(x => x.Id == _planting.Plant.Id);
-        _planting.SeedPacket = _seedPackets.First(x => x.Id == _planting.SeedPacket.Id);
-        _planting.Author = _people.First(x => x.Id == _planting.Author.Id);
+        if (_planting.Plant.Id != 0 && _plants.Count > 0) _planting.Plant = _plants.First(x => x.Id == _planting.Plant.Id);
+        if (_planting.SeedPacket.Id != 0 && _seedPackets.Count > 0) _planting.SeedPacket = _seedPackets.First(x => x.Id == _planting.SeedPacket.Id);
+        if (_planting.Author.Id != 0 && _people.Count > 0) _planting.Author = _people.First(x => x.Id == _planting.Author.Id);
     }
 
     public PlantingDocumentViewModel()
@@ -72,6 +72,8 @@ public partial class PlantingDocumentViewModel : Document
             var rtnValue = DataAccess.Local.PlantingsRepository.Update(_planting);
             
         }
+       
+        //need a way to send a refresh message back to the tree browser...
 
     }
 }

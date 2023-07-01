@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="Permastead.Views.Tools.Tool2View"
+﻿<UserControl x:Class="Permastead.Views.Tools.BrowserView"
              xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -6,8 +6,7 @@
              xmlns:vm="using:Permastead.ViewModels.Tools"
              mc:Ignorable="d"
              d:DesignWidth="300" d:DesignHeight="400"
-             x:DataType="vm:Tool2ViewModel" x:CompileBindings="True">
-  
+             x:DataType="vm:BrowserViewModel" x:CompileBindings="True">
   
   <Grid Focusable="True" RowDefinitions="Auto,*" >
     
@@ -21,11 +20,15 @@
           <Button.Flyout>
           <MenuFlyout Placement="Bottom">
             <MenuItem Header="Add New">
-              <MenuItem Header="Garden Bed" />
-              <MenuItem Header="Garden Bed Type" />
-              <MenuItem Header="Inventory Group" />
-              <MenuItem Header="Inventory Type" />
-              <MenuItem Header="Vendor" />
+              <MenuItem IsEnabled="False" Header="Garden Bed" />
+              <MenuItem IsEnabled="False" Header="Garden Bed Type" />
+              <MenuItem Header="-" />
+              <MenuItem IsEnabled="False" Header="Inventory Group" />
+              <MenuItem IsEnabled="False" Header="Inventory Type" />
+              <MenuItem Header="-" />
+              <MenuItem Header="Planting" Command="{Binding CreateNewPlanting}" />
+              <MenuItem Header="-" />
+              <MenuItem IsEnabled="False" Header="Vendor" />
             </MenuItem>
           </MenuFlyout>
           </Button.Flyout>
