@@ -1,17 +1,12 @@
 
-using Avalonia.Controls.Primitives;
 using System;
 using System.Collections.Generic;
-using System.Collections.Immutable;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-using System.Windows.Input;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using DynamicData;
+
 using Models;
 using Services;
 
@@ -96,11 +91,11 @@ public partial class ToDoViewModel : ViewModelBase
 
         if (ActiveOnly)
         {
-            todos = Services.ToDoService.GetActiveTodos(AppSession.ServiceMode);
+            todos = ToDoService.GetActiveTodos(AppSession.ServiceMode);
         }
         else
         {
-            todos = Services.ToDoService.GetAllToDos(AppSession.ServiceMode);
+            todos = ToDoService.GetAllToDos(AppSession.ServiceMode);
         }
         
 
@@ -129,8 +124,8 @@ public partial class ToDoViewModel : ViewModelBase
             
             _currentItem = new ToDo();
 
-            _todoTypes = new ObservableCollection<ToDoType>(Services.ToDoService.GetAllToDoTypes(AppSession.ServiceMode));
-            _todoStatuses = new ObservableCollection<ToDoStatus>(Services.ToDoService.GetAllToDoStatuses(AppSession.ServiceMode));
+            _todoTypes = new ObservableCollection<ToDoType>(ToDoService.GetAllToDoTypes(AppSession.ServiceMode));
+            _todoStatuses = new ObservableCollection<ToDoStatus>(ToDoService.GetAllToDoStatuses(AppSession.ServiceMode));
             _people = new ObservableCollection<Person>(PersonService.GetAllPeople(AppSession.ServiceMode));
             
             RefreshToDo();
