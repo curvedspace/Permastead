@@ -15,6 +15,10 @@ public class Planting: CodeTable
     public long BedId => this.Bed!.Id;
 
     public decimal YieldRating { get; set; } = 0;
+    
+    public PlantingState State { get; set; }
+    
+    public long PlantingStateId => this.State!.Id;
 
     public string Comment { get; set; } 
 
@@ -31,6 +35,7 @@ public class Planting: CodeTable
         this.Description = string.Empty;
         this.Plant = new Plant();
         this.SeedPacket = new SeedPacket();
+        this.State = new PlantingState();
         this.Author = Person.Anonymous();
         this.Bed = new GardenBed();
         this.Comment = string.Empty;

@@ -1,13 +1,10 @@
 using Dapper;
-
 using Microsoft.Data.Sqlite;
 
-using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Text;
+
 using Models;
-using Microsoft.VisualBasic;
+
 
 namespace DataAccess.Local;
 
@@ -22,10 +19,10 @@ public class PlantingsRepository
         "p.CreationDate, p.StartDate, p2.Id, p2.FirstName, p2.LastName, p.Comment,  " + 
         "gb.Id, gb.Code as gbcode, gb.Description as gbdesc,  " + 
         "sp.Id , sp.DaysToHarvest, sp.Description as PacketDesc,  " + 
-        "v.Id, v.Code, v.Description as VendorDesc, p.EndDate, p.YieldRating " + 
-        "FROM Planting p, Person p2, Plant p3, GardenBed gb, SeedPacket sp, Vendor v  " + 
+        "v.Id, v.Code, v.Description as VendorDesc, p.EndDate, p.YieldRating, ps.Id, ps.Code, ps.Description " + 
+        "FROM Planting p, Person p2, Plant p3, GardenBed gb, SeedPacket sp, Vendor v, PlantingState ps  " + 
         "WHERE p.AuthorId = p2.Id AND p.GardenBedId = gb.Id  " + 
-        "AND p.PlantId = p3.Id  " + 
+        "AND p.PlantId = p3.Id AND p.PlantingStateId = ps.Id " + 
         "AND p.SeedPacketId = sp.Id AND sp.VendorId = v.Id ORDER BY p.StartDate ";
 
         using (IDbConnection connection = new SqliteConnection(connectionString))
@@ -70,6 +67,10 @@ public class PlantingsRepository
                     planting.EndDate = Convert.ToDateTime(dr[19].ToString());
                     planting.YieldRating = Convert.ToInt64(dr[20].ToString());
                     
+                    planting.State.Id = Convert.ToInt64(dr[21].ToString());
+                    planting.State.Code = dr[22].ToString();
+                    planting.State.Description = dr[23].ToString();
+                    
                     plantings.Add(planting);
                 }
             }
@@ -86,10 +87,10 @@ public class PlantingsRepository
         "p.CreationDate, p.StartDate, p2.Id, p2.FirstName, p2.LastName, p.Comment,  " +
         "gb.Id, gb.Code as gbcode, gb.Description as gbdesc,  " +
         "sp.Id , sp.DaysToHarvest, sp.Description as PacketDesc,  " +
-        "v.Id, v.Code, v.Description as VendorDesc, p.EndDate, p.YieldRating " +
-        "FROM Planting p, Person p2, Plant p3, GardenBed gb, SeedPacket sp, Vendor v  " +
+        "v.Id, v.Code, v.Description as VendorDesc, p.EndDate, p.YieldRating , ps.Id, ps.Code, ps.Description " + 
+        "FROM Planting p, Person p2, Plant p3, GardenBed gb, SeedPacket sp, Vendor v , PlantingState ps  " + 
         "WHERE p.AuthorId = p2.Id AND p.GardenBedId = gb.Id  " +
-        "AND p.PlantId = p3.Id  " +
+        "AND p.PlantId = p3.Id AND p.PlantingStateId = ps.Id " + 
         "AND p.Id = @id " + 
         "AND p.SeedPacketId = sp.Id AND sp.VendorId = v.Id ORDER BY p.StartDate ";
 
@@ -136,6 +137,10 @@ public class PlantingsRepository
 
                     planting.EndDate = Convert.ToDateTime(dr[19].ToString());
                     planting.YieldRating = Convert.ToInt64(dr[20].ToString());
+                    
+                    planting.State.Id = Convert.ToInt64(dr[21].ToString());
+                    planting.State.Code = dr[22].ToString();
+                    planting.State.Description = dr[23].ToString();
 
                 }
             }
@@ -180,8 +185,8 @@ public class PlantingsRepository
         {
             using (IDbConnection db = new SqliteConnection(DataConnection.GetLocalDataSource()))
             {
-                string sqlQuery = "INSERT INTO Planting (Description, PlantId, SeedPacketId, GardenBedId, StartDate, EndDate, CreationDate, YieldRating, AuthorId, Comment) " +
-                    "VALUES(@Description, @PlantId, @SeedPacketId, @BedId, @StartDate, @EndDate, CURRENT_DATE, @YieldRating, @AuthorId, @Comment);";
+                string sqlQuery = "INSERT INTO Planting (Description, PlantId, SeedPacketId, GardenBedId, StartDate, EndDate, CreationDate, YieldRating, AuthorId, PlantingStateId, Comment) " +
+                    "VALUES(@Description, @PlantId, @SeedPacketId, @BedId, @StartDate, @EndDate, CURRENT_DATE, @YieldRating, @AuthorId, @PlantingStateId, @Comment);";
 
                 return (db.Execute(sqlQuery, planting) == 1);
             }
@@ -202,7 +207,7 @@ public class PlantingsRepository
                 {
                     string sqlQuery =
                         "UPDATE Planting SET Description = @Description, StartDate = @StartDate, EndDate = @EndDate, PlantId = @PlantId, " +
-                        "SeedPacketId = @SeedPacketId, GardenBedId = @BedId, AuthorId = @AuthorId, YieldRating = @YieldRating, " +
+                        "SeedPacketId = @SeedPacketId, GardenBedId = @BedId, AuthorId = @AuthorId, YieldRating = @YieldRating, PlantingStateId = @PlantingStateId, " +
                         "Comment = @Comment " +
                         "WHERE Id = @Id;";
 

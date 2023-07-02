@@ -48,13 +48,13 @@
             </DataTemplate>
           </ComboBox.ItemTemplate>
         </ComboBox>
-        
-        <TextBlock Grid.Row="3" Grid.Column="0" Margin="10,10" >Author:</TextBlock>
-        <ComboBox Grid.Row="3" Grid.Column="1" Width="200" Margin="10" ItemsSource="{Binding People} "
-                  SelectedItem="{Binding Planting.Author, Mode=TwoWay}" AutoScrollToSelectedItem="False">
+       
+        <TextBlock Grid.Row="3" Grid.Column="0" Margin="10">State:</TextBlock>
+        <ComboBox Grid.Row="3" Grid.Column="1" Margin="10" Width="300" ItemsSource="{Binding PlantingStates} "
+                  SelectedItem="{Binding Planting.State, Mode=TwoWay}" AutoScrollToSelectedItem="False">
           <ComboBox.ItemTemplate>
             <DataTemplate >
-              <TextBlock Text="{Binding FullNameLastFirst, Mode=TwoWay}" />
+              <TextBlock Text="{Binding Description, Mode=TwoWay}" />
             </DataTemplate>
           </ComboBox.ItemTemplate>
         </ComboBox>
@@ -76,8 +76,19 @@
         <CalendarDatePicker Grid.Row="4" Grid.Column="3" Name = "LastTrigger" SelectedDate="{Binding Planting.EndDate, Mode=TwoWay}">
         </CalendarDatePicker>
             
-        <TextBlock Grid.Row="5" Grid.Column="0" Margin="10">Comment:</TextBlock>
-        <TextBox Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="3" Grid.RowSpan="2"  
+        <TextBlock Grid.Row="5" Grid.Column="0" Margin="10,10" >Author:</TextBlock>
+        <ComboBox Grid.Row="5" Grid.Column="1" Width="200" Margin="10" ItemsSource="{Binding People} "
+                  SelectedItem="{Binding Planting.Author, Mode=TwoWay}" AutoScrollToSelectedItem="False">
+          <ComboBox.ItemTemplate>
+            <DataTemplate >
+              <TextBlock Text="{Binding FullNameLastFirst, Mode=TwoWay}" />
+            </DataTemplate>
+          </ComboBox.ItemTemplate>
+        </ComboBox>
+
+        
+        <TextBlock Grid.Row="6" Grid.Column="0" Margin="10">Comment:</TextBlock>
+        <TextBox Grid.Row="6" Grid.Column="1" Grid.ColumnSpan="3" Grid.RowSpan="2"  
                  Text="{Binding Planting.Comment }" TextWrapping="Wrap" Margin="10,10,10,10"></TextBox>
         
       </Grid>

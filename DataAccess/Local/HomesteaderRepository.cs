@@ -353,9 +353,9 @@ namespace DataAccess.Local
 				Id INTEGER PRIMARY KEY,
 				Code VARCHAR (50) UNIQUE NOT NULL,
 				Description VARCHAR (2000) NOT NULL,
-				CreationDate timestamp,
-				StartDate timestamp NOT NULL,
-				EndDate timestamp
+				CreationDate TIMESTAMP,
+				StartDate TIMESTAMP NOT NULL,
+				EndDate TIMESTAMP
 			);
 
 			-- DELIVERY METHOD
@@ -364,9 +364,9 @@ namespace DataAccess.Local
 				Id INTEGER PRIMARY KEY,
 				Code VARCHAR (50) UNIQUE NOT NULL,
 				Description VARCHAR (2000) NOT NULL,
-				CreationDate timestamp,
-				StartDate timestamp NOT NULL,
-				EndDate timestamp
+				CreationDate TIMESTAMP,
+				StartDate TIMESTAMP NOT NULL,
+				EndDate TIMESTAMP
 			);
 
 			-- PRODUCT
@@ -375,14 +375,15 @@ namespace DataAccess.Local
 				Id INTEGER PRIMARY KEY,
 				Code VARCHAR (50) UNIQUE NOT NULL,
 				Description VARCHAR (2000) NOT NULL,
-				StartDate timestamp NOT NULL,
-				EndDate timestamp,
-				CreationDate timestamp,
+				StartDate TIMESTAMP NOT NULL,
+				EndDate TIMESTAMP,
+				CreationDate TIMESTAMP,
 				Price decimal NOT NULL,
 				ProductTypeId integer,
 				RecipeId integer,
 				AuthorId integer
 			);
+
 
 			-- PLANT
 			DROP TABLE IF EXISTS Plant;
@@ -390,9 +391,9 @@ namespace DataAccess.Local
 				Id INTEGER PRIMARY KEY,
 				Code VARCHAR (50) UNIQUE NOT NULL,
 				Description VARCHAR (2000) NOT NULL,
-				StartDate timestamp NOT NULL,
-				EndDate timestamp,
-				CreationDate timestamp,
+				StartDate TIMESTAMP NOT NULL,
+				EndDate TIMESTAMP,
+				CreationDate TIMESTAMP,
 				Species VARCHAR (2000),
 				Family VARCHAR (2000),
 				Url VARCHAR (2000),
@@ -405,9 +406,9 @@ namespace DataAccess.Local
 				Id INTEGER PRIMARY KEY,
 				Code VARCHAR (50) UNIQUE NOT NULL,
 				Description VARCHAR (2000) NOT NULL,
-				CreationDate timestamp,
-				StartDate timestamp NOT NULL,
-				EndDate timestamp,
+				CreationDate TIMESTAMP,
+				StartDate TIMESTAMP NOT NULL,
+				EndDate TIMESTAMP,
 				AuthorId integer
 			);
 
@@ -417,7 +418,7 @@ namespace DataAccess.Local
 				Id INTEGER PRIMARY KEY,
 				GuildId integer,
 				PlantId integer,
-				CreationDate timestamp
+				CreationDate TIMESTAMP
 			);
 
 
@@ -427,9 +428,9 @@ namespace DataAccess.Local
 				Id INTEGER PRIMARY KEY,
 				Code VARCHAR (50) UNIQUE NOT NULL,
 				Description VARCHAR (2000) NOT NULL,
-				CreationDate timestamp,
-				StartDate timestamp NOT NULL,
-				EndDate timestamp,
+				CreationDate TIMESTAMP,
+				StartDate TIMESTAMP NOT NULL,
+				EndDate TIMESTAMP,
 				AuthorId integer
 			);
 
@@ -439,9 +440,9 @@ namespace DataAccess.Local
 				Id INTEGER PRIMARY KEY,
 				Code VARCHAR (50) UNIQUE NOT NULL,
 				Description VARCHAR (2000) NOT NULL,
-				CreationDate timestamp,
-				StartDate timestamp NOT NULL,
-				EndDate timestamp,
+				CreationDate TIMESTAMP,
+				StartDate TIMESTAMP NOT NULL,
+				EndDate TIMESTAMP,
 				AuthorId integer
 			);
 
@@ -450,9 +451,9 @@ namespace DataAccess.Local
 			CREATE TABLE IF NOT EXISTS InventoryType(
 				Id INTEGER PRIMARY KEY,
 				Description VARCHAR (2000) NOT NULL,
-				CreationDate timestamp,
-				StartDate timestamp NOT NULL,
-				EndDate timestamp,
+				CreationDate TIMESTAMP,
+				StartDate TIMESTAMP NOT NULL,
+				EndDate TIMESTAMP,
 				AuthorId INTEGER
 			);
 
@@ -461,9 +462,9 @@ namespace DataAccess.Local
 			CREATE TABLE IF NOT EXISTS InventoryGroup(
 				Id INTEGER PRIMARY KEY,
 				Description VARCHAR (2000) NOT NULL,
-				CreationDate timestamp,
-				StartDate timestamp NOT NULL,
-				EndDate timestamp,
+				CreationDate TIMESTAMP,
+				StartDate TIMESTAMP NOT NULL,
+				EndDate TIMESTAMP,
 				AuthorId INTEGER
 			);
 
@@ -506,9 +507,9 @@ namespace DataAccess.Local
 				Id INTEGER PRIMARY KEY,
 				Code VARCHAR (50) UNIQUE NOT NULL,
 				Description VARCHAR (2000) NOT NULL,
-				CreationDate timestamp,
-				StartDate timestamp NOT NULL,
-				EndDate timestamp,
+				CreationDate TIMESTAMP,
+				StartDate TIMESTAMP NOT NULL,
+				EndDate TIMESTAMP,
 				AuthorId integer
 			);
 
@@ -518,9 +519,9 @@ namespace DataAccess.Local
 				Id INTEGER PRIMARY KEY,
 				CycleId INTEGER NOT NULL,
 				EntityId INTEGER NOT NULL,
-				CreationDate timestamp,
-				StartDate timestamp NOT NULL,
-				EndDate timestamp,
+				CreationDate TIMESTAMP,
+				StartDate TIMESTAMP NOT NULL,
+				EndDate TIMESTAMP,
 				AuthorId integer
 			);
 
@@ -531,12 +532,23 @@ namespace DataAccess.Local
 				Description TEXT NOT NULL,
 				Instructions TEXT,
 				DaysToHarvest integer,
-				CreationDate timestamp,
-				StartDate timestamp NOT NULL,
-				EndDate timestamp,
+				CreationDate TIMESTAMP,
+				StartDate TIMESTAMP NOT NULL,
+				EndDate TIMESTAMP,
 				PlantId integer,
 				VendorId integer,
 				AuthorId integer
+			);
+
+			-- PLANTING STATE
+			DROP TABLE IF EXISTS PlantingState;
+			CREATE TABLE IF NOT EXISTS PlantingState(
+				Id INTEGER PRIMARY KEY,
+				Code VARCHAR (50) UNIQUE NOT NULL,
+				Description VARCHAR (2000) NOT NULL,
+				CreationDate TIMESTAMP,
+				StartDate TIMESTAMP NOT NULL,
+				EndDate TIMESTAMP
 			);
 
 			--PLANTING
@@ -544,14 +556,15 @@ namespace DataAccess.Local
 			CREATE TABLE IF NOT EXISTS Planting(
 				Id INTEGER PRIMARY KEY,
 				Description TEXT NOT NULL,
-				PlantId integer,
-				SeedPacketId integer,
-				GardenBedId integer,
-				CreationDate timestamp,
-				StartDate timestamp NOT NULL,
-				EndDate timestamp,
-				YieldRating integer,
-				AuthorId integer,
+				PlantId INTEGER,
+				SeedPacketId INTEGER,
+				GardenBedId INTEGER,
+				CreationDate TIMESTAMP,
+				StartDate TIMESTAMP NOT NULL,
+				EndDate TIMESTAMP,
+				PlantingStateId INTEGER,
+				YieldRating INTEGER,
+				AuthorId INTEGER,
 				Comment TEXT
 			);
 
@@ -561,14 +574,14 @@ namespace DataAccess.Local
 				Id INTEGER PRIMARY KEY,
 				Code VARCHAR (50) UNIQUE NOT NULL,
 				Description TEXT NOT NULL,
-				RecipeId integer,
-				CreationDate timestamp,
-				StartDate timestamp NOT NULL,
-				EndDate timestamp,
-				Rating integer,
-				Amount integer,
-				AmountMeasurementTypeId integer,
-				AuthorId integer
+				RecipeId INTEGER,
+				CreationDate TIMESTAMP,
+				StartDate TIMESTAMP NOT NULL,
+				EndDate TIMESTAMP,
+				Rating INTEGER,
+				Amount INTEGER,
+				AmountMeasurementTypeId INTEGER,
+				AuthorId INTEGER
 			);" +
             "";
             
@@ -684,6 +697,25 @@ namespace DataAccess.Local
 
             #endregion
 
+            #region PlantingState
+
+            var ps = new PlantingState() { Code = "SD", Description = "Seedling" };
+            PlantingStateRepository.Insert(ps);
+
+            ps = new PlantingState { Code = "IP", Description = "In Pot" };
+            PlantingStateRepository.Insert(ps);
+            
+            ps = new PlantingState { Code = "IG", Description = "In Ground" };
+            PlantingStateRepository.Insert(ps);
+            
+            ps = new PlantingState { Code = "H", Description = "Harvested" };
+            PlantingStateRepository.Insert(ps);
+            
+            ps = new PlantingState { Code = "DEAD", Description = "Deceased" };
+            PlantingStateRepository.Insert(ps);
+
+            #endregion
+            
             #region CommentType
 
             var ct = new CommentType { Code = "JOURNAL", Description = "Journal", Author = new Person(1) };

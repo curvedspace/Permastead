@@ -54,6 +54,18 @@ public static class PlantingsService
         return beds;
     }
     
+    public static List<PlantingState> GetPlantingStates(ServiceMode mode)
+    {
+        var states = new List<PlantingState>();
+
+        if (mode == ServiceMode.Local)
+        {
+            states = PlantingStateRepository.GetAll(DataConnection.GetLocalDataSource());
+        }
+
+        return states;
+    }
+    
     public static List<SeedPacket> GetSeedPackets(ServiceMode mode, bool byPlant = true)
     {
         var seedPackets = new List<SeedPacket>();

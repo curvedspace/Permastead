@@ -1,12 +1,15 @@
-﻿using System;
+﻿using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.ComponentModel;
+
 using Dock.Model.Mvvm.Controls;
+
 using Models;
 using Permastead.ViewModels.Tools;
+
+using System;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Reactive.Joins;
-using CommunityToolkit.Mvvm.Input;
+
 
 namespace Permastead.ViewModels.Documents;
 
@@ -27,6 +30,9 @@ public partial class PlantingDocumentViewModel : Document
     
     [ObservableProperty]
     private ObservableCollection<Person> _people = new ObservableCollection<Person>();
+    
+    [ObservableProperty]
+    private ObservableCollection<PlantingState> _plantingStates = new ObservableCollection<PlantingState>();
 
     public BrowserViewModel Browser = null;
 
@@ -35,20 +41,22 @@ public partial class PlantingDocumentViewModel : Document
         _planting = planting;
         this.Id = planting.Id.ToString();
         
-        if (_planting.Plant.Id != 0 && _plants.Count > 0) _planting.Plant = _plants.First(x => x.Id == _planting.Plant.Id);
-        if (_planting.SeedPacket.Id != 0 && _seedPackets.Count > 0) _planting.SeedPacket = _seedPackets.First(x => x.Id == _planting.SeedPacket.Id);
-        if (_planting.Author.Id != 0 && _people.Count > 0) _planting.Author = _people.First(x => x.Id == _planting.Author.Id);
+        if (Planting.Plant.Id != 0 && _plants.Count > 0) Planting.Plant = Plants.First(x => x.Id == Planting.Plant.Id);
+        if (Planting.SeedPacket.Id != 0 && SeedPackets.Count > 0) Planting.SeedPacket = SeedPackets.First(x => x.Id == Planting.SeedPacket.Id);
+        if (Planting.Author.Id != 0 && People.Count > 0) Planting.Author = People.First(x => x.Id == Planting.Author.Id);
+        if (Planting.State.Id != 0 && PlantingStates.Count > 0) Planting.State = PlantingStates.First(x => x.Id == Planting.State.Id);
     }
 
     public PlantingDocumentViewModel(BrowserViewModel browser)
     {
-        _planting = new Planting();
+        Planting = new Planting();
         Browser = browser;
 
-        _plants = new ObservableCollection<Plant>(Services.PlantingsService.GetPlants(AppSession.ServiceMode));
-        _seedPackets = new ObservableCollection<SeedPacket>(Services.PlantingsService.GetSeedPackets(AppSession.ServiceMode));
-        _beds = new ObservableCollection<GardenBed>(Services.PlantingsService.GetGardenBeds(AppSession.ServiceMode));
-        _people = new ObservableCollection<Person>(Services.PersonService.GetAllPeople(AppSession.ServiceMode));
+        Plants = new ObservableCollection<Plant>(Services.PlantingsService.GetPlants(AppSession.ServiceMode));
+        SeedPackets = new ObservableCollection<SeedPacket>(Services.PlantingsService.GetSeedPackets(AppSession.ServiceMode));
+        Beds = new ObservableCollection<GardenBed>(Services.PlantingsService.GetGardenBeds(AppSession.ServiceMode));
+        People = new ObservableCollection<Person>(Services.PersonService.GetAllPeople(AppSession.ServiceMode));
+        PlantingStates = new ObservableCollection<PlantingState>(Services.PlantingsService.GetPlantingStates(AppSession.ServiceMode));
     }
     
     [RelayCommand]
