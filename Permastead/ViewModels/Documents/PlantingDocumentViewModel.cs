@@ -27,22 +27,22 @@ public partial class PlantingDocumentViewModel : Document
     [ObservableProperty]
     private ObservableCollection<Person> _people = new ObservableCollection<Person>();
 
-    public Tool5ViewModel PropertyViewModel = new Tool5ViewModel();
+    public BrowserViewModel Browser = null;
 
-    public PlantingDocumentViewModel(Planting planting) : this()
+    public PlantingDocumentViewModel(Planting planting, BrowserViewModel browser) : this(browser)
     {
         _planting = planting;
         this.Id = planting.Id.ToString();
-
+        
         if (_planting.Plant.Id != 0 && _plants.Count > 0) _planting.Plant = _plants.First(x => x.Id == _planting.Plant.Id);
         if (_planting.SeedPacket.Id != 0 && _seedPackets.Count > 0) _planting.SeedPacket = _seedPackets.First(x => x.Id == _planting.SeedPacket.Id);
         if (_planting.Author.Id != 0 && _people.Count > 0) _planting.Author = _people.First(x => x.Id == _planting.Author.Id);
     }
 
-    public PlantingDocumentViewModel()
+    public PlantingDocumentViewModel(BrowserViewModel browser)
     {
         _planting = new Planting();
-        PropertyViewModel = new Tool5ViewModel();
+        Browser = browser;
 
         _plants = new ObservableCollection<Plant>(Services.PlantingsService.GetPlants(AppSession.ServiceMode));
         _seedPackets = new ObservableCollection<SeedPacket>(Services.PlantingsService.GetSeedPackets(AppSession.ServiceMode));
@@ -73,6 +73,7 @@ public partial class PlantingDocumentViewModel : Document
         }
        
         //need a way to send a refresh message back to the tree browser...
+        if (Browser != null) Browser.RefreshData();
 
     }
 }

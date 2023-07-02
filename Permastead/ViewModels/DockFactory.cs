@@ -24,6 +24,7 @@ public class DockFactory : Factory
     private IDocumentDock? _documentDock;
 
     private HomeViewModel _homeView;
+    private BrowserViewModel _browser;
 
     private ToolDock _toolDock;
 
@@ -40,16 +41,18 @@ public class DockFactory : Factory
         var document2 = new DocumentViewModel {Id = "Document2", Title = "Document2"};
         var document3 = new PlantDocumentViewModel {Id = "Document3", Title = "Document3", CanClose = true};
         var tool1 = new Tool1ViewModel {Id = "Tool1", Title = "Plants"};
-        var tool2 = new BrowserViewModel {Id = "Browser", Title = "Browser"};
+        
         var tool3 = new Tool3ViewModel {Id = "Tool3", Title = "Tool3"};
         var tool4 = new Tool4ViewModel {Id = "Tool4", Title = "Tool4"};
         var tool5 = new Tool5ViewModel {Id = "Tool5", Title = "Tool5"};
+        
+        _browser = new BrowserViewModel {Id = "Browser", Title = "Browser"};
 
         tool1.Home = _homeView;
         tool1.Dock = this;
 
-        tool2.Home = _homeView;
-        tool2.Dock = this;
+        _browser.Home = _homeView;
+        _browser.Dock = this;
 
         var leftDock = new ProportionalDock
         {
@@ -61,7 +64,7 @@ public class DockFactory : Factory
                 new ToolDock
                 {
                     ActiveDockable = tool1,
-                    VisibleDockables = CreateList<IDockable>(tool2),
+                    VisibleDockables = CreateList<IDockable>(_browser),
                     Alignment = Alignment.Left
                 }
                 //},
@@ -235,7 +238,7 @@ public class DockFactory : Factory
             
             case "Models.Planting":
                 Planting currPlanting = currentItem as Planting;
-                doc = new PlantingDocumentViewModel(currPlanting);
+                doc = new PlantingDocumentViewModel(currPlanting, _browser);
                 doc.Title = currPlanting.Description;
                 break;
             
@@ -259,6 +262,5 @@ public class DockFactory : Factory
             _toolDock.ActiveDockable.Title = doc.Title;
 
         }
-        
     }
 }
