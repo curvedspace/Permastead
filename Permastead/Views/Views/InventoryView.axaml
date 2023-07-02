@@ -14,14 +14,18 @@
  
     <Grid ColumnDefinitions="*" RowDefinitions="Auto, Auto, Auto, Auto,*">
     
-    <WrapPanel Grid.Row="0">
+    <WrapPanel Grid.Row="0" Background="{StaticResource  ButtonBackground}">
+      <PathIcon Margin="10,0,0,0" Width="24" Height="24" Opacity="0.8" Data="{StaticResource clipboard_letter_regular}"/>
       <TextBlock FontWeight="Bold" Margin="20,20,20,20">Inventory</TextBlock>
       <Separator MaxWidth="5" Foreground="Black"></Separator>
+      <Button Command="{Binding ResetToDoCommand}" Name="Reset" HorizontalAlignment="Right" Margin="10,10,0,10">Reset</Button>
+      <Button Command="{Binding SaveToDoCommand}" Name="Save" HorizontalAlignment="Right" Margin="10,10,0,10">Save</Button>
+      <Separator MaxWidth="5" Foreground="Black"></Separator>
       <TextBlock Name="InventoryCount" Text="{Binding InventoryCount, StringFormat='{}{0} total'}" Margin="20,20,20,20"></TextBlock>
-      <CheckBox Name="ForSaleOnly" Command="{Binding RefreshInventoryCommand}" IsChecked="{Binding ForSaleOnly, Mode=TwoWay}" Margin="5,5,20,20">For Sale Only</CheckBox>
+      <CheckBox Name="ForSaleOnly" Command="{Binding RefreshInventoryCommand}" IsChecked="{Binding ForSaleOnly, Mode=TwoWay}" Margin="5,0,0,0">For Sale Only</CheckBox>
     </WrapPanel>
 
-    <WrapPanel Grid.Row="1">
+    <WrapPanel Grid.Row="1" Margin="0,10,0,0">
       <Label Margin="10,5,5,5">Description:</Label>
       <TextBox Text="{Binding CurrentItem.Description, Mode=TwoWay}" Margin="5,0,5,5" ></TextBox>
 
@@ -80,8 +84,7 @@
       
     <Panel Grid.Row="3">
       <WrapPanel>
-        <Button Command="{Binding ResetToDoCommand}" Name="Reset" HorizontalAlignment="Right" Margin="10,0,0,10">Reset</Button>
-        <Button Command="{Binding SaveToDoCommand}" Name="Save" HorizontalAlignment="Right" Margin="10,0,0,10">Save</Button>
+ 
       </WrapPanel>     
     </Panel>
        

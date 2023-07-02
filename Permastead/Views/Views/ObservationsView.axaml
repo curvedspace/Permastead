@@ -12,10 +12,11 @@
   <Design.DataContext>
     <vm:ObservationsViewModel/>
   </Design.DataContext>
-
+  
   <Grid ColumnDefinitions="*" RowDefinitions="Auto, Auto, Auto, *">
     
-    <WrapPanel>
+    <WrapPanel Background="{StaticResource  ButtonBackground}">
+      <PathIcon Margin="10,0,0,0" Width="24" Height="24" Opacity="0.8" Data="{StaticResource glasses_regular}"/>
       <TextBlock FontWeight="Bold" Margin="20,20,20,20">Observations</TextBlock>
       <Separator MaxWidth="5" Foreground="Black"></Separator>
       <ToolTip.Tip>
@@ -24,6 +25,8 @@
           <TextBlock>Shows the number of observations, the overall word count and the average words per observation.</TextBlock>
         </StackPanel>
       </ToolTip.Tip>
+      <Button Command="{Binding SaveObservationCommand, Mode=TwoWay}" Name="Save" HorizontalAlignment="Right" Margin="30,0">Save</Button>
+      <Separator MaxWidth="5" Foreground="Black"></Separator>
       <TextBlock Name="ObservationCount" Text="{Binding ObservationCount}" Margin="20,20,20,20"></TextBlock>
       <TextBlock Name="WordCount" Text="{Binding WordCount}" Margin="20,20,20,20"></TextBlock>
       <TextBlock Name="WordsPerObservation" Text="{Binding WordsPerObservation}" Margin="20,20,20,20"></TextBlock>
@@ -35,10 +38,10 @@
     </Panel>
     
     <Panel Grid.Row="2">
-      <Button Command="{Binding SaveObservationCommand, Mode=TwoWay}" Name="Save" HorizontalAlignment="Right" Margin="30,0">Save</Button>
+      
     </Panel>
 
-    <Panel Grid.Row="3">
+    <Panel Grid.Row="2">
       <ListBox Name="ObservationsList" ItemsSource="{Binding Observations, Mode=TwoWay }" Margin="30">
         <ListBox.ItemTemplate>
           <DataTemplate>

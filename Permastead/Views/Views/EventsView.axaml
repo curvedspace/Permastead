@@ -16,13 +16,17 @@
     
     <Grid ColumnDefinitions="*" RowDefinitions="Auto, Auto, Auto, Auto,*">
     
-    <WrapPanel>
+    <WrapPanel Background="{StaticResource  ButtonBackground}">
+      <PathIcon Margin="10,0,0,0" Width="24" Height="24" Opacity="0.8" Data="{StaticResource alert_on_regular}"/>
       <TextBlock FontWeight="Bold" Margin="20,20,20,20">Events</TextBlock>
+      <Separator MaxWidth="5" Foreground="Black"></Separator>
+      <Button Command="{Binding ResetEventCommand}" Name="Reset" HorizontalAlignment="Right" Margin="5,0">Reset</Button>
+      <Button Command="{Binding SaveEventCommand}" Name="Save" HorizontalAlignment="Right" Margin="5,0">Save</Button>
       <Separator MaxWidth="5" Foreground="Black"></Separator>
       <TextBlock Name="EventsCount" Text="{Binding EventsCount , StringFormat='{}{0} total'}" Margin="20,20,20,20"></TextBlock>
     </WrapPanel>
     
-    <WrapPanel Grid.Row="1">
+    <WrapPanel Grid.Row="1" Margin="0,10,0,0">
       
       <Label FontSize="12" Margin="10,10,5,5">Start Date:</Label>
       <CalendarDatePicker Name="StarDate" FontSize="12" SelectedDate="{Binding CurrentItem.StartDate, Mode=TwoWay}">
@@ -75,25 +79,16 @@
       <Label FontSize="12" Margin="5,10,5,5">Warning Days: </Label>
       <TextBox Margin="5,7,5,5" Text="{Binding CurrentItem.WarningDays}"></TextBox>
       
-      
       <CheckBox FontSize="12"  IsThreeState="True" IsChecked="{Binding CurrentItem.ToDoTrigger}">Trigger Action</CheckBox>
 
     </WrapPanel>
       
-    <Panel Grid.Row="2" Height="100" Margin="30">
+    <Panel Grid.Row="2" Height="100" Margin="10">
       <TextBlock>Enter Text:</TextBlock>
       <TextBox Text="{Binding CurrentItem.Description, Mode=TwoWay}" TextWrapping="Wrap" Height="50" FontSize="14"></TextBox>
     </Panel>
       
     <Panel Grid.Row="3">
-      <WrapPanel>
-        <Button Command="{Binding ResetEventCommand}" Name="Reset" HorizontalAlignment="Right" Margin="30,0">Reset</Button>
-        <Button Command="{Binding SaveEventCommand}" Name="Save" HorizontalAlignment="Right" Margin="30,0">Save</Button>
-      </WrapPanel>
-      
-    </Panel>
-      
-    <Panel Grid.Row="4">
       <DataGrid Name="ToDoGrid" ItemsSource="{Binding Events, Mode=TwoWay}" SelectedItem="{Binding CurrentItem, Mode=TwoWay}" 
                 AutoGenerateColumns="False" FontSize="12" Margin="30">
         <DataGrid.Styles>
