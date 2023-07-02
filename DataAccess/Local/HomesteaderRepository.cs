@@ -731,12 +731,6 @@ namespace DataAccess.Local
 			var v = new Vendor { Code = "UNKNOWN", Description = "Unknown", Rating = 0 };
             VendorRepository.Insert(v);
 
-            v = new Vendor { Code = "MURHON", Description = "Murray's Honey", Rating = 80 };
-            VendorRepository.Insert(v);
-
-            v = new Vendor { Code = "KIRKLAND", Description = "Kirkland", Rating = 50 };
-            VendorRepository.Insert(v);
-
             #endregion
 
             #region Person
