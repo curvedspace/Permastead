@@ -111,7 +111,6 @@ namespace Permastead.ViewModels.Views;
         }
 
         [RelayCommand]
-        // The method that will be executed when the command is invoked
         private void SaveRecord()
         {
             //if there is a comment, save it.

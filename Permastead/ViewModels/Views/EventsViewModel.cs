@@ -71,14 +71,14 @@ public partial class  EventsViewModel : ViewModelBase
 
         foreach (var e in _myEvents)
         {
-            e.Frequency = _frequencies.First(x => x.Id == e.Frequency.Id);
-            e.AnEventType = _eventTypes.First(x => x.Id == e.AnEventType.Id);
-            e.Assignee = _people.First(x => x.Id == e.Assignee.Id);
-            e.Assigner = _people.First(x => x.Id == e.Assigner.Id);
+            e.Frequency = Frequencies.First(x => x.Id == e.Frequency.Id);
+            e.AnEventType = EventTypes.First(x => x.Id == e.AnEventType.Id);
+            e.Assignee = People.First(x => x.Id == e.Assignee.Id);
+            e.Assigner = People.First(x => x.Id == e.Assigner.Id);
             
             Events.Add(e);
             
-            EventsCount = this._events.Count;
+            EventsCount = Events.Count;
         }
     }
     
@@ -97,7 +97,7 @@ public partial class  EventsViewModel : ViewModelBase
             
             if (rtnValue)
             {
-                _events.Add(CurrentItem);
+                Events.Add(CurrentItem);
             }
             
             Console.WriteLine("saved " + rtnValue);

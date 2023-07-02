@@ -5,6 +5,7 @@ using Models;
 using Permastead.ViewModels.Tools;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Reactive.Joins;
 using CommunityToolkit.Mvvm.Input;
 
 namespace Permastead.ViewModels.Documents;
@@ -75,5 +76,12 @@ public partial class PlantingDocumentViewModel : Document
         //need a way to send a refresh message back to the tree browser...
         if (Browser != null) Browser.RefreshData();
 
+    }
+    
+    [RelayCommand]
+    private void Harvest()
+    {
+        Planting.EndDate = DateTime.Today;
+        SaveEvent();
     }
 }

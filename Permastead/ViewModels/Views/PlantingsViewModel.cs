@@ -24,7 +24,7 @@ public partial class PlantingsViewModel : ViewModelBase
     private ObservableCollection<Plant> _plants = new ObservableCollection<Plant>();
     
     [ObservableProperty] 
-    private ObservableCollection<Person> _people;
+    private ObservableCollection<Person> _people = new ObservableCollection<Person>();
 
     [ObservableProperty] 
     private long _plantingCount;
@@ -90,7 +90,6 @@ public partial class PlantingsViewModel : ViewModelBase
     }
     
     [RelayCommand]
-    // The method that will be executed when the command is invoked
     private void SaveEvent()
     {
         //if there is a comment, save it.
@@ -104,7 +103,7 @@ public partial class PlantingsViewModel : ViewModelBase
             
             if (rtnValue)
             {
-                _plantings.Add(CurrentItem);
+                Plantings.Add(CurrentItem);
             }
             
             Console.WriteLine("saved " + rtnValue);
@@ -129,4 +128,5 @@ public partial class PlantingsViewModel : ViewModelBase
         OnPropertyChanged(nameof(CurrentItem));
         
     }
+    
 }
