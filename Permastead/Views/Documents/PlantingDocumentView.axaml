@@ -10,7 +10,7 @@
   <Grid Focusable="True" RowDefinitions="Auto, *">
     <WrapPanel Name="ToolBar" HorizontalAlignment="Stretch" Margin="5" Background="{StaticResource  SystemAccentColorLight2}">
       <TextBlock FontWeight="Bold" Margin="10">Planting</TextBlock>
-      <Button Command="{Binding SaveEvent}" Name="SaveButton">Save</Button>
+      <Button Command="{Binding SaveEventCommand}" Name="SaveButton">Save</Button>
     </WrapPanel>
     
     <StackPanel Grid.Row="1" VerticalAlignment="Top" HorizontalAlignment="Center">
