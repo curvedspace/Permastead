@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:id="clr-namespace:Dock.Avalonia;assembly=Dock.Avalonia"
+             xmlns:materialIcons="clr-namespace:Material.Icons.Avalonia;assembly=Material.Icons.Avalonia"
              xmlns:dm="using:Dock.Model.Core"
              xmlns:dmc="using:Dock.Model.Controls"
              xmlns:vm="using:Permastead.ViewModels"
@@ -78,28 +79,28 @@
         </Button>
 
         <Button ToolTip.Tip="Dashboard" Command="{Binding Navigate}" CommandParameter="Dashboard" Grid.Column="2">
-          <PathIcon Width="24" Height="24" Opacity="0.8" Data="{StaticResource data_usage_regular}"/>
+          <materialIcons:MaterialIcon Kind="HomeClockOutline" Margin="2"/>
         </Button>
           
         <Button ToolTip.Tip="Observations View" Command="{Binding Navigate}" CommandParameter="ObservationsPage" Grid.Column="3">
-          <PathIcon Width="24" Height="24" Opacity="0.8" Data="{StaticResource glasses_regular}"/>
+          <materialIcons:MaterialIcon Kind="EyeCircle" Margin="2"/>
         </Button>
         
         <Button ToolTip.Tip="Actions View" Command="{Binding Navigate}" CommandParameter="ToDoPage" Grid.Column="4" >
-          <PathIcon Width="24" Height="24" Opacity="0.8" Data="{StaticResource  home_checkmark_regular}"/>
+          <materialIcons:MaterialIcon Kind="Shovel" Margin="2"/>
         </Button>
         
         <Button ToolTip.Tip="Events View" Command="{Binding Navigate}" CommandParameter="EventsPage" Grid.Column="5" >
-          <PathIcon Width="24" Height="24" Opacity="0.8" Data="{StaticResource   alert_on_regular}"/>
+          <materialIcons:MaterialIcon Kind="Calendars" Margin="2"/>
         </Button>
         
         <Button ToolTip.Tip="Inventory View" Command="{Binding Navigate}" CommandParameter="InventoryPage" Grid.Column="6" >
-          <PathIcon Width="24" Height="24" Opacity="0.8" Data="{StaticResource  clipboard_letter_regular}"/>
+          <materialIcons:MaterialIcon Kind="Clipboard" Margin="2"/>
         </Button>
         
         <TextBlock Grid.Column="7" Text =""></TextBlock>
         <Button ToolTip.Tip="Workbench View " Command="{Binding Navigate}" CommandParameter="{Binding DefaultDockable}" Grid.Column="8" >
-          <PathIcon Width="24" Height="24" Opacity="0.8" Data="{StaticResource  leaf_two_regular}"/>
+          <materialIcons:MaterialIcon Kind="LandPlotsCircleVariant" Margin="2"/>
         </Button>
         
         <TextBox x:Name="Id" Text="" Watermark="Search" UseFloatingWatermark="True" Grid.Column="9" Grid.ColumnSpan="1"/>
@@ -108,8 +109,8 @@
           <PathIcon Width="24" Height="24" Opacity="0.6" Data="{StaticResource DarkTheme}"/>
         </Button>
         
-        <Button ToolTip.Tip="Edit Settings" Command="{Binding Navigate}" CommandParameter="SettingsPage" Grid.Column="11">
-          <PathIcon Width="24" Height="24" Opacity="0.8" Data="{StaticResource edit_settings_regular}"/>
+        <Button ToolTip.Tip="Edit Settings" Command="{Binding Navigate}" CommandParameter="SettingsPage" Grid.Column="11" HorizontalAlignment="Right">
+          <materialIcons:MaterialIcon Kind="Settings" Margin="2"/>
         </Button>
       </Grid>
     </Panel>

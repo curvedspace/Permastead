@@ -3,12 +3,14 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:vm="using:Permastead.ViewModels.Documents"
+             xmlns:materialIcons="clr-namespace:Material.Icons.Avalonia;assembly=Material.Icons.Avalonia"
              mc:Ignorable="d"
              d:DesignWidth="1000" d:DesignHeight="600"
              x:Class="Permastead.Views.Documents.SeedPacketDocumentView"
              x:DataType="vm:SeedPacketDocumentViewModel" x:CompileBindings="True">
   <Grid Focusable="True" RowDefinitions="Auto, *">
-    <WrapPanel Name="ToolBar" HorizontalAlignment="Stretch" Margin="5" Background="{StaticResource  SystemAccentColorLight2}">
+    <WrapPanel Name="ToolBar" HorizontalAlignment="Stretch" Margin="5" Background="{StaticResource  SystemAccentColorLight1}">
+      <materialIcons:MaterialIcon Kind="Seed" Margin="10"/>
       <TextBlock FontWeight="Bold" Margin="10">Seed Packet</TextBlock>
       <Button Command="{Binding SaveEventCommand}" Name="SaveButton">Save</Button>
     </WrapPanel>

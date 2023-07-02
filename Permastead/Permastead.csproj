@@ -24,6 +24,7 @@
     <PackageReference Include="Dock.Model.Avalonia" Version="11.0.0-rc1.1" />
     <PackageReference Include="Dock.Model.Mvvm" Version="11.0.0-rc1.1" />
     <PackageReference Include="Dock.Model.ReactiveUI" Version="11.0.0-preview6" />
+    <PackageReference Include="Material.Icons.Avalonia" Version="2.0.1" />
   </ItemGroup>
 
   <ItemGroup>

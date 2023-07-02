@@ -5,6 +5,7 @@
              xmlns:core="using:Dock.Model.Core"
              Name="Permastead"
              x:Class="Permastead.App"
+             xmlns:materialIcons="clr-namespace:Material.Icons.Avalonia;assembly=Material.Icons.Avalonia" 
              RequestedThemeVariant="Light">
              <!-- "Default" ThemeVariant follows system theme variant. "Dark" or "Light" are other available options. -->
 
@@ -35,6 +36,7 @@
         <FluentTheme />
         
         <StyleInclude Source="avares://Avalonia.Controls.DataGrid/Themes/Fluent.xaml"/>
+        <materialIcons:MaterialIconStyles />
     
         <Style Selector="idc|DocumentControl">
             <Setter Property="HeaderTemplate">

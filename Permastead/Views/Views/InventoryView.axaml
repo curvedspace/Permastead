@@ -2,6 +2,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:materialIcons="clr-namespace:Material.Icons.Avalonia;assembly=Material.Icons.Avalonia"
              mc:Ignorable="d" d:DesignWidth="1000" d:DesignHeight="450"
              x:Class="Permastead.Views.Views.InventoryView"
              xmlns:vm="using:Permastead.ViewModels.Views"
@@ -15,7 +16,7 @@
     <Grid ColumnDefinitions="*" RowDefinitions="Auto, Auto, Auto, Auto,*">
     
     <WrapPanel Grid.Row="0" Background="{StaticResource  ButtonBackground}">
-      <PathIcon Margin="10,0,0,0" Width="24" Height="24" Opacity="0.8" Data="{StaticResource clipboard_letter_regular}"/>
+      <materialIcons:MaterialIcon Kind="Clipboard" Margin="10"/>
       <TextBlock FontWeight="Bold" Margin="20,20,20,20">Inventory</TextBlock>
       <Separator MaxWidth="5" Foreground="Black"></Separator>
       <Button Command="{Binding ResetToDoCommand}" Name="Reset" HorizontalAlignment="Right" Margin="10,10,0,10">Reset</Button>
