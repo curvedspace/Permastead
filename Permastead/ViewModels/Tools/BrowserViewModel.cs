@@ -46,7 +46,7 @@ public partial class BrowserViewModel : Tool
         RefreshData();
     }
 
-
+    [RelayCommand]
     public void RefreshData()
     {
         _plantings = new ObservableCollection<Planting>(PlantingsService.GetPlantings(AppSession.ServiceMode));
