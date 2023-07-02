@@ -20,13 +20,12 @@
               TextAlignment="Center">
       </TextBlock>
       
-      <Border Classes="Card" Width="200" DockPanel.Dock="Left"> 
+      <Border  Width="200" DockPanel.Dock="Left"> 
           <StackPanel>
               <TextBlock Classes="h4" TextAlignment="Center" Margin="5,0,0,10">Level Progress</TextBlock>
                   <Border Padding="20" Width="200">
 
                       <TextBlock
-                          Classes="h3"
                           Margin="0,5,0,0"
                           Name="TextPercent"
                           HorizontalAlignment="Center"
@@ -34,7 +33,7 @@
                           VerticalAlignment="Center" />
                   </Border>
               
-              <TextBlock Classes="h4" TextAlignment="Center" Margin="5,80,0,10">Obs/Action Ratio</TextBlock>
+              <TextBlock  TextAlignment="Center" Margin="5,80,0,10">Obs/Action Ratio</TextBlock>
               <Border Padding="20" Width="200">
                   <TextBlock
                       Classes="h3"
@@ -45,7 +44,7 @@
                       VerticalAlignment="Center" />
               </Border>
 
-            <TextBlock Classes="h4" TextAlignment="Center" Margin="5,20,0,10">Inventory</TextBlock>
+            <TextBlock TextAlignment="Center" Margin="5,20,0,10">Inventory</TextBlock>
             <TextBlock
                 Classes="h3"
                 Margin="0,5,0,100"
@@ -56,10 +55,10 @@
           </StackPanel>
       </Border>
       
-      <Border Classes="Card" Width="200" DockPanel.Dock="Right"> 
+      <Border Width="200" DockPanel.Dock="Right"> 
           <StackPanel>
             
-            <TextBlock Classes="h4" TextAlignment="Center" Margin="5,0,0,10">Plants</TextBlock>
+            <TextBlock TextAlignment="Center" Margin="5,0,0,10">Plants</TextBlock>
             <Border Padding="20" Width="200">
                 <TextBlock
                     Classes="h3"
@@ -70,7 +69,7 @@
                     VerticalAlignment="Center" />
             </Border>
                           
-            <TextBlock Classes="h4" TextAlignment="Center" Margin="5,30,0,0">Plantings</TextBlock>
+            <TextBlock TextAlignment="Center" Margin="5,30,0,0">Plantings</TextBlock>
             <TextBlock
               Classes="h3"
               Margin="0,20,0,0"
@@ -79,7 +78,7 @@
               VerticalAlignment="Center" HorizontalAlignment="Center" />
               
           
-          <TextBlock Classes="h4" TextAlignment="Center" Margin="5,100,0,0">Seed Types</TextBlock>
+          <TextBlock TextAlignment="Center" Margin="5,100,0,0">Seed Types</TextBlock>
           <TextBlock
               Classes="h3"
               Margin="0,20,0,20"
