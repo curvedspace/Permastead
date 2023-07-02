@@ -71,7 +71,7 @@
                 SelectedItem="{Binding CurrentItem.Assignee, Mode=TwoWay}" AutoScrollToSelectedItem="True">
         <ComboBox.ItemTemplate>
           <DataTemplate >
-            <TextBlock Text="{Binding FullNameLastFirst, Mode=TwoWay}" />
+            <TextBlock FontSize="12" Text="{Binding FullNameLastFirst, Mode=TwoWay}" />
           </DataTemplate>
         </ComboBox.ItemTemplate>
       </ComboBox>
