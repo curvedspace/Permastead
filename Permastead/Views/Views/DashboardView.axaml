@@ -22,10 +22,11 @@
       
       <Border  Width="200" DockPanel.Dock="Left"> 
           <StackPanel>
-              <TextBlock Classes="h4" TextAlignment="Center" Margin="5,0,0,10">Level Progress</TextBlock>
+              <TextBlock FontSize="20" TextAlignment="Center" Margin="5,0,0,10">Level Progress</TextBlock>
                   <Border Padding="20" Width="200">
 
                       <TextBlock
+                          FontSize="20" 
                           Margin="0,5,0,0"
                           Name="TextPercent"
                           HorizontalAlignment="Center"
@@ -33,10 +34,10 @@
                           VerticalAlignment="Center" />
                   </Border>
               
-              <TextBlock  TextAlignment="Center" Margin="5,80,0,10">Obs/Action Ratio</TextBlock>
+              <TextBlock FontSize="20"  TextAlignment="Center" Margin="5,80,0,10">Obs/Action Ratio</TextBlock>
               <Border Padding="20" Width="200">
                   <TextBlock
-                      Classes="h3"
+                      FontSize="20" 
                       Margin="0,5,0,50"
                       Name="ObservationActionRatio"
                       HorizontalAlignment="Center"
@@ -44,9 +45,9 @@
                       VerticalAlignment="Center" />
               </Border>
 
-            <TextBlock TextAlignment="Center" Margin="5,20,0,10">Inventory</TextBlock>
+            <TextBlock FontSize="20"  TextAlignment="Center" Margin="5,20,0,10">Inventory</TextBlock>
             <TextBlock
-                Classes="h3"
+                FontSize="20" 
                 Margin="0,5,0,100"
                 Name="InventoryCount"
                 Text="{Binding InventoryItems.Count}"
@@ -58,10 +59,10 @@
       <Border Width="200" DockPanel.Dock="Right"> 
           <StackPanel>
             
-            <TextBlock TextAlignment="Center" Margin="5,0,0,10">Plants</TextBlock>
+            <TextBlock FontSize="20" TextAlignment="Center" Margin="5,0,0,10">Plants</TextBlock>
             <Border Padding="20" Width="200">
                 <TextBlock
-                    Classes="h3"
+                    FontSize="20" 
                     Margin="0,5,0,50"
                     Name="Plants"
                     HorizontalAlignment="Center"
@@ -69,18 +70,18 @@
                     VerticalAlignment="Center" />
             </Border>
                           
-            <TextBlock TextAlignment="Center" Margin="5,30,0,0">Plantings</TextBlock>
+            <TextBlock FontSize="20" TextAlignment="Center" Margin="5,30,0,0">Plantings</TextBlock>
             <TextBlock
-              Classes="h3"
-              Margin="0,20,0,0"
-              Name="TextPercent2"
-              Text="{Binding Plantings.Count}"
-              VerticalAlignment="Center" HorizontalAlignment="Center" />
+                FontSize="20" 
+                Margin="0,20,0,0"
+                Name="TextPercent2"
+                Text="{Binding Plantings.Count}"
+                VerticalAlignment="Center" HorizontalAlignment="Center" />
               
           
-          <TextBlock TextAlignment="Center" Margin="5,100,0,0">Seed Types</TextBlock>
+          <TextBlock FontSize="20" TextAlignment="Center" Margin="5,100,0,0">Seed Types</TextBlock>
           <TextBlock
-              Classes="h3"
+              FontSize="20" 
               Margin="0,20,0,20"
               Name="Seeds"
               Text="{Binding SeedPackets.Count}"
@@ -89,7 +90,7 @@
           </StackPanel>
       </Border>
      <StackPanel>
-     <TextBlock TextAlignment="Center" Text="{Binding Statistics}" Margin="50,0,50,50"></TextBlock>
+     <TextBlock FontSize="20" TextAlignment="Center" Text="{Binding Statistics}" Margin="50,0,50,50"></TextBlock>
       <views:OpeningView HorizontalAlignment="Center"></views:OpeningView>
      </StackPanel>
   </DockPanel>
