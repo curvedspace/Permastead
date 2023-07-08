@@ -46,5 +46,32 @@ namespace DataAccess.Local
                 return false;
             }
         }
+        
+        public static bool Update(Vendor vendor)
+        {
+            try
+            {
+                
+                if (vendor != null)
+                {
+                    using (IDbConnection db = new SqliteConnection(DataConnection.GetLocalDataSource()))
+                    {
+                        string sqlQuery =
+                            "UPDATE Vendor SET Code = @Code, Description = @Description, StartDate = @StartDate, EndDate = @EndDate " +
+                            "WHERE Id = @Id;";
+
+                        return (db.Execute(sqlQuery, vendor) == 1);
+                    }
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch
+            {
+                return false;
+            }
+        }
     }
 }
