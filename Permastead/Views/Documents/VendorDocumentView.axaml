@@ -5,7 +5,7 @@
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              xmlns:materialIcons="clr-namespace:Material.Icons.Avalonia;assembly=Material.Icons.Avalonia"
              xmlns:vm="using:Permastead.ViewModels.Documents"
-             x:DataType="vm:PlantingDocumentViewModel" x:CompileBindings="True"
+             x:DataType="vm:VendorDocumentViewModel" x:CompileBindings="True"
              x:Class="Permastead.Views.Documents.VendorDocumentView">
   
   <Grid Focusable="True" RowDefinitions="Auto, *">
@@ -23,24 +23,23 @@
               Padding="10" Margin="10">
       <Grid ColumnDefinitions="*,3*, *, 3*" RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,*"  Margin="20">
         <TextBlock Grid.Row="0" Grid.Column="0" Margin="10,10,0,0">ID:</TextBlock>
-        <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding Planting.Id }" Margin="10,10,10,0"></TextBox>
+        <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding Vendor.Id }" Margin="10,10,10,0"></TextBox>
         <Label Grid.Row="0" Margin="10,10,10,10" Grid.Column="2">Code:</Label>
-        <TextBox Grid.Row="0" Grid.Column="3" Text="{Binding Planting.Code }" Margin="10,10,10,10"></TextBox>
+        <TextBox Grid.Row="0" Grid.Column="3" Text="{Binding Vendor.Code }" Margin="10,10,10,10"></TextBox>
         <TextBlock Grid.Row="1" Grid.Column="0" Margin="10,10,10,10">Description:</TextBlock>
-        <TextBox Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3"  Text="{Binding Planting.Description }" Margin="10,10,10,10"></TextBox>
+        <TextBox Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3"  Text="{Binding Vendor.Description }" Margin="10,10,10,10"></TextBox>
         
         <Label Grid.Row="2" Grid.Column="0" Margin="10">Rating: </Label>
-        <TextBox Grid.Row="2" Grid.Column="1" Margin="10" Text="{Binding Planting.YieldRating}"></TextBox>
+        <TextBox Grid.Row="2" Grid.Column="1" Margin="10" Text="{Binding Vendor.Rating}"></TextBox>
         
         <Label Grid.Row="3" Grid.Column="0" Margin="10">Start Date:</Label>
-        <CalendarDatePicker Grid.Row="3" Grid.Column="1" Name = "EndDate" SelectedDate="{Binding Planting.EndDate, Mode=TwoWay}">
+        <CalendarDatePicker Grid.Row="3" Grid.Column="1" Name = "EndDate" SelectedDate="{Binding Vendor.EndDate, Mode=TwoWay}">
         </CalendarDatePicker>
         
         <Label Grid.Row="3" Grid.Column="2" Margin="10">End Date:</Label>
-        <CalendarDatePicker Grid.Row="3" Grid.Column="3" Name = "LastTrigger" SelectedDate="{Binding Planting.EndDate, Mode=TwoWay}">
+        <CalendarDatePicker Grid.Row="3" Grid.Column="3" Name = "LastTrigger" SelectedDate="{Binding Vendor.EndDate, Mode=TwoWay}">
         </CalendarDatePicker>
-          
-
+        
         
       </Grid>
       </Border>

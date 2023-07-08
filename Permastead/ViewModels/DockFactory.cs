@@ -248,6 +248,12 @@ public class DockFactory : Factory
                 doc.Title = seedPacket.Description;
                 break;
             
+            case "Models.Vendor":
+                Vendor vendor = currentItem as Vendor;
+                doc = new VendorDocumentViewModel(vendor, _browser);
+                doc.Title = vendor.Description;
+                break;
+            
             default:
                 doc = new DocumentViewModel();
                 doc.Title = "Unknown";

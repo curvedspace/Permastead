@@ -26,6 +26,9 @@ public partial class BrowserViewModel : Tool
     
     [ObservableProperty]
     private SeedPacket _currentSeedPacket;
+    
+    [ObservableProperty]
+    private Vendor _currentVendor;
 
     private ObservableCollection<Planting> _plantings;
     private ObservableCollection<Plant> _plants;
@@ -190,6 +193,15 @@ public partial class BrowserViewModel : Tool
         _currentSeedPacket.Description = "New Seeds";
         
         this.Dock.OpenDoc(_currentSeedPacket);
+    }
+    
+    [RelayCommand]
+    public void CreateNewVendor()
+    {
+        CurrentVendor = new Vendor();
+        CurrentVendor.Description = "New Vendor";
+        
+        this.Dock.OpenDoc(CurrentVendor);
     }
     
     [RelayCommand]

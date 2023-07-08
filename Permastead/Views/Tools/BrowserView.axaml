@@ -35,7 +35,7 @@
               <MenuItem Header="Planting" Command="{Binding CreateNewPlanting}" />
               <MenuItem Header="Seed Packet" Command="{Binding CreateNewSeedPacket}" />
               <MenuItem Header="-" />
-              <MenuItem IsEnabled="False" Header="Vendor" />
+              <MenuItem IsEnabled="True" Header="Vendor" Command="{Binding CreateNewVendor}" />
             </MenuItem>
           </MenuFlyout>
           </Button.Flyout>
