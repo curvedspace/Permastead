@@ -7,6 +7,8 @@ Desktop software for managing a homestead using permaculture design. It features
 - Inventory - this tracks what you have available on the homestead.
 - Greehouse View - this shows your current plantings and seeds.
 
+
+
 Dashboard
 ![screenshot1.png](Docs/screenshot1.png)
 
