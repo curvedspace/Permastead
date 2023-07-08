@@ -12,7 +12,7 @@
     
     <!--<StackPanel VerticalAlignment="Top" HorizontalAlignment="Left" Grid.Row="0">-->
 
-      <WrapPanel Grid.Row="0">
+      <Grid Grid.Row="0" ColumnDefinitions="Auto,*">
         <!-- <Button Command="{Binding ExpandTreeNodes}">+</Button> -->
         <!-- <Button Click="ExpandAllNodes">-</Button> -->
         <Button Command="{Binding RefreshDataCommand}">
@@ -20,7 +20,8 @@
            <ToolTip.Tip>Refresh the Browser Data.</ToolTip.Tip>
         </Button>
         
-        <Button Content="..." >
+        <Button Grid.Column="1" HorizontalAlignment="Right" Content= "..." >
+          
           <Button.Flyout>
           <MenuFlyout Placement="Bottom">
             <MenuItem Header="Add New">
@@ -39,7 +40,7 @@
           </MenuFlyout>
           </Button.Flyout>
         </Button>
-      </WrapPanel>
+      </Grid>
       
       <Panel VerticalAlignment="Top" HorizontalAlignment="Left" Grid.Row="1">
         <ScrollViewer >
