@@ -87,7 +87,7 @@
       
     <Panel Grid.Row="3">
       <DataGrid Name="ToDoGrid" ItemsSource="{Binding Todos, Mode=TwoWay}" SelectedItem="{Binding CurrentItem, Mode=TwoWay}" 
-                AutoGenerateColumns="False" FontSize="12" Margin="10">
+                AutoGenerateColumns="False" FontSize="12" CanUserSortColumns="True" CanUserResizeColumns="True" CanUserReorderColumns="True" Margin="10">
         <DataGrid.Styles>
           <Style Selector="DataGridCell">
             <Setter Property="Background" Value="Transparent" />
