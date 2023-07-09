@@ -796,6 +796,12 @@ namespace DataAccess.Local
             ig = new InventoryGroup { Author = new Person(1), Description = "Cookware" };
             InventoryGroupRepository.Insert(ig);
             
+            ig = new InventoryGroup { Author = new Person(1), Description = "Dishware" };
+            InventoryGroupRepository.Insert(ig);
+            
+            ig = new InventoryGroup { Author = new Person(1), Description = "Drinkware" };
+            InventoryGroupRepository.Insert(ig);
+            
             ig = new InventoryGroup { Author = new Person(1), Description = "Vehicles" };
             InventoryGroupRepository.Insert(ig);
             
@@ -806,6 +812,12 @@ namespace DataAccess.Local
             InventoryGroupRepository.Insert(ig);
             
             ig = new InventoryGroup { Author = new Person(1), Description = "Furniture" };
+            InventoryGroupRepository.Insert(ig);
+            
+            ig = new InventoryGroup { Author = new Person(1), Description = "Artwork" };
+            InventoryGroupRepository.Insert(ig);
+            
+            ig = new InventoryGroup { Author = new Person(1), Description = "Energy" };
             InventoryGroupRepository.Insert(ig);
 
             // -- Types
@@ -837,6 +849,36 @@ namespace DataAccess.Local
             InventoryTypeRepository.Insert(iType);
             
             iType = new InventoryType { Author = new Person(1), Description = "Sofa" };
+            InventoryTypeRepository.Insert(iType);
+            
+            iType = new InventoryType { Author = new Person(1), Description = "Bed" };
+            InventoryTypeRepository.Insert(iType);
+            
+            iType = new InventoryType { Author = new Person(1), Description = "Painting" };
+            InventoryTypeRepository.Insert(iType);
+            
+            iType = new InventoryType { Author = new Person(1), Description = "Sculpture" };
+            InventoryTypeRepository.Insert(iType);
+            
+            iType = new InventoryType { Author = new Person(1), Description = "Car" };
+            InventoryTypeRepository.Insert(iType);
+            
+            iType = new InventoryType { Author = new Person(1), Description = "Truck" };
+            InventoryTypeRepository.Insert(iType);
+            
+            iType = new InventoryType { Author = new Person(1), Description = "Bicycle" };
+            InventoryTypeRepository.Insert(iType);
+            
+            iType = new InventoryType { Author = new Person(1), Description = "Generator" };
+            InventoryTypeRepository.Insert(iType);
+            
+            iType = new InventoryType { Author = new Person(1), Description = "Solar Panel" };
+            InventoryTypeRepository.Insert(iType);
+            
+            iType = new InventoryType { Author = new Person(1), Description = "Glass" };
+            InventoryTypeRepository.Insert(iType);
+            
+            iType = new InventoryType { Author = new Person(1), Description = "Plate" };
             InventoryTypeRepository.Insert(iType);
             
             #endregion
