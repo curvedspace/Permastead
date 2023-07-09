@@ -1010,12 +1010,12 @@ namespace DataAccess.Local
 
 			var todo = new ToDo
 			{
-				Description = "Learn about Homesteader",
+				Description = "Learn about Permastead",
 				Assignee = new Person(2),
 				Assigner = new Person(1),
 				DueDate = DateTime.Today.AddMonths(1),
 				ToDoStatus = new ToDoStatus(1),
-				ToDoType = new ToDoType(1),
+				ToDoType = new ToDoType(6),	//educational
 				PercentDone = 0
 			};
             ToDoRepository.Insert(todo);
