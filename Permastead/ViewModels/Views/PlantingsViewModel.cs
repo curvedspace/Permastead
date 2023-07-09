@@ -60,7 +60,7 @@ public partial class PlantingsViewModel : ViewModelBase
     {
         Plantings.Clear();
         
-        var p = Services.PlantingsService.GetPlantings(AppSession.ServiceMode);
+        var p = Services.PlantingsService.GetPlantingsByPlantedDate(AppSession.ServiceMode);
 
         foreach (var o in p)
         {

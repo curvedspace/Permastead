@@ -35,7 +35,7 @@
   </UserControl.Resources>
   <Grid RowDefinitions="Auto,*,25" ColumnDefinitions="Auto,*" Background="Transparent">
     <Panel x:Name="ToolBar" DataContext="{Binding Layout}" Grid.Row="0" Grid.Column="0">
-      <Grid ColumnDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,350,Auto,Auto,Auto,200,Auto"
+      <Grid ColumnDefinitions="Auto, Auto,Auto,Auto,Auto,Auto,Auto,350,Auto,Auto,Auto,200,Auto"
             HorizontalAlignment="Right"
             Margin="4"
             x:DataType="dmc:IRootDock"
@@ -98,18 +98,22 @@
           <materialIcons:MaterialIcon Kind="Clipboard" Margin="2"/>
         </Button>
         
-        <TextBlock Grid.Column="7" Text =""></TextBlock>
-        <Button ToolTip.Tip="Greenhouse View " Command="{Binding Navigate}" CommandParameter="{Binding DefaultDockable}" Grid.Column="8" >
+        <Button ToolTip.Tip="Plantings View" Command="{Binding Navigate}" CommandParameter="PlantingsPage" Grid.Column="7" >
+          <materialIcons:MaterialIcon Kind="Plant" Margin="2"/>
+        </Button>
+        
+        <TextBlock Grid.Column="8" Text =""></TextBlock>
+        <Button ToolTip.Tip="Greenhouse View " Command="{Binding Navigate}" CommandParameter="{Binding DefaultDockable}" Grid.Column="9" >
           <materialIcons:MaterialIcon Kind="Greenhouse" Margin="2"/>
         </Button>
         
-        <TextBox x:Name="Id" Text="" Watermark="Search" UseFloatingWatermark="True" Grid.Column="9" Grid.ColumnSpan="1"/>
+        <TextBox x:Name="Id" Text="" Watermark="Search" UseFloatingWatermark="True" Grid.Column="10" Grid.ColumnSpan="1"/>
         <!-- <Button Content="Navigate" Command="{Binding Navigate}" CommandParameter="{Binding #Id.Text}" Grid.Column="9" /> -->
-        <Button x:Name="ThemeButton" Grid.Column="10" Background="Transparent">
+        <Button x:Name="ThemeButton" Grid.Column="11" Background="Transparent">
           <PathIcon Width="24" Height="24" Opacity="0.6" Data="{StaticResource DarkTheme}"/>
         </Button>
         
-        <Button ToolTip.Tip="Edit Settings" Command="{Binding Navigate}" CommandParameter="SettingsPage" Grid.Column="11" HorizontalAlignment="Right">
+        <Button ToolTip.Tip="Edit Settings" Command="{Binding Navigate}" CommandParameter="SettingsPage" Grid.Column="12" HorizontalAlignment="Right">
           <materialIcons:MaterialIcon Kind="Settings" Margin="2"/>
         </Button>
       </Grid>

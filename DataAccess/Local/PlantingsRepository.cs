@@ -10,20 +10,30 @@ namespace DataAccess.Local;
 
 public class PlantingsRepository
 {
-    public static List<Planting> GetAllPlantings(string connectionString)
+    public static List<Planting> GetAllPlantings(string connectionString, bool byPlantedDate = false)
     {
         var plantings = new List<Planting>();
         Planting planting;
 
-        var sql = "SELECT p.Id, p.Description, p3.Id plantId, p3.Description plant, " + 
-        "p.CreationDate, p.StartDate, p2.Id, p2.FirstName, p2.LastName, p.Comment,  " + 
-        "gb.Id, gb.Code as gbcode, gb.Description as gbdesc,  " + 
-        "sp.Id , sp.DaysToHarvest, sp.Description as PacketDesc,  " + 
-        "v.Id, v.Code, v.Description as VendorDesc, p.EndDate, p.YieldRating, ps.Id, ps.Code, ps.Description " + 
-        "FROM Planting p, Person p2, Plant p3, GardenBed gb, SeedPacket sp, Vendor v, PlantingState ps  " + 
-        "WHERE p.AuthorId = p2.Id AND p.GardenBedId = gb.Id  " + 
-        "AND p.PlantId = p3.Id AND p.PlantingStateId = ps.Id " + 
-        "AND p.SeedPacketId = sp.Id AND sp.VendorId = v.Id ORDER BY p.StartDate ";
+        var sql = "SELECT p.Id, p.Description, p3.Id plantId, p3.Description plant, " +
+                  "p.CreationDate, p.StartDate, p2.Id, p2.FirstName, p2.LastName, p.Comment,  " +
+                  "gb.Id, gb.Code as gbcode, gb.Description as gbdesc,  " +
+                  "sp.Id , sp.DaysToHarvest, sp.Description as PacketDesc,  " +
+                  "v.Id, v.Code, v.Description as VendorDesc, p.EndDate, p.YieldRating, ps.Id, ps.Code, ps.Description " +
+                  "FROM Planting p, Person p2, Plant p3, GardenBed gb, SeedPacket sp, Vendor v, PlantingState ps  " +
+                  "WHERE p.AuthorId = p2.Id AND p.GardenBedId = gb.Id  " +
+                  "AND p.PlantId = p3.Id AND p.PlantingStateId = ps.Id " +
+                  "AND p.SeedPacketId = sp.Id AND sp.VendorId = v.Id ";
+
+        if (byPlantedDate)
+        {
+            sql = sql + " ORDER BY p.StartDate DESC ";
+        }
+        else
+        {
+            sql = sql + " ORDER BY p.StartDate ";
+        }
+
 
         using (IDbConnection connection = new SqliteConnection(connectionString))
         {

@@ -1,18 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
+
 using Permastead.Models.Documents;
 using Permastead.Models.Tools;
 using Permastead.ViewModels.Docks;
 using Permastead.ViewModels.Documents;
 using Permastead.ViewModels.Tools;
 using Permastead.ViewModels.Views;
+
 using Dock.Avalonia.Controls;
 using Dock.Model.Controls;
 using Dock.Model.Core;
 using Dock.Model.Mvvm;
 using Dock.Model.Mvvm.Controls;
-using DynamicData.Kernel;
+
 using Models;
 
 namespace Permastead.ViewModels;
@@ -109,7 +110,7 @@ public class DockFactory : Factory
         var documentDock = new CustomDocumentDock
         {
             IsCollapsable = false,
-            ActiveDockable = document1,
+            ActiveDockable = null,
             VisibleDockables = CreateList<IDockable>(),
             CanCreateDocument = false
         };
@@ -157,6 +158,12 @@ public class DockFactory : Factory
             Title = "InventoryPage"
         };
         
+        var plantingsPageView = new PlantingsPageViewModel()
+        {
+            Id = "PlantingsPage",
+            Title = "PlantingsPage"
+        };
+        
         var settingsPageView = new SettingsPageViewModel()
         {
             Id = "SettingsPage",
@@ -176,7 +183,7 @@ public class DockFactory : Factory
         rootDock.IsCollapsable = false;
         rootDock.ActiveDockable = dashboardView;
         rootDock.DefaultDockable = _homeView;
-        rootDock.VisibleDockables = CreateList<IDockable>(dashboardView, observationsPageView, todoPageView, eventsPageView, inventoryPageView, settingsPageView, _homeView);
+        rootDock.VisibleDockables = CreateList<IDockable>(dashboardView, observationsPageView, todoPageView, eventsPageView, inventoryPageView, plantingsPageView, settingsPageView, _homeView);
         
 
         _documentDock = documentDock;
@@ -206,6 +213,7 @@ public class DockFactory : Factory
             ["EventsPage"] = () => layout,
             ["InventoryPage"] = () => layout,
             ["SettingsPage"] = () => layout,
+            ["PlantingsPage"] = () => layout,
             ["Home"] = () => _context
         };
 

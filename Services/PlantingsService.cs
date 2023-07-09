@@ -17,6 +17,18 @@ public static class PlantingsService
 
         return plantings;
     }
+    
+    public static List<Planting> GetPlantingsByPlantedDate(ServiceMode mode)
+    {
+        var plantings = new List<Planting>();
+
+        if (mode == ServiceMode.Local)
+        {
+            plantings = PlantingsRepository.GetAllPlantings(DataConnection.GetLocalDataSource(), true);
+        }
+
+        return plantings;
+    }
 
     public static Planting GetPlantingFromId(ServiceMode mode, long id) 
     {
