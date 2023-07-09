@@ -1,8 +1,10 @@
 using System;
 using System.Collections.ObjectModel;
 using System.Linq;
+
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+
 using Models;
 using Services;
 
@@ -49,10 +51,10 @@ public partial class  EventsViewModel : ViewModelBase
             RefreshEvents();
             
             if (_events.Count > 0) 
-                CurrentItem = _events.FirstOrDefault();
+                _currentItem = _events.FirstOrDefault();
             else
             {
-                CurrentItem = new AnEvent();
+                _currentItem = new AnEvent();
             }
 
             
@@ -88,16 +90,17 @@ public partial class  EventsViewModel : ViewModelBase
     {
         //if there is a comment, save it.
 
-        if (CurrentItem != null && CurrentItem.Id == 0 && !string.IsNullOrEmpty(CurrentItem.Description))
+        if (_currentItem != null && _currentItem.Id == 0 && !string.IsNullOrEmpty(_currentItem.Description))
         {
 
-            CurrentItem.CreationDate = DateTime.Now;
- 
-            var rtnValue = DataAccess.Local.AnEventRepository.Insert(CurrentItem);
+            _currentItem.CreationDate = DateTime.Now;
+            _currentItem.LastTriggerDate = _currentItem.StartDate;
+            
+            var rtnValue = DataAccess.Local.AnEventRepository.Insert(_currentItem);
             
             if (rtnValue)
             {
-                Events.Add(CurrentItem);
+                Events.Add(_currentItem);
             }
             
             Console.WriteLine("saved " + rtnValue);
@@ -106,7 +109,7 @@ public partial class  EventsViewModel : ViewModelBase
         }
         else
         {
-            var rtnValue = DataAccess.Local.AnEventRepository.Update(CurrentItem);
+            var rtnValue = DataAccess.Local.AnEventRepository.Update(_currentItem);
             RefreshEvents();
         }
 
@@ -118,8 +121,8 @@ public partial class  EventsViewModel : ViewModelBase
         RefreshEvents();
         
         // reset the current item
-        CurrentItem = new AnEvent();
-        OnPropertyChanged(nameof(CurrentItem));
+        _currentItem = new AnEvent();
+        OnPropertyChanged(nameof(_currentItem));
         
     }
 
