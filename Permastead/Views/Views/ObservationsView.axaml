@@ -20,17 +20,15 @@
       <materialIcons:MaterialIcon Kind="EyeCircle" Margin="20"/>
       <TextBlock FontWeight="Bold" Margin="20,20,20,20">Observations</TextBlock>
       <Separator MaxWidth="5" Foreground="Black"></Separator>
-      <ToolTip.Tip>
-        <StackPanel>
-          <TextBlock>Observation Statistics</TextBlock>
-          <TextBlock>Shows the number of observations, the overall word count and the average words per observation.</TextBlock>
-        </StackPanel>
-      </ToolTip.Tip>
+      
       <Button Command="{Binding SaveObservationCommand, Mode=TwoWay}" Name="Save" HorizontalAlignment="Right" Margin="30,0">Save</Button>
       <Separator MaxWidth="5" Foreground="Black"></Separator>
-      <TextBlock Name="ObservationCount" Text="{Binding ObservationCount}" Margin="20,20,20,20"></TextBlock>
-      <TextBlock Name="WordCount" Text="{Binding WordCount}" Margin="20,20,20,20"></TextBlock>
-      <TextBlock Name="WordsPerObservation" Text="{Binding WordsPerObservation}" Margin="20,20,20,20"></TextBlock>
+      <StackPanel  Orientation="Horizontal" ToolTip.Tip = "Shows the number of observations, the overall word count and the average words per observation">
+        <TextBlock Margin="20">Statistics:</TextBlock>
+        <TextBlock Name="ObservationCount" Text="{Binding ObservationCount}" Margin="20,20,20,20"></TextBlock>
+        <TextBlock Name="WordCount" Text="{Binding WordCount}" Margin="20,20,20,20"></TextBlock>
+        <TextBlock Name="WordsPerObservation" Text="{Binding WordsPerObservation}" Margin="20,20,20,20"></TextBlock>
+      </StackPanel>
     </WrapPanel>
     
     <Panel Grid.Row="1" Height="100" Margin="30,10,30,0">
