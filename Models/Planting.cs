@@ -1,3 +1,5 @@
+using System.ComponentModel.DataAnnotations;
+
 namespace Models;
 
 public class Planting: CodeTable
@@ -27,6 +29,33 @@ public class Planting: CodeTable
     public long AuthorId => this.Author!.Id;
 
     public string StartDateString => this.StartDate.ToShortDateString();
+
+    public string Age
+    {
+        get
+        {
+            string calculatedAge = "Unavailable.";
+
+            if (DateTime.Now < this.StartDate)
+            {
+                calculatedAge = "Not yet planted.";
+            }
+            else
+            {
+                
+                if ((DateTime.Now - this.StartDate).Days >= 365)
+                {
+                    calculatedAge = (DateTime.Now - this.StartDate).Days + " day(s).";
+                }
+                else
+                {
+                    calculatedAge = ((DateTime.Now - this.StartDate).Days / 365).ToString("0.##") + " year(s).";
+                }
+            }
+
+            return calculatedAge;
+        }
+    }
     
 
     public Planting()
