@@ -35,21 +35,29 @@ public class Planting: CodeTable
         get
         {
             string calculatedAge = "Unavailable.";
+            DateTime measurementDate = DateTime.Now;
 
-            if (DateTime.Now < this.StartDate)
+            if (this.EndDate < measurementDate)
+            {
+                // if there is an end date in the past, the plant is dead.
+                // use this end date as the basis for measuring its age.
+                measurementDate = this.EndDate;
+            }
+            
+            if (measurementDate < this.StartDate)
             {
                 calculatedAge = "Not yet planted.";
             }
             else
             {
                 
-                if ((DateTime.Now - this.StartDate).Days >= 365)
+                if ((measurementDate - this.StartDate).Days <= 365)
                 {
-                    calculatedAge = (DateTime.Now - this.StartDate).Days + " day(s).";
+                    calculatedAge = (measurementDate - this.StartDate).Days + " day(s).";
                 }
                 else
                 {
-                    calculatedAge = ((DateTime.Now - this.StartDate).Days / 365).ToString("0.##") + " year(s).";
+                    calculatedAge = ((measurementDate - this.StartDate).Days / 365).ToString("0.##") + " year(s).";
                 }
             }
 
