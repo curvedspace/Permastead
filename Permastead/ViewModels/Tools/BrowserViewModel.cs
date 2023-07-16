@@ -205,6 +205,15 @@ public partial class BrowserViewModel : Tool
     }
     
     [RelayCommand]
+    public void CreateNewPlant()
+    {
+        CurrentPlant = new Plant();
+        CurrentPlant.Description = "New Plant";
+        
+        this.Dock.OpenDoc(CurrentPlant);
+    }
+    
+    [RelayCommand]
     public void ExpandTreeNodes(TreeView treeView)
     {
         // foreach (object item in treeView.Items)

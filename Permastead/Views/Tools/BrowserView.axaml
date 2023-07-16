@@ -31,7 +31,7 @@
               <MenuItem IsEnabled="False" Header="Inventory Group" />
               <MenuItem IsEnabled="False" Header="Inventory Type" />
               <MenuItem Header="-" />
-              <MenuItem IsEnabled="False" Header="Plant" />
+              <MenuItem IsEnabled="True" Header="Plant" Command="{Binding CreateNewPlant}" />
               <MenuItem Header="Planting" Command="{Binding CreateNewPlanting}" />
               <MenuItem Header="Seed Packet" Command="{Binding CreateNewSeedPacket}" />
               <MenuItem Header="-" />
