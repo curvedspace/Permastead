@@ -127,5 +127,24 @@ namespace DataAccess.Local
                 return false;
             }
         }
+        
+        public static bool Update(Plant plant)
+        {
+            try
+            {
+                using (IDbConnection db = new SqliteConnection(DataConnection.GetLocalDataSource()))
+                {
+                    string sqlQuery = "UPDATE Plant SET Code = @Code, Description = @Description, StartDate = @StartDate, EndDate = @EndDate, " +
+                                      "Species = @Species, Family = @Family, Url = @Url, AuthorId = @AuthorId " + 
+                                      "WHERE Id = @Id;";
+
+                    return (db.Execute(sqlQuery, plant) == 1);
+                }
+            }
+            catch
+            {
+                return false;
+            }
+        }
     }
 }
