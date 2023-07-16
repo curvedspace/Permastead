@@ -17,11 +17,7 @@
     
     <StackPanel Grid.Row="1" VerticalAlignment="Top" HorizontalAlignment="Center">
       
-      <Border BorderBrush="{DynamicResource TextControlBorderBrush}"
-              BorderThickness="2"
-              CornerRadius="3"
-              Padding="10" Margin="10">
-      <Grid ColumnDefinitions="*,3*, *, 3*" RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,*"  Margin="20">
+      <Grid ColumnDefinitions="*,*,*,*" RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,*"  Margin="20">
         <TextBlock Grid.Row="0" Grid.Column="0" Margin="10,10,0,0">ID:</TextBlock>
         <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding Vendor.Id }" Margin="10,10,10,0"></TextBox>
         <Label Grid.Row="0" Margin="10,10,10,10" Grid.Column="2">Code:</Label>
@@ -42,7 +38,7 @@
         
         
       </Grid>
-      </Border>
+
     </StackPanel>
      
   </Grid>

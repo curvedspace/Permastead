@@ -130,7 +130,7 @@ public partial class ToDoViewModel : ViewModelBase
             
             RefreshToDo();
             
-            if (_todos.Count > 0) CurrentItem = _todos.FirstOrDefault();
+            if (Todos.Count > 0) CurrentItem = Todos.FirstOrDefault();
 
             
         }
