@@ -99,7 +99,13 @@
      <StackPanel>
      <TextBlock FontSize="20" ToolTip.Tip="Your current score and level. You get points for adding records to the database. " 
                 TextAlignment="Center" Text="{Binding Statistics}" Margin="50,0,50,50"></TextBlock>
-      <views:OpeningView HorizontalAlignment="Center"></views:OpeningView>
+      <Border Background="Transparent"
+                      BorderBrush="{StaticResource  TextControlForeground}"
+                      BorderThickness="1"
+                      CornerRadius="5"
+                      Padding="40" Margin="60,20,60,20">
+         <views:OpeningView HorizontalAlignment="Center"></views:OpeningView>
+      </Border>
      </StackPanel>
   </DockPanel>
     

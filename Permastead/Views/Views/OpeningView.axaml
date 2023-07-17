@@ -13,7 +13,7 @@
         <vm:OpeningViewModel/>
     </Design.DataContext>
 
-      <Grid ColumnDefinitions="Auto" RowDefinitions="Auto, Auto">
+      <Grid HorizontalAlignment="Center" ColumnDefinitions="Auto" RowDefinitions="Auto, Auto">
 
         <TextBlock Grid.Column="0" Grid.Row="0"
                    Name="UpcomingEvents" 
