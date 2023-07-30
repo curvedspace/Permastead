@@ -30,6 +30,8 @@ public partial class BrowserViewModel : Tool
     [ObservableProperty]
     private Vendor _currentVendor;
 
+    [ObservableProperty] private bool _activeOnly = true;
+
     private ObservableCollection<Planting> _plantings;
     private ObservableCollection<Plant> _plants;
     private ObservableCollection<Inventory> _inventory;
@@ -75,7 +77,15 @@ public partial class BrowserViewModel : Tool
         plantingsNode.SubNodes.Add(allPlantings);   
         foreach (var p in _plantings)
         {
-            allPlantings.SubNodes.Add(new Node(p.Id, p.Description, NodeType.Planting));
+            if (ActiveOnly)
+            {
+                if (p.IsActive) allPlantings.SubNodes.Add(new Node(p.Id, p.Description, NodeType.Planting));
+            }
+            else
+            {
+                allPlantings.SubNodes.Add(new Node(p.Id, p.Description, NodeType.Planting));
+            }
+            
         }
         
         var byBedPlantings = new Node("By Bed", new ObservableCollection<Node>());
@@ -89,7 +99,14 @@ public partial class BrowserViewModel : Tool
             {
                 if (p.Bed.Id == gb.Id)
                 {
-                    currentBed.SubNodes.Add(new Node(p.Id, p.Description, NodeType.Planting));
+                    if (ActiveOnly)
+                    {
+                        if (p.IsActive) currentBed.SubNodes.Add(new Node(p.Id, p.Description, NodeType.Planting));
+                    }
+                    else
+                    {
+                        currentBed.SubNodes.Add(new Node(p.Id, p.Description, NodeType.Planting));
+                    }
                 }
             }
         }
@@ -104,7 +121,14 @@ public partial class BrowserViewModel : Tool
         Nodes.Add(seedsNode);
         foreach (var p in _seedsPackets)
         {
-            seedsNode.SubNodes.Add(new Node(p.Id, p.Description, NodeType.SeedPacket));
+            if (ActiveOnly)
+            {
+                if (p.IsCurrent()) seedsNode.SubNodes.Add(new Node(p.Id, p.Description, NodeType.SeedPacket));
+            }
+            else
+            {
+                seedsNode.SubNodes.Add(new Node(p.Id, p.Description, NodeType.SeedPacket));
+            }
         }
         
     }

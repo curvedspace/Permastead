@@ -82,7 +82,7 @@ public partial class PlantingDocumentViewModel : Document
         }
        
         //need a way to send a refresh message back to the tree browser...
-        if (Browser != null) Browser.RefreshData();
+        //if (Browser != null) Browser.RefreshData();
 
     }
     
