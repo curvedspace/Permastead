@@ -42,7 +42,7 @@ public partial class  EventsViewModel : ViewModelBase
             _people = new ObservableCollection<Person>();
             _events = new ObservableCollection<AnEvent>();
             
-            _currentItem = new AnEvent();
+            CurrentItem = new AnEvent();
 
             _eventTypes = new ObservableCollection<AnEventType>(Services.EventsService.GetAllEventTypes(AppSession.ServiceMode));
             _frequencies = new ObservableCollection<Frequency>(Services.FrequencyService.GetAll(AppSession.ServiceMode));
@@ -51,10 +51,10 @@ public partial class  EventsViewModel : ViewModelBase
             RefreshEvents();
             
             if (_events.Count > 0) 
-                _currentItem = _events.FirstOrDefault();
+                CurrentItem = _events.FirstOrDefault();
             else
             {
-                _currentItem = new AnEvent();
+                CurrentItem = new AnEvent();
             }
 
             
@@ -90,17 +90,17 @@ public partial class  EventsViewModel : ViewModelBase
     {
         //if there is a comment, save it.
 
-        if (_currentItem != null && _currentItem.Id == 0 && !string.IsNullOrEmpty(_currentItem.Description))
+        if (CurrentItem != null && CurrentItem.Id == 0 && !string.IsNullOrEmpty(CurrentItem.Description))
         {
 
-            _currentItem.CreationDate = DateTime.Now;
-            _currentItem.LastTriggerDate = _currentItem.StartDate;
+            CurrentItem.CreationDate = DateTime.Now;
+            CurrentItem.LastTriggerDate = CurrentItem.StartDate;
             
-            var rtnValue = DataAccess.Local.AnEventRepository.Insert(_currentItem);
+            var rtnValue = DataAccess.Local.AnEventRepository.Insert(CurrentItem);
             
             if (rtnValue)
             {
-                Events.Add(_currentItem);
+                Events.Add(CurrentItem);
             }
             
             Console.WriteLine("saved " + rtnValue);
@@ -109,7 +109,7 @@ public partial class  EventsViewModel : ViewModelBase
         }
         else
         {
-            var rtnValue = DataAccess.Local.AnEventRepository.Update(_currentItem);
+            var rtnValue = DataAccess.Local.AnEventRepository.Update(CurrentItem);
             RefreshEvents();
         }
 
@@ -121,8 +121,8 @@ public partial class  EventsViewModel : ViewModelBase
         RefreshEvents();
         
         // reset the current item
-        _currentItem = new AnEvent();
-        OnPropertyChanged(nameof(_currentItem));
+        CurrentItem = new AnEvent();
+        OnPropertyChanged(nameof(CurrentItem));
         
     }
 
