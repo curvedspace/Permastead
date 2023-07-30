@@ -34,19 +34,35 @@ namespace Permastead.ViewModels.Views;
         
         [ObservableProperty]
         private double _totalScore;
+
+        public string GrowingSeason => "Growing Season: " + PlantingYearEndDate.Year.ToString();
+
+        public string HravestPlants => "Harvested: " + TotalHarvestedPlants.ToString();
         
-        public string TotalScoreFormatted => _totalScore.ToString("F1");
+        public string TotalScoreFormatted => TotalScore.ToString("F1");
         
         [ObservableProperty]
         private double _totalScoreNormalized;
         
         [ObservableProperty]
         private decimal _observationsToActionRatio;
+
+        private DateTime PlantingYearStartDate;
+        
+        private DateTime PlantingYearEndDate;
+
+        [ObservableProperty] private long _totalPlantings;
+        [ObservableProperty] private long _successfulPlantings;
+        [ObservableProperty] private long _totalHarvestedPlants;
+        [ObservableProperty] private string _totalPlantStats;
         
         public DashboardViewModel()
         {
             this.QuoteViewModel.Quote.Description = "This is a test quote";
             this.QuoteViewModel.Quote.AuthorName = "Anonymous";
+            
+            PlantingYearStartDate = new DateTime(DateTime.Today.Year, 1,1);
+            PlantingYearEndDate = new DateTime(DateTime.Today.Year, 12,31);
             
             //get observations
             Observations = new ObservableCollection<Observation>(Services.ObservationsService.GetObservations(AppSession.ServiceMode));
@@ -74,6 +90,27 @@ namespace Permastead.ViewModels.Views;
             SeedPackets = new ObservableCollection<SeedPacket>(PlantingsService.GetSeedPackets(AppSession.ServiceMode));
             Plants = new ObservableCollection<Plant>(PlantingsService.GetPlants(AppSession.ServiceMode));
 
+            //compute the success rate for the current growing year
+            foreach (var p in Plantings)
+            {
+                if (p.EndDate > PlantingYearStartDate)
+                {
+                    TotalPlantings++;
+
+                    if (p.State.Code != "DEAD")
+                    {
+                        SuccessfulPlantings++;
+                    }
+
+                    if (p.State.Code == "H")
+                    {
+                        TotalHarvestedPlants++;
+                    }
+                }
+            }
+
+            TotalPlantStats = "Total: " + TotalPlantings + " Harvested: " + TotalHarvestedPlants + " Failed: " +
+                              (TotalPlantings - SuccessfulPlantings);
         }
 
         public void GetQuote()
