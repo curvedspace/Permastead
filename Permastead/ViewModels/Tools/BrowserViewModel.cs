@@ -187,7 +187,15 @@ public partial class BrowserViewModel : Tool
         }
         else
         {
-            _currentPlant = new Plant();
+            //check for null
+            if (_currentPlant == null)
+            {
+                _currentPlant = new Plant();
+            }
+            else
+            {
+                _currentPlant = PlantService.GetPlantFromId(ServiceMode.Local, _currentPlant.Id);     
+            }
         }
 
         if (_currentPlant != null)
@@ -203,7 +211,15 @@ public partial class BrowserViewModel : Tool
         }
         else
         {
-            _currentPlanting = null;
+            //check for null
+            if (_currentPlanting == null)
+            {
+                _currentPlanting = new Planting();
+            }
+            else
+            {
+                _currentPlanting = PlantingsService.GetPlantingFromId(ServiceMode.Local, _currentPlanting.Id);     
+            }
         }
 
         if (_currentPlanting != null)
