@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
 using Avalonia.Controls;
@@ -7,7 +8,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 
 using Dock.Model.Mvvm.Controls;
-
+using DynamicData;
 using Models;
 using Services;
 
@@ -43,6 +44,8 @@ public partial class BrowserViewModel : Tool
 
     [ObservableProperty] private ObservableCollection<Node> _selectedNodes;
 
+    [ObservableProperty] private List<string> _searchItems;
+
     public HomeViewModel Home { get; set; }
     public DockFactory Dock { get; set; }
 
@@ -54,6 +57,8 @@ public partial class BrowserViewModel : Tool
     [RelayCommand]
     public void RefreshData()
     {
+        _searchItems = new List<string>();
+        
         _plantings = new ObservableCollection<Planting>(PlantingsService.GetPlantings(AppSession.ServiceMode));
         _plants = new ObservableCollection<Plant>(PlantService.GetAllPlants(AppSession.ServiceMode));
         _inventory = new ObservableCollection<Inventory>(InventoryService.GetAllInventory(AppSession.ServiceMode));
@@ -74,16 +79,23 @@ public partial class BrowserViewModel : Tool
         //plantings
         Nodes.Add(plantingsNode);
         var allPlantings = new Node("All", new ObservableCollection<Node>());
-        plantingsNode.SubNodes.Add(allPlantings);   
+        plantingsNode.SubNodes!.Add(allPlantings);   
+        
         foreach (var p in _plantings)
         {
             if (ActiveOnly)
             {
-                if (p.IsActive) allPlantings.SubNodes.Add(new Node(p.Id, p.Description, NodeType.Planting));
+                if (p.IsActive)
+                {
+                    allPlantings.SubNodes.Add(new Node(p.Id, p.Description, NodeType.Planting));
+                    SearchItems.Add("PG:" + p.Id + ": " + p.Description.ToString());
+                }
+                
             }
             else
             {
                 allPlantings.SubNodes.Add(new Node(p.Id, p.Description, NodeType.Planting));
+                SearchItems.Add("PG:" + p.Id + ": " + p.Description.ToString());
             }
             
         }
@@ -116,6 +128,7 @@ public partial class BrowserViewModel : Tool
         foreach (var p in _plants)
         {
             plantsNode.SubNodes.Add(new Node(p.Id, p.Description, NodeType.Plant));
+            SearchItems.Add("P:" + p.Id + ": " + p.Description.ToString());
         }
         
         Nodes.Add(seedsNode);
@@ -123,11 +136,16 @@ public partial class BrowserViewModel : Tool
         {
             if (ActiveOnly)
             {
-                if (p.IsCurrent()) seedsNode.SubNodes.Add(new Node(p.Id, p.Description, NodeType.SeedPacket));
+                if (p.IsCurrent())
+                {
+                    seedsNode.SubNodes.Add(new Node(p.Id, p.Description, NodeType.SeedPacket));
+                    SearchItems.Add("S:" + p.Id + ": " + p.Description.ToString());
+                }
             }
             else
             {
                 seedsNode.SubNodes.Add(new Node(p.Id, p.Description, NodeType.SeedPacket));
+                SearchItems.Add("S:" + p.Id + ": " + p.Description.ToString());
             }
         }
         

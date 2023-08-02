@@ -12,7 +12,7 @@
     
     <!--<StackPanel VerticalAlignment="Top" HorizontalAlignment="Left" Grid.Row="0">-->
 
-      <Grid Grid.Row="0" ColumnDefinitions="Auto,Auto,*">
+      <Grid Grid.Row="0" ColumnDefinitions="Auto,Auto,Auto,*">
         <!-- <Button Command="{Binding ExpandTreeNodes}">+</Button> -->
         <!-- <Button Click="ExpandAllNodes">-</Button> -->
         <Button Command="{Binding RefreshDataCommand}">
@@ -22,7 +22,8 @@
         <ToggleButton Name="ActiveOnly" Grid.Column="1" IsChecked="{Binding ActiveOnly}" Command="{Binding RefreshDataCommand}">
           Active Only
         </ToggleButton>
-        <Button Grid.Column="2" HorizontalAlignment="Right" Content= "..." >
+        <AutoCompleteBox x:Name="SearchBox" FilterMode="Contains" Grid.Column="2" Watermark="Search" Width="100" ItemsSource="{Binding SearchItems}"></AutoCompleteBox>
+        <Button Grid.Column="3" HorizontalAlignment="Right" Content= "..." >
           
           <Button.Flyout>
           <MenuFlyout Placement="Bottom">
