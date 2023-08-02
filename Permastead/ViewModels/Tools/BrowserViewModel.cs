@@ -46,6 +46,8 @@ public partial class BrowserViewModel : Tool
 
     [ObservableProperty] private List<string> _searchItems;
 
+    [ObservableProperty] private string _searchText;
+
     public HomeViewModel Home { get; set; }
     public DockFactory Dock { get; set; }
 
@@ -151,6 +153,11 @@ public partial class BrowserViewModel : Tool
         
     }
 
+    [RelayCommand]
+    public void ResetSearchBox()
+    {
+        SearchText = "";
+    }
     
     [RelayCommand]
     public void OpenDocument(Node node)
