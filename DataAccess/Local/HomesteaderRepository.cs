@@ -568,6 +568,19 @@ namespace DataAccess.Local
 				Comment TEXT
 			);
 
+			-- PLANTING OBSERVATION
+			DROP TABLE IF EXISTS PlantingObservation;
+			CREATE TABLE IF NOT EXISTS PlantingObservation(
+				Id INTEGER PRIMARY KEY,
+				PlantingId INTEGER NOT NULL,
+				Comment TEXT NOT NULL,
+				CreationDate TIMESTAMP,
+				StartDate TIMESTAMP NOT NULL,
+				EndDate TIMESTAMP,
+				CommentTypeId INTEGER,
+				AuthorId INTEGER
+			);
+
 			--FERMENTATION
 			DROP TABLE IF EXISTS Fermentation;
 			CREATE TABLE IF NOT EXISTS Fermentation(
