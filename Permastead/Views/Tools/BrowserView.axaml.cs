@@ -54,11 +54,28 @@ public partial class BrowserView : UserControl
                 string itemType = parsedValues[0];
                 long id = Convert.ToInt64(parsedValues[1]);
                 string itemName = parsedValues[2];
+
+                NodeType nodeType = NodeType.Planting;
+                
+                switch (itemType)
+                {
+                    case "PG":
+                        nodeType = NodeType.Planting;
+                        ((BrowserViewModel)(this.DataContext)).CurrentPlanting = new Planting() {Id = id};
+                        break;
+                    case "P":
+                        nodeType = NodeType.Plant;
+                        ((BrowserViewModel)(this.DataContext)).CurrentPlant = new Plant() {Id = id};
+                        break;
+                    case "S":
+                        nodeType = NodeType.SeedPacket;
+                        ((BrowserViewModel)(this.DataContext)).CurrentSeedPacket = new SeedPacket() {Id = id};
+                        break;
+                }
                 
                 //create the treenode
-                var node = new Node(id, itemName, NodeType.Planting);
-                ((BrowserViewModel)(this.DataContext)).CurrentPlanting = new Planting() {Id = id};
-                
+                var node = new Node(id, itemName, nodeType);
+
                 ((BrowserViewModel)(this.DataContext)).OpenDocument(node);
 
             }

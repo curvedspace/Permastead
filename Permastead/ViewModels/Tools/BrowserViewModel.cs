@@ -235,7 +235,16 @@ public partial class BrowserViewModel : Tool
         }
         else
         {
-            _currentSeedPacket = new SeedPacket();
+            //check for null
+            if (_currentSeedPacket == null)
+            {
+                _currentSeedPacket = new SeedPacket();
+            }
+            else
+            {
+                _currentSeedPacket = PlantingsService.GetSeedPacketFromId(ServiceMode.Local, _currentSeedPacket.Id);     
+            }
+            
         }
 
         if (_currentSeedPacket != null)
