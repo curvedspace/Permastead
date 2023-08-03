@@ -67,7 +67,7 @@ public class PlantingObservation
         this.Planting = new Planting();
     }
     
-    public Observation(string comment) : this()
+    public PlantingObservation(string comment) : this()
     {
         this.Comment = comment;
     }

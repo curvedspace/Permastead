@@ -5,7 +5,7 @@
              xmlns:materialIcons="clr-namespace:Material.Icons.Avalonia;assembly=Material.Icons.Avalonia"
              xmlns:vm="using:Permastead.ViewModels.Documents"
              mc:Ignorable="d"
-             d:DesignWidth="1000" d:DesignHeight="600"
+             d:DesignWidth="1200" d:DesignHeight="600"
              x:Class="Permastead.Views.Documents.PlantingDocumentView"
              x:DataType="vm:PlantingDocumentViewModel" x:CompileBindings="True">
   <Grid Focusable="True" RowDefinitions="Auto, *">
@@ -16,12 +16,12 @@
       <Button Command="{Binding HarvestCommand}" Name="HarvestButton">Harvest</Button>
     </WrapPanel>
     
-    <StackPanel Grid.Row="1" VerticalAlignment="Top" HorizontalAlignment="Center">
+    <StackPanel Grid.Row="1" VerticalAlignment="Top" HorizontalAlignment="Stretch">
       
       <Border BorderBrush="{DynamicResource TextControlBorderBrush}"
               BorderThickness="2"
               CornerRadius="3"
-              Padding="10" Margin="10">
+              Padding="50" Margin="20">
       <Grid ColumnDefinitions="*,3*, *, 3*" RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,*"  Margin="20">
         <TextBlock Grid.Row="0" Grid.Column="0" Margin="10,10,0,0">ID:</TextBlock>
         <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding Planting.Id }" Margin="10,10,10,0"></TextBox>
