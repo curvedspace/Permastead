@@ -24,7 +24,7 @@
           Active Only
         </ToggleButton>
         <AutoCompleteBox x:Name="SearchBox" FilterMode="Contains" Grid.Column="2" Watermark="Search" Width="200" 
-                         DropDownClosed="SearchBox_OnDropDownClosed"
+                         KeyDown="SearchBox_OnKeyDown"
                          ItemsSource="{Binding SearchItems}" Text="{Binding SearchText}"></AutoCompleteBox>
         <Button Grid.Column="3" Command="{Binding ResetSearchBox}">
           <materialIcons:MaterialIcon Kind="Restore" Margin="2"/>

@@ -39,25 +39,29 @@ public partial class BrowserView : UserControl
         
         
     }
+    
 
-    private void SearchBox_OnDropDownClosed(object? sender, EventArgs e)
+    private void SearchBox_OnKeyDown(object? sender, KeyEventArgs e)
     {
-        var textValue = SearchBox.Text;
-        var parsedValues = textValue.Split(":");
-
-        if (parsedValues.Length >= 3)
+        if (e.Key == Key.Return)
         {
-            string itemType = parsedValues[0];
-            long id = Convert.ToInt64(parsedValues[1]);
-            string itemName = parsedValues[2];
             
-            //create the treenode
-            var node = new Node(id, itemName, NodeType.Planting);
-            ((BrowserViewModel)(this.DataContext)).CurrentPlanting = new Planting() {Id = id};
-            
-            ((BrowserViewModel)(this.DataContext)).OpenDocument(node);
+            var textValue = SearchBox.Text;
+            var parsedValues = textValue.Split(":");
 
+            if (parsedValues.Length >= 3 && e.Key == Key.Return)
+            {
+                string itemType = parsedValues[0];
+                long id = Convert.ToInt64(parsedValues[1]);
+                string itemName = parsedValues[2];
+                
+                //create the treenode
+                var node = new Node(id, itemName, NodeType.Planting);
+                ((BrowserViewModel)(this.DataContext)).CurrentPlanting = new Planting() {Id = id};
+                
+                ((BrowserViewModel)(this.DataContext)).OpenDocument(node);
+
+            }
         }
-        
     }
 }
