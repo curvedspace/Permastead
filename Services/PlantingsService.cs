@@ -104,4 +104,16 @@ public static class PlantingsService
 
         return plants;
     }
+
+    public static List<PlantingObservation> GetObservationsForPlanting(ServiceMode mode, long id)
+    {
+        var obs = new List<PlantingObservation>();
+
+        if (mode == ServiceMode.Local)
+        {
+            obs = PlantingsRepository.GetAllObservationsForPlanting(DataConnection.GetLocalDataSource(), id);
+        }
+
+        return obs;
+    }
 }

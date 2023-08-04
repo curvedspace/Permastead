@@ -5,10 +5,10 @@
              xmlns:materialIcons="clr-namespace:Material.Icons.Avalonia;assembly=Material.Icons.Avalonia"
              xmlns:vm="using:Permastead.ViewModels.Documents"
              mc:Ignorable="d"
-             d:DesignWidth="1200" d:DesignHeight="600"
+             d:DesignWidth="1200" d:DesignHeight="800"
              x:Class="Permastead.Views.Documents.PlantingDocumentView"
              x:DataType="vm:PlantingDocumentViewModel" x:CompileBindings="True">
-  <Grid Focusable="True" RowDefinitions="Auto, *">
+  <Grid Focusable="True" RowDefinitions="Auto, Auto,*">
     <WrapPanel Name="ToolBar" HorizontalAlignment="Stretch" Margin="5" Background="{StaticResource  SystemAccentColorLight1}">
       <materialIcons:MaterialIcon Kind="Sprout" Margin="10"/>
       <TextBlock FontWeight="Bold" Margin="10">Planting</TextBlock>
@@ -97,6 +97,28 @@
         
       </Grid>
       </Border>
+      
+      <WrapPanel>
+        <Label>Comment:</Label>
+        <TextBox Width="700" Text="{Binding CurrentObservation.Comment}"></TextBox>
+        <Button Command="{Binding SaveObservationCommand}" Name="AddObservationButton">Add</Button>
+      </WrapPanel>
+      
+      <Panel Grid.Row="2">
+
+        <ListBox Name="PlantingObservationsList" ItemsSource="{Binding PlantingObservations, Mode=TwoWay }" 
+                 Margin="30" ScrollViewer.VerticalScrollBarVisibility="Auto">
+          <ListBox.ItemTemplate>
+            <DataTemplate>
+              <Border CornerRadius="4">
+                <TextBlock Text="{Binding FullDescription}"></TextBlock>
+              </Border>
+            </DataTemplate>
+          </ListBox.ItemTemplate>
+        </ListBox>
+
+      </Panel>
+      
     </StackPanel>
      
   </Grid>

@@ -34,6 +34,11 @@ public partial class PlantingDocumentViewModel : Document
     [ObservableProperty]
     private ObservableCollection<PlantingState> _plantingStates = new ObservableCollection<PlantingState>();
 
+    [ObservableProperty]
+    private ObservableCollection<PlantingObservation> _plantingObservations = new ObservableCollection<PlantingObservation>();
+
+    [ObservableProperty] private PlantingObservation _currentObservation = new PlantingObservation();
+    
     public BrowserViewModel Browser = null;
 
     public PlantingDocumentViewModel(Planting planting, BrowserViewModel browser) : this(browser)
@@ -45,6 +50,10 @@ public partial class PlantingDocumentViewModel : Document
         if (Planting.SeedPacket.Id != 0 && SeedPackets.Count > 0) Planting.SeedPacket = SeedPackets.First(x => x.Id == Planting.SeedPacket.Id);
         if (Planting.Author.Id != 0 && People.Count > 0) Planting.Author = People.First(x => x.Id == Planting.Author.Id);
         if (Planting.State.Id != 0 && PlantingStates.Count > 0) Planting.State = PlantingStates.First(x => x.Id == Planting.State.Id);
+        
+        PlantingObservations =
+            new ObservableCollection<PlantingObservation>(
+                Services.PlantingsService.GetObservationsForPlanting(AppSession.ServiceMode, Planting.Id));
     }
 
     public PlantingDocumentViewModel(BrowserViewModel browser)
@@ -57,6 +66,7 @@ public partial class PlantingDocumentViewModel : Document
         Beds = new ObservableCollection<GardenBed>(Services.PlantingsService.GetGardenBeds(AppSession.ServiceMode));
         People = new ObservableCollection<Person>(Services.PersonService.GetAllPeople(AppSession.ServiceMode));
         PlantingStates = new ObservableCollection<PlantingState>(Services.PlantingsService.GetPlantingStates(AppSession.ServiceMode));
+        
     }
     
     [RelayCommand]
@@ -91,5 +101,31 @@ public partial class PlantingDocumentViewModel : Document
     {
         Planting.EndDate = DateTime.Today;
         SaveEvent();
+    }
+
+    [RelayCommand]
+    private void SaveObservation()
+    {
+        try
+        {
+            //saves the planting observation to database
+            CurrentObservation.Author.Id = 2;
+            CurrentObservation.Planting = Planting;
+            CurrentObservation.AsOfDate = DateTime.Today;
+            CurrentObservation.CommentType.Id = 2;
+
+            DataAccess.Local.PlantingsRepository.InsertPlantingObservation(DataAccess.DataConnection.GetLocalDataSource(),
+                CurrentObservation);
+        
+            PlantingObservations =
+                new ObservableCollection<PlantingObservation>(
+                    Services.PlantingsService.GetObservationsForPlanting(AppSession.ServiceMode, Planting.Id));
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            
+        }
+        
     }
 }
