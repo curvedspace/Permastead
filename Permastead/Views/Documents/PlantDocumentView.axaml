@@ -15,7 +15,7 @@
             <Button Command="{Binding SaveEventCommand}" Name="SaveButton">Save</Button>
         </WrapPanel>
     
-        <StackPanel Grid.Row="1" VerticalAlignment="Top" HorizontalAlignment="Center">
+        <StackPanel Grid.Row="1" VerticalAlignment="Top" HorizontalAlignment="Stretch">
       
             <Grid ColumnDefinitions="*,*,*,*" RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,*"  Margin="20">
                 <TextBlock Grid.Row="0" Grid.Column="0" Margin="10,10,0,0">ID:</TextBlock>
@@ -32,11 +32,11 @@
                 <TextBox Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="3" Margin="10" Text="{Binding Plant.Species}"></TextBox>
         
                 <Label Grid.Row="4" Grid.Column="0" Margin="10">Start Date:</Label>
-                <CalendarDatePicker Grid.Row="4" Grid.Column="1" Name = "EndDate" SelectedDate="{Binding Plant.StartDate, Mode=TwoWay}">
+                <CalendarDatePicker Grid.Row="4" Grid.Column="1" Name = "EndDate" Margin="10" SelectedDate="{Binding Plant.StartDate, Mode=TwoWay}">
                 </CalendarDatePicker>
         
                 <Label Grid.Row="4" Grid.Column="2" Margin="10">End Date:</Label>
-                <CalendarDatePicker Grid.Row="4" Grid.Column="3" Name = "LastTrigger" SelectedDate="{Binding Plant.EndDate, Mode=TwoWay}">
+                <CalendarDatePicker Grid.Row="4" Grid.Column="3" Name = "LastTrigger" Margin="10" SelectedDate="{Binding Plant.EndDate, Mode=TwoWay}">
                 </CalendarDatePicker>
         
         
