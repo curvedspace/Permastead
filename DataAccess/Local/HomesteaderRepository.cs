@@ -529,15 +529,17 @@ namespace DataAccess.Local
 			DROP TABLE IF EXISTS SeedPacket;
 			CREATE TABLE IF NOT EXISTS SeedPacket(
 				Id INTEGER PRIMARY KEY,
+				Code TEXT,
 				Description TEXT NOT NULL,
 				Instructions TEXT,
-				DaysToHarvest integer,
+				DaysToHarvest INTEGER,
 				CreationDate TIMESTAMP,
 				StartDate TIMESTAMP NOT NULL,
 				EndDate TIMESTAMP,
-				PlantId integer,
-				VendorId integer,
-				AuthorId integer
+				Generations INTEGER,
+				PlantId INTEGER,
+				VendorId INTEGER,
+				AuthorId INTEGER
 			);
 
 			-- PLANTING STATE

@@ -8,6 +8,7 @@ public class SeedPacket
 {
     public long Id { get; set; }
 
+    public string? Code { get; set; }
     public string? Description { get; set; }
 
     public string? Instructions { get; set; }
@@ -28,7 +29,9 @@ public class SeedPacket
 
     public long AuthorId => this.Author?.Id ?? 0;
 
-    public DateTime BestByDate { get; set; }
+    public DateTime BestByDate => this.StartDate.AddYears(5);
+    
+    public long Generations { get; set; }
 
     public DateTime StartDate { get; set; } = DateTime.Today;
 
@@ -67,6 +70,6 @@ public class SeedPacket
 
         this.StartDate = DateTime.UtcNow;
         this.EndDate = new DateTime(2100, 12, 31);
-        this.BestByDate = this.StartDate.AddYears(5);
+        
     }
 }

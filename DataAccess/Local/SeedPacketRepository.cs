@@ -26,7 +26,7 @@ public class SeedPacketRepository
             {
                 string sqlQuery =
                     "SELECT sp.Id, sp.Description, sp.Instructions, sp.DaysToHarvest, sp.CreationDate, sp.StartDate, sp.EndDate," +
-                    "v.Id, v.Code, v.Description, p.Id, p.FirstName, p.LastName, p2.Id, p2.Code, p2.Description " +
+                    "v.Id, v.Code, v.Description, p.Id, p.FirstName, p.LastName, p2.Id, p2.Code, p2.Description, sp.Code, sp.Generations " +
                     "FROM SeedPacket sp, Vendor v, Person p, Plant p2 " +
                     "WHERE sp.PlantId = p2.Id AND sp.VendorId = v.Id AND sp.AuthorId = p.Id AND sp.Id = @id";
                 
@@ -50,7 +50,6 @@ public class SeedPacketRepository
                         packet.CreationDate = Convert.ToDateTime(dr[4].ToString());
                         packet.StartDate = Convert.ToDateTime(dr[5].ToString());
                         packet.EndDate = Convert.ToDateTime(dr[6].ToString());
-                        packet.BestByDate = packet.EndDate;
 
                         packet.Vendor.Id = Convert.ToInt64(dr[7].ToString());
                         packet.Vendor.Code = dr[8].ToString();
@@ -64,6 +63,9 @@ public class SeedPacketRepository
                         packet.Plant!.Id = Convert.ToInt64(dr[13].ToString());
                         packet.Plant.Code = dr[14].ToString();
                         packet.Plant.Description = dr[15].ToString();
+                        
+                        packet.Code = dr[16].ToString();
+                        packet.Generations = Convert.ToInt64(dr[17].ToString());
 
                         packet.IsPlanted = currentPackets.Contains(packet.Id);
                         
@@ -85,8 +87,8 @@ public class SeedPacketRepository
         {
             using (IDbConnection db = new SqliteConnection(DataConnection.GetLocalDataSource()))
             {
-                string sqlQuery = "INSERT INTO SeedPacket (Description, Instructions, DaysToHarvest, CreationDate, StartDate, EndDate, PlantId, VendorId, AuthorId) " +
-                                  "VALUES(@Description, @Instructions, @DaysToHarvest, CURRENT_DATE, @StartDate, @EndDate, @PlantId, @VendorId, @AuthorId);";
+                string sqlQuery = "INSERT INTO SeedPacket (Code, Description, Instructions, DaysToHarvest, CreationDate, StartDate, EndDate, PlantId, VendorId, AuthorId, Generations) " +
+                                  "VALUES(@Code, @Description, @Instructions, @DaysToHarvest, CURRENT_DATE, @StartDate, @EndDate, @PlantId, @VendorId, @AuthorId, @Generations);";
 
                 return (db.Execute(sqlQuery, seedPacket) == 1);
             }
@@ -103,9 +105,9 @@ public class SeedPacketRepository
         {
             using (IDbConnection db = new SqliteConnection(DataConnection.GetLocalDataSource()))
             {
-                string sqlQuery = "UPDATE SeedPacket SET Description = @Description, " +
+                string sqlQuery = "UPDATE SeedPacket SET Code = @Code, Description = @Description, " +
                     "Instructions = @Instructions, DaysToHarvest = @DaysToHarvest, StartDate = @StartDate, " +
-                    "EndDate = @BestByDate, PlantId = @PlantId, VendorId = @VendorId, AuthorId = @AuthorId " +
+                    "EndDate = @EndDate, PlantId = @PlantId, VendorId = @VendorId, AuthorId = @AuthorId, Generations = @Generations " +
                     "WHERE Id = @Id;";
 
                 return (db.Execute(sqlQuery, seedPacket) == 1);
@@ -126,7 +128,7 @@ public class SeedPacketRepository
         var currentPackets = PlantingsRepository.GetAllActivePlantingIds(connectionString);
 
         string sqlQuery = "SELECT sp.Id, sp.Description, sp.Instructions, sp.DaysToHarvest, sp.CreationDate, sp.StartDate, sp.EndDate," +
-                    "v.Id, v.Code, v.Description, p.Id, p.FirstName, p.LastName, p2.Id, p2.Code, p2.Description " +
+                    "v.Id, v.Code, v.Description, p.Id, p.FirstName, p.LastName, p2.Id, p2.Code, p2.Description, sp.Code, sp.Generations " +
                     "FROM SeedPacket sp, Vendor v, Person p, Plant p2 " +
                     "WHERE sp.PlantId = p2.Id AND sp.VendorId = v.Id AND sp.AuthorId = p.Id ORDER BY p2.Description";
 
@@ -150,7 +152,6 @@ public class SeedPacketRepository
                     packet.CreationDate = Convert.ToDateTime(dr[4].ToString());
                     packet.StartDate = Convert.ToDateTime(dr[5].ToString());
                     packet.EndDate = Convert.ToDateTime(dr[6].ToString());
-                    packet.BestByDate = packet.EndDate;
 
                     packet.Vendor.Id = Convert.ToInt64(dr[7].ToString());
                     packet.Vendor.Code = dr[8].ToString();
@@ -166,6 +167,8 @@ public class SeedPacketRepository
                     packet.Plant.Description = dr[15].ToString();
 
                     packet.IsPlanted = currentPackets.Contains(packet.Id);
+                    packet.Code = dr[16].ToString();
+                    packet.Generations = Convert.ToInt64(dr[17].ToString());
 
                     packets.Add(packet);
                 }
@@ -184,7 +187,7 @@ public class SeedPacketRepository
         var currentPackets = PlantingsRepository.GetAllActivePlantingIds(connectionString);
 
         string sqlQuery = "SELECT sp.Id, sp.Description, sp.Instructions, sp.DaysToHarvest, sp.CreationDate, sp.StartDate, sp.EndDate," +
-                    "v.Id, v.Code, v.Description, p.Id, p.FirstName, p.LastName, p2.Id, p2.Code, p2.Description " +
+                    "v.Id, v.Code, v.Description, p.Id, p.FirstName, p.LastName, p2.Id, p2.Code, p2.Description, sp.Code, sp.Generations " +
                     "FROM SeedPacket sp, Vendor v, Person p, Plant p2 " +
                     "WHERE sp.PlantId = p2.Id AND sp.VendorId = v.Id AND sp.AuthorId = p.Id ORDER BY sp.Description";
 
@@ -208,7 +211,6 @@ public class SeedPacketRepository
                     packet.CreationDate = Convert.ToDateTime(dr[4].ToString());
                     packet.StartDate = Convert.ToDateTime(dr[5].ToString());
                     packet.EndDate = Convert.ToDateTime(dr[6].ToString());
-                    packet.BestByDate = packet.EndDate;
 
                     packet.Vendor.Id = Convert.ToInt64(dr[7].ToString());
                     packet.Vendor.Code = dr[8].ToString();
@@ -222,6 +224,8 @@ public class SeedPacketRepository
                     packet.Plant!.Id = Convert.ToInt64(dr[13].ToString());
                     packet.Plant.Code = dr[14].ToString();
                     packet.Plant.Description = dr[15].ToString();
+                    packet.Code = dr[16].ToString();
+                    packet.Generations = Convert.ToInt64(dr[17].ToString());
 
                     packet.IsPlanted = currentPackets.Contains(packet.Id);
 
