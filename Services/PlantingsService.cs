@@ -116,4 +116,16 @@ public static class PlantingsService
 
         return obs;
     }
+
+    public static List<SeedPacketObservation> GetObservationsForSeedPacket(ServiceMode mode, long id)
+    {
+        var obs = new List<SeedPacketObservation>();
+
+        if (mode == ServiceMode.Local)
+        {
+            obs = SeedPacketRepository.GetAllObservationsForSeedPacket(DataConnection.GetLocalDataSource(), id);
+        }
+
+        return obs;
+    }
 }

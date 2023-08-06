@@ -542,6 +542,19 @@ namespace DataAccess.Local
 				AuthorId INTEGER
 			);
 
+			-- SEED PACKET OBSERVATION
+			DROP TABLE IF EXISTS SeedPacketObservation;
+			CREATE TABLE IF NOT EXISTS SeedPacketObservation(
+				Id INTEGER PRIMARY KEY,
+				SeedPacketId INTEGER NOT NULL,
+				Comment TEXT NOT NULL,
+				CreationDate TIMESTAMP,
+				StartDate TIMESTAMP NOT NULL,
+				EndDate TIMESTAMP,
+				CommentTypeId INTEGER,
+				AuthorId INTEGER
+			);
+
 			-- PLANTING STATE
 			DROP TABLE IF EXISTS PlantingState;
 			CREATE TABLE IF NOT EXISTS PlantingState(

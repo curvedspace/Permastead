@@ -98,7 +98,7 @@
       </Grid>
       </Border>
       
-      <WrapPanel>
+      <WrapPanel Margin="20">
         <Label>Comment:</Label>
         <TextBox Width="700" Text="{Binding CurrentObservation.Comment}"></TextBox>
         <Button Command="{Binding SaveObservationCommand}" Name="AddObservationButton">Add</Button>

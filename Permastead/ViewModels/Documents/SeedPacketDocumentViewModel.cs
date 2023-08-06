@@ -24,6 +24,11 @@ public partial class SeedPacketDocumentViewModel : Document
     
     [ObservableProperty]
     private ObservableCollection<Vendor> _vendors;
+    
+    [ObservableProperty]
+    private ObservableCollection<SeedPacketObservation> _seedPacketObservations = new ObservableCollection<SeedPacketObservation>();
+    
+    [ObservableProperty] private SeedPacketObservation _currentObservation = new SeedPacketObservation();
 
     public Tool5ViewModel PropertyViewModel = new Tool5ViewModel();
 
@@ -35,6 +40,10 @@ public partial class SeedPacketDocumentViewModel : Document
         if (_seedPacket.Plant.Id != 0 && _plants.Count > 0) _seedPacket.Plant = _plants.First(x => x.Id == _seedPacket.Plant.Id);
         if (_seedPacket.Author.Id != 0 && _people.Count > 0) _seedPacket.Author = _people.First(x => x.Id == _seedPacket.Author.Id);
         if (_seedPacket.Vendor.Id != 0 && _vendors.Count > 0) _seedPacket.Vendor = _vendors.First(x => x.Id == _seedPacket.VendorId);
+        
+        SeedPacketObservations =
+            new ObservableCollection<SeedPacketObservation>(
+                Services.PlantingsService.GetObservationsForSeedPacket(AppSession.ServiceMode, SeedPacket.Id));
     }
 
     public SeedPacketDocumentViewModel()
@@ -66,5 +75,31 @@ public partial class SeedPacketDocumentViewModel : Document
             
         }
 
+    }
+    
+    [RelayCommand]
+    private void SaveObservation()
+    {
+        try
+        {
+            //saves the seed packet observation to database
+            CurrentObservation.Author.Id = 2;
+            CurrentObservation.SeedPacket = SeedPacket;
+            CurrentObservation.AsOfDate = DateTime.Today;
+            CurrentObservation.CommentType.Id = 2;
+
+            DataAccess.Local.SeedPacketRepository.InsertSeedPacketObservation(DataAccess.DataConnection.GetLocalDataSource(),
+                CurrentObservation);
+        
+            SeedPacketObservations =
+                new ObservableCollection<SeedPacketObservation>(
+                    Services.PlantingsService.GetObservationsForSeedPacket(AppSession.ServiceMode, SeedPacket.Id));
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            
+        }
+        
     }
 }

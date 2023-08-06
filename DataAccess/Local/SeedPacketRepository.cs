@@ -236,5 +236,87 @@ public class SeedPacketRepository
 
         return packets;
     }
+    
+    public static bool InsertSeedPacketObservation(string connectionString, SeedPacketObservation spObs)
+    {
+        var rtnValue = false;
 
+        var sql = "INSERT INTO SeedPacketObservation (SeedPacketId, Comment, CreationDate, StartDate, EndDate, CommentTypeId, AuthorId) " +
+                  "VALUES($seedPacketId, $comment, CURRENT_DATE, CURRENT_DATE, '9999-12-31', $commentTypeId, $authorId) ";
+
+        using (var connection = new SqliteConnection(connectionString))
+        {
+            connection.Open();
+
+            using (var command = connection.CreateCommand())
+            {
+                command.CommandText = sql;
+                command.Parameters.AddWithValue("$seedPacketId", spObs.SeedPacketId);
+                command.Parameters.AddWithValue("$comment", spObs.Comment);
+                command.Parameters.AddWithValue("$commentTypeId", spObs.CommentType!.Id);
+                command.Parameters.AddWithValue("$authorId", spObs.Author!.Id);
+
+                rtnValue = (command.ExecuteNonQuery() == 1);
+            }
+        }
+
+        return rtnValue;
+    }
+
+    public static List<SeedPacketObservation> GetAllObservationsForSeedPacket(string connectionString, long plantingId)
+    {
+        {
+            var myObs = new List<SeedPacketObservation>();
+            SeedPacketObservation o;
+
+            var sql = "SELECT o.Comment, o.CreationDate, o.StartDate, o.EndDate, o.CommentTypeId, " +
+                      "ct.Description, o.AuthorId, p.FirstName, p.LastName, o.Id, o.SeedPacketId " +
+                      "FROM SeedPacketObservation o, CommentType ct, Person p " +
+                      "WHERE ct.Id = o.CommentTypeId " +
+                      "AND o.SeedPacketId = @Id " +
+                      "AND p.Id = o.AuthorId ORDER BY o.Id DESC";
+
+            using (SqliteConnection connection = new SqliteConnection(connectionString))
+            {
+                connection.Open();
+
+                using (SqliteCommand command = connection.CreateCommand())
+                {
+                    command.CommandText = sql;
+                    command.Parameters.AddWithValue("@Id", plantingId);
+                    
+                    var dr = command.ExecuteReader();
+
+                    while (dr.Read())
+                    {
+                        o = new SeedPacketObservation();
+                        
+                        o.Comment = dr[0].ToString()!;
+                        o.CreationDate = Convert.ToDateTime(dr[1].ToString());
+                        o.StartDate = Convert.ToDateTime(dr[2].ToString());
+                        o.EndDate = Convert.ToDateTime(dr[3].ToString());
+
+                        o.CommentType = new CommentType();
+                        o.CommentType.Id = Convert.ToInt64(dr[4].ToString());
+                        o.CommentType.Description = dr[5].ToString();
+
+                        o.Author = new Person();
+                        o.Author.Id = Convert.ToInt64(dr[6].ToString());
+                        o.Author.FirstName = dr[7].ToString();
+                        o.Author.LastName = dr[8].ToString();
+
+                        o.Id = Convert.ToInt64(dr[9].ToString());
+                        o.SeedPacket.Id = Convert.ToInt64(dr[10].ToString());
+                        
+                        o.AsOfDate = o.CreationDate;
+
+                        myObs.Add(o);
+                    }
+                }
+
+                return myObs;
+            }
+        }
+    }
+    
 }

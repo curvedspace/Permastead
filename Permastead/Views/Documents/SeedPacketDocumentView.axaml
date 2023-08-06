@@ -86,6 +86,28 @@
         
       </Grid>
       </Border>
+      
+      <WrapPanel Margin="20">
+        <Label>Comment:</Label>
+        <TextBox Width="700" Text="{Binding CurrentObservation.Comment}"></TextBox>
+        <Button Command="{Binding SaveObservationCommand}" Name="AddObservationButton">Add</Button>
+      </WrapPanel>
+      
+      <Panel Grid.Row="2">
+
+        <ListBox Name="SeedPacketObservationsList" ItemsSource="{Binding SeedPacketObservations, Mode=TwoWay }" 
+                 Margin="30" ScrollViewer.VerticalScrollBarVisibility="Auto">
+          <ListBox.ItemTemplate>
+            <DataTemplate>
+              <Border CornerRadius="4">
+                <TextBlock Text="{Binding FullDescription}"></TextBlock>
+              </Border>
+            </DataTemplate>
+          </ListBox.ItemTemplate>
+        </ListBox>
+
+      </Panel>
+      
     </StackPanel>
      
   </Grid>
