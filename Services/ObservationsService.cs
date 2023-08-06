@@ -31,7 +31,9 @@ namespace Services
             
             // now get planting observations, convert to Observation objects
             var plantingObs = PlantingsRepository.GetAllPlantingObservations(DataConnection.GetLocalDataSource());
-
+            var seedPacketObs = SeedPacketRepository.GetAllSeedPacketObservations((DataConnection.GetLocalDataSource()));
+            
+            // add the planting observations 
             foreach (var po in plantingObs)
             {
                 var newObs = new Observation()
@@ -47,7 +49,24 @@ namespace Services
                 };
                 
                 observations.Add(newObs);
-
+            }
+            
+            // add the seed packet observations
+            foreach (var po in seedPacketObs)
+            {
+                var newObs = new Observation()
+                {
+                    AsOfDate = po.AsOfDate,
+                    Author = po.Author,
+                    Comment = "(S:" + po.SeedPacket.Description + ") " + po.Comment,
+                    CommentType = po.CommentType,
+                    CreationDate = po.CreationDate,
+                    EndDate = po.EndDate,
+                    Id = po.Id,
+                    StartDate = po.StartDate
+                };
+                
+                observations.Add(newObs);
             }
 
             return observations;
