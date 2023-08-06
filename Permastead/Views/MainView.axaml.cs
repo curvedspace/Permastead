@@ -14,11 +14,13 @@ public partial class MainView : UserControl
         InitializeComponent();
         InitializeThemes();
         InitializeMenu();
+
+        App.ThemeManager?.Switch(1);
     }
 
     private void InitializeThemes()
     {
-        var dark = false;
+        var dark = true;
         var theme = this.Find<Button>("ThemeButton");
         if (theme is { })
         {
