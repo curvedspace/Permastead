@@ -109,9 +109,11 @@ namespace Permastead.ViewModels.Views;
         private void RefreshObservations()
         {
             _observations.Clear();
-            var obs = Services.ObservationsService.GetObservations(AppSession.ServiceMode);
+            var obs = Services.ObservationsService.GetObservationsForAllEntities(AppSession.ServiceMode);
+            
 
-            foreach (var o in obs)
+            //finally, sort by date, add to collection for display
+            foreach (var o in obs.OrderByDescending(x=>x.AsOfDate))
             {
                 _observations.Add(o);
             }

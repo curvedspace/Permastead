@@ -24,6 +24,35 @@ namespace Services
             return observations;
         }
 
+        public static List<Observation> GetObservationsForAllEntities(ServiceMode mode)
+        {
+            // get base observations
+            var observations = GetObservations(mode);
+            
+            // now get planting observations, convert to Observation objects
+            var plantingObs = PlantingsRepository.GetAllPlantingObservations(DataConnection.GetLocalDataSource());
+
+            foreach (var po in plantingObs)
+            {
+                var newObs = new Observation()
+                {
+                    AsOfDate = po.AsOfDate,
+                    Author = po.Author,
+                    Comment = "(PG:" + po.Planting.Description + ") " + po.Comment,
+                    CommentType = po.CommentType,
+                    CreationDate = po.CreationDate,
+                    EndDate = po.EndDate,
+                    Id = po.Id,
+                    StartDate = po.StartDate
+                };
+                
+                observations.Add(newObs);
+
+            }
+
+            return observations;
+        }
+
         public static bool InsertRecord(ServiceMode mode, Observation obs)
         {
             var rtnValue = false;
@@ -39,13 +68,6 @@ namespace Services
         public static long GetObservationWordCount(List<Observation> observations)
         {
             long wordCount = 0;
-
-            // foreach (Observation ob in observations)
-            // {
-            //     var comment = ob.Comment;
-            //     wordCount = wordCount + comment.Trim().Split(" ").Length;
-            // }
-            //
 
             foreach (Observation ob in observations)
             {

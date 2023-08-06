@@ -261,6 +261,62 @@ public class PlantingsRepository
         return rtnValue;
     }
 
+    public static List<PlantingObservation> GetAllPlantingObservations(string connectionString)
+    {
+        {
+            var myObs = new List<PlantingObservation>();
+            PlantingObservation o;
+
+            var sql = "SELECT o.Comment, o.CreationDate, o.StartDate, o.EndDate, o.CommentTypeId, " +
+                      "ct.Description, o.AuthorId, p.FirstName, p.LastName, o.Id, o.PlantingId, pg.Description " +
+                      "FROM PlantingObservation o, CommentType ct, Person p, Planting pg " +
+                      "WHERE ct.Id = o.CommentTypeId " +
+                      "AND o.PlantingId = pg.Id " +
+                      "AND p.Id = o.AuthorId ORDER BY o.Id DESC";
+
+            using (SqliteConnection connection = new SqliteConnection(connectionString))
+            {
+                connection.Open();
+
+                using (SqliteCommand command = connection.CreateCommand())
+                {
+                    command.CommandText = sql;
+                    
+                    var dr = command.ExecuteReader();
+
+                    while (dr.Read())
+                    {
+                        o = new PlantingObservation();
+                        
+                        o.Comment = dr[0].ToString()!;
+                        o.CreationDate = Convert.ToDateTime(dr[1].ToString());
+                        o.StartDate = Convert.ToDateTime(dr[2].ToString());
+                        o.EndDate = Convert.ToDateTime(dr[3].ToString());
+
+                        o.CommentType = new CommentType();
+                        o.CommentType.Id = Convert.ToInt64(dr[4].ToString());
+                        o.CommentType.Description = dr[5].ToString();
+
+                        o.Author = new Person();
+                        o.Author.Id = Convert.ToInt64(dr[6].ToString());
+                        o.Author.FirstName = dr[7].ToString();
+                        o.Author.LastName = dr[8].ToString();
+
+                        o.Id = Convert.ToInt64(dr[9].ToString());
+                        o.Planting.Id = Convert.ToInt64(dr[10].ToString());
+                        o.Planting.Description = dr[11].ToString();
+                        
+                        o.AsOfDate = o.CreationDate;
+
+                        myObs.Add(o);
+                    }
+                }
+
+                return myObs;
+            }
+        }
+    }
+      
     public static List<PlantingObservation> GetAllObservationsForPlanting(string connectionString, long plantingId)
     {
         {
@@ -268,9 +324,10 @@ public class PlantingsRepository
             PlantingObservation o;
 
             var sql = "SELECT o.Comment, o.CreationDate, o.StartDate, o.EndDate, o.CommentTypeId, " +
-                      "ct.Description, o.AuthorId, p.FirstName, p.LastName, o.Id, o.PlantingId " +
-                      "FROM PlantingObservation o, CommentType ct, Person p " +
+                      "ct.Description, o.AuthorId, p.FirstName, p.LastName, o.Id, o.PlantingId, pg.Description " +
+                      "FROM PlantingObservation o, CommentType ct, Person p, Planting pg " +
                       "WHERE ct.Id = o.CommentTypeId " +
+                      "AND o.PlantingId = pg.Id " +
                       "AND o.PlantingId = @Id " +
                       "AND p.Id = o.AuthorId ORDER BY o.Id DESC";
 
@@ -305,6 +362,7 @@ public class PlantingsRepository
 
                         o.Id = Convert.ToInt64(dr[9].ToString());
                         o.Planting.Id = Convert.ToInt64(dr[10].ToString());
+                        o.Planting.Description = dr[11].ToString();
                         
                         o.AsOfDate = o.CreationDate;
 

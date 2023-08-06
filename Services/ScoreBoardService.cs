@@ -26,7 +26,7 @@ public static class ScoreBoardService
             { AchievementType.SaveSeed, new Achievement() { Type = AchievementType.SaveSeed, InitialPoints = 50 } }
         };
 
-        var obs = ObservationsService.GetObservations(mode);
+        var obs = ObservationsService.GetObservationsForAllEntities(mode);
         var todos = ToDoService.GetAllToDos(mode);
         var inventory = InventoryService.GetAllInventory(mode);
         var plantings = PlantingsService.GetPlantings(mode);
