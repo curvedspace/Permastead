@@ -125,6 +125,8 @@
              
              <TextBlock Grid.Column="2" VerticalAlignment="Center" TextAlignment="Right" FontSize="16"
                         Text="{Binding TotalPlantStats}"></TextBlock>
+             
+             <TextBlock FontSize="20" HorizontalAlignment="Center" Grid.ColumnSpan="3" Grid.Row="1" Text="{Binding WeatherForecast}"></TextBlock>
          </Grid>
          
      </StackPanel>

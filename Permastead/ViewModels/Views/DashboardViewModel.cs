@@ -1,7 +1,7 @@
 ﻿
 using System;
 using System.Collections.ObjectModel;
-
+using System.Threading.Tasks;
 using CommunityToolkit.Mvvm.ComponentModel;
 using Dock.Model.Mvvm.Core;
 
@@ -34,6 +34,8 @@ namespace Permastead.ViewModels.Views;
         
         [ObservableProperty]
         private double _totalScore;
+
+        [ObservableProperty] private string _weatherForecast = "Weather Unknown";
 
         public string GrowingSeason => "Growing Season: " + PlantingYearEndDate.Year.ToString();
 
@@ -111,11 +113,35 @@ namespace Permastead.ViewModels.Views;
 
             TotalPlantStats = "Total: " + TotalPlantings + " Harvested: " + TotalHarvestedPlants + " Failed: " +
                               (TotalPlantings - SuccessfulPlantings);
+
+            try
+            {
+                var t = new Task(GetWeatherAsync);
+                t.Start();
+                t.Wait();
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+            
+            
         }
 
         public void GetQuote()
         {
             this.QuoteViewModel.Quote = Services.QuoteService.GetRandomQuote(AppSession.ServiceMode);
+        }
+
+        async void GetWeatherAsync()
+        {
+            var ws = new Services.WeatherService();
+            var city = new City("Halifax", "Canada", 44.6475, -63.5906, "CA");
+
+            var results = await ws.UpdateWeather(city);
+            WeatherForecast = "Current Weather for " + city.Name + ", " + city.Country + ": " + results.WeatherStateAlias + ", Temperature: " + results.Temperature + ", Humidity: " + results.Humidity;
+            
         }
 
     }
