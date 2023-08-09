@@ -139,8 +139,17 @@ namespace Permastead.ViewModels.Views;
             var ws = new Services.WeatherService();
             var city = new City("Halifax", "Canada", 44.6475, -63.5906, "CA");
 
-            var results = await ws.UpdateWeather(city);
-            WeatherForecast = "Current Weather for " + city.Name + ", " + city.Country + ": " + results.WeatherStateAlias + ", Temperature: " + results.Temperature + ", Humidity: " + results.Humidity;
+            try
+            {
+                var results = await ws.UpdateWeather(city);
+                WeatherForecast = "Current Weather for " + city.Name + ", " + city.Country + ": " + results.WeatherStateAlias + ", Temperature: " + results.Temperature + ", Humidity: " + results.Humidity;
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                WeatherForecast = "Unable to get weather data.";
+            }
             
         }
 
