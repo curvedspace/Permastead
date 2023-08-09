@@ -23,7 +23,7 @@
         <ToggleButton Name="ActiveOnly" Grid.Column="1" IsChecked="{Binding ActiveOnly}" Command="{Binding RefreshData}">
           Active Only
         </ToggleButton>
-        <AutoCompleteBox x:Name="SearchBox" FilterMode="Contains" Grid.Column="2" Watermark="Search" Width="200" 
+        <AutoCompleteBox x:Name="SearchBox" FilterMode="Contains" Grid.Column="2" Watermark="Search" Width="100" 
                          KeyDown="SearchBox_OnKeyDown"
                          ItemsSource="{Binding SearchItems}" Text="{Binding SearchText}"></AutoCompleteBox>
         <Button Grid.Column="3" Command="{Binding ResetSearchBox}">
