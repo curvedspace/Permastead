@@ -30,4 +30,12 @@
   <ItemGroup>
     <ProjectReference Include="..\Services\Services.csproj" />
   </ItemGroup>
+
+  <ItemGroup>
+    <AvaloniaXaml Remove="Views\Views\GaiaView.axaml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Views\Views\GaiaView.axaml" />
+  </ItemGroup>
 </Project>

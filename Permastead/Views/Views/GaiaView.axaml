@@ -1,0 +1,52 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             xmlns:vm="using:Permastead.ViewModels.Views"
+             xmlns:models="clr-namespace:Models;assembly=Models"
+             x:DataType="vm:GaiaViewModel"
+             x:CompileBindings="True"
+             x:Class="Permastead.Views.GaiaView">
+
+  <!--This is design time only-->
+  <Design.DataContext>
+    <vm:GaiaViewModel/>
+  </Design.DataContext>
+
+  <StackPanel>
+    <WrapPanel>
+      <TextBlock Text="You: " Margin="10,20,10,10"> </TextBlock>
+      <TextBox Text="{Binding Request}" Name="RequestText"
+               Watermark="Enter your question"
+               TextWrapping="Wrap"
+               AcceptsReturn="False"
+               Height="50" Width="400"
+               FontSize="12">
+      </TextBox>
+
+      <Button Command="{Binding SendRequestCommand}" HotKey="Return">Send</Button>
+    </WrapPanel>
+
+    <WrapPanel>
+      <TextBlock Text="{Binding Response}" Margin="10,30,10,10" FontSize="16"></TextBlock>
+    </WrapPanel>
+   
+    
+      <ListBox ItemsSource="{Binding RequestResponses}" Margin="10,50,10,10">
+        <ListBox.ItemTemplate>
+          <DataTemplate>
+            <Border BorderBrush="Blue"
+                Margin="0,10,0,0"
+                BorderThickness="1"
+                Padding="5">
+              <TextBlock Text="{Binding FullText}"/>
+            </Border>          
+          </DataTemplate>
+        </ListBox.ItemTemplate>
+      </ListBox>
+    
+
+  </StackPanel>
+
+</UserControl>
