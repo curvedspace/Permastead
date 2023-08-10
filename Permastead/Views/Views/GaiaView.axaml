@@ -16,12 +16,12 @@
 
   <StackPanel>
     <WrapPanel>
-      <TextBlock Text="You: " Margin="10,20,10,10"> </TextBlock>
+      <TextBlock Text="You: " Margin="20,20,20,20"> </TextBlock>
       <TextBox Text="{Binding Request}" Name="RequestText"
                Watermark="Enter your question"
                TextWrapping="Wrap"
                AcceptsReturn="False"
-               Height="50" Width="400"
+               Height="20" Width="400"
                FontSize="12">
       </TextBox>
 
