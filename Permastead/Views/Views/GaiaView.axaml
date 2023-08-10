@@ -3,11 +3,11 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             xmlns:materialIcons="clr-namespace:Material.Icons.Avalonia;assembly=Material.Icons.Avalonia"
              xmlns:vm="using:Permastead.ViewModels.Views"
-             xmlns:models="clr-namespace:Models;assembly=Models"
              x:DataType="vm:GaiaViewModel"
              x:CompileBindings="True"
-             x:Class="Permastead.Views.GaiaView">
+             x:Class="Permastead.Views.Views.GaiaView">
 
   <!--This is design time only-->
   <Design.DataContext>

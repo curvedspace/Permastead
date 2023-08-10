@@ -160,6 +160,9 @@
       <None Update="AIML\Z.aiml">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </None>
+      <None Update="aiml\startup.aiml">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
     </ItemGroup>
 
     <ItemGroup>
@@ -168,8 +171,5 @@
       <PackageReference Include="Serilog.Sinks.File" Version="5.0.0" />
     </ItemGroup>
 
-    <ItemGroup>
-      <Folder Include="aiml\" />
-    </ItemGroup>
 
 </Project>

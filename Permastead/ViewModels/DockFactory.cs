@@ -38,13 +38,9 @@ public class DockFactory : Factory
 
     public override IRootDock CreateLayout()
     {
-        var document1 = new DocumentViewModel {Id = "Document1", Title = "Document1"};
-        var document2 = new DocumentViewModel {Id = "Document2", Title = "Document2"};
         var document3 = new PlantDocumentViewModel {Id = "Document3", Title = "Document3", CanClose = true};
         var tool1 = new Tool1ViewModel {Id = "Tool1", Title = "Plants"};
         
-        var tool3 = new Tool3ViewModel {Id = "Tool3", Title = "Tool3"};
-        var tool4 = new Tool4ViewModel {Id = "Tool4", Title = "Tool4"};
         var tool5 = new Tool5ViewModel {Id = "Tool5", Title = "Tool5"};
         
         _browser = new BrowserViewModel {Id = "Browser", Title = "Browser"};
@@ -164,6 +160,12 @@ public class DockFactory : Factory
             Title = "PlantingsPage"
         };
         
+        var gaiaPageView = new GaiaPageViewModel()
+        {
+            Id = "GaiaPage",
+            Title = "GaiaPage"
+        };
+        
         var settingsPageView = new SettingsPageViewModel()
         {
             Id = "SettingsPage",
@@ -183,7 +185,7 @@ public class DockFactory : Factory
         rootDock.IsCollapsable = false;
         rootDock.ActiveDockable = dashboardView;
         rootDock.DefaultDockable = _homeView;
-        rootDock.VisibleDockables = CreateList<IDockable>(dashboardView, observationsPageView, todoPageView, eventsPageView, inventoryPageView, plantingsPageView, settingsPageView, _homeView);
+        rootDock.VisibleDockables = CreateList<IDockable>(dashboardView, observationsPageView, todoPageView, eventsPageView, inventoryPageView, settingsPageView, plantingsPageView, gaiaPageView, _homeView);
         
 
         _documentDock = documentDock;
@@ -196,8 +198,6 @@ public class DockFactory : Factory
     {
         ContextLocator = new Dictionary<string, Func<object?>>
         {
-            ["Document1"] = () => new DemoDocument(),
-            ["Document2"] = () => new DemoDocument(),
             ["Document3"] = () => new DemoDocument(),
             ["Tool1"] = () => new Tool1(),
             ["Tool2"] = () => new Tool2(),
@@ -212,6 +212,7 @@ public class DockFactory : Factory
             ["ToDoPage"] = () => layout,
             ["EventsPage"] = () => layout,
             ["InventoryPage"] = () => layout,
+            ["GaiaPage"] = () => layout,
             ["SettingsPage"] = () => layout,
             ["PlantingsPage"] = () => layout,
             ["Home"] = () => _context
