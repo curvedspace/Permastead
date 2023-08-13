@@ -10,6 +10,7 @@ public class Vendor : CodeTable
     public Vendor()
     {
         this.Id = 0;
+        this.CreationDate = DateTime.Now;
         this.Address = new Address();
     }
 

@@ -29,7 +29,7 @@
         <TextBox Grid.Row="2" Grid.Column="1" Margin="10" Text="{Binding Vendor.Rating}"></TextBox>
         
         <Label Grid.Row="3" Grid.Column="0" Margin="10">Start Date:</Label>
-        <CalendarDatePicker Grid.Row="3" Grid.Column="1" Name = "EndDate" SelectedDate="{Binding Vendor.EndDate, Mode=TwoWay}">
+        <CalendarDatePicker Grid.Row="3" Grid.Column="1" Name = "EndDate" SelectedDate="{Binding Vendor.StartDate, Mode=TwoWay}">
         </CalendarDatePicker>
         
         <Label Grid.Row="3" Grid.Column="2" Margin="10">End Date:</Label>
