@@ -1167,6 +1167,9 @@ namespace DataAccess.Local
             et = new AnEventType() { Description = "Financial" };
             AnEventTypeRepository.Insert(et);
             
+            et = new AnEventType() { Description = "Anniversary" };
+            AnEventTypeRepository.Insert(et);
+            
             #endregion
             
             #region SeedPacket

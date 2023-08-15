@@ -1,8 +1,10 @@
 ﻿using DataAccess;
+using Models;
+using System.Threading;
 
 namespace Services
 {
-    public static class SettingsService
+    public class SettingsService
     {
         /// <summary>
         /// Given a settings key, return the value for said key.
@@ -19,6 +21,46 @@ namespace Services
         {
             return DataAccess.DataConnection.GetDefaultDatabaseLocation();
         }
+
+        public IReadOnlyDictionary<(string, string), City> GetCities()
+        {
+            var _citiesDictionary = Task.Run(async() => await CreateAndFillCitiesDictionary()).Result;
+
+            return _citiesDictionary;
+        }
+        
+        public async Task<IReadOnlyDictionary<(string, string), City>> CreateAndFillCitiesDictionary()
+        {
+            string FilePath = "Assets/worldcities.csv";
+            const int cityNameKey = 0;
+            const int idKey = 10;
+
+            if (!File.Exists(FilePath))
+            {
+                throw new FileNotFoundException($"File with path \"{FilePath}\" doesnt exist");
+            }
+
+            var dictionary = new Dictionary<(string, string), City>();
+
+            using var sr = new StreamReader(FilePath);
+
+            while (!sr.EndOfStream)
+            {
+                var line = await sr.ReadLineAsync();
+
+                if (line is null)
+                {
+                    throw new ArgumentNullException(nameof(line), "Error with reading line from file");
+                }
+
+                var lines = line.Split(',');
+
+                dictionary[(lines[cityNameKey], lines[idKey])] = City.Parse(line);
+            }
+                
+            return dictionary;
+        }
+        
 
     }
 }

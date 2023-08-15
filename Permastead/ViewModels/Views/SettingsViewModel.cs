@@ -1,6 +1,11 @@
+using System;
+using System.Collections.ObjectModel;
 using System.ComponentModel.Design;
+using System.Security.Cryptography;
 using Avalonia.Controls;
 using CommunityToolkit.Mvvm.ComponentModel;
+using Models;
+using Services;
 
 namespace Permastead.ViewModels.Views;
 
@@ -15,6 +20,8 @@ public partial class SettingsViewModel : ViewModelBase
     [ObservableProperty] private string _firstName;
     
     [ObservableProperty] private string _lastName;
+
+    [ObservableProperty] private ObservableCollection<City> _cities;
     
     public string HomesteadNameText => _homesteadName.ToString();
     
@@ -34,7 +41,13 @@ public partial class SettingsViewModel : ViewModelBase
         _lastName = "Person";
 
         //var gaia = new Services.GaiaService();
+
+        var settingsService = new SettingsService();
+
+        //_cities = new ObservableCollection<City>(settingsService.GetCities().Values);
         
+        Console.WriteLine("cities has been loaded");
+
     }
     
     #endregion
