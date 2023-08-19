@@ -66,7 +66,7 @@ public class SeedPacket
     {
         this.Plant = new Plant();
         this.Vendor = new Vendor();
-        this.Author = Person.Anonymous();
+        this.Author = Person.Gaia();
 
         this.StartDate = DateTime.UtcNow;
         this.EndDate = new DateTime(2100, 12, 31);

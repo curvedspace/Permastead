@@ -20,7 +20,7 @@ public class Plant : CodeTable
     {
         this.Code = string.Empty;
         this.Description = string.Empty;
-        this.Author = Person.Anonymous();
+        this.Author = Person.Gaia();
     }
     
     public Plant(long id) : this()
