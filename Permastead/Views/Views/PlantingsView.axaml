@@ -30,11 +30,11 @@
 
     <WrapPanel Grid.Row="1" Margin="0,10,0,0">
       
-      <Label Margin="5,20,5,5">Start Date:</Label>
+      <Label Margin="5,5,5,5">Start Date:</Label>
       <CalendarDatePicker Name="StartDate" FontSize="12" SelectedDate="{Binding CurrentItem.StartDate, Mode=TwoWay}">
       </CalendarDatePicker>
       
-      <TextBlock Margin="20,20,5,5">Plant Type:</TextBlock>
+      <TextBlock Margin="5,5,5,5">Plant Type:</TextBlock>
       <ComboBox Width="200" ItemsSource="{Binding Plants, Mode=TwoWay}"
                  SelectedItem="{Binding CurrentItem.Plant, Mode=TwoWay}" AutoScrollToSelectedItem="False">
         <ComboBox.ItemTemplate>
@@ -44,7 +44,7 @@
         </ComboBox.ItemTemplate>
       </ComboBox>
       
-      <TextBlock Margin="10,20,5,5">Seed Packet:</TextBlock>
+      <TextBlock Margin="5,5,5,5">Seed Packet:</TextBlock>
       <ComboBox Width="300" ItemsSource="{Binding SeedPackets} "
                 SelectedItem="{Binding CurrentItem.SeedPacket, Mode=TwoWay}" AutoScrollToSelectedItem="False">
         <ComboBox.ItemTemplate>
@@ -54,7 +54,7 @@
         </ComboBox.ItemTemplate>
       </ComboBox>
       
-      <TextBlock Margin="10,20,5,5">Author:</TextBlock>
+      <TextBlock Margin="5,5,5,5">Author:</TextBlock>
       <ComboBox Width="200" ItemsSource="{Binding People} "
                 SelectedItem="{Binding CurrentItem.Author, Mode=TwoWay}" AutoScrollToSelectedItem="False">
         <ComboBox.ItemTemplate>
@@ -64,8 +64,8 @@
         </ComboBox.ItemTemplate>
       </ComboBox>
       
-      <TextBlock Margin="10,20,5,5">Bed:</TextBlock>
-      <ComboBox Width="400" ItemsSource="{Binding Beds} "
+      <TextBlock Margin="5,5,5,5">Bed:</TextBlock>
+      <ComboBox Width="350" ItemsSource="{Binding Beds} "
                 SelectedItem="{Binding CurrentItem.Bed, Mode=TwoWay}" AutoScrollToSelectedItem="False">
         <ComboBox.ItemTemplate>
           <DataTemplate >
@@ -74,11 +74,11 @@
         </ComboBox.ItemTemplate>
       </ComboBox>
       
-      <Label Margin="5,20,5,5">End Date:</Label>
+      <Label Margin="5,5,5,5">End Date:</Label>
       <CalendarDatePicker Name = "LastTrigger" FontSize="12" SelectedDate="{Binding CurrentItem.EndDate, Mode=TwoWay}">
       </CalendarDatePicker>
             
-      <Label Margin="5,20,5,5">Yield Rating: </Label>
+      <Label Margin="5,5,5,5">Yield Rating: </Label>
       <TextBox Margin="5,7,5,5" Text="{Binding CurrentItem.YieldRating}"></TextBox>
     </WrapPanel>
     
