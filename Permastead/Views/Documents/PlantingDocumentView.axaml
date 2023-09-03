@@ -61,7 +61,7 @@
           </ComboBox.ItemTemplate>
         </ComboBox>
       
-        <TextBlock Grid.Row="3" Grid.Column="2" Margin="10">Bed:</TextBlock>
+        <TextBlock Grid.Row="3" Grid.Column="2" Margin="10">Location:</TextBlock>
         <ComboBox Grid.Row="3" Grid.Column="3" Margin="10" Width="300" ItemsSource="{Binding Beds} "
                   SelectedItem="{Binding Planting.Bed, Mode=TwoWay}" AutoScrollToSelectedItem="False">
           <ComboBox.ItemTemplate>

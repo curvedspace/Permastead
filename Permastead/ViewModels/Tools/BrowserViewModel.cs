@@ -286,6 +286,12 @@ public partial class BrowserViewModel : Tool
         
         this.Dock.OpenDoc(CurrentPlant);
     }
+
+    [RelayCommand]
+    public void CreateNewPlantLocation()
+    {
+        
+    }
     
     [RelayCommand]
     public void ExpandTreeNodes(TreeView treeView)

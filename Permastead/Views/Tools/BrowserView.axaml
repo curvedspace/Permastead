@@ -34,8 +34,7 @@
           <Button.Flyout>
           <MenuFlyout Placement="Bottom">
             <MenuItem Header="Add New">
-              <MenuItem IsEnabled="False" Header="Garden Bed" />
-              <MenuItem IsEnabled="False" Header="Garden Bed Type" />
+              <MenuItem IsEnabled="False" Header="Plant Location" Command="{Binding CreateNewPlantLocation}" />
               <MenuItem Header="-" />
               <MenuItem IsEnabled="False" Header="Inventory Group" />
               <MenuItem IsEnabled="False" Header="Inventory Type" />
@@ -71,7 +70,6 @@
           </TreeView>
         </ScrollViewer>
       </Panel>
-      
       
     <!--</StackPanel>-->
     

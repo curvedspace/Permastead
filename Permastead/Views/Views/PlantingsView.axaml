@@ -64,7 +64,7 @@
         </ComboBox.ItemTemplate>
       </ComboBox>
       
-      <TextBlock Margin="5,5,5,5">Bed:</TextBlock>
+      <TextBlock Margin="5,5,5,5">Location:</TextBlock>
       <ComboBox Width="350" ItemsSource="{Binding Beds} "
                 SelectedItem="{Binding CurrentItem.Bed, Mode=TwoWay}" AutoScrollToSelectedItem="False">
         <ComboBox.ItemTemplate>
@@ -173,7 +173,7 @@
             </DataGridTemplateColumn.CellTemplate>
           </DataGridTemplateColumn>
           
-          <DataGridTemplateColumn Header="Bed Code">
+          <DataGridTemplateColumn Header="Location">
             <DataGridTemplateColumn.CellTemplate>
               <DataTemplate DataType="model:Planting">
                 <TextBlock Text="{Binding Bed.Code}" TextAlignment="Left" TextWrapping="WrapWithOverflow"  Margin="10" />
@@ -181,7 +181,7 @@
             </DataGridTemplateColumn.CellTemplate>
           </DataGridTemplateColumn>
           
-          <DataGridTemplateColumn Header="Bed Description">
+          <DataGridTemplateColumn Header="Location Description">
             <DataGridTemplateColumn.CellTemplate>
               <DataTemplate DataType="model:Planting">
                 <TextBlock Text="{Binding Bed.Description}" TextAlignment="Left" TextWrapping="WrapWithOverflow"  Margin="10" />

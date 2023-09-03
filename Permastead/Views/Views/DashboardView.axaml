@@ -117,7 +117,7 @@
              <TextBlock Grid.Column="0" VerticalAlignment="Center" TextAlignment="Left" FontSize="16"
                         Text="{Binding GrowingSeason}"></TextBlock>
              
-             <ProgressBar Grid.Column="1" Margin="50" Height="30" ShowProgressText="True"
+             <ProgressBar Grid.Column="1" Margin="80,50,80,50" Height="30" ShowProgressText="True"
                           Value="{Binding SuccessfulPlantings}" 
                           Minimum="0" 
                           Maximum="{Binding TotalPlantings}"></ProgressBar>
