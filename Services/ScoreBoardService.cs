@@ -217,7 +217,9 @@ public static class ScoreBoardService
         var newList = new List<string>();
         var events = Services.EventsService.GetAllEvents(mode);
         
-        //loop through events, see if 1) we need to trigger a new action and 2) see if we need to post any warnings for upcoming dates
+        //loop through events, see if
+        //1) we need to trigger a new action and
+        //2) see if we need to post any warnings for upcoming dates
         foreach (var e in events)
         {
             

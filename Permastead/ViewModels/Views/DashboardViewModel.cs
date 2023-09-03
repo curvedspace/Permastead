@@ -39,7 +39,7 @@ namespace Permastead.ViewModels.Views;
 
         public string GrowingSeason => "Growing Season: " + PlantingYearEndDate.Year.ToString();
 
-        public string HravestPlants => "Harvested: " + TotalHarvestedPlants.ToString();
+        public string HarvestedPlants => "Harvested: " + TotalHarvestedPlants.ToString();
         
         public string TotalScoreFormatted => TotalScore.ToString("F1");
         
