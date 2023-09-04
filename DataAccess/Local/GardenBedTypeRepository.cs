@@ -13,6 +13,23 @@ namespace DataAccess.Local
 {
     public class GardenBedTypeRepository
     {
+        public static List<GardenBedType> GetAll(string conn)
+        {
+            try
+            {
+                using (IDbConnection db = new SqliteConnection(conn))
+                {
+                    string sqlQuery = "SELECT * FROM GardenBedType ORDER BY Description;";
+
+                    return db.Query<GardenBedType>(sqlQuery).ToList();
+                }
+            }
+            catch
+            {
+                return new List<GardenBedType>();
+            }
+        }
+        
         public static bool Insert(GardenBedType gbt)
         {
             try

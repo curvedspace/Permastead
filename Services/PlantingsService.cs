@@ -66,6 +66,18 @@ public static class PlantingsService
         return beds;
     }
     
+    public static List<GardenBedType> GetGardenBedTypes(ServiceMode mode)
+    {
+        var bedTypes = new List<GardenBedType>();
+
+        if (mode == ServiceMode.Local)
+        {
+            bedTypes = GardenBedTypeRepository.GetAll(DataConnection.GetLocalDataSource());
+        }
+
+        return bedTypes;
+    }
+    
     public static List<PlantingState> GetPlantingStates(ServiceMode mode)
     {
         var states = new List<PlantingState>();

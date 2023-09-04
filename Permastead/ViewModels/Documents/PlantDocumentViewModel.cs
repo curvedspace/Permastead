@@ -3,7 +3,6 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Dock.Model.Mvvm.Controls;
 using Models;
-using Permastead.ViewModels.Tools;
 using Serilog;
 
 namespace Permastead.ViewModels.Documents;

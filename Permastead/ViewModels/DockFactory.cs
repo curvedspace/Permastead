@@ -64,14 +64,6 @@ public class DockFactory : Factory
                     VisibleDockables = CreateList<IDockable>(_browser),
                     Alignment = Alignment.Left
                 }
-                //},
-                // new ProportionalDockSplitter(),
-                // new ToolDock
-                // {
-                //     ActiveDockable = tool3,
-                //     VisibleDockables = CreateList<IDockable>(tool3, tool4),
-                //     Alignment = Alignment.Bottom
-                // }
             )
         };
 
@@ -89,15 +81,6 @@ public class DockFactory : Factory
                     Alignment = Alignment.Top,
                     GripMode = GripMode.Hidden
                 }
-                //},
-                // new ProportionalDockSplitter(),
-                // new ToolDock
-                // {
-                //     ActiveDockable = tool7,
-                //     VisibleDockables = CreateList<IDockable>(tool7, tool8),
-                //     Alignment = Alignment.Right,
-                //     GripMode = GripMode.AutoHide
-                // }
             )
         };
 
@@ -119,8 +102,6 @@ public class DockFactory : Factory
                 leftDock,
                 new ProportionalDockSplitter(),
                 documentDock
-                // new ProportionalDockSplitter(),
-                // rightDock
             )
         };
 
@@ -261,6 +242,12 @@ public class DockFactory : Factory
                 Vendor vendor = currentItem as Vendor;
                 doc = new VendorDocumentViewModel(vendor, _browser);
                 doc.Title = vendor.Description;
+                break;
+            
+            case "Models.GardenBed":
+                GardenBed bed = currentItem as GardenBed;
+                doc = new PlantingLocationDocumentViewModel(bed);
+                doc.Title = bed.Description;
                 break;
             
             default:

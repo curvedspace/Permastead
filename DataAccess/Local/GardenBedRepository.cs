@@ -44,4 +44,23 @@ public class GardenBedRepository
             return false;
         }
     }
+    
+    public static bool Update(GardenBed gb)
+    {
+        try
+        {
+            using (IDbConnection db = new SqliteConnection(DataConnection.GetLocalDataSource()))
+            {
+                string sqlQuery = "UPDATE GardenBed SET Code = @Code, Description = @Description, StartDate = @StartDate, EndDate = @EndDate, " +
+                                  "PermacultureZone = @PermacultureZone, LocationId = @LocationId, GardenBedTypeId = @GardenBedTypeId, AuthorId = @AuthorId " + 
+                                  "WHERE Id = @Id;";
+
+                return (db.Execute(sqlQuery, gb) == 1);
+            }
+        }
+        catch
+        {
+            return false;
+        }
+    }
 }

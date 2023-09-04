@@ -34,14 +34,13 @@
           <Button.Flyout>
           <MenuFlyout Placement="Bottom">
             <MenuItem Header="Add New">
-              <MenuItem IsEnabled="False" Header="Plant Location" Command="{Binding CreateNewPlantLocation}" />
-              <MenuItem Header="-" />
               <MenuItem IsEnabled="False" Header="Inventory Group" />
               <MenuItem IsEnabled="False" Header="Inventory Type" />
               <MenuItem Header="-" />
               <MenuItem IsEnabled="True" Header="Plant" Command="{Binding CreateNewPlant}" />
               <MenuItem Header="Planting" Command="{Binding CreateNewPlanting}" />
               <MenuItem Header="Seed Packet" Command="{Binding CreateNewSeedPacket}" />
+              <MenuItem Header="Plant Location" Command="{Binding CreateNewPlantLocation}" />
               <MenuItem Header="-" />
               <MenuItem IsEnabled="True" Header="Vendor" Command="{Binding CreateNewVendor}" />
             </MenuItem>

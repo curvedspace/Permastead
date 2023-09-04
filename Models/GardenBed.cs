@@ -19,7 +19,9 @@ public class GardenBed : CodeTable
     public GardenBed()
     {
         this.Location = new Location();
+        this.Location.Id = 1;
+        
         this.Type = new GardenBedType();
-        this.Author = Person.Anonymous();
+        this.Author = Person.Gaia();
     }
 }

@@ -19,17 +19,15 @@ namespace Permastead.ViewModels.Tools;
 public partial class BrowserViewModel : Tool
 {
 
-    [ObservableProperty]
-    private Planting _currentPlanting;
+    [ObservableProperty] private Planting _currentPlanting;
     
-    [ObservableProperty]
-    private Plant _currentPlant;
+    [ObservableProperty] private Plant _currentPlant;
     
-    [ObservableProperty]
-    private SeedPacket _currentSeedPacket;
+    [ObservableProperty] private SeedPacket _currentSeedPacket;
     
-    [ObservableProperty]
-    private Vendor _currentVendor;
+    [ObservableProperty] private Vendor _currentVendor;
+
+    [ObservableProperty] private GardenBed _currentPlantingLocation;
 
     [ObservableProperty] private bool _activeOnly = true;
 
@@ -102,7 +100,7 @@ public partial class BrowserViewModel : Tool
             
         }
         
-        var byBedPlantings = new Node("By Bed", new ObservableCollection<Node>());
+        var byBedPlantings = new Node("By Location", new ObservableCollection<Node>());
         plantingsNode.SubNodes.Add(byBedPlantings);   
         foreach (var gb in _beds)
         {
@@ -290,7 +288,10 @@ public partial class BrowserViewModel : Tool
     [RelayCommand]
     public void CreateNewPlantLocation()
     {
-        
+        CurrentPlantingLocation = new GardenBed();
+        CurrentPlantingLocation.Description = "New Location";
+
+        this.Dock.OpenDoc(CurrentPlantingLocation);
     }
     
     [RelayCommand]
