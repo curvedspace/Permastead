@@ -30,7 +30,7 @@ public partial class OpeningViewModel: ViewModelBase
         
         if (_updates.Count == 0)
         {
-            _updates.Add("Hello homesteader, you have no upcoming events.");
+            _updates.Add("Hello permasteader, you have no upcoming events.");
         }
     }
 
