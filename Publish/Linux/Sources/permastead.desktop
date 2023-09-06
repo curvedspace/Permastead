@@ -1,0 +1,8 @@
+# Desktop Entry Specification: https://standards.freedesktop.org/desktop-entry-spec/desktop-entry-spec-latest.html
+[Desktop Entry]
+Type=Application
+Name=Permastead
+Comment=A homestead management system
+Icon=icn
+Exec=Permastead.Desktop
+Categories=Audio;AudioVideo;

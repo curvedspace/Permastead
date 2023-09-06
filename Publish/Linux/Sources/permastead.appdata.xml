@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop-application">
+	<id>permastead</id>
+	<metadata_license>CC0-1.0</metadata_license>
+	<project_license>MIT</project_license>
+	<name>Permastead</name>
+	<summary>A homestead management system</summary>
+	<description>
+		<p>A homestead management system.</p>
+	</description>
+	<launchable type="desktop-id">permastead.desktop</launchable>
+	<url type="homepage"></url>
+	<screenshots>
+		<screenshot type="default">
+			<image>https://github.com/dan0v/AmplitudeSoundboard/raw/master/docs/assets/img/MainGrid.png</image>
+		</screenshot>
+	</screenshots>
+	<provides>
+		<id>permastead.desktop</id>
+	</provides>
+</component>
