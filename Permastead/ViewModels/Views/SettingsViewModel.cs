@@ -23,6 +23,8 @@ public partial class SettingsViewModel : ViewModelBase
 
     [ObservableProperty] private ObservableCollection<City> _cities;
     
+    [ObservableProperty] private string _location;
+    
     public string HomesteadNameText => _homesteadName.ToString();
     
     public string DatabaseLocationText => _databaseLocation.ToString();
@@ -39,6 +41,8 @@ public partial class SettingsViewModel : ViewModelBase
         _firstName = "Homesteader";
 
         _lastName = "Person";
+
+        Location = "";
 
         //var gaia = new Services.GaiaService();
 

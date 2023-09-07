@@ -24,7 +24,7 @@
                 <Button MaxHeight="50" Click="Button_OnClickSave">Save</Button>
             </WrapPanel>
             
-        <Grid ColumnDefinitions="Auto,*" RowDefinitions="Auto,Auto, Auto, Auto">
+        <Grid ColumnDefinitions="Auto,*" RowDefinitions="Auto,Auto, Auto, Auto, Auto">
             <TextBlock Grid.Row="0" Grid.Column="0" Margin="10,17,0,0">Homestead Name:</TextBlock>
             <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding HomesteadNameText }" Margin="10,10,20,0"></TextBox>
             
@@ -36,6 +36,9 @@
             
             <TextBlock Grid.Row="3" Grid.Column="0" Margin="10,17,0,0">Last Name:</TextBlock>
             <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding LastName }" Margin="10,10,20,0"></TextBox>
+            
+            <TextBlock Grid.Row="4" Grid.Column="0" Margin="10,17,0,0">Location:</TextBlock>
+            <TextBox Grid.Row="4" Grid.Column="1" Text="{Binding Location }" Margin="10,10,20,0"></TextBox>
 
         </Grid>
         </StackPanel>
