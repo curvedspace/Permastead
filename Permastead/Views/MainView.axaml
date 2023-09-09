@@ -124,12 +124,12 @@
     </Panel>
     <DockControl x:Name="DockControl" Layout="{Binding Layout}" Margin="4"
                      Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" />
-    <Panel DataContext="{Binding Layout.ActiveDockable}"
+    <Panel DataContext="{Binding }"
            Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2">
-      <TextBlock Text="{Binding FocusedDockable, FallbackValue={}}"
-                 Margin="4"
-                 x:DataType="dm:IDock"
-                 x:CompileBindings="True" />
+      <!-- <TextBlock Text="{Binding Title, FallbackValue={}}" -->
+      <!--            Margin="4" -->
+      <!--            x:DataType="dm:IDock" -->
+      <!--            x:CompileBindings="True" /> -->
     </Panel>
   </Grid>
 </UserControl>
