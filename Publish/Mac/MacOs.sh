@@ -17,7 +17,7 @@ limitations under the License.
 
 ORIGIN="$(pwd)"
 cd "../.."
-dotnet publish -r osx-x64 -c Release -p:SelfContained=True -o bin/Release/net6.0/publishMac
+dotnet publish -r osx-x64 -c Release -p:SelfContained=True -p:UseAppHost=true -o bin/Release/net6.0/publishMac
 cd "$ORIGIN"
 
 APP_NAME="Permastead.app"
