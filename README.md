@@ -17,5 +17,7 @@ Greenhouse View
 
 Thanks
 dan0v from Amplitude Soundboard for the publishing code
+wttr.in weather service
+Nikita Shishkin for weather project
 Wieslaw Soltes for Avalonia Dock
 The entire Avalonia team
