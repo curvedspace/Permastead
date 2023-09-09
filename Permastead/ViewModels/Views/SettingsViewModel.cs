@@ -1,9 +1,11 @@
 
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using AIMLbot.AIMLTagHandlers;
+
 using CommunityToolkit.Mvvm.ComponentModel;
-using DataAccess;
+using CommunityToolkit.Mvvm.Input;
+
 using DataAccess.Local;
 using Models;
 using Services;
@@ -29,6 +31,8 @@ public partial class SettingsViewModel : ViewModelBase
     public string HomesteadNameText => _homesteadName.ToString();
     
     public string DatabaseLocationText => _databaseLocation.ToString();
+
+    private Dictionary<string, string> _initialSettings;
     
     #region Constructors
 
@@ -45,14 +49,14 @@ public partial class SettingsViewModel : ViewModelBase
         
         //var gaia = new Services.GaiaService();
         
-        var settings = SettingsService.GetAllSettings();
+        _initialSettings = SettingsService.GetAllSettings();
 
         try
         {
-            HomesteadName = settings["HNAME"];
-            FirstName = settings["FNAME"];
-            LastName = settings["LNAME"];
-            Location = settings["LOC"];
+            HomesteadName = _initialSettings["HNAME"];
+            FirstName = _initialSettings["FNAME"];
+            LastName = _initialSettings["LNAME"];
+            Location = _initialSettings["LOC"];
         }
         catch (Exception e)
         {
@@ -65,4 +69,27 @@ public partial class SettingsViewModel : ViewModelBase
     }
     
     #endregion
+
+    [RelayCommand]
+    private void SaveSettings()
+    {
+        //save the settings to database
+        bool rtnValue;
+        
+        //get existing values, only update the ones that have changed
+        try
+        {
+            if (_initialSettings["FNAME"] != FirstName) rtnValue = SettingsRepository.Update("FNAME", FirstName);
+            if (_initialSettings["LNAME"] != LastName) rtnValue = SettingsRepository.Update("LNAME", LastName);
+            if (_initialSettings["HNAME"] != HomesteadName) rtnValue = SettingsRepository.Update("HNAME", HomesteadName);
+            if (_initialSettings["LOC"] != Location) rtnValue = SettingsRepository.Update("LOC", Location);
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+        }
+        
+    }
+    
+
 }

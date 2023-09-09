@@ -21,12 +21,4 @@ public partial class SettingsView : UserControl
         AvaloniaXamlLoader.Load(this);
     }
     
-    private void Button_OnClickSave(object? sender, RoutedEventArgs e)
-    {
-        
-        // var mainWindow = this.Parent.Find<MainWindow>("MainWindow");
-        //
-        // if(mainWindow != null)
-        //     MessageBox.Success(mainWindow, "Saved","Your settings have been saved", WindowStartupLocation.CenterOwner);
-    }
 }
