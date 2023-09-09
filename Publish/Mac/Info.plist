@@ -15,7 +15,7 @@
 	<key>LSMinimumSystemVersion</key>
 	<string>10.12</string>
 	<key>CFBundleExecutable</key>
-	<string>permastead</string>
+	<string>permastead.desktop</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundlePackageType</key>
