@@ -15,3 +15,7 @@ Dashboard
 Greenhouse View
 ![screenshot2.png](Docs/screenshot2.png)
 
+Thanks
+dan0v from Amplitude Soundboard for the publishing code
+Wieslaw Soltes for Avalonia Dock
+The entire Avalonia team
