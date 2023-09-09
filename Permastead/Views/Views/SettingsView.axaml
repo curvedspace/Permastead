@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:materialIcons="clr-namespace:Material.Icons.Avalonia;assembly=Material.Icons.Avalonia"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             xmlns:model="using:Models"
              xmlns:vm="using:Permastead.ViewModels.Views"
              x:DataType="vm:SettingsViewModel"
              x:Class="Permastead.Views.Views.SettingsView">
@@ -20,12 +21,12 @@
                 <materialIcons:MaterialIcon Kind="Settings" Margin="20"/>
                 <TextBlock FontWeight="Bold" Margin="20,20,20,20">Settings</TextBlock>
                 <Separator MaxWidth="5"></Separator>
-                <Button Command="{Binding SaveSettingsCommand}" MaxHeight="50">Save</Button>
+                <Button MaxHeight="50" Click="Button_OnClickSave">Save</Button>
             </WrapPanel>
             
-        <Grid ColumnDefinitions="Auto,*" RowDefinitions="Auto,Auto, Auto, Auto, Auto,Auto">
+        <Grid ColumnDefinitions="Auto,*" RowDefinitions="Auto,Auto, Auto, Auto">
             <TextBlock Grid.Row="0" Grid.Column="0" Margin="10,17,0,0">Homestead Name:</TextBlock>
-            <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding HomesteadName}" Margin="10,10,20,0"></TextBox>
+            <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding HomesteadNameText }" Margin="10,10,20,0"></TextBox>
             
             <TextBlock Grid.Row="1" Grid.Column="0" Margin="10,17,0,0">Database Location:</TextBlock>
             <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding DatabaseLocationText }" Margin="10,10,20,0"></TextBox>
@@ -35,12 +36,6 @@
             
             <TextBlock Grid.Row="3" Grid.Column="0" Margin="10,17,0,0">Last Name:</TextBlock>
             <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding LastName }" Margin="10,10,20,0"></TextBox>
-            
-            <TextBlock Grid.Row="4" Grid.Column="0" Margin="10,17,0,0">Location:</TextBlock>
-            <TextBox Grid.Row="4" Grid.Column="1" Text="{Binding Location }" Margin="10,10,20,0"></TextBox>
-            
-            <TextBlock Grid.Row="5" Grid.Column="0" Margin="10,17,0,0">Country:</TextBlock>
-            <TextBox Grid.Row="5" Grid.Column="1" Text="{Binding Country }" Margin="10,10,20,0"></TextBox>
 
         </Grid>
         </StackPanel>
