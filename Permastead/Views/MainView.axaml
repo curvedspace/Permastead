@@ -35,7 +35,7 @@
   </UserControl.Resources>
   <Grid RowDefinitions="Auto,*,25" ColumnDefinitions="Auto,*" Background="Transparent">
     <Panel x:Name="ToolBar" DataContext="{Binding Layout}" Grid.Row="0" Grid.Column="0">
-      <Grid ColumnDefinitions="Auto, Auto,Auto,Auto,Auto,Auto,Auto,Auto,350,Auto,Auto,Auto,200,Auto"
+      <Grid ColumnDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,100,Auto,Auto,Auto,Auto,*,Auto"
             HorizontalAlignment="Right"
             Margin="4"
             x:DataType="dmc:IRootDock"
@@ -111,15 +111,17 @@
           <materialIcons:MaterialIcon Kind="Greenhouse" Margin="2"/>
         </Button>
         
-        <TextBox x:Name="Id" Text="" Watermark="Search" UseFloatingWatermark="True" Grid.Column="11" Grid.ColumnSpan="1"/>
+        <!-- <TextBox x:Name="Id" Text="" Watermark="Search" UseFloatingWatermark="True" Grid.Column="11" Grid.ColumnSpan="1"/> -->
         <!-- <Button Content="Navigate" Command="{Binding Navigate}" CommandParameter="{Binding #Id.Text}" Grid.Column="9" /> -->
-        <Button x:Name="ThemeButton" Grid.Column="12" Background="Transparent">
+        
+        <Button ToolTip.Tip="Edit Settings" Command="{Binding Navigate}" CommandParameter="SettingsPage" Grid.Column="12" HorizontalAlignment="Right">
+          <materialIcons:MaterialIcon Kind="Settings" Margin="2"/>
+        </Button>
+        
+        <Button x:Name="ThemeButton" Grid.Column="14" Background="Transparent" HorizontalAlignment="Right">
           <PathIcon Width="24" Height="24" Opacity="0.6" Data="{StaticResource DarkTheme}"/>
         </Button>
         
-        <Button ToolTip.Tip="Edit Settings" Command="{Binding Navigate}" CommandParameter="SettingsPage" Grid.Column="13" HorizontalAlignment="Right">
-          <materialIcons:MaterialIcon Kind="Settings" Margin="2"/>
-        </Button>
       </Grid>
     </Panel>
     <DockControl x:Name="DockControl" Layout="{Binding Layout}" Margin="4"
