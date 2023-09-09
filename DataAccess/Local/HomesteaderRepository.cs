@@ -82,6 +82,15 @@ namespace DataAccess.Local
 				EndDate TIMESTAMP
 			);
 
+			-- SETTINGS
+			DROP TABLE IF EXISTS Settings;
+			CREATE TABLE IF NOT EXISTS Settings(
+				Code TEXT PRIMARY KEY,
+				Description TEXT NOT NULL,
+				CreationDate TIMESTAMP,
+				LastUpdated TIMESTAMP
+			);
+
 			-- IMAGE STORE GROUP
 			DROP TABLE IF EXISTS ImageStoreGroup;
 			CREATE TABLE IF NOT EXISTS ImageStoreGroup(
@@ -711,6 +720,15 @@ namespace DataAccess.Local
             
             #endregion
             
+            #region Settings
+            
+            SettingsRepository.Insert("FNAME","Homesteadr");
+            SettingsRepository.Insert("LNAME","Person");
+            SettingsRepository.Insert("HNAME","My Homestead");
+            SettingsRepository.Insert("LOC","");
+            
+            #endregion
+	        
             #region ImageGroup
             
             #endregion

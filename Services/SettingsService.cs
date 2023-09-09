@@ -1,6 +1,7 @@
 ﻿using DataAccess;
 using Models;
 using System.Threading;
+using DataAccess.Local;
 
 namespace Services
 {
@@ -60,7 +61,11 @@ namespace Services
                 
             return dictionary;
         }
-        
+
+        public static Dictionary<string, string> GetAllSettings()
+        {
+            return SettingsRepository.GetAll(DataConnection.GetLocalDataSource());
+        }
 
     }
 }
