@@ -67,5 +67,18 @@ namespace Services
             return SettingsRepository.GetAll(DataConnection.GetLocalDataSource());
         }
 
+        public static string GetSettingsForCode(string code)
+        {
+            var settings = SettingsRepository.GetAll(DataConnection.GetLocalDataSource());
+
+            if (settings.ContainsKey(code))
+            {
+                return settings[code].ToString();
+            }
+            else
+            {
+                return "";
+            }
+        }
     }
 }

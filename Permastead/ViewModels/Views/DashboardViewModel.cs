@@ -137,18 +137,31 @@ namespace Permastead.ViewModels.Views;
         async void GetWeatherAsync()
         {
             var ws = new Services.WeatherService();
-            var city = new City("Halifax", "Canada", 44.6475, -63.5906, "CA");
+            //var city = new City("Halifax", "Canada", 44.6475, -63.5906, "CA");
+            
+            //get location from settings
+            var location = SettingsService.GetSettingsForCode("LOC");
+            var ctry = SettingsService.GetSettingsForCode("CTRY");
 
-            try
+            if (!string.IsNullOrEmpty(location) && !string.IsNullOrEmpty(ctry))
             {
-                var results = await ws.UpdateWeather(city);
-                WeatherForecast = "Current Weather for " + city.Name + ", " + city.Country + ": " + results.WeatherStateAlias + ", Temperature: " + results.Temperature + ", Humidity: " + results.Humidity;
+                var city = new City(location, ctry, 0, 0, "");
 
+                try
+                {
+                    var results = await ws.UpdateWeather(city);
+                    WeatherForecast = "Current Weather for " + city.Name + ", " + city.Country + ": " + results.WeatherStateAlias + ", Temperature: " + results.Temperature + ", Humidity: " + results.Humidity;
+                    Console.WriteLine(WeatherForecast);
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
+                    WeatherForecast = "Unable to get weather data.";
+                }
             }
-            catch (Exception e)
+            else
             {
-                Console.WriteLine(e);
-                WeatherForecast = "Unable to get weather data.";
+                WeatherForecast = "";
             }
             
         }

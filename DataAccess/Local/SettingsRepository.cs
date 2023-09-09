@@ -33,9 +33,9 @@ public class SettingsRepository
                         var code = dr[0].ToString();
                         var description = dr[1].ToString();
 
-                        if (!string.IsNullOrEmpty(code) && !string.IsNullOrEmpty(description))
+                        if (!string.IsNullOrEmpty(code))
                         {
-                            rtnDict.Add(code, description);
+                            rtnDict.Add(code, description!.ToString());
                         }
                         
                     }

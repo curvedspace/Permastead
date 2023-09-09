@@ -23,7 +23,7 @@
                 <Button Command="{Binding SaveSettingsCommand}" MaxHeight="50">Save</Button>
             </WrapPanel>
             
-        <Grid ColumnDefinitions="Auto,*" RowDefinitions="Auto,Auto, Auto, Auto, Auto">
+        <Grid ColumnDefinitions="Auto,*" RowDefinitions="Auto,Auto, Auto, Auto, Auto,Auto">
             <TextBlock Grid.Row="0" Grid.Column="0" Margin="10,17,0,0">Homestead Name:</TextBlock>
             <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding HomesteadName}" Margin="10,10,20,0"></TextBox>
             
@@ -38,6 +38,9 @@
             
             <TextBlock Grid.Row="4" Grid.Column="0" Margin="10,17,0,0">Location:</TextBlock>
             <TextBox Grid.Row="4" Grid.Column="1" Text="{Binding Location }" Margin="10,10,20,0"></TextBox>
+            
+            <TextBlock Grid.Row="5" Grid.Column="0" Margin="10,17,0,0">Country:</TextBlock>
+            <TextBox Grid.Row="5" Grid.Column="1" Text="{Binding Country }" Margin="10,10,20,0"></TextBox>
 
         </Grid>
         </StackPanel>

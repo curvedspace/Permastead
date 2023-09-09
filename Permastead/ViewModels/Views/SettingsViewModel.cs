@@ -25,6 +25,8 @@ public partial class SettingsViewModel : ViewModelBase
     [ObservableProperty] private string _lastName;
     
     [ObservableProperty] private string _location;
+    
+    [ObservableProperty] private string _country;
 
     [ObservableProperty] private ObservableCollection<City> _cities;
     
@@ -45,6 +47,7 @@ public partial class SettingsViewModel : ViewModelBase
         _firstName = "Homesteader";
         _lastName = "Person";
         _location = "";
+        _country = "";
 
         
         //var gaia = new Services.GaiaService();
@@ -57,6 +60,7 @@ public partial class SettingsViewModel : ViewModelBase
             FirstName = _initialSettings["FNAME"];
             LastName = _initialSettings["LNAME"];
             Location = _initialSettings["LOC"];
+            Country = _initialSettings["CTRY"];
         }
         catch (Exception e)
         {
@@ -83,6 +87,7 @@ public partial class SettingsViewModel : ViewModelBase
             if (_initialSettings["LNAME"] != LastName) rtnValue = SettingsRepository.Update("LNAME", LastName);
             if (_initialSettings["HNAME"] != HomesteadName) rtnValue = SettingsRepository.Update("HNAME", HomesteadName);
             if (_initialSettings["LOC"] != Location) rtnValue = SettingsRepository.Update("LOC", Location);
+            if (_initialSettings["CTRY"] != Country) rtnValue = SettingsRepository.Update("CTRY", Country);
         }
         catch (Exception e)
         {
