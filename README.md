@@ -16,8 +16,8 @@ Greenhouse View
 ![screenshot2.png](Docs/screenshot2.png)
 
 Thanks
-dan0v from Amplitude Soundboard for the publishing code
-wttr.in weather service
-Nikita Shishkin for weather project
-Wieslaw Soltes for Avalonia Dock
-The entire Avalonia team
+- dan0v from Amplitude Soundboard for the publishing code
+- wttr.in weather service
+- Nikita Shishkin for weather project
+- Wieslaw Soltes for Avalonia Dock
+- The entire Avalonia team
