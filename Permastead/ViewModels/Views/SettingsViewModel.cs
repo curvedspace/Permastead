@@ -27,6 +27,10 @@ public partial class SettingsViewModel : ViewModelBase
     [ObservableProperty] private string _location;
     
     [ObservableProperty] private string _country;
+    
+    [ObservableProperty] private string _nostrPublicKey;
+    
+    [ObservableProperty] private string _nostrPrivateKey;
 
     [ObservableProperty] private ObservableCollection<City> _cities;
     
@@ -48,6 +52,8 @@ public partial class SettingsViewModel : ViewModelBase
         _lastName = "Person";
         _location = "";
         _country = "";
+        _nostrPrivateKey = "";
+        _nostrPublicKey = "";
 
         
         //var gaia = new Services.GaiaService();
@@ -61,6 +67,8 @@ public partial class SettingsViewModel : ViewModelBase
             LastName = _initialSettings["LNAME"];
             Location = _initialSettings["LOC"];
             Country = _initialSettings["CTRY"];
+            NostrPublicKey = _initialSettings["NOSTRPUB"];
+            NostrPrivateKey = _initialSettings["NOSTRPRIV"];
         }
         catch (Exception e)
         {
@@ -88,6 +96,8 @@ public partial class SettingsViewModel : ViewModelBase
             if (_initialSettings["HNAME"] != HomesteadName) rtnValue = SettingsRepository.Update("HNAME", HomesteadName);
             if (_initialSettings["LOC"] != Location) rtnValue = SettingsRepository.Update("LOC", Location);
             if (_initialSettings["CTRY"] != Country) rtnValue = SettingsRepository.Update("CTRY", Country);
+            if (_initialSettings["NOSTRPUB"] != NostrPublicKey) rtnValue = SettingsRepository.Update("NOSTRPUB", NostrPublicKey);
+            if (_initialSettings["NOSTRPRIV"] != NostrPrivateKey) rtnValue = SettingsRepository.Update("NOSTRPRIV", NostrPrivateKey);
         }
         catch (Exception e)
         {

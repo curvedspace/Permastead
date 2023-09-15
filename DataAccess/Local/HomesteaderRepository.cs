@@ -727,6 +727,8 @@ namespace DataAccess.Local
             SettingsRepository.Insert("HNAME","My Homestead");
             SettingsRepository.Insert("LOC","");
             SettingsRepository.Insert("CTRY","");
+            SettingsRepository.Insert("NOSTRPUB","");
+            SettingsRepository.Insert("NOSTRPRIV","");
             
             #endregion
 	        
