@@ -47,7 +47,7 @@
             <TextBox Grid.Row="6" Grid.Column="1" Text="{Binding NostrPublicKey }" Margin="10,10,20,0"></TextBox>
             
             <TextBlock Grid.Row="7" Grid.Column="0" Margin="10,17,0,0">Nostr Private Key:</TextBlock>
-            <TextBox Grid.Row="7" Grid.Column="1" Text="{Binding NostrPrivateKey }" Margin="10,10,20,0"></TextBox>
+            <TextBox Grid.Row="7" Grid.Column="1" Text="{Binding NostrPrivateKey }" Margin="10,10,20,0" PasswordChar="*"></TextBox>
 
         </Grid>
         </StackPanel>
