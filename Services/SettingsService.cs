@@ -20,6 +20,13 @@ namespace Services
 
         public static string GetLocalDatabaseSource()
         {
+            //try getting the location from file
+            
+            return DataAccess.DataConnection.GetDefaultDatabaseLocation();
+        }
+        
+        public static string GetDefaultDatabaseSource()
+        {
             return DataAccess.DataConnection.GetDefaultDatabaseLocation();
         }
 

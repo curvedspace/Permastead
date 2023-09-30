@@ -22,7 +22,17 @@ namespace DataAccess
             string dbLocation = "";
             
             //try to read in a db_location.txt file
-            var dbLoc = new FileInfo(userFolder + @"\.config\permastead\db_location.txt");
+            FileInfo dbLoc;
+            if (isWindows)
+            {
+                dbLoc = new FileInfo(userFolder + @"\.config\permastead\db_location.txt");
+            }
+            else
+            {
+                //linux or macos
+                dbLoc = new FileInfo(userFolder + @"/.config/permastead/db_location.txt");
+            }
+            
             if (dbLoc.Exists)
             {
                 //read in db file location from this file
