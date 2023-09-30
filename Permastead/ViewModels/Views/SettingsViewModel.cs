@@ -45,7 +45,7 @@ public partial class SettingsViewModel : ViewModelBase
     public SettingsViewModel()
     {
         //set a default db location
-        this._databaseLocation = Services.SettingsService.GetLocalDatabaseSource();
+        DatabaseLocation = Services.SettingsService.GetLocalDatabaseSource();
 
         _homesteadName = "My Homestead";
         _firstName = "Homesteader";
@@ -54,9 +54,7 @@ public partial class SettingsViewModel : ViewModelBase
         _country = "";
         _nostrPrivateKey = "";
         _nostrPublicKey = "";
-
         
-        //var gaia = new Services.GaiaService();
         
         _initialSettings = SettingsService.GetAllSettings();
 
