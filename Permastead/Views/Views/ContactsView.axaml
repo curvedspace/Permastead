@@ -7,5 +7,10 @@
              xmlns:model="using:Models"
              x:DataType="vm:ContactsViewModel"
              x:Class="Permastead.Views.Views.ContactsView">
-    Contacts Page Placeholder
+    <Grid ColumnDefinitions="200,*">
+        <TreeDataGrid></TreeDataGrid>
+        <Panel Grid.Column="1">
+            <TextBlock Margin="20">Contacts</TextBlock>
+        </Panel>
+    </Grid>
 </UserControl>
