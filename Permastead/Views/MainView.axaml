@@ -35,7 +35,7 @@
   </UserControl.Resources>
   <Grid RowDefinitions="Auto,*,25" ColumnDefinitions="Auto,*" Background="Transparent">
     <Panel x:Name="ToolBar" DataContext="{Binding Layout}" Grid.Row="0" Grid.Column="0">
-      <Grid ColumnDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,100,Auto,Auto,Auto,Auto,*,Auto"
+      <Grid ColumnDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,100,Auto,Auto,Auto,Auto,*,Auto"
             HorizontalAlignment="Right"
             Margin="4"
             x:DataType="dmc:IRootDock"
@@ -102,12 +102,16 @@
           <materialIcons:MaterialIcon Kind="Plant" Margin="2"/>
         </Button>
         
-        <Button ToolTip.Tip="Gaia View " Command="{Binding Navigate}" CommandParameter="GaiaPage" Grid.Column="8" >
+        <Button ToolTip.Tip="Contacts View" Command="{Binding Navigate}" CommandParameter="ContactsPage" Grid.Column="8" >
+          <materialIcons:MaterialIcon Kind="Person" Margin="2"/>
+        </Button>
+        
+        <Button ToolTip.Tip="Gaia View " Command="{Binding Navigate}" CommandParameter="GaiaPage" Grid.Column="9" >
           <materialIcons:MaterialIcon Kind="HelpCircle" Margin="2"/>
         </Button>
         
         <TextBlock Grid.Column="9" Text =""></TextBlock>
-        <Button ToolTip.Tip="Greenhouse View " Command="{Binding Navigate}" CommandParameter="{Binding DefaultDockable}" Grid.Column="10" >
+        <Button ToolTip.Tip="Greenhouse View " Command="{Binding Navigate}" CommandParameter="{Binding DefaultDockable}" Grid.Column="11" >
           <materialIcons:MaterialIcon Kind="Greenhouse" Margin="2"/>
         </Button>
         

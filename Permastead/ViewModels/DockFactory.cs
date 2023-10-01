@@ -141,6 +141,12 @@ public class DockFactory : Factory
             Title = "PlantingsPage"
         };
         
+        var contactsPageView = new ContactsPageViewModel()
+        {
+            Id = "ContactsPage",
+            Title = "ContactsPage"
+        };
+        
         var gaiaPageView = new GaiaPageViewModel()
         {
             Id = "GaiaPage",
@@ -166,7 +172,8 @@ public class DockFactory : Factory
         rootDock.IsCollapsable = false;
         rootDock.ActiveDockable = dashboardView;
         rootDock.DefaultDockable = _homeView;
-        rootDock.VisibleDockables = CreateList<IDockable>(dashboardView, observationsPageView, todoPageView, eventsPageView, inventoryPageView, settingsPageView, plantingsPageView, gaiaPageView, _homeView);
+        rootDock.VisibleDockables = CreateList<IDockable>(dashboardView, observationsPageView, todoPageView, 
+            eventsPageView, inventoryPageView, settingsPageView, plantingsPageView, contactsPageView, gaiaPageView, _homeView);
         
 
         _documentDock = documentDock;
@@ -196,6 +203,7 @@ public class DockFactory : Factory
             ["GaiaPage"] = () => layout,
             ["SettingsPage"] = () => layout,
             ["PlantingsPage"] = () => layout,
+            ["ContactsPage"] = () => layout,
             ["Home"] = () => _context
         };
 
