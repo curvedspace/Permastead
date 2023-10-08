@@ -8,7 +8,7 @@
              x:DataType="vm:ContactsViewModel"
              x:Class="Permastead.Views.Views.ContactsView">
     <Grid ColumnDefinitions="200,*">
-        <TreeDataGrid></TreeDataGrid>
+        <TreeDataGrid Source="{Binding PersonSource}"></TreeDataGrid>
         <Panel Grid.Column="1">
             <TextBlock Margin="20">Contacts</TextBlock>
         </Panel>
