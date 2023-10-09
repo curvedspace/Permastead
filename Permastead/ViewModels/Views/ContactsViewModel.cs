@@ -10,13 +10,13 @@ public class ContactsViewModel : ViewModelBase
 {
     private ObservableCollection<Person> _people;
 
-    public HierarchicalTreeDataGridSource<Person> PersonSource { get; }
+    public FlatTreeDataGridSource<Person> PersonSource { get; }
     
     public ContactsViewModel()
     {
         _people = new ObservableCollection<Person>(Services.PersonService.GetAllPeople(AppSession.ServiceMode));
 
-        PersonSource = new HierarchicalTreeDataGridSource<Person>(_people)
+        PersonSource = new FlatTreeDataGridSource<Person>(_people)
         {
             Columns =
             {

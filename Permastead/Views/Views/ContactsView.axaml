@@ -7,10 +7,12 @@
              xmlns:model="using:Models"
              x:DataType="vm:ContactsViewModel"
              x:Class="Permastead.Views.Views.ContactsView">
+    <!-- <StackPanel> -->
     <Grid ColumnDefinitions="200,*">
         <TreeDataGrid Source="{Binding PersonSource}"></TreeDataGrid>
         <Panel Grid.Column="1">
             <TextBlock Margin="20">Contacts</TextBlock>
         </Panel>
     </Grid>
+    <!-- </StackPanel> -->
 </UserControl>
