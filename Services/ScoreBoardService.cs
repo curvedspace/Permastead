@@ -23,6 +23,7 @@ public static class ScoreBoardService
             { AchievementType.AddPlanting, new Achievement() { Type = AchievementType.AddPlanting, InitialPoints = 100 } },
             { AchievementType.AddEvent, new Achievement() { Type = AchievementType.AddEvent, InitialPoints = 100 } },
             { AchievementType.AddFermentation, new Achievement() { Type = AchievementType.AddObservation, InitialPoints = 100 } },
+            { AchievementType.AddSeedPacket, new Achievement() { Type = AchievementType.AddSeedPacket, InitialPoints = 100 } },
             { AchievementType.SaveSeed, new Achievement() { Type = AchievementType.SaveSeed, InitialPoints = 50 } }
         };
 
@@ -30,11 +31,13 @@ public static class ScoreBoardService
         var todos = ToDoService.GetAllToDos(mode);
         var inventory = InventoryService.GetAllInventory(mode);
         var plantings = PlantingsService.GetPlantings(mode);
+        var seedPackets = PlantingsService.GetSeedPackets(mode);
         var events = EventsService.GetAllEvents(mode);
 
         scoreBoard.Actions = todos.Count;
         scoreBoard.Observations = obs.Count;
         scoreBoard.Plantings = plantings.Count;
+        scoreBoard.SeedPackets = seedPackets.Count;
         scoreBoard.Events = events.Count;
 
         //iterate through data
@@ -61,7 +64,14 @@ public static class ScoreBoardService
         {
             plantingsAchievement.Count = plantingsAchievement.Count + 1;
             scoreBoard.TotalScore += plantingsAchievement.CurrentPoints;
-
+        }
+        
+        //seed packets
+        var seedPacketsAchievement = achievements[AchievementType.AddSeedPacket];
+        foreach (var p in seedPackets)
+        {
+            seedPacketsAchievement.Count = seedPacketsAchievement.Count + 1;
+            scoreBoard.TotalScore += seedPacketsAchievement.CurrentPoints;
         }
         
         //events
@@ -124,6 +134,15 @@ public static class ScoreBoardService
         if (plantings.Count >= 500) scoreBoard.TotalScore += 500;
         if (plantings.Count >= 1000) scoreBoard.TotalScore += 1000;
         if (plantings.Count >= 10000) scoreBoard.TotalScore += 10000;
+        
+        //bonus computation - seed packets
+        if (seedPackets.Count >= 10) scoreBoard.TotalScore += 10;
+        if (seedPackets.Count >= 25) scoreBoard.TotalScore += 25;
+        if (seedPackets.Count >= 50) scoreBoard.TotalScore += 50;
+        if (seedPackets.Count >= 100) scoreBoard.TotalScore += 100;
+        if (seedPackets.Count >= 500) scoreBoard.TotalScore += 500;
+        if (seedPackets.Count >= 1000) scoreBoard.TotalScore += 1000;
+        if (seedPackets.Count >= 10000) scoreBoard.TotalScore += 10000;
         
         //bonus computation - events
         if (events.Count >= 10) scoreBoard.TotalScore += 10;

@@ -8,6 +8,7 @@ public enum AchievementType
     AddFermentation,
     AddInventory,
     AddEvent,
+    AddSeedPacket,
     EngageBot,
     SaveSeed,
     TagMistake,

@@ -17,6 +17,8 @@ public class ScoreBoard
     public decimal Events { get; set; }
 
     public decimal Plantings { get; set; }
+    
+    public decimal SeedPackets { get; set; }
 
     public override string ToString()
     {
