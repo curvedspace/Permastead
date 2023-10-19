@@ -14,15 +14,15 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Avalonia" Version="11.0.5-rc1" />
-    <PackageReference Include="Avalonia.Controls.DataGrid" Version="11.0.5-rc1" />
+    <PackageReference Include="Avalonia" Version="11.0.5" />
+    <PackageReference Include="Avalonia.Controls.DataGrid" Version="11.0.5" />
     <PackageReference Include="Avalonia.Controls.TreeDataGrid" Version="11.0.1" />
-    <PackageReference Include="Avalonia.Themes.Fluent" Version="11.0.5-rc1" />
-    <PackageReference Include="Avalonia.Fonts.Inter" Version="11.0.5-rc1" />
+    <PackageReference Include="Avalonia.Themes.Fluent" Version="11.0.5" />
+    <PackageReference Include="Avalonia.Fonts.Inter" Version="11.0.5" />
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.1" />
 
     <!--Condition below is needed to remove Avalonia.Diagnostics package from build output in Release configuration.-->
-    <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics" Version="11.0.5-rc1" />
+    <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics" Version="11.0.5" />
     <PackageReference Include="Dock.Avalonia" Version="11.0.0.2" />
     <PackageReference Include="Dock.Model.Avalonia" Version="11.0.0.2" />
     <PackageReference Include="Dock.Model.Mvvm" Version="11.0.0.2" />
