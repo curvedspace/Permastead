@@ -55,14 +55,16 @@ public class DockFactory : Factory
         {
             Proportion = 0.25,
             Orientation = Orientation.Vertical,
+            Title = "Workbench",
             ActiveDockable = null,
             VisibleDockables = CreateList<IDockable>
             (
                 new ToolDock
                 {
-                    ActiveDockable = tool1,
-                    VisibleDockables = CreateList<IDockable>(_browser),
+                    ActiveDockable = _browser,
+                    VisibleDockables = CreateList<IDockable>(_browser, tool1),
                     Alignment = Alignment.Left
+                    
                 }
             )
         };
