@@ -5,6 +5,7 @@
              xmlns:core="using:Dock.Model.Core"
              Name="Permastead"
              x:Class="Permastead.App"
+             xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
              xmlns:materialIcons="clr-namespace:Material.Icons.Avalonia;assembly=Material.Icons.Avalonia" 
              RequestedThemeVariant="Light">
              <!-- "Default" ThemeVariant follows system theme variant. "Dark" or "Light" are other available options. -->
@@ -33,11 +34,14 @@
     </Application.Resources>
              
     <Application.Styles>
+        <actipro:ModernTheme Includes="NativeDataGrid" />
+        
         <FluentTheme />
         
-        <StyleInclude Source="avares://Avalonia.Controls.DataGrid/Themes/Fluent.xaml"/>
+        <!-- <StyleInclude Source="avares://Avalonia.Controls.DataGrid/Themes/Fluent.xaml"/> -->
         <StyleInclude Source="avares://Avalonia.Controls.TreeDataGrid/Themes/Fluent.axaml"/>
         <materialIcons:MaterialIconStyles />
+        
     
         <Style Selector="idc|DocumentControl">
             <Setter Property="HeaderTemplate">
