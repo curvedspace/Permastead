@@ -18,18 +18,18 @@ public partial class VendorDocumentViewModel : Document
     [ObservableProperty]
     private Vendor _vendor;
     
-    public BrowserViewModel Browser = null;
+    public GreenhouseToolViewModel GreenhouseTool = null;
 
-    public VendorDocumentViewModel(Vendor vendor, BrowserViewModel browser) : this(browser)
+    public VendorDocumentViewModel(Vendor vendor, GreenhouseToolViewModel greenhouseTool) : this(greenhouseTool)
     {
         _vendor = vendor;
         this.Id = vendor.Id.ToString();
     }
 
-    public VendorDocumentViewModel(BrowserViewModel browser)
+    public VendorDocumentViewModel(GreenhouseToolViewModel greenhouseTool)
     {
         Vendor = new Vendor();
-        Browser = browser;
+        GreenhouseTool = greenhouseTool;
     }
     
     [RelayCommand]
@@ -53,7 +53,7 @@ public partial class VendorDocumentViewModel : Document
         }
        
         //need a way to send a refresh message back to the tree browser...
-        if (Browser != null) Browser.RefreshData();
+        if (GreenhouseTool != null) GreenhouseTool.RefreshData();
 
     }
     

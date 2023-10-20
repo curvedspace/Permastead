@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="Permastead.Views.Tools.BrowserView"
+﻿<UserControl x:Class="Permastead.Views.Tools.GreenhouseToolView"
              xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -7,7 +7,7 @@
              xmlns:materialIcons="clr-namespace:Material.Icons.Avalonia;assembly=Material.Icons.Avalonia"
              mc:Ignorable="d"
              d:DesignWidth="600" d:DesignHeight="600"
-             x:DataType="vm:BrowserViewModel" x:CompileBindings="True">
+             x:DataType="vm:GreenhouseToolViewModel" x:CompileBindings="True">
   
   <Grid Focusable="True" RowDefinitions="Auto,*" >
     

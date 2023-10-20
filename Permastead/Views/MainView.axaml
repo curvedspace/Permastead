@@ -111,8 +111,8 @@
         </Button>
         
         <TextBlock Grid.Column="9" Text =""></TextBlock>
-        <Button ToolTip.Tip="Greenhouse View " Command="{Binding Navigate}" CommandParameter="{Binding DefaultDockable}" Grid.Column="11" >
-          <materialIcons:MaterialIcon Kind="Greenhouse" Margin="2"/>
+        <Button ToolTip.Tip="Workbench View " Command="{Binding Navigate}" CommandParameter="{Binding DefaultDockable}" Grid.Column="11" >
+          <materialIcons:MaterialIcon Kind="WorkerOutline" Margin="2"/>
         </Button>
         
         <!-- <TextBox x:Name="Id" Text="" Watermark="Search" UseFloatingWatermark="True" Grid.Column="11" Grid.ColumnSpan="1"/> -->

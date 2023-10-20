@@ -2,6 +2,6 @@
 
 namespace Permastead.ViewModels.Tools;
 
-public class Tool3ViewModel : Tool
+public class KitchenToolViewModel : Tool
 {
 }

@@ -25,7 +25,7 @@ public class DockFactory : Factory
     private IDocumentDock? _documentDock;
 
     private HomeViewModel _homeView;
-    private BrowserViewModel _browser;
+    private GreenhouseToolViewModel _greenhouseTool;
 
     private ToolDock _toolDock;
 
@@ -39,17 +39,16 @@ public class DockFactory : Factory
     public override IRootDock CreateLayout()
     {
         var document3 = new PlantDocumentViewModel {Id = "Document3", Title = "Document3", CanClose = true};
-        var tool1 = new Tool1ViewModel {Id = "Tool1", Title = "Plants"};
+        var peopleToolViewModel = new PeopleToolViewModel {Id = "People", Title = "People"};
+        var kitchenToolViewModel = new KitchenToolViewModel {Id = "Kitchen", Title = "Kitchen"};
         
-        var tool5 = new Tool5ViewModel {Id = "Tool5", Title = "Tool5"};
-        
-        _browser = new BrowserViewModel {Id = "Browser", Title = "Browser"};
+        _greenhouseTool = new GreenhouseToolViewModel {Id = "Greenhouse", Title = "Greenhouse"};
 
-        tool1.Home = _homeView;
-        tool1.Dock = this;
+        peopleToolViewModel.Home = _homeView;
+        peopleToolViewModel.Dock = this;
 
-        _browser.Home = _homeView;
-        _browser.Dock = this;
+        _greenhouseTool.Home = _homeView;
+        _greenhouseTool.Dock = this;
 
         var leftDock = new ProportionalDock
         {
@@ -61,8 +60,8 @@ public class DockFactory : Factory
             (
                 new ToolDock
                 {
-                    ActiveDockable = _browser,
-                    VisibleDockables = CreateList<IDockable>(_browser, tool1),
+                    ActiveDockable = _greenhouseTool,
+                    VisibleDockables = CreateList<IDockable>(_greenhouseTool, peopleToolViewModel, kitchenToolViewModel),
                     Alignment = Alignment.Left
                     
                 }
@@ -78,8 +77,8 @@ public class DockFactory : Factory
             (
                 new ToolDock
                 {
-                    ActiveDockable = tool5,
-                    VisibleDockables = CreateList<IDockable>(tool5),
+                    ActiveDockable = kitchenToolViewModel,
+                    VisibleDockables = CreateList<IDockable>(kitchenToolViewModel),
                     Alignment = Alignment.Top,
                     GripMode = GripMode.Hidden
                 }
@@ -238,7 +237,7 @@ public class DockFactory : Factory
             
             case "Models.Planting":
                 Planting currPlanting = currentItem as Planting;
-                doc = new PlantingDocumentViewModel(currPlanting, _browser);
+                doc = new PlantingDocumentViewModel(currPlanting, _greenhouseTool);
                 doc.Title = currPlanting.Description;
                 break;
             
@@ -250,7 +249,7 @@ public class DockFactory : Factory
             
             case "Models.Vendor":
                 Vendor vendor = currentItem as Vendor;
-                doc = new VendorDocumentViewModel(vendor, _browser);
+                doc = new VendorDocumentViewModel(vendor, _greenhouseTool);
                 doc.Title = vendor.Description;
                 break;
             

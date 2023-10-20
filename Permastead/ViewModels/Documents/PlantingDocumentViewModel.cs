@@ -39,9 +39,9 @@ public partial class PlantingDocumentViewModel : Document
 
     [ObservableProperty] private PlantingObservation _currentObservation = new PlantingObservation();
     
-    public BrowserViewModel Browser = null;
+    public GreenhouseToolViewModel GreenhouseTool = null;
 
-    public PlantingDocumentViewModel(Planting planting, BrowserViewModel browser) : this(browser)
+    public PlantingDocumentViewModel(Planting planting, GreenhouseToolViewModel greenhouseTool) : this(greenhouseTool)
     {
         _planting = planting;
         this.Id = planting.Id.ToString();
@@ -56,10 +56,10 @@ public partial class PlantingDocumentViewModel : Document
                 Services.PlantingsService.GetObservationsForPlanting(AppSession.ServiceMode, Planting.Id));
     }
 
-    public PlantingDocumentViewModel(BrowserViewModel browser)
+    public PlantingDocumentViewModel(GreenhouseToolViewModel greenhouseTool)
     {
         Planting = new Planting();
-        Browser = browser;
+        GreenhouseTool = greenhouseTool;
 
         Plants = new ObservableCollection<Plant>(Services.PlantingsService.GetPlants(AppSession.ServiceMode));
         SeedPackets = new ObservableCollection<SeedPacket>(Services.PlantingsService.GetSeedPackets(AppSession.ServiceMode));

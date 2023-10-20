@@ -8,9 +8,9 @@ using Models;
 
 namespace Permastead.Views.Tools;
 
-public partial class BrowserView : UserControl
+public partial class GreenhouseToolView : UserControl
 {
-    public BrowserView()
+    public GreenhouseToolView()
     {
         InitializeComponent();
     }
@@ -20,7 +20,7 @@ public partial class BrowserView : UserControl
         try
         {
             Node node = (Node)TreeBrowser.SelectedItem;
-            ((BrowserViewModel)(this.DataContext)).OpenDocument(node);
+            ((GreenhouseToolViewModel)(this.DataContext)).OpenDocument(node);
         }
         catch (Exception exception)
         {
@@ -61,22 +61,22 @@ public partial class BrowserView : UserControl
                 {
                     case "PG":
                         nodeType = NodeType.Planting;
-                        ((BrowserViewModel)(this.DataContext)).CurrentPlanting = new Planting() {Id = id};
+                        ((GreenhouseToolViewModel)(this.DataContext)).CurrentPlanting = new Planting() {Id = id};
                         break;
                     case "P":
                         nodeType = NodeType.Plant;
-                        ((BrowserViewModel)(this.DataContext)).CurrentPlant = new Plant() {Id = id};
+                        ((GreenhouseToolViewModel)(this.DataContext)).CurrentPlant = new Plant() {Id = id};
                         break;
                     case "S":
                         nodeType = NodeType.SeedPacket;
-                        ((BrowserViewModel)(this.DataContext)).CurrentSeedPacket = new SeedPacket() {Id = id};
+                        ((GreenhouseToolViewModel)(this.DataContext)).CurrentSeedPacket = new SeedPacket() {Id = id};
                         break;
                 }
                 
                 //create the treenode
                 var node = new Node(id, itemName, nodeType);
 
-                ((BrowserViewModel)(this.DataContext)).OpenDocument(node);
+                ((GreenhouseToolViewModel)(this.DataContext)).OpenDocument(node);
 
             }
         }

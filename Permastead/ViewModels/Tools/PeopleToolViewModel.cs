@@ -9,22 +9,22 @@ using Services;
 
 namespace Permastead.ViewModels.Tools;
 
-public partial class Tool1ViewModel : Tool
+public partial class PeopleToolViewModel : Tool
 {
     [ObservableProperty]
-    private ObservableCollection<Plant> _plants = new ObservableCollection<Plant>();
+    private ObservableCollection<Person> _people = new ObservableCollection<Person>();
 
     [ObservableProperty]
-    private Plant _currentItem;
+    private Person _currentItem;
 
     public HomeViewModel Home { get; set; }
     public DockFactory Dock { get; set; }
 
-    public Tool1ViewModel() 
+    public PeopleToolViewModel() 
     {
-        _currentItem = new Plant();
+        _currentItem = new Person();
 
-        _plants = new ObservableCollection<Plant>(Services.PlantService.GetAllPlants(AppSession.ServiceMode));
+        _people = new ObservableCollection<Person>(Services.PersonService.GetAllPeople(AppSession.ServiceMode));
     }
 
     [RelayCommand]

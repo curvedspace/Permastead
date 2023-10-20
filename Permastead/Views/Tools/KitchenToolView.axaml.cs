@@ -3,9 +3,9 @@ using Avalonia.Markup.Xaml;
 
 namespace Permastead.Views.Tools;
 
-public partial class Tool3View : UserControl
+public partial class KitchenToolView : UserControl
 {
-    public Tool3View()
+    public KitchenToolView()
     {
         InitializeComponent();
     }

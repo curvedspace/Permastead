@@ -8,18 +8,18 @@ using Permastead.ViewModels.Tools;
 
 namespace Permastead.Views.Tools;
 
-public partial class Tool1View : UserControl
+public partial class PeopleToolView : UserControl
 {
-    public Tool1View()
+    public PeopleToolView()
     {
         InitializeComponent();
     }
     
-    private void PlantsListBox_OnDoubleTapped(object? sender, TappedEventArgs e)
+    private void PeopleListBox_OnDoubleTapped(object? sender, TappedEventArgs e)
     {
         try
         {
-            ((Tool1ViewModel)(this.DataContext)).Open();
+            ((PeopleToolViewModel)(this.DataContext)).Open();
         }
         catch (Exception exception)
         {

@@ -16,7 +16,7 @@ using Permastead.ViewModels.Views;
 
 namespace Permastead.ViewModels.Tools;
 
-public partial class BrowserViewModel : Tool
+public partial class GreenhouseToolViewModel : Tool
 {
 
     [ObservableProperty] private Planting _currentPlanting;
@@ -49,7 +49,7 @@ public partial class BrowserViewModel : Tool
     public HomeViewModel Home { get; set; }
     public DockFactory Dock { get; set; }
 
-    public BrowserViewModel()
+    public GreenhouseToolViewModel()
     {
         RefreshData();
     }
