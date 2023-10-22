@@ -88,7 +88,7 @@ public class DockFactory : Factory
         //     )
         // };
 
-        // _toolDock = (ToolDock)rightDock.VisibleDockables[0];
+        _toolDock = (ToolDock)leftDock.VisibleDockables[0];
 
         var documentDock = new CustomDocumentDock
         {
@@ -279,7 +279,7 @@ public class DockFactory : Factory
             _documentDock.VisibleDockables.Add(doc);
             _documentDock.ActiveDockable = doc;
             
-            _toolDock.ActiveDockable.Title = doc.Title;
+            //_toolDock.ActiveDockable.Title = doc.Title;
 
         }
     }
