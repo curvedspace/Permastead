@@ -26,6 +26,8 @@ public class DockFactory : Factory
 
     private HomeViewModel _homeView;
     private GreenhouseToolViewModel _greenhouseTool;
+    private KitchenToolViewModel _kitchenTool;
+    private PeopleToolViewModel _peopleTool;
 
     private ToolDock _toolDock;
 
@@ -38,14 +40,15 @@ public class DockFactory : Factory
 
     public override IRootDock CreateLayout()
     {
-        var document3 = new PlantDocumentViewModel {Id = "Document3", Title = "Document3", CanClose = true};
-        var peopleToolViewModel = new PeopleToolViewModel {Id = "People", Title = "People"};
-        var kitchenToolViewModel = new KitchenToolViewModel {Id = "Kitchen", Title = "Kitchen"};
-        
+        _peopleTool = new PeopleToolViewModel {Id = "People", Title = "People"};
+        _kitchenTool = new KitchenToolViewModel {Id = "Kitchen", Title = "Kitchen"};
         _greenhouseTool = new GreenhouseToolViewModel {Id = "Greenhouse", Title = "Greenhouse"};
 
-        peopleToolViewModel.Home = _homeView;
-        peopleToolViewModel.Dock = this;
+        _peopleTool.Home = _homeView;
+        _peopleTool.Dock = this;
+        
+        _kitchenTool.Home = _homeView;
+        _kitchenTool.Dock = this;
 
         _greenhouseTool.Home = _homeView;
         _greenhouseTool.Dock = this;
@@ -61,31 +64,31 @@ public class DockFactory : Factory
                 new ToolDock
                 {
                     ActiveDockable = _greenhouseTool,
-                    VisibleDockables = CreateList<IDockable>(_greenhouseTool, peopleToolViewModel, kitchenToolViewModel),
+                    VisibleDockables = CreateList<IDockable>(_greenhouseTool, _peopleTool, _kitchenTool),
                     Alignment = Alignment.Left
                     
                 }
             )
         };
 
-        var rightDock = new ProportionalDock
-        {
-            Proportion = 0.15,
-            Orientation = Orientation.Vertical,
-            ActiveDockable = null,
-            VisibleDockables = CreateList<IDockable>
-            (
-                new ToolDock
-                {
-                    ActiveDockable = kitchenToolViewModel,
-                    VisibleDockables = CreateList<IDockable>(kitchenToolViewModel),
-                    Alignment = Alignment.Top,
-                    GripMode = GripMode.Hidden
-                }
-            )
-        };
+        // var rightDock = new ProportionalDock
+        // {
+        //     Proportion = 0.15,
+        //     Orientation = Orientation.Vertical,
+        //     ActiveDockable = null,
+        //     VisibleDockables = CreateList<IDockable>
+        //     (
+        //         new ToolDock
+        //         {
+        //             ActiveDockable = _kitchenTool,
+        //             VisibleDockables = CreateList<IDockable>(_kitchenTool),
+        //             Alignment = Alignment.Top,
+        //             GripMode = GripMode.Hidden
+        //         }
+        //     )
+        // };
 
-        _toolDock = (ToolDock)rightDock.VisibleDockables[0];
+        // _toolDock = (ToolDock)rightDock.VisibleDockables[0];
 
         var documentDock = new CustomDocumentDock
         {
@@ -257,6 +260,12 @@ public class DockFactory : Factory
                 GardenBed bed = currentItem as GardenBed;
                 doc = new PlantingLocationDocumentViewModel(bed);
                 doc.Title = bed.Description;
+                break;
+            
+            case "Models.Person":
+                Person person = currentItem as Person;
+                doc = new PersonDocumentViewModel(person);
+                doc.Title = person.FullNameLastFirst;
                 break;
             
             default:

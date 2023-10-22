@@ -18,4 +18,16 @@ public class PersonService
 
         return people;
     }
+    
+    public static Person GetPersonFromId(ServiceMode mode, long id) 
+    {
+        var person = new Person();
+
+        if (mode == ServiceMode.Local)
+        {
+            person = PersonRepository.GetPersonFromId(DataConnection.GetLocalDataSource(), id);
+        }
+
+        return person;
+    }
 }

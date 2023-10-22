@@ -349,5 +349,6 @@ public enum NodeType
 {
     Plant = 0,
     Planting,
-    SeedPacket
+    SeedPacket,
+    People
 }
