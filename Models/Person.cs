@@ -14,6 +14,12 @@ public class Person
     public string? LastName { get; set; }
 
     public string? Suffix { get; set; }
+    
+    public string? Company { get; set; }
+    
+    public string? Email { get; set; }
+    
+    public string? Comment { get; set; }
 
     public IList<PersonRole> Roles {get; set;}
 

@@ -37,8 +37,8 @@ namespace DataAccess.Local
             {
                 using (IDbConnection db = new SqliteConnection(DataConnection.GetLocalDataSource()))
                 {
-                    string sqlQuery = "INSERT INTO Person (FirstName, LastName, CreationDate, StartDate, EndDate) " +
-                                      "VALUES(@FirstName,@LastName,CURRENT_DATE,@StartDate,@EndDate);";
+                    string sqlQuery = "INSERT INTO Person (FirstName, LastName, CreationDate, StartDate, EndDate, Company, Email, Comment) " +
+                                      "VALUES(@FirstName,@LastName,CURRENT_DATE,@StartDate,@EndDate,@Company,@Email,@Comment);";
 
                     return (db.Execute(sqlQuery, person) == 1);
                 }
@@ -58,7 +58,8 @@ namespace DataAccess.Local
                     using (IDbConnection db = new SqliteConnection(DataConnection.GetLocalDataSource()))
                     {
                         string sqlQuery =
-                            "UPDATE Person SET FirstName = @FirstName, StartDate = @StartDate, EndDate = @EndDate, LastName = @LastName " +
+                            "UPDATE Person SET FirstName = @FirstName, StartDate = @StartDate, EndDate = @EndDate, LastName = @LastName, " +
+                            "Company = @Company, Email = @Email, Comment = @Comment " +
                             "WHERE Id = @Id;";
 
                         return (db.Execute(sqlQuery, person) == 1);
@@ -80,7 +81,7 @@ namespace DataAccess.Local
             Person person = new Person();
 
             var sql = "SELECT p.Id, p.FirstName, p.LastName, " +
-                      "p.CreationDate, p.StartDate, p.EndDate " +
+                      "p.CreationDate, p.StartDate, p.EndDate, p.Company, p.Email, p.Comment " +
                       "FROM Person p  " +
                       "WHERE p.Id = @id ";
 
@@ -105,7 +106,9 @@ namespace DataAccess.Local
                         person.CreationDate = Convert.ToDateTime(dr[3].ToString());
                         person.StartDate = Convert.ToDateTime(dr[4].ToString());
                         person.EndDate = Convert.ToDateTime(dr[5].ToString());
-
+                        person.Company = dr[6].ToString();
+                        person.Email = dr[7].ToString();
+                        person.Comment = dr[8].ToString();
                     }
                 }
 

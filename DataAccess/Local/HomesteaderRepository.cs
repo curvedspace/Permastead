@@ -306,6 +306,9 @@ namespace DataAccess.Local
 				Id INTEGER PRIMARY KEY,
 				FirstName VARCHAR (2000) NOT NULL,
 				LastName VARCHAR (2000) NOT NULL,
+				Company VARCHAR (2000) NULL,
+				Email VARCHAR (200) NULL,
+				Comment TEXT NULL,
 				CreationDate timestamp,
 				StartDate TIMESTAMP NOT NULL,
 				EndDate TIMESTAMP

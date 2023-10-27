@@ -30,6 +30,12 @@ public partial class ContactsViewModel : ViewModelBase
                     ("Last Name", x => x.LastName),
                 new TextColumn<Person, string>
                     ("First Name", x => x.FirstName),
+                new TextColumn<Person, string>
+                    ("Company", x => x.Company),
+                new TextColumn<Person, string>
+                    ("Email", x => x.Email),
+                new TextColumn<Person, string>
+                    ("Comment", x => x.Comment)
             },
         };
         
