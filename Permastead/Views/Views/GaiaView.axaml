@@ -15,6 +15,12 @@
   </Design.DataContext>
 
   <StackPanel>
+    <WrapPanel Background="{StaticResource  ButtonBackground}">
+      <materialIcons:MaterialIcon Kind="Earth" Margin="20"/>
+      <TextBlock FontWeight="Bold" Margin="20,20,20,20">Gaia</TextBlock>
+      <Separator MaxWidth="5" Foreground="Black"></Separator>
+      <TextBlock Name="EventsCount" Text="{Binding  ResponseCount , StringFormat='{}{0} total'}" Margin="20,20,20,20"></TextBlock>
+    </WrapPanel>
     <WrapPanel>
       <TextBlock Text="You: " Margin="20,20,20,20"> </TextBlock>
       <TextBox Text="{Binding Request}" Name="RequestText"

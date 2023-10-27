@@ -9,6 +9,9 @@ namespace Permastead.ViewModels.Views;
 public partial class GaiaViewModel : ViewModelBase
 {
     [ObservableProperty]
+    private long _responseCount;
+    
+    [ObservableProperty]
     private string _request = string.Empty;
     
     [ObservableProperty]
@@ -32,7 +35,7 @@ public partial class GaiaViewModel : ViewModelBase
     private void SendRequest()
     {
         Response = _gaia.GetResponse(Request);
-
+        ResponseCount++;
         RequestResponses.Add(new RequestResponse() { Request = _request, Response = _response });
 
         Request = string.Empty;
