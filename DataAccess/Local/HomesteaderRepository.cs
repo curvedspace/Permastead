@@ -308,6 +308,7 @@ namespace DataAccess.Local
 				LastName VARCHAR (2000) NOT NULL,
 				Company VARCHAR (2000) NULL,
 				Email VARCHAR (200) NULL,
+				Phone VARCHAR (200) NULL,
 				Comment TEXT NULL,
 				CreationDate timestamp,
 				StartDate TIMESTAMP NOT NULL,

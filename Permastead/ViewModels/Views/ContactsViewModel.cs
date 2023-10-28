@@ -35,12 +35,11 @@ public partial class ContactsViewModel : ViewModelBase
                 new TextColumn<Person, string>
                     ("Email", x => x.Email),
                 new TextColumn<Person, string>
+                    ("Phone", x => x.Phone),
+                new TextColumn<Person, string>
                     ("Comment", x => x.Comment)
             },
         };
-        
-        // PersonSource.Columns.Add(new TextColumn<Person, string>("Last Name", x => x.LastName));
-        // PersonSource.Columns.Add(new TextColumn<Person, string>("First Name", x => x.FirstName));
 
         PeopleCount = _people.Count;
     }
