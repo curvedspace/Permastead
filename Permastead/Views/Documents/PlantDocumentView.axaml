@@ -94,7 +94,8 @@
                                             <TextBlock Text="{Binding Code}"/>
                                             <TextBlock Margin="5 0" Text="{Binding Description }"/>
                                             <TextBlock Text="{Binding StartDate,StringFormat='yyyy-MM-dd'}"/>
-                                            <TextBlock Margin="5 0" Text="{Binding State.Description }"/>
+                                            <TextBlock Foreground="{Binding Colour}" Margin="5 0" 
+                                                       Text="{Binding State.Description }"/>
                                         </StackPanel>
                                     </Border>
                                 </DataTemplate>

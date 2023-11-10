@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using Serilog.Core;
 
 namespace Models;
 
@@ -64,8 +65,32 @@ public class Planting: CodeTable
             return calculatedAge;
         }
     }
-    
 
+    public string Colour
+    {
+        get
+        {
+            switch (this.State.Code)
+            {
+                case "DEAD":
+                {
+                    return "Red";
+                    break;
+                }
+                case "H":
+                {
+                    return "Gray";
+                    break;
+                }
+                default:
+                {
+                    return "Green";
+                    break;
+                }
+            }
+        }
+    }
+    
     public Planting()
     {
         this.Code = string.Empty;
