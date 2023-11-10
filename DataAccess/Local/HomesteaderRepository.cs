@@ -609,6 +609,19 @@ namespace DataAccess.Local
 				AuthorId INTEGER
 			);
 
+			-- PERSON OBSERVATION
+			DROP TABLE IF EXISTS PersonObservation;
+			CREATE TABLE IF NOT EXISTS PersonObservation(
+				Id INTEGER PRIMARY KEY,
+				PersonId INTEGER NOT NULL,
+				Comment TEXT NOT NULL,
+				CreationDate TIMESTAMP,
+				StartDate TIMESTAMP NOT NULL,
+				EndDate TIMESTAMP,
+				CommentTypeId INTEGER,
+				AuthorId INTEGER
+			);
+
 			--FERMENTATION
 			DROP TABLE IF EXISTS Fermentation;
 			CREATE TABLE IF NOT EXISTS Fermentation(

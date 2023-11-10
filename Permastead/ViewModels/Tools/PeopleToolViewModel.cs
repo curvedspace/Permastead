@@ -72,12 +72,13 @@ public partial class PeopleToolViewModel : Tool
         _currentPerson = new Person();
 
         _people = new ObservableCollection<Person>(Services.PersonService.GetAllPeople(AppSession.ServiceMode));
+        //_companies = new ObservableCollection<GardenBed>(PlantingsService.GetGardenBeds(AppSession.ServiceMode));
         
 
         SelectedNodes = new ObservableCollection<Node>();
         Nodes = new ObservableCollection<Node>();
         
-        var peopleNode = new Node("People", new ObservableCollection<Node>());
+        var peopleNode = new Node("Contacts", new ObservableCollection<Node>());
         
         //peopleNode
         Nodes.Add(peopleNode);
@@ -90,6 +91,29 @@ public partial class PeopleToolViewModel : Tool
             SearchItems.Add("C:" + p.Id + ": " + p.FullNameLastFirst.ToString());
         }
         
+        //by company
+        // var byCompanyPeople = new Node("By Company", new ObservableCollection<Node>());
+        // peopleNode.SubNodes.Add(byCompanyPeople);   
+        // foreach (var gb in _beds)
+        // {
+        //     var currentBed = new Node(gb.Id, gb.Code + ": " + gb.Description, NodeType.Planting);
+        //     byCompanyPeople.SubNodes.Add(currentBed);
+        //     //load up plantings by bed
+        //     foreach (var p in _plantings)
+        //     {
+        //         if (p.Bed.Id == gb.Id)
+        //         {
+        //             if (ActiveOnly)
+        //             {
+        //                 if (p.IsActive) currentBed.SubNodes.Add(new Node(p.Id, p.Description, NodeType.Planting));
+        //             }
+        //             else
+        //             {
+        //                 currentBed.SubNodes.Add(new Node(p.Id, p.Description, NodeType.Planting));
+        //             }
+        //         }
+        //     }
+        // }
         
     }
 

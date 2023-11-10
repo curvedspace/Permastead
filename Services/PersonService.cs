@@ -30,4 +30,16 @@ public class PersonService
 
         return person;
     }
+    
+    public static List<PersonObservation> GetObservationsForPerson(ServiceMode mode, long id)
+    {
+        var obs = new List<PersonObservation>();
+
+        if (mode == ServiceMode.Local)
+        {
+            obs = PersonRepository.GetAllObservationsForPerson(DataConnection.GetLocalDataSource(), id);
+        }
+
+        return obs;
+    }
 }
