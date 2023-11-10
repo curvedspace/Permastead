@@ -140,4 +140,28 @@ public static class PlantingsService
 
         return obs;
     }
+    
+    public static List<SeedPacket> GetSeedPacketForPlant(ServiceMode mode, long plantId)
+    {
+        var obs = new List<SeedPacket>();
+
+        if (mode == ServiceMode.Local)
+        {
+            obs = SeedPacketRepository.GetAllForPlant(DataConnection.GetLocalDataSource(), plantId);
+        }
+
+        return obs;
+    }
+    
+    public static List<Planting> GetPlantingsForPlant(ServiceMode mode, long plantId)
+    {
+        var obs = new List<Planting>();
+
+        if (mode == ServiceMode.Local)
+        {
+            obs = PlantingsRepository.GetAllForPlant(DataConnection.GetLocalDataSource(), plantId);
+        }
+
+        return obs;
+    }
 }

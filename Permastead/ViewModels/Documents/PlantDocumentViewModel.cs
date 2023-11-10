@@ -1,4 +1,5 @@
 using System;
+using System.Collections.ObjectModel;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Dock.Model.Mvvm.Controls;
@@ -14,6 +15,12 @@ public partial class PlantDocumentViewModel : Document
 
     [ObservableProperty] 
     private Plant _plant;
+    
+    [ObservableProperty]
+    private ObservableCollection<SeedPacket> _seedPackets = new ObservableCollection<SeedPacket>();
+    
+    [ObservableProperty]
+    private ObservableCollection<Planting> _plantings = new ObservableCollection<Planting>();
 
 
     public PlantDocumentViewModel(Plant plant)
@@ -21,6 +28,9 @@ public partial class PlantDocumentViewModel : Document
         _plant = plant;
         this.Id = plant.Id.ToString();
         this.PlantingCount = 10;
+
+        _seedPackets = new ObservableCollection<SeedPacket>(Services.PlantingsService.GetSeedPacketForPlant(AppSession.ServiceMode, Plant.Id));
+        _plantings = new ObservableCollection<Planting>(Services.PlantingsService.GetPlantingsForPlant(AppSession.ServiceMode, Plant.Id));
     }
     
     public PlantDocumentViewModel()
