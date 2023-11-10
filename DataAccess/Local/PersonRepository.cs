@@ -31,6 +31,23 @@ namespace DataAccess.Local
             }
         }
 
+        public static List<string> GetAllCompanies(string conn)
+        {
+            try
+            {
+                using (IDbConnection db = new SqliteConnection(conn))
+                {
+                    string sqlQuery = "SELECT DISTINCT p.Company FROM Person p WHERE p.Company != '' ORDER BY Company;";
+
+                    return db.Query<string>(sqlQuery).ToList();
+                }
+            }
+            catch
+            {
+                return new List<string>();
+            }
+        }
+
         public static bool Insert(Person person)
         {
             try

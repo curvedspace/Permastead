@@ -350,5 +350,6 @@ public enum NodeType
     Plant = 0,
     Planting,
     SeedPacket,
-    People
+    People,
+    Company
 }

@@ -19,6 +19,18 @@ public class PersonService
         return people;
     }
     
+    public static List<string> GetAllCompanies(ServiceMode mode)
+    {
+        var companies = new List<string>();
+
+        if (mode == ServiceMode.Local)
+        {
+            companies = PersonRepository.GetAllCompanies(DataConnection.GetLocalDataSource());
+        }
+
+        return companies;
+    }
+    
     public static Person GetPersonFromId(ServiceMode mode, long id) 
     {
         var person = new Person();

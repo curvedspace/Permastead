@@ -28,6 +28,8 @@ public partial class PeopleToolViewModel : Tool
     [ObservableProperty] private List<string> _searchItems;
 
     [ObservableProperty] private string _searchText;
+    
+    private ObservableCollection<string> _companies;
 
 
     public HomeViewModel Home { get; set; }
@@ -72,7 +74,7 @@ public partial class PeopleToolViewModel : Tool
         _currentPerson = new Person();
 
         _people = new ObservableCollection<Person>(Services.PersonService.GetAllPeople(AppSession.ServiceMode));
-        //_companies = new ObservableCollection<GardenBed>(PlantingsService.GetGardenBeds(AppSession.ServiceMode));
+        _companies = new ObservableCollection<string>(PersonService.GetAllCompanies(AppSession.ServiceMode));
         
 
         SelectedNodes = new ObservableCollection<Node>();
@@ -92,28 +94,30 @@ public partial class PeopleToolViewModel : Tool
         }
         
         //by company
-        // var byCompanyPeople = new Node("By Company", new ObservableCollection<Node>());
-        // peopleNode.SubNodes.Add(byCompanyPeople);   
-        // foreach (var gb in _beds)
-        // {
-        //     var currentBed = new Node(gb.Id, gb.Code + ": " + gb.Description, NodeType.Planting);
-        //     byCompanyPeople.SubNodes.Add(currentBed);
-        //     //load up plantings by bed
-        //     foreach (var p in _plantings)
-        //     {
-        //         if (p.Bed.Id == gb.Id)
-        //         {
-        //             if (ActiveOnly)
-        //             {
-        //                 if (p.IsActive) currentBed.SubNodes.Add(new Node(p.Id, p.Description, NodeType.Planting));
-        //             }
-        //             else
-        //             {
-        //                 currentBed.SubNodes.Add(new Node(p.Id, p.Description, NodeType.Planting));
-        //             }
-        //         }
-        //     }
-        // }
+        var byCompanyPeople = new Node("By Company", new ObservableCollection<Node>());
+        peopleNode.SubNodes.Add(byCompanyPeople);   
+        
+        foreach (var company in _companies)
+        {
+            var currentCompany = new Node(0, company, NodeType.Company);
+            byCompanyPeople.SubNodes.Add(currentCompany);
+            
+            //load up people by company
+            foreach (var p in _people)
+            {
+                if (p.Company == company)
+                {
+                    if (ActiveOnly)
+                    {
+                        if (p.IsCurrent()) currentCompany.SubNodes.Add(new Node(p.Id, p.FullNameLastFirst, NodeType.People));
+                    }
+                    else
+                    {
+                        currentCompany.SubNodes.Add(new Node(p.Id, p.FullNameLastFirst, NodeType.People));
+                    }
+                }
+            }
+        }
         
     }
 
