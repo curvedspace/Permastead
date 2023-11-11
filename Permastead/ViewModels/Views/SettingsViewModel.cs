@@ -32,7 +32,7 @@ public partial class SettingsViewModel : ViewModelBase
     
     [ObservableProperty] private string _nostrPrivateKey;
 
-    [ObservableProperty] private ObservableCollection<City> _cities;
+    [ObservableProperty] private ObservableCollection<City>? _cities;
     
     public string HomesteadNameText => _homesteadName.ToString();
     
