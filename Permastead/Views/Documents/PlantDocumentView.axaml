@@ -53,7 +53,7 @@
                     Padding="10" Margin="20">
                 <ScrollViewer>
                     <StackPanel Margin="5">
-                        <TextBlock Margin="0 ">Seeds:</TextBlock>
+                        <TextBlock Margin="0 ">Starters:</TextBlock>
                         <ItemsControl ItemsSource="{Binding SeedPackets}" >
                             <ItemsControl.ItemTemplate>
                                 <DataTemplate>
