@@ -34,6 +34,17 @@ namespace Models
             FeedSource = new FeedSource();
             Author = Person.Anonymous();
         }
+        
+        public static Recipe NotAvailable()
+        {
+            var anon = new Recipe()
+            {
+                Code = "NA",
+                Description = "Not Available"
+            };
+
+            return anon;
+        }
 
         public long NumberOfIngredients => Ingredients.Count;
 
