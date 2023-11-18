@@ -190,15 +190,6 @@ public class DockFactory : Factory
     {
         ContextLocator = new Dictionary<string, Func<object?>>
         {
-            ["Document3"] = () => new DemoDocument(),
-            ["Tool1"] = () => new Tool1(),
-            ["Tool2"] = () => new Tool2(),
-            ["Tool3"] = () => new Tool3(),
-            ["Tool4"] = () => new Tool4(),
-            ["Tool5"] = () => new Tool5(),
-            ["Tool6"] = () => new Tool6(),
-            ["Tool7"] = () => new Tool7(),
-            ["Tool8"] = () => new Tool8(),
             ["Dashboard"] = () => layout,
             ["ObservationsPage"] = () => layout,
             ["ToDoPage"] = () => layout,
