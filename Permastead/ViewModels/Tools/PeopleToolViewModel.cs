@@ -84,7 +84,7 @@ public partial class PeopleToolViewModel : Tool
         
         //peopleNode
         Nodes.Add(peopleNode);
-        var allPeople = new Node("All", new ObservableCollection<Node>());
+        var allPeople = new Node("All (" + _people.Count + ")", new ObservableCollection<Node>());
         peopleNode.SubNodes!.Add(allPeople);   
         
         foreach (var p in _people)
@@ -94,7 +94,7 @@ public partial class PeopleToolViewModel : Tool
         }
         
         //by company
-        var byCompanyPeople = new Node("By Company", new ObservableCollection<Node>());
+        var byCompanyPeople = new Node("By Company (" + _companies.Count + ")", new ObservableCollection<Node>());
         peopleNode.SubNodes.Add(byCompanyPeople);   
         
         foreach (var company in _companies)
