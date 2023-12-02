@@ -69,8 +69,8 @@ public partial class GreenhouseToolViewModel : Tool
         SelectedNodes = new ObservableCollection<Node>();
         Nodes = new ObservableCollection<Node>();
         
-        var plantsNode = new Node("Plants", new ObservableCollection<Node>());
-        var seedsNode = new Node("Seeds", new ObservableCollection<Node>());
+        var plantsNode = new Node("Plants (" + _plants.Count + ")", new ObservableCollection<Node>());
+        var seedsNode = new Node("Seeds (" + _seedsPackets.Count + ")", new ObservableCollection<Node>());
         var plantingsNode = new Node("Plantings", new ObservableCollection<Node>());
         var inventoryNode = new Node("Inventory", new ObservableCollection<Node>());
         var contactsNode = new Node("Contacts", new ObservableCollection<Node>());
@@ -78,7 +78,8 @@ public partial class GreenhouseToolViewModel : Tool
 
         //plantings
         Nodes.Add(plantingsNode);
-        var allPlantings = new Node("All", new ObservableCollection<Node>());
+        var plantingsCount = 0;
+        var allPlantings = new Node("All (" + _plantings.Count + ")", new ObservableCollection<Node>());
         plantingsNode.SubNodes!.Add(allPlantings);   
         
         foreach (var p in _plantings)
@@ -89,6 +90,7 @@ public partial class GreenhouseToolViewModel : Tool
                 {
                     allPlantings.SubNodes.Add(new Node(p.Id, p.Description, NodeType.Planting));
                     SearchItems.Add("PG:" + p.Id + ": " + p.Description.ToString());
+                    plantingsCount++;
                 }
                 
             }
@@ -96,11 +98,14 @@ public partial class GreenhouseToolViewModel : Tool
             {
                 allPlantings.SubNodes.Add(new Node(p.Id, p.Description, NodeType.Planting));
                 SearchItems.Add("PG:" + p.Id + ": " + p.Description.ToString());
+                plantingsCount++;
             }
             
         }
+
+        allPlantings.Title = "All (" + plantingsCount + ")";
         
-        var byBedPlantings = new Node("By Location", new ObservableCollection<Node>());
+        var byBedPlantings = new Node("By Location (" + _beds.Count + ")", new ObservableCollection<Node>());
         plantingsNode.SubNodes.Add(byBedPlantings);   
         foreach (var gb in _beds)
         {
@@ -131,6 +136,8 @@ public partial class GreenhouseToolViewModel : Tool
             SearchItems.Add("P:" + p.Id + ": " + p.Description.ToString());
         }
         
+        //seeds
+        var seedsCount = 0;
         Nodes.Add(seedsNode);
         foreach (var p in _seedsPackets)
         {
@@ -140,14 +147,18 @@ public partial class GreenhouseToolViewModel : Tool
                 {
                     seedsNode.SubNodes.Add(new Node(p.Id, p.Description, NodeType.SeedPacket));
                     SearchItems.Add("S:" + p.Id + ": " + p.Description.ToString());
+                    seedsCount++;
                 }
             }
             else
             {
                 seedsNode.SubNodes.Add(new Node(p.Id, p.Description, NodeType.SeedPacket));
                 SearchItems.Add("S:" + p.Id + ": " + p.Description.ToString());
+                seedsCount++;
             }
         }
+        
+        seedsNode.Title = "Seeds (" + seedsCount + ")";
         
     }
 
@@ -313,7 +324,7 @@ public class Node
 {
     public ObservableCollection<Node>? SubNodes { get; }
     public long Id { get; }
-    public string Title { get; }
+    public string Title { get; set; }
     
     public NodeType Type { get; }
 
