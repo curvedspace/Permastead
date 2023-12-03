@@ -741,6 +741,9 @@ namespace DataAccess.Local
             q = new Quote { Description = "We come from the earth, we return to the earth, and in between, we garden.", AuthorName = "Anonymous" };
             QuoteRepository.Insert(DataConnection.GetLocalDataSource(), q);
             
+            q = new Quote { Description = "When you are standing on the ground, you are really standing on the rooftop of another world.", AuthorName = "Dr. M. Jill Clapperton" };
+            QuoteRepository.Insert(DataConnection.GetLocalDataSource(), q);
+           
             #endregion
             
             #region Settings
