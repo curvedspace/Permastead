@@ -738,6 +738,9 @@ namespace DataAccess.Local
             q = new Quote { Description = "Debt is a form of slavery.", AuthorName = "Jack Spirko" };
             QuoteRepository.Insert(DataConnection.GetLocalDataSource(), q);
             
+            q = new Quote { Description = "We come from the earth, we return to the earth, and in between, we garden.", AuthorName = "Anonymous" };
+            QuoteRepository.Insert(DataConnection.GetLocalDataSource(), q);
+            
             #endregion
             
             #region Settings
