@@ -743,7 +743,13 @@ namespace DataAccess.Local
             
             q = new Quote { Description = "When you are standing on the ground, you are really standing on the rooftop of another world.", AuthorName = "Dr. M. Jill Clapperton" };
             QuoteRepository.Insert(DataConnection.GetLocalDataSource(), q);
+            
+            q = new Quote { Description = "To forget how to dig the earth and to tend the soil is to forget ourselves.", AuthorName = "Mohandas K. Gandhi" };
+            QuoteRepository.Insert(DataConnection.GetLocalDataSource(), q);
            
+            q = new Quote { Description = "Buy land, they’re not making it anymore.", AuthorName = "Mark Twain" };
+            QuoteRepository.Insert(DataConnection.GetLocalDataSource(), q);
+            
             #endregion
             
             #region Settings
