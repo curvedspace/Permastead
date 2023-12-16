@@ -125,6 +125,8 @@ public partial class PeopleToolViewModel : Tool
     public void ResetSearchBox()
     {
         SearchText = "";
+
+        _currentPerson = null;
     }
     
     [RelayCommand]

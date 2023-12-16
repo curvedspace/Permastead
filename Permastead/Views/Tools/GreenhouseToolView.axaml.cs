@@ -75,7 +75,9 @@ public partial class GreenhouseToolView : UserControl
                 
                 //create the treenode
                 var node = new Node(id, itemName, nodeType);
-
+                if (((GreenhouseToolViewModel)(this.DataContext)).SelectedNodes.Count > 0) 
+                    ((GreenhouseToolViewModel)(this.DataContext)).SelectedNodes[0] = node;
+                
                 ((GreenhouseToolViewModel)(this.DataContext)).OpenDocument(node);
 
             }

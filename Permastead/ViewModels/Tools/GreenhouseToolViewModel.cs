@@ -166,6 +166,10 @@ public partial class GreenhouseToolViewModel : Tool
     public void ResetSearchBox()
     {
         SearchText = "";
+        _currentPlant = null;
+        _currentPlanting = null;
+        _currentSeedPacket = null;
+        _currentPlantingLocation = null;
     }
     
     [RelayCommand]

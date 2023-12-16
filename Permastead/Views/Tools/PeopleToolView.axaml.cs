@@ -72,6 +72,9 @@ public partial class PeopleToolView : UserControl
                 
                 //create the treenode
                 var node = new Node(id, itemName, nodeType);
+                
+                if (((PeopleToolViewModel)(this.DataContext)).SelectedNodes.Count > 0) 
+                    ((PeopleToolViewModel)(this.DataContext)).SelectedNodes[0] = node;
 
                 ((PeopleToolViewModel)(this.DataContext)).OpenDocument(node);
 
