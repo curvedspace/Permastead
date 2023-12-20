@@ -36,14 +36,15 @@
             <ListBox.ItemTemplate>
               <DataTemplate> 
                 <Grid ColumnDefinitions="Auto,*,Auto" RowDefinitions="Auto,*,Auto">
-                  <Border Grid.Row="0" Grid.Column="0" BorderBrush="White" CornerRadius="5" BorderThickness="2" Padding="5">
-                    <TextBlock  TextAlignment="Left"
-                                Text="{Binding Response}" />
-                  </Border>
-                  <Border Grid.Row="1" Grid.Column="2" BorderBrush="Black" Background="Chartreuse" CornerRadius="5" BorderThickness="2" Padding="5">
+                  <Border Grid.Row="0" Grid.Column="2" BorderBrush="Black" Background="Chartreuse" CornerRadius="5" BorderThickness="2" Padding="5">
                     <TextBlock  TextAlignment="Right" Foreground="Black"
                                 Text="{Binding Request}" />
                   </Border>
+                  <Border Grid.Row="1" Grid.Column="0" BorderBrush="White" CornerRadius="5" BorderThickness="2" Padding="5">
+                    <TextBlock  TextAlignment="Left"
+                                Text="{Binding Response}" />
+                  </Border>
+                  
                 </Grid>
               </DataTemplate> 
             </ListBox.ItemTemplate> 
@@ -64,18 +65,18 @@
       <!--   </ListBox.ItemTemplate> -->
       <!-- </ListBox> -->
     
-      <WrapPanel Grid.Row="2" >
+      <Grid Grid.Row="2" ColumnDefinitions="Auto,*,Auto">
         <TextBlock Text="You: " Margin="20,20,20,20"> </TextBlock>
-        <TextBox Text="{Binding Request}" Name="RequestText"
+        <TextBox Grid.Column="1" Text="{Binding Request}" Name="RequestText"
                  Watermark="Enter your question"
                  TextWrapping="Wrap"
                  AcceptsReturn="False"
-                 Height="20" Width="400"
+                 Height="20" 
                  FontSize="12">
         </TextBox>
 
-        <Button Command="{Binding SendRequestCommand}" HotKey="Return">Send</Button>
-      </WrapPanel>
+        <Button Grid.Column="2" Command="{Binding SendRequestCommand}" HotKey="Return">Send</Button>
+      </Grid>
       
   </Grid>
 
