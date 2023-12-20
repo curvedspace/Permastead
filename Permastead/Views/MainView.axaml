@@ -78,32 +78,32 @@
           <!-- </Viewbox> -->
         </Button>
 
-        <Button ToolTip.Tip="Dashboard" Command="{Binding Navigate}" CommandParameter="Dashboard" Grid.Column="2">
-          <materialIcons:MaterialIcon Kind="HomeClockOutline" Margin="2"/>
+        <Button ToolTip.Tip="Dashboard " Command="{Binding Navigate}" CommandParameter="Dashboard" Grid.Column="2">
+          <Image Width="16" Height="16" Source="/Assets/house_one.png" />
         </Button>
           
-        <Button ToolTip.Tip="Observations View" Command="{Binding Navigate}" CommandParameter="ObservationsPage" Grid.Column="3">
-          <materialIcons:MaterialIcon Kind="EyeCircle" Margin="2"/>
+        <Button ToolTip.Tip="Observations " Command="{Binding Navigate}" CommandParameter="ObservationsPage" Grid.Column="3">
+          <Image Width="16" Height="16" Source="/Assets/web_template_editor.png" />
         </Button>
         
-        <Button ToolTip.Tip="Actions View" Command="{Binding Navigate}" CommandParameter="ToDoPage" Grid.Column="4" >
-          <materialIcons:MaterialIcon Kind="Shovel" Margin="2"/>
+        <Button ToolTip.Tip="Actions " Command="{Binding Navigate}" CommandParameter="ToDoPage" Grid.Column="4" >
+          <Image Width="16" Height="16" Source="/Assets/showel.png" />
         </Button>
         
-        <Button ToolTip.Tip="Events View" Command="{Binding Navigate}" CommandParameter="EventsPage" Grid.Column="5" >
-          <materialIcons:MaterialIcon Kind="Calendars" Margin="2"/>
+        <Button ToolTip.Tip="Events " Command="{Binding Navigate}" CommandParameter="EventsPage" Grid.Column="5" >
+          <Image Width="16" Height="16" Source="/Assets/sheduled_task.png" />
         </Button>
         
-        <Button ToolTip.Tip="Inventory View" Command="{Binding Navigate}" CommandParameter="InventoryPage" Grid.Column="6" >
-          <materialIcons:MaterialIcon Kind="Clipboard" Margin="2"/>
+        <Button ToolTip.Tip="Inventory " Command="{Binding Navigate}" CommandParameter="InventoryPage" Grid.Column="6" >
+          <Image Width="16" Height="16" Source="/Assets/clipboard_invoice.png" />
         </Button>
         
-        <Button ToolTip.Tip="Plantings View" Command="{Binding Navigate}" CommandParameter="PlantingsPage" Grid.Column="7" >
-          <materialIcons:MaterialIcon Kind="Plant" Margin="2"/>
+        <Button ToolTip.Tip="Plantings " Command="{Binding Navigate}" CommandParameter="PlantingsPage" Grid.Column="7" >
+          <Image Width="16" Height="16" Source="/Assets/plant.png" />
         </Button>
         
-        <Button ToolTip.Tip="Contacts View" Command="{Binding Navigate}" CommandParameter="ContactsPage" Grid.Column="8" >
-          <materialIcons:MaterialIcon Kind="Person" Margin="2"/>
+        <Button ToolTip.Tip="Contacts " Command="{Binding Navigate}" CommandParameter="ContactsPage" Grid.Column="8" >
+          <Image Width="16" Height="16" Source="/Assets/outlook_new_meeting.png" />
         </Button>
         
         <Button ToolTip.Tip="Gaia View " Command="{Binding Navigate}" CommandParameter="GaiaPage" Grid.Column="9" >
@@ -118,8 +118,8 @@
         <!-- <TextBox x:Name="Id" Text="" Watermark="Search" UseFloatingWatermark="True" Grid.Column="11" Grid.ColumnSpan="1"/> -->
         <!-- <Button Content="Navigate" Command="{Binding Navigate}" CommandParameter="{Binding #Id.Text}" Grid.Column="9" /> -->
         
-        <Button ToolTip.Tip="Edit Settings" Command="{Binding Navigate}" CommandParameter="SettingsPage" Grid.Column="12" HorizontalAlignment="Right">
-          <materialIcons:MaterialIcon Kind="Settings" Margin="2"/>
+        <Button ToolTip.Tip="Edit Settings " Command="{Binding Navigate}" CommandParameter="SettingsPage" Grid.Column="12" HorizontalAlignment="Right">
+          <Image Width="16" Height="16" Source="/Assets/setting_tools.png" />
         </Button>
         
         <Button x:Name="ThemeButton" Grid.Column="14" Background="Transparent" HorizontalAlignment="Right">
