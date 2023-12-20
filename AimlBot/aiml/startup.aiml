@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <aiml>
    <category>
-      <pattern> HELLO * </pattern>
-      
+      <pattern> HELLO * </pattern> 
       <template>
          Hello User
       </template>
-      
    </category>
+   <category>
+         <pattern> HI * </pattern> 
+         <template>
+            Hi there.
+         </template>
+      </category>
 </aiml>
