@@ -6,6 +6,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Models;
 using Serilog;
+using Services;
 
 namespace Permastead.ViewModels.Views;
 
@@ -35,6 +36,10 @@ public partial class PlantingsViewModel : ViewModelBase
     [ObservableProperty] 
     private Planting _currentItem;
     
+    [ObservableProperty] private ObservableCollection<Node> _nodes;
+
+    [ObservableProperty] private ObservableCollection<Node> _selectedNodes;
+    
     public PlantingsViewModel()
     {
         try
@@ -58,11 +63,25 @@ public partial class PlantingsViewModel : ViewModelBase
     [RelayCommand]
     private void RefreshPlantings()
     {
+        SelectedNodes = new ObservableCollection<Node>();
+        Nodes = new ObservableCollection<Node>();
+        
+        var plantsNode = new Node("Plants (" + _plants.Count + ")", new ObservableCollection<Node>());
+        _plants = new ObservableCollection<Plant>(PlantService.GetAllPlants(AppSession.ServiceMode));
+        
+        //plants
+        Nodes.Add(plantsNode);
+        foreach (var p in _plants)
+        {
+            plantsNode.SubNodes.Add(new Node(p.Id, p.Description, NodeType.Plant));
+            //SearchItems.Add("P:" + p.Id + ": " + p.Description.ToString());
+        }
+        
         Plantings.Clear();
         
-        var p = Services.PlantingsService.GetPlantingsByPlantedDate(AppSession.ServiceMode);
+        var p1 = Services.PlantingsService.GetPlantingsByPlantedDate(AppSession.ServiceMode);
 
-        foreach (var o in p)
+        foreach (var o in p1)
         {
             o.SeedPacket = SeedPackets.First(x => x.Id == o.SeedPacket.Id);
             o.Author = People.First(x => x.Id == o.Author.Id);
@@ -129,4 +148,50 @@ public partial class PlantingsViewModel : ViewModelBase
         
     }
     
+    
+}
+
+public class Node
+{
+    public ObservableCollection<Node>? SubNodes { get; }
+    public long Id { get; }
+    public string Title { get; set; }
+    
+    public NodeType Type { get; }
+
+    public Node(long id,string title, NodeType type)
+    {
+        Id = id;
+        Title = title;
+        Type = type;
+        SubNodes = new ObservableCollection<Node>();
+    }
+    
+    public Node(long id,string title)
+    {
+        Id = id;
+        Title = title;
+        SubNodes = new ObservableCollection<Node>();
+    }
+
+    public Node(string title)
+    {
+        Title = title;
+        SubNodes = new ObservableCollection<Node>();
+    }
+
+    public Node(string title, ObservableCollection<Node> subNodes)
+    {
+        Title = title;
+        SubNodes = subNodes;
+    }
+}
+
+public enum NodeType
+{
+    Plant = 0,
+    Planting,
+    SeedPacket,
+    People,
+    Company
 }
