@@ -5,6 +5,7 @@
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              xmlns:materialIcons="clr-namespace:Material.Icons.Avalonia;assembly=Material.Icons.Avalonia"
              xmlns:vm="using:Permastead.ViewModels.Views"
+             xmlns:view="using:Permastead.Views.Views"
              x:DataType="vm:GaiaViewModel"
              x:CompileBindings="True"
              x:Class="Permastead.Views.Views.GaiaView">
@@ -13,46 +14,69 @@
   <Design.DataContext>
     <vm:GaiaViewModel/>
   </Design.DataContext>
+  
+    <Grid RowDefinitions="Auto,*,Auto">
+      
+      <WrapPanel Grid.Row="0" Background="{StaticResource  ButtonBackground}">
+        <materialIcons:MaterialIcon Kind="Earth" Margin="20"/>
+        <TextBlock FontWeight="Bold" Margin="20,20,20,20">Gaia</TextBlock>
+        <Separator MaxWidth="5" Foreground="Black"></Separator>
+        <TextBlock Name="EventsCount" Text="{Binding  ResponseCount , StringFormat='{}{0} total'}" Margin="20,20,20,20"></TextBlock>
+      </WrapPanel>
+    
 
-  <StackPanel>
-    <WrapPanel Background="{StaticResource  ButtonBackground}">
-      <materialIcons:MaterialIcon Kind="Earth" Margin="20"/>
-      <TextBlock FontWeight="Bold" Margin="20,20,20,20">Gaia</TextBlock>
-      <Separator MaxWidth="5" Foreground="Black"></Separator>
-      <TextBlock Name="EventsCount" Text="{Binding  ResponseCount , StringFormat='{}{0} total'}" Margin="20,20,20,20"></TextBlock>
-    </WrapPanel>
-    <WrapPanel>
-      <TextBlock Text="You: " Margin="20,20,20,20"> </TextBlock>
-      <TextBox Text="{Binding Request}" Name="RequestText"
-               Watermark="Enter your question"
-               TextWrapping="Wrap"
-               AcceptsReturn="False"
-               Height="20" Width="400"
-               FontSize="12">
-      </TextBox>
-
-      <Button Command="{Binding SendRequestCommand}" HotKey="Return">Send</Button>
-    </WrapPanel>
-
-    <WrapPanel>
-      <TextBlock Text="{Binding Response}" Margin="10,30,10,10" FontSize="16"></TextBlock>
-    </WrapPanel>
+      <!-- <WrapPanel Grid.Row="1" > -->
+      <!--   <TextBlock Text="{Binding Response}" Margin="10,30,10,10" FontSize="16"></TextBlock> -->
+      <!-- </WrapPanel> -->
    
+      <Panel Grid.Row="1" Background="Gray">
+        <Grid RowDefinitions="*,Auto">
+          <ListBox ItemsSource="{Binding RequestResponses}" Margin="10,50,10,10" VerticalAlignment="Bottom">
+            <!-- <view:RequestResponseView></view:RequestResponseView> -->
+            <ListBox.ItemTemplate>
+              <DataTemplate> 
+                <Grid ColumnDefinitions="Auto,*,Auto" RowDefinitions="Auto,*,Auto">
+                  <Border Grid.Row="0" Grid.Column="0" BorderBrush="White" CornerRadius="5" BorderThickness="2" Padding="5">
+                    <TextBlock  TextAlignment="Left"
+                                Text="{Binding Response}" />
+                  </Border>
+                  <Border Grid.Row="1" Grid.Column="2" BorderBrush="Black" Background="Chartreuse" CornerRadius="5" BorderThickness="2" Padding="5">
+                    <TextBlock  TextAlignment="Right" Foreground="Black"
+                                Text="{Binding Request}" />
+                  </Border>
+                </Grid>
+              </DataTemplate> 
+            </ListBox.ItemTemplate> 
+          </ListBox>
+        </Grid>
+      </Panel>
     
-      <ListBox ItemsSource="{Binding RequestResponses}" Margin="10,50,10,10">
-        <ListBox.ItemTemplate>
-          <DataTemplate>
-            <Border BorderBrush="Blue"
-                Margin="0,10,0,0"
-                BorderThickness="1"
-                Padding="5">
-              <TextBlock Text="{Binding FullText}"/>
-            </Border>          
-          </DataTemplate>
-        </ListBox.ItemTemplate>
-      </ListBox>
+      <!-- <ListBox ItemsSource="{Binding RequestResponses}" Margin="10,50,10,10"> -->
+      <!--   <ListBox.ItemTemplate> -->
+      <!--     <DataTemplate> -->
+      <!--       <Border BorderBrush="Blue" -->
+      <!--           Margin="0,10,0,0" -->
+      <!--           BorderThickness="1" -->
+      <!--           Padding="5"> -->
+      <!--         <TextBlock Text="{Binding FullText}"/> -->
+      <!--       </Border>           -->
+      <!--     </DataTemplate> -->
+      <!--   </ListBox.ItemTemplate> -->
+      <!-- </ListBox> -->
     
+      <WrapPanel Grid.Row="2" >
+        <TextBlock Text="You: " Margin="20,20,20,20"> </TextBlock>
+        <TextBox Text="{Binding Request}" Name="RequestText"
+                 Watermark="Enter your question"
+                 TextWrapping="Wrap"
+                 AcceptsReturn="False"
+                 Height="20" Width="400"
+                 FontSize="12">
+        </TextBox>
 
-  </StackPanel>
+        <Button Command="{Binding SendRequestCommand}" HotKey="Return">Send</Button>
+      </WrapPanel>
+      
+  </Grid>
 
 </UserControl>
