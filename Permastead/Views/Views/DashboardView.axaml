@@ -102,7 +102,7 @@
      <TextBlock FontSize="20" ToolTip.Tip="Your current score and level. You get points for adding records to the database. " 
                 TextAlignment="Center" Text="{Binding Statistics}" Margin="20,0,20,0"></TextBlock>
       <Border Background="Transparent"
-                      BorderBrush="{StaticResource  TextControlForeground}"
+                      BorderBrush="Transparent"
                       BorderThickness="1"
                       CornerRadius="5"
                       Padding="40" Margin="40,0,40,0">
