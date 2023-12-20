@@ -10,7 +10,7 @@
 <!-- Last modified 10/5/2011 -->
 <!-- -->
 <category><pattern>NORWAY DENMARK *</pattern>
-<template>That sounds like a wondeful trip.</template>
+<template>That sounds like a wonderful trip.</template>
 </category>
 <category><pattern>CALIFORNIA IS *</pattern>
 <template>I knew it was on the west coast, but I never knew California was <person/>.</template>
@@ -1264,7 +1264,7 @@
 <template><set name="it">Russia</set> is a large country in Asia.</template>
 </category>
 <category><pattern>WHERE IS BOSTON</pattern>
-<template><set name="it">      <set name="topic"> BOSTON </set>     </set> is a city in Massachusettes.</template>
+<template><set name="it">      <set name="topic"> BOSTON </set>     </set> is a city in Massachusetts.</template>
 </category>
 <category><pattern>WHERE IS KENYA</pattern>
 <template><set name="it">      <set name="topic"> KENYA </set>     </set> is a country in central Africa.</template>
