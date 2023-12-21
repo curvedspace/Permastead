@@ -22,7 +22,7 @@ public class GaiaService
 
         _gaia.IsAcceptingUserInput = false; // This switches off the bot to stop the user entering input while the bot is loading
 
-        _user = new User("Username", _gaia); // This creates a new User called "Username", using the object "AI"'s information.
+        _user = new User("Permasteader", _gaia); // This creates a new User called "Username", using the object "AI"'s information.
 
         _gaia.IsAcceptingUserInput = true; // This switches the user input back on
 
