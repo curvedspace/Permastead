@@ -8,6 +8,23 @@ namespace DataAccess.Local
 {
     public class CommentTypeRepository
     {
+        public static List<CommentType> GetAll(string conn)
+        {
+            try
+            {
+                using (IDbConnection db = new SqliteConnection(conn))
+                {
+                    string sqlQuery = "SELECT * FROM CommentType;";
+
+                    return db.Query<CommentType>(sqlQuery).ToList();
+                }
+            }
+            catch
+            {
+                return new List<CommentType>();
+            }
+        }
+        
         public static bool Insert(CommentType commentType)
         {
             try

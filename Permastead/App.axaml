@@ -7,7 +7,7 @@
              x:Class="Permastead.App"
              xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
              xmlns:materialIcons="clr-namespace:Material.Icons.Avalonia;assembly=Material.Icons.Avalonia" 
-             RequestedThemeVariant="Light">
+             RequestedThemeVariant="Dark">
              <!-- "Default" ThemeVariant follows system theme variant. "Dark" or "Light" are other available options. -->
 
      <Application.DataTemplates>

@@ -16,7 +16,7 @@ public partial class MainView : UserControl
         InitializeThemes();
         InitializeMenu();
 
-        App.ThemeManager?.Switch(1);
+        //App.ThemeManager?.Switch(1);
     }
 
     private void InitializeThemes()

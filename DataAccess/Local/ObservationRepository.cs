@@ -129,5 +129,24 @@ namespace DataAccess.Local
                 return false;
             }
         }
+        
+        public static bool UpdateObservation(string connectionString, Observation observation)
+        {
+            try
+            {
+                using (IDbConnection db = new SqliteConnection(connectionString))
+                {
+                    string sqlQuery =
+                        "UPDATE Observation SET CreationDate = @CreationDate, Comment = @Comment, CommentTypeId = @CommentTypeId, AuthorId = @AuthorId " +
+                        "WHERE Id = @Id;";
+
+                    return (db.Execute(sqlQuery, observation) == 1);
+                }
+            }
+            catch
+            {
+                return false;
+            }
+        }
     }
 }

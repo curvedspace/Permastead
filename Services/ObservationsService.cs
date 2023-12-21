@@ -41,7 +41,8 @@ namespace Services
                 {
                     AsOfDate = po.AsOfDate,
                     Author = po.Author,
-                    Comment = "(PG:" + po.Planting.Description + ") " + po.Comment,
+                    Annotation = "(PG:" + po.Planting.Description + ")",
+                    Comment = po.Comment,
                     CommentType = po.CommentType,
                     CreationDate = po.CreationDate,
                     EndDate = po.EndDate,
@@ -59,7 +60,8 @@ namespace Services
                 {
                     AsOfDate = po.AsOfDate,
                     Author = po.Author,
-                    Comment = "(S:" + po.SeedPacket.Description + ") " + po.Comment,
+                    Annotation = "(S:" + po.SeedPacket.Description + ")",
+                    Comment = po.Comment,
                     CommentType = po.CommentType,
                     CreationDate = po.CreationDate,
                     EndDate = po.EndDate,
@@ -77,7 +79,8 @@ namespace Services
                 {
                     AsOfDate = po.AsOfDate,
                     Author = po.Author,
-                    Comment = "(C:" + po.Person.FullName() + ") " + po.Comment,
+                    Annotation = "(C:" + po.Person.FullName() + ")",
+                    Comment =  po.Comment,
                     CommentType = po.CommentType,
                     CreationDate = po.CreationDate,
                     EndDate = po.EndDate,
@@ -90,6 +93,18 @@ namespace Services
 
             return observations;
         }
+        
+        public static List<CommentType> GetCommentTypes(ServiceMode mode)
+        {
+            var commentTypes = new List<CommentType>();
+
+            if (mode == ServiceMode.Local)
+            {
+                commentTypes = CommentTypeRepository.GetAll(DataConnection.GetLocalDataSource());
+            }
+
+            return commentTypes;
+        }
 
         public static bool InsertRecord(ServiceMode mode, Observation obs)
         {
@@ -98,6 +113,23 @@ namespace Services
             if (mode == ServiceMode.Local)
             {
                 rtnValue = ObservationRepository.InsertObservation(DataConnection.GetLocalDataSource(), obs);
+            }
+
+            return rtnValue;
+        }
+        
+        public static bool CommitRecord(ServiceMode mode, Observation obs)
+        {
+            var rtnValue = false;
+
+            if (mode == ServiceMode.Local)
+            {
+                if (obs.Id == 0)
+                    rtnValue = ObservationRepository.InsertObservation(DataConnection.GetLocalDataSource(), obs);
+                else
+                {
+                    rtnValue = ObservationRepository.UpdateObservation(DataConnection.GetLocalDataSource(), obs);
+                }
             }
 
             return rtnValue;

@@ -2,8 +2,39 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        mc:Ignorable="d" d:DesignWidth="200" d:DesignHeight="250"
+        mc:Ignorable="d" d:DesignWidth="550" d:DesignHeight="350"
+        xmlns:vm="using:Permastead.ViewModels.Dialogs"
         x:Class="Permastead.Views.Dialogs.ObservationWindow"
+        x:DataType="vm:ObservationWindowViewModel"
         Title="ObservationWindow">
-    Observations
+    
+    <!--This is design time only-->
+    <Design.DataContext>
+        <vm:ObservationWindowViewModel/>
+    </Design.DataContext>
+    
+    <Grid ColumnDefinitions="Auto,Auto,Auto,*" RowDefinitions="Auto,Auto,*,Auto">
+        <Label Grid.Row="0" Grid.Column="0" Margin="20">Date:</Label>
+        <CalendarDatePicker Grid.Row="0" Grid.Column="1" FontSize="12" SelectedDate="{Binding Observation.CreationDate, Mode=TwoWay}" >
+        </CalendarDatePicker>
+        <Label Grid.Row="0" Grid.Column="2" Margin="20">Type:</Label>
+        <ComboBox Grid.Row="0" Grid.Column="3" Width="200" Margin="0,15,20,0"
+                  ItemsSource="{Binding CommentTypes}"
+                  SelectedItem="{Binding Observation.CommentType}" AutoScrollToSelectedItem="False" >
+            <ComboBox.ItemTemplate>
+                <DataTemplate >
+                    <TextBlock Text="{Binding Description}" />
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
+        <Label Grid.Row="1" Grid.Column="0" Margin="20,20,0,0">Comment:</Label>
+        <TextBox Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="4" Margin="10,10,10,10" 
+                 TextWrapping="WrapWithOverflow"
+                 Text="{Binding Observation.Comment}"></TextBox>
+        <StackPanel Grid.Row="3" Grid.Column="3" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,20,0">
+            <Button Name="SaveButton" Margin="10" Click="SaveButton_OnClick">Save</Button>
+            <Button Name="CancelButton" Margin="10" Click="CancelButton_OnClick">Cancel</Button>
+        </StackPanel>
+        
+    </Grid>
 </Window>

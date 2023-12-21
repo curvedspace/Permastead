@@ -16,12 +16,14 @@ public class Observation
     public long CommentTypeId { get { return this.CommentType?.Id ?? 0; } }
 
     public string Comment { get; set; } = string.Empty;
+    
+    public string Annotation { get; set; } = string.Empty;
 
     public Person? Author { get; set; }
 
     public long AuthorId { get { return this.Author?.Id ?? 0; } }
 
-    public string FullDescription => DisplayAsOfDate + ": " + Comment;
+    public string FullDescription => DisplayAsOfDate + ": " + Annotation + " " + Comment;
 
     public DateTime StartDate { get; set; } = DateTime.Today;
 
