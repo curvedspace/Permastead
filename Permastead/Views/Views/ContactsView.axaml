@@ -10,8 +10,9 @@
              x:Class="Permastead.Views.Views.ContactsView">
     <!-- <StackPanel> -->
     <Grid ColumnDefinitions="*" RowDefinitions="Auto,*">
-        <WrapPanel Background="{StaticResource  ButtonBackground}">
-            <materialIcons:MaterialIcon Kind="People" Margin="20"/>
+        <WrapPanel>
+            <Image Margin="20" Width="24" Height="24" Source="/Assets/outlook_new_meeting.png" />
+            <!-- <materialIcons:MaterialIcon Kind="People" Margin="20"/> -->
             <TextBlock FontWeight="Bold" Margin="20,20,20,20">People</TextBlock>
             <Separator MaxWidth="5" Foreground="Black"></Separator>
             <TextBlock Name="EventsCount" Text="{Binding PeopleCount , StringFormat='{}{0} total'}" Margin="20,20,20,20"></TextBlock>

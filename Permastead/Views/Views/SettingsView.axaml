@@ -17,7 +17,7 @@
     <Panel>
         <StackPanel>
             
-            <WrapPanel Background="{StaticResource  ButtonBackground}">
+            <WrapPanel>
                 <materialIcons:MaterialIcon Kind="Settings" Margin="20"/>
                 <TextBlock FontWeight="Bold" Margin="20,20,20,20">Settings</TextBlock>
                 <Separator MaxWidth="5"></Separator>

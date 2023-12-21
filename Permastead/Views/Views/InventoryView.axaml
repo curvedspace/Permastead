@@ -15,7 +15,7 @@
  
     <Grid ColumnDefinitions="*" RowDefinitions="Auto, Auto, Auto, Auto,*">
     
-    <WrapPanel Grid.Row="0" Background="{StaticResource  ButtonBackground}">
+      <WrapPanel>
       <materialIcons:MaterialIcon Kind="Clipboard" Margin="20"/>
       <TextBlock FontWeight="Bold" Margin="20,20,20,20">Inventory</TextBlock>
       <Separator MaxWidth="5" Foreground="Black"></Separator>

@@ -17,7 +17,7 @@
   <Panel>
       <Grid ColumnDefinitions="*" RowDefinitions="Auto, Auto, *">
       
-        <WrapPanel Background="{StaticResource  ButtonBackground}">
+        <WrapPanel>
           <materialIcons:MaterialIcon Kind="EyeCircle" Margin="20"/>
           <TextBlock FontWeight="Bold" Margin="20,20,20,20">Observations</TextBlock>
           <Separator MaxWidth="5" Foreground="Black"></Separator>

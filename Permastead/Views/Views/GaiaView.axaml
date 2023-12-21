@@ -17,7 +17,7 @@
   
     <Grid RowDefinitions="Auto,*,Auto">
       
-      <WrapPanel Grid.Row="0" Background="{StaticResource  ButtonBackground}">
+      <WrapPanel Grid.Row="0" >
         <materialIcons:MaterialIcon Kind="Earth" Margin="20"/>
         <TextBlock FontWeight="Bold" Margin="20,20,20,20">Gaia</TextBlock>
         <Separator MaxWidth="5" Foreground="Black"></Separator>
