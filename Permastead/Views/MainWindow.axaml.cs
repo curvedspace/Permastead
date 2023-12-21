@@ -15,7 +15,7 @@ public partial class MainWindow : Window
         try
         {
                 
-            this.Title = $"Permastead V{Assembly.GetEntryAssembly().GetCustomAttribute<AssemblyInformationalVersionAttribute>().InformationalVersion} - " +
+            this.Title = $"Permastead V{Assembly.GetEntryAssembly().GetCustomAttribute<AssemblyFileVersionAttribute>().Version} - " +
                          File.GetLastWriteTime(Assembly.GetExecutingAssembly().Location).ToString("yyyy-MM-dd");
 
 #if DEBUG
