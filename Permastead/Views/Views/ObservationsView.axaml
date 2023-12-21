@@ -41,7 +41,7 @@
       <Panel Grid.Row="2">
 
           <ListBox Name="ObservationsList" ItemsSource="{Binding Observations, Mode=TwoWay }" 
-                   Margin="30" ScrollViewer.VerticalScrollBarVisibility="Auto">
+                  DoubleTapped="ObservationsList_OnDoubleTapped" Margin="30" ScrollViewer.VerticalScrollBarVisibility="Auto">
             <ListBox.ItemTemplate>
               <DataTemplate>
                 <Border CornerRadius="4">
