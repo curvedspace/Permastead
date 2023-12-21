@@ -34,11 +34,22 @@ public partial class GaiaViewModel : ViewModelBase
     [RelayCommand]
     private void SendRequest()
     {
+        
         Response = _gaia.GetResponse(Request);
         ResponseCount++;
-        RequestResponses.Add(new RequestResponse() { Request = _request, Response = _response });
+
+        if (string.IsNullOrEmpty(Response))
+        {
+            Response = "Sorry, not sure how to answer.";
+            RequestResponses.Add(new RequestResponse() { Request = _request, Response = _response });
+        }
+        else
+        {
+            RequestResponses.Add(new RequestResponse() { Request = _request, Response = _response });
+        }
 
         Request = string.Empty;
+
     }
     
     bool CanSendRequest(object parameter)

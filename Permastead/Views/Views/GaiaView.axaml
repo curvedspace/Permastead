@@ -31,17 +31,17 @@
    
       <Panel Grid.Row="1" Background="Gray">
         <Grid RowDefinitions="*,Auto">
-          <ListBox ItemsSource="{Binding RequestResponses}" Margin="10,50,10,10" VerticalAlignment="Bottom">
+          <ListBox Name="GaiaListBox" ItemsSource="{Binding RequestResponses}" Margin="10,50,10,10" VerticalAlignment="Bottom" AutoScrollToSelectedItem="True">
             <!-- <view:RequestResponseView></view:RequestResponseView> -->
             <ListBox.ItemTemplate>
               <DataTemplate> 
                 <Grid ColumnDefinitions="Auto,*,Auto" RowDefinitions="Auto,*,Auto">
                   <Border Grid.Row="0" Grid.Column="2" BorderBrush="Black" Background="Chartreuse" CornerRadius="5" BorderThickness="2" Padding="5">
-                    <TextBlock  TextAlignment="Right" Foreground="Black"
+                    <TextBlock  TextAlignment="Right" Foreground="Black" TextWrapping="WrapWithOverflow"
                                 Text="{Binding Request}" />
                   </Border>
                   <Border Grid.Row="1" Grid.Column="0" BorderBrush="White" CornerRadius="5" BorderThickness="2" Padding="5">
-                    <TextBlock  TextAlignment="Left"
+                    <TextBlock  TextAlignment="Left" TextWrapping="WrapWithOverflow"
                                 Text="{Binding Response}" />
                   </Border>
                   

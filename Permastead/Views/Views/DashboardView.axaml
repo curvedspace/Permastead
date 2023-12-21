@@ -6,7 +6,7 @@
              xmlns:idc="using:Dock.Model.Controls"
              xmlns:vm="using:Permastead.ViewModels.Views"
              mc:Ignorable="d"
-             d:DesignWidth="1200" d:DesignHeight="1000"
+             d:DesignWidth="1800" d:DesignHeight="1000"
              xmlns:views="clr-namespace:Permastead.Views.Views"
              x:DataType="vm:DashboardViewModel" x:CompileBindings="True">
  <DockPanel>
@@ -16,7 +16,7 @@
                 FontSize="32"
                 TextWrapping="WrapWithOverflow"
                 ToolTip.Tip="The quote of the day. "
-                Margin="100"
+                Margin="50"
                 Opacity="0.8"
                 Text="{Binding QuoteViewModel.QuoteText}"
                 TextAlignment="Center">
@@ -99,35 +99,35 @@
       </Border>
      
      <StackPanel>
-     <TextBlock FontSize="20" ToolTip.Tip="Your current score and level. You get points for adding records to the database. " 
-                TextAlignment="Center" Text="{Binding Statistics}" Margin="20,0,20,0"></TextBlock>
-      <Border Background="Transparent"
-                      BorderBrush="Transparent"
-                      BorderThickness="1"
-                      CornerRadius="5"
-                      Padding="40" Margin="40,0,40,0">
-         <views:OpeningView HorizontalAlignment="Center"></views:OpeningView>
-      </Border>
+         <TextBlock FontSize="20" ToolTip.Tip="Your current score and level. You get points for adding records to the database. " 
+                    TextAlignment="Center" Text="{Binding Statistics}" Margin="20,0,20,0"></TextBlock>
+         <Border Background="Transparent"
+                 BorderBrush="Transparent"
+                 BorderThickness="1"
+                 CornerRadius="5"
+                 Padding="40" Margin="40,0,40,0">
+             <views:GaiaView HorizontalAlignment="Center" Width="1000" Height="700"></views:GaiaView>
+         </Border>
          
-         <Grid DockPanel.Dock="Bottom" ColumnDefinitions="Auto, *, Auto" RowDefinitions="Auto,*" VerticalAlignment="Bottom">
-             <TextBlock Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="0" 
-                        Margin="10" FontSize="20"
-                        HorizontalAlignment="Center">Planting Success Rate</TextBlock>
-             
-             <TextBlock Grid.Column="0" VerticalAlignment="Center" TextAlignment="Left" FontSize="16"
-                        Text="{Binding GrowingSeason}"></TextBlock>
-             
-             <ProgressBar Grid.Column="1" Margin="80,50,80,50" Height="30" ShowProgressText="True"
-                          Value="{Binding SuccessfulPlantings}" 
-                          Minimum="0" 
-                          Maximum="{Binding TotalPlantings}"></ProgressBar>
-             
-             
-             <TextBlock Grid.Column="2" VerticalAlignment="Center" TextAlignment="Right" FontSize="16"
-                        Text="{Binding TotalPlantStats}"></TextBlock>
-             
-             <TextBlock FontSize="20" HorizontalAlignment="Center" Grid.ColumnSpan="3" Grid.Row="1" Text="{Binding WeatherForecast}"></TextBlock>
-         </Grid>
+         <!-- <Grid DockPanel.Dock="Bottom" ColumnDefinitions="Auto, *, Auto" RowDefinitions="Auto,*" VerticalAlignment="Bottom"> -->
+         <!--     <TextBlock Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="0"  -->
+         <!--                Margin="10" FontSize="20" -->
+         <!--                HorizontalAlignment="Center">Planting Success Rate</TextBlock> -->
+         <!--      -->
+         <!--     <TextBlock Grid.Column="0" VerticalAlignment="Center" TextAlignment="Left" FontSize="16" -->
+         <!--                Text="{Binding GrowingSeason}"></TextBlock> -->
+         <!--      -->
+         <!--     <ProgressBar Grid.Column="1" Margin="80,50,80,50" Height="30" ShowProgressText="True" -->
+         <!--                  Value="{Binding SuccessfulPlantings}"  -->
+         <!--                  Minimum="0"  -->
+         <!--                  Maximum="{Binding TotalPlantings}"></ProgressBar> -->
+         <!--      -->
+         <!--      -->
+         <!--     <TextBlock Grid.Column="2" VerticalAlignment="Center" TextAlignment="Right" FontSize="16" -->
+         <!--                Text="{Binding TotalPlantStats}"></TextBlock> -->
+         <!--      -->
+         <!--     <TextBlock FontSize="20" HorizontalAlignment="Center" Grid.ColumnSpan="3" Grid.Row="1" Text="{Binding WeatherForecast}"></TextBlock> -->
+         <!-- </Grid> -->
          
      </StackPanel>
      

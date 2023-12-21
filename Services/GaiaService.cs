@@ -46,11 +46,22 @@ public class GaiaService
     {
         if (inputString.StartsWith("/")) 
         {
+            switch (inputString)
+            {
+                case "/help":
+                    return "You can ask me questions, but I also know the following commands: " + '\n' +
+                           "/help - Displays a list of commands" + '\n' +
+                           "/s - will search observations for a word.";
+                    break;
+                
+                default:
+                    var searchList = GetSearchResults(inputString.Replace("/s ",""));
 
-            //assume search for now
-            var searchList = GetSearchResults(inputString.Replace("/s ",""));
-
-            return searchList.ToString();
+                    return searchList.ToString();
+                    
+                    //return @"Sorry, I don't know that command.";
+                    break;
+            }
         }
         else 
         { 

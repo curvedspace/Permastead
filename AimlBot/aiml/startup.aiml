@@ -7,9 +7,33 @@
       </template>
    </category>
    <category>
-         <pattern> HI * </pattern> 
-         <template>
-            Hi there.
-         </template>
-      </category>
+     <pattern> HELLO</pattern> 
+     <template>
+        Hello
+     </template>
+   </category>
+   <category>
+     <pattern> HI * </pattern> 
+     <template>
+        Hello there
+     </template>
+   </category>
+   <category>
+    <pattern> HI</pattern> 
+        <template>
+           Hi.
+        </template>
+    </category>
+    <category>
+      <pattern> HELP </pattern> 
+      <template>
+         You can ask me about anything.
+      </template>
+   </category>    
+    <category>
+      <pattern> * HELP </pattern> 
+      <template>
+         You can ask me about anything.
+      </template>
+   </category>
 </aiml>
