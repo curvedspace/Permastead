@@ -12,5 +12,7 @@ namespace Permastead
     {
         public static ServiceMode ServiceMode { get; set; } = ServiceMode.Local;
 
+        public static GaiaService GaiaService { get; } = new GaiaService();
+
     }
 }

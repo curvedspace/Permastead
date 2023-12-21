@@ -30,7 +30,8 @@ public partial class GaiaViewModel : ViewModelBase
 
     public GaiaViewModel()
     {
-        _gaia = new Services.GaiaService();
+        _gaia = AppSession.GaiaService;
+        //_gaia = new Services.GaiaService();
 
         //Response = _gaia.GetResponse("Hello");
         
