@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
@@ -31,7 +33,10 @@ public partial class ObservationsView : UserControl
             //get the selected row in the list
             var currentObs = sender as ListBox;
             var obs = currentObs.SelectedValue as Observation;
-            var vm = new ObservationWindowViewModel(obs);
+            
+            //get underlying view's viewmodel
+            
+            var vm = new ObservationWindowViewModel(obs, (ObservationsViewModel)DataContext);
         
             var obsWindow = new ObservationWindow();
             obsWindow.DataContext = vm;
@@ -43,7 +48,13 @@ public partial class ObservationsView : UserControl
             obsWindow.Title = "Observation";
             obsWindow.WindowStartupLocation = WindowStartupLocation.CenterOwner;
             
+            // IReadOnlyList<Window>? windows = ((IClassicDesktopStyleApplicationLifetime)Application.Current.ApplicationLifetime).Windows;
+            // Window? parent = windows.First();
+            //
+            // obsWindow.ShowDialog(parent);
+            
             obsWindow.Show();
+            
         }
         catch (Exception exception)
         {

@@ -106,7 +106,7 @@ namespace Permastead.ViewModels.Views;
 
         }
 
-        private void RefreshObservations()
+        public void RefreshObservations()
         {
             _observations.Clear();
             var obs = Services.ObservationsService.GetObservationsForAllEntities(AppSession.ServiceMode);

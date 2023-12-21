@@ -4,6 +4,7 @@ using System.Linq;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Models;
+using Permastead.ViewModels.Views;
 using Serilog;
 using Serilog.Context;
 
@@ -17,9 +18,12 @@ public partial class ObservationWindowViewModel : ViewModelBase
     [ObservableProperty]
     private ObservableCollection<CommentType> _commentTypes = new ObservableCollection<CommentType>();
     
-    public ObservationWindowViewModel(Observation obs)
+    private ObservationsViewModel _controlViewModel { get; set;  } = new ObservationsViewModel();
+    
+    public ObservationWindowViewModel(Observation obs, ObservationsViewModel obsVm)
     {
         _observation = obs;
+        _controlViewModel = obsVm;
         
         CommentTypes =
             new ObservableCollection<CommentType>(
@@ -27,6 +31,7 @@ public partial class ObservationWindowViewModel : ViewModelBase
         _observation.CommentType = CommentTypes.First(x => x.Id == _observation.CommentType.Id);
         
         OnPropertyChanged(nameof(_observation));
+        
     }
     
     public ObservationWindowViewModel()
@@ -49,6 +54,8 @@ public partial class ObservationWindowViewModel : ViewModelBase
             {
                 Log.Information("Saved observation: ", rtnValue);
             }
+            
+            _controlViewModel.RefreshObservations();
         }
     }
 }
