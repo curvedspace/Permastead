@@ -34,26 +34,26 @@ public partial class GaiaViewModel : ViewModelBase
 
         //Response = _gaia.GetResponse("Hello");
         
-        try
-        {
-            var t = new Task(GetWeatherAsync);
-            t.Start();
-            t.Wait();
-
-            if (string.IsNullOrEmpty(WeatherForecast))
-            {
-                RequestResponses.Add(new RequestResponse() { Request = "Hello", Response = "Hello, I am Gaia." });
-            }
-            else
-            {
-                RequestResponses.Add(new RequestResponse() { Request = "The weather please?", Response = WeatherForecast });
-            }
-
-        }
-        catch (Exception e)
-        {
-            Console.WriteLine(e);
-        }
+        // try
+        // {
+        //     var t = new Task(GetWeatherAsync);
+        //     t.Start();
+        //     t.Wait();
+        //
+        // }
+        // catch (Exception e)
+        // {
+        //     Console.WriteLine(e);
+        // }
+        
+        // if (string.IsNullOrEmpty(WeatherForecast))
+        // {
+        //     RequestResponses.Add(new RequestResponse() { Request = "Hello", Response = "Hello, I am Gaia." });
+        // }
+        // else
+        // {
+        //     RequestResponses.Add(new RequestResponse() { Request = "The weather please?", Response = WeatherForecast });
+        // }
 
     }  
     
