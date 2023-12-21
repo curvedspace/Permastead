@@ -31,7 +31,8 @@
    
       <Panel Grid.Row="1" Background="Gray">
         <Grid RowDefinitions="*,Auto">
-          <ListBox Name="GaiaListBox" ItemsSource="{Binding RequestResponses}" Margin="10,50,10,10" VerticalAlignment="Bottom" AutoScrollToSelectedItem="True">
+          <ListBox x:Name="GaiaListBox" ItemsSource="{Binding RequestResponses}" Margin="10,50,10,10" 
+                   VerticalAlignment="Bottom" AutoScrollToSelectedItem="True">
             <!-- <view:RequestResponseView></view:RequestResponseView> -->
             <ListBox.ItemTemplate>
               <DataTemplate> 
@@ -67,7 +68,7 @@
     
       <Grid Grid.Row="2" ColumnDefinitions="Auto,*,Auto">
         <TextBlock Text="You: " Margin="20,20,20,20"> </TextBlock>
-        <TextBox Grid.Column="1" Text="{Binding Request}" Name="RequestText"
+        <TextBox Grid.Column="1" Text="{Binding Request}" x:Name="RequestTextBox"
                  Watermark="Enter your question"
                  TextWrapping="Wrap"
                  AcceptsReturn="False"

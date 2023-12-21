@@ -14,6 +14,9 @@ public partial class GaiaView : UserControl
     {
         InitializeComponent();
         DataContext = new GaiaViewModel();
+        
+        this.FindControl<ListBox>("GaiaListBox").PropertyChanged += ListBoxPropertyChanged;
+        //RequestTextBox.PropertyChanged += TextBoxPropertyChanged;
     }
 
 
@@ -28,5 +31,18 @@ public partial class GaiaView : UserControl
             Console.WriteLine(e);
         }
         
+    }
+    
+    private void ListBoxPropertyChanged(object? sender, AvaloniaPropertyChangedEventArgs e)
+    {
+        Console.WriteLine(e.Property.Name);
+        if(e.Property.Name == "ItemCount")
+        {
+            var itemCount = this.FindControl<ListBox>("GaiaListBox").ItemCount;
+            this.FindControl<ListBox>("GaiaListBox").SelectedIndex = itemCount-1;
+            this.FindControl<ListBox>("GaiaListBox").ScrollIntoView(itemCount);
+            this.FindControl<ListBox>("GaiaListBox").InvalidateVisual();
+            
+        }
     }
 }
