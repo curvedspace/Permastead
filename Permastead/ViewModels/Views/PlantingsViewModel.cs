@@ -2,8 +2,11 @@ using System;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Reactive.Joins;
+using Avalonia.Controls;
+using Avalonia.Controls.Models.TreeDataGrid;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using DynamicData.Kernel;
 using Models;
 using Serilog;
 using Services;
@@ -40,6 +43,8 @@ public partial class PlantingsViewModel : ViewModelBase
 
     [ObservableProperty] private ObservableCollection<Node> _selectedNodes;
     
+    public FlatTreeDataGridSource<Planting> PlantingsSource { get; set; }
+    
     public PlantingsViewModel()
     {
         try
@@ -59,52 +64,117 @@ public partial class PlantingsViewModel : ViewModelBase
         }
             
     }
-    
+
     [RelayCommand]
     private void RefreshPlantings()
     {
         SelectedNodes = new ObservableCollection<Node>();
         Nodes = new ObservableCollection<Node>();
         
+        // populate treeview with plants
         var plantsNode = new Node("Plants (" + _plants.Count + ")", new ObservableCollection<Node>());
-        _plants = new ObservableCollection<Plant>(PlantService.GetAllPlants(AppSession.ServiceMode));
-        
-        //plants
         Nodes.Add(plantsNode);
         foreach (var p in _plants)
         {
             plantsNode.SubNodes.Add(new Node(p.Id, p.Description, NodeType.Plant));
-            //SearchItems.Add("P:" + p.Id + ": " + p.Description.ToString());
         }
         
+        // now location
+        var locNode = new Node("Locations (" + _beds.Count + ")", new ObservableCollection<Node>());
+        Nodes.Add(locNode);
+        foreach (var b in _beds)
+        {
+            locNode.SubNodes.Add(new Node(b.Id, b.Code + ": " + b.Description, NodeType.GardenBed));
+        }
+        
+        this.RefreshData();
+    }
+
+    [RelayCommand]
+    private void RefreshDataOnly()
+    {
+        RefreshData();
+    }
+    
+    public void RefreshData(Node node = null, string searchText = "")
+    {
+        // clear out plantings, prepare for filtering
         Plantings.Clear();
         
         var p1 = Services.PlantingsService.GetPlantingsByPlantedDate(AppSession.ServiceMode);
 
+        bool addRecord = false;
         foreach (var o in p1)
         {
-            o.SeedPacket = SeedPackets.First(x => x.Id == o.SeedPacket.Id);
-            o.Author = People.First(x => x.Id == o.Author.Id);
-            o.Bed =Beds.First(x => x.Id == o.Bed.Id);
-            o.Plant = Plants.First(x => x.Id == o.Plant.Id);
+            addRecord = false;
+            // o.SeedPacket = SeedPackets.First(x => x.Id == o.SeedPacket.Id);
+            // o.Author = People.First(x => x.Id == o.Author.Id);
+            // o.Bed =Beds.First(x => x.Id == o.Bed.Id);
+            // o.Plant = Plants.First(x => x.Id == o.Plant.Id);
 
-            if (_currentOnly)
+            if (node != null)
             {
-                if (o.IsActive) Plantings.Add(o);
+                switch (node.Type)
+                {
+                    case NodeType.Plant:
+                        if (o.Plant.Description == node.Title) addRecord = true;
+                        break;
+                    case NodeType.GardenBed:
+                        if (o.Bed.Code + ": " + o.Bed.Description == node.Title) addRecord = true;
+                        break;
+                    default:
+                        addRecord = false;
+                        break;
+                }
             }
             else
             {
-                Plantings.Add(o);
+                addRecord = true;
             }
             
+            if (CurrentOnly)
+            {
+                if (o.IsActive && addRecord) Plantings.Add(o);
+            }
+            else
+            {
+                if (addRecord) Plantings.Add(o);
+            }
         }
 
         if (Plantings.Count > 0) 
-            CurrentItem = Plantings.FirstOrDefault();
+            CurrentItem = Plantings.FirstOrDefault()!;
         else
             CurrentItem = new Planting();
 
         PlantingCount = Plantings.Count;
+        
+        PlantingsSource = new FlatTreeDataGridSource<Planting>(Plantings)
+        {
+            Columns =
+            {
+                new TextColumn<Planting, string>
+                    ("Date", x => x.StartDateString),
+                new TextColumn<Planting, string>
+                    ("Description", x => x.Description),
+                new TextColumn<Planting, string>
+                    ("Author", x => x.Author.FirstName),
+                new TextColumn<Planting, string>
+                    ("Type", x => x.Plant.Description),
+                new TextColumn<Planting, decimal>
+                    ("Yield", x => x.YieldRating),
+                new TextColumn<Planting, string>
+                    ("Age", x => x.Age),
+                new TextColumn<Planting, string>
+                    ("Location", x => x.Bed.Code),
+                new TextColumn<Planting, string>
+                    ("Location Description", x => x.Bed.Description),
+                new TextColumn<Planting, string>
+                    ("Starter", x => x.SeedPacket.Description),
+                new TextColumn<Planting, string>
+                    ("Comment", x => x.Comment)
+            },
+        };
 
     }
     
@@ -193,5 +263,6 @@ public enum NodeType
     Planting,
     SeedPacket,
     People,
-    Company
+    Company,
+    GardenBed
 }

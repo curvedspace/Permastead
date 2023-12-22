@@ -22,12 +22,25 @@ public partial class PlantingsView : UserControl
         AvaloniaXamlLoader.Load(this);
     }
     
-    private void TreeBrowser_OnTapped(object? sender, TappedEventArgs e)
+    private void TreeBrowser_OnDoubleTapped(object? sender, TappedEventArgs e)
     {
         try
         {
-            Node node = (Node)TreeBrowser.SelectedItem;
-            if (node != null) Console.WriteLine(node.Title);
+            var tv = this.FindControl<TreeView>("TreeBrowser");
+            
+            if (tv is { SelectedItems.Count: > 0 })
+            {
+                if (tv.SelectedItems[0] is Node node)
+                {
+                    Console.WriteLine(node.Title);
+                    
+                    //refresh plantings
+                    var vm = DataContext as PlantingsViewModel;
+                    vm!.RefreshData(node,"");
+                }
+
+            }
+            
         }
         catch (Exception exception)
         {

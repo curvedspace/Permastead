@@ -17,15 +17,14 @@
   <Grid ColumnDefinitions="*" RowDefinitions="Auto,*">
     
     <WrapPanel>
-      <materialIcons:MaterialIcon Kind="Plant" Margin="20"/>
-      <TextBlock FontWeight="Bold" Margin="20,20,20,20">Plantings</TextBlock>
-      <Separator MaxWidth="5" Foreground="Black"></Separator>
+      <Image Margin="20" Width="24" Height="24" Source="/Assets/plant.png" />
+      <!-- <materialIcons:MaterialIcon Kind="Plant" Margin="20"/> -->
+      <TextBlock FontWeight="Bold" Margin="20,24,20,20">Plantings</TextBlock>
+      <!-- <Separator MaxWidth="5" Foreground="Black"></Separator> -->
       <Button Command="{Binding RefreshPlantingsCommand}" Name="Refresh" HorizontalAlignment="Right" Margin="5,0">Refresh</Button> 
-      <!-- <Button Command="{Binding ResetEventCommand}" Name="Reset" HorizontalAlignment="Right" Margin="5,0">Reset</Button> -->
-      <!-- <Button Command="{Binding SaveEventCommand}" Name="Save" HorizontalAlignment="Right" Margin="5,0">Save</Button> -->
-      <Separator MaxWidth="5" Foreground="Black"></Separator>
-      <TextBlock Name="PlantingCount" Text="{Binding PlantingCount , StringFormat='{}{0} total'}" Margin="20,20,20,20"></TextBlock>
-      <CheckBox Name="CurrentOnly" Command="{Binding RefreshPlantingsCommand}" IsChecked="{Binding CurrentOnly, Mode=TwoWay}" Margin="0">Current Only</CheckBox>
+      <!-- <Separator MaxWidth="5" Foreground="Black"></Separator> -->
+      <TextBlock Name="PlantingCount" Text="{Binding PlantingCount , StringFormat='{}{0} total'}" Margin="20,24,20,20"></TextBlock>
+      <CheckBox Name="CurrentOnly" Command="{Binding RefreshDataOnlyCommand}" IsChecked="{Binding CurrentOnly, Mode=TwoWay}" Margin="0">Current Only</CheckBox>
     </WrapPanel>
      
     <Panel Grid.Row="1">
@@ -35,10 +34,10 @@
           <SplitView.Pane>
             <ScrollViewer >
               <TreeView Margin="10"
-                        Name="TreeBrowser"
+                        x:Name="TreeBrowser"
                         ItemsSource="{Binding Nodes}"
                         SelectedItems="{Binding SelectedNodes}"
-                        Tapped="TreeBrowser_OnTapped"
+                        DoubleTapped="TreeBrowser_OnDoubleTapped"
                         SelectionMode="Single">
                 <TreeView.ItemTemplate>
                   <TreeDataTemplate ItemsSource="{Binding SubNodes}">
@@ -52,122 +51,125 @@
               </TreeView>
             </ScrollViewer>
           </SplitView.Pane>
+        
+        <TreeDataGrid Grid.Row="1" Margin="10" Source="{Binding PlantingsSource}" 
+                      CanUserResizeColumns="True"></TreeDataGrid>
      
-      <DataGrid Name="PlantingsGrid" ItemsSource="{Binding Plantings, Mode=TwoWay}" SelectedItem="{Binding CurrentItem, Mode=TwoWay}" 
-                AutoGenerateColumns="False" FontSize="12" Margin="30">
-        <DataGrid.Styles>
-          <Style Selector="DataGridCell">
-            <Setter Property="Background" Value="Transparent" />
-            <Setter Property="HorizontalContentAlignment" Value="Left" />
-            <Setter Property="VerticalContentAlignment" Value="Center" />
-            <Setter Property="FontSize" Value="10" />
-            <Setter Property="Template">
-              <ControlTemplate>
-                <Grid Background="{TemplateBinding Background}" ColumnDefinitions="*,Auto">
-                  <ContentPresenter
-                    Content="{TemplateBinding Content}"
-                    ContentTemplate="{TemplateBinding ContentTemplate}"
-                    HorizontalContentAlignment="Left" HorizontalAlignment="Left"
-                    Margin="{TemplateBinding Padding}"
-                    TextBlock.Foreground="{TemplateBinding Foreground}"
-                    VerticalAlignment="Center" VerticalContentAlignment="Center" />
-
-                  <Rectangle
-                    Grid.Column="1"
-                    HorizontalAlignment="Stretch"
-                    Name="PART_RightGridLine"
-                    Stroke="WhiteSmoke"
-                    StrokeThickness="1"
-                    VerticalAlignment="Stretch" />
-                </Grid>
-              </ControlTemplate>
-            </Setter>
-          </Style>
-        </DataGrid.Styles>
-        <DataGrid.Columns>
-        
-          <DataGridTemplateColumn Header="Date">
-            <DataGridTemplateColumn.CellTemplate>
-              <DataTemplate DataType="model:Planting">
-                <TextBlock Text="{Binding StartDateString}" TextAlignment="Left"  Margin="10" />
-              </DataTemplate>
-            </DataGridTemplateColumn.CellTemplate>
-          </DataGridTemplateColumn>
-        
-          <DataGridTemplateColumn Header="Description">
-            <DataGridTemplateColumn.CellTemplate>
-              <DataTemplate DataType="model:Planting">
-                <TextBlock Text="{Binding Description}"  Margin="10" />
-              </DataTemplate>
-            </DataGridTemplateColumn.CellTemplate>
-          </DataGridTemplateColumn>
-        
-          <DataGridTemplateColumn Header="Author">
-            <DataGridTemplateColumn.CellTemplate>
-              <DataTemplate DataType="model:Planting">
-                <TextBlock Text="{Binding Author.FirstName}"  Margin="10" />
-              </DataTemplate>
-            </DataGridTemplateColumn.CellTemplate>
-          </DataGridTemplateColumn>
-        
-          <DataGridTemplateColumn Header="Type">
-            <DataGridTemplateColumn.CellTemplate>
-              <DataTemplate DataType="model:Planting">
-                <TextBlock Text="{Binding Plant.Description}" TextAlignment="Left" TextWrapping="WrapWithOverflow"  Margin="10" />
-              </DataTemplate>
-            </DataGridTemplateColumn.CellTemplate>
-          </DataGridTemplateColumn>
-          
-          <DataGridTemplateColumn Header="Yield Rating">
-            <DataGridTemplateColumn.CellTemplate>
-              <DataTemplate DataType="model:Planting">
-                <TextBlock Text="{Binding YieldRating}" TextAlignment="Center" TextWrapping="WrapWithOverflow"  Margin="10" />
-              </DataTemplate>
-            </DataGridTemplateColumn.CellTemplate>
-          </DataGridTemplateColumn>
-          
-          <DataGridTemplateColumn Header="Age">
-            <DataGridTemplateColumn.CellTemplate>
-              <DataTemplate DataType="model:Planting">
-                <TextBlock Text="{Binding Age}" TextAlignment="Center" TextWrapping="WrapWithOverflow"  Margin="10" />
-              </DataTemplate>
-            </DataGridTemplateColumn.CellTemplate>
-          </DataGridTemplateColumn>
-          
-          <DataGridTemplateColumn Header="Location">
-            <DataGridTemplateColumn.CellTemplate>
-              <DataTemplate DataType="model:Planting">
-                <TextBlock Text="{Binding Bed.Code}" TextAlignment="Left" TextWrapping="WrapWithOverflow"  Margin="10" />
-              </DataTemplate>
-            </DataGridTemplateColumn.CellTemplate>
-          </DataGridTemplateColumn>
-          
-          <DataGridTemplateColumn Header="Location Description">
-            <DataGridTemplateColumn.CellTemplate>
-              <DataTemplate DataType="model:Planting">
-                <TextBlock Text="{Binding Bed.Description}" TextAlignment="Left" TextWrapping="WrapWithOverflow"  Margin="10" />
-              </DataTemplate>
-            </DataGridTemplateColumn.CellTemplate>
-          </DataGridTemplateColumn>
-          
-          <DataGridTemplateColumn Header="Seed Packet">
-            <DataGridTemplateColumn.CellTemplate>
-              <DataTemplate DataType="model:Planting">
-                <TextBlock Text="{Binding SeedPacket.Description}" TextAlignment="Left" TextWrapping="WrapWithOverflow"  Margin="10" />
-              </DataTemplate>
-            </DataGridTemplateColumn.CellTemplate>
-          </DataGridTemplateColumn>
-          
-          <DataGridTemplateColumn Header="Comment">
-            <DataGridTemplateColumn.CellTemplate>
-              <DataTemplate DataType="model:Planting">
-                <TextBlock Text="{Binding Comment}" TextAlignment="Left" TextWrapping="WrapWithOverflow"  Margin="10" />
-              </DataTemplate>
-            </DataGridTemplateColumn.CellTemplate>
-          </DataGridTemplateColumn>
-        
-        </DataGrid.Columns>
-      </DataGrid>
+      <!-- <DataGrid Name="PlantingsGrid" ItemsSource="{Binding Plantings, Mode=TwoWay}" SelectedItem="{Binding CurrentItem, Mode=TwoWay}"  -->
+      <!--           AutoGenerateColumns="False" FontSize="12" Margin="30"> -->
+      <!--   <DataGrid.Styles> -->
+      <!--     <Style Selector="DataGridCell"> -->
+      <!--       <Setter Property="Background" Value="Transparent" /> -->
+      <!--       <Setter Property="HorizontalContentAlignment" Value="Left" /> -->
+      <!--       <Setter Property="VerticalContentAlignment" Value="Center" /> -->
+      <!--       <Setter Property="FontSize" Value="10" /> -->
+      <!--       <Setter Property="Template"> -->
+      <!--         <ControlTemplate> -->
+      <!--           <Grid Background="{TemplateBinding Background}" ColumnDefinitions="*,Auto"> -->
+      <!--             <ContentPresenter -->
+      <!--               Content="{TemplateBinding Content}" -->
+      <!--               ContentTemplate="{TemplateBinding ContentTemplate}" -->
+      <!--               HorizontalContentAlignment="Left" HorizontalAlignment="Left" -->
+      <!--               Margin="{TemplateBinding Padding}" -->
+      <!--               TextBlock.Foreground="{TemplateBinding Foreground}" -->
+      <!--               VerticalAlignment="Center" VerticalContentAlignment="Center" /> -->
+      <!-- -->
+      <!--             <Rectangle -->
+      <!--               Grid.Column="1" -->
+      <!--               HorizontalAlignment="Stretch" -->
+      <!--               Name="PART_RightGridLine" -->
+      <!--               Stroke="WhiteSmoke" -->
+      <!--               StrokeThickness="1" -->
+      <!--               VerticalAlignment="Stretch" /> -->
+      <!--           </Grid> -->
+      <!--         </ControlTemplate> -->
+      <!--       </Setter> -->
+      <!--     </Style> -->
+      <!--   </DataGrid.Styles> -->
+      <!--   <DataGrid.Columns> -->
+      <!--    -->
+      <!--     <DataGridTemplateColumn Header="Date"> -->
+      <!--       <DataGridTemplateColumn.CellTemplate> -->
+      <!--         <DataTemplate DataType="model:Planting"> -->
+      <!--           <TextBlock Text="{Binding StartDateString}" TextAlignment="Left"  Margin="10" /> -->
+      <!--         </DataTemplate> -->
+      <!--       </DataGridTemplateColumn.CellTemplate> -->
+      <!--     </DataGridTemplateColumn> -->
+      <!--    -->
+      <!--     <DataGridTemplateColumn Header="Description"> -->
+      <!--       <DataGridTemplateColumn.CellTemplate> -->
+      <!--         <DataTemplate DataType="model:Planting"> -->
+      <!--           <TextBlock Text="{Binding Description}"  Margin="10" /> -->
+      <!--         </DataTemplate> -->
+      <!--       </DataGridTemplateColumn.CellTemplate> -->
+      <!--     </DataGridTemplateColumn> -->
+      <!--    -->
+      <!--     <DataGridTemplateColumn Header="Author"> -->
+      <!--       <DataGridTemplateColumn.CellTemplate> -->
+      <!--         <DataTemplate DataType="model:Planting"> -->
+      <!--           <TextBlock Text="{Binding Author.FirstName}"  Margin="10" /> -->
+      <!--         </DataTemplate> -->
+      <!--       </DataGridTemplateColumn.CellTemplate> -->
+      <!--     </DataGridTemplateColumn> -->
+      <!--    -->
+      <!--     <DataGridTemplateColumn Header="Type"> -->
+      <!--       <DataGridTemplateColumn.CellTemplate> -->
+      <!--         <DataTemplate DataType="model:Planting"> -->
+      <!--           <TextBlock Text="{Binding Plant.Description}" TextAlignment="Left" TextWrapping="WrapWithOverflow"  Margin="10" /> -->
+      <!--         </DataTemplate> -->
+      <!--       </DataGridTemplateColumn.CellTemplate> -->
+      <!--     </DataGridTemplateColumn> -->
+      <!--      -->
+      <!--     <DataGridTemplateColumn Header="Yield Rating"> -->
+      <!--       <DataGridTemplateColumn.CellTemplate> -->
+      <!--         <DataTemplate DataType="model:Planting"> -->
+      <!--           <TextBlock Text="{Binding YieldRating}" TextAlignment="Center" TextWrapping="WrapWithOverflow"  Margin="10" /> -->
+      <!--         </DataTemplate> -->
+      <!--       </DataGridTemplateColumn.CellTemplate> -->
+      <!--     </DataGridTemplateColumn> -->
+      <!--      -->
+      <!--     <DataGridTemplateColumn Header="Age"> -->
+      <!--       <DataGridTemplateColumn.CellTemplate> -->
+      <!--         <DataTemplate DataType="model:Planting"> -->
+      <!--           <TextBlock Text="{Binding Age}" TextAlignment="Center" TextWrapping="WrapWithOverflow"  Margin="10" /> -->
+      <!--         </DataTemplate> -->
+      <!--       </DataGridTemplateColumn.CellTemplate> -->
+      <!--     </DataGridTemplateColumn> -->
+      <!--      -->
+      <!--     <DataGridTemplateColumn Header="Location"> -->
+      <!--       <DataGridTemplateColumn.CellTemplate> -->
+      <!--         <DataTemplate DataType="model:Planting"> -->
+      <!--           <TextBlock Text="{Binding Bed.Code}" TextAlignment="Left" TextWrapping="WrapWithOverflow"  Margin="10" /> -->
+      <!--         </DataTemplate> -->
+      <!--       </DataGridTemplateColumn.CellTemplate> -->
+      <!--     </DataGridTemplateColumn> -->
+      <!--      -->
+      <!--     <DataGridTemplateColumn Header="Location Description"> -->
+      <!--       <DataGridTemplateColumn.CellTemplate> -->
+      <!--         <DataTemplate DataType="model:Planting"> -->
+      <!--           <TextBlock Text="{Binding Bed.Description}" TextAlignment="Left" TextWrapping="WrapWithOverflow"  Margin="10" /> -->
+      <!--         </DataTemplate> -->
+      <!--       </DataGridTemplateColumn.CellTemplate> -->
+      <!--     </DataGridTemplateColumn> -->
+      <!--      -->
+      <!--     <DataGridTemplateColumn Header="Seed Packet"> -->
+      <!--       <DataGridTemplateColumn.CellTemplate> -->
+      <!--         <DataTemplate DataType="model:Planting"> -->
+      <!--           <TextBlock Text="{Binding SeedPacket.Description}" TextAlignment="Left" TextWrapping="WrapWithOverflow"  Margin="10" /> -->
+      <!--         </DataTemplate> -->
+      <!--       </DataGridTemplateColumn.CellTemplate> -->
+      <!--     </DataGridTemplateColumn> -->
+      <!--      -->
+      <!--     <DataGridTemplateColumn Header="Comment"> -->
+      <!--       <DataGridTemplateColumn.CellTemplate> -->
+      <!--         <DataTemplate DataType="model:Planting"> -->
+      <!--           <TextBlock Text="{Binding Comment}" TextAlignment="Left" TextWrapping="WrapWithOverflow"  Margin="10" /> -->
+      <!--         </DataTemplate> -->
+      <!--       </DataGridTemplateColumn.CellTemplate> -->
+      <!--     </DataGridTemplateColumn> -->
+      <!--    -->
+      <!--   </DataGrid.Columns> -->
+      <!-- </DataGrid> -->
         </SplitView>
     </Panel>
     
