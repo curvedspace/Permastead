@@ -36,12 +36,11 @@
       <SplitButton x:Name="AddButton" Content="Add">
         <SplitButton.Flyout>
           <MenuFlyout Placement="Bottom">
-            <MenuItem Header="Planting..." InputGesture="Ctrl+N" Click="NewPlantingMenuItem_OnClick" />
+            <MenuItem Header="Planting..." Click="NewPlantingMenuItem_OnClick" />
             <Separator/>
-            <MenuItem Header="Plant..."
-                      InputGesture="Ctrl+P" IsEnabled="False"/>
-            
+            <MenuItem Header="Plant..." IsEnabled="False"/>
             <MenuItem Header="Starter " IsEnabled="False"/>
+            <MenuItem Header="Location " IsEnabled="False"/>
             <MenuItem Header="Vendor " IsEnabled="False"/>
           </MenuFlyout>
         </SplitButton.Flyout>
