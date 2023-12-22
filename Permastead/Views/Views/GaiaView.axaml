@@ -37,12 +37,14 @@
             <ListBox.ItemTemplate>
               <DataTemplate> 
                 <Grid ColumnDefinitions="Auto,*,Auto" RowDefinitions="Auto,*,Auto">
-                  <Border Grid.Row="0" Grid.Column="2" BorderBrush="Black" Background="Chartreuse" CornerRadius="5" BorderThickness="2" Padding="5">
-                    <TextBlock  TextAlignment="Right" Foreground="Black" TextWrapping="Wrap"
+                  <Border Grid.Row="0" Grid.Column="2" BorderBrush="White" Background="Chartreuse" IsVisible="{Binding HasRequest}"
+                          CornerRadius="5" BorderThickness="2" Padding="5">
+                    <TextBlock  TextAlignment="Right" Foreground="Black" TextWrapping="Wrap" IsVisible="{Binding HasRequest}"
                                 Text="{Binding Request}" />
                   </Border>
-                  <Border Grid.Row="1" Grid.Column="0" BorderBrush="White" CornerRadius="5" BorderThickness="2" Padding="5">
-                    <TextBlock  TextAlignment="Left" TextWrapping="Wrap"
+                  <Border Grid.Row="1" Grid.Column="0" BorderBrush="White" CornerRadius="5" IsVisible="{Binding HasResponse}"
+                          BorderThickness="2" Padding="5">
+                    <TextBlock  TextAlignment="Left" TextWrapping="Wrap" IsVisible="{Binding HasResponse}"
                                 Text="{Binding Response}" />
                   </Border>
                   

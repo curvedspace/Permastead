@@ -1,6 +1,7 @@
 using System;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
@@ -26,13 +27,43 @@ public partial class GaiaViewModel : ViewModelBase
 
     [ObservableProperty]
     private ObservableCollection<RequestResponse> _RequestResponses = new ObservableCollection<RequestResponse>();
-
+    
 
     public GaiaViewModel()
     {
         _gaia = AppSession.GaiaService;
         //_gaia = new Services.GaiaService();
+        
+        AddResponse("Hello there, welcome to Permastead.");
+        AddResponse("Quote of the day: " + Services.QuoteService.GetRandomQuote(AppSession.ServiceMode).ToString());
+        
+        var updates = new ObservableCollection<string>(ScoreBoardService.CheckForNewToDos(ServiceMode.Local));
 
+        var upcomingTodos = Services.ToDoService.GetUpcomingToDos(ServiceMode.Local, 3);
+
+        var updateBuilder = new StringBuilder();
+
+        if (upcomingTodos.Count > 0)
+        {
+            updateBuilder.AppendLine("Here are your upcoming events:");
+        }
+        
+        foreach (var t in upcomingTodos)
+        {
+            updateBuilder.AppendLine(t.Description + " (" + t.DueDate.Date.ToShortDateString() + ", " +
+                                     t.ToDoStatus.Description + ".");
+        }
+        
+        if (upcomingTodos.Count == 0)
+        {
+            AddResponse("Hello there, welcome to Permastead. You have no upcoming events.");
+        }
+        else
+        {
+            AddResponse(updateBuilder.ToString());
+        }
+
+        
         //Response = _gaia.GetResponse("Hello");
         
         // try
@@ -110,6 +141,11 @@ public partial class GaiaViewModel : ViewModelBase
         Request = string.Empty;
 
     }
+
+    public void AddResponse(string response)
+    {
+        RequestResponses.Add(new RequestResponse() { Request = "", Response = response });
+    }
     
     bool CanSendRequest(object parameter)
     {
@@ -125,6 +161,9 @@ public class RequestResponse
 
     public string Request { get; set; }
     public string Response { get; set; }
+    
+    public bool HasResponse  => !string.IsNullOrEmpty(Response);
+    public bool HasRequest => !string.IsNullOrEmpty(Request);
 
     public string FullText => DateTime.Now.ToShortTimeString() + ": " + Request + '\n' + "     " + Response;
 
