@@ -13,8 +13,6 @@
             <vm:PlantingWindowViewModel/>
     </Design.DataContext>
   
-
-      
       <Grid ColumnDefinitions="Auto,Auto,Auto,*" RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,*,Auto" Margin="10">
         <TextBlock Grid.Row="0" Grid.Column="0" Margin="10,15,0,0">ID:</TextBlock>
         <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding Planting.Id }" Margin="10,10,10,0"></TextBox>
@@ -96,28 +94,5 @@
           <Button x:Name="CancelButton" Margin="10" Click="CancelButton_OnClick" >Cancel</Button>
         </StackPanel>
       </Grid>
-        
-      <!-- <WrapPanel Margin="20"> -->
-      <!--   <Label>Comment:</Label> -->
-      <!--   <TextBox Width="700" Text="{Binding CurrentObservation.Comment}"></TextBox> -->
-      <!--   <Button Command="{Binding SaveObservationCommand}" Name="AddObservationButton">Add</Button> -->
-      <!-- </WrapPanel> -->
-      
-      <!-- <Panel Grid.Row="2"> -->
-      <!-- -->
-      <!--   <ListBox Name="PlantingObservationsList" ItemsSource="{Binding PlantingObservations, Mode=TwoWay }"  -->
-      <!--            Margin="30" ScrollViewer.VerticalScrollBarVisibility="Auto"> -->
-      <!--     <ListBox.ItemTemplate> -->
-      <!--       <DataTemplate> -->
-      <!--         <Border CornerRadius="4"> -->
-      <!--           <TextBlock Text="{Binding FullDescription}"></TextBlock> -->
-      <!--         </Border> -->
-      <!--       </DataTemplate> -->
-      <!--     </ListBox.ItemTemplate> -->
-      <!--   </ListBox> -->
-      <!-- -->
-      <!-- </Panel> -->
-    
-     
 
 </Window>
