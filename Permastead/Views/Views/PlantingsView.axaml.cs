@@ -108,10 +108,10 @@ public partial class PlantingsView : UserControl
         plantingWindow.Show();
     }
 
-    private void EditPlantMenuItem_OnClick(object? sender, RoutedEventArgs e)
+    private void NewPlantMenuItem_OnClick(object? sender, RoutedEventArgs e)
     {
         var plantWindow = new PlantWindow();
-        var vm = new PlantingWindowViewModel(new Planting(), (PlantingsViewModel)DataContext);
+        var vm = new PlantWindowViewModel();
             
         plantWindow.DataContext = vm;
         
@@ -120,6 +120,33 @@ public partial class PlantingsView : UserControl
         plantWindow.Height = 500;
         plantWindow.Opacity = 0.95;
         plantWindow.Title = "New Plant";
+        plantWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+                
+        // IReadOnlyList<Window>? windows = ((IClassicDesktopStyleApplicationLifetime)Application.Current.ApplicationLifetime).Windows;
+        // Window? parent = windows.First();
+        //
+        // obsWindow.ShowDialog(parent);
+                
+        plantWindow.Show();
+    }
+
+    private void EditMenuItem_OnClick(object? sender, RoutedEventArgs e)
+    {
+        var plantWindow = new PlantWindow();
+
+        // Plant currentPlant;
+        // Node currentNode = (Node)this.TreeBrowser.SelectedItem;
+        
+        
+        var vm = new PlantWindowViewModel();
+            
+        plantWindow.DataContext = vm;
+        
+        plantWindow.Topmost = true;
+        plantWindow.Width = 900;
+        plantWindow.Height = 500;
+        plantWindow.Opacity = 0.95;
+        plantWindow.Title = "Edit Plant";
         plantWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;
                 
         // IReadOnlyList<Window>? windows = ((IClassicDesktopStyleApplicationLifetime)Application.Current.ApplicationLifetime).Windows;

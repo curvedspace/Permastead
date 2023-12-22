@@ -38,7 +38,7 @@
           <MenuFlyout Placement="Bottom">
             <MenuItem Header="Planting..." Click="NewPlantingMenuItem_OnClick" />
             <Separator/>
-            <MenuItem Header="Plant..." Click="EditPlantMenuItem_OnClick"/>
+            <MenuItem Header="Plant..." Click="NewPlantMenuItem_OnClick"/>
             <MenuItem Header="Starter " IsEnabled="False"/>
             <MenuItem Header="Location " IsEnabled="False"/>
             <MenuItem Header="Vendor " IsEnabled="False"/>
@@ -63,7 +63,7 @@
                         SelectionMode="Single">
                 <TreeView.ContextMenu>
                   <ContextMenu>
-                    <MenuItem Header="Edit..."></MenuItem>
+                    <MenuItem Header="Edit..." Click="EditMenuItem_OnClick"></MenuItem>
                   </ContextMenu>
                 </TreeView.ContextMenu>
                 <TreeView.ItemTemplate>
