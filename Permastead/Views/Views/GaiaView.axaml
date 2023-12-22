@@ -32,7 +32,7 @@
       <Panel Grid.Row="1" Background="Transparent">
         <Grid RowDefinitions="*,Auto">
           <ListBox x:Name="GaiaListBox" ItemsSource="{Binding RequestResponses}" Margin="10,50,10,10" 
-                   VerticalAlignment="Bottom" AutoScrollToSelectedItem="True">
+                   VerticalAlignment="Stretch" AutoScrollToSelectedItem="True">
             <!-- <view:RequestResponseView></view:RequestResponseView> -->
             <ListBox.ItemTemplate>
               <DataTemplate> 
