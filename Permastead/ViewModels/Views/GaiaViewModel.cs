@@ -56,7 +56,7 @@ public partial class GaiaViewModel : ViewModelBase
         
         if (upcomingTodos.Count == 0)
         {
-            AddResponse("Hello there, welcome to Permastead. You have no upcoming events.");
+            AddResponse("I just checked the database and you have no upcoming events.");
         }
         else
         {
