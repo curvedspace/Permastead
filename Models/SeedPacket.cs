@@ -39,6 +39,28 @@ public class SeedPacket
 
     public DateTime CreationDate { get; set; } = DateTime.UtcNow;
 
+    public override bool Equals(object? obj)
+    {
+        if (obj == null) return false;
+
+        SeedPacket? sp = obj as SeedPacket;
+        if (sp == null)
+            return false;
+        else
+            return (sp.Id == Id) && (sp.Code == Code) && (sp.Description == Description);
+
+    }
+    
+    public override int GetHashCode()
+    {
+        return HashCode.Combine(Id, Code, Description);
+    }
+    
+    public bool Equals(SeedPacket? obj)
+    {
+        return obj != null && (obj.Id == Id) && (obj.Code == Code) && (obj.Description == Description);
+    }
+    
     /// <summary>
     /// Indicates is the item is currently active, meaning it's start date is earlier than today
     /// and it's end date is in the future.

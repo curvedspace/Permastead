@@ -64,7 +64,8 @@ public partial class PlantingsView : UserControl
             var planting = (Planting)current.RowSelection!.SelectedItem;
             
             //get underlying view's viewmodel
-            var vm = new PlantingWindowViewModel(planting);
+            var vm = new PlantingWindowViewModel(planting, (PlantingsViewModel)DataContext);
+            
             plantingWindow.DataContext = vm;
         
             plantingWindow.Topmost = true;

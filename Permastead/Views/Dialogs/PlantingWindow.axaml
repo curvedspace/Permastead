@@ -2,7 +2,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        mc:Ignorable="d" d:DesignWidth="900" d:DesignHeight="500"
+        mc:Ignorable="d" d:DesignWidth="850" d:DesignHeight="500"
         xmlns:vm="using:Permastead.ViewModels.Dialogs"
         x:Class="Permastead.Views.Dialogs.PlantingWindow"
         x:DataType="vm:PlantingWindowViewModel"
@@ -88,9 +88,12 @@
         <TextBox Grid.Row="6" Grid.Column="1" Grid.ColumnSpan="3" 
                  Text="{Binding Planting.Comment }" TextWrapping="Wrap" Margin="10,10,10,10"></TextBox>
         
+        <Button Grid.Row="7" Grid.Column="1"  x:Name="TerminateButton" Margin="10" Click="TerminateButton_OnClick">Terminate</Button>
+        <Button Grid.Row="7" Grid.Column="2" x:Name="HarvestButton" Margin="10,0,20,0" Click="HarvestButton_OnClick">Harvest</Button>
+        
         <StackPanel Grid.Row="7" Grid.Column="3" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,0,0">
-          <Button Name="SaveButton" Margin="10" >Save</Button>
-          <Button Name="CancelButton" Margin="10" Click="CancelButton_OnClick" >Cancel</Button>
+          <Button x:Name="SaveButton" Margin="10" Click="SaveButton_OnClick">Save</Button>
+          <Button x:Name="CancelButton" Margin="10" Click="CancelButton_OnClick" >Cancel</Button>
         </StackPanel>
       </Grid>
         

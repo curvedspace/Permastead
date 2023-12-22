@@ -164,4 +164,24 @@ public static class PlantingsService
 
         return obs;
     }
+
+    public static bool CommitRecord(ServiceMode serviceMode, Planting? planting)
+    {
+        bool rtnValue = false;
+        
+        if (planting != null)
+        {
+            if (planting.Id > 0)
+            {
+                PlantingsRepository.Update(planting);
+            }
+            else
+            {
+                // insert new record
+                PlantingsRepository.Insert(planting);
+            }
+        }
+
+        return rtnValue;
+    }
 }
