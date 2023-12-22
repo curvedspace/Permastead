@@ -41,7 +41,7 @@ public partial class GaiaView : UserControl
             var itemCount = this.FindControl<ListBox>("GaiaListBox").ItemCount;
             this.FindControl<ListBox>("GaiaListBox").SelectedIndex = itemCount-1;
             this.FindControl<ListBox>("GaiaListBox").ScrollIntoView(itemCount);
-            this.FindControl<ListBox>("GaiaListBox").InvalidateVisual();
+            // this.FindControl<ListBox>("GaiaListBox").InvalidateVisual();
             
         }
     }

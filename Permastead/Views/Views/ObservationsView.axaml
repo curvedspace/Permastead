@@ -18,17 +18,18 @@
       <Grid ColumnDefinitions="*" RowDefinitions="Auto, Auto, *">
       
         <WrapPanel>
-          <materialIcons:MaterialIcon Kind="EyeCircle" Margin="20"/>
-          <TextBlock FontWeight="Bold" Margin="20,20,20,20">Observations</TextBlock>
-          <Separator MaxWidth="5" Foreground="Black"></Separator>
+          <Image Margin="20" Width="24" Height="24" Source="/Assets/web_template_editor.png" />
+          <!-- <materialIcons:MaterialIcon Kind="EyeCircle" Margin="20"/> -->
+          <TextBlock FontWeight="Bold" Margin="20,24,20,20">Observations</TextBlock>
+          <!-- <Separator MaxWidth="5" Foreground="Black"></Separator> -->
           
           <Button Command="{Binding SaveObservationCommand, Mode=TwoWay}" Name="Save" HorizontalAlignment="Right" Margin="30,0">Save</Button>
-          <Separator MaxWidth="5" Foreground="Black"></Separator>
+          <!-- <Separator MaxWidth="5" Foreground="Black"></Separator> -->
           <StackPanel  Orientation="Horizontal" ToolTip.Tip = "Shows the number of observations, the overall word count and the average words per observation">
-            <TextBlock Margin="20">Statistics:</TextBlock>
-            <TextBlock Name="ObservationCount" Text="{Binding ObservationCount}" Margin="20,20,20,20"></TextBlock>
-            <TextBlock Name="WordCount" Text="{Binding WordCount}" Margin="20,20,20,20"></TextBlock>
-            <TextBlock Name="WordsPerObservation" Text="{Binding WordsPerObservation}" Margin="20,20,20,20"></TextBlock>
+            <TextBlock Margin="24">Statistics:</TextBlock>
+            <TextBlock Name="ObservationCount" Text="{Binding ObservationCount}" Margin="20,24,20,20"></TextBlock>
+            <TextBlock Name="WordCount" Text="{Binding WordCount}" Margin="20,24,20,20"></TextBlock>
+            <TextBlock Name="WordsPerObservation" Text="{Binding WordsPerObservation}" Margin="20,24,20,20"></TextBlock>
           </StackPanel>
         </WrapPanel>
       

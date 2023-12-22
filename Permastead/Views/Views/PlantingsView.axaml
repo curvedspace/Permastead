@@ -52,7 +52,8 @@
             </ScrollViewer>
           </SplitView.Pane>
         
-        <TreeDataGrid Grid.Row="1" Margin="10" Source="{Binding PlantingsSource}" 
+        <TreeDataGrid x:Name="PlantingsGrid" Grid.Row="1" Margin="10" Source="{Binding PlantingsSource}" 
+                      DoubleTapped="PlantingsGrid_OnDoubleTapped"
                       CanUserResizeColumns="True"></TreeDataGrid>
      
       <!-- <DataGrid Name="PlantingsGrid" ItemsSource="{Binding Plantings, Mode=TwoWay}" SelectedItem="{Binding CurrentItem, Mode=TwoWay}"  -->
