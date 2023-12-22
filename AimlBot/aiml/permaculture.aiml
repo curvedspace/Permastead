@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml version="1.0">
+<category><pattern>WHAT IS PERMACULTURE</pattern>
+<template>Permaculture integrates land, resources, people and the environment through 
+mutually beneficial synergies – imitating the no waste, closed loop systems seen in diverse natural systems. 
+Permaculture studies and applies holistic solutions that are applicable in rural and urban contexts at 
+any scale. It is a multidisciplinary toolbox including agriculture, water harvesting and hydrology, 
+energy, natural building, forestry, waste management, animal systems, aquaculture, 
+appropriate technology, economics and community development.
+</template>
+</category>
+<category><pattern>WHO INVENTED PERMACULTURE</pattern>
+<template>Permaculture was developed by Bill Moulison and David Holmgren.
+</template>
+</category>
+</aiml>
