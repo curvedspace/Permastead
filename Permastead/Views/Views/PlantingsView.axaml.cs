@@ -9,6 +9,7 @@ using Permastead.ViewModels.Dialogs;
 using Permastead.ViewModels.Tools;
 using Permastead.ViewModels.Views;
 using Permastead.Views.Dialogs;
+using Services;
 using Node = Permastead.ViewModels.Views.Node;
 
 namespace Permastead.Views.Views;
@@ -134,12 +135,14 @@ public partial class PlantingsView : UserControl
     {
         var plantWindow = new PlantWindow();
 
-        // Plant currentPlant;
-        // Node currentNode = (Node)this.TreeBrowser.SelectedItem;
-        
+        Plant currentPlant;
+        var tree = this.FindControl<TreeView>("TreeBrowser");
+        Node currentNode = tree.SelectedItem as Node;
+
+        var plant = PlantService.GetPlantFromId(AppSession.ServiceMode, currentNode.Id);
         
         var vm = new PlantWindowViewModel();
-            
+        vm.Plant = plant;
         plantWindow.DataContext = vm;
         
         plantWindow.Topmost = true;
