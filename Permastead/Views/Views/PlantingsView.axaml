@@ -38,7 +38,7 @@
           <MenuFlyout Placement="Bottom">
             <MenuItem Header="Planting..." Click="NewPlantingMenuItem_OnClick" />
             <Separator/>
-            <MenuItem Header="Plant..." IsEnabled="False"/>
+            <MenuItem Header="Plant..." Click="EditPlantMenuItem_OnClick"/>
             <MenuItem Header="Starter " IsEnabled="False"/>
             <MenuItem Header="Location " IsEnabled="False"/>
             <MenuItem Header="Vendor " IsEnabled="False"/>
@@ -61,6 +61,11 @@
                         SelectedItems="{Binding SelectedNodes}"
                         DoubleTapped="TreeBrowser_OnDoubleTapped"
                         SelectionMode="Single">
+                <TreeView.ContextMenu>
+                  <ContextMenu>
+                    <MenuItem Header="Edit..."></MenuItem>
+                  </ContextMenu>
+                </TreeView.ContextMenu>
                 <TreeView.ItemTemplate>
                   <TreeDataTemplate ItemsSource="{Binding SubNodes}">
                     <Border HorizontalAlignment="Left"

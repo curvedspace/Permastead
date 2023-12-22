@@ -107,4 +107,26 @@ public partial class PlantingsView : UserControl
                 
         plantingWindow.Show();
     }
+
+    private void EditPlantMenuItem_OnClick(object? sender, RoutedEventArgs e)
+    {
+        var plantWindow = new PlantWindow();
+        var vm = new PlantingWindowViewModel(new Planting(), (PlantingsViewModel)DataContext);
+            
+        plantWindow.DataContext = vm;
+        
+        plantWindow.Topmost = true;
+        plantWindow.Width = 900;
+        plantWindow.Height = 500;
+        plantWindow.Opacity = 0.95;
+        plantWindow.Title = "New Plant";
+        plantWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+                
+        // IReadOnlyList<Window>? windows = ((IClassicDesktopStyleApplicationLifetime)Application.Current.ApplicationLifetime).Windows;
+        // Window? parent = windows.First();
+        //
+        // obsWindow.ShowDialog(parent);
+                
+        plantWindow.Show();
+    }
 }
