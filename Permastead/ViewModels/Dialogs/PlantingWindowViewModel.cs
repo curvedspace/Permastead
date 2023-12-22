@@ -2,6 +2,7 @@ using System;
 using System.Collections.ObjectModel;
 using System.Linq;
 using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using Models;
 using Permastead.ViewModels.Views;
 using Serilog;
@@ -54,6 +55,7 @@ public partial class PlantingWindowViewModel : ViewModelBase
         if (Planting.State.Id != 0 && PlantingStates.Count > 0) Planting.State = PlantingStates.First(x => x.Id == Planting.State.Id);
     }
 
+    
     public void SavePlanting()
     {
         bool rtnValue;

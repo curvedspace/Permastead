@@ -2,6 +2,7 @@ using System;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Input;
+using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml;
 using Models;
 using Permastead.ViewModels.Dialogs;
@@ -75,13 +76,35 @@ public partial class PlantingsView : UserControl
             plantingWindow.Title = "Planting - " + planting.Description;
         }
 
-        plantingWindow.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+        plantingWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;
             
         // IReadOnlyList<Window>? windows = ((IClassicDesktopStyleApplicationLifetime)Application.Current.ApplicationLifetime).Windows;
         // Window? parent = windows.First();
         //
         // obsWindow.ShowDialog(parent);
             
+        plantingWindow.Show();
+    }
+
+    private void NewPlantingMenuItem_OnClick(object? sender, RoutedEventArgs e)
+    {
+        var plantingWindow = new PlantingWindow();
+        var vm = new PlantingWindowViewModel(new Planting(), (PlantingsViewModel)DataContext);
+            
+        plantingWindow.DataContext = vm;
+        
+        plantingWindow.Topmost = true;
+        plantingWindow.Width = 900;
+        plantingWindow.Height = 500;
+        plantingWindow.Opacity = 0.95;
+        plantingWindow.Title = "New Planting";
+        plantingWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+                
+        // IReadOnlyList<Window>? windows = ((IClassicDesktopStyleApplicationLifetime)Application.Current.ApplicationLifetime).Windows;
+        // Window? parent = windows.First();
+        //
+        // obsWindow.ShowDialog(parent);
+                
         plantingWindow.Show();
     }
 }

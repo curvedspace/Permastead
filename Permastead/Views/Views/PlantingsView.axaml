@@ -18,11 +18,34 @@
     
     <WrapPanel>
       <Image Margin="20" Width="24" Height="24" Source="/Assets/plant.png" />
-      <!-- <materialIcons:MaterialIcon Kind="Plant" Margin="20"/> -->
       <TextBlock FontWeight="Bold" Margin="20,24,20,20">Plantings</TextBlock>
-      <!-- <Separator MaxWidth="5" Foreground="Black"></Separator> -->
       <Button Command="{Binding RefreshPlantingsCommand}" Name="Refresh" HorizontalAlignment="Right" Margin="5,0">Refresh</Button> 
-      <!-- <Separator MaxWidth="5" Foreground="Black"></Separator> -->
+      <!-- <Menu> -->
+      <!--     <MenuItem Header="_Add" Icon="{StaticResource glasses_regular}"> -->
+      <!--       <MenuItem Header="Planting..."> -->
+      <!--       <MenuItem.Icon> -->
+      <!--         <PathIcon Data="{StaticResource  glasses_regular}"/> -->
+      <!--       </MenuItem.Icon> -->
+      <!--       </MenuItem> -->
+      <!--       <Separator/> -->
+      <!--       <MenuItem Header="Plant..."/> -->
+      <!--       <MenuItem Header="Starter..." /> -->
+      <!--       <MenuItem Header="Vendor..."/> -->
+      <!--     </MenuItem> -->
+      <!-- </Menu> -->
+      <SplitButton x:Name="AddButton" Content="Add">
+        <SplitButton.Flyout>
+          <MenuFlyout Placement="Bottom">
+            <MenuItem Header="Planting..." InputGesture="Ctrl+N" Click="NewPlantingMenuItem_OnClick" />
+            <Separator/>
+            <MenuItem Header="Plant..."
+                      InputGesture="Ctrl+P" IsEnabled="False"/>
+            
+            <MenuItem Header="Starter " IsEnabled="False"/>
+            <MenuItem Header="Vendor " IsEnabled="False"/>
+          </MenuFlyout>
+        </SplitButton.Flyout>
+      </SplitButton>
       <TextBlock Name="PlantingCount" Text="{Binding PlantingCount , StringFormat='{}{0} total'}" Margin="20,24,20,20"></TextBlock>
       <CheckBox Name="CurrentOnly" Command="{Binding RefreshDataOnlyCommand}" IsChecked="{Binding CurrentOnly, Mode=TwoWay}" Margin="0">Current Only</CheckBox>
     </WrapPanel>
