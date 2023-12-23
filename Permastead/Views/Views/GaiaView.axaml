@@ -3,9 +3,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-             xmlns:materialIcons="clr-namespace:Material.Icons.Avalonia;assembly=Material.Icons.Avalonia"
              xmlns:vm="using:Permastead.ViewModels.Views"
-             xmlns:view="using:Permastead.Views.Views"
              x:DataType="vm:GaiaViewModel"
              x:CompileBindings="True"
              x:Class="Permastead.Views.Views.GaiaView">
@@ -19,22 +17,14 @@
       
       <WrapPanel Grid.Row="0" >
         <Image Margin="20" Width="24" Height="24" Source="/Assets/earth_night.png" />
-        <!-- <materialIcons:MaterialIcon Kind="Earth" Margin="20"/> -->
         <TextBlock FontWeight="Bold" Margin="20,20,20,20">Gaia</TextBlock>
-        <!-- <Separator MaxWidth="5" Foreground="Black"></Separator> -->
         <TextBlock Name="EventsCount" Text="{Binding  ResponseCount , StringFormat='{}{0} total'}" Margin="20,20,20,20"></TextBlock>
       </WrapPanel>
-    
-
-      <!-- <WrapPanel Grid.Row="1" > -->
-      <!--   <TextBlock Text="{Binding Response}" Margin="10,30,10,10" FontSize="16"></TextBlock> -->
-      <!-- </WrapPanel> -->
    
       <Panel Grid.Row="1" Background="Transparent">
         <Grid RowDefinitions="*,Auto">
-          <ListBox x:Name="GaiaListBox" ItemsSource="{Binding RequestResponses}" Margin="10,50,10,10" 
+          <ListBox x:Name="GaiaListBox" ItemsSource="{Binding RequestResponses}" Margin="10,10,10,10" 
                    VerticalAlignment="Stretch" AutoScrollToSelectedItem="True">
-            <!-- <view:RequestResponseView></view:RequestResponseView> -->
             <ListBox.ItemTemplate>
               <DataTemplate> 
                 <Grid ColumnDefinitions="Auto,*,Auto" RowDefinitions="Auto,*,Auto">
@@ -55,19 +45,6 @@
           </ListBox>
         </Grid>
       </Panel>
-    
-      <!-- <ListBox ItemsSource="{Binding RequestResponses}" Margin="10,50,10,10"> -->
-      <!--   <ListBox.ItemTemplate> -->
-      <!--     <DataTemplate> -->
-      <!--       <Border BorderBrush="Blue" -->
-      <!--           Margin="0,10,0,0" -->
-      <!--           BorderThickness="1" -->
-      <!--           Padding="5"> -->
-      <!--         <TextBlock Text="{Binding FullText}"/> -->
-      <!--       </Border>           -->
-      <!--     </DataTemplate> -->
-      <!--   </ListBox.ItemTemplate> -->
-      <!-- </ListBox> -->
     
       <Grid Grid.Row="2" ColumnDefinitions="Auto,*,Auto">
         <TextBlock Text="You: " Margin="20,20,20,20"> </TextBlock>
