@@ -18,9 +18,10 @@
     <Grid RowDefinitions="Auto,*,Auto">
       
       <WrapPanel Grid.Row="0" >
-        <materialIcons:MaterialIcon Kind="Earth" Margin="20"/>
+        <Image Margin="20" Width="24" Height="24" Source="/Assets/earth_night.png" />
+        <!-- <materialIcons:MaterialIcon Kind="Earth" Margin="20"/> -->
         <TextBlock FontWeight="Bold" Margin="20,20,20,20">Gaia</TextBlock>
-        <Separator MaxWidth="5" Foreground="Black"></Separator>
+        <!-- <Separator MaxWidth="5" Foreground="Black"></Separator> -->
         <TextBlock Name="EventsCount" Text="{Binding  ResponseCount , StringFormat='{}{0} total'}" Margin="20,20,20,20"></TextBlock>
       </WrapPanel>
     

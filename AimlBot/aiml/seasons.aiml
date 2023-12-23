@@ -36,7 +36,7 @@
 <pattern>WHAT SEASON IS IT</pattern>
 <template>
 <think>
-	<set name="month"><date format="%B"/></set>
+	<set name="month"><date format="MMM"/></set>
 	<condition name="month"> 
 		<li value="January"><set name="season">the middle of Winter</set><set name="season1">enjoying Summer</set></li>
 		<li value="February"><set name="season">Winter</set><set name="season1">in Summer</set></li>
@@ -52,7 +52,7 @@
 		<li value="December"><set name="season">Winter</set><set name="season1">in Summer</set></li>
 	</condition> 
 </think>
-Well we are currently in the month of<get name="month"/>, so here in the Northern Hemisphere it is<get name="season"/>.<br/>Those countries which lie below the Equator are<get name="season1"/>.
+Well we are currently in the month of <get name="month"/>, so here in the Northern Hemisphere it is <get name="season"/>.<br/>Those countries which lie below the Equator are<get name="season1"/>.
 </template>
 </category>
 

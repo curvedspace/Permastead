@@ -17,16 +17,17 @@
     <Grid ColumnDefinitions="*" RowDefinitions="Auto, Auto, Auto, Auto,*">
     
       <WrapPanel>
-      <materialIcons:MaterialIcon Kind="Shovel" Margin="20"/>
-      <TextBlock FontWeight="Bold" Margin="20,20,20,20">Actions</TextBlock>
-      <Separator MaxWidth="5" Foreground="Black"></Separator>
+      <!-- <materialIcons:MaterialIcon Kind="Shovel" Margin="20"/> -->
+      <Image Margin="20" Width="24" Height="24" Source="/Assets/showel.png" />
+      <TextBlock FontWeight="Bold" Margin="20,24,20,20">Actions</TextBlock>
+      <!-- <Separator MaxWidth="5" Foreground="Black"></Separator> -->
       <Button Command="{Binding RefreshToDoCommand}" Name="Refresh" HorizontalAlignment="Right" Margin="5,10, 10,10">Refresh</Button>
       <Button Command="{Binding ResetToDoCommand}" Name="Reset" HorizontalAlignment="Right" Margin="5,0">Reset</Button>
       <Button Command="{Binding SaveToDoCommand}" Name="Save" HorizontalAlignment="Right" Margin="5,0">Save</Button>
-      <Separator MaxWidth="5" Foreground="Black"></Separator>
+      <!-- <Separator MaxWidth="5" Foreground="Black"></Separator> -->
       <CheckBox Name="ActiveOnly" Command="{Binding RefreshToDoCommand}" IsChecked="{Binding ActiveOnly, Mode=TwoWay}" Margin="5,10,20,10">Active Only</CheckBox>
-      <TextBlock Name="ToDoCount" Text="{Binding ToDoCount, StringFormat='{}{0} total'}" Margin="20,20,20,20"></TextBlock>
-      <TextBlock Name="ActiveCount" Text="{Binding ActiveToDos, StringFormat='{}{0} active'}" Margin="20,20,20,20"></TextBlock>
+      <TextBlock Name="ToDoCount" Text="{Binding ToDoCount, StringFormat='{}{0} total'}" Margin="20,24,20,20"></TextBlock>
+      <TextBlock Name="ActiveCount" Text="{Binding ActiveToDos, StringFormat='{}{0} active'}" Margin="20,24,20,20"></TextBlock>
       
     </WrapPanel>
     

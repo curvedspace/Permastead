@@ -18,7 +18,8 @@
     <Grid ColumnDefinitions="*" RowDefinitions="Auto, Auto, Auto, Auto,*">
     
       <WrapPanel>
-      <materialIcons:MaterialIcon Kind="Calendars" Margin="20"/>
+      <!-- <materialIcons:MaterialIcon Kind="Calendars" Margin="20"/> -->
+      <Image Margin="20" Width="24" Height="24" Source="/Assets/sheduled_task.png" />
       <TextBlock FontWeight="Bold" Margin="20,20,20,20">Events</TextBlock>
       <Separator MaxWidth="5" Foreground="Black"></Separator>
       <Button Command="{Binding ResetEventCommand}" Name="Reset" HorizontalAlignment="Right" Margin="5,0">Reset</Button>
