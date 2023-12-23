@@ -35,7 +35,7 @@ public partial class GaiaView : UserControl
     
     private void ListBoxPropertyChanged(object? sender, AvaloniaPropertyChangedEventArgs e)
     {
-        Console.WriteLine(e.Property.Name);
+        //Console.WriteLine(e.Property.Name);
         if(e.Property.Name == "ItemCount")
         {
             var itemCount = this.FindControl<ListBox>("GaiaListBox").ItemCount;
