@@ -262,7 +262,7 @@ namespace AIMLbot
         {
             get
             {
-                return Path.Combine(Environment.CurrentDirectory, this.GlobalSettings.grabSetting("aimldirectory"));
+                return Path.Combine(AppContext.BaseDirectory, this.GlobalSettings.grabSetting("aimldirectory"));
             }
         }
 
@@ -273,7 +273,7 @@ namespace AIMLbot
         {
             get
             {
-                return Path.Combine(Environment.CurrentDirectory, this.GlobalSettings.grabSetting("configdirectory"));
+                return Path.Combine(AppContext.BaseDirectory, this.GlobalSettings.grabSetting("configdirectory"));
             }
         }
 
@@ -284,7 +284,7 @@ namespace AIMLbot
         {
             get
             {
-                return Path.Combine(Environment.CurrentDirectory, this.GlobalSettings.grabSetting("logdirectory"));
+                return Path.Combine(AppContext.BaseDirectory, this.GlobalSettings.grabSetting("logdirectory"));
             }
         }
 
@@ -377,7 +377,9 @@ namespace AIMLbot
         public void LoadSettings()
         {
             // try a safe default setting for the settings xml file
-            string path = Path.Combine(Environment.CurrentDirectory, Path.Combine("config", "Settings.xml"));
+            //string path = Path.Combine(Environment.CurrentDirectory, Path.Combine("config", "Settings.xml")); 
+            string path = Path.Combine(AppContext.BaseDirectory, Path.Combine("config", "Settings.xml")); //AppContext.BaseDirectory
+            Console.WriteLine("Reading AIML settings from " + path);
             this.loadSettings(path);          
         }
 

@@ -105,7 +105,7 @@ namespace AIMLbot.Utils
                 }
                 else
                 {
-                    throw new FileNotFoundException();
+                    Console.WriteLine("Cannot find " + pathToSettings);
                 }
             }
             else
