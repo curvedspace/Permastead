@@ -6,19 +6,18 @@
              xmlns:materialIcons="clr-namespace:Material.Icons.Avalonia;assembly=Material.Icons.Avalonia"
              xmlns:vm="using:Permastead.ViewModels"
              mc:Ignorable="d"
-             d:DesignWidth="1000" d:DesignHeight="800"
+             d:DesignWidth="1700" d:DesignHeight="1000"
              x:DataType="vm:MainWindowViewModel" 
              FontFamily="avares://Avalonia.Fonts.Inter/Assets#Inter">
   <Design.DataContext>
     <vm:MainWindowViewModel />
   </Design.DataContext>
   
-    
         <Grid RowDefinitions="Auto,*,Auto">
         <StackPanel>
             
             <Grid RowDefinitions="Auto,*,Auto" ColumnDefinitions="Auto,*" Margin="0" >
-                <StackPanel Grid.Row="0" Grid.Column="0" Margin="0,0,0,20" HorizontalAlignment="Left" Orientation="Horizontal">
+                <StackPanel Grid.Row="0" Grid.Column="0" Margin="0,0,0,0" HorizontalAlignment="Left" Orientation="Horizontal">
                     <Button Name="HomeButton" ToolTip.Tip="Home " Command="{Binding OpenHomeViewCommand}">
                         <!-- <materialIcons:MaterialIcon Kind="Home" Margin="0"/> -->
                         <Image Width="16" Height="16" Source="/Assets/house_one.png" />
@@ -37,7 +36,7 @@
                     </Button>
                     <Button Name="PlantsButton" ToolTip.Tip="Plants " Command="{Binding OpenPlantingsViewCommand}">
                         <!-- <materialIcons:MaterialIcon Kind="Leaf" Margin="0"/> -->
-                        <Image Width="16" Height="16" Source="/Assets/plant.png" />
+                        <Image Width="16" Height="16" Source="/Assets/leaf_plant.png" />
                     </Button>
                     <Button Name="PeopleButton" ToolTip.Tip="People " Command="{Binding OpenPeopleViewCommand}">
                         <!-- <materialIcons:MaterialIcon Kind="PeopleGroup" Margin="0"/> -->
