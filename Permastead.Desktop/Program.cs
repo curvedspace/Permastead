@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Runtime.InteropServices;
 using Avalonia;
+
 using Serilog;
 
 namespace Permastead.Desktop;

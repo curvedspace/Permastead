@@ -15,8 +15,8 @@ public partial class App : Application
     public static IThemeManager? ThemeManager;
     public override void Initialize()
     {
-        ThemeManager = new FluentThemeManager();
-        ThemeManager.Initialize(this);
+        // ThemeManager = new FluentThemeManager();
+        // ThemeManager.Initialize(this);
 
         AvaloniaXamlLoader.Load(this);
         
@@ -30,7 +30,7 @@ public partial class App : Application
     {
         // Line below is needed to remove Avalonia data validation.
         // Without this line you will get duplicate validations from both Avalonia and CT
-        BindingPlugins.DataValidators.RemoveAt(0);
+        //BindingPlugins.DataValidators.RemoveAt(0);
 
         var mainWindowViewModel = new MainWindowViewModel();
 
@@ -38,22 +38,22 @@ public partial class App : Application
         {
             case IClassicDesktopStyleApplicationLifetime desktopLifetime:
             {
-                var mainWindow = new MainWindow
+                var mainWindow = new MainWindow()
                 {
                     DataContext = mainWindowViewModel
                 };
 
-                mainWindow.Closing += (_, _) =>
-                {
-                    mainWindowViewModel.CloseLayout();
-                };
-
+                // mainWindow.Closing += (_, _) =>
+                // {
+                //     mainWindowViewModel.CloseLayout();
+                // };
+                //
                 desktopLifetime.MainWindow = mainWindow;
-
-                desktopLifetime.Exit += (_, _) =>
-                {
-                    mainWindowViewModel.CloseLayout();
-                };
+                //
+                // desktopLifetime.Exit += (_, _) =>
+                // {
+                //     mainWindowViewModel.CloseLayout();
+                // };
 
                 break;
             }

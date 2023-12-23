@@ -1,15 +1,17 @@
 using System;
-using Avalonia;
+
 using Avalonia.Controls;
 using Avalonia.Input;
 using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml;
+
 using Models;
+using Services;
+
 using Permastead.ViewModels.Dialogs;
-using Permastead.ViewModels.Tools;
 using Permastead.ViewModels.Views;
 using Permastead.Views.Dialogs;
-using Services;
+
 using Node = Permastead.ViewModels.Views.Node;
 using NodeType = Permastead.ViewModels.Views.NodeType;
 
@@ -102,11 +104,6 @@ public partial class PlantingsView : UserControl
         plantingWindow.Title = "New Planting";
         plantingWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;
                 
-        // IReadOnlyList<Window>? windows = ((IClassicDesktopStyleApplicationLifetime)Application.Current.ApplicationLifetime).Windows;
-        // Window? parent = windows.First();
-        //
-        // obsWindow.ShowDialog(parent);
-                
         plantingWindow.Show();
     }
 
@@ -123,11 +120,6 @@ public partial class PlantingsView : UserControl
         plantWindow.Opacity = 0.95;
         plantWindow.Title = "New Plant";
         plantWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;
-                
-        // IReadOnlyList<Window>? windows = ((IClassicDesktopStyleApplicationLifetime)Application.Current.ApplicationLifetime).Windows;
-        // Window? parent = windows.First();
-        //
-        // obsWindow.ShowDialog(parent);
                 
         plantWindow.Show();
     }

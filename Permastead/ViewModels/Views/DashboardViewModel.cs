@@ -3,14 +3,13 @@ using System;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using CommunityToolkit.Mvvm.ComponentModel;
-using Dock.Model.Mvvm.Core;
 
 using Models;
 using Services;
 
 namespace Permastead.ViewModels.Views;
 
-    public partial class DashboardViewModel : DockBase
+    public partial class DashboardViewModel : ViewModelBase
     {
         public QuoteViewModel QuoteViewModel { get; set; } = new QuoteViewModel();
 
