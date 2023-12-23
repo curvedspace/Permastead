@@ -165,6 +165,8 @@ public partial class PlantingsViewModel : ViewModelBase
                     ("Yield", x => x.YieldRating),
                 new TextColumn<Planting, string>
                     ("Age", x => x.Age),
+                new TextColumn<Planting, decimal>
+                    ("DTM", x => x.SeedPacket.DaysToHarvest),
                 new TextColumn<Planting, string>
                     ("Location", x => x.Bed.Code),
                 new TextColumn<Planting, string>
