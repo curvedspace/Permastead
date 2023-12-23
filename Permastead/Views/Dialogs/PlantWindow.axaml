@@ -106,8 +106,10 @@
             </Border>
         </Grid>
         
+        <Image Grid.Row="4" Grid.Column="0" HorizontalAlignment="Left" Margin="20" Width="32" Height="32" Source="/Assets/plant.png" />
+        
         <StackPanel Grid.Row="4" Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,10,0">
-            <Button Name="SaveButton" Margin="10" >Save</Button>
+            <Button Name="SaveButton" Margin="10" Click="SaveButton_OnClick" >Save</Button>
             <Button Name="CancelButton" Margin="10" Click="CancelButton_OnClick">Cancel</Button>
         </StackPanel>
     

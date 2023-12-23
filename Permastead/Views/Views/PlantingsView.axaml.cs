@@ -11,6 +11,7 @@ using Permastead.ViewModels.Views;
 using Permastead.Views.Dialogs;
 using Services;
 using Node = Permastead.ViewModels.Views.Node;
+using NodeType = Permastead.ViewModels.Views.NodeType;
 
 namespace Permastead.Views.Views;
 
@@ -118,7 +119,7 @@ public partial class PlantingsView : UserControl
         
         plantWindow.Topmost = true;
         plantWindow.Width = 900;
-        plantWindow.Height = 500;
+        plantWindow.Height = 700;
         plantWindow.Opacity = 0.95;
         plantWindow.Title = "New Plant";
         plantWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;
@@ -138,25 +139,31 @@ public partial class PlantingsView : UserControl
         Plant currentPlant;
         var tree = this.FindControl<TreeView>("TreeBrowser");
         Node currentNode = tree.SelectedItem as Node;
-
-        var plant = PlantService.GetPlantFromId(AppSession.ServiceMode, currentNode.Id);
         
-        var vm = new PlantWindowViewModel();
-        vm.Plant = plant;
-        plantWindow.DataContext = vm;
+        // figure out what to do based on the node type
+        if (currentNode != null)
+        {
+            switch (currentNode.Type)
+            {
+                case NodeType.Plant:
+                    var plant = PlantService.GetPlantFromId(AppSession.ServiceMode, currentNode.Id);
+                    var vm = new PlantWindowViewModel(plant, (PlantingsViewModel)DataContext);
+                    vm.Plant = plant;
+                    plantWindow.DataContext = vm;
         
-        plantWindow.Topmost = true;
-        plantWindow.Width = 900;
-        plantWindow.Height = 500;
-        plantWindow.Opacity = 0.95;
-        plantWindow.Title = "Edit Plant";
-        plantWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+                    plantWindow.Topmost = true;
+                    plantWindow.Width = 900;
+                    plantWindow.Height = 700;
+                    plantWindow.Opacity = 0.95;
+                    plantWindow.Title = "Edit Plant";
+                    plantWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;
                 
-        // IReadOnlyList<Window>? windows = ((IClassicDesktopStyleApplicationLifetime)Application.Current.ApplicationLifetime).Windows;
-        // Window? parent = windows.First();
-        //
-        // obsWindow.ShowDialog(parent);
+                    plantWindow.Show();
+                    break;
                 
-        plantWindow.Show();
+                case NodeType.GardenBed:
+                    break;
+            }
+        }
     }
 }

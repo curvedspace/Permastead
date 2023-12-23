@@ -1,11 +1,6 @@
 ﻿using DataAccess.Local;
 using DataAccess;
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Models;
 
 namespace Services
@@ -34,6 +29,26 @@ namespace Services
             }
 
             return plant;
+        }
+        
+        public static bool CommitRecord(ServiceMode serviceMode, Plant? plant)
+        {
+            bool rtnValue = false;
+        
+            if (plant != null)
+            {
+                if (plant.Id > 0)
+                {
+                    PlantRepository.Update(plant);
+                }
+                else
+                {
+                    // insert new record
+                    PlantRepository.Insert(plant);
+                }
+            }
+
+            return rtnValue;
         }
     }
 }

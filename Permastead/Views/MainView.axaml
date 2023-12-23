@@ -99,7 +99,7 @@
         </Button>
         
         <Button ToolTip.Tip="Plantings " Command="{Binding Navigate}" CommandParameter="PlantingsPage" Grid.Column="7" >
-          <Image Width="16" Height="16" Source="/Assets/plant.png" />
+          <Image Width="16" Height="16" Source="/Assets/leaf_plant.png" />
         </Button>
         
         <Button ToolTip.Tip="Contacts " Command="{Binding Navigate}" CommandParameter="ContactsPage" Grid.Column="8" >

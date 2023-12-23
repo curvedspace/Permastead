@@ -17,7 +17,7 @@
   <Grid ColumnDefinitions="*" RowDefinitions="Auto,*">
     
     <WrapPanel>
-      <Image Margin="20" Width="24" Height="24" Source="/Assets/plant.png" />
+      <Image Margin="20" Width="24" Height="24" Source="/Assets/leaf_plant.png" />
       <TextBlock FontWeight="Bold" Margin="20,24,20,20">Plantings</TextBlock>
       <Button Command="{Binding RefreshPlantingsCommand}" Name="Refresh" HorizontalAlignment="Right" Margin="5,0">Refresh</Button> 
       <!-- <Menu> -->
