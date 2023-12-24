@@ -35,7 +35,7 @@ public partial class GaiaViewModel : ViewModelBase
         //_gaia = new Services.GaiaService();
         
         AddResponse("Hello there, welcome to Permastead.");
-        AddResponse("Quote of the day: " + Services.QuoteService.GetRandomQuote(AppSession.ServiceMode).ToString());
+        AddResponse("Quote of the day: " + '\n' + Services.QuoteService.GetRandomQuote(AppSession.ServiceMode).ToString());
         
         var updates = new ObservableCollection<string>(ScoreBoardService.CheckForNewToDos(ServiceMode.Local));
 

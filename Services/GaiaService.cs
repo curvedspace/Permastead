@@ -26,20 +26,7 @@ public class GaiaService
 
         _gaia.IsAcceptingUserInput = true; // This switches the user input back on
 
-        // while (true)
-        // {
-        //     // This starts a loop forever so the bot will keep replying and accepting input
-        //
-        //     Request r = new Request(Console.ReadLine(), myUser,
-        //             _gaia); // This generates a request using the Console's ReadLine function to get text from the console, the user and the AI object's.
-        //
-        //     Result res = _gaia.Chat(r); // This sends the request off to the object AI to get a reply back based of the AIML file's.
-        //
-        //     Console.WriteLine("Robot: " +
-        //                       res.Output); // This display's the output in the console by retrieving a string from res.Output
-        // }
-        
-        
+       
     }
 
     public string GetResponse(string inputString)
@@ -58,8 +45,7 @@ public class GaiaService
                     var searchList = GetSearchResults(inputString.Replace("/s ",""));
 
                     return searchList.ToString();
-                    
-                    //return @"Sorry, I don't know that command.";
+
                     break;
             }
         }
