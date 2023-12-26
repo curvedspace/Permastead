@@ -1,18 +1,28 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 using Services;
 
 namespace Permastead
 {
-    public static class AppSession
+    public class AppSession
     {
         public static ServiceMode ServiceMode { get; set; } = ServiceMode.Local;
 
-        public static GaiaService GaiaService { get; } = new GaiaService();
+        public GaiaService GaiaService;
 
+        
+        private AppSession()
+        {
+            GaiaService = new GaiaService();
+        }
+        
+        private static readonly Lazy<AppSession> lazy = new Lazy<AppSession>(() => new AppSession());
+        
+        public static AppSession Instance
+        {
+            get
+            {
+                return lazy.Value;
+            }
+        }
     }
 }
