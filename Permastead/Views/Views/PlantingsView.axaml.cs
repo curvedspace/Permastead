@@ -161,13 +161,13 @@ public partial class PlantingsView : UserControl
     private void NewVendorMenuItem_OnClick(object? sender, RoutedEventArgs e)
     {
         var win = new VendorWindow();
-        var vm = new VendorWindowViewModel();
+        var vm = new VendorWindowViewModel(new Vendor(), (PlantingsViewModel)DataContext);
             
         win.DataContext = vm;
         
         win.Topmost = true;
-        win.Width = 900;
-        win.Height = 700;
+        win.Width = 500;
+        win.Height = 300;
         win.Opacity = 0.95;
         win.Title = "New Vendor";
         win.WindowStartupLocation = WindowStartupLocation.CenterScreen;
