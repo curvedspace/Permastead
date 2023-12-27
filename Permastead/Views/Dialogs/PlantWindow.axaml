@@ -22,7 +22,7 @@
                     Padding="10" Margin="20">
             <Grid ColumnDefinitions="*,*,*,*" RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,*"  Margin="10">
                 <TextBlock Grid.Row="0" Grid.Column="0" Margin="10,10,0,0">ID:</TextBlock>
-                <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding Plant.Id }" Margin="10,10,10,10"></TextBox>
+                <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding Plant.Id }" IsEnabled="False" Margin="10,10,10,10"></TextBox>
                 <Label Grid.Row="0" Margin="10,10,10,10" Grid.Column="2">Code:</Label>
                 <TextBox Grid.Row="0" Grid.Column="3" Text="{Binding Plant.Code }" Margin="10,10,10,10"></TextBox>
                 <TextBlock Grid.Row="1" Grid.Column="0" Margin="10,10,10,10">Description:</TextBlock>

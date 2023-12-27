@@ -132,8 +132,8 @@ public partial class PlantingsView : UserControl
         win.DataContext = vm;
         
         win.Topmost = true;
-        win.Width = 900;
-        win.Height = 700;
+        win.Width = 700;
+        win.Height = 370;
         win.Opacity = 0.95;
         win.Title = "New Location";
         win.WindowStartupLocation = WindowStartupLocation.CenterScreen;
@@ -149,8 +149,8 @@ public partial class PlantingsView : UserControl
         win.DataContext = vm;
         
         win.Topmost = true;
-        win.Width = 900;
-        win.Height = 700;
+        win.Width = 800;
+        win.Height = 500;
         win.Opacity = 0.95;
         win.Title = "New Plant Starter";
         win.WindowStartupLocation = WindowStartupLocation.CenterScreen;

@@ -107,10 +107,6 @@ public partial class PlantingsViewModel : ViewModelBase
         foreach (var o in p1)
         {
             addRecord = false;
-            // o.SeedPacket = SeedPackets.First(x => x.Id == o.SeedPacket.Id);
-            // o.Author = People.First(x => x.Id == o.Author.Id);
-            // o.Bed =Beds.First(x => x.Id == o.Bed.Id);
-            // o.Plant = Plants.First(x => x.Id == o.Plant.Id);
 
             if (node != null)
             {

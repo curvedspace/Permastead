@@ -15,7 +15,7 @@
   
       <Grid ColumnDefinitions="Auto,Auto,Auto,*" RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,*,Auto" Margin="10">
         <TextBlock Grid.Row="0" Grid.Column="0" Margin="10,15,0,0">ID:</TextBlock>
-        <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding Planting.Id }" Margin="10,10,10,0"></TextBox>
+        <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding Planting.Id }" IsEnabled="False" Margin="10,10,10,0"></TextBox>
         <Label Grid.Row="0" Margin="10,10,10,10" Grid.Column="2">Start Date:</Label>
         <CalendarDatePicker x:Name="StartDate" Margin="10,5,0,0" Grid.Row="0" Grid.Column="3" SelectedDate="{Binding Planting.StartDate, Mode=TwoWay}">
         </CalendarDatePicker>
