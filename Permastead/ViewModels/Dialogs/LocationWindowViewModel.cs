@@ -4,6 +4,7 @@ using System.Linq;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Models;
+using Permastead.ViewModels.Views;
 using Serilog;
 
 namespace Permastead.ViewModels.Dialogs;
@@ -16,11 +17,14 @@ public partial class LocationWindowViewModel : ViewModelBase
     
     [ObservableProperty]
     private ObservableCollection<GardenBedType> _bedTypes = new ObservableCollection<GardenBedType>();
+    
+    private PlantingsViewModel _controlViewModel { get; set;  } = new PlantingsViewModel();
 
 
-    public LocationWindowViewModel(GardenBed bed) : this()
+    public LocationWindowViewModel(GardenBed bed, PlantingsViewModel obsVm) : this()
     {
         _bed = bed;
+        _controlViewModel = obsVm;
         
         if (_bed.GardenBedTypeId != 0 && _bedTypes.Count > 0) _bed.Type = _bedTypes.First(x => x.Id == _bed.Type.Id);
     }
@@ -28,7 +32,6 @@ public partial class LocationWindowViewModel : ViewModelBase
     public LocationWindowViewModel()
     {
         _bed = new GardenBed();
-        
         _bedTypes = new ObservableCollection<GardenBedType>(Services.PlantingsService.GetGardenBedTypes(AppSession.ServiceMode));
     }
 

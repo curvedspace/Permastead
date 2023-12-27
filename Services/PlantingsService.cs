@@ -66,6 +66,18 @@ public static class PlantingsService
         return beds;
     }
     
+    public static GardenBed GetGardenBedFromId(ServiceMode mode, long id) 
+    {
+        var gardenBed = new GardenBed();
+
+        if (mode == ServiceMode.Local)
+        {
+            gardenBed = GardenBedRepository.GetFromId(DataConnection.GetLocalDataSource(), id);
+        }
+
+        return gardenBed;
+    }
+    
     public static List<GardenBedType> GetGardenBedTypes(ServiceMode mode)
     {
         var bedTypes = new List<GardenBedType>();

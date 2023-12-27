@@ -29,6 +29,9 @@ public partial class PlantingsViewModel : ViewModelBase
     
     [ObservableProperty] 
     private ObservableCollection<Person> _people = new ObservableCollection<Person>();
+    
+    [ObservableProperty] 
+    private ObservableCollection<Vendor> _vendors = new ObservableCollection<Vendor>();
 
     [ObservableProperty] 
     private long _plantingCount;
@@ -53,6 +56,7 @@ public partial class PlantingsViewModel : ViewModelBase
             _seedPackets = new ObservableCollection<SeedPacket>(Services.PlantingsService.GetSeedPackets(AppSession.ServiceMode, false));
             _plants = new ObservableCollection<Plant>(Services.PlantingsService.GetPlants(AppSession.ServiceMode));
             _people = new ObservableCollection<Person>(Services.PersonService.GetAllPeople(AppSession.ServiceMode));
+            _vendors = new ObservableCollection<Vendor>(VendorService.GetAll(AppSession.ServiceMode));
 
             _currentItem = new Planting();
 
@@ -85,6 +89,14 @@ public partial class PlantingsViewModel : ViewModelBase
         foreach (var b in _beds)
         {
             locNode.SubNodes.Add(new Node(b.Id, b.Code + ": " + b.Description, NodeType.GardenBed));
+        }
+        
+        // now vendors
+        var vendorNode = new Node("Vendors (" + _vendors.Count + ")", new ObservableCollection<Node>());
+        Nodes.Add(vendorNode);
+        foreach (var b in _vendors)
+        {
+            vendorNode.SubNodes.Add(new Node(b.Id, b.Description, NodeType.Vendor));
         }
         
         this.RefreshData();
@@ -262,5 +274,6 @@ public enum NodeType
     SeedPacket,
     People,
     Company,
-    GardenBed
+    GardenBed,
+    Vendor
 }

@@ -178,6 +178,7 @@ public partial class PlantingsView : UserControl
     private void EditMenuItem_OnClick(object? sender, RoutedEventArgs e)
     {
         var plantWindow = new PlantWindow();
+        var locWindow = new LocationWindow();
 
         Plant currentPlant;
         var tree = this.FindControl<TreeView>("TreeBrowser");
@@ -190,9 +191,9 @@ public partial class PlantingsView : UserControl
             {
                 case NodeType.Plant:
                     var plant = PlantService.GetPlantFromId(AppSession.ServiceMode, currentNode.Id);
-                    var vm = new PlantWindowViewModel(plant, (PlantingsViewModel)DataContext);
-                    vm.Plant = plant;
-                    plantWindow.DataContext = vm;
+                    var plantWindowViewModel = new PlantWindowViewModel(plant, (PlantingsViewModel)DataContext);
+                    plantWindowViewModel.Plant = plant;
+                    plantWindow.DataContext = plantWindowViewModel;
         
                     plantWindow.Topmost = true;
                     plantWindow.Width = 900;
@@ -205,6 +206,19 @@ public partial class PlantingsView : UserControl
                     break;
                 
                 case NodeType.GardenBed:
+                    var bed = PlantingsService.GetGardenBedFromId(AppSession.ServiceMode, currentNode.Id);
+                    var locationWindowViewModel = new LocationWindowViewModel(bed, (PlantingsViewModel)DataContext);
+                    locationWindowViewModel.Bed = bed;
+                    locWindow.DataContext = locationWindowViewModel;
+        
+                    locWindow.Topmost = true;
+                    locWindow.Width = 900;
+                    locWindow.Height = 700;
+                    locWindow.Opacity = 0.95;
+                    locWindow.Title = "Edit Location";
+                    locWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+                
+                    locWindow.Show();
                     break;
             }
         }
