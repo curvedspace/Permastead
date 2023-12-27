@@ -6,6 +6,7 @@
         xmlns:vm="using:Permastead.ViewModels.Dialogs"
         x:Class="Permastead.Views.Dialogs.PlantingWindow"
         x:DataType="vm:PlantingWindowViewModel"
+        Icon="/Assets/leaf_plant.png"
         Title="PlantingWindow">
     
     <!--This is design time only-->

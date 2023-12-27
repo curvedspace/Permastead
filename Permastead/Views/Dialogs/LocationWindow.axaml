@@ -6,7 +6,8 @@
         x:Class="Permastead.Views.Dialogs.LocationWindow"
         xmlns:vm="using:Permastead.ViewModels.Dialogs"
         x:DataType="vm:LocationWindowViewModel" x:CompileBindings="True"
-        Title="LocationWindow">
+        Icon="/Assets/soil_layers.png"
+        Title="Location Window">
     
         <StackPanel VerticalAlignment="Top" HorizontalAlignment="Stretch">
       

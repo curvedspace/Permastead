@@ -6,6 +6,7 @@
         x:Class="Permastead.Views.Dialogs.VendorWindow"
         xmlns:vm="using:Permastead.ViewModels.Dialogs"
         x:DataType="vm:VendorWindowViewModel" x:CompileBindings="True"
+        Icon="/Assets/cpanel_branding.png"
         Title="Vendor Window">
     
         <Grid ColumnDefinitions="Auto,Auto,Auto,*" RowDefinitions="Auto,Auto,Auto,Auto,*"  Margin="10">

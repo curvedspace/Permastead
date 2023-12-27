@@ -6,6 +6,7 @@
         x:Class="Permastead.Views.Dialogs.StarterWindow"
         xmlns:vm="using:Permastead.ViewModels.Dialogs"
         x:DataType="vm:StarterWindowViewModel" x:CompileBindings="True"
+        Icon="/Assets/photo_add.png"
         Title="Starter Window">
   
   <Grid ColumnDefinitions="Auto,*" RowDefinitions="Auto,*"  Margin="10,10,10,0">
