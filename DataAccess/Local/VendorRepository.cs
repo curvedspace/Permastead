@@ -57,7 +57,7 @@ namespace DataAccess.Local
                     using (IDbConnection db = new SqliteConnection(DataConnection.GetLocalDataSource()))
                     {
                         string sqlQuery =
-                            "UPDATE Vendor SET Code = @Code, Description = @Description, StartDate = @StartDate, EndDate = @EndDate " +
+                            "UPDATE Vendor SET Code = @Code, Description = @Description, Rating = @Rating, StartDate = @StartDate, EndDate = @EndDate " +
                             "WHERE Id = @Id;";
 
                         return (db.Execute(sqlQuery, vendor) == 1);
