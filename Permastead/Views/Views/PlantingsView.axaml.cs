@@ -123,6 +123,57 @@ public partial class PlantingsView : UserControl
                 
         plantWindow.Show();
     }
+    
+    private void NewLocationMenuItem_OnClick(object? sender, RoutedEventArgs e)
+    {
+        var win = new LocationWindow();
+        var vm = new LocationWindowViewModel();
+            
+        win.DataContext = vm;
+        
+        win.Topmost = true;
+        win.Width = 900;
+        win.Height = 700;
+        win.Opacity = 0.95;
+        win.Title = "New Location";
+        win.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+                
+        win.Show();
+    }
+    
+    private void NewStarterMenuItem_OnClick(object? sender, RoutedEventArgs e)
+    {
+        var win = new StarterWindow();
+        var vm = new StarterWindowViewModel();
+            
+        win.DataContext = vm;
+        
+        win.Topmost = true;
+        win.Width = 900;
+        win.Height = 700;
+        win.Opacity = 0.95;
+        win.Title = "New Plant Starter";
+        win.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+                
+        win.Show();
+    }
+    
+    private void NewVendorMenuItem_OnClick(object? sender, RoutedEventArgs e)
+    {
+        var win = new VendorWindow();
+        var vm = new VendorWindowViewModel();
+            
+        win.DataContext = vm;
+        
+        win.Topmost = true;
+        win.Width = 900;
+        win.Height = 700;
+        win.Opacity = 0.95;
+        win.Title = "New Vendor";
+        win.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+                
+        win.Show();
+    }
 
     private void EditMenuItem_OnClick(object? sender, RoutedEventArgs e)
     {

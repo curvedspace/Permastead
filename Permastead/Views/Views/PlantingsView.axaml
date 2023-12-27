@@ -39,9 +39,9 @@
             <MenuItem Header="Planting..." Click="NewPlantingMenuItem_OnClick" />
             <Separator/>
             <MenuItem Header="Plant..." Click="NewPlantMenuItem_OnClick"/>
-            <MenuItem Header="Starter " IsEnabled="False"/>
-            <MenuItem Header="Location " IsEnabled="False"/>
-            <MenuItem Header="Vendor " IsEnabled="False"/>
+            <MenuItem Header="Starter " Click="NewStarterMenuItem_OnClick"/>
+            <MenuItem Header="Location " Click="NewLocationMenuItem_OnClick"/>
+            <MenuItem Header="Vendor " Click="NewVendorMenuItem_OnClick"/>
           </MenuFlyout>
         </SplitButton.Flyout>
       </SplitButton>

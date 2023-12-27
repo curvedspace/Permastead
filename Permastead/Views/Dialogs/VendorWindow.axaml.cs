@@ -2,13 +2,12 @@ using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 
-namespace Permastead.Views.Views;
+namespace Permastead.Views.Dialogs;
 
-public partial class ToDoPageView : UserControl
+public partial class VendorWindow : Window
 {
-    public ToDoPageView()
+    public VendorWindow()
     {
         InitializeComponent();
     }
-    
 }
