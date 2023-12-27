@@ -130,6 +130,9 @@ public partial class PlantingsViewModel : ViewModelBase
                     case NodeType.GardenBed:
                         if (o.Bed.Code + ": " + o.Bed.Description == node.Title) addRecord = true;
                         break;
+                    case NodeType.Vendor:
+                        if (o.SeedPacket.Vendor.Description == node.Title) addRecord = true;
+                        break;
                     default:
                         addRecord = false;
                         break;

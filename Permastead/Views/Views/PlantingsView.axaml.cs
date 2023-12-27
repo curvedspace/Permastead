@@ -1,5 +1,5 @@
 using System;
-
+using System.Linq;
 using Avalonia.Controls;
 using Avalonia.Input;
 using Avalonia.Interactivity;
@@ -179,6 +179,7 @@ public partial class PlantingsView : UserControl
     {
         var plantWindow = new PlantWindow();
         var locWindow = new LocationWindow();
+        var vendorWindow = new VendorWindow();
 
         Plant currentPlant;
         var tree = this.FindControl<TreeView>("TreeBrowser");
@@ -212,13 +213,30 @@ public partial class PlantingsView : UserControl
                     locWindow.DataContext = locationWindowViewModel;
         
                     locWindow.Topmost = true;
-                    locWindow.Width = 900;
-                    locWindow.Height = 700;
+                    locWindow.Width = 700;
+                    locWindow.Height = 370;
                     locWindow.Opacity = 0.95;
-                    locWindow.Title = "Edit Location";
+                    locWindow.Title = "Edit Bed Location";
                     locWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;
                 
                     locWindow.Show();
+                    break;
+                
+                case NodeType.Vendor:
+                    var vendors = VendorService.GetAll(AppSession.ServiceMode);
+                    var vendor = vendors.FirstOrDefault(x => x.Id == currentNode.Id);
+                    var vendorWindowViewModel = new VendorWindowViewModel(vendor, (PlantingsViewModel)DataContext);
+                    vendorWindowViewModel.Vendor = vendor;
+                    vendorWindow.DataContext = vendorWindowViewModel;
+        
+                    vendorWindow.Topmost = true;
+                    vendorWindow.Width = 500;
+                    vendorWindow.Height = 300;
+                    vendorWindow.Opacity = 0.95;
+                    vendorWindow.Title = "Edit Vendor";
+                    vendorWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+                
+                    vendorWindow.Show();
                     break;
             }
         }

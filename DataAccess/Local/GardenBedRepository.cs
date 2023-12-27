@@ -46,7 +46,7 @@ public class GardenBedRepository
                     using (IDbCommand command = connection.CreateCommand())
                     {
                         command.CommandText = sql;
-                        command.Parameters.Add(new SqliteParameter("@id", id));
+                        command.Parameters.Add(new SqliteParameter("@Id", id));
                     
                         var dr = command.ExecuteReader();
 
@@ -58,13 +58,14 @@ public class GardenBedRepository
                             bed.Code = dr[1].ToString()!;
                             bed.Description = dr[2].ToString()!;
                             bed.PermacultureZone = Convert.ToInt64(dr[3].ToString());
+                            bed.Type.Id = Convert.ToInt64(dr[4].ToString());
 
-                            bed.CreationDate = Convert.ToDateTime(dr[4].ToString());
-                            bed.StartDate = Convert.ToDateTime(dr[5].ToString());
-                            bed.EndDate = Convert.ToDateTime(dr[6].ToString());
+                            bed.CreationDate = Convert.ToDateTime(dr[5].ToString());
+                            bed.StartDate = Convert.ToDateTime(dr[6].ToString());
+                            bed.EndDate = Convert.ToDateTime(dr[7].ToString());
 
                             bed.Author = new Person();
-                            bed.Author.Id = Convert.ToInt64(dr[7].ToString());
+                            bed.Author.Id = Convert.ToInt64(dr[8].ToString());
                             
                         }
                     }
