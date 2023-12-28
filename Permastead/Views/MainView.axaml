@@ -22,6 +22,10 @@
                         <!-- <materialIcons:MaterialIcon Kind="Home" Margin="0"/> -->
                         <Image Width="16" Height="16" Source="/Assets/house_one.png" />
                     </Button>
+                    <Button Name="DashboardButton" ToolTip.Tip="Dashboard " Command="{Binding OpenDashboardViewCommand}">
+                        <!-- <materialIcons:MaterialIcon Kind="EyeCheck" Margin="0"/> -->
+                        <Image Width="16" Height="16" Source="/Assets/statistics.png" />
+                    </Button>
                     <Button Name="ObservationsButton" ToolTip.Tip="Observations " Command="{Binding OpenObservationViewCommand}">
                         <!-- <materialIcons:MaterialIcon Kind="EyeCheck" Margin="0"/> -->
                         <Image Width="16" Height="16" Source="/Assets/web_template_editor.png" />
@@ -36,6 +40,9 @@
                     </Button>
                     <Button Name="InventoryButton" ToolTip.Tip="Inventory " Command="{Binding OpenInventoryViewCommand}">
                         <Image Width="16" Height="16" Source="/Assets/clipboard_invoice.png" />
+                    </Button>
+                    <Button Name="SeedsButton" ToolTip.Tip="Seeds " Command="{Binding OpenSeedsViewCommand}">
+                        <Image Width="16" Height="16" Source="/Assets/bean.png" />
                     </Button>
                     <Button Name="PlantsButton" ToolTip.Tip="Plants " Command="{Binding OpenPlantingsViewCommand}">
                         <!-- <materialIcons:MaterialIcon Kind="Leaf" Margin="0"/> -->

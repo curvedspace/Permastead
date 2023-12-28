@@ -1,6 +1,6 @@
 namespace Permastead.ViewModels.Views;
 
-public class DashboardViewModel : ViewModelBase
+public class SeedsViewModel : ViewModelBase
 {
     
 }

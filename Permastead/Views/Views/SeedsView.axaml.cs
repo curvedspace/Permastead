@@ -4,9 +4,9 @@ using Avalonia.Markup.Xaml;
 
 namespace Permastead.Views.Views;
 
-public partial class DashboardView : UserControl
+public partial class SeedsView : UserControl
 {
-    public DashboardView()
+    public SeedsView()
     {
         InitializeComponent();
     }
