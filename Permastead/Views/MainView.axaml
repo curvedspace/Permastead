@@ -34,6 +34,9 @@
                         <!-- <materialIcons:MaterialIcon Kind="Calendars" Margin="0"/> -->
                         <Image Width="16" Height="16" Source="/Assets/sheduled_task.png" />
                     </Button>
+                    <Button Name="InventoryButton" ToolTip.Tip="Inventory " Command="{Binding OpenInventoryViewCommand}">
+                        <Image Width="16" Height="16" Source="/Assets/clipboard_invoice.png" />
+                    </Button>
                     <Button Name="PlantsButton" ToolTip.Tip="Plants " Command="{Binding OpenPlantingsViewCommand}">
                         <!-- <materialIcons:MaterialIcon Kind="Leaf" Margin="0"/> -->
                         <Image Width="16" Height="16" Source="/Assets/leaf_plant.png" />
