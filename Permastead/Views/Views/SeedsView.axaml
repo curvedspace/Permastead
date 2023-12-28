@@ -3,6 +3,31 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             xmlns:vm="using:Permastead.ViewModels.Views"
+             x:DataType="vm:SeedsViewModel"
              x:Class="Permastead.Views.Views.SeedsView">
-    Seeds
+    <!--This is design time only-->
+    <Design.DataContext>
+        <vm:SeedsViewModel/>
+    </Design.DataContext>
+    
+    <Panel>
+        <StackPanel>
+            
+            <WrapPanel>
+                <!-- <materialIcons:MaterialIcon Kind="Settings" Margin="20"/> -->
+                <Image Margin="20" Width="24" Height="24" Source="/Assets/bean.png" />
+                <TextBlock FontWeight="Bold" Margin="20,24,20,20">Seeds</TextBlock>
+                <!-- <Separator MaxWidth="5"></Separator> -->
+                
+            </WrapPanel>
+            
+            <TreeDataGrid x:Name="SeedsGrid" Grid.Row="1" Margin="10" Source="{Binding SeedsSource}" 
+                          DoubleTapped="SeedsGrid_OnDoubleTapped"
+                          CanUserResizeColumns="True">
+                
+            </TreeDataGrid>
+            
+        </StackPanel>
+    </Panel>
 </UserControl>
