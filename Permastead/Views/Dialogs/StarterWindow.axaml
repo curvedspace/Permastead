@@ -9,7 +9,7 @@
         Icon="/Assets/photo_add.png"
         Title="Starter Window">
   
-  <Grid ColumnDefinitions="Auto,*" RowDefinitions="Auto,*"  Margin="10,10,10,0">
+  <Grid ColumnDefinitions="*,Auto" RowDefinitions="*,Auto"  Margin="10,10,10,10">
     <StackPanel Grid.Row="0" VerticalAlignment="Top" HorizontalAlignment="Stretch">
       
       <Border BorderBrush="{DynamicResource TextControlBorderBrush}"
