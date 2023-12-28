@@ -34,6 +34,8 @@ public partial class SeedsViewModel : ViewModelBase
                 new TextColumn<SeedPacket, DateTime>
                     ("Date", x => x.CreationDate),
                 new TextColumn<SeedPacket, string>
+                    ("Code", x => x.Code),
+                new TextColumn<SeedPacket, string>
                     ("Description", x => x.Description),
                 new TextColumn<SeedPacket, string>
                     ("Author", x => x.Author.FirstName),
@@ -41,6 +43,10 @@ public partial class SeedsViewModel : ViewModelBase
                     ("Plant", x => x.Plant.Description),
                 new TextColumn<SeedPacket, int>
                     ("DTH", x => x.DaysToHarvest),
+                new TextColumn<SeedPacket, long>
+                    ("Gens", x => x.Generations),
+                new TextColumn<SeedPacket, string>
+                    ("Vendor", x => x.Vendor.Description),
                 new TextColumn<SeedPacket, string>
                     ("Instructions", x => x.Instructions)
             },
