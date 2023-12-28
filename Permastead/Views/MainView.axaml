@@ -36,7 +36,7 @@
                     </Button>
                     <Button Name="EventsButton" ToolTip.Tip="Events " Command="{Binding OpenEventsViewCommand}">
                         <!-- <materialIcons:MaterialIcon Kind="Calendars" Margin="0"/> -->
-                        <Image Width="16" Height="16" Source="/Assets/sheduled_task.png" />
+                        <Image Width="16" Height="16" Source="/Assets/clock_red.png" />
                     </Button>
                     <Button Name="InventoryButton" ToolTip.Tip="Inventory " Command="{Binding OpenInventoryViewCommand}">
                         <Image Width="16" Height="16" Source="/Assets/clipboard_invoice.png" />
