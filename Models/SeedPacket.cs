@@ -18,6 +18,8 @@ public class SeedPacket
 
     public int DaysToHarvest { get; set; }
 
+    public Seasonality? Seasonality { get; set; }
+    
     public Plant? Plant { get; set; }
 
     public long PlantId => this.Plant?.Id ?? 0;
@@ -90,6 +92,7 @@ public class SeedPacket
         this.Plant = new Plant();
         this.Vendor = new Vendor();
         this.Author = Person.Gaia();
+        this.Seasonality = new Seasonality();
 
         this.StartDate = DateTime.UtcNow;
         this.EndDate = new DateTime(2100, 12, 31);

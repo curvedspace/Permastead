@@ -413,6 +413,18 @@ namespace DataAccess.Local
 				AuthorId integer
 			);
 
+			-- SEASONALITY
+			DROP TABLE IF EXISTS Seasonality;
+			CREATE TABLE IF NOT EXISTS Seasonality(
+				Id INTEGER PRIMARY KEY,
+				Code VARCHAR (50) UNIQUE NOT NULL,
+				Description VARCHAR (2000) NOT NULL,
+				CreationDate TIMESTAMP,
+				StartDate TIMESTAMP NOT NULL,
+				EndDate TIMESTAMP,
+				AuthorId integer
+			);
+
 			-- GUILD
 			DROP TABLE IF EXISTS Guild;
 			CREATE TABLE IF NOT EXISTS Guild(
@@ -550,6 +562,7 @@ namespace DataAccess.Local
 				StartDate TIMESTAMP NOT NULL,
 				EndDate TIMESTAMP,
 				Generations INTEGER,
+				SeasonalityId INTEGER,
 				PlantId INTEGER,
 				VendorId INTEGER,
 				AuthorId INTEGER
@@ -794,6 +807,19 @@ namespace DataAccess.Local
             
             ps = new PlantingState { Code = "DEAD", Description = "Deceased" };
             PlantingStateRepository.Insert(ps);
+
+            #endregion
+            
+            #region Seasonality
+
+            var s = new Seasonality() { Code = "A", Description = "Annual" };
+            SeasonalityRepository.Insert(s);
+
+            s = new Seasonality { Code = "B", Description = "Biennial" };
+            SeasonalityRepository.Insert(s);
+            
+            s = new Seasonality { Code = "P", Description = "Perennial" };
+            SeasonalityRepository.Insert(s);
 
             #endregion
             
@@ -1227,7 +1253,7 @@ namespace DataAccess.Local
             
             #region SeedPacket
             
-            var sp = new SeedPacket() { Description = "Not Available", Instructions = "Not available", Author = Person.Gaia(), Vendor = new Vendor(1), Plant = new Plant(1) };
+            var sp = new SeedPacket() { Description = "Not Available", Instructions = "Not available", Author = Person.Gaia(), Vendor = new Vendor(1), Seasonality = new Seasonality(1),  Plant = new Plant(1)};
             SeedPacketRepository.Insert(sp);
             
             #endregion

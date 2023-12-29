@@ -102,6 +102,18 @@ public static class PlantingsService
         return states;
     }
     
+    public static List<Seasonality> GetSeasonalities(ServiceMode mode)
+    {
+        var seasonalities = new List<Seasonality>();
+
+        if (mode == ServiceMode.Local)
+        {
+            seasonalities = SeasonalityRepository.GetAll(DataConnection.GetLocalDataSource());
+        }
+
+        return seasonalities;
+    }
+    
     public static List<SeedPacket> GetSeedPackets(ServiceMode mode, bool byPlant = true)
     {
         var seedPackets = new List<SeedPacket>();

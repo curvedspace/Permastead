@@ -5,7 +5,7 @@ using Avalonia.Controls;
 using Avalonia.Controls.Models.TreeDataGrid;
 
 using CommunityToolkit.Mvvm.ComponentModel;
-
+using CommunityToolkit.Mvvm.Input;
 using Models;
 
 namespace Permastead.ViewModels.Views;
@@ -20,13 +20,14 @@ public partial class SeedsViewModel : ViewModelBase
     
     public FlatTreeDataGridSource<SeedPacket> SeedsSource { get; set; }
 
-    public SeedsViewModel()
+    [RelayCommand]
+    private void RefreshData()
     {
-        
         var p = Services.PlantingsService.GetSeedPackets(AppSession.ServiceMode, true);
 
         _packets = new ObservableCollection<SeedPacket>(p);
-        
+
+        SeedsSource = null;
         SeedsSource = new FlatTreeDataGridSource<SeedPacket>(_packets)
         {
             Columns =
@@ -41,6 +42,8 @@ public partial class SeedsViewModel : ViewModelBase
                     ("Author", x => x.Author.FirstName),
                 new TextColumn<SeedPacket, string>
                     ("Plant", x => x.Plant.Description),
+                new TextColumn<SeedPacket, string>
+                    ("Seasonality", x => x.Seasonality.Description),
                 new TextColumn<SeedPacket, int>
                     ("DTH", x => x.DaysToHarvest),
                 new TextColumn<SeedPacket, long>
@@ -51,5 +54,11 @@ public partial class SeedsViewModel : ViewModelBase
                     ("Instructions", x => x.Instructions)
             },
         };
+    }
+    
+    
+    public SeedsViewModel()
+    {
+       this.RefreshData();
     }
 }
