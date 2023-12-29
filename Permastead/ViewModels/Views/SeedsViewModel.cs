@@ -1,6 +1,6 @@
 using System;
 using System.Collections.ObjectModel;
-
+using System.Linq;
 using Avalonia.Controls;
 using Avalonia.Controls.Models.TreeDataGrid;
 
@@ -16,7 +16,7 @@ public partial class SeedsViewModel : ViewModelBase
     private SeedPacket _currentItem;
     
     [ObservableProperty]
-    private ObservableCollection<SeedPacket> _packets;
+    private ObservableCollection<SeedPacket> _packets = new ObservableCollection<SeedPacket>();
     
     public FlatTreeDataGridSource<SeedPacket> SeedsSource { get; set; }
 
@@ -30,7 +30,13 @@ public partial class SeedsViewModel : ViewModelBase
     {
         var p = Services.PlantingsService.GetSeedPackets(AppSession.ServiceMode, true);
 
+        //Packets.Clear();
         Packets = new ObservableCollection<SeedPacket>(p);
+        
+        if (Packets.Count > 0) 
+            CurrentItem = Packets.FirstOrDefault()!;
+        else
+            CurrentItem = new SeedPacket();
         
         SeedsSource = new FlatTreeDataGridSource<SeedPacket>(Packets)
         {
@@ -58,6 +64,8 @@ public partial class SeedsViewModel : ViewModelBase
                     ("Instructions", x => x.Instructions)
             },
         };
+        
+        Console.WriteLine("Refreshed Seeds view");
     }
     
     public SeedsViewModel()

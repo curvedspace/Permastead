@@ -150,7 +150,7 @@ public partial class PlantingsView : UserControl
         
         win.Topmost = true;
         win.Width = 800;
-        win.Height = 500;
+        win.Height = 550;
         win.Opacity = 0.95;
         win.Title = "New Plant Starter";
         win.WindowStartupLocation = WindowStartupLocation.CenterScreen;
