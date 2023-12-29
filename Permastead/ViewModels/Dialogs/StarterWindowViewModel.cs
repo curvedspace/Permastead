@@ -30,7 +30,7 @@ public partial class StarterWindowViewModel : ViewModelBase
     
     [ObservableProperty] private SeedPacketObservation _currentObservation = new SeedPacketObservation();
 
-    private PlantingsViewModel _controlViewModel { get; set;  } = new PlantingsViewModel();
+    private SeedsViewModel _controlViewModel { get; set;  } = new SeedsViewModel();
 
     public StarterWindowViewModel(SeedPacket seedPacket) : this()
     {
@@ -67,13 +67,15 @@ public partial class StarterWindowViewModel : ViewModelBase
  
             var rtnValue = DataAccess.Local.SeedPacketRepository.Insert(_seedPacket);
 
-            Console.WriteLine("saved " + rtnValue);
+            Console.WriteLine("Saved SeedPacket " + rtnValue);
         }
         else
         {
             var rtnValue = DataAccess.Local.SeedPacketRepository.Update(_seedPacket);
-            
+            Console.WriteLine("Updated SeedPacket" + rtnValue);
         }
+        
+        _controlViewModel.RefreshDataOnly();
 
     }
     

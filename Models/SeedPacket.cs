@@ -20,6 +20,8 @@ public class SeedPacket
 
     public Seasonality? Seasonality { get; set; }
     
+    public long SeasonalityId => this.Seasonality?.Id ?? 0;
+    
     public Plant? Plant { get; set; }
 
     public long PlantId => this.Plant?.Id ?? 0;

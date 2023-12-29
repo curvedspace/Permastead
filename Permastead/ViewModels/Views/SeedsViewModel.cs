@@ -23,11 +23,16 @@ public partial class SeedsViewModel : ViewModelBase
     [RelayCommand]
     private void RefreshData()
     {
+        RefreshDataOnly();
+    }
+
+    public void RefreshDataOnly()
+    {
         var p = Services.PlantingsService.GetSeedPackets(AppSession.ServiceMode, true);
 
-        _packets = new ObservableCollection<SeedPacket>(p);
+        Packets = new ObservableCollection<SeedPacket>(p);
         
-        SeedsSource = new FlatTreeDataGridSource<SeedPacket>(_packets)
+        SeedsSource = new FlatTreeDataGridSource<SeedPacket>(Packets)
         {
             Columns =
             {
@@ -55,9 +60,8 @@ public partial class SeedsViewModel : ViewModelBase
         };
     }
     
-    
     public SeedsViewModel()
     {
-       this.RefreshData();
+       this.RefreshDataOnly();
     }
 }
