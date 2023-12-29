@@ -24,13 +24,15 @@
             </WrapPanel>
         </StackPanel>
         
-            <ScrollViewer Grid.Row="1">
+        <Panel Grid.Row="1">
+            <ScrollViewer>
                 <TreeDataGrid x:Name="SeedsGrid" Grid.Row="1" Margin="10" Source="{Binding SeedsSource}" 
                               DoubleTapped="SeedsGrid_OnDoubleTapped"
                               CanUserResizeColumns="True">
                     
                 </TreeDataGrid>
             </ScrollViewer>
+        </Panel>
         
     </Grid>
 </UserControl>
