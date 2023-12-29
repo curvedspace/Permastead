@@ -26,8 +26,7 @@ public partial class SeedsViewModel : ViewModelBase
         var p = Services.PlantingsService.GetSeedPackets(AppSession.ServiceMode, true);
 
         _packets = new ObservableCollection<SeedPacket>(p);
-
-        SeedsSource = null;
+        
         SeedsSource = new FlatTreeDataGridSource<SeedPacket>(_packets)
         {
             Columns =
