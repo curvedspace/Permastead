@@ -16,7 +16,8 @@
     <Grid ColumnDefinitions="*" RowDefinitions="Auto, Auto, Auto, Auto,*">
     
       <WrapPanel>
-      <materialIcons:MaterialIcon Kind="Clipboard" Margin="20"/>
+        <Image Margin="20" Width="24" Height="24"  Source="/Assets/clipboard_invoice.png" />
+        <!-- <materialIcons:MaterialIcon Kind="Clipboard" Margin="20"/> -->
       <TextBlock FontWeight="Bold" Margin="20,20,20,20">Inventory</TextBlock>
       <Separator MaxWidth="5" Foreground="Black"></Separator>
       <Button Command="{Binding ResetToDoCommand}" Name="Reset" HorizontalAlignment="Right" Margin="10,10,0,10">Reset</Button>
