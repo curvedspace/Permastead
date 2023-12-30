@@ -17,6 +17,8 @@ public partial class SeedsViewModel : ViewModelBase
     
     [ObservableProperty]
     private ObservableCollection<SeedPacket> _packets = new ObservableCollection<SeedPacket>();
+
+    [ObservableProperty] private string _searchText;
     
     public FlatTreeDataGridSource<SeedPacket> SeedsSource { get; set; }
 
@@ -24,6 +26,12 @@ public partial class SeedsViewModel : ViewModelBase
     private void RefreshData()
     {
         RefreshDataOnly();
+    }
+
+    [RelayCommand]
+    private void ClearSearch()
+    {
+        SearchText = "";
     }
 
     public void RefreshDataOnly()

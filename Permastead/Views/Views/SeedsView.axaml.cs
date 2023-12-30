@@ -1,3 +1,4 @@
+using System;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Input;
@@ -50,5 +51,10 @@ public partial class SeedsView : UserControl
         // obsWindow.ShowDialog(parent);
             
         plantingWindow.Show();
+    }
+
+    private void TextBox_OnTextChanged(object? sender, TextChangedEventArgs e)
+    {
+        Console.WriteLine(sender.ToString() + ": " + e);
     }
 }
