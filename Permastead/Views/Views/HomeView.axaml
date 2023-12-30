@@ -118,7 +118,7 @@
               BorderThickness="1"
               CornerRadius="5"
               Padding="10" Margin="10,0,10,0">
-          <views:GaiaView HorizontalAlignment="Center" VerticalAlignment="Stretch" Width="1200" Height="700"></views:GaiaView>
+          <views:GaiaView HorizontalAlignment="Center" VerticalAlignment="Stretch" MinWidth="1000" MinHeight="600"> </views:GaiaView>
       </Border>
     </Panel>
      

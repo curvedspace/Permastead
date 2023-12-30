@@ -2,7 +2,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="750"
              xmlns:vm="using:Permastead.ViewModels.Views"
              x:DataType="vm:GaiaViewModel"
              x:CompileBindings="True"
@@ -24,7 +24,7 @@
       <Panel Grid.Row="1" Background="Transparent">
         <Grid RowDefinitions="*,Auto">
           <ListBox x:Name="GaiaListBox" ItemsSource="{Binding RequestResponses}" Margin="10,10,10,10" 
-                   VerticalAlignment="Stretch" AutoScrollToSelectedItem="True">
+                   VerticalAlignment="Stretch" AutoScrollToSelectedItem="True" SelectionMode="Toggle" Focusable="False">
             <ListBox.ItemTemplate>
               <DataTemplate> 
                 <Grid ColumnDefinitions="Auto,*,Auto" RowDefinitions="Auto,*,Auto">
