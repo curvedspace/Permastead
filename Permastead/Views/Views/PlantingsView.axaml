@@ -2,10 +2,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:materialIcons="clr-namespace:Material.Icons.Avalonia;assembly=Material.Icons.Avalonia"
              mc:Ignorable="d" d:DesignWidth="1200" d:DesignHeight="850"
              xmlns:vm="using:Permastead.ViewModels.Views"
-             xmlns:model="using:Models"
              x:DataType="vm:PlantingsViewModel"
              x:Class="Permastead.Views.Views.PlantingsView">
     

@@ -3,9 +3,14 @@ using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Data.Core.Plugins;
 using Avalonia.Markup.Xaml;
 
+using LiveChartsCore; 
+using LiveChartsCore.Kernel; 
+using LiveChartsCore.SkiaSharpView; 
+
 using Permastead.Themes;
 using Permastead.ViewModels;
 using Permastead.Views;
+
 using Serilog;
 
 namespace Permastead;
@@ -24,6 +29,13 @@ public partial class App : Application
         {
             Log.Logger.Information("New database created.");
         }
+        
+        LiveCharts.Configure(config => 
+                config 
+                    // you can override the theme 
+                    .AddDarkTheme()  
+            
+        ); 
     }
 
     public override void OnFrameworkInitializationCompleted()
