@@ -1,6 +1,8 @@
 using System;
 using System.Collections.ObjectModel;
 using System.Linq;
+using Avalonia.Controls;
+using Avalonia.Controls.Models.TreeDataGrid;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Models;
@@ -29,6 +31,8 @@ public partial class InventoryViewModel: ViewModelBase
     
     [ObservableProperty] 
     private bool _forSaleOnly = false;
+    
+    public FlatTreeDataGridSource<Inventory> InventorySource { get; set; }
 
     [RelayCommand]
     // The method that will be executed when the command is invoked
@@ -56,7 +60,7 @@ public partial class InventoryViewModel: ViewModelBase
             var rtnValue = DataAccess.Local.InventoryRepository.Update(_currentItem);
             RefreshInventory();
         }
-
+        
     }
 
     [RelayCommand]
@@ -114,6 +118,33 @@ public partial class InventoryViewModel: ViewModelBase
             }
             
         }
+        
+        InventorySource = new FlatTreeDataGridSource<Inventory>(_inventory)
+        {
+            Columns =
+            {
+                new TextColumn<Inventory, DateTime>
+                    ("Date", x => x.CreationDate),
+                new TextColumn<Inventory, string>
+                    ("Brand", x => x.Brand),
+                new TextColumn<Inventory, string>
+                    ("Description", x => x.Description),
+                new TextColumn<Inventory, string>
+                    ("Author", x => x.Author.FirstName),
+                new TextColumn<Inventory, string>
+                    ("Room", x => x.Room),
+                new TextColumn<Inventory, string>
+                    ("Group", x => x.InventoryGroup.Description),
+                new TextColumn<Inventory, string>
+                    ("Type", x => x.InventoryType.Description),
+                new TextColumn<Inventory, long>
+                    ("Quantity", x => x.Quantity),
+                new TextColumn<Inventory, double>
+                    ("Value", x => x.CurrentValue),
+                new TextColumn<Inventory, string>
+                    ("Notes", x => x.Notes)
+            },
+        };
         
         InventoryCount = _inventory.Count;
       
