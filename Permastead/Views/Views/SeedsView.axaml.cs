@@ -14,6 +14,7 @@ public partial class SeedsView : UserControl
     public SeedsView()
     {
         InitializeComponent();
+        DataContext = new SeedsViewModel();
     }
 
     private void SeedsGrid_OnDoubleTapped(object? sender, TappedEventArgs e)
@@ -30,6 +31,7 @@ public partial class SeedsView : UserControl
             //get underlying view's viewmodel
             // var vm = new StarterWindowViewModel(seedPacket, (SeedsViewModel)DataContext);
             var vm = new StarterWindowViewModel(seedPacket);
+            vm.ControlViewModel = (SeedsViewModel)DataContext;
             
             plantingWindow.DataContext = vm;
         

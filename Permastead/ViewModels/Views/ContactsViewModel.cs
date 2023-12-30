@@ -11,17 +11,34 @@ namespace Permastead.ViewModels.Views;
 
 public partial class ContactsViewModel : ViewModelBase
 {
-    private ObservableCollection<Person> _people;
+    private ObservableCollection<Person> _people = new ObservableCollection<Person>();
     
     [ObservableProperty] 
     private long _peopleCount;
 
-    public FlatTreeDataGridSource<Person> PersonSource { get; }
+    public FlatTreeDataGridSource<Person> PersonSource { get; set; }
     
     public ContactsViewModel()
     {
-        _people = new ObservableCollection<Person>(Services.PersonService.GetAllPeople(AppSession.ServiceMode));
+        RefreshDataOnly();
+    }
 
+    [RelayCommand]
+    private void RefreshData()
+    {
+        RefreshDataOnly();
+    }
+
+    public void RefreshDataOnly()
+    {
+        var myPeople = Services.PersonService.GetAllPeople(AppSession.ServiceMode);
+
+        _people.Clear();
+        foreach (var p in myPeople)
+        {
+            _people.Add(p);
+        }
+        
         PersonSource = new FlatTreeDataGridSource<Person>(_people)
         {
             Columns =
@@ -49,7 +66,6 @@ public partial class ContactsViewModel : ViewModelBase
     private void SaveEvent()
     {
         //if there is a comment, save it.
-
         
 
     }

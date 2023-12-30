@@ -28,10 +28,13 @@ public partial class SeedsViewModel : ViewModelBase
 
     public void RefreshDataOnly()
     {
-        var p = Services.PlantingsService.GetSeedPackets(AppSession.ServiceMode, true);
-
-        //Packets.Clear();
-        Packets = new ObservableCollection<SeedPacket>(p);
+        var myPackets = Services.PlantingsService.GetSeedPackets(AppSession.ServiceMode, true);
+        
+        Packets.Clear();
+        foreach (var packet in myPackets)
+        {
+            Packets.Add(packet);
+        }
         
         if (Packets.Count > 0) 
             CurrentItem = Packets.FirstOrDefault()!;

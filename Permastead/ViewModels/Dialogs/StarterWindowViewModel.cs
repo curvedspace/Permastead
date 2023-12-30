@@ -30,7 +30,7 @@ public partial class StarterWindowViewModel : ViewModelBase
     
     [ObservableProperty] private SeedPacketObservation _currentObservation = new SeedPacketObservation();
 
-    private SeedsViewModel _controlViewModel { get; set;  } = new SeedsViewModel();
+    public SeedsViewModel ControlViewModel { get; set;  } = new SeedsViewModel();
 
     public StarterWindowViewModel(SeedPacket seedPacket) : this()
     {
@@ -75,7 +75,7 @@ public partial class StarterWindowViewModel : ViewModelBase
             Console.WriteLine("Updated SeedPacket" + rtnValue);
         }
         
-        _controlViewModel.RefreshDataOnly();
+        ControlViewModel.RefreshDataOnly();
 
     }
     
