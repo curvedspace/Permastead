@@ -149,7 +149,7 @@ namespace Permastead.ViewModels.Views;
                 try
                 {
                     var results = await ws.UpdateWeather(city);
-                    WeatherForecast = "Current Weather for " + city.Name + ", " + city.Country + ": " + results.WeatherStateAlias + ", Temperature: " + results.Temperature + ", Humidity: " + results.Humidity;
+                    WeatherForecast = "Current Weather " + " as of " + results.ObservationTime + " for " + city.Name + ", " + city.Country + ": " + results.WeatherStateAlias + ", Temperature: " + results.Temperature + ", Humidity: " + results.Humidity;
                     Console.WriteLine(WeatherForecast);
                 }
                 catch (Exception e)

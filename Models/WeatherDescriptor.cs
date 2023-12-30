@@ -31,6 +31,9 @@ public class WeatherDescriptorJsonConverter : Newtonsoft.Json.JsonConverter
                    throw new JsonSerializationException("No windspeedKmph property");
         var uvIndex = mainToken.SelectToken("current_condition[0].uvIndex")?.Value<int>() ??
                       throw new JsonSerializationException("No uvIndex property");
+        
+        var obsTime = mainToken.SelectToken("current_condition[0].localObsDateTime")?.Value<DateTime>() ??
+                      throw new JsonSerializationException("No observation time property");
 
         //ContextManager.Context.Logger.Info("Recieve weather state: " + weatherState);
 
@@ -43,7 +46,8 @@ public class WeatherDescriptorJsonConverter : Newtonsoft.Json.JsonConverter
             Visibility = visibilityMiles,
             Wind = wind,
             UvIndex = uvIndex,
-            WeatherStateAlias = weatherState
+            WeatherStateAlias = weatherState,
+            ObservationTime = obsTime
         };
     }
 
@@ -62,4 +66,6 @@ public class WeatherDescriptor
     public int Wind { get; init; }
     public int UvIndex { get; init; }
     public string WeatherStateAlias { get; init; }
+    
+    public DateTime ObservationTime { get; init; }
 }
