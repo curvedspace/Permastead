@@ -1,9 +1,12 @@
 using LiveChartsCore;
 using LiveChartsCore.SkiaSharpView;
+using LiveChartsCore.SkiaSharpView.Painting;
+using LiveChartsCore.SkiaSharpView.VisualElements;
+using SkiaSharp;
 
 namespace Permastead.ViewModels.Views;
 
-public class DashboardViewModel : ViewModelBase
+public partial class DashboardViewModel : ViewModelBase
 {
 
     public ISeries[] Series { get; set; } 
@@ -16,10 +19,14 @@ public class DashboardViewModel : ViewModelBase
             }
         };
     
-    public DashboardViewModel()
-    {
-        
-    }
-
+    public LabelVisual Title { get; set; } =
+        new LabelVisual
+        {
+            Text = "My chart title",
+            TextSize = 25,
+            Padding = new LiveChartsCore.Drawing.Padding(15),
+            Paint = new SolidColorPaint(SKColors.DarkSlateGray)
+        };
+    
     
 }
