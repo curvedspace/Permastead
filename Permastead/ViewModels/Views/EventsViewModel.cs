@@ -1,7 +1,8 @@
 using System;
 using System.Collections.ObjectModel;
 using System.Linq;
-
+using Avalonia.Controls;
+using Avalonia.Controls.Models.TreeDataGrid;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 
@@ -33,6 +34,8 @@ public partial class  EventsViewModel : ViewModelBase
     [ObservableProperty] 
     private AnEvent _currentItem;
     
+    public FlatTreeDataGridSource<AnEvent> EventsSource { get; set; }
+    
     public EventsViewModel()
     {
         try
@@ -56,7 +59,6 @@ public partial class  EventsViewModel : ViewModelBase
             {
                 CurrentItem = new AnEvent();
             }
-
             
         }
         catch (Exception)
@@ -82,6 +84,39 @@ public partial class  EventsViewModel : ViewModelBase
             
             EventsCount = Events.Count;
         }
+        
+        EventsSource = new FlatTreeDataGridSource<AnEvent>(_myEvents)
+        {
+            Columns =
+            {
+                new TextColumn<AnEvent, DateTime>
+                    ("Next Date", x => x.NextDate),
+                new TextColumn<AnEvent, string>
+                    ("Type", x => x.AnEventType.Description),
+                new TextColumn<AnEvent, string>
+                    ("Description", x => x.Description),
+                new TextColumn<AnEvent, string>
+                    ("Assigner", x => x.Assigner.FirstName),
+                new TextColumn<AnEvent, string>
+                    ("Assignee", x => x.Assignee.FirstName),
+                new TextColumn<AnEvent, string>
+                    ("Frequency", x => x.Frequency.Description),
+                new CheckBoxColumn<AnEvent>
+                (
+                    "ToDo Trigger",
+                    x => x.ToDoTrigger,
+                    (o, v) => o.ToDoTrigger = v,
+                    options: new()
+                    {
+                        CanUserResizeColumn = false, CanUserSortColumn = true
+                    }),
+                
+                new TextColumn<AnEvent, DateTime>
+                    ("Last Triggered", x => x.LastTriggerDate),
+                new TextColumn<AnEvent, DateTime>
+                    ("Last Updated", x => x.LastUpdatedDate)
+            },
+        };
     }
     
     [RelayCommand]

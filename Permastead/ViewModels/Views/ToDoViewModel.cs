@@ -3,7 +3,8 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-
+using Avalonia.Controls;
+using Avalonia.Controls.Models.TreeDataGrid;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 
@@ -38,6 +39,8 @@ public partial class ToDoViewModel : ViewModelBase
     
     [ObservableProperty] 
     private ToDo _currentItem;
+    
+    public FlatTreeDataGridSource<ToDo> ToDosSource { get; set; }
 
 
     [RelayCommand]
@@ -110,6 +113,31 @@ public partial class ToDoViewModel : ViewModelBase
             if (todo.ToDoStatus.Description != "Complete") ActiveToDos = ActiveToDos + 1;
             ToDoCount = Todos.Count;
         }
+        
+        ToDosSource = new FlatTreeDataGridSource<ToDo>(_todos)
+        {
+            Columns =
+            {
+                new TextColumn<ToDo, string>
+                    ("Due Date", x => x.DisplayDueDate),
+                new TextColumn<ToDo, long>
+                    ("Days Until Due", x => x.DaysUntilDue),
+                new TextColumn<ToDo, string>
+                    ("Type", x => x.ToDoType.Description),
+                new TextColumn<ToDo, string>
+                    ("Description", x => x.Description),
+                new TextColumn<ToDo, string>
+                    ("Assigner", x => x.Assigner.FirstName),
+                new TextColumn<ToDo, string>
+                    ("Assignee", x => x.Assignee.FirstName),
+                new TextColumn<ToDo, string>
+                    ("Status", x => x.ToDoStatus.Description),
+                new TextColumn<ToDo, int>
+                    ("% Done", x => x.PercentDone),
+                new TextColumn<ToDo, DateTime>
+                    ("Last Updated", x => x.LastUpdatedDate)
+            },
+        };
     }
     
 
