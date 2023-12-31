@@ -2,7 +2,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             mc:Ignorable="d" d:DesignWidth="1000" d:DesignHeight="450"
              xmlns:vm="using:Permastead.ViewModels.Views"
              x:DataType="vm:SeedsViewModel"
              x:Class="Permastead.Views.Views.SeedsView">
@@ -23,6 +23,7 @@
                 <Label Margin="25,24,0,20">Search:</Label>
                 <TextBox Text="{Binding SearchText}" Watermark="Enter search text" Width="200" Margin="20,20,20,20" TextChanged="TextBox_OnTextChanged"></TextBox>
                 <Button Command="{Binding ClearSearchCommand}" Margin="5,20,0,20">Clear</Button>
+                <TextBlock Name="InventoryCount" Text="{Binding SeedsCount, StringFormat='{}{0} total'}" Margin="20,27,20,20"></TextBlock>
             </WrapPanel>
         </StackPanel>
         
@@ -30,7 +31,6 @@
             <TreeDataGrid x:Name="SeedsGrid" Grid.Row="1" Margin="10" Source="{Binding SeedsSource, Mode=TwoWay}" 
                           DoubleTapped="SeedsGrid_OnDoubleTapped"
                           CanUserResizeColumns="True">
-                
             </TreeDataGrid>
         </Panel>
         

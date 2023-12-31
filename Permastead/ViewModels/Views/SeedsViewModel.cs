@@ -20,6 +20,9 @@ public partial class SeedsViewModel : ViewModelBase
 
     [ObservableProperty] private string _searchText;
     
+    [ObservableProperty] 
+    private long _seedsCount;
+    
     public FlatTreeDataGridSource<SeedPacket> SeedsSource { get; set; }
 
     [RelayCommand]
@@ -75,6 +78,8 @@ public partial class SeedsViewModel : ViewModelBase
                     ("Instructions", x => x.Instructions)
             },
         };
+
+        SeedsCount = Packets.Count;
         
         Console.WriteLine("Refreshed Seeds view");
     }
