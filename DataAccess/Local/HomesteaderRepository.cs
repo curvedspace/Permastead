@@ -1246,7 +1246,7 @@ namespace DataAccess.Local
             et = new AnEventType() { Description = "Financial" };
             AnEventTypeRepository.Insert(et);
             
-            et = new AnEventType() { Description = "Anniversary" };
+            et = new AnEventType() { Description = "Holiday" };
             AnEventTypeRepository.Insert(et);
             
             #endregion
