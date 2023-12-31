@@ -3,6 +3,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using Avalonia.Controls;
 using Avalonia.Controls.Models.TreeDataGrid;
+using Avalonia.Media;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Models;
@@ -119,6 +120,12 @@ public partial class InventoryViewModel: ViewModelBase
             
         }
         
+        var centered = new TextColumnOptions<Inventory>
+        {
+            TextTrimming = TextTrimming.None,
+            TextWrapping = TextWrapping.Wrap, TextAlignment = TextAlignment.Center
+        };
+        
         InventorySource = new FlatTreeDataGridSource<Inventory>(_inventory)
         {
             Columns =
@@ -138,7 +145,7 @@ public partial class InventoryViewModel: ViewModelBase
                 new TextColumn<Inventory, string>
                     ("Type", x => x.InventoryType.Description),
                 new TextColumn<Inventory, long>
-                    ("Quantity", x => x.Quantity),
+                    ("Quantity", x => x.Quantity,GridLength.Auto,centered),
                 new TextColumn<Inventory, double>
                     ("Value", x => x.CurrentValue),
                 new TextColumn<Inventory, string>

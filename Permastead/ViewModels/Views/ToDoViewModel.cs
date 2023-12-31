@@ -5,6 +5,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using Avalonia.Controls;
 using Avalonia.Controls.Models.TreeDataGrid;
+using Avalonia.Media;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 
@@ -114,6 +115,12 @@ public partial class ToDoViewModel : ViewModelBase
             ToDoCount = Todos.Count;
         }
         
+        var centered = new TextColumnOptions<ToDo>
+        {
+            TextTrimming = TextTrimming.None,
+            TextWrapping = TextWrapping.Wrap, TextAlignment = TextAlignment.Center
+        };
+        
         ToDosSource = new FlatTreeDataGridSource<ToDo>(_todos)
         {
             Columns =
@@ -121,7 +128,7 @@ public partial class ToDoViewModel : ViewModelBase
                 new TextColumn<ToDo, string>
                     ("Due Date", x => x.DisplayDueDate),
                 new TextColumn<ToDo, long>
-                    ("Days Until Due", x => x.DaysUntilDue),
+                    ("Days Until Due", x => x.DaysUntilDue, GridLength.Auto,centered),
                 new TextColumn<ToDo, string>
                     ("Type", x => x.ToDoType.Description),
                 new TextColumn<ToDo, string>
@@ -133,7 +140,7 @@ public partial class ToDoViewModel : ViewModelBase
                 new TextColumn<ToDo, string>
                     ("Status", x => x.ToDoStatus.Description),
                 new TextColumn<ToDo, int>
-                    ("% Done", x => x.PercentDone),
+                    ("% Done", x => x.PercentDone, GridLength.Auto, centered),
                 new TextColumn<ToDo, DateTime>
                     ("Last Updated", x => x.LastUpdatedDate)
             },

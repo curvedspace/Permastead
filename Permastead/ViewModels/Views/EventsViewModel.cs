@@ -3,6 +3,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using Avalonia.Controls;
 using Avalonia.Controls.Models.TreeDataGrid;
+using Avalonia.Media;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 
@@ -84,6 +85,11 @@ public partial class  EventsViewModel : ViewModelBase
             
             EventsCount = Events.Count;
         }
+        var centered = new TextColumnOptions<AnEvent>
+        {
+            TextTrimming = TextTrimming.None,
+            TextWrapping = TextWrapping.Wrap, TextAlignment = TextAlignment.Center
+        };
         
         EventsSource = new FlatTreeDataGridSource<AnEvent>(_myEvents)
         {
