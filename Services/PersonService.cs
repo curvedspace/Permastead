@@ -54,4 +54,24 @@ public class PersonService
 
         return obs;
     }
+
+    public static bool CommitRecord(ServiceMode serviceMode, Person person)
+    {
+        bool rtnValue = false;
+        
+        if (person != null)
+        {
+            if (person.Id > 0)
+            {
+                PersonRepository.Update(person);
+            }
+            else
+            {
+                // insert new record
+                PersonRepository.Insert(person);
+            }
+        }
+
+        return rtnValue;
+    }
 }

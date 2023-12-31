@@ -1,0 +1,51 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="650"
+        xmlns:vm="using:Permastead.ViewModels.Dialogs"
+        x:Class="Permastead.Views.Dialogs.PersonWindow"
+        x:DataType="vm:PersonWindowViewModel"
+        Icon="/Assets/outlook_new_meeting.png"
+        Title="Person Window">
+    
+    <Grid ColumnDefinitions="Auto,Auto,Auto,*" RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,*,Auto"  Margin="20">
+        <TextBlock Grid.Row="0" Grid.Column="0" Margin="10,10,0,0">ID:</TextBlock>
+        <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding Person.Id }" Margin="10,10,10,10"></TextBox>
+        <Label Grid.Row="0" Margin="10,10,0,10" Grid.Column="2">Company:</Label>
+        <TextBox Grid.Row="0" Grid.Column="3" Text="{Binding Person.Company }" Margin="0,10,10,10"></TextBox>
+        
+        <TextBlock Grid.Row="1" Grid.Column="0" Margin="10,10,10,10">First Name:</TextBlock>
+        <TextBox Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3"  Text="{Binding Person.FirstName }" Margin="10,10,10,10"></TextBox>
+
+        <Label Grid.Row="2" Grid.Column="0" Margin="10">Last Name: </Label>
+        <TextBox Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3" Margin="10" Text="{Binding Person.LastName}"></TextBox>
+        
+        <Label Grid.Row="4" Grid.Column="0" Margin="10">Start Date:</Label>
+        <CalendarDatePicker Grid.Row="4" Grid.Column="1" Name = "StartDate" Margin="10" SelectedDate="{Binding Person.StartDate, Mode=TwoWay}">
+        </CalendarDatePicker>
+
+        <Label Grid.Row="4" Grid.Column="2" Margin="10">End Date:</Label>
+        <CalendarDatePicker Grid.Row="4" Grid.Column="3" Name = "EndDate" Margin="10" SelectedDate="{Binding Person.EndDate, Mode=TwoWay}">
+        </CalendarDatePicker>
+
+        <Label Grid.Row="5" Grid.Column="0" Margin="10">Phone:</Label>
+        <TextBox Grid.Row="5" Grid.Column="1"  Margin="10" Text="{Binding Person.Phone}"></TextBox>
+        
+        <Label Grid.Row="5" Grid.Column="2" Margin="10">Email:</Label>
+        <TextBox Grid.Row="5" Grid.Column="3" Margin="10" Text="{Binding Person.Email}"></TextBox>
+
+        <Label Grid.Row="6" Grid.Column="0" Margin="10">Comment:</Label>
+        <TextBox Grid.Row="6" Grid.Column="1" Grid.ColumnSpan="3" 
+                 TextWrapping="WrapWithOverflow"
+                 Text="{Binding Person.Comment}" Margin="10,10,10,10"></TextBox>
+
+        <Image Grid.Row="7" Grid.Column="0"  Margin="10" Width="32" Height="32" Source="/Assets/outlook_new_meeting.png" />
+
+        <StackPanel Grid.Row="7" Grid.Column="3" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,0,0">
+            <Button x:Name="SaveButton" Margin="10" Click="SaveButton_OnClick">Save</Button>
+            <Button x:Name="CancelButton" Margin="10" Click="CancelButton_OnClick" >Cancel</Button>
+        </StackPanel>
+    </Grid>
+    
+</Window>
