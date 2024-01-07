@@ -57,4 +57,30 @@ public partial class SeedsView : UserControl
     {
         Console.WriteLine(sender.ToString() + ": " + e);
     }
+
+    private void SearchBox_OnKeyDown(object? sender, KeyEventArgs e)
+    {
+        // if the key is return, do a search and filter the grid data
+        if (e.Key == Key.Return)
+        {
+            var textValue = SearchBox.Text;
+            var vm = (SeedsViewModel)this.DataContext;
+
+            if (vm != null)
+            {
+                vm.RefreshDataOnly(textValue);
+            }
+        }
+
+        if (e.Key == Key.Escape)
+        {
+            var vm = (SeedsViewModel)this.DataContext;
+
+            if (vm != null)
+            {
+                vm.SearchText = "";
+                vm.RefreshDataOnly(vm.SearchText);
+            }
+        }
+    }
 }

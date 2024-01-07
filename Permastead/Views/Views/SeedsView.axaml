@@ -21,9 +21,9 @@
                 <!-- <Separator MaxWidth="5"></Separator> -->
                 <Button Command="{Binding RefreshDataCommand}" x:Name="Refresh" HorizontalAlignment="Right" Margin="25,0">Refresh</Button> 
                 <Label Margin="25,24,0,20">Search:</Label>
-                <TextBox Text="{Binding SearchText}" Watermark="Enter search text" Width="200" Margin="20,20,20,20" TextChanged="TextBox_OnTextChanged"></TextBox>
+                <TextBox x:Name="SearchBox" Text="{Binding SearchText}" Watermark="Enter search text" Width="200" Margin="20,20,20,20" KeyDown="SearchBox_OnKeyDown" TextChanged="TextBox_OnTextChanged"></TextBox>
                 <Button Command="{Binding ClearSearchCommand}" Margin="5,20,0,20">Clear</Button>
-                <TextBlock Name="InventoryCount" Text="{Binding SeedsCount, StringFormat='{}{0} total'}" Margin="20,27,20,20"></TextBlock>
+                <TextBlock Name="SeedsCount" Text="{Binding SeedsCount, StringFormat='{}{0} total'}" Margin="20,27,20,20"></TextBlock>
             </WrapPanel>
         </StackPanel>
         

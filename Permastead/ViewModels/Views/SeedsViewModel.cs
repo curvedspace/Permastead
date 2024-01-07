@@ -35,16 +35,32 @@ public partial class SeedsViewModel : ViewModelBase
     private void ClearSearch()
     {
         SearchText = "";
+        RefreshDataOnly(SearchText);
     }
 
-    public void RefreshDataOnly()
+    public void RefreshDataOnly(string filterText = "")
     {
         var myPackets = Services.PlantingsService.GetSeedPackets(AppSession.ServiceMode, true);
+        var caseAdjustedFilterText = filterText.Trim().ToLowerInvariant();
         
         Packets.Clear();
         foreach (var packet in myPackets)
         {
-            Packets.Add(packet);
+            if (string.IsNullOrEmpty(caseAdjustedFilterText))
+            {
+                Packets.Add(packet);
+            }
+            else
+            {
+                if (packet.Description.ToLowerInvariant().Contains(caseAdjustedFilterText) ||
+                    packet.Instructions.ToLowerInvariant().Contains(caseAdjustedFilterText) ||
+                    packet.Vendor.Description.ToLowerInvariant().Contains(caseAdjustedFilterText) ||
+                    packet.Plant.Description.ToLowerInvariant().Contains(caseAdjustedFilterText))
+                {
+                    Packets.Add(packet);
+                }
+            }
+            
         }
         
         if (Packets.Count > 0) 
