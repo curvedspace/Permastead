@@ -13,7 +13,8 @@
         <WrapPanel>
             <Image Margin="20" Width="24" Height="24" Source="/Assets/outlook_new_meeting.png" />
             <TextBlock FontWeight="Bold" Margin="20,24,20,20">People</TextBlock>
-            <Button Command="{Binding RefreshDataCommand}" Name="Refresh" HorizontalAlignment="Right" Margin="25,0">Refresh</Button> 
+            <Button Command="{Binding RefreshDataCommand}" x:Name="Refresh" HorizontalAlignment="Right" Margin="10,0">Refresh</Button> 
+            <Button Tapped="Add_OnTapped" x:Name="Add" HorizontalAlignment="Right" Margin="10,0">Add</Button> 
             <TextBlock Name="EventsCount" Text="{Binding PeopleCount , StringFormat='{}{0} total'}" Margin="20,24,20,20"></TextBlock>
         </WrapPanel>
         

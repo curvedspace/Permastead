@@ -44,4 +44,21 @@ public partial class ContactsView : UserControl
            
         personWindow.Show();
     }
+
+    private void Add_OnTapped(object? sender, TappedEventArgs e)
+    {
+        var win = new PersonWindow();
+        var vm = new PersonWindowViewModel(new Person(), (ContactsViewModel)DataContext);
+            
+        win.DataContext = vm;
+        
+        win.Topmost = true;
+        win.Width = 900;
+        win.Height = 550;
+        win.Opacity = 0.95;
+        win.Title = "New Person";
+        win.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+                
+        win.Show();
+    }
 }

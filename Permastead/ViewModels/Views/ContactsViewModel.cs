@@ -67,7 +67,12 @@ public partial class ContactsViewModel : ViewModelBase
     {
         //if there is a comment, save it.
         
+    }
 
+    [RelayCommand]
+    private void AddContact()
+    {
+        
     }
     
 }
