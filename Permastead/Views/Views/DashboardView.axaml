@@ -13,11 +13,26 @@
         <vm:DashboardViewModel/>
     </UserControl.DataContext>
     
-    <Grid ColumnDefinitions="*,*" RowDefinitions="Auto,*,*,*">
-        <lvc:CartesianChart Grid.Column="1" 
-            Series="{Binding Series}"
-            Title="{Binding Title}">
-        </lvc:CartesianChart>
-    </Grid>
+    <!-- <Grid ColumnDefinitions="Auto,*" RowDefinitions="Auto,*"> -->
+        <!-- <Panel Grid.Row="0" Grid.Column="0"> -->
+            <lvc:PieChart
+                Series="{Binding Series}"
+                InitialRotation="-90"
+                MinValue="0"
+                MaxValue="100">
+            </lvc:PieChart>
+        <!-- </Panel> -->
+
+        <!-- <lvc:CartesianChart x:Name="Chart2" Grid.Row="0" Grid.Column="1" -->
+        <!--                     Series="{Binding Series}"> -->
+        <!-- </lvc:CartesianChart> -->
+        <!-- -->
+        <!-- <lvc:CartesianChart Grid.Row="1" Grid.Column="0" -->
+        <!--                     Series="{Binding Series}"> -->
+        <!-- </lvc:CartesianChart> -->
+        <!-- <lvc:CartesianChart Grid.Row="1" Grid.Column="1" -->
+        <!--                     Series="{Binding Series}"> -->
+        <!-- </lvc:CartesianChart> -->
+    <!-- </Grid> -->
     
 </UserControl>
