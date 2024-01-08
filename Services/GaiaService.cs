@@ -43,13 +43,14 @@ public class GaiaService
             updateBuilder.AppendLine("Here are your upcoming events:");
         }
         
-        foreach (var t in upcomingTodos)
+        foreach (var t in updates)
         {
-            updateBuilder.AppendLine(t.Description + " (" + t.DueDate.Date.ToShortDateString() + ", " +
-                                     t.ToDoStatus.Description + ".");
+            // updateBuilder.AppendLine(t.Description + " (" + t.DueDate.Date.ToShortDateString() + ", " +
+            //                          t.ToDoStatus.Description + ".");
+            updateBuilder.AppendLine(t);
         }
         
-        if (upcomingTodos.Count == 0)
+        if (updates.Count == 0)
         {
             AddResponse("I just checked the database and you have no upcoming events.");
         }
