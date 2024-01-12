@@ -41,12 +41,15 @@ public class GaiaService
         if (upcomingTodos.Count > 0)
         {
             updateBuilder.AppendLine("Here are your upcoming events:");
+            foreach (var t in upcomingTodos)
+            {
+                updateBuilder.AppendLine(t.Description + " (" + t.DueDate.Date.ToShortDateString() + ", " +
+                                         t.ToDoStatus.Description + ".");
+            }
         }
         
         foreach (var t in updates)
         {
-            // updateBuilder.AppendLine(t.Description + " (" + t.DueDate.Date.ToShortDateString() + ", " +
-            //                          t.ToDoStatus.Description + ".");
             updateBuilder.AppendLine(t);
         }
         
