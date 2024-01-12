@@ -84,6 +84,8 @@ public partial class SeedsViewModel : ViewModelBase
                     ("Plant", x => x.Plant.Description),
                 new TextColumn<SeedPacket, string>
                     ("Seasonality", x => x.Seasonality.Description),
+                new TextColumn<SeedPacket, string>
+                    ("Species", x => x.Species),
                 new TextColumn<SeedPacket, int>
                     ("DTH", x => x.DaysToHarvest),
                 new TextColumn<SeedPacket, long>

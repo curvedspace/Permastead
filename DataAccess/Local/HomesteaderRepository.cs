@@ -563,6 +563,7 @@ namespace DataAccess.Local
 				EndDate TIMESTAMP,
 				Generations INTEGER,
 				SeasonalityId INTEGER,
+				Species TEXT,
 				PlantId INTEGER,
 				VendorId INTEGER,
 				AuthorId INTEGER
