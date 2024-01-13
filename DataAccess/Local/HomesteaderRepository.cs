@@ -407,7 +407,7 @@ namespace DataAccess.Local
 				StartDate TIMESTAMP NOT NULL,
 				EndDate TIMESTAMP,
 				CreationDate TIMESTAMP,
-				Species VARCHAR (2000),
+				Comment TEXT,
 				Family VARCHAR (2000),
 				Url VARCHAR (2000),
 				AuthorId integer
@@ -1017,10 +1017,10 @@ namespace DataAccess.Local
             p = new Plant { Author = new Person(1), Code = "OREGANO", Description = "Oregano" };
             PlantRepository.Insert(p);
 
-            p = new Plant { Author = new Person(1), Code = "CATNIP", Description = "Catnip", Species = "Nepeta Cataria" };
+            p = new Plant { Author = new Person(1), Code = "CATNIP", Description = "Catnip" };
             PlantRepository.Insert(p);
 
-            p = new Plant { Author = new Person(1), Code = "SQUASH", Description = "Squash", Species = "Cucurbita pepo" };
+            p = new Plant { Author = new Person(1), Code = "SQUASH", Description = "Squash" };
             PlantRepository.Insert(p);
 
             p = new Plant { Author = new Person(1), Code = "MINT", Description = "Mint" };

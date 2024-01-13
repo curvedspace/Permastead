@@ -17,7 +17,7 @@ namespace DataAccess.Local
             var myPlants = new List<Plant>();
             Plant plant;
 
-            var sql = "SELECT p.Description, p.Species, p.Family, p.Url, p.CreationDate, p.StartDate, p.EndDate, p.AuthorId, " + 
+            var sql = "SELECT p.Description, p.Comment, p.Family, p.Url, p.CreationDate, p.StartDate, p.EndDate, p.AuthorId, " + 
                 "per.FirstName, per.LastName, p.Id, p.code " +
                 "FROM Plant p, Person per " + 
                 "WHERE per.Id = p.AuthorId ORDER BY p.Description ASC";
@@ -36,7 +36,7 @@ namespace DataAccess.Local
                         plant = new Plant();
 
                         plant.Description = dr[0].ToString()!;
-                        plant.Species = dr[1].ToString()!;
+                        plant.Comment = dr[1].ToString()!;
                         plant.Family = dr[2].ToString()!;
                         plant.Url = dr[3].ToString()!;
 
@@ -64,7 +64,7 @@ namespace DataAccess.Local
         {
             Plant plant = new Plant();
 
-            var sql = "SELECT p.Description, p.Species, p.Family, p.Url, p.CreationDate, p.StartDate, p.EndDate, p.AuthorId, " + 
+            var sql = "SELECT p.Description, p.Comment, p.Family, p.Url, p.CreationDate, p.StartDate, p.EndDate, p.AuthorId, " + 
                 "per.FirstName, per.LastName, p.Id, p.code " +
                 "FROM Plant p, Person per " + 
                 "WHERE per.Id = p.AuthorId " +
@@ -86,7 +86,7 @@ namespace DataAccess.Local
                         plant = new Plant();
 
                         plant.Description = dr[0].ToString()!;
-                        plant.Species = dr[1].ToString()!;
+                        plant.Comment = dr[1].ToString()!;
                         plant.Family = dr[2].ToString()!;
                         plant.Url = dr[3].ToString()!;
 
@@ -116,8 +116,8 @@ namespace DataAccess.Local
             {
                 using (IDbConnection db = new SqliteConnection(DataConnection.GetLocalDataSource()))
                 {
-                    string sqlQuery = "INSERT INTO Plant (Code, Description, StartDate, EndDate, CreationDate, Species, Family, Url, AuthorId) " +
-                        "VALUES(@Code, @Description, @StartDate, @EndDate, CURRENT_DATE, @Species, @Family, @Url, @AuthorId);";
+                    string sqlQuery = "INSERT INTO Plant (Code, Description, StartDate, EndDate, CreationDate, Comment, Family, Url, AuthorId) " +
+                        "VALUES(@Code, @Description, @StartDate, @EndDate, CURRENT_DATE, @Comment, @Family, @Url, @AuthorId);";
 
                     return (db.Execute(sqlQuery, plant) == 1);
                 }
@@ -135,7 +135,7 @@ namespace DataAccess.Local
                 using (IDbConnection db = new SqliteConnection(DataConnection.GetLocalDataSource()))
                 {
                     string sqlQuery = "UPDATE Plant SET Code = @Code, Description = @Description, StartDate = @StartDate, EndDate = @EndDate, " +
-                                      "Species = @Species, Family = @Family, Url = @Url, AuthorId = @AuthorId " + 
+                                      "Comment = @Comment, Family = @Family, Url = @Url, AuthorId = @AuthorId " + 
                                       "WHERE Id = @Id;";
 
                     return (db.Execute(sqlQuery, plant) == 1);

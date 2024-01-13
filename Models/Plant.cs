@@ -6,7 +6,7 @@ public class Plant : CodeTable
 {
     public string PlantType { get; set; } = "Unknown";
 
-    public string Species { get; set; } = "Unknown";
+    public string Comment { get; set; } = "";
 
     public string Family { get; set; } = "Unknown";
 
