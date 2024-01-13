@@ -20,5 +20,9 @@ public partial class DashboardViewModel : ViewModelBase
                     series.DataLabelsSize = 50;
                 }));
     
-    
+    public IEnumerable<ISeries> PlantSeries { get; set; } =
+        new[] { 25,35,30,10}.AsPieSeries((value, series) =>
+        {
+            series.MaxRadialColumnWidth = 60;
+        });
 }

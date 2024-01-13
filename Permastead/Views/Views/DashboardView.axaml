@@ -14,7 +14,7 @@
         <vm:DashboardViewModel/>
     </UserControl.DataContext>
     
-    <Grid RowDefinitions="500,*" ColumnDefinitions="400,*">
+    <Grid RowDefinitions="*,*" ColumnDefinitions="*,*,*">
         <!-- <StackPanel> -->
         <!-- <Grid ColumnDefinitions="Auto,*" RowDefinitions="Auto,*"> -->
         <!-- <Panel Grid.Row="0" Grid.Column="0"> -->
@@ -24,6 +24,19 @@
                 MinValue="0"
                 MaxValue="100">
             </lvc:PieChart>
+        
+        <lvc:PieChart Grid.Column="1" Grid.Row="0"
+                      Series="{Binding PlantSeries}"
+                      MinValue="0"
+                      MaxValue="100">
+        </lvc:PieChart>
+        
+        <lvc:PieChart Grid.Column="2" Grid.Row="0"
+                      Series="{Binding Series}"
+                      InitialRotation="-90"
+                      MinValue="0"
+                      MaxValue="100">
+        </lvc:PieChart>
         <!-- </Panel> -->
 
         <!-- <lvc:CartesianChart x:Name="Chart2" Grid.Row="0" Grid.Column="1" -->
@@ -39,7 +52,7 @@
     <!-- </Grid> -->
     
     <!-- <Grid ColumnDefinitions="Auto,*" RowDefinitions="Auto,*"> -->
-        <views:ActObsChartView Grid.Column="0"  Grid.ColumnSpan="2" Grid.Row="1"></views:ActObsChartView>
+        <views:ActObsChartView Grid.Column="0"  Grid.ColumnSpan="3" Grid.Row="1"></views:ActObsChartView>
     <!-- </Grid> -->
         <!-- </StackPanel> -->
     </Grid>
