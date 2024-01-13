@@ -11,12 +11,12 @@ public class ActObsChartViewModel : ViewModelBase
     {
         new ColumnSeries<double>
         {
-            Name = "Mary",
+            Name = "Actions",
             Values = new double[] { 2, 5, 4 }
         },
         new ColumnSeries<double>
         {
-            Name = "Ana",
+            Name = "Observations",
             Values = new double[] { 3, 1, 6 }
         }
     };
@@ -25,7 +25,7 @@ public class ActObsChartViewModel : ViewModelBase
     {
         new Axis
         {
-            Labels = new string[] { "Category 1", "Category 2", "Category 3" },
+            Labels = new string[] { "January", "Category 2", "Category 3" },
             LabelsRotation = 0,
             SeparatorsPaint = new SolidColorPaint(new SKColor(200, 200, 200)),
             SeparatorsAtCenter = false,

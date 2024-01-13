@@ -14,11 +14,11 @@
         <vm:DashboardViewModel/>
     </UserControl.DataContext>
     
-    <Panel>
+    <Grid RowDefinitions="500,*" ColumnDefinitions="400,*">
         <!-- <StackPanel> -->
         <!-- <Grid ColumnDefinitions="Auto,*" RowDefinitions="Auto,*"> -->
         <!-- <Panel Grid.Row="0" Grid.Column="0"> -->
-            <lvc:PieChart
+            <lvc:PieChart Grid.Column="0" Grid.Row="0"
                 Series="{Binding Series}"
                 InitialRotation="-90"
                 MinValue="0"
@@ -39,8 +39,8 @@
     <!-- </Grid> -->
     
     <!-- <Grid ColumnDefinitions="Auto,*" RowDefinitions="Auto,*"> -->
-        <views:ActObsChartView Grid.Column="0" Grid.Row="1"></views:ActObsChartView>
+        <views:ActObsChartView Grid.Column="0"  Grid.ColumnSpan="2" Grid.Row="1"></views:ActObsChartView>
     <!-- </Grid> -->
         <!-- </StackPanel> -->
-    </Panel>
+    </Grid>
 </UserControl>
