@@ -15,7 +15,7 @@ public partial class ToDoView : UserControl
         DataContext = new ToDoViewModel();
     }
 
-    private void TodoGrid_OnDoubleTapped(object? sender, TappedEventArgs e)
+    private void TodoGrid_OnTapped(object? sender, TappedEventArgs e)
     {
         var current = sender as TreeDataGrid;
         if (current != null)

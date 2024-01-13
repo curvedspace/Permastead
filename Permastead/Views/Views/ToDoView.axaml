@@ -88,7 +88,7 @@
       
     <Panel Grid.Row="3">
       <TreeDataGrid x:Name="TodoGrid" Grid.Row="1" Margin="10" Source="{Binding ToDosSource, Mode=TwoWay}" 
-                    DoubleTapped="TodoGrid_OnDoubleTapped"
+                    Tapped="TodoGrid_OnTapped"
                     CanUserResizeColumns="True">
       </TreeDataGrid>
       <!-- <DataGrid Name="ToDoGrid" ItemsSource="{Binding Todos, Mode=TwoWay}" SelectedItem="{Binding CurrentItem, Mode=TwoWay}"  -->

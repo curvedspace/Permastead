@@ -92,7 +92,7 @@
       
     <Panel Grid.Row="3">
       <TreeDataGrid x:Name="EventsGrid" Grid.Row="1" Margin="10" Source="{Binding EventsSource, Mode=TwoWay}" 
-                    DoubleTapped="EventsGrid_OnDoubleTapped"
+                    Tapped="EventsGrid_OnTapped"
                     CanUserResizeColumns="True">
       </TreeDataGrid>
     </Panel>

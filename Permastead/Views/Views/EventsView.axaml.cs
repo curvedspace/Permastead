@@ -20,7 +20,7 @@ public partial class EventsView : UserControl
         AvaloniaXamlLoader.Load(this);
     }
 
-    private void EventsGrid_OnDoubleTapped(object? sender, TappedEventArgs e)
+    private void EventsGrid_OnTapped(object? sender, TappedEventArgs e)
     {
         var current = sender as TreeDataGrid;
         if (current != null)
