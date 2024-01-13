@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:lvc="using:LiveChartsCore.SkiaSharpView.Avalonia"
              xmlns:vm="using:Permastead.ViewModels.Views"
+             xmlns:views="using:Permastead.Views.Views"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:DataType="vm:DashboardViewModel"
              x:CompileBindings="True"
@@ -13,7 +14,9 @@
         <vm:DashboardViewModel/>
     </UserControl.DataContext>
     
-    <!-- <Grid ColumnDefinitions="Auto,*" RowDefinitions="Auto,*"> -->
+    <Panel>
+        <!-- <StackPanel> -->
+        <!-- <Grid ColumnDefinitions="Auto,*" RowDefinitions="Auto,*"> -->
         <!-- <Panel Grid.Row="0" Grid.Column="0"> -->
             <lvc:PieChart
                 Series="{Binding Series}"
@@ -35,4 +38,9 @@
         <!-- </lvc:CartesianChart> -->
     <!-- </Grid> -->
     
+    <!-- <Grid ColumnDefinitions="Auto,*" RowDefinitions="Auto,*"> -->
+        <views:ActObsChartView Grid.Column="0" Grid.Row="1"></views:ActObsChartView>
+    <!-- </Grid> -->
+        <!-- </StackPanel> -->
+    </Panel>
 </UserControl>
