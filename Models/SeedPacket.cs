@@ -75,10 +75,7 @@ public class SeedPacket
     /// <returns></returns>
     public bool IsCurrent()
     {
-        if ((DateTime.UtcNow > StartDate) && (DateTime.UtcNow < EndDate))
-            return true;
-        else
-            return false;
+        return (DateTime.UtcNow > StartDate) && (DateTime.UtcNow < EndDate);
     }
 
     public bool IsInThePast()

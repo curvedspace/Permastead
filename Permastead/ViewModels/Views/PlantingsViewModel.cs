@@ -37,7 +37,7 @@ public partial class PlantingsViewModel : ViewModelBase
     private long _plantingCount;
     
     [ObservableProperty] 
-    private bool _currentOnly = false;
+    private bool _currentOnly = true;   //show only current plantings by default
     
     [ObservableProperty] 
     private Planting _currentItem;

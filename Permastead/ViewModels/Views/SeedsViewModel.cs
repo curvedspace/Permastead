@@ -18,7 +18,10 @@ public partial class SeedsViewModel : ViewModelBase
     [ObservableProperty]
     private ObservableCollection<SeedPacket> _packets = new ObservableCollection<SeedPacket>();
 
-    [ObservableProperty] private string _searchText;
+    [ObservableProperty] private string _searchText = "";
+    
+    [ObservableProperty] 
+    private bool _currentOnly = true;
     
     [ObservableProperty] 
     private long _seedsCount;
@@ -28,7 +31,7 @@ public partial class SeedsViewModel : ViewModelBase
     [RelayCommand]
     private void RefreshData()
     {
-        RefreshDataOnly();
+        RefreshDataOnly(SearchText);
     }
 
     [RelayCommand]
@@ -48,7 +51,14 @@ public partial class SeedsViewModel : ViewModelBase
         {
             if (string.IsNullOrEmpty(caseAdjustedFilterText))
             {
-                Packets.Add(packet);
+                if (CurrentOnly)
+                {
+                    if (packet.IsCurrent()) Packets.Add(packet);
+                }
+                else
+                {
+                    Packets.Add(packet);
+                }
             }
             else
             {
@@ -57,10 +67,16 @@ public partial class SeedsViewModel : ViewModelBase
                     packet.Vendor.Description.ToLowerInvariant().Contains(caseAdjustedFilterText) ||
                     packet.Plant.Description.ToLowerInvariant().Contains(caseAdjustedFilterText))
                 {
-                    Packets.Add(packet);
+                    if (CurrentOnly)
+                    {
+                        if (packet.IsCurrent()) Packets.Add(packet);
+                    }
+                    else
+                    {
+                        Packets.Add(packet);
+                    }
                 }
             }
-            
         }
         
         if (Packets.Count > 0) 
@@ -99,7 +115,7 @@ public partial class SeedsViewModel : ViewModelBase
 
         SeedsCount = Packets.Count;
         
-        Console.WriteLine("Refreshed Seeds view");
+        Console.WriteLine("Refreshed Seeds view: " + SeedsCount);
     }
     
     public SeedsViewModel()

@@ -158,6 +158,7 @@ public class SeedPacketRepository
                     packet.Description = dr[1].ToString();
                     packet.Instructions = dr[2].ToString();
                     packet.DaysToHarvest = Convert.ToInt32(dr[3].ToString());
+                    
                     packet.CreationDate = Convert.ToDateTime(dr[4].ToString());
                     packet.StartDate = Convert.ToDateTime(dr[5].ToString());
                     packet.EndDate = Convert.ToDateTime(dr[6].ToString());
