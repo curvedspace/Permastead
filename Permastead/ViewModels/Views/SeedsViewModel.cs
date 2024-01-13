@@ -115,7 +115,7 @@ public partial class SeedsViewModel : ViewModelBase
 
         SeedsCount = Packets.Count;
         
-        Console.WriteLine("Refreshed Seeds view: " + SeedsCount);
+        //Console.WriteLine("Refreshed Seeds view: " + SeedsCount);
     }
     
     public SeedsViewModel()
