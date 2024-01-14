@@ -37,7 +37,7 @@ public partial class SeedsView : UserControl
             plantingWindow.DataContext = vm;
         
             plantingWindow.Topmost = true;
-            plantingWindow.Width = 900;
+            plantingWindow.Width = 1000;
             plantingWindow.Height = 550;
             plantingWindow.Opacity = 0.95;
             plantingWindow.Title = "Starter - " + seedPacket.Description;
