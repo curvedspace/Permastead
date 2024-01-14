@@ -2,8 +2,78 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="430"
+        xmlns:vm="using:Permastead.ViewModels.Dialogs"
         x:Class="Permastead.Views.Dialogs.ActionWindow"
-        Title="ActionWindow">
-    Action Window
+        x:DataType="vm:ActionWindowViewModel" x:CompileBindings="True"
+        Title="Action Window">
+    
+    <Grid ColumnDefinitions="Auto,Auto,Auto,*" RowDefinitions="Auto,Auto,Auto,Auto,Auto,*"  Margin="20">
+            
+        <TextBlock Grid.Row="0" Grid.Column="0" Margin="10,10,0,0">ID:</TextBlock>
+        <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding CurrentTodo.Id }" IsEnabled="False" Margin="10,10,10,10"></TextBox>
+    
+        <Label Grid.Row="0" Grid.Column="2" Margin="10">Pct Done: </Label>
+        <TextBox Grid.Row="0" Grid.Column="3" Margin="10" Text="{Binding CurrentTodo.PercentDone}"></TextBox>
+    
+        <TextBlock Grid.Row="1" Grid.Column="0" Margin="10,15,10,10">Description:</TextBlock>
+        <TextBox Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" Height="100" TextWrapping="WrapWithOverflow" Text="{Binding CurrentTodo.Description }" Margin="10,10,10,10"></TextBox>
+        
+        <Label Grid.Row="2" Margin="10,10,10,10" Grid.Column="0">Type:</Label>
+        <ComboBox Width="200" Grid.Row="2" Grid.Column="1" Margin="10" ItemsSource="{Binding TodoTypes, Mode=TwoWay}"
+                  SelectedItem="{Binding CurrentTodo.ToDoType, Mode=TwoWay}" AutoScrollToSelectedItem="True">
+            <ComboBox.ItemTemplate>
+                <DataTemplate >
+                    <TextBlock Text="{Binding Description}" />
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
+        
+        <Label Grid.Row="2" Margin="10,10,10,10" Grid.Column="2">Status:</Label>
+        <ComboBox Width="200" Grid.Row="2" Grid.Column="3" Margin="10" ItemsSource="{Binding TodoStatuses, Mode=TwoWay}"
+                  SelectedItem="{Binding CurrentTodo.ToDoStatus, Mode=TwoWay}" AutoScrollToSelectedItem="True">
+            <ComboBox.ItemTemplate>
+                <DataTemplate >
+                    <TextBlock Text="{Binding Description}" />
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
+        
+        <Label Grid.Row="3" Margin="10,10,10,10" Grid.Column="0">Assigner:</Label>
+        <ComboBox Width="200" Grid.Row="3" Grid.Column="1" Margin="10" ItemsSource="{Binding People, Mode=TwoWay}"
+                  SelectedItem="{Binding CurrentTodo.Assigner, Mode=TwoWay}" AutoScrollToSelectedItem="True">
+            <ComboBox.ItemTemplate>
+                <DataTemplate >
+                    <TextBlock Text="{Binding FullNameLastFirst}" />
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
+    
+        <Label Grid.Row="3" Margin="10,10,10,10" Grid.Column="2">Assignee:</Label>
+        <ComboBox Width="200" Grid.Row="3" Grid.Column="3" Margin="10" ItemsSource="{Binding People, Mode=TwoWay}"
+                  SelectedItem="{Binding CurrentTodo.Assignee, Mode=TwoWay}" AutoScrollToSelectedItem="True">
+            <ComboBox.ItemTemplate>
+                <DataTemplate >
+                    <TextBlock Text="{Binding FullNameLastFirst}" />
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
+        
+           
+        <Label Grid.Row="4" Grid.Column="0" Margin="10">Start Date:</Label>
+        <CalendarDatePicker Grid.Row="4" Grid.Column="1" Margin="10,0,0,0"  Name = "EndDate" SelectedDate="{Binding CurrentTodo.StartDate, Mode=TwoWay}">
+        </CalendarDatePicker>
+    
+        <Label Grid.Row="4" Grid.Column="2" Margin="10">Due Date:</Label>
+        <CalendarDatePicker Margin="10,0,0,0" Grid.Row="4" Grid.Column="3" Name = "LastTrigger" SelectedDate="{Binding CurrentTodo.DueDate, Mode=TwoWay}">
+        </CalendarDatePicker>
+        
+        <Image Grid.Row="5" Grid.Column="0" HorizontalAlignment="Left" Margin="10,15,0,10" Width="32" Height="32" Source="/Assets/showel.png" />
+    
+        <StackPanel Grid.Row="5" Grid.Column="3" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,10,10,0">
+            <Button Name="SaveButton" Margin="10" Click="SaveButton_OnClick" >Save</Button>
+            <Button Name="CancelButton" Margin="10" Click="CancelButton_OnClick">Cancel</Button>
+        </StackPanel>
+    
+    </Grid>
 </Window>

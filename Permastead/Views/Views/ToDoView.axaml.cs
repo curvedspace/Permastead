@@ -39,16 +39,16 @@ public partial class ToDoView : UserControl
             var todo = (ToDo)current.RowSelection!.SelectedItem;
             
             //get underlying view's viewmodel
-            //var vm = new ActionWindowViewModel(todo, (ContactsViewModel)DataContext);
-            var vm = new ActionWindowViewModel();
+            var vm = new ActionWindowViewModel(todo, (ToDoViewModel)DataContext);
+            //var vm = new ActionWindowViewModel();
             
             actionWindow.DataContext = vm;
         
             actionWindow.Topmost = true;
-            actionWindow.Width = 900;
-            actionWindow.Height = 550;
+            actionWindow.Width = 700;
+            actionWindow.Height = 450;
             actionWindow.Opacity = 0.95;
-            actionWindow.Title = "Action Item - " + todo.Description;
+            actionWindow.Title = "Action Item - Due in " + todo.DaysUntilDue + " day(s).";
         }
 
         actionWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;

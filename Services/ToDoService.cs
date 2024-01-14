@@ -71,5 +71,25 @@ namespace Services
         {
             return ToDoRepository.DoesToDoExist(description);
         }
+
+        public static bool CommitRecord(ServiceMode serviceMode, ToDo? todo)
+        {
+            bool rtnValue = false;
+        
+            if (todo != null)
+            {
+                if (todo.Id > 0)
+                {
+                    ToDoRepository.Update(todo);
+                }
+                else
+                {
+                    // insert new record
+                    ToDoRepository.Insert(todo);
+                }
+            }
+
+            return rtnValue;
+        }
     }
 }

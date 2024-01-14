@@ -48,30 +48,7 @@ public partial class ToDoViewModel : ViewModelBase
     // The method that will be executed when the command is invoked
     private void SaveToDo()
     {
-        //if there is a comment, save it.
-
-        if (CurrentItem != null && CurrentItem.Id == 0 && !string.IsNullOrEmpty(CurrentItem.Description))
-        {
-
-            CurrentItem.CreationDate = DateTime.Now;
- 
-            var rtnValue = DataAccess.Local.ToDoRepository.Insert(CurrentItem);
-
-            if (rtnValue)
-            {
-                _todos.Add(CurrentItem);
-            }
-
-            Console.WriteLine("saved " + rtnValue);
-
-            RefreshToDo();
-        }
-        else
-        {
-            var rtnValue = DataAccess.Local.ToDoRepository.Update(_currentItem);
-            RefreshToDo();
-        }
-
+        this.SaveData();
     }
 
     [RelayCommand]
@@ -146,8 +123,35 @@ public partial class ToDoViewModel : ViewModelBase
             },
         };
     }
-    
 
+
+    public void SaveData()
+    {
+        //if there is a comment, save it.
+
+        if (CurrentItem != null && CurrentItem.Id == 0 && !string.IsNullOrEmpty(CurrentItem.Description))
+        {
+
+            CurrentItem.CreationDate = DateTime.Now;
+ 
+            var rtnValue = DataAccess.Local.ToDoRepository.Insert(CurrentItem);
+
+            if (rtnValue)
+            {
+                _todos.Add(CurrentItem);
+            }
+
+            Console.WriteLine("saved " + rtnValue);
+
+            RefreshToDo();
+        }
+        else
+        {
+            var rtnValue = DataAccess.Local.ToDoRepository.Update(CurrentItem);
+            RefreshToDo();
+        }
+    }
+    
     public ToDoViewModel()
     {
         try
