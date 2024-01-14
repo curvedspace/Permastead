@@ -1,4 +1,5 @@
 ﻿using System;
+using Models;
 using Services;
 
 namespace Permastead
@@ -8,6 +9,8 @@ namespace Permastead
         public static ServiceMode ServiceMode { get; set; } = ServiceMode.Local;
 
         public GaiaService GaiaService;
+
+        public ScoreBoard CurrentScoreboard = new ScoreBoard();
 
         
         private AppSession()

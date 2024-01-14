@@ -69,6 +69,7 @@ namespace Permastead.ViewModels.Views;
             Observations = new ObservableCollection<Observation>(Services.ObservationsService.GetObservations(AppSession.ServiceMode));
             
             var scoreBoard = ScoreBoardService.ComputeTotalScore(ServiceMode.Local);
+            AppSession.Instance.CurrentScoreboard = scoreBoard;
 
             this.Statistics = scoreBoard.ToString();
             this.TotalScore = (double)scoreBoard.TotalScore;

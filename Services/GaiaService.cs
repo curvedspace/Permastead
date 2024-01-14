@@ -32,11 +32,9 @@ public class GaiaService
         AddResponse("Hello there, welcome to Permastead.");
         AddResponse("Quote of the day: " + '\n' + Services.QuoteService.GetRandomQuote(ServiceMode.Local).ToString());
 
-        var updates = new ObservableCollection<string>(ScoreBoardService.CheckForNewToDos(ServiceMode.Local));
-
-        var upcomingTodos = Services.ToDoService.GetUpcomingToDos(ServiceMode.Local, 3);
-
         var updateBuilder = new StringBuilder();
+        var updates = new ObservableCollection<string>(ScoreBoardService.CheckForNewToDos(ServiceMode.Local));
+        var upcomingTodos = Services.ToDoService.GetUpcomingToDos(ServiceMode.Local, 3);
 
         if (upcomingTodos.Count > 0)
         {
@@ -53,7 +51,7 @@ public class GaiaService
             updateBuilder.AppendLine(t);
         }
         
-        if (updates.Count == 0)
+        if (upcomingTodos.Count == 0)
         {
             AddResponse("I just checked the database and you have no upcoming events.");
         }
