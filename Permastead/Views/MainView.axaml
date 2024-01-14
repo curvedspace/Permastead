@@ -68,7 +68,13 @@
         </StackPanel>
         <TransitioningContentControl Grid.Row="1" Content="{Binding CurrentView}"></TransitioningContentControl>
         <Panel Grid.Row="2" VerticalAlignment="Bottom" Margin="0,0,0,0">
-            <TextBlock Height="20" Margin="2,0,0,0" Text="{Binding CurrentViewName}"></TextBlock>
+            <Border Background="{StaticResource ButtonBackgroundPointerOver}"
+                    BorderBrush="{StaticResource AccentButtonForeground}"
+                    BorderThickness="1"
+                    CornerRadius="2"
+                    Padding="5" Margin="0,0,0,0">
+            <TextBlock Foreground="{DynamicResource ButtonForeground}" TextAlignment="Center" Height="20" Margin="2,0,0,0" Text="{Binding CurrentViewName}"></TextBlock>
+            </Border>
         </Panel>
     </Grid>
     
