@@ -46,7 +46,7 @@
             <ListBox.ItemTemplate>
               <DataTemplate>
                 <Border CornerRadius="4">
-                  <TextBlock Text="{Binding FullDescription}"></TextBlock>
+                  <TextBlock TextWrapping="Wrap" Text="{Binding FullDescription}"></TextBlock>
                 </Border>
               </DataTemplate>
             </ListBox.ItemTemplate>
