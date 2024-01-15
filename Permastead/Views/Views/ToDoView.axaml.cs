@@ -1,6 +1,7 @@
 
 using Avalonia.Controls;
 using Avalonia.Input;
+using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml;
 using Models;
 using Permastead.ViewModels.Dialogs;
@@ -54,5 +55,22 @@ public partial class ToDoView : UserControl
         actionWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;
            
         actionWindow.Show();
+    }
+
+    private void Add_OnClick(object? sender, RoutedEventArgs e)
+    {
+        var win = new ActionWindow();
+        var vm = new ActionWindowViewModel();
+            
+        win.DataContext = vm;
+        
+        win.Topmost = true;
+        win.Width = 700;
+        win.Height = 450;
+        win.Opacity = 0.95;
+        win.Title = "New Action Item";
+        win.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+                
+        win.Show();
     }
 }
