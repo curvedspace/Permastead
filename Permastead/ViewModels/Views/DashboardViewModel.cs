@@ -29,6 +29,7 @@ public partial class DashboardViewModel : ViewModelBase
     
     [ObservableProperty] private long _totalPlantings;
     [ObservableProperty] private long _successfulPlantings;
+    [ObservableProperty] private long _deadPlantings;
     [ObservableProperty] private long _totalHarvestedPlants;
     
     private DateTime PlantingYearStartDate;
@@ -57,13 +58,18 @@ public partial class DashboardViewModel : ViewModelBase
         //compute the success rate for the current growing year
         foreach (var p in Plantings)
         {
-            if (p.EndDate > PlantingYearStartDate || p.SeedPacket.SeasonalityId == 3)
+            // if (p.EndDate > PlantingYearStartDate || p.SeedPacket.SeasonalityId == 3)
             {
                 TotalPlantings++;
 
-                if (p.State.Code != "DEAD" || p.State.Code != "H")
+                if (p.State.Code != "DEAD" && p.State.Code != "H")
                 {
                     SuccessfulPlantings++;
+                }
+                
+                if (p.State.Code == "DEAD")
+                {
+                    DeadPlantings++;
                 }
 
                 if (p.State.Code == "H")
@@ -90,13 +96,13 @@ public partial class DashboardViewModel : ViewModelBase
         PlantingSuccessSeries =
             new[] { 15, 20, 65}.AsPieSeries((value, series) => { series.MaxRadialColumnWidth = 60; });
 
-      //   var success = new List<int>();
-      //   success.Add(Convert.ToInt32(TotalHarvestedPlants));
-      //   success.Add(Convert.ToInt32(SuccessfulPlantings));
-      //   success.Add(Convert.ToInt32(TotalPlantings - SuccessfulPlantings));
+      //   var success = new List<double>();
+      //   success.Add(Convert.ToDouble(TotalHarvestedPlants/TotalPlantings) * 100);
+      //   success.Add(Convert.ToDouble(DeadPlantings/TotalPlantings) * 100);
+      //   success.Add(Convert.ToDouble((TotalPlantings - TotalHarvestedPlants - DeadPlantings) / TotalPlantings) * 100);
       //
       // PlantingSuccessSeries = success.AsPieSeries((value, series) => { series.MaxRadialColumnWidth = 60; });
-      //   
+        
         // var breakdown = new List<int>();
         // breakdown.Add(Convert.ToInt32(TotalHarvestedPlants));
         // breakdown.Add(Convert.ToInt32(SuccessfulPlantings));
