@@ -14,24 +14,30 @@
         <vm:DashboardViewModel/>
     </UserControl.DataContext>
     
-    <Grid RowDefinitions="*,*" ColumnDefinitions="*,*,*">
+    <Grid RowDefinitions="Auto,*,*" ColumnDefinitions="*,*,*">
+        <WrapPanel>
+            <Image Margin="20" Width="24" Height="24" Source="/Assets/statistics.png" />
+            <TextBlock FontWeight="Bold" Margin="20,24,20,20">Dashboard</TextBlock>
+            <Button x:Name="Refresh" HorizontalAlignment="Right" Margin="10,0">Refresh</Button> 
+        </WrapPanel>
+        
         <!-- <StackPanel> -->
         <!-- <Grid ColumnDefinitions="Auto,*" RowDefinitions="Auto,*"> -->
         <!-- <Panel Grid.Row="0" Grid.Column="0"> -->
-            <lvc:PieChart Grid.Column="0" Grid.Row="0"
+            <lvc:PieChart Grid.Column="0" Grid.Row="1"
                 Series="{Binding Series}"
                 InitialRotation="-90"
                 MinValue="0"
                 MaxValue="100">
             </lvc:PieChart>
         
-        <lvc:PieChart Grid.Column="1" Grid.Row="0"
+        <lvc:PieChart Grid.Column="1" Grid.Row="1"
                       Series="{Binding PlantSeries}"
                       MinValue="0"
                       MaxValue="100">
         </lvc:PieChart>
         
-        <lvc:PieChart Grid.Column="2" Grid.Row="0"
+        <lvc:PieChart Grid.Column="2" Grid.Row="1"
                       Series="{Binding Series}"
                       InitialRotation="-90"
                       MinValue="0"
@@ -52,7 +58,7 @@
     <!-- </Grid> -->
     
     <!-- <Grid ColumnDefinitions="Auto,*" RowDefinitions="Auto,*"> -->
-        <views:ActObsChartView Grid.Column="0"  Grid.ColumnSpan="3" Grid.Row="1"></views:ActObsChartView>
+        <views:ActObsChartView Grid.Column="0"  Grid.ColumnSpan="3" Grid.Row="2"></views:ActObsChartView>
     <!-- </Grid> -->
         <!-- </StackPanel> -->
     </Grid>
