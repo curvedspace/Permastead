@@ -2,6 +2,7 @@ using System;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Input;
+using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml;
 using Models;
 using Permastead.ViewModels.Dialogs;
@@ -82,5 +83,23 @@ public partial class SeedsView : UserControl
                 vm.RefreshDataOnly(vm.SearchText);
             }
         }
+    }
+
+    private void Add_OnClick(object? sender, RoutedEventArgs e)
+    {
+        var win = new StarterWindow();
+        var vm = new StarterWindowViewModel();
+        vm.ControlViewModel = (SeedsViewModel)DataContext;
+        
+        win.DataContext = vm;
+        
+        win.Topmost = true;
+        win.Width = 800;
+        win.Height = 550;
+        win.Opacity = 0.95;
+        win.Title = "New Plant Starter";
+        win.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+                
+        win.Show();
     }
 }
