@@ -86,8 +86,8 @@
       </StackPanel>
      
      <StackPanel Grid.Row="0" Grid.Column="1" VerticalAlignment="Stretch">
-         <TextBlock FontSize="24" ToolTip.Tip="Your current score and level. You get points for adding records to the database. " 
-                    TextAlignment="Center" Text="{Binding Statistics}" Margin="20,0,20,0"></TextBlock>
+         <TextBlock FontSize="24" ToolTip.Tip="The current date. " 
+                    TextAlignment="Center" Text="{Binding CurrentDateDisplay}" Margin="20,0,20,0"></TextBlock>
          
          
          <!-- <Grid DockPanel.Dock="Bottom" ColumnDefinitions="Auto, *, Auto" RowDefinitions="Auto,*" VerticalAlignment="Bottom"> -->

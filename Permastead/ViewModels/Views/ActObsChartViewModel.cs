@@ -32,7 +32,7 @@ public class ActObsChartViewModel : ViewModelBase
             LabelsRotation = 0,
             SeparatorsPaint = new SolidColorPaint(new SKColor(200, 200, 200)),
             SeparatorsAtCenter = false,
-            TicksPaint = new SolidColorPaint(new SKColor(35, 35, 35)),
+            TicksPaint = new SolidColorPaint(new SKColor(200, 200, 200)),
             TicksAtCenter = true,
             // By default the axis tries to optimize the number of 
             // labels to fit the available space, 
@@ -77,5 +77,6 @@ public class ActObsChartViewModel : ViewModelBase
         obsSeries.Values = observationsByMonth.Values;
 
         Series = new[] { actSeries, obsSeries };
+        
     }
 }

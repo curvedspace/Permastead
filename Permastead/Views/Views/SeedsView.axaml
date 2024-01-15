@@ -13,14 +13,13 @@
     
     <Grid ColumnDefinitions="*" RowDefinitions="Auto,*">
         <StackPanel>
-            
             <WrapPanel>
                 <!-- <materialIcons:MaterialIcon Kind="Settings" Margin="20"/> -->
                 <Image Margin="20" Width="24" Height="24" Source="/Assets/bean.png" />
                 <TextBlock FontWeight="Bold" Margin="20,26,20,20">Seeds</TextBlock>
                 <!-- <Separator MaxWidth="5"></Separator> -->
                 <Button Command="{Binding RefreshDataCommand}" x:Name="Refresh" HorizontalAlignment="Right" Margin="10,0">Refresh</Button> 
-                <Button Click="Add_OnClick" x:Name="Add" HorizontalAlignment="Right" Margin="0,0">Add</Button> 
+                <Button Click="Add_OnClick" x:Name="Add" HorizontalAlignment="Right" Margin="0,20">Add</Button> 
                 <Label Margin="25,24,0,20">Search:</Label>
                 <TextBox x:Name="SearchBox" Text="{Binding SearchText}" Watermark="Enter search text" Width="200" Margin="20,20,20,20" KeyDown="SearchBox_OnKeyDown" TextChanged="TextBox_OnTextChanged"></TextBox>
                 <Button Command="{Binding ClearSearchCommand}" Margin="5,20,20,20">Clear</Button>

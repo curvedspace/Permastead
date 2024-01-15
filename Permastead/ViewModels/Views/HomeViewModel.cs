@@ -34,6 +34,8 @@ namespace Permastead.ViewModels.Views;
         [ObservableProperty]
         private double _totalScore;
 
+        [ObservableProperty] private string _CurrentDateDisplay = DateTime.Now.ToLongDateString();
+
         [ObservableProperty] private string _weatherForecast = "Weather Unknown";
 
         public string GrowingSeason => "Growing Season: " + PlantingYearEndDate.Year.ToString();
@@ -125,8 +127,6 @@ namespace Permastead.ViewModels.Views;
             {
                 Console.WriteLine(e);
             }
-            
-            
         }
 
         public void GetQuote()
