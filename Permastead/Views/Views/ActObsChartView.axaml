@@ -13,6 +13,7 @@
     <lvc:CartesianChart
         Series="{Binding Series}"
         XAxes="{Binding XAxes}"
+        LegendTextPaint="{Binding LegendTextPaint}"
         LegendPosition="Top">
     </lvc:CartesianChart>
 </UserControl>

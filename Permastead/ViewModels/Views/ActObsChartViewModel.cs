@@ -24,6 +24,12 @@ public class ActObsChartViewModel : ViewModelBase
     //     }
     // };
 
+    public SolidColorPaint LegendTextPaint { get; set; } =
+        new SolidColorPaint()
+        {
+            Color = new SKColor(240, 240, 240)
+        };
+
     public Axis[] XAxes { get; set; } =
     {
         new Axis
