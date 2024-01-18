@@ -28,20 +28,24 @@ public partial class SeedsView : UserControl
         var current = sender as TreeDataGrid;
         if (current != null)
         {
-            var seedPacket = (SeedPacket)current.RowSelection!.SelectedItem;
+            if (current.RowSelection!.SelectedItem != null)
+            {
+                var seedPacket = (SeedPacket)current.RowSelection!.SelectedItem;
             
-            //get underlying view's viewmodel
-            // var vm = new StarterWindowViewModel(seedPacket, (SeedsViewModel)DataContext);
-            var vm = new StarterWindowViewModel(seedPacket);
-            vm.ControlViewModel = (SeedsViewModel)DataContext;
+                //get underlying view's viewmodel
+                // var vm = new StarterWindowViewModel(seedPacket, (SeedsViewModel)DataContext);
+                var vm = new StarterWindowViewModel(seedPacket);
+                vm.ControlViewModel = (SeedsViewModel)DataContext;
             
-            plantingWindow.DataContext = vm;
+                plantingWindow.DataContext = vm;
         
-            plantingWindow.Topmost = true;
-            plantingWindow.Width = 1000;
-            plantingWindow.Height = 550;
-            plantingWindow.Opacity = 0.95;
-            plantingWindow.Title = "Starter - " + seedPacket.Description;
+                plantingWindow.Topmost = true;
+                plantingWindow.Width = 1000;
+                plantingWindow.Height = 550;
+                plantingWindow.Opacity = 0.95;
+                plantingWindow.Title = "Starter - " + seedPacket.Description;
+            }
+            
         }
 
         plantingWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;
