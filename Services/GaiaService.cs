@@ -42,7 +42,7 @@ public class GaiaService
             foreach (var t in upcomingTodos)
             {
                 updateBuilder.AppendLine(t.Description + " (" + t.DueDate.Date.ToShortDateString() + ", " +
-                                         t.ToDoStatus.Description + ".");
+                                         t.ToDoStatus.Description + ").");
             }
         }
         
