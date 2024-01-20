@@ -19,10 +19,12 @@ public class PlantingsRepository
                   "p.CreationDate, p.StartDate, p2.Id, p2.FirstName, p2.LastName, p.Comment,  " +
                   "gb.Id, gb.Code as gbcode, gb.Description as gbdesc,  " +
                   "sp.Id , sp.DaysToHarvest, sp.Description as PacketDesc,  " +
-                  "v.Id, v.Code, v.Description as VendorDesc, p.EndDate, p.YieldRating, ps.Id, ps.Code, ps.Description " +
-                  "FROM Planting p, Person p2, Plant p3, GardenBed gb, SeedPacket sp, Vendor v, PlantingState ps  " +
+                  "v.Id, v.Code, v.Description as VendorDesc, p.EndDate, p.YieldRating, ps.Id, ps.Code, ps.Description, " +
+                  "s.Id, s.Code, s.Description " +
+                  "FROM Planting p, Person p2, Plant p3, GardenBed gb, SeedPacket sp, Vendor v, PlantingState ps, Seasonality s  " +
                   "WHERE p.AuthorId = p2.Id AND p.GardenBedId = gb.Id  " +
                   "AND p.PlantId = p3.Id AND p.PlantingStateId = ps.Id " +
+                  "AND sp.SeasonalityId = s.Id " +
                   "AND p.SeedPacketId = sp.Id AND sp.VendorId = v.Id ";
 
         if (byPlantedDate)
@@ -80,7 +82,14 @@ public class PlantingsRepository
                     planting.State.Id = Convert.ToInt64(dr[21].ToString());
                     planting.State.Code = dr[22].ToString();
                     planting.State.Description = dr[23].ToString();
-                    
+
+                    if (planting.SeedPacket.Seasonality != null)
+                    {
+                        planting.SeedPacket.Seasonality.Id = Convert.ToInt64(dr[24].ToString());
+                        planting.SeedPacket.Seasonality.Code = dr[25].ToString();
+                        planting.SeedPacket.Seasonality.Description = dr[26].ToString();
+                    }
+
                     plantings.Add(planting);
                 }
             }

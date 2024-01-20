@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using AIMLbot.AIMLTagHandlers;
 using CommunityToolkit.Mvvm.ComponentModel;
 using LiveChartsCore;
+using LiveChartsCore.Defaults;
 using LiveChartsCore.Measure;
 using LiveChartsCore.SkiaSharpView;
 using LiveChartsCore.SkiaSharpView.Extensions;
@@ -31,6 +32,7 @@ public partial class DashboardViewModel : ViewModelBase
     [ObservableProperty] private long _successfulPlantings;
     [ObservableProperty] private long _deadPlantings;
     [ObservableProperty] private long _totalHarvestedPlants;
+    [ObservableProperty] private long _totalActivePlantings;
     
     private DateTime PlantingYearStartDate;
         
@@ -103,12 +105,62 @@ public partial class DashboardViewModel : ViewModelBase
       //
       // PlantingSuccessSeries = success.AsPieSeries((value, series) => { series.MaxRadialColumnWidth = 60; });
         
-        // var breakdown = new List<int>();
-        // breakdown.Add(Convert.ToInt32(TotalHarvestedPlants));
-        // breakdown.Add(Convert.ToInt32(SuccessfulPlantings));
-        // breakdown.Add(Convert.ToInt32(TotalPlantings - SuccessfulPlantings));
-        //
+      //get plant breakdown
+        Int32 annuals = 0;
+        Int32 biennials = 0;
+        Int32 perennials = 0;
+      
+        foreach (var p in Plantings)
+        {
+            if (p.IsActive)
+            {
+                switch (p.SeedPacket.Seasonality.Code)
+                {
+                    case "A":
+                        annuals++;
+                        break;
+                    case "B":
+                        biennials++;
+                        break;
+                    case "P":
+                        perennials++;
+                        break;
+                }
+
+                _totalActivePlantings++;
+            }
+        }
+      
+        var breakdown = new List<int>();
+        breakdown.Add(annuals);
+        breakdown.Add(biennials);
+        breakdown.Add(perennials);
+        
+
         // PlantBreakdownSeries
         //     = breakdown.AsPieSeries((value, series) => { series.MaxRadialColumnWidth = 60; });
+        
+        PlantBreakdownSeries =
+        GaugeGenerator.BuildSolidGauge(
+            new GaugeItem(annuals, series => SetStyle("Annuals", series)),
+            new GaugeItem(biennials, series => SetStyle("Biennials", series)),
+            new GaugeItem(perennials, series => SetStyle("Perennials", series)),
+            new GaugeItem(GaugeItem.Background, series =>
+            {
+                series.InnerRadius = 20;
+            }));
+
+    
+    }
+    
+    private static void SetStyle(string name, PieSeries<ObservableValue> series)
+    {
+        series.Name = name;
+        series.DataLabelsPosition = PolarLabelsPosition.Start;
+        series.DataLabelsFormatter =
+            point => $"{point.Coordinate.PrimaryValue} {point.Context.Series.Name}";
+        series.InnerRadius = 20;
+        series.RelativeOuterRadius = 8;
+        series.RelativeInnerRadius = 8;
     }
 }
