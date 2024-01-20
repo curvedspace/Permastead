@@ -122,7 +122,6 @@ public partial class InventoryViewModel: ViewModelBase
             {
                 _inventory.Add(inv);
             }
-            
         }
         
         var centered = new TextColumnOptions<Inventory>

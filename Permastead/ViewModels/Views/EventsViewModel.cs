@@ -36,7 +36,13 @@ public partial class  EventsViewModel : ViewModelBase
     private AnEvent _currentItem;
     
     public FlatTreeDataGridSource<AnEvent> EventsSource { get; set; }
-    
+
+    [RelayCommand]
+    private void RefreshData()
+    {
+        RefreshEvents();
+    }
+
     public EventsViewModel()
     {
         try
@@ -68,7 +74,7 @@ public partial class  EventsViewModel : ViewModelBase
         }
     }
     
-    private void RefreshEvents()
+    public void RefreshEvents()
     {
         Events.Clear();
 

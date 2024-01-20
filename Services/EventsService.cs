@@ -29,4 +29,21 @@ public class EventsService
 
         return eventTypes;
     }
+
+    public static bool CommitRecord(ServiceMode serviceMode, AnEvent currentItem)
+    {
+        bool rtnValue = false;
+        
+        if (currentItem.Id > 0)
+        {
+            AnEventRepository.Update(currentItem);
+        }
+        else
+        {
+            // insert new record
+            AnEventRepository.Insert(currentItem);
+        }
+        
+        return rtnValue;
+    }
 }
