@@ -18,7 +18,7 @@
         <WrapPanel Grid.ColumnSpan="3">
             <Image Margin="20" Width="24" Height="24" Source="/Assets/statistics.png" />
             <TextBlock FontWeight="Bold" Margin="20,24,20,20">Dashboard</TextBlock>
-            <Button x:Name="Refresh" HorizontalAlignment="Right" Margin="10,0">Refresh</Button> 
+            <Button x:Name="Refresh" HorizontalAlignment="Right" Margin="10,0" Command="{Binding RefreshDataCommand}">Refresh</Button> 
             <TextBlock Margin="20,24,20,20" Text="{Binding ScoreBoard}" ></TextBlock>
         </WrapPanel>
         

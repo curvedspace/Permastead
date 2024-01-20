@@ -14,6 +14,6 @@
         Series="{Binding Series}"
         XAxes="{Binding XAxes}"
         LegendTextPaint="{Binding LegendTextPaint}"
-        LegendPosition="Top">
+        LegendPosition="Bottom">
     </lvc:CartesianChart>
 </UserControl>

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using AIMLbot.AIMLTagHandlers;
 using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using LiveChartsCore;
 using LiveChartsCore.Defaults;
 using LiveChartsCore.Measure;
@@ -46,14 +47,15 @@ public partial class DashboardViewModel : ViewModelBase
     //         Padding = new LiveChartsCore.Drawing.Padding(15),
     //         Paint = new SolidColorPaint(SKColors.DarkSlateGray)
     //     };
-    
-    public DashboardViewModel()
+
+    [RelayCommand]
+    private void RefreshData()
     {
-        ScoreBoard = AppSession.Instance.CurrentScoreboard;
-        
-        PlantingYearStartDate = new DateTime(DateTime.Today.Year, 1,1);
-        PlantingYearEndDate = new DateTime(DateTime.Today.Year, 12,31);
-        
+        RefreshDataOnly();
+    }
+
+    private void RefreshDataOnly()
+    {
         // get other data
         Plantings = new ObservableCollection<Planting>(Services.PlantingsService.GetPlantings(AppSession.ServiceMode));
         
@@ -159,6 +161,16 @@ public partial class DashboardViewModel : ViewModelBase
                 {
                     series.InnerRadius = 20;
                 }));
+    }
+    
+    public DashboardViewModel()
+    {
+        ScoreBoard = AppSession.Instance.CurrentScoreboard;
+        
+        PlantingYearStartDate = new DateTime(DateTime.Today.Year, 1,1);
+        PlantingYearEndDate = new DateTime(DateTime.Today.Year, 12,31);
+        
+        RefreshDataOnly();
     
     }
     
