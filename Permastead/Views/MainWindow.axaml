@@ -5,7 +5,7 @@
         xmlns:views="clr-namespace:Permastead.Views"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="Permastead.Views.MainWindow"
-        Icon="/Assets/permastead.ico"
+        Icon="/Assets/App.png"
         Title="Permastead">
         <views:MainView />
 </Window>
