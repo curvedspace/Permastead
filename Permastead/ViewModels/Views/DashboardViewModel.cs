@@ -60,7 +60,7 @@ public partial class DashboardViewModel : ViewModelBase
         //compute the success rate for the current growing year
         foreach (var p in Plantings)
         {
-            // if (p.EndDate > PlantingYearStartDate || p.SeedPacket.SeasonalityId == 3)
+            if (p.IsActive)
             {
                 TotalPlantings++;
 
@@ -150,6 +150,15 @@ public partial class DashboardViewModel : ViewModelBase
                 series.InnerRadius = 20;
             }));
 
+        PlantingSuccessSeries =
+            GaugeGenerator.BuildSolidGauge(
+                new GaugeItem(SuccessfulPlantings, series => SetStyle("Successful", series)),
+                new GaugeItem(DeadPlantings, series => SetStyle("Deceased", series)),
+                new GaugeItem(TotalHarvestedPlants, series => SetStyle("Harvested", series)),
+                new GaugeItem(GaugeItem.Background, series =>
+                {
+                    series.InnerRadius = 20;
+                }));
     
     }
     
