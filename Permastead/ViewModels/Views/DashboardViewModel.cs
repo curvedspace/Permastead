@@ -56,6 +56,11 @@ public partial class DashboardViewModel : ViewModelBase
 
     private void RefreshDataOnly()
     {
+        // reset counters
+        SuccessfulPlantings = 0;
+        DeadPlantings = 0;
+        TotalHarvestedPlants = 0;
+        
         // get other data
         Plantings = new ObservableCollection<Planting>(Services.PlantingsService.GetPlantings(AppSession.ServiceMode));
         
