@@ -4,6 +4,72 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="Permastead.Views.Dialogs.EventsWindow"
+        xmlns:vm="using:Permastead.ViewModels.Views"
+        x:DataType="vm:EventsViewModel"
+        x:CompileBindings="True"
         Title="EventsWindow">
-    Welcome to Avalonia!
+    
+        <!--This is design time only-->
+        <Design.DataContext>
+                <vm:EventsViewModel/>
+        </Design.DataContext>
+        
+        <Grid ColumnDefinitions="Auto,Auto,Auto,*" RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,*,Auto" Margin="10">
+          <TextBlock Grid.Row="0" Grid.Column="0" Margin="10,15,0,0">ID:</TextBlock>
+          <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding CurrentItem.Id}" IsEnabled="False" Margin="10,10,10,10"></TextBox>
+          <Label Grid.Row="0" Margin="10,10,10,10" Grid.Column="2">Start Date:</Label>
+          <CalendarDatePicker x:Name="StartDate" Margin="10,5,0,0" Grid.Row="0" Grid.Column="3" SelectedDate="{Binding CurrentItem.StartDate, Mode=TwoWay}">
+          </CalendarDatePicker>
+          
+          <TextBlock Grid.Row="2" Grid.Column="0" Margin="10,15,10,10">Frequency:</TextBlock>
+          <ComboBox Width="200" Grid.Row="2" Grid.Column="1" Margin="10" ItemsSource="{Binding Frequencies, Mode=TwoWay}"
+                     SelectedItem="{Binding CurrentItem.Frequency, Mode=TwoWay}" AutoScrollToSelectedItem="True">
+            <ComboBox.ItemTemplate>
+              <DataTemplate >
+                <TextBlock Text="{Binding Description}" />
+              </DataTemplate>
+            </ComboBox.ItemTemplate>
+          </ComboBox>
+          
+          <Label Grid.Row="2" Grid.Column="2" Margin="10,15,0,0">Warning Days: </Label>
+          <TextBox Grid.Row="2" Grid.Column="3" Margin="10" Text="{Binding CurrentItem.WarningDays}"></TextBox>
+          
+          <TextBlock Grid.Row="5" Grid.Column="0" Margin="10,15" >Assigner:</TextBlock>
+          <ComboBox Grid.Row="5" Grid.Column="1" Width="200" Margin="10,10,0,0" ItemsSource="{Binding People} "
+                    SelectedItem="{Binding CurrentItem.Assigner, Mode=TwoWay}" AutoScrollToSelectedItem="False">
+            <ComboBox.ItemTemplate>
+              <DataTemplate >
+                <TextBlock Text="{Binding FullNameLastFirst, Mode=TwoWay}" />
+              </DataTemplate>
+            </ComboBox.ItemTemplate>
+          </ComboBox>
+          
+          <TextBlock Grid.Row="5" Grid.Column="2" Margin="10,15" >Assignee:</TextBlock>
+          <ComboBox Grid.Row="5" Grid.Column="3" Width="200" Margin="10,10,0,0" ItemsSource="{Binding People} "
+                    SelectedItem="{Binding CurrentItem.Assignee, Mode=TwoWay}" AutoScrollToSelectedItem="False">
+            <ComboBox.ItemTemplate>
+              <DataTemplate >
+                <TextBlock Text="{Binding FullNameLastFirst, Mode=TwoWay}" />
+              </DataTemplate>
+            </ComboBox.ItemTemplate>
+          </ComboBox>
+                   
+          <Label Grid.Row="6" Margin="10,10,10,10" Grid.Column="0">Start Date:</Label>
+          <CalendarDatePicker x:Name="LastTriggered" Margin="10,5,0,0" Grid.Row="6" Grid.Column="1" SelectedDate="{Binding CurrentItem.LastTriggerDate, Mode=TwoWay}">
+          </CalendarDatePicker>
+          
+          <CheckBox Grid.Row="6" Grid.Column="3" Name="TriggerTodo" IsChecked="{Binding CurrentItem.ToDoTrigger, Mode=TwoWay}" Margin="5,10,10,10">Trigger TODO?</CheckBox>
+          
+          <TextBlock Grid.Row="7" Grid.Column="0" Margin="10">Description:</TextBlock>
+          <TextBox Grid.Row="7" Grid.Column="1" Grid.ColumnSpan="3" 
+                   Text="{Binding CurrentItem.Description }" TextWrapping="Wrap" Margin="10,10,10,10"></TextBox>
+          
+          <Image Grid.Row="8" Grid.Column="0"  Margin="10" Width="32" Height="32" Source="/Assets/clock_red.png" />
+          
+          <StackPanel Grid.Row="8" Grid.Column="3" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,0,0">
+            <Button x:Name="SaveButton" Margin="10" Click="SaveButton_OnClick">Save</Button>
+            <Button x:Name="CancelButton" Margin="10" Click="CancelButton_OnClick" >Cancel</Button>
+          </StackPanel>
+      </Grid>
+        
 </Window>
