@@ -99,6 +99,11 @@ public partial class InventoryViewModel: ViewModelBase
     [RelayCommand]
     private void RefreshInventory()
     {
+        this.RefreshData();
+    }
+
+    public void RefreshData()
+    {
         _inventory.Clear();
 
         var invList = Services.InventoryService.GetAllInventory(AppSession.ServiceMode);
@@ -137,7 +142,7 @@ public partial class InventoryViewModel: ViewModelBase
                 new TextColumn<Inventory, string>
                     ("Description", x => x.Description),
                 new TextColumn<Inventory, string>
-                    ("Author", x => x.Author.FirstName),
+                    ("Author", x => x.Author!.FirstName),
                 new TextColumn<Inventory, string>
                     ("Room", x => x.Room),
                 new TextColumn<Inventory, string>
@@ -147,13 +152,23 @@ public partial class InventoryViewModel: ViewModelBase
                 new TextColumn<Inventory, long>
                     ("Quantity", x => x.Quantity,GridLength.Auto,centered),
                 new TextColumn<Inventory, double>
-                    ("Value", x => x.CurrentValue),
+                    ("Original Value", x => x.OriginalValue),
+                new TextColumn<Inventory, double>
+                    ("Current Value", x => x.CurrentValue),
+                new CheckBoxColumn<Inventory>
+                (
+                    "For Sale",
+                    x => x.ForSale,
+                    (o, v) => o.ForSale = v,
+                    options: new()
+                    {
+                        CanUserResizeColumn = false, CanUserSortColumn = true
+                    }),
                 new TextColumn<Inventory, string>
                     ("Notes", x => x.Notes)
             },
         };
         
         InventoryCount = _inventory.Count;
-      
     }
 }

@@ -43,4 +43,21 @@ public class InventoryService
         return myList;
     }
     
+    public static bool CommitRecord(ServiceMode serviceMode, Inventory inventory)
+    {
+        bool rtnValue = false;
+        
+        if (inventory.Id > 0)
+        {
+            InventoryRepository.Update(inventory);
+        }
+        else
+        {
+            // insert new record
+            InventoryRepository.Insert(inventory);
+        }
+        
+        return rtnValue;
+    }
+    
 }
