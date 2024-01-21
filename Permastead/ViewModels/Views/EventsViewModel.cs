@@ -97,7 +97,7 @@ public partial class  EventsViewModel : ViewModelBase
             TextWrapping = TextWrapping.Wrap, TextAlignment = TextAlignment.Center
         };
         
-        EventsSource = new FlatTreeDataGridSource<AnEvent>(_myEvents)
+        EventsSource = new FlatTreeDataGridSource<AnEvent>(Events)
         {
             Columns =
             {
