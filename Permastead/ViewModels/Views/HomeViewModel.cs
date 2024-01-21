@@ -28,6 +28,9 @@ namespace Permastead.ViewModels.Views;
         [ObservableProperty] 
         private ObservableCollection<SeedPacket> _seedPackets = new ObservableCollection<SeedPacket>();
         
+        [ObservableProperty] 
+        private ObservableCollection<Person> _people = new ObservableCollection<Person>();
+        
         [ObservableProperty]
         private string? _statistics;
         
@@ -93,6 +96,7 @@ namespace Permastead.ViewModels.Views;
             InventoryItems = new ObservableCollection<Inventory>(Services.InventoryService.GetAllInventory(AppSession.ServiceMode));
             SeedPackets = new ObservableCollection<SeedPacket>(PlantingsService.GetSeedPackets(AppSession.ServiceMode));
             Plants = new ObservableCollection<Plant>(PlantingsService.GetPlants(AppSession.ServiceMode));
+            People = new ObservableCollection<Person>(PersonService.GetAllPeople(AppSession.ServiceMode));
 
             //compute the success rate for the current growing year
             foreach (var p in Plantings)

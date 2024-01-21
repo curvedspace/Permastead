@@ -12,16 +12,18 @@
     <Grid RowDefinitions="Auto,*,Auto,Auto" ColumnDefinitions="Auto,*,Auto" Margin="20">
     
       <StackPanel Grid.Row="0" Grid.Column="0">
-      <TextBlock FontSize="20" TextAlignment="Center" Margin="5,20,0,10">Level Progress</TextBlock>
+      <TextBlock FontSize="20" TextAlignment="Center" Margin="5,40,0,10">People</TextBlock>
       <TextBlock
           FontSize="20" 
           Margin="0,5,0,0"
           Name="TextPercent"
-          ToolTip.Tip="The progress you have made to the next level. "
+          ToolTip.Tip="The number of contacts. "
           HorizontalAlignment="Center"
-          Text="{Binding TotalScoreNormalized, StringFormat={}{0:0.00%}}"
+          Text="{Binding People.Count, StringFormat={}{0:0}}"
           VerticalAlignment="Center" />
       </StackPanel>
+        
+        <!-- Text="{Binding TotalScoreNormalized, StringFormat={}{0:0.00%}}" -->
               
       <StackPanel Grid.Row="1" Grid.Column="0" VerticalAlignment="Center">
           <TextBlock Grid.Row="1" FontSize="20"  TextAlignment="Center" Margin="10">Obs/Action Ratio</TextBlock>

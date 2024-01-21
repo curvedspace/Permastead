@@ -173,6 +173,7 @@ public partial class DashboardViewModel : ViewModelBase
                     series.InnerRadius = 20;
                 }));
 
+        // values need to be observable for them to update properly
         SuccessfulPlantingsValue.Value = SuccessfulPlantings;
         DeadPlantingsValue.Value = DeadPlantings;
         HarvestedPlantingsValue.Value = TotalHarvestedPlants;
