@@ -43,6 +43,7 @@ public partial class DashboardViewModel : ViewModelBase
 
     public ObservableValue SuccessfulPlantingsValue { get; set; } = new ObservableValue(0);
     public ObservableValue DeadPlantingsValue { get; set; } = new ObservableValue(0);
+    public ObservableValue HarvestedPlantingsValue { get; set; } = new ObservableValue(0);
     
     private DateTime PlantingYearStartDate;
         
@@ -174,12 +175,13 @@ public partial class DashboardViewModel : ViewModelBase
 
         SuccessfulPlantingsValue.Value = SuccessfulPlantings;
         DeadPlantingsValue.Value = DeadPlantings;
+        HarvestedPlantingsValue.Value = TotalHarvestedPlants;
         
         PlantingSuccessSeries =
             GaugeGenerator.BuildSolidGauge(
                 new GaugeItem(SuccessfulPlantingsValue, series => SetStyle("Successful", series)),
                 new GaugeItem(DeadPlantingsValue, series => SetStyle("Deceased", series)),
-                new GaugeItem(TotalHarvestedPlants, series => SetStyle("Harvested", series)),
+                new GaugeItem(HarvestedPlantingsValue, series => SetStyle("Harvested", series)),
                 new GaugeItem(GaugeItem.Background, series =>
                 {
                     series.InnerRadius = 20;
