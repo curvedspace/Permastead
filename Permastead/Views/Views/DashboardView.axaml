@@ -18,7 +18,13 @@
         <WrapPanel Grid.ColumnSpan="3">
             <Image Margin="20" Width="24" Height="24" Source="/Assets/statistics.png" />
             <TextBlock FontWeight="Bold" Margin="20,24,20,20">Dashboard</TextBlock>
-            <!-- <Button x:Name="Refresh" HorizontalAlignment="Right" Margin="10,0" Command="{Binding RefreshDataCommand}">Refresh</Button>  -->
+            <Button x:Name="Refresh" HorizontalAlignment="Right" Margin="10,0" Command="{Binding RefreshDataCommand}">Refresh</Button>
+            <Label Margin="10,20,0,0">Planting Year:</Label>
+            <ComboBox Margin = "10,17,20,0" SelectionChanged="SelectingItemsControl_OnSelectionChanged"
+                ItemsSource="{Binding PlantingYears, Mode=TwoWay}"
+                SelectedItem="{Binding PlantingYear, Mode=TwoWay}" AutoScrollToSelectedItem="True">
+            </ComboBox>
+            
             <TextBlock Margin="20,24,20,20" Text="{Binding ScoreBoard}" ></TextBlock>
         </WrapPanel>
         
@@ -30,8 +36,8 @@
             <!--               MinValue="0" -->
             <!--               MaxValue="{Binding TotalActivePlantings}"> -->
             <!-- </lvc:PieChart> -->
-            <lvc:PieChart Grid.Row="1"
-                          Series="{Binding PlantingSuccessSeries}"
+            <lvc:PieChart Grid.Row="1" x:Name="PlantSuccess"
+                          Series="{Binding PlantingSuccessSeries, Mode=TwoWay}"
                           InitialRotation="45"
                           MaxAngle="270"
                           MinValue="0"

@@ -1,3 +1,4 @@
+using System;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
@@ -11,5 +12,19 @@ public partial class DashboardView : UserControl
     {
         InitializeComponent();
         DataContext = new DashboardViewModel();
+    }
+
+    private void SelectingItemsControl_OnSelectionChanged(object? sender, SelectionChangedEventArgs e)
+    {
+        // refresh the display when the planting year has changed
+        try
+        {
+            var vm = (DashboardViewModel)DataContext;
+            vm.RefreshDataOnly();
+        }
+        catch (Exception exception)
+        {
+            Console.WriteLine(exception);
+        }
     }
 }
