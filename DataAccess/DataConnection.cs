@@ -14,6 +14,11 @@ namespace DataAccess
         {
             return @"data source=" + GetDefaultDatabaseLocation() + ";";
         }
+        
+        public static string GetServerDataSource()
+        {
+            return @"Server=192.168.x.xxx;Port=9000;Database=permastead;User Id=permastead;Password=xxx;";
+        }
 
         public static string GetDefaultDatabaseLocation()
         {

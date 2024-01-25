@@ -12,6 +12,7 @@ using Permastead.ViewModels;
 using Permastead.Views;
 
 using Serilog;
+using Services;
 
 namespace Permastead;
 
@@ -24,11 +25,22 @@ public partial class App : Application
         // ThemeManager.Initialize(this);
 
         AvaloniaXamlLoader.Load(this);
-        
-        if (!DataAccess.Local.HomesteaderRepository.DatabaseExists())
+
+        if (AppSession.ServiceMode == ServiceMode.Local)
         {
-            Log.Logger.Information("New database created.");
+            if (!DataAccess.Local.HomesteaderRepository.DatabaseExists())
+            {
+                Log.Logger.Information("New database created.");
+            }
         }
+        else
+        {
+            if (!DataAccess.Server.HomesteaderRepository.DatabaseExists())
+            {
+                Log.Logger.Information("New database created.");
+            }
+        }
+        
         
         LiveCharts.Configure(config => 
                 config 

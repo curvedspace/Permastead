@@ -6,7 +6,7 @@ namespace Permastead
 {
     public class AppSession
     {
-        public static ServiceMode ServiceMode { get; set; } = ServiceMode.Local;
+        public static ServiceMode ServiceMode { get; set; } = ServiceMode.Server;
 
         public GaiaService GaiaService;
 
