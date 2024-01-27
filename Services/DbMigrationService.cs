@@ -908,7 +908,7 @@ public static class DbMigrationService
         return "";
     }
 
-    public static void RunServerSql(string connectionString, string sql)
+    private static void RunServerSql(string connectionString, string sql)
     {
         using IDbConnection connection = new NpgsqlConnection(connectionString);
         connection.Open();
