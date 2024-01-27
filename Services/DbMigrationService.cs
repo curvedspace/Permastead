@@ -647,8 +647,7 @@ public static class DbMigrationService
                                     ConvertToText(dr,2) + "," +
                                     ConvertToText(dr,3) + "," +
                                     ConvertToText(dr,4) + "," +
-                                    ConvertToText(dr,5) + "," +
-                                    ConvertToNumeric(dr,6) + 
+                                    ConvertToText(dr,5) +
                                     ")";
                         Console.WriteLine(pgSql);
                         RunServerSql(serverConnectionString, pgSql);
@@ -702,6 +701,208 @@ public static class DbMigrationService
             Console.WriteLine(e);
         }
         
+        // SeedPacketObservation
+        try
+        {
+            using (IDbConnection connection = new SqliteConnection(localConnectionString))
+            {
+                var sql = "SELECT * FROM SeedPacketObservation;";
+                connection.Open();
+
+                using (IDbCommand command = connection.CreateCommand())
+                {
+                    command.CommandText = sql;
+                    var dr = command.ExecuteReader();
+
+                    while (dr.Read())
+                    {
+                        var pgSql = @"INSERT INTO SeedPacketObservation VALUES(" + dr[0].ToString() + "," +
+                                    ConvertToNumeric(dr,1) + "," +
+                                    ConvertToText(dr,2) + "," +
+                                    ConvertToText(dr,3) + "," +
+                                    ConvertToText(dr,4) + "," +
+                                    ConvertToText(dr,5) + "," +
+                                    ConvertToNumeric(dr,6) + "," +
+                                    ConvertToNumeric(dr,7) + 
+                                    ")";
+                        Console.WriteLine(pgSql);
+                        RunServerSql(serverConnectionString, pgSql);
+                    }
+                }
+            }
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+        }
+        
+        // Settings
+        try
+        {
+            using (IDbConnection connection = new SqliteConnection(localConnectionString))
+            {
+                var sql = "SELECT * FROM Settings;";
+                connection.Open();
+
+                using (IDbCommand command = connection.CreateCommand())
+                {
+                    command.CommandText = sql;
+                    var dr = command.ExecuteReader();
+
+                    while (dr.Read())
+                    {
+                        var pgSql = @"INSERT INTO Settings VALUES(" + 
+                                    ConvertToText(dr,0) + "," +
+                                    ConvertToText(dr,1) + "," +
+                                    ConvertToText(dr,2) + "," +
+                                    ConvertToText(dr,3) + 
+                                    ")";
+                        Console.WriteLine(pgSql);
+                        RunServerSql(serverConnectionString, pgSql);
+                    }
+                }
+            }
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+        }
+        
+        // ToDo
+        try
+        {
+            using (IDbConnection connection = new SqliteConnection(localConnectionString))
+            {
+                var sql = "SELECT * FROM ToDo;";
+                connection.Open();
+
+                using (IDbCommand command = connection.CreateCommand())
+                {
+                    command.CommandText = sql;
+                    var dr = command.ExecuteReader();
+
+                    while (dr.Read())
+                    {
+                        var pgSql = @"INSERT INTO ToDo VALUES(" + dr[0].ToString() + "," +
+                                    ConvertToText(dr,1) + "," +
+                                    ConvertToNumeric(dr,2) + "," +
+                                    ConvertToNumeric(dr,3) + "," +
+                                    ConvertToNumeric(dr,4) + "," +
+                                    ConvertToText(dr,5) + "," +
+                                    ConvertToText(dr,6) + "," +
+                                    ConvertToNumeric(dr,7) + "," +
+                                    ConvertToText(dr,8) + "," +
+                                    ConvertToNumeric(dr,9) + "," +
+                                    ConvertToText(dr,10) +  
+                                    ")";
+                        Console.WriteLine(pgSql);
+                        RunServerSql(serverConnectionString, pgSql);
+                    }
+                }
+            }
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+        }
+        
+        // ToDoStatus
+        try
+        {
+            using (IDbConnection connection = new SqliteConnection(localConnectionString))
+            {
+                var sql = "SELECT * FROM ToDoStatus;";
+                connection.Open();
+
+                using (IDbCommand command = connection.CreateCommand())
+                {
+                    command.CommandText = sql;
+                    var dr = command.ExecuteReader();
+
+                    while (dr.Read())
+                    {
+                        var pgSql = @"INSERT INTO ToDoStatus VALUES(" + dr[0].ToString() + "," +
+                                    ConvertToText(dr,1) + "," +
+                                    ConvertToText(dr,2) + "," +
+                                    ConvertToText(dr,3) + "," +
+                                    ConvertToText(dr,4) +
+                                    ")";
+                        Console.WriteLine(pgSql);
+                        RunServerSql(serverConnectionString, pgSql);
+                    }
+                }
+            }
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+        }
+        
+        // ToDoType
+        try
+        {
+            using (IDbConnection connection = new SqliteConnection(localConnectionString))
+            {
+                var sql = "SELECT * FROM ToDoType;";
+                connection.Open();
+
+                using (IDbCommand command = connection.CreateCommand())
+                {
+                    command.CommandText = sql;
+                    var dr = command.ExecuteReader();
+
+                    while (dr.Read())
+                    {
+                        var pgSql = @"INSERT INTO ToDoType VALUES(" + dr[0].ToString() + "," +
+                                    ConvertToText(dr,1) + "," +
+                                    ConvertToText(dr,2) + "," +
+                                    ConvertToText(dr,3) + "," +
+                                    ConvertToText(dr,4) +
+                                    ")";
+                        Console.WriteLine(pgSql);
+                        RunServerSql(serverConnectionString, pgSql);
+                    }
+                }
+            }
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+        }
+        
+        // Vendor
+        try
+        {
+            using (IDbConnection connection = new SqliteConnection(localConnectionString))
+            {
+                var sql = "SELECT * FROM Vendor;";
+                connection.Open();
+
+                using (IDbCommand command = connection.CreateCommand())
+                {
+                    command.CommandText = sql;
+                    var dr = command.ExecuteReader();
+
+                    while (dr.Read())
+                    {
+                        var pgSql = @"INSERT INTO Vendor VALUES(" + dr[0].ToString() + "," +
+                                    ConvertToText(dr,1) + "," +
+                                    ConvertToText(dr,2) + "," +
+                                    ConvertToNumeric(dr,3) + "," +
+                                    ConvertToText(dr,4) + "," +
+                                    ConvertToText(dr,5) + "," +
+                                    ConvertToText(dr,6) +
+                                    ")";
+                        Console.WriteLine(pgSql);
+                        RunServerSql(serverConnectionString, pgSql);
+                    }
+                }
+            }
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+        }
         Console.WriteLine("Completed migration to Server DB");
         
         return "";
