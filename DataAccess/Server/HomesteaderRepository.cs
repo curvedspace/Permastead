@@ -293,13 +293,13 @@ namespace DataAccess.Server
 				Id SERIAL PRIMARY KEY,
 				FirstName VARCHAR (2000) NOT NULL,
 				LastName VARCHAR (2000) NOT NULL,
+				CreationDate TIMESTAMP,
+				StartDate TIMESTAMP NOT NULL,
+				EndDate TIMESTAMP,
 				Company VARCHAR (2000) NULL,
 				Email VARCHAR (200) NULL,
-				Phone VARCHAR (200) NULL,
 				Comment TEXT NULL,
-				CreationDate timestamp,
-				StartDate TIMESTAMP NOT NULL,
-				EndDate TIMESTAMP
+				Phone VARCHAR (200) NULL
 			);
 
 			--TODO 
@@ -488,17 +488,17 @@ namespace DataAccess.Server
 				InventoryGroupId INTEGER NOT NULL,
 				InventoryTypeId INTEGER NOT NULL,
 				OriginalValue REAL,
-				CurrentValue REAL,
-				Quantity INTEGER,
-				ForSale INTEGER,
+				CurrentValue REAL,	
 				Brand TEXT,
 				Notes TEXT,
-				Room TEXT,
 				CreationDate TIMESTAMP,
 				StartDate TIMESTAMP NOT NULL,
 				EndDate TIMESTAMP,
 				LastUpdated TIMESTAMP NOT NULL,
-				AuthorId INTEGER
+				AuthorId INTEGER,
+				Room TEXT,
+				Quantity INTEGER,
+				ForSale BOOLEAN
 			);
 
 			-- OBSERVATION
@@ -591,10 +591,10 @@ namespace DataAccess.Server
 				CreationDate TIMESTAMP,
 				StartDate TIMESTAMP NOT NULL,
 				EndDate TIMESTAMP,
-				PlantingStateId INTEGER,
 				YieldRating INTEGER,
 				AuthorId INTEGER,
-				Comment TEXT
+				Comment TEXT,
+				PlantingStateId INTEGER
 			);
 
 			-- PLANTING OBSERVATION

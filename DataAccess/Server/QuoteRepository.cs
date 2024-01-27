@@ -18,8 +18,7 @@ namespace DataAccess.Server
         {
             var q = new Quote();
 
-            var sql = $"SELECT description, authorname FROM quote WHERE rowid IN (SELECT rowid FROM quote " + 
-                "WHERE enddate > CURRENT_DATE ORDER BY RANDOM() LIMIT 1)";
+            var sql = $"SELECT description, authorname FROM quote ORDER BY RANDOM() LIMIT 1";
 
             using (IDbConnection connection = new NpgsqlConnection(connectionString))
             {
