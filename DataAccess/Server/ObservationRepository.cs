@@ -93,7 +93,7 @@ namespace DataAccess.Server
             var rtnValue = false;
 
             var sql = "INSERT INTO Observation (Comment, CreationDate, StartDate, EndDate, CommentTypeId, AuthorId) " +
-                "VALUES($comment, CURRENT_DATE, CURRENT_DATE, '9999-12-31', $commentTypeId, $authorId) ";
+                "VALUES(:comment, CURRENT_DATE, CURRENT_DATE, '9999-12-31', :commentTypeId, :authorId) ";
 
             using (var connection = new NpgsqlConnection(connectionString))
             {
@@ -102,9 +102,9 @@ namespace DataAccess.Server
                 using (var command = connection.CreateCommand())
                 {
                     command.CommandText = sql;
-                    command.Parameters.AddWithValue("$comment", obs.Comment);
-                    command.Parameters.AddWithValue("$commentTypeId", obs.CommentType!.Id);
-                    command.Parameters.AddWithValue("$authorId", obs.Author!.Id);
+                    command.Parameters.AddWithValue(":comment", obs.Comment);
+                    command.Parameters.AddWithValue(":commentTypeId", obs.CommentType!.Id);
+                    command.Parameters.AddWithValue(":authorId", obs.Author!.Id);
 
                     rtnValue = (command.ExecuteNonQuery() == 1);
                 }
@@ -117,7 +117,7 @@ namespace DataAccess.Server
         {
             try
             {
-                using (IDbConnection db = new NpgsqlConnection(DataConnection.GetLocalDataSource()))
+                using (IDbConnection db = new NpgsqlConnection(DataConnection.GetServerConnectionString()))
                 {
                     string sqlQuery = "INSERT INTO Observation (Comment, CreationDate, StartDate, EndDate, CommentTypeId, AuthorId) " +
                         "VALUES(@Comment, CURRENT_DATE, @StartDate, @EndDate, @CommentTypeId, @AuthorId);";

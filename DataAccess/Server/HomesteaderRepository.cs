@@ -504,7 +504,7 @@ namespace DataAccess.Server
 			-- OBSERVATION
 			DROP TABLE IF EXISTS Observation;
 			CREATE TABLE IF NOT EXISTS Observation(
-				Id SERIAL PRIMARY KEY,
+				Id integer primary key generated always as identity,
 				Comment TEXT NOT NULL,
 				CreationDate TIMESTAMP,
 				StartDate TIMESTAMP NOT NULL,

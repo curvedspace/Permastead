@@ -390,11 +390,12 @@ public static class DbMigrationService
 
                     while (dr.Read())
                     {
-                        var pgSql = @"INSERT INTO Observation VALUES(" + dr[0].ToString() + "," +
+                        var pgSql = @"INSERT INTO Observation " + 
+                                    "(comment,creationdate,startdate,enddate,commenttypeid,authorid)  VALUES(" + 
                                     ConvertToText(dr,1) + "," +
                                     ConvertToText(dr,2) + "," +
                                     ConvertToText(dr,3) + "," +
-                                    ConvertToText(dr,4) + "," +
+                                    ConvertToDateTime(dr,4) + "," +
                                     ConvertToNumeric(dr,5) + "," +
                                     ConvertToNumeric(dr,6) +
                                     ")";
@@ -944,4 +945,16 @@ public static class DbMigrationService
         return (dr[index].ToString() == "1");
     }
     
+    private static string ConvertToDateTime(IDataReader dr, int index)
+    {
+        // make sure we don't go over 9999 as the year
+        var myDateTime = Convert.ToDateTime(dr[index].ToString());
+
+        if (myDateTime.Year > 9999)
+        {
+            myDateTime = new DateTime(9999, myDateTime.Month, myDateTime.Day);
+        }
+            
+        return "'" + myDateTime.ToString("yyyy-MM-dd HH:mm:ss") + "'";
+    }
 }
