@@ -541,19 +541,19 @@ namespace DataAccess.Server
 			DROP TABLE IF EXISTS SeedPacket;
 			CREATE TABLE IF NOT EXISTS SeedPacket(
 				Id SERIAL PRIMARY KEY,
-				Code TEXT,
 				Description TEXT NOT NULL,
 				Instructions TEXT,
 				DaysToHarvest INTEGER,
 				CreationDate TIMESTAMP,
 				StartDate TIMESTAMP NOT NULL,
 				EndDate TIMESTAMP,
-				Generations INTEGER,
-				SeasonalityId INTEGER,
-				Species TEXT,
 				PlantId INTEGER,
 				VendorId INTEGER,
-				AuthorId INTEGER
+				AuthorId INTEGER,
+				Code TEXT,
+				Generations INTEGER,
+				SeasonalityId INTEGER,
+				Species TEXT
 			);
 
 			-- SEED PACKET OBSERVATION

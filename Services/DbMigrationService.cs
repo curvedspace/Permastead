@@ -559,6 +559,149 @@ public static class DbMigrationService
             Console.WriteLine(e);
         }
         
+        // PlantingObservation
+        try
+        {
+            using (IDbConnection connection = new SqliteConnection(localConnectionString))
+            {
+                var sql = "SELECT * FROM PlantingObservation;";
+                connection.Open();
+
+                using (IDbCommand command = connection.CreateCommand())
+                {
+                    command.CommandText = sql;
+                    var dr = command.ExecuteReader();
+
+                    while (dr.Read())
+                    {
+                        var pgSql = @"INSERT INTO PlantingObservation VALUES(" + dr[0].ToString() + "," +
+                                    ConvertToNumeric(dr,1) + "," +
+                                    ConvertToText(dr,2) + "," +
+                                    ConvertToText(dr,3) + "," +
+                                    ConvertToText(dr,4) + "," +
+                                    ConvertToText(dr,5) + "," +
+                                    ConvertToNumeric(dr,6) + "," +
+                                    ConvertToNumeric(dr,7) + 
+                                    ")";
+                        Console.WriteLine(pgSql);
+                        RunServerSql(serverConnectionString, pgSql);
+                    }
+                }
+            }
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+        }
+        
+        // PlantingState
+        try
+        {
+            using (IDbConnection connection = new SqliteConnection(localConnectionString))
+            {
+                var sql = "SELECT * FROM PlantingState;";
+                connection.Open();
+
+                using (IDbCommand command = connection.CreateCommand())
+                {
+                    command.CommandText = sql;
+                    var dr = command.ExecuteReader();
+
+                    while (dr.Read())
+                    {
+                        var pgSql = @"INSERT INTO PlantingState VALUES(" + dr[0].ToString() + "," +
+                                    ConvertToText(dr,1) + "," +
+                                    ConvertToText(dr,2) + "," +
+                                    ConvertToText(dr,3) + "," +
+                                    ConvertToText(dr,4) + "," +
+                                    ConvertToText(dr,5) + 
+                                    ")";
+                        Console.WriteLine(pgSql);
+                        RunServerSql(serverConnectionString, pgSql);
+                    }
+                }
+            }
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+        }
+        
+        // Seasonality
+        try
+        {
+            using (IDbConnection connection = new SqliteConnection(localConnectionString))
+            {
+                var sql = "SELECT * FROM Seasonality;";
+                connection.Open();
+
+                using (IDbCommand command = connection.CreateCommand())
+                {
+                    command.CommandText = sql;
+                    var dr = command.ExecuteReader();
+
+                    while (dr.Read())
+                    {
+                        var pgSql = @"INSERT INTO Seasonality VALUES(" + dr[0].ToString() + "," +
+                                    ConvertToText(dr,1) + "," +
+                                    ConvertToText(dr,2) + "," +
+                                    ConvertToText(dr,3) + "," +
+                                    ConvertToText(dr,4) + "," +
+                                    ConvertToText(dr,5) + "," +
+                                    ConvertToNumeric(dr,6) + 
+                                    ")";
+                        Console.WriteLine(pgSql);
+                        RunServerSql(serverConnectionString, pgSql);
+                    }
+                }
+            }
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+        }
+        
+        // SeedPacket
+        try
+        {
+            using (IDbConnection connection = new SqliteConnection(localConnectionString))
+            {
+                var sql = "SELECT * FROM SeedPacket;";
+                connection.Open();
+
+                using (IDbCommand command = connection.CreateCommand())
+                {
+                    command.CommandText = sql;
+                    var dr = command.ExecuteReader();
+
+                    while (dr.Read())
+                    {
+                        var pgSql = @"INSERT INTO SeedPacket VALUES(" + dr[0].ToString() + "," +
+                                    ConvertToText(dr,1) + "," +
+                                    ConvertToText(dr,2) + "," +
+                                    ConvertToNumeric(dr,3) + "," +
+                                    ConvertToText(dr,4) + "," +
+                                    ConvertToText(dr,5) + "," +
+                                    ConvertToText(dr,6) + "," +
+                                    ConvertToNumeric(dr,7) + "," +
+                                    ConvertToNumeric(dr,8) + "," +
+                                    ConvertToNumeric(dr,9) + "," +
+                                    ConvertToText(dr,10) + "," +
+                                    ConvertToNumeric(dr,11) + "," +
+                                    ConvertToNumeric(dr,12) + "," +
+                                    ConvertToText(dr,13) + 
+                                    ")";
+                        Console.WriteLine(pgSql);
+                        RunServerSql(serverConnectionString, pgSql);
+                    }
+                }
+            }
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+        }
+        
         Console.WriteLine("Completed migration to Server DB");
         
         return "";
