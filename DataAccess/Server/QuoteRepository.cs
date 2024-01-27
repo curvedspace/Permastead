@@ -47,7 +47,7 @@ namespace DataAccess.Server
         {
             try
             {
-                using (IDbConnection db = new NpgsqlConnection(DataConnection.GetLocalDataSource()))
+                using (IDbConnection db = new NpgsqlConnection(connectionString))
                 {
                     string sqlQuery = $"INSERT INTO Quote (Description, AuthorName, CreationDate, StartDate, EndDate) " + 
                         "VALUES(@Description,@AuthorName,CURRENT_DATE,@StartDate,@EndDate);";

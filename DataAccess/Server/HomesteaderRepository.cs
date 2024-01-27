@@ -17,31 +17,10 @@ namespace DataAccess.Server
         public static bool DatabaseExists(bool forceReset = false)
         {
             var rtnValue = false;
-            var expectedPath = DataAccess.DataConnection.GetDefaultDatabaseLocation();
-
-            var fi = new FileInfo(expectedPath);
 
             try
             {
-                if (fi.Exists && !forceReset)
-                {
-                    rtnValue = true;
-                }
-                else
-                {
-                    //create a fresh default database in the user's home folder
-                    if (fi.Directory != null)
-                    {
-	                    fi.Directory.Create();
-	                    CreateDatabase();
-	                    rtnValue = true;
-                    }
-                    else
-                    {
-	                    rtnValue = false;
-                    }
-                    
-                }
+				CreateDatabase();
             }
             catch (Exception)
             {
@@ -59,8 +38,15 @@ namespace DataAccess.Server
         {
             var rtnValue = false;
 
-            CreateSchema();
-            CreateData();
+            try
+            {
+	            CreateSchema();
+	            CreateData();
+            }
+            catch (Exception e)
+            {
+	            Console.WriteLine(e);
+            }
 
             return rtnValue;
         }
@@ -75,7 +61,7 @@ namespace DataAccess.Server
 			-- QUOTES
 			DROP TABLE IF EXISTS Quote;
 			CREATE TABLE IF NOT EXISTS Quote(
-				Id INTEGER PRIMARY KEY,
+				Id SERIAL PRIMARY KEY,
 				Description TEXT NOT NULL,
 				AuthorName TEXT,
 				CreationDate TIMESTAMP,
@@ -95,7 +81,7 @@ namespace DataAccess.Server
 			-- IMAGE STORE GROUP
 			DROP TABLE IF EXISTS ImageStoreGroup;
 			CREATE TABLE IF NOT EXISTS ImageStoreGroup(
-				Id INTEGER PRIMARY KEY,
+				Id SERIAL PRIMARY KEY,
 				Description TEXT NOT NULL,
 				CreationDate TIMESTAMP,
 				StartDate TIMESTAMP NOT NULL,
@@ -105,17 +91,17 @@ namespace DataAccess.Server
 			-- IMAGE STORE
 			DROP TABLE IF EXISTS ImageStore;
 			CREATE TABLE IF NOT EXISTS ImageStore(
-				Id INTEGER PRIMARY KEY,
+				Id SERIAL PRIMARY KEY,
 				ImageGroupId INTEGER NULL,
 				FileName TEXT NOT NULL,
-				ImageBlob BLOB NULL,
+				ImageBlob BYTEA NULL,
 				CreationDate TIMESTAMP
 			);
 
 			-- LOCATION
 			DROP TABLE IF EXISTS Location;
 			CREATE TABLE IF NOT EXISTS Location(
-				Id INTEGER PRIMARY KEY,
+				Id SERIAL PRIMARY KEY,
 				Code VARCHAR (50) UNIQUE NOT NULL,
 				Description TEXT NOT NULL,
 				AuthorId INTEGER,
@@ -123,11 +109,11 @@ namespace DataAccess.Server
 				StartDate TIMESTAMP NOT NULL,
 				EndDate TIMESTAMP
 			);
-
+			
 			-- FREQUENCY
 			DROP TABLE IF EXISTS Frequency;
 			CREATE TABLE IF NOT EXISTS Frequency(
-				Id INTEGER PRIMARY KEY,
+				Id SERIAL PRIMARY KEY,
 				Code VARCHAR (50) UNIQUE NOT NULL,
 				Description TEXT NOT NULL,
 				AuthorId INTEGER,
@@ -139,7 +125,7 @@ namespace DataAccess.Server
 			-- HARDINESS ZONE
 			DROP TABLE IF EXISTS HardinessZone;
 			CREATE TABLE IF NOT EXISTS HardinessZone(
-				Id INTEGER PRIMARY KEY,
+				Id SERIAL PRIMARY KEY,
 				Code VARCHAR (50) UNIQUE NOT NULL,
 				Description TEXT NOT NULL,
 				AuthorId INTEGER,
@@ -151,7 +137,7 @@ namespace DataAccess.Server
 			-- LAND PLOT
 			DROP TABLE IF EXISTS LandPlot;
 			CREATE TABLE IF NOT EXISTS LandPlot(
-				Id INTEGER PRIMARY KEY,
+				Id SERIAL PRIMARY KEY,
 				Code VARCHAR (50) UNIQUE NOT NULL,
 				Description TEXT NOT NULL,
 				LocationId INTEGER,
@@ -165,7 +151,7 @@ namespace DataAccess.Server
 			-- GARDEN BED TYPE
 			DROP TABLE IF EXISTS GardenBedType;
 			CREATE TABLE IF NOT EXISTS GardenBedType(
-				Id INTEGER PRIMARY KEY,
+				Id SERIAL PRIMARY KEY,
 				Code VARCHAR (50) UNIQUE NOT NULL,
 				Description TEXT NOT NULL,
 				AuthorId INTEGER,
@@ -177,7 +163,7 @@ namespace DataAccess.Server
 			-- GARDEN BED
 			DROP TABLE IF EXISTS GardenBed;
 			CREATE TABLE IF NOT EXISTS GardenBed(
-				Id INTEGER PRIMARY KEY,
+				Id SERIAL PRIMARY KEY,
 				Code VARCHAR (50) UNIQUE NOT NULL,
 				Description TEXT NOT NULL,
 				LocationId INTEGER,
@@ -192,7 +178,7 @@ namespace DataAccess.Server
 			-- CYCLES
 			DROP TABLE IF EXISTS Cycle;
 			CREATE TABLE IF NOT EXISTS Cycle(
-				Id INTEGER PRIMARY KEY,
+				Id SERIAL PRIMARY KEY,
 				Description TEXT NOT NULL,
 				NumberOfDays INTEGER,
 				AuthorId INTEGER,
@@ -204,7 +190,7 @@ namespace DataAccess.Server
 			-- RECIPE
 			DROP TABLE IF EXISTS Recipe;
 			CREATE TABLE IF NOT EXISTS Recipe(
-				Id INTEGER PRIMARY KEY,
+				Id SERIAL PRIMARY KEY,
 				Code VARCHAR (50) UNIQUE NOT NULL,
 				Description TEXT NOT NULL,
 				FeedSourceId integer,
@@ -217,7 +203,7 @@ namespace DataAccess.Server
 			-- FEED SOURCE
 			DROP TABLE IF EXISTS FeedSource;
 			CREATE TABLE IF NOT EXISTS FeedSource(
-				Id INTEGER PRIMARY KEY,
+				Id SERIAL PRIMARY KEY,
 				Code VARCHAR (50) UNIQUE NOT NULL,
 				Description VARCHAR (2000) NOT NULL,
 				CreationDate TIMESTAMP,
@@ -228,7 +214,7 @@ namespace DataAccess.Server
 			-- VENDOR
 			DROP TABLE IF EXISTS Vendor;
 			CREATE TABLE IF NOT EXISTS Vendor(
-				Id INTEGER PRIMARY KEY,
+				Id SERIAL PRIMARY KEY,
 				Code VARCHAR (50) UNIQUE NOT NULL,
 				Description VARCHAR (2000) NOT NULL,
 				Rating INTEGER,
@@ -240,7 +226,7 @@ namespace DataAccess.Server
 			-- INGREDIENT
 			DROP TABLE IF EXISTS Ingredient;
 			CREATE TABLE IF NOT EXISTS Ingredient(
-				Id INTEGER PRIMARY KEY,
+				Id SERIAL PRIMARY KEY,
 				Code VARCHAR (50) UNIQUE NOT NULL,
 				Description VARCHAR (2000) NOT NULL,
 				Notes TEXT,
@@ -253,7 +239,7 @@ namespace DataAccess.Server
 			--EVENT TYPE
 			DROP TABLE IF EXISTS EventType;
 			CREATE TABLE IF NOT EXISTS EventType(
-				Id INTEGER PRIMARY KEY,
+				Id SERIAL PRIMARY KEY,
 				Description VARCHAR (2000) NOT NULL,
 				CreationDate TIMESTAMP,
 				StartDate TIMESTAMP NOT NULL,
@@ -263,7 +249,7 @@ namespace DataAccess.Server
 			--TODO TYPE
 			DROP TABLE IF EXISTS ToDoType;
 			CREATE TABLE IF NOT EXISTS ToDoType(
-				Id INTEGER PRIMARY KEY,
+				Id SERIAL PRIMARY KEY,
 				Description VARCHAR (2000) NOT NULL,
 				CreationDate TIMESTAMP,
 				StartDate TIMESTAMP NOT NULL,
@@ -273,7 +259,7 @@ namespace DataAccess.Server
 			--TODO STATUS
 			DROP TABLE IF EXISTS ToDoStatus;
 			CREATE TABLE IF NOT EXISTS ToDoStatus(
-				Id INTEGER PRIMARY KEY,
+				Id SERIAL PRIMARY KEY,
 				Description VARCHAR (2000) NOT NULL,
 				CreationDate TIMESTAMP,
 				StartDate TIMESTAMP NOT NULL,
@@ -283,7 +269,7 @@ namespace DataAccess.Server
 			-- RECIPE INGREDIENTS
 			DROP TABLE IF EXISTS RecipeIngredient;
 			CREATE TABLE IF NOT EXISTS RecipeIngredient(
-				Id INTEGER PRIMARY KEY,
+				Id SERIAL PRIMARY KEY,
 				RecipeId integer NOT NULL,
 				IngredientId integer NOT NULL,
 				CreationDate TIMESTAMP NOT NULL,
@@ -293,7 +279,7 @@ namespace DataAccess.Server
 			-- RECIPE STEPS
 			DROP TABLE IF EXISTS RecipeStep;
 			CREATE TABLE IF NOT EXISTS RecipeStep(
-				Id INTEGER PRIMARY KEY,
+				Id SERIAL PRIMARY KEY,
 				RecipeId integer NOT NULL,
 				StepNumber integer NOT NULL,
 				StepDescription TEXT,
@@ -304,7 +290,7 @@ namespace DataAccess.Server
 			-- PERSON
 			DROP TABLE IF EXISTS Person;
 			CREATE TABLE IF NOT EXISTS Person(
-				Id INTEGER PRIMARY KEY,
+				Id SERIAL PRIMARY KEY,
 				FirstName VARCHAR (2000) NOT NULL,
 				LastName VARCHAR (2000) NOT NULL,
 				Company VARCHAR (2000) NULL,
@@ -319,7 +305,7 @@ namespace DataAccess.Server
 			--TODO 
 			DROP TABLE IF EXISTS ToDo;
 			CREATE TABLE IF NOT EXISTS ToDo(
-				Id INTEGER PRIMARY KEY,
+				Id SERIAL PRIMARY KEY,
 				Description TEXT NOT NULL,
 				ToDoTypeId INTEGER NOT NULL,
 				AssignerId INTEGER,
@@ -335,7 +321,7 @@ namespace DataAccess.Server
 			--EVENT 
 			DROP TABLE IF EXISTS Event;
 			CREATE TABLE IF NOT EXISTS Event(
-				Id INTEGER PRIMARY KEY,
+				Id SERIAL PRIMARY KEY,
 				Description TEXT NOT NULL,
 				EventTypeId INTEGER NOT NULL,
 				AssignerId INTEGER,
@@ -353,7 +339,7 @@ namespace DataAccess.Server
 			-- PRODUCT TYPE
 			DROP TABLE IF EXISTS ProductType;
 			CREATE TABLE IF NOT EXISTS ProductType(
-				Id INTEGER PRIMARY KEY,
+				Id SERIAL PRIMARY KEY,
 				Code VARCHAR (50) UNIQUE NOT NULL,
 				Description VARCHAR (2000) NOT NULL,
 				CreationDate TIMESTAMP,
@@ -364,7 +350,7 @@ namespace DataAccess.Server
 			-- DELIVERY TYPE
 			DROP TABLE IF EXISTS DeliveryStatus;
 			CREATE TABLE IF NOT EXISTS DeliveryStatus(
-				Id INTEGER PRIMARY KEY,
+				Id SERIAL PRIMARY KEY,
 				Code VARCHAR (50) UNIQUE NOT NULL,
 				Description VARCHAR (2000) NOT NULL,
 				CreationDate TIMESTAMP,
@@ -375,7 +361,7 @@ namespace DataAccess.Server
 			-- DELIVERY METHOD
 			DROP TABLE IF EXISTS DeliveryMethod;
 			CREATE TABLE IF NOT EXISTS DeliveryMethod(
-				Id INTEGER PRIMARY KEY,
+				Id SERIAL PRIMARY KEY,
 				Code VARCHAR (50) UNIQUE NOT NULL,
 				Description VARCHAR (2000) NOT NULL,
 				CreationDate TIMESTAMP,
@@ -386,7 +372,7 @@ namespace DataAccess.Server
 			-- PRODUCT
 			DROP TABLE IF EXISTS Product;
 			CREATE TABLE IF NOT EXISTS Product(
-				Id INTEGER PRIMARY KEY,
+				Id SERIAL PRIMARY KEY,
 				Code VARCHAR (50) UNIQUE NOT NULL,
 				Description VARCHAR (2000) NOT NULL,
 				StartDate TIMESTAMP NOT NULL,
@@ -402,7 +388,7 @@ namespace DataAccess.Server
 			-- PLANT
 			DROP TABLE IF EXISTS Plant;
 			CREATE TABLE IF NOT EXISTS Plant(
-				Id INTEGER PRIMARY KEY,
+				Id SERIAL PRIMARY KEY,
 				Code VARCHAR (50) UNIQUE NOT NULL,
 				Description VARCHAR (2000) NOT NULL,
 				StartDate TIMESTAMP NOT NULL,
@@ -417,7 +403,7 @@ namespace DataAccess.Server
 			-- SEASONALITY
 			DROP TABLE IF EXISTS Seasonality;
 			CREATE TABLE IF NOT EXISTS Seasonality(
-				Id INTEGER PRIMARY KEY,
+				Id SERIAL PRIMARY KEY,
 				Code VARCHAR (50) UNIQUE NOT NULL,
 				Description VARCHAR (2000) NOT NULL,
 				CreationDate TIMESTAMP,
@@ -429,7 +415,7 @@ namespace DataAccess.Server
 			-- GUILD
 			DROP TABLE IF EXISTS Guild;
 			CREATE TABLE IF NOT EXISTS Guild(
-				Id INTEGER PRIMARY KEY,
+				Id SERIAL PRIMARY KEY,
 				Code VARCHAR (50) UNIQUE NOT NULL,
 				Description VARCHAR (2000) NOT NULL,
 				CreationDate TIMESTAMP,
@@ -441,7 +427,7 @@ namespace DataAccess.Server
 			-- GUILD PLANT
 			DROP TABLE IF EXISTS GuildPlant;
 			CREATE TABLE IF NOT EXISTS GuildPlant(
-				Id INTEGER PRIMARY KEY,
+				Id SERIAL PRIMARY KEY,
 				GuildId integer,
 				PlantId integer,
 				CreationDate TIMESTAMP
@@ -451,7 +437,7 @@ namespace DataAccess.Server
 			-- MEASUREMENTTYPE
 			DROP TABLE IF EXISTS MeasurementType;
 			CREATE TABLE IF NOT EXISTS MeasurementType(
-				Id INTEGER PRIMARY KEY,
+				Id SERIAL PRIMARY KEY,
 				Code VARCHAR (50) UNIQUE NOT NULL,
 				Description VARCHAR (2000) NOT NULL,
 				CreationDate TIMESTAMP,
@@ -463,7 +449,7 @@ namespace DataAccess.Server
 			-- COMMENTTYPE
 			DROP TABLE IF EXISTS CommentType;
 			CREATE TABLE IF NOT EXISTS CommentType(
-				Id INTEGER PRIMARY KEY,
+				Id SERIAL PRIMARY KEY,
 				Code VARCHAR (50) UNIQUE NOT NULL,
 				Description VARCHAR (2000) NOT NULL,
 				CreationDate TIMESTAMP,
@@ -475,7 +461,7 @@ namespace DataAccess.Server
 			-- INVENTORYTYPE
 			DROP TABLE IF EXISTS InventoryType;
 			CREATE TABLE IF NOT EXISTS InventoryType(
-				Id INTEGER PRIMARY KEY,
+				Id SERIAL PRIMARY KEY,
 				Description VARCHAR (2000) NOT NULL,
 				CreationDate TIMESTAMP,
 				StartDate TIMESTAMP NOT NULL,
@@ -486,7 +472,7 @@ namespace DataAccess.Server
 			-- INVENTORYGROUP
 			DROP TABLE IF EXISTS InventoryGroup;
 			CREATE TABLE IF NOT EXISTS InventoryGroup(
-				Id INTEGER PRIMARY KEY,
+				Id SERIAL PRIMARY KEY,
 				Description VARCHAR (2000) NOT NULL,
 				CreationDate TIMESTAMP,
 				StartDate TIMESTAMP NOT NULL,
@@ -497,7 +483,7 @@ namespace DataAccess.Server
 			-- INVENTORY
 			DROP TABLE IF EXISTS Inventory;
 			CREATE TABLE IF NOT EXISTS Inventory(
-				Id INTEGER PRIMARY KEY,
+				Id SERIAL PRIMARY KEY,
 				Description VARCHAR (2000) NOT NULL,
 				InventoryGroupId INTEGER NOT NULL,
 				InventoryTypeId INTEGER NOT NULL,
@@ -518,7 +504,7 @@ namespace DataAccess.Server
 			-- OBSERVATION
 			DROP TABLE IF EXISTS Observation;
 			CREATE TABLE IF NOT EXISTS Observation(
-				Id INTEGER PRIMARY KEY,
+				Id SERIAL PRIMARY KEY,
 				Comment TEXT NOT NULL,
 				CreationDate TIMESTAMP,
 				StartDate TIMESTAMP NOT NULL,
@@ -530,7 +516,7 @@ namespace DataAccess.Server
 			-- ENTITY
 			DROP TABLE IF EXISTS Entity;
 			CREATE TABLE IF NOT EXISTS Entity(
-				Id INTEGER PRIMARY KEY,
+				Id SERIAL PRIMARY KEY,
 				Code VARCHAR (50) UNIQUE NOT NULL,
 				Description VARCHAR (2000) NOT NULL,
 				CreationDate TIMESTAMP,
@@ -542,7 +528,7 @@ namespace DataAccess.Server
 			-- CYCLE ENTITY
 			DROP TABLE IF EXISTS CycleEntity;
 			CREATE TABLE IF NOT EXISTS CycleEntity(
-				Id INTEGER PRIMARY KEY,
+				Id SERIAL PRIMARY KEY,
 				CycleId INTEGER NOT NULL,
 				EntityId INTEGER NOT NULL,
 				CreationDate TIMESTAMP,
@@ -554,7 +540,7 @@ namespace DataAccess.Server
 			-- SEED PACKET
 			DROP TABLE IF EXISTS SeedPacket;
 			CREATE TABLE IF NOT EXISTS SeedPacket(
-				Id INTEGER PRIMARY KEY,
+				Id SERIAL PRIMARY KEY,
 				Code TEXT,
 				Description TEXT NOT NULL,
 				Instructions TEXT,
@@ -573,7 +559,7 @@ namespace DataAccess.Server
 			-- SEED PACKET OBSERVATION
 			DROP TABLE IF EXISTS SeedPacketObservation;
 			CREATE TABLE IF NOT EXISTS SeedPacketObservation(
-				Id INTEGER PRIMARY KEY,
+				Id SERIAL PRIMARY KEY,
 				SeedPacketId INTEGER NOT NULL,
 				Comment TEXT NOT NULL,
 				CreationDate TIMESTAMP,
@@ -586,7 +572,7 @@ namespace DataAccess.Server
 			-- PLANTING STATE
 			DROP TABLE IF EXISTS PlantingState;
 			CREATE TABLE IF NOT EXISTS PlantingState(
-				Id INTEGER PRIMARY KEY,
+				Id SERIAL PRIMARY KEY,
 				Code VARCHAR (50) UNIQUE NOT NULL,
 				Description VARCHAR (2000) NOT NULL,
 				CreationDate TIMESTAMP,
@@ -597,7 +583,7 @@ namespace DataAccess.Server
 			--PLANTING
 			DROP TABLE IF EXISTS Planting;
 			CREATE TABLE IF NOT EXISTS Planting(
-				Id INTEGER PRIMARY KEY,
+				Id SERIAL PRIMARY KEY,
 				Description TEXT NOT NULL,
 				PlantId INTEGER,
 				SeedPacketId INTEGER,
@@ -614,7 +600,7 @@ namespace DataAccess.Server
 			-- PLANTING OBSERVATION
 			DROP TABLE IF EXISTS PlantingObservation;
 			CREATE TABLE IF NOT EXISTS PlantingObservation(
-				Id INTEGER PRIMARY KEY,
+				Id SERIAL PRIMARY KEY,
 				PlantingId INTEGER NOT NULL,
 				Comment TEXT NOT NULL,
 				CreationDate TIMESTAMP,
@@ -627,7 +613,7 @@ namespace DataAccess.Server
 			-- PERSON OBSERVATION
 			DROP TABLE IF EXISTS PersonObservation;
 			CREATE TABLE IF NOT EXISTS PersonObservation(
-				Id INTEGER PRIMARY KEY,
+				Id SERIAL PRIMARY KEY,
 				PersonId INTEGER NOT NULL,
 				Comment TEXT NOT NULL,
 				CreationDate TIMESTAMP,
@@ -640,7 +626,7 @@ namespace DataAccess.Server
 			--FERMENTATION
 			DROP TABLE IF EXISTS Fermentation;
 			CREATE TABLE IF NOT EXISTS Fermentation(
-				Id INTEGER PRIMARY KEY,
+				Id SERIAL PRIMARY KEY,
 				Code VARCHAR (50) UNIQUE NOT NULL,
 				Description TEXT NOT NULL,
 				RecipeId INTEGER,

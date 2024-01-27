@@ -103,6 +103,12 @@ public partial class SettingsViewModel : ViewModelBase
         }
         
     }
-    
+
+    [RelayCommand]
+    private void MigrateDbToServer()
+    {
+        Services.DbMigrationService.MigrateLocalToServer(DataAccess.DataConnection.GetLocalDataSource(), DataAccess.DataConnection.GetServerDataSource());
+    }
+
 
 }
