@@ -1,6 +1,7 @@
 using DataAccess;
 using DataAccess.Local;
 using Models;
+using NBitcoin.Protocol;
 
 namespace Services;
 
@@ -14,6 +15,10 @@ public static class PlantingsService
         {
             plantings = PlantingsRepository.GetAllPlantings(DataConnection.GetLocalDataSource());
         }
+        else
+        {
+            plantings = DataAccess.Server.PlantingsRepository.GetAllPlantings(DataConnection.GetServerConnectionString());
+        }
 
         return plantings;
     }
@@ -25,6 +30,10 @@ public static class PlantingsService
         if (mode == ServiceMode.Local)
         {
             plantings = PlantingsRepository.GetAllPlantings(DataConnection.GetLocalDataSource(), true);
+        }
+        else
+        {
+            plantings = DataAccess.Server.PlantingsRepository.GetAllPlantings(DataConnection.GetServerConnectionString(), true);
         }
 
         return plantings;
@@ -38,6 +47,10 @@ public static class PlantingsService
         {
             planting = PlantingsRepository.GetPlantingFromId(DataConnection.GetLocalDataSource(), id);
         }
+        else
+        {
+            planting = DataAccess.Server.PlantingsRepository.GetPlantingFromId(DataConnection.GetServerConnectionString(), id);
+        }
 
         return planting;
     }
@@ -49,6 +62,10 @@ public static class PlantingsService
         if (mode == ServiceMode.Local)
         {
             sp = SeedPacketRepository.GetFromId(DataConnection.GetLocalDataSource(), id);
+        }
+        else
+        {
+            sp = DataAccess.Server.SeedPacketRepository.GetFromId(DataConnection.GetServerConnectionString(), id);
         }
 
         return sp;
@@ -62,6 +79,10 @@ public static class PlantingsService
         {
             beds = GardenBedRepository.GetAll(DataConnection.GetLocalDataSource());
         }
+        else
+        {
+            beds = DataAccess.Server.GardenBedRepository.GetAll(DataConnection.GetServerConnectionString());
+        }
 
         return beds;
     }
@@ -73,6 +94,10 @@ public static class PlantingsService
         if (mode == ServiceMode.Local)
         {
             gardenBed = GardenBedRepository.GetFromId(DataConnection.GetLocalDataSource(), id);
+        }
+        else
+        {
+            gardenBed = DataAccess.Server.GardenBedRepository.GetFromId(DataConnection.GetServerConnectionString(), id);
         }
 
         return gardenBed;
@@ -86,6 +111,10 @@ public static class PlantingsService
         {
             bedTypes = GardenBedTypeRepository.GetAll(DataConnection.GetLocalDataSource());
         }
+        else
+        {
+            bedTypes = DataAccess.Server.GardenBedTypeRepository.GetAll(DataConnection.GetServerConnectionString());
+        }
 
         return bedTypes;
     }
@@ -98,6 +127,10 @@ public static class PlantingsService
         {
             states = PlantingStateRepository.GetAll(DataConnection.GetLocalDataSource());
         }
+        else
+        {
+            states = DataAccess.Server.PlantingStateRepository.GetAll(DataConnection.GetServerConnectionString());
+        }
 
         return states;
     }
@@ -109,6 +142,10 @@ public static class PlantingsService
         if (mode == ServiceMode.Local)
         {
             seasonalities = SeasonalityRepository.GetAll(DataConnection.GetLocalDataSource());
+        }
+        else
+        {
+            seasonalities = DataAccess.Server.SeasonalityRepository.GetAll(DataConnection.GetServerConnectionString());
         }
 
         return seasonalities;
@@ -125,6 +162,13 @@ public static class PlantingsService
             else
                 seedPackets = SeedPacketRepository.GetAllByDescription(DataConnection.GetLocalDataSource());
         }
+        else
+        {
+            if (byPlant)
+                seedPackets = DataAccess.Server.SeedPacketRepository.GetAllByPlant(DataConnection.GetServerConnectionString());
+            else
+                seedPackets = DataAccess.Server.SeedPacketRepository.GetAllByDescription(DataConnection.GetServerConnectionString());
+        }
 
         return seedPackets;
     }
@@ -136,6 +180,10 @@ public static class PlantingsService
         if (mode == ServiceMode.Local)
         {
             plants = PlantRepository.GetPlants(DataConnection.GetLocalDataSource());
+        }
+        else
+        {
+            plants = DataAccess.Server.PlantRepository.GetPlants(DataConnection.GetServerConnectionString());
         }
 
         return plants;
@@ -149,6 +197,26 @@ public static class PlantingsService
         {
             obs = PlantingsRepository.GetAllObservationsForPlanting(DataConnection.GetLocalDataSource(), id);
         }
+        else
+        {
+            obs = DataAccess.Server.PlantingsRepository.GetAllObservationsForPlanting(DataConnection.GetServerConnectionString(), id);
+        }
+
+        return obs;
+    }
+    
+    public static List<PlantingObservation> GetPlantingObservations(ServiceMode mode)
+    {
+        var obs = new List<PlantingObservation>();
+
+        if (mode == ServiceMode.Local)
+        {
+            obs = PlantingsRepository.GetAllPlantingObservations(DataConnection.GetLocalDataSource());
+        }
+        else
+        {
+            obs = DataAccess.Server.PlantingsRepository.GetAllPlantingObservations(DataConnection.GetServerConnectionString());
+        }
 
         return obs;
     }
@@ -160,6 +228,26 @@ public static class PlantingsService
         if (mode == ServiceMode.Local)
         {
             obs = SeedPacketRepository.GetAllObservationsForSeedPacket(DataConnection.GetLocalDataSource(), id);
+        }
+        else
+        {
+            obs = DataAccess.Server.SeedPacketRepository.GetAllObservationsForSeedPacket(DataConnection.GetServerConnectionString(), id);
+        }
+
+        return obs;
+    }
+    
+    public static List<SeedPacketObservation> GetSeedPacketObservations(ServiceMode mode)
+    {
+        var obs = new List<SeedPacketObservation>();
+
+        if (mode == ServiceMode.Local)
+        {
+            obs = SeedPacketRepository.GetAllSeedPacketObservations(DataConnection.GetLocalDataSource());
+        }
+        else
+        {
+            obs = DataAccess.Server.SeedPacketRepository.GetAllSeedPacketObservations(DataConnection.GetServerConnectionString());
         }
 
         return obs;
@@ -173,6 +261,10 @@ public static class PlantingsService
         {
             obs = SeedPacketRepository.GetAllForPlant(DataConnection.GetLocalDataSource(), plantId);
         }
+        else
+        {
+            obs = DataAccess.Server.SeedPacketRepository.GetAllForPlant(DataConnection.GetServerConnectionString(), plantId);
+        }
 
         return obs;
     }
@@ -185,11 +277,15 @@ public static class PlantingsService
         {
             obs = PlantingsRepository.GetAllForPlant(DataConnection.GetLocalDataSource(), plantId);
         }
+        else
+        {
+            obs = DataAccess.Server.PlantingsRepository.GetAllForPlant(DataConnection.GetServerConnectionString(), plantId);
+        }
 
         return obs;
     }
 
-    public static bool CommitRecord(ServiceMode serviceMode, Planting? planting)
+    public static bool CommitRecord(ServiceMode mode, Planting? planting)
     {
         bool rtnValue = false;
         
@@ -197,15 +293,30 @@ public static class PlantingsService
         {
             if (planting.Id > 0)
             {
-                PlantingsRepository.Update(planting);
+                if (mode == ServiceMode.Local)
+                {
+                    PlantingsRepository.Update(planting);
+                }
+                else
+                { 
+                    DataAccess.Server.PlantingsRepository.Update(planting);
+                }
             }
             else
             {
                 // insert new record
-                PlantingsRepository.Insert(planting);
+                if (mode == ServiceMode.Local)
+                {
+                    PlantingsRepository.Insert(planting);
+                }
+                else
+                {
+                    DataAccess.Server.PlantingsRepository.Insert(planting);
+                }
             }
         }
 
         return rtnValue;
+        
     }
 }

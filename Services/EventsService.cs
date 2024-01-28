@@ -14,6 +14,10 @@ public class EventsService
         {
             myEvents = AnEventRepository.GetAll(DataConnection.GetLocalDataSource());
         }
+        else
+        {
+            myEvents = DataAccess.Server.AnEventRepository.GetAll(DataConnection.GetServerConnectionString());
+        }
 
         return myEvents;
     }
@@ -26,22 +30,42 @@ public class EventsService
         {
             eventTypes = AnEventTypeRepository.GetAll(DataConnection.GetLocalDataSource());
         }
+        else
+        {
+            eventTypes = DataAccess.Server.AnEventTypeRepository.GetAll(DataConnection.GetServerConnectionString());
+        }
 
         return eventTypes;
     }
 
-    public static bool CommitRecord(ServiceMode serviceMode, AnEvent currentItem)
+    public static bool CommitRecord(ServiceMode mode, AnEvent currentItem)
     {
         bool rtnValue = false;
         
         if (currentItem.Id > 0)
         {
-            AnEventRepository.Update(currentItem);
+            if (mode == ServiceMode.Local)
+            {
+                AnEventRepository.Update(currentItem);
+            }
+            else
+            {
+                DataAccess.Server.AnEventRepository.Update(currentItem);
+            }
+            
         }
         else
         {
             // insert new record
-            AnEventRepository.Insert(currentItem);
+            if (mode == ServiceMode.Local)
+            {
+                AnEventRepository.Insert(currentItem);
+            }
+            else
+            {
+                DataAccess.Server.AnEventRepository.Insert(currentItem);
+            }
+            
         }
         
         return rtnValue;

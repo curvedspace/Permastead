@@ -20,6 +20,10 @@ namespace Services
             {
                 observations = ObservationRepository.GetObservations(DataConnection.GetLocalDataSource());
             }
+            else
+            {
+                observations = DataAccess.Server.ObservationRepository.GetObservations(DataConnection.GetServerConnectionString());
+            }
 
             return observations;
         }
@@ -30,9 +34,9 @@ namespace Services
             var observations = GetObservations(mode);
             
             // now get planting observations, convert to Observation objects
-            var plantingObs = PlantingsRepository.GetAllPlantingObservations(DataConnection.GetLocalDataSource());
-            var seedPacketObs = SeedPacketRepository.GetAllSeedPacketObservations((DataConnection.GetLocalDataSource()));
-            var personObs = PersonRepository.GetAllPersonObservations(DataConnection.GetLocalDataSource());
+            var plantingObs = PlantingsService.GetPlantingObservations(mode);
+            var seedPacketObs = PlantingsService.GetSeedPacketObservations(mode);
+            var personObs = PersonService.GetAllPersonObservations(mode);
             
             // add the planting observations 
             foreach (var po in plantingObs)
@@ -102,6 +106,10 @@ namespace Services
             {
                 commentTypes = CommentTypeRepository.GetAll(DataConnection.GetLocalDataSource());
             }
+            else
+            {
+                commentTypes = DataAccess.Server.CommentTypeRepository.GetAll(DataConnection.GetServerConnectionString());
+            }
 
             return commentTypes;
         }
@@ -113,6 +121,10 @@ namespace Services
             if (mode == ServiceMode.Local)
             {
                 rtnValue = ObservationRepository.InsertObservation(DataConnection.GetLocalDataSource(), obs);
+            }
+            else
+            {
+                rtnValue = DataAccess.Server.ObservationRepository.InsertObservation(DataConnection.GetServerConnectionString(), obs);
             }
 
             return rtnValue;
@@ -128,7 +140,7 @@ namespace Services
                     rtnValue = ObservationRepository.InsertObservation(DataConnection.GetLocalDataSource(), obs);
                 else
                 {
-                    rtnValue = ObservationRepository.UpdateObservation(DataConnection.GetLocalDataSource(), obs);
+                    rtnValue = DataAccess.Server.ObservationRepository.UpdateObservation(DataConnection.GetServerConnectionString(), obs);
                 }
             }
 

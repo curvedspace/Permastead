@@ -46,7 +46,7 @@ public static class ScoreBoardService
         var obsAchievement = achievements[AchievementType.AddObservation];
         foreach (var ob in obs)
         {
-            obsAchievement.Count = obsAchievement.Count + 1;
+            obsAchievement.Count += 1;
             scoreBoard.TotalScore += obsAchievement.CurrentPoints;
         }
 
@@ -54,7 +54,7 @@ public static class ScoreBoardService
         var invAchievement = achievements[AchievementType.AddInventory];
         foreach (var inv in inventory)
         {
-            invAchievement.Count = invAchievement.Count + 1;
+            invAchievement.Count += 1;
             scoreBoard.TotalScore += invAchievement.CurrentPoints;
         }
 
@@ -62,7 +62,7 @@ public static class ScoreBoardService
         var plantingsAchievement = achievements[AchievementType.AddPlanting];
         foreach (var p in plantings)
         {
-            plantingsAchievement.Count = plantingsAchievement.Count + 1;
+            plantingsAchievement.Count += 1;
             scoreBoard.TotalScore += plantingsAchievement.CurrentPoints;
         }
         
@@ -70,7 +70,7 @@ public static class ScoreBoardService
         var seedPacketsAchievement = achievements[AchievementType.AddSeedPacket];
         foreach (var p in seedPackets)
         {
-            seedPacketsAchievement.Count = seedPacketsAchievement.Count + 1;
+            seedPacketsAchievement.Count += 1;
             scoreBoard.TotalScore += seedPacketsAchievement.CurrentPoints;
         }
         
@@ -78,7 +78,7 @@ public static class ScoreBoardService
         var eventAchievement = achievements[AchievementType.AddEvent];
         foreach (var e in events)
         {
-            eventAchievement.Count = eventAchievement.Count + 1;
+            eventAchievement.Count += 1;
             scoreBoard.TotalScore += eventAchievement.CurrentPoints;
         }
 
@@ -105,7 +105,7 @@ public static class ScoreBoardService
 
         foreach (var todo in todos)
         {
-            actionAchievement.Count = actionAchievement.Count + 1;
+            actionAchievement.Count += 1;
             scoreBoard.TotalScore += actionAchievement.CurrentPoints;
         }
             
@@ -234,7 +234,7 @@ public static class ScoreBoardService
     public static List<string> CheckForNewToDos(ServiceMode mode)
     {
         var newList = new List<string>();
-        var events = Services.EventsService.GetAllEvents(mode);
+        var events = EventsService.GetAllEvents(mode);
         
         //loop through events, see if
         //1) we need to trigger a new action and
@@ -280,7 +280,6 @@ public static class ScoreBoardService
                 }
             }
         }
-        
         
         return newList;
     }

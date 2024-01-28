@@ -1,11 +1,6 @@
 ﻿using DataAccess.Local;
 using DataAccess;
 using Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Services
 {
@@ -18,6 +13,10 @@ namespace Services
             if (mode == ServiceMode.Local)
             {
                 vendorList = VendorRepository.GetAll(DataConnection.GetLocalDataSource());
+            }
+            else
+            {
+                vendorList = DataAccess.Server.VendorRepository.GetAll(DataConnection.GetServerConnectionString());
             }
 
             return vendorList;

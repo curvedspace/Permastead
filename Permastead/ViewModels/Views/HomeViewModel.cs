@@ -92,8 +92,8 @@ namespace Permastead.ViewModels.Views;
             ObservationsToActionRatio = ratio;
             
             // get other data
-            Plantings = new ObservableCollection<Planting>(Services.PlantingsService.GetPlantings(AppSession.ServiceMode));
-            InventoryItems = new ObservableCollection<Inventory>(Services.InventoryService.GetAllInventory(AppSession.ServiceMode));
+            Plantings = new ObservableCollection<Planting>(PlantingsService.GetPlantings(AppSession.ServiceMode));
+            InventoryItems = new ObservableCollection<Inventory>(InventoryService.GetAllInventory(AppSession.ServiceMode));
             SeedPackets = new ObservableCollection<SeedPacket>(PlantingsService.GetSeedPackets(AppSession.ServiceMode));
             Plants = new ObservableCollection<Plant>(PlantingsService.GetPlants(AppSession.ServiceMode));
             People = new ObservableCollection<Person>(PersonService.GetAllPeople(AppSession.ServiceMode));
@@ -144,8 +144,8 @@ namespace Permastead.ViewModels.Views;
             //var city = new City("Halifax", "Canada", 44.6475, -63.5906, "CA");
             
             //get location from settings
-            var location = SettingsService.GetSettingsForCode("LOC");
-            var ctry = SettingsService.GetSettingsForCode("CTRY");
+            var location = SettingsService.GetSettingsForCode("LOC", AppSession.ServiceMode);
+            var ctry = SettingsService.GetSettingsForCode("CTRY", AppSession.ServiceMode);
 
             if (!string.IsNullOrEmpty(location) && !string.IsNullOrEmpty(ctry))
             {

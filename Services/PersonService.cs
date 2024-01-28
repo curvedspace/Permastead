@@ -15,6 +15,10 @@ public class PersonService
         {
             people = PersonRepository.GetAll(DataConnection.GetLocalDataSource());
         }
+        else
+        {
+            people = DataAccess.Server.PersonRepository.GetAll(DataConnection.GetServerConnectionString());
+        }
 
         return people;
     }
@@ -26,6 +30,10 @@ public class PersonService
         if (mode == ServiceMode.Local)
         {
             companies = PersonRepository.GetAllCompanies(DataConnection.GetLocalDataSource());
+        }
+        else
+        {
+            companies = DataAccess.Server.PersonRepository.GetAllCompanies(DataConnection.GetServerConnectionString());
         }
 
         return companies;
@@ -39,6 +47,10 @@ public class PersonService
         {
             person = PersonRepository.GetPersonFromId(DataConnection.GetLocalDataSource(), id);
         }
+        else
+        {
+            person = DataAccess.Server.PersonRepository.GetPersonFromId(DataConnection.GetServerConnectionString(), id);
+        }
 
         return person;
     }
@@ -51,11 +63,31 @@ public class PersonService
         {
             obs = PersonRepository.GetAllObservationsForPerson(DataConnection.GetLocalDataSource(), id);
         }
+        else
+        {
+            obs = DataAccess.Server.PersonRepository.GetAllObservationsForPerson(DataConnection.GetServerConnectionString(), id);
+        }
+
+        return obs;
+    }
+    
+    public static List<PersonObservation> GetAllPersonObservations(ServiceMode mode)
+    {
+        var obs = new List<PersonObservation>();
+
+        if (mode == ServiceMode.Local)
+        {
+            obs = PersonRepository.GetAllPersonObservations(DataConnection.GetLocalDataSource());
+        }
+        else
+        {
+            obs = DataAccess.Server.PersonRepository.GetAllPersonObservations(DataConnection.GetServerConnectionString());
+        }
 
         return obs;
     }
 
-    public static bool CommitRecord(ServiceMode serviceMode, Person person)
+    public static bool CommitRecord(ServiceMode mode, Person person)
     {
         bool rtnValue = false;
         
@@ -63,12 +95,27 @@ public class PersonService
         {
             if (person.Id > 0)
             {
-                PersonRepository.Update(person);
+                if (mode == ServiceMode.Local)
+                {
+                    PersonRepository.Update(person);
+                }
+                else
+                {
+                    DataAccess.Server.PersonRepository.Update(person);
+                }
+                
             }
             else
             {
                 // insert new record
-                PersonRepository.Insert(person);
+                if (mode == ServiceMode.Local)
+                {
+                    PersonRepository.Insert(person);
+                }
+                else
+                {
+                    DataAccess.Server.PersonRepository.Insert(person);
+                }
             }
         }
 

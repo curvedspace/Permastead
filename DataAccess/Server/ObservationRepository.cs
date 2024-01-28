@@ -7,9 +7,10 @@ using System.Collections.Generic;
 using Dapper;
 using Models;
 using System.Text;
+using Npgsql;
 using static System.Reflection.Metadata.BlobBuilder;
 
-namespace DataAccess.Local
+namespace DataAccess.Server
 {
     public static class ObservationRepository
     {
@@ -24,7 +25,7 @@ namespace DataAccess.Local
                 "WHERE ct.Id = o.CommentTypeId " +
                 "AND p.Id = o.AuthorId ORDER BY o.Id DESC";
 
-            using (IDbConnection connection = new SqliteConnection(connectionString))
+            using (IDbConnection connection = new NpgsqlConnection(connectionString))
             {
                 connection.Open();
 
@@ -67,7 +68,7 @@ namespace DataAccess.Local
             var sql = "SELECT o.Comment, o.CreationDate FROM Observation o WHERE o.Comment LIKE '%" + searchTerm + "%' ORDER BY o.CreationDate DESC";
             var sb = new StringBuilder();
 
-            using (IDbConnection connection = new SqliteConnection(connectionString))
+            using (IDbConnection connection = new NpgsqlConnection(connectionString))
             {
                 connection.Open();
 
@@ -92,18 +93,18 @@ namespace DataAccess.Local
             var rtnValue = false;
 
             var sql = "INSERT INTO Observation (Comment, CreationDate, StartDate, EndDate, CommentTypeId, AuthorId) " +
-                "VALUES($comment, CURRENT_DATE, CURRENT_DATE, '9999-12-31', $commentTypeId, $authorId) ";
+                "VALUES(:comment, CURRENT_DATE, CURRENT_DATE, '9999-12-31', :commentTypeId, :authorId) ";
 
-            using (var connection = new SqliteConnection(connectionString))
+            using (var connection = new NpgsqlConnection(connectionString))
             {
                 connection.Open();
 
                 using (var command = connection.CreateCommand())
                 {
                     command.CommandText = sql;
-                    command.Parameters.AddWithValue("$comment", obs.Comment);
-                    command.Parameters.AddWithValue("$commentTypeId", obs.CommentType!.Id);
-                    command.Parameters.AddWithValue("$authorId", obs.Author!.Id);
+                    command.Parameters.AddWithValue(":comment", obs.Comment);
+                    command.Parameters.AddWithValue(":commentTypeId", obs.CommentType!.Id);
+                    command.Parameters.AddWithValue(":authorId", obs.Author!.Id);
 
                     rtnValue = (command.ExecuteNonQuery() == 1);
                 }
@@ -112,11 +113,11 @@ namespace DataAccess.Local
             return rtnValue;
         }
 
-        public static bool Insert(string connectionString,Observation observation)
+        public static bool Insert(Observation observation)
         {
             try
             {
-                using (IDbConnection db = new SqliteConnection(connectionString))
+                using (IDbConnection db = new NpgsqlConnection(DataConnection.GetServerConnectionString()))
                 {
                     string sqlQuery = "INSERT INTO Observation (Comment, CreationDate, StartDate, EndDate, CommentTypeId, AuthorId) " +
                         "VALUES(@Comment, CURRENT_DATE, @StartDate, @EndDate, @CommentTypeId, @AuthorId);";
@@ -134,7 +135,7 @@ namespace DataAccess.Local
         {
             try
             {
-                using (IDbConnection db = new SqliteConnection(connectionString))
+                using (IDbConnection db = new NpgsqlConnection(connectionString))
                 {
                     string sqlQuery =
                         "UPDATE Observation SET CreationDate = @CreationDate, Comment = @Comment, CommentTypeId = @CommentTypeId, AuthorId = @AuthorId " +

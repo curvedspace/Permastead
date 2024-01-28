@@ -18,8 +18,7 @@ namespace DataAccess.Server
         {
             var q = new Quote();
 
-            var sql = $"SELECT description, authorname FROM quote WHERE rowid IN (SELECT rowid FROM quote " + 
-                "WHERE enddate > CURRENT_DATE ORDER BY RANDOM() LIMIT 1)";
+            var sql = $"SELECT description, authorname FROM quote ORDER BY RANDOM() LIMIT 1";
 
             using (IDbConnection connection = new NpgsqlConnection(connectionString))
             {
@@ -47,7 +46,7 @@ namespace DataAccess.Server
         {
             try
             {
-                using (IDbConnection db = new NpgsqlConnection(DataConnection.GetLocalDataSource()))
+                using (IDbConnection db = new NpgsqlConnection(connectionString))
                 {
                     string sqlQuery = $"INSERT INTO Quote (Description, AuthorName, CreationDate, StartDate, EndDate) " + 
                         "VALUES(@Description,@AuthorName,CURRENT_DATE,@StartDate,@EndDate);";

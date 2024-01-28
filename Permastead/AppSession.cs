@@ -6,7 +6,7 @@ namespace Permastead
 {
     public class AppSession
     {
-        public static ServiceMode ServiceMode { get; set; } = ServiceMode.Local;
+        public static ServiceMode ServiceMode { get; set; }
 
         public GaiaService GaiaService;
 
@@ -16,6 +16,8 @@ namespace Permastead
         private AppSession()
         {
             GaiaService = new GaiaService();
+
+            ServiceMode = ServiceMode.Local;
         }
         
         private static readonly Lazy<AppSession> lazy = new Lazy<AppSession>(() => new AppSession());

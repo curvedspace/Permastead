@@ -17,7 +17,7 @@ namespace DataAccess
         
         public static string GetServerDataSource()
         {
-            return @"Server=192.168.x.xxx;Port=9000;Database=permastead;User Id=permastead;Password=xxx;";
+            return GetServerConnectionString();
         }
 
         public static string GetDefaultDatabaseLocation()
@@ -55,6 +55,34 @@ namespace DataAccess
                     //linux or macos
                     dbLocation = userFolder + @"/.config/permastead/permastead.db";
                 }
+            }
+
+            return dbLocation;
+
+        }
+        
+        public static string GetServerConnectionString()
+        {
+            var userFolder = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
+            var isWindows = System.Runtime.InteropServices.RuntimeInformation.IsOSPlatform(OSPlatform.Windows);
+            string dbLocation = "";
+            
+            //try to read in a db_location.txt file
+            FileInfo dbLoc;
+            if (isWindows)
+            {
+                dbLoc = new FileInfo(userFolder + @"\.config\permastead\pg_connection_string.txt");
+            }
+            else
+            {
+                //linux or macos
+                dbLoc = new FileInfo(userFolder + @"/.config/permastead/pg_connection_string.txt");
+            }
+            
+            if (dbLoc.Exists)
+            {
+                //read in db file location from this file
+                dbLocation = File.ReadAllText(dbLoc.FullName);
             }
 
             return dbLocation;

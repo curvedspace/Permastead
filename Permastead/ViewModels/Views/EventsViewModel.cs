@@ -54,8 +54,8 @@ public partial class  EventsViewModel : ViewModelBase
             
             CurrentItem = new AnEvent();
 
-            _eventTypes = new ObservableCollection<AnEventType>(Services.EventsService.GetAllEventTypes(AppSession.ServiceMode));
-            _frequencies = new ObservableCollection<Frequency>(Services.FrequencyService.GetAll(AppSession.ServiceMode));
+            _eventTypes = new ObservableCollection<AnEventType>(EventsService.GetAllEventTypes(AppSession.ServiceMode));
+            _frequencies = new ObservableCollection<Frequency>(FrequencyService.GetAll(AppSession.ServiceMode));
             _people = new ObservableCollection<Person>(PersonService.GetAllPeople(AppSession.ServiceMode));
             
             RefreshEvents();
@@ -78,7 +78,7 @@ public partial class  EventsViewModel : ViewModelBase
     {
         Events.Clear();
 
-        var _myEvents = Services.EventsService.GetAllEvents(AppSession.ServiceMode);
+        var _myEvents = EventsService.GetAllEvents(AppSession.ServiceMode);
 
         foreach (var e in _myEvents)
         {
@@ -138,14 +138,21 @@ public partial class  EventsViewModel : ViewModelBase
     private void SaveEvent()
     {
         //if there is a comment, save it.
+        bool rtnValue;
 
         if (CurrentItem != null && CurrentItem.Id == 0 && !string.IsNullOrEmpty(CurrentItem.Description))
         {
-
             CurrentItem.CreationDate = DateTime.Now;
             CurrentItem.LastTriggerDate = CurrentItem.StartDate;
-            
-            var rtnValue = DataAccess.Local.AnEventRepository.Insert(CurrentItem);
+
+            if (AppSession.ServiceMode == ServiceMode.Local)
+            {
+                rtnValue = DataAccess.Local.AnEventRepository.Insert(CurrentItem);
+            }
+            else
+            {
+                rtnValue = DataAccess.Server.AnEventRepository.Insert(CurrentItem);
+            }
             
             if (rtnValue)
             {
@@ -158,10 +165,18 @@ public partial class  EventsViewModel : ViewModelBase
         }
         else
         {
-            var rtnValue = DataAccess.Local.AnEventRepository.Update(CurrentItem);
+            
+            if (AppSession.ServiceMode == ServiceMode.Local)
+            {
+                rtnValue = DataAccess.Local.AnEventRepository.Update(CurrentItem);
+            }
+            else
+            {
+                rtnValue = DataAccess.Server.AnEventRepository.Update(CurrentItem);
+            }
+            
             RefreshEvents();
         }
-
     }
 
     [RelayCommand]
@@ -172,7 +187,5 @@ public partial class  EventsViewModel : ViewModelBase
         // reset the current item
         CurrentItem = new AnEvent();
         OnPropertyChanged(nameof(CurrentItem));
-        
     }
-
 }

@@ -14,6 +14,10 @@ public class FrequencyService
         {
             myEvents = FrequencyRepository.GetAll(DataConnection.GetLocalDataSource());
         }
+        else
+        {
+            myEvents = DataAccess.Server.FrequencyRepository.GetAll(DataConnection.GetServerConnectionString());
+        }
 
         return myEvents;
     }

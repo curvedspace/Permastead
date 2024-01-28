@@ -29,7 +29,7 @@ namespace Services
             }
             else
             {
-
+                rtnValue = DataAccess.Server.QuoteRepository.GetRandomQuote(DataConnection.GetServerConnectionString());
             }
             
 
