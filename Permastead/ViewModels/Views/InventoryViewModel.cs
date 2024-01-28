@@ -8,6 +8,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Models;
 using Serilog;
+using Services;
 
 namespace Permastead.ViewModels.Views;
 public partial class InventoryViewModel: ViewModelBase
@@ -45,7 +46,17 @@ public partial class InventoryViewModel: ViewModelBase
 
             CurrentItem.CreationDate = DateTime.Now;
 
-            var rtnValue = DataAccess.Local.InventoryRepository.Insert(CurrentItem);
+            bool rtnValue;
+
+            if (AppSession.ServiceMode == ServiceMode.Local)
+            {
+                rtnValue = DataAccess.Local.InventoryRepository.Insert(CurrentItem);
+            }
+            else
+            {
+                rtnValue = DataAccess.Server.InventoryRepository.Insert(CurrentItem);
+            }
+            
 
             if (rtnValue)
             {

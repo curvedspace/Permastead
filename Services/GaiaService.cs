@@ -34,7 +34,7 @@ public class GaiaService
 
         var updateBuilder = new StringBuilder();
         var updates = new ObservableCollection<string>(ScoreBoardService.CheckForNewToDos(ServiceMode.Local));
-        var upcomingTodos = Services.ToDoService.GetUpcomingToDos(ServiceMode.Local, 3);
+        var upcomingTodos = ToDoService.GetUpcomingToDos(ServiceMode.Local, 3);
 
         if (upcomingTodos.Count > 0)
         {
@@ -61,7 +61,7 @@ public class GaiaService
         }
     }
 
-    public string GetResponse(string inputString)
+    public string GetResponse(string inputString, ServiceMode mode)
     {
         if (inputString.StartsWith("/")) 
         {
@@ -74,7 +74,7 @@ public class GaiaService
                     break;
                 
                 default:
-                    var searchList = GetSearchResults(inputString.Replace("/s ",""));
+                    var searchList = GetSearchResults(inputString.Replace("/s ",""), mode);
 
                     return searchList.ToString();
 
@@ -92,12 +92,19 @@ public class GaiaService
         }
     }
 
-    public StringBuilder GetSearchResults(string inputString) 
+    public StringBuilder GetSearchResults(string inputString, ServiceMode mode) 
     {
         var rtnList = new StringBuilder();
 
-        rtnList = DataAccess.Local.ObservationRepository.SearchObservations(DataConnection.GetLocalDataSource(), inputString);
-
+        if (mode == ServiceMode.Local)
+        {
+            rtnList = DataAccess.Local.ObservationRepository.SearchObservations(DataConnection.GetLocalDataSource(), inputString);
+        }
+        else
+        {
+            rtnList = DataAccess.Server.ObservationRepository.SearchObservations(DataConnection.GetLocalDataSource(), inputString);
+        }
+        
         return rtnList; 
     }
     

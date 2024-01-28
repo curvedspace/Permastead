@@ -37,7 +37,7 @@ public partial class GaiaViewModel : ViewModelBase
     private void SendRequest()
     {
         
-        Response = _gaia.GetResponse(Request);
+        Response = _gaia.GetResponse(Request, AppSession.ServiceMode);
         ResponseCount++;
 
         if (string.IsNullOrEmpty(Response))

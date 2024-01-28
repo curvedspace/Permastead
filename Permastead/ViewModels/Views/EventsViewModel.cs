@@ -145,7 +145,17 @@ public partial class  EventsViewModel : ViewModelBase
             CurrentItem.CreationDate = DateTime.Now;
             CurrentItem.LastTriggerDate = CurrentItem.StartDate;
             
-            var rtnValue = DataAccess.Local.AnEventRepository.Insert(CurrentItem);
+            bool rtnValue;
+
+            if (AppSession.ServiceMode == ServiceMode.Local)
+            {
+                rtnValue = DataAccess.Local.AnEventRepository.Insert(CurrentItem);
+            }
+            else
+            {
+                rtnValue = DataAccess.Server.AnEventRepository.Insert(CurrentItem);
+            }
+            
             
             if (rtnValue)
             {
