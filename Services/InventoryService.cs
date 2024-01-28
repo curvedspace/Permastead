@@ -15,6 +15,10 @@ public class InventoryService
         {
             inventoryList = InventoryRepository.GetAll(DataConnection.GetLocalDataSource());
         }
+        else
+        {
+            inventoryList = DataAccess.Server.InventoryRepository.GetAll(DataConnection.GetServerConnectionString());
+        }
 
         return inventoryList;
     }
@@ -26,6 +30,10 @@ public class InventoryService
         if (mode == ServiceMode.Local)
         {
             myList = InventoryGroupRepository.GetAll(DataConnection.GetLocalDataSource());
+        }
+        else
+        {
+            myList = DataAccess.Server.InventoryGroupRepository.GetAll(DataConnection.GetServerConnectionString());
         }
 
         return myList;
@@ -39,25 +47,45 @@ public class InventoryService
         {
             myList = InventoryTypeRepository.GetAll(DataConnection.GetLocalDataSource());
         }
+        else
+        {
+            myList = DataAccess.Server.InventoryTypeRepository.GetAll(DataConnection.GetServerConnectionString());
+        }
 
         return myList;
     }
     
-    public static bool CommitRecord(ServiceMode serviceMode, Inventory inventory)
+    public static bool CommitRecord(ServiceMode mode, Inventory inventory)
     {
         bool rtnValue = false;
         
         if (inventory.Id > 0)
         {
-            InventoryRepository.Update(inventory);
+            if (mode == ServiceMode.Local)
+            {
+                InventoryRepository.Update(inventory);
+            }
+            else
+            {
+                DataAccess.Server.InventoryRepository.Update(inventory);
+            }
+            
         }
         else
         {
             // insert new record
-            InventoryRepository.Insert(inventory);
+            if (mode == ServiceMode.Local)
+            {
+                InventoryRepository.Insert(inventory);
+            }
+            else
+            {
+                DataAccess.Server.InventoryRepository.Insert(inventory);
+            }
         }
-        
+
         return rtnValue;
+        
     }
     
 }
