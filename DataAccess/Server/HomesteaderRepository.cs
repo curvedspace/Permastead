@@ -449,7 +449,7 @@ namespace DataAccess.Server
 			-- COMMENTTYPE
 			DROP TABLE IF EXISTS CommentType;
 			CREATE TABLE IF NOT EXISTS CommentType(
-				Id SERIAL PRIMARY KEY,
+				Id integer primary key generated always as identity,
 				Code VARCHAR (50) UNIQUE NOT NULL,
 				Description VARCHAR (2000) NOT NULL,
 				CreationDate TIMESTAMP,

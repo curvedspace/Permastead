@@ -35,7 +35,7 @@ public static class DbMigrationService
 
                     while (dr.Read())
                     {
-                        var pgSql = @"INSERT INTO CommentType VALUES(" + dr[0].ToString() + "," +
+                        var pgSql = @"INSERT INTO CommentType(code,description,creationdate,startdate,enddate,authorid) VALUES(" + 
                                     "'" + dr[1].ToString() + "'," +
                                     "'" + dr[2].ToString() + "'," +
                                     "'" + dr[3].ToString() + "'," +
