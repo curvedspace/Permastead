@@ -65,7 +65,8 @@ public class AnEventRepository
                         anEvent.Frequency.Code = dr[14].ToString()!;
                         anEvent.Frequency.Description = dr[15].ToString()!;
 
-                        anEvent.ToDoTrigger = Convert.ToBoolean(Convert.ToInt32(dr[16].ToString()));
+                        anEvent.ToDoTrigger = Convert.ToBoolean(dr[16].ToString());
+                        
                         anEvent.WarningDays = Convert.ToInt64(dr[17].ToString());
                         anEvent.LastTriggerDate = Convert.ToDateTime(dr[18].ToString());
                         anEvent.LastUpdatedDate = Convert.ToDateTime(dr[19].ToString());
