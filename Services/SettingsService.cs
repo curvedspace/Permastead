@@ -25,9 +25,12 @@ namespace Services
             return DataAccess.DataConnection.GetDefaultDatabaseLocation();
         }
         
-        public static string GetDefaultDatabaseSource()
+        public static string GetDefaultDatabaseSource(ServiceMode mode)
         {
-            return DataAccess.DataConnection.GetDefaultDatabaseLocation();
+            if (mode == ServiceMode.Local)
+                return DataAccess.DataConnection.GetDefaultDatabaseLocation();
+            else
+                return DataAccess.DataConnection.GetServerConnectionString();
         }
 
         public IReadOnlyDictionary<(string, string), City> GetCities()
@@ -69,14 +72,30 @@ namespace Services
             return dictionary;
         }
 
-        public static Dictionary<string, string> GetAllSettings()
+        public static Dictionary<string, string> GetAllSettings(ServiceMode mode)
         {
-            return SettingsRepository.GetAll(DataConnection.GetLocalDataSource());
+            if (mode == ServiceMode.Local)
+            {
+                return SettingsRepository.GetAll(DataConnection.GetLocalDataSource());
+            }
+            else
+            {
+                return DataAccess.Server.SettingsRepository.GetAll(DataConnection.GetServerConnectionString());
+            }
         }
 
-        public static string GetSettingsForCode(string code)
+        public static string GetSettingsForCode(string code, ServiceMode mode)
         {
-            var settings = SettingsRepository.GetAll(DataConnection.GetLocalDataSource());
+            Dictionary<string, string> settings;
+
+            if (mode == ServiceMode.Local)
+            {
+                settings = SettingsRepository.GetAll(DataConnection.GetLocalDataSource());
+            }
+            else
+            {
+                settings = DataAccess.Server.SettingsRepository.GetAll(DataConnection.GetServerConnectionString());
+            }
 
             if (settings.ContainsKey(code))
             {
@@ -85,6 +104,18 @@ namespace Services
             else
             {
                 return "";
+            }
+        }
+
+        public static bool UpdateSetting(string code, string description, ServiceMode mode)
+        {
+            if (mode == ServiceMode.Local)
+            {
+                return SettingsRepository.Update(code, description);
+            }
+            else
+            {
+                return DataAccess.Server.SettingsRepository.Update(code, description);
             }
         }
     }

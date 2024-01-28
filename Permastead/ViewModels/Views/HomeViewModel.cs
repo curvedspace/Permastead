@@ -144,8 +144,8 @@ namespace Permastead.ViewModels.Views;
             //var city = new City("Halifax", "Canada", 44.6475, -63.5906, "CA");
             
             //get location from settings
-            var location = SettingsService.GetSettingsForCode("LOC");
-            var ctry = SettingsService.GetSettingsForCode("CTRY");
+            var location = SettingsService.GetSettingsForCode("LOC", AppSession.ServiceMode);
+            var ctry = SettingsService.GetSettingsForCode("CTRY", AppSession.ServiceMode);
 
             if (!string.IsNullOrEmpty(location) && !string.IsNullOrEmpty(ctry))
             {

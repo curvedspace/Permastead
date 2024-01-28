@@ -56,7 +56,7 @@ public partial class SettingsViewModel : ViewModelBase
         _nostrPublicKey = "";
         
         
-        _initialSettings = SettingsService.GetAllSettings();
+        _initialSettings = SettingsService.GetAllSettings(AppSession.ServiceMode);
 
         try
         {
@@ -89,13 +89,13 @@ public partial class SettingsViewModel : ViewModelBase
         //get existing values, only update the ones that have changed
         try
         {
-            if (_initialSettings["FNAME"] != FirstName) rtnValue = SettingsRepository.Update("FNAME", FirstName);
-            if (_initialSettings["LNAME"] != LastName) rtnValue = SettingsRepository.Update("LNAME", LastName);
-            if (_initialSettings["HNAME"] != HomesteadName) rtnValue = SettingsRepository.Update("HNAME", HomesteadName);
-            if (_initialSettings["LOC"] != Location) rtnValue = SettingsRepository.Update("LOC", Location);
-            if (_initialSettings["CTRY"] != Country) rtnValue = SettingsRepository.Update("CTRY", Country);
-            if (_initialSettings["NOSTRPUB"] != NostrPublicKey) rtnValue = SettingsRepository.Update("NOSTRPUB", NostrPublicKey);
-            if (_initialSettings["NOSTRPRIV"] != NostrPrivateKey) rtnValue = SettingsRepository.Update("NOSTRPRIV", NostrPrivateKey);
+            if (_initialSettings["FNAME"] != FirstName) rtnValue = SettingsService.UpdateSetting("FNAME", FirstName, AppSession.ServiceMode);
+            if (_initialSettings["LNAME"] != LastName) rtnValue = SettingsService.UpdateSetting("LNAME", LastName, AppSession.ServiceMode);
+            if (_initialSettings["HNAME"] != HomesteadName) rtnValue = SettingsService.UpdateSetting("HNAME", HomesteadName, AppSession.ServiceMode);
+            if (_initialSettings["LOC"] != Location) rtnValue = SettingsService.UpdateSetting("LOC", Location, AppSession.ServiceMode);
+            if (_initialSettings["CTRY"] != Country) rtnValue = SettingsService.UpdateSetting("CTRY", Country, AppSession.ServiceMode);
+            if (_initialSettings["NOSTRPUB"] != NostrPublicKey) rtnValue = SettingsService.UpdateSetting("NOSTRPUB", NostrPublicKey, AppSession.ServiceMode);
+            if (_initialSettings["NOSTRPRIV"] != NostrPrivateKey) rtnValue = SettingsService.UpdateSetting("NOSTRPRIV", NostrPrivateKey, AppSession.ServiceMode);
         }
         catch (Exception e)
         {
