@@ -70,6 +70,22 @@ public class PersonService
 
         return obs;
     }
+    
+    public static List<PersonObservation> GetAllPersonObservations(ServiceMode mode)
+    {
+        var obs = new List<PersonObservation>();
+
+        if (mode == ServiceMode.Local)
+        {
+            obs = PersonRepository.GetAllPersonObservations(DataConnection.GetLocalDataSource());
+        }
+        else
+        {
+            obs = DataAccess.Server.PersonRepository.GetAllPersonObservations(DataConnection.GetServerConnectionString());
+        }
+
+        return obs;
+    }
 
     public static bool CommitRecord(ServiceMode mode, Person person)
     {

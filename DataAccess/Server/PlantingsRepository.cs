@@ -248,7 +248,7 @@ public class PlantingsRepository
     {
         var plantings = new List<long>();
 
-        var sql = "SELECT DISTINCT sp.Id FROM Planting p, SeedPacket sp WHERE p.SeedPacketId = sp.Id AND p.EndDate > Date(); ";
+        var sql = "SELECT DISTINCT sp.Id FROM Planting p, SeedPacket sp WHERE p.SeedPacketId = sp.Id AND p.EndDate > CURRENT_DATE; ";
 
         using (IDbConnection connection = new NpgsqlConnection(connectionString))
         {
