@@ -35,7 +35,7 @@ public static class DbMigrationService
 
                     while (dr.Read())
                     {
-                        var pgSql = @"INSERT INTO CommentType VALUES(" + dr[0].ToString() + "," +
+                        var pgSql = @"INSERT INTO CommentType (code,description,creationdate,startdate,enddate,authorid) VALUES(" + 
                                     "'" + dr[1].ToString() + "'," +
                                     "'" + dr[2].ToString() + "'," +
                                     "'" + dr[3].ToString() + "'," +
@@ -69,7 +69,7 @@ public static class DbMigrationService
 
                     while (dr.Read())
                     {
-                        var pgSql = @"INSERT INTO Event VALUES(" + dr[0].ToString() + "," +
+                        var pgSql = @"INSERT INTO Event (description,eventtypeid,assignerid,assigneeid,creationdate,startdate,enddate,frequencyid,todotrigger,warningdays,lasttriggerdate,lastupdateddate) VALUES(" + 
                                     "'" + dr[1].ToString().Replace("'","''") + "'," +
                                     dr[2].ToString() + "," +
                                     dr[3].ToString() + "," +
@@ -109,7 +109,7 @@ public static class DbMigrationService
 
                     while (dr.Read())
                     {
-                        var pgSql = @"INSERT INTO EventType VALUES(" + dr[0].ToString() + "," +
+                        var pgSql = @"INSERT INTO EventType (description,creationdate,startdate,enddate) VALUES(" + 
                                     "'" + dr[1].ToString() + "'," +
                                     "'" + dr[2].ToString() + "'," +
                                     "'" + dr[3].ToString() + "'," +
@@ -141,7 +141,7 @@ public static class DbMigrationService
 
                     while (dr.Read())
                     {
-                        var pgSql = @"INSERT INTO FeedSource VALUES(" + dr[0].ToString() + "," +
+                        var pgSql = @"INSERT INTO FeedSource (code,description,creationdate,startdate,enddate) VALUES(" + 
                                     "'" + dr[1].ToString() + "'," +
                                     "'" + dr[2].ToString() + "'," +
                                     "'" + dr[3].ToString() + "'," +
@@ -174,7 +174,7 @@ public static class DbMigrationService
 
                     while (dr.Read())
                     {
-                        var pgSql = @"INSERT INTO Frequency VALUES(" + dr[0].ToString() + "," +
+                        var pgSql = @"INSERT INTO Frequency (code,description,authorid,creationdate,startdate,enddate) VALUES(" + 
                                     "'" + dr[1].ToString() + "'," +
                                     "'" + dr[2].ToString() + "'," +
                                     dr[3].ToString() + "," +
@@ -208,7 +208,7 @@ public static class DbMigrationService
 
                     while (dr.Read())
                     {
-                        var pgSql = @"INSERT INTO GardenBed VALUES(" + dr[0].ToString() + "," +
+                        var pgSql = @"INSERT INTO GardenBed (code,description,locationid,permaculturezone,gardenbedtypeid,authorid,creationdate,startdate,enddate) VALUES(" + 
                                     ConvertToText(dr,1) + "," +
                                     ConvertToText(dr,2) + "," +
                                     dr[3].ToString() + "," +
@@ -245,7 +245,7 @@ public static class DbMigrationService
 
                     while (dr.Read())
                     {
-                        var pgSql = @"INSERT INTO GardenBedType VALUES(" + dr[0].ToString() + "," +
+                        var pgSql = @"INSERT INTO GardenBedType (code,description,authorid,creationdate,startdate,enddate) VALUES(" + 
                                     ConvertToText(dr,1) + "," +
                                     ConvertToText(dr,2) + "," +
                                     dr[3].ToString() + "," +

@@ -81,7 +81,7 @@ namespace DataAccess.Server
 			-- IMAGE STORE GROUP
 			DROP TABLE IF EXISTS ImageStoreGroup;
 			CREATE TABLE IF NOT EXISTS ImageStoreGroup(
-				Id SERIAL PRIMARY KEY,
+				Id integer primary key generated always as identity,
 				Description TEXT NOT NULL,
 				CreationDate TIMESTAMP,
 				StartDate TIMESTAMP NOT NULL,
@@ -91,7 +91,7 @@ namespace DataAccess.Server
 			-- IMAGE STORE
 			DROP TABLE IF EXISTS ImageStore;
 			CREATE TABLE IF NOT EXISTS ImageStore(
-				Id SERIAL PRIMARY KEY,
+				Id integer primary key generated always as identity,
 				ImageGroupId INTEGER NULL,
 				FileName TEXT NOT NULL,
 				ImageBlob BYTEA NULL,
@@ -101,7 +101,7 @@ namespace DataAccess.Server
 			-- LOCATION
 			DROP TABLE IF EXISTS Location;
 			CREATE TABLE IF NOT EXISTS Location(
-				Id SERIAL PRIMARY KEY,
+				Id integer primary key generated always as identity,
 				Code VARCHAR (50) UNIQUE NOT NULL,
 				Description TEXT NOT NULL,
 				AuthorId INTEGER,
@@ -113,7 +113,7 @@ namespace DataAccess.Server
 			-- FREQUENCY
 			DROP TABLE IF EXISTS Frequency;
 			CREATE TABLE IF NOT EXISTS Frequency(
-				Id SERIAL PRIMARY KEY,
+				Id integer primary key generated always as identity,
 				Code VARCHAR (50) UNIQUE NOT NULL,
 				Description TEXT NOT NULL,
 				AuthorId INTEGER,
@@ -125,7 +125,7 @@ namespace DataAccess.Server
 			-- HARDINESS ZONE
 			DROP TABLE IF EXISTS HardinessZone;
 			CREATE TABLE IF NOT EXISTS HardinessZone(
-				Id SERIAL PRIMARY KEY,
+				Id integer primary key generated always as identity,
 				Code VARCHAR (50) UNIQUE NOT NULL,
 				Description TEXT NOT NULL,
 				AuthorId INTEGER,
@@ -137,7 +137,7 @@ namespace DataAccess.Server
 			-- LAND PLOT
 			DROP TABLE IF EXISTS LandPlot;
 			CREATE TABLE IF NOT EXISTS LandPlot(
-				Id SERIAL PRIMARY KEY,
+				Id integer primary key generated always as identity,
 				Code VARCHAR (50) UNIQUE NOT NULL,
 				Description TEXT NOT NULL,
 				LocationId INTEGER,
@@ -151,7 +151,7 @@ namespace DataAccess.Server
 			-- GARDEN BED TYPE
 			DROP TABLE IF EXISTS GardenBedType;
 			CREATE TABLE IF NOT EXISTS GardenBedType(
-				Id SERIAL PRIMARY KEY,
+				Id integer primary key generated always as identity,
 				Code VARCHAR (50) UNIQUE NOT NULL,
 				Description TEXT NOT NULL,
 				AuthorId INTEGER,
@@ -163,7 +163,7 @@ namespace DataAccess.Server
 			-- GARDEN BED
 			DROP TABLE IF EXISTS GardenBed;
 			CREATE TABLE IF NOT EXISTS GardenBed(
-				Id SERIAL PRIMARY KEY,
+				Id integer primary key generated always as identity,
 				Code VARCHAR (50) UNIQUE NOT NULL,
 				Description TEXT NOT NULL,
 				LocationId INTEGER,
@@ -203,7 +203,7 @@ namespace DataAccess.Server
 			-- FEED SOURCE
 			DROP TABLE IF EXISTS FeedSource;
 			CREATE TABLE IF NOT EXISTS FeedSource(
-				Id SERIAL PRIMARY KEY,
+				Id integer primary key generated always as identity,
 				Code VARCHAR (50) UNIQUE NOT NULL,
 				Description VARCHAR (2000) NOT NULL,
 				CreationDate TIMESTAMP,
@@ -239,7 +239,7 @@ namespace DataAccess.Server
 			--EVENT TYPE
 			DROP TABLE IF EXISTS EventType;
 			CREATE TABLE IF NOT EXISTS EventType(
-				Id SERIAL PRIMARY KEY,
+				Id integer primary key generated always as identity,
 				Description VARCHAR (2000) NOT NULL,
 				CreationDate TIMESTAMP,
 				StartDate TIMESTAMP NOT NULL,
@@ -321,7 +321,7 @@ namespace DataAccess.Server
 			--EVENT 
 			DROP TABLE IF EXISTS Event;
 			CREATE TABLE IF NOT EXISTS Event(
-				Id SERIAL PRIMARY KEY,
+				Id integer primary key generated always as identity,
 				Description TEXT NOT NULL,
 				EventTypeId INTEGER NOT NULL,
 				AssignerId INTEGER,
@@ -449,7 +449,7 @@ namespace DataAccess.Server
 			-- COMMENTTYPE
 			DROP TABLE IF EXISTS CommentType;
 			CREATE TABLE IF NOT EXISTS CommentType(
-				Id SERIAL PRIMARY KEY,
+				Id integer primary key generated always as identity,
 				Code VARCHAR (50) UNIQUE NOT NULL,
 				Description VARCHAR (2000) NOT NULL,
 				CreationDate TIMESTAMP,
