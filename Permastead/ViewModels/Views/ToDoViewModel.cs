@@ -133,8 +133,8 @@ public partial class ToDoViewModel : ViewModelBase
         {
 
             CurrentItem.CreationDate = DateTime.Now;
- 
-            var rtnValue = DataAccess.Local.ToDoRepository.Insert(CurrentItem);
+
+            var rtnValue = Services.ToDoService.CommitRecord(AppSession.ServiceMode, CurrentItem);
 
             if (rtnValue)
             {
@@ -147,7 +147,7 @@ public partial class ToDoViewModel : ViewModelBase
         }
         else
         {
-            var rtnValue = DataAccess.Local.ToDoRepository.Update(CurrentItem);
+            var rtnValue = Services.ToDoService.CommitRecord(AppSession.ServiceMode, CurrentItem);
             RefreshToDo();
         }
     }
