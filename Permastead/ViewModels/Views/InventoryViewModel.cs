@@ -48,14 +48,7 @@ public partial class InventoryViewModel: ViewModelBase
 
             bool rtnValue;
 
-            if (AppSession.ServiceMode == ServiceMode.Local)
-            {
-                rtnValue = DataAccess.Local.InventoryRepository.Insert(CurrentItem);
-            }
-            else
-            {
-                rtnValue = DataAccess.Server.InventoryRepository.Insert(CurrentItem);
-            }
+            rtnValue = InventoryService.CommitRecord(AppSession.ServiceMode, CurrentItem);
             
 
             if (rtnValue)
@@ -69,7 +62,7 @@ public partial class InventoryViewModel: ViewModelBase
         }
         else
         {
-            var rtnValue = DataAccess.Local.InventoryRepository.Update(_currentItem);
+            var rtnValue = InventoryService.CommitRecord(AppSession.ServiceMode, CurrentItem);
             RefreshInventory();
         }
         

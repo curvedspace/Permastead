@@ -120,7 +120,7 @@ namespace Permastead.ViewModels.Views;
 
                 CurrentItem.CreationDate = DateTime.Now;
 
-                var rtnValue = DataAccess.Local.SeedPacketRepository.Insert(CurrentItem);
+                var rtnValue = SeedPacketService.CommitRecord(AppSession.ServiceMode, CurrentItem);
 
                 if (rtnValue)
                 {
@@ -133,7 +133,7 @@ namespace Permastead.ViewModels.Views;
             }
             else
             {
-                var rtnValue = DataAccess.Local.SeedPacketRepository.Update(CurrentItem);
+                var rtnValue = SeedPacketService.CommitRecord(AppSession.ServiceMode, CurrentItem);
                 RefreshView();
             }
 
