@@ -178,7 +178,7 @@ namespace DataAccess.Server
 			-- CYCLES
 			DROP TABLE IF EXISTS Cycle;
 			CREATE TABLE IF NOT EXISTS Cycle(
-				Id SERIAL PRIMARY KEY,
+				Id integer primary key generated always as identity,
 				Description TEXT NOT NULL,
 				NumberOfDays INTEGER,
 				AuthorId INTEGER,
@@ -190,7 +190,7 @@ namespace DataAccess.Server
 			-- RECIPE
 			DROP TABLE IF EXISTS Recipe;
 			CREATE TABLE IF NOT EXISTS Recipe(
-				Id SERIAL PRIMARY KEY,
+				Id integer primary key generated always as identity,
 				Code VARCHAR (50) UNIQUE NOT NULL,
 				Description TEXT NOT NULL,
 				FeedSourceId integer,
@@ -214,7 +214,7 @@ namespace DataAccess.Server
 			-- VENDOR
 			DROP TABLE IF EXISTS Vendor;
 			CREATE TABLE IF NOT EXISTS Vendor(
-				Id SERIAL PRIMARY KEY,
+				Id integer primary key generated always as identity,
 				Code VARCHAR (50) UNIQUE NOT NULL,
 				Description VARCHAR (2000) NOT NULL,
 				Rating INTEGER,
@@ -226,7 +226,7 @@ namespace DataAccess.Server
 			-- INGREDIENT
 			DROP TABLE IF EXISTS Ingredient;
 			CREATE TABLE IF NOT EXISTS Ingredient(
-				Id SERIAL PRIMARY KEY,
+				Id integer primary key generated always as identity,
 				Code VARCHAR (50) UNIQUE NOT NULL,
 				Description VARCHAR (2000) NOT NULL,
 				Notes TEXT,
@@ -249,7 +249,7 @@ namespace DataAccess.Server
 			--TODO TYPE
 			DROP TABLE IF EXISTS ToDoType;
 			CREATE TABLE IF NOT EXISTS ToDoType(
-				Id SERIAL PRIMARY KEY,
+				Id integer primary key generated always as identity,
 				Description VARCHAR (2000) NOT NULL,
 				CreationDate TIMESTAMP,
 				StartDate TIMESTAMP NOT NULL,
@@ -259,7 +259,7 @@ namespace DataAccess.Server
 			--TODO STATUS
 			DROP TABLE IF EXISTS ToDoStatus;
 			CREATE TABLE IF NOT EXISTS ToDoStatus(
-				Id SERIAL PRIMARY KEY,
+				Id integer primary key generated always as identity,
 				Description VARCHAR (2000) NOT NULL,
 				CreationDate TIMESTAMP,
 				StartDate TIMESTAMP NOT NULL,
@@ -269,7 +269,7 @@ namespace DataAccess.Server
 			-- RECIPE INGREDIENTS
 			DROP TABLE IF EXISTS RecipeIngredient;
 			CREATE TABLE IF NOT EXISTS RecipeIngredient(
-				Id SERIAL PRIMARY KEY,
+				Id integer primary key generated always as identity,
 				RecipeId integer NOT NULL,
 				IngredientId integer NOT NULL,
 				CreationDate TIMESTAMP NOT NULL,
@@ -279,7 +279,7 @@ namespace DataAccess.Server
 			-- RECIPE STEPS
 			DROP TABLE IF EXISTS RecipeStep;
 			CREATE TABLE IF NOT EXISTS RecipeStep(
-				Id SERIAL PRIMARY KEY,
+				Id integer primary key generated always as identity,
 				RecipeId integer NOT NULL,
 				StepNumber integer NOT NULL,
 				StepDescription TEXT,
@@ -290,7 +290,7 @@ namespace DataAccess.Server
 			-- PERSON
 			DROP TABLE IF EXISTS Person;
 			CREATE TABLE IF NOT EXISTS Person(
-				Id SERIAL PRIMARY KEY,
+				Id integer primary key generated always as identity,
 				FirstName VARCHAR (2000) NOT NULL,
 				LastName VARCHAR (2000) NOT NULL,
 				CreationDate TIMESTAMP,
@@ -305,7 +305,7 @@ namespace DataAccess.Server
 			--TODO 
 			DROP TABLE IF EXISTS ToDo;
 			CREATE TABLE IF NOT EXISTS ToDo(
-				Id SERIAL PRIMARY KEY,
+				Id integer primary key generated always as identity,
 				Description TEXT NOT NULL,
 				ToDoTypeId INTEGER NOT NULL,
 				AssignerId INTEGER,
@@ -339,7 +339,7 @@ namespace DataAccess.Server
 			-- PRODUCT TYPE
 			DROP TABLE IF EXISTS ProductType;
 			CREATE TABLE IF NOT EXISTS ProductType(
-				Id SERIAL PRIMARY KEY,
+				Id integer primary key generated always as identity,
 				Code VARCHAR (50) UNIQUE NOT NULL,
 				Description VARCHAR (2000) NOT NULL,
 				CreationDate TIMESTAMP,
@@ -350,7 +350,7 @@ namespace DataAccess.Server
 			-- DELIVERY TYPE
 			DROP TABLE IF EXISTS DeliveryStatus;
 			CREATE TABLE IF NOT EXISTS DeliveryStatus(
-				Id SERIAL PRIMARY KEY,
+				Id integer primary key generated always as identity,
 				Code VARCHAR (50) UNIQUE NOT NULL,
 				Description VARCHAR (2000) NOT NULL,
 				CreationDate TIMESTAMP,
@@ -361,7 +361,7 @@ namespace DataAccess.Server
 			-- DELIVERY METHOD
 			DROP TABLE IF EXISTS DeliveryMethod;
 			CREATE TABLE IF NOT EXISTS DeliveryMethod(
-				Id SERIAL PRIMARY KEY,
+				Id integer primary key generated always as identity,
 				Code VARCHAR (50) UNIQUE NOT NULL,
 				Description VARCHAR (2000) NOT NULL,
 				CreationDate TIMESTAMP,
@@ -372,7 +372,7 @@ namespace DataAccess.Server
 			-- PRODUCT
 			DROP TABLE IF EXISTS Product;
 			CREATE TABLE IF NOT EXISTS Product(
-				Id SERIAL PRIMARY KEY,
+				Id integer primary key generated always as identity,
 				Code VARCHAR (50) UNIQUE NOT NULL,
 				Description VARCHAR (2000) NOT NULL,
 				StartDate TIMESTAMP NOT NULL,
@@ -388,7 +388,7 @@ namespace DataAccess.Server
 			-- PLANT
 			DROP TABLE IF EXISTS Plant;
 			CREATE TABLE IF NOT EXISTS Plant(
-				Id SERIAL PRIMARY KEY,
+				Id integer primary key generated always as identity,
 				Code VARCHAR (50) UNIQUE NOT NULL,
 				Description VARCHAR (2000) NOT NULL,
 				StartDate TIMESTAMP NOT NULL,
@@ -403,7 +403,7 @@ namespace DataAccess.Server
 			-- SEASONALITY
 			DROP TABLE IF EXISTS Seasonality;
 			CREATE TABLE IF NOT EXISTS Seasonality(
-				Id SERIAL PRIMARY KEY,
+				Id integer primary key generated always as identity,
 				Code VARCHAR (50) UNIQUE NOT NULL,
 				Description VARCHAR (2000) NOT NULL,
 				CreationDate TIMESTAMP,
@@ -415,7 +415,7 @@ namespace DataAccess.Server
 			-- GUILD
 			DROP TABLE IF EXISTS Guild;
 			CREATE TABLE IF NOT EXISTS Guild(
-				Id SERIAL PRIMARY KEY,
+				Id integer primary key generated always as identity,
 				Code VARCHAR (50) UNIQUE NOT NULL,
 				Description VARCHAR (2000) NOT NULL,
 				CreationDate TIMESTAMP,
@@ -427,7 +427,7 @@ namespace DataAccess.Server
 			-- GUILD PLANT
 			DROP TABLE IF EXISTS GuildPlant;
 			CREATE TABLE IF NOT EXISTS GuildPlant(
-				Id SERIAL PRIMARY KEY,
+				Id integer primary key generated always as identity,
 				GuildId integer,
 				PlantId integer,
 				CreationDate TIMESTAMP
@@ -437,7 +437,7 @@ namespace DataAccess.Server
 			-- MEASUREMENTTYPE
 			DROP TABLE IF EXISTS MeasurementType;
 			CREATE TABLE IF NOT EXISTS MeasurementType(
-				Id SERIAL PRIMARY KEY,
+				Id integer primary key generated always as identity,
 				Code VARCHAR (50) UNIQUE NOT NULL,
 				Description VARCHAR (2000) NOT NULL,
 				CreationDate TIMESTAMP,
@@ -461,7 +461,7 @@ namespace DataAccess.Server
 			-- INVENTORYTYPE
 			DROP TABLE IF EXISTS InventoryType;
 			CREATE TABLE IF NOT EXISTS InventoryType(
-				Id SERIAL PRIMARY KEY,
+				Id integer primary key generated always as identity,
 				Description VARCHAR (2000) NOT NULL,
 				CreationDate TIMESTAMP,
 				StartDate TIMESTAMP NOT NULL,
@@ -472,7 +472,7 @@ namespace DataAccess.Server
 			-- INVENTORYGROUP
 			DROP TABLE IF EXISTS InventoryGroup;
 			CREATE TABLE IF NOT EXISTS InventoryGroup(
-				Id SERIAL PRIMARY KEY,
+				Id integer primary key generated always as identity,
 				Description VARCHAR (2000) NOT NULL,
 				CreationDate TIMESTAMP,
 				StartDate TIMESTAMP NOT NULL,
@@ -483,7 +483,7 @@ namespace DataAccess.Server
 			-- INVENTORY
 			DROP TABLE IF EXISTS Inventory;
 			CREATE TABLE IF NOT EXISTS Inventory(
-				Id SERIAL PRIMARY KEY,
+				Id integer primary key generated always as identity,
 				Description VARCHAR (2000) NOT NULL,
 				InventoryGroupId INTEGER NOT NULL,
 				InventoryTypeId INTEGER NOT NULL,
@@ -516,7 +516,7 @@ namespace DataAccess.Server
 			-- ENTITY
 			DROP TABLE IF EXISTS Entity;
 			CREATE TABLE IF NOT EXISTS Entity(
-				Id SERIAL PRIMARY KEY,
+				Id integer primary key generated always as identity,
 				Code VARCHAR (50) UNIQUE NOT NULL,
 				Description VARCHAR (2000) NOT NULL,
 				CreationDate TIMESTAMP,
@@ -528,7 +528,7 @@ namespace DataAccess.Server
 			-- CYCLE ENTITY
 			DROP TABLE IF EXISTS CycleEntity;
 			CREATE TABLE IF NOT EXISTS CycleEntity(
-				Id SERIAL PRIMARY KEY,
+				Id integer primary key generated always as identity,
 				CycleId INTEGER NOT NULL,
 				EntityId INTEGER NOT NULL,
 				CreationDate TIMESTAMP,
@@ -540,7 +540,7 @@ namespace DataAccess.Server
 			-- SEED PACKET
 			DROP TABLE IF EXISTS SeedPacket;
 			CREATE TABLE IF NOT EXISTS SeedPacket(
-				Id SERIAL PRIMARY KEY,
+				Id integer primary key generated always as identity,
 				Description TEXT NOT NULL,
 				Instructions TEXT,
 				DaysToHarvest INTEGER,
@@ -559,7 +559,7 @@ namespace DataAccess.Server
 			-- SEED PACKET OBSERVATION
 			DROP TABLE IF EXISTS SeedPacketObservation;
 			CREATE TABLE IF NOT EXISTS SeedPacketObservation(
-				Id SERIAL PRIMARY KEY,
+				Id integer primary key generated always as identity,
 				SeedPacketId INTEGER NOT NULL,
 				Comment TEXT NOT NULL,
 				CreationDate TIMESTAMP,
@@ -572,7 +572,7 @@ namespace DataAccess.Server
 			-- PLANTING STATE
 			DROP TABLE IF EXISTS PlantingState;
 			CREATE TABLE IF NOT EXISTS PlantingState(
-				Id SERIAL PRIMARY KEY,
+				Id integer primary key generated always as identity,
 				Code VARCHAR (50) UNIQUE NOT NULL,
 				Description VARCHAR (2000) NOT NULL,
 				CreationDate TIMESTAMP,
@@ -583,7 +583,7 @@ namespace DataAccess.Server
 			--PLANTING
 			DROP TABLE IF EXISTS Planting;
 			CREATE TABLE IF NOT EXISTS Planting(
-				Id SERIAL PRIMARY KEY,
+				Id integer primary key generated always as identity,
 				Description TEXT NOT NULL,
 				PlantId INTEGER,
 				SeedPacketId INTEGER,
@@ -600,7 +600,7 @@ namespace DataAccess.Server
 			-- PLANTING OBSERVATION
 			DROP TABLE IF EXISTS PlantingObservation;
 			CREATE TABLE IF NOT EXISTS PlantingObservation(
-				Id SERIAL PRIMARY KEY,
+				Id integer primary key generated always as identity,
 				PlantingId INTEGER NOT NULL,
 				Comment TEXT NOT NULL,
 				CreationDate TIMESTAMP,
@@ -613,7 +613,7 @@ namespace DataAccess.Server
 			-- PERSON OBSERVATION
 			DROP TABLE IF EXISTS PersonObservation;
 			CREATE TABLE IF NOT EXISTS PersonObservation(
-				Id SERIAL PRIMARY KEY,
+				Id integer primary key generated always as identity,
 				PersonId INTEGER NOT NULL,
 				Comment TEXT NOT NULL,
 				CreationDate TIMESTAMP,
@@ -626,7 +626,7 @@ namespace DataAccess.Server
 			--FERMENTATION
 			DROP TABLE IF EXISTS Fermentation;
 			CREATE TABLE IF NOT EXISTS Fermentation(
-				Id SERIAL PRIMARY KEY,
+				Id integer primary key generated always as identity,
 				Code VARCHAR (50) UNIQUE NOT NULL,
 				Description TEXT NOT NULL,
 				RecipeId INTEGER,

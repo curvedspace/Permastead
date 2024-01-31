@@ -279,7 +279,7 @@ public static class DbMigrationService
 
                     while (dr.Read())
                     {
-                        var pgSql = @"INSERT INTO InventoryGroup VALUES(" + dr[0].ToString() + "," +
+                        var pgSql = @"INSERT INTO InventoryGroup (description,creationdate,startdate,enddate,authorid) VALUES(" + 
                                     ConvertToText(dr,1) + "," +
                                     ConvertToText(dr,2) + "," +
                                     ConvertToText(dr,3) + "," +
@@ -312,7 +312,7 @@ public static class DbMigrationService
 
                     while (dr.Read())
                     {
-                        var pgSql = @"INSERT INTO InventoryType VALUES(" + dr[0].ToString() + "," +
+                        var pgSql = @"INSERT INTO InventoryType (description,creationdate,startdate,enddate,authorid) VALUES(" + 
                                     ConvertToText(dr,1) + "," +
                                     ConvertToText(dr,2) + "," +
                                     ConvertToText(dr,3) + "," +
@@ -345,7 +345,7 @@ public static class DbMigrationService
 
                     while (dr.Read())
                     {
-                        var pgSql = @"INSERT INTO Inventory VALUES(" + dr[0].ToString() + "," +
+                        var pgSql = @"INSERT INTO Inventory (description,inventorygroupid,inventorytypeid,originalvalue,currentvalue,brand,notes,creationdate,startdate,enddate,lastupdated,authorid,room,quantity,forsale) VALUES(" + 
                                     ConvertToText(dr,1) + "," +
                                     ConvertToNumeric(dr,2) + "," +
                                     ConvertToNumeric(dr,3) + "," +
@@ -423,7 +423,7 @@ public static class DbMigrationService
 
                     while (dr.Read())
                     {
-                        var pgSql = @"INSERT INTO Person VALUES(" + dr[0].ToString() + "," +
+                        var pgSql = @"INSERT INTO Person (firstname,lastname,creationdate,startdate,enddate,company,email,comment,phone) VALUES(" + 
                                     ConvertToText(dr,1) + "," +
                                     ConvertToText(dr,2) + "," +
                                     ConvertToText(dr,3) + "," +
@@ -460,7 +460,7 @@ public static class DbMigrationService
 
                     while (dr.Read())
                     {
-                        var pgSql = @"INSERT INTO PersonObservation VALUES(" + dr[0].ToString() + "," +
+                        var pgSql = @"INSERT INTO PersonObservation (personid,comment,creationdate,startdate,enddate,commenttypeid,authorid) VALUES(" + 
                                     ConvertToNumeric(dr,1) + "," +
                                     ConvertToText(dr,2) + "," +
                                     ConvertToText(dr,3) + "," +
@@ -495,8 +495,7 @@ public static class DbMigrationService
 
                     while (dr.Read())
                     {
-                        var pgSql = @"INSERT INTO Plant VALUES(" + 
-                                    ConvertToNumeric(dr,0) + "," +
+                        var pgSql = @"INSERT INTO Plant (code,description,startdate,enddate,creationdate,comment,family,url,authorid) VALUES(" + 
                                     ConvertToText(dr,1) + "," +
                                     ConvertToText(dr,2) + "," +
                                     ConvertToText(dr,3) + "," +
@@ -533,8 +532,7 @@ public static class DbMigrationService
 
                     while (dr.Read())
                     {
-                        var pgSql = @"INSERT INTO Planting VALUES(" + 
-                                    ConvertToNumeric(dr,0) + "," +
+                        var pgSql = @"INSERT INTO Planting (description,plantid,seedpacketid,gardenbedid,creationdate,startdate,enddate,yieldrating,authorid,comment,plantingstateid) VALUES(" + 
                                     ConvertToText(dr,1) + "," +
                                     ConvertToNumeric(dr,2) + "," +
                                     ConvertToNumeric(dr,3) + "," +
@@ -573,7 +571,7 @@ public static class DbMigrationService
 
                     while (dr.Read())
                     {
-                        var pgSql = @"INSERT INTO PlantingObservation VALUES(" + dr[0].ToString() + "," +
+                        var pgSql = @"INSERT INTO PlantingObservation (plantingid,comment,creationdate,startdate,enddate,commenttypeid,authorid) VALUES(" + 
                                     ConvertToNumeric(dr,1) + "," +
                                     ConvertToText(dr,2) + "," +
                                     ConvertToDateTime(dr,3) + "," +
@@ -608,7 +606,7 @@ public static class DbMigrationService
 
                     while (dr.Read())
                     {
-                        var pgSql = @"INSERT INTO PlantingState VALUES(" + dr[0].ToString() + "," +
+                        var pgSql = @"INSERT INTO PlantingState (code,description,creationdate,startdate,enddate) VALUES(" +
                                     ConvertToText(dr,1) + "," +
                                     ConvertToText(dr,2) + "," +
                                     ConvertToDateTime(dr,3) + "," +
@@ -641,7 +639,7 @@ public static class DbMigrationService
 
                     while (dr.Read())
                     {
-                        var pgSql = @"INSERT INTO Seasonality VALUES(" + dr[0].ToString() + "," +
+                        var pgSql = @"INSERT INTO Seasonality (code,description,creationdate,startdate,enddate) VALUES(" + 
                                     ConvertToText(dr,1) + "," +
                                     ConvertToText(dr,2) + "," +
                                     ConvertToText(dr,3) + "," +
@@ -674,7 +672,7 @@ public static class DbMigrationService
 
                     while (dr.Read())
                     {
-                        var pgSql = @"INSERT INTO SeedPacket VALUES(" + dr[0].ToString() + "," +
+                        var pgSql = @"INSERT INTO SeedPacket (description,instructions,daystoharvest,creationdate,startdate,enddate,plantid,vendorid,authorid,code,generations,seasonalityid,species) VALUES(" + 
                                     ConvertToText(dr,1) + "," +
                                     ConvertToText(dr,2) + "," +
                                     ConvertToNumeric(dr,3) + "," +
@@ -715,7 +713,7 @@ public static class DbMigrationService
 
                     while (dr.Read())
                     {
-                        var pgSql = @"INSERT INTO SeedPacketObservation VALUES(" + dr[0].ToString() + "," +
+                        var pgSql = @"INSERT INTO SeedPacketObservation (seedpacketid,comment,creationdate,startdate,enddate,commenttypeid,authorid) VALUES(" + 
                                     ConvertToNumeric(dr,1) + "," +
                                     ConvertToText(dr,2) + "," +
                                     ConvertToDateTime(dr,3) + "," +
@@ -782,7 +780,7 @@ public static class DbMigrationService
 
                     while (dr.Read())
                     {
-                        var pgSql = @"INSERT INTO ToDo VALUES(" + dr[0].ToString() + "," +
+                        var pgSql = @"INSERT INTO ToDo (description,todotypeid,assignerid,assigneeid,creationdate,startdate,todostatusid,duedate,percentdone,lastupdateddate) VALUES(" + 
                                     ConvertToText(dr,1) + "," +
                                     ConvertToNumeric(dr,2) + "," +
                                     ConvertToNumeric(dr,3) + "," +
@@ -820,7 +818,7 @@ public static class DbMigrationService
 
                     while (dr.Read())
                     {
-                        var pgSql = @"INSERT INTO ToDoStatus VALUES(" + dr[0].ToString() + "," +
+                        var pgSql = @"INSERT INTO ToDoStatus (description,creationdate,startdate,enddate) VALUES(" + 
                                     ConvertToText(dr,1) + "," +
                                     ConvertToText(dr,2) + "," +
                                     ConvertToText(dr,3) + "," +
@@ -852,7 +850,7 @@ public static class DbMigrationService
 
                     while (dr.Read())
                     {
-                        var pgSql = @"INSERT INTO ToDoType VALUES(" + dr[0].ToString() + "," +
+                        var pgSql = @"INSERT INTO ToDoType (description,creationdate,startdate,enddate) VALUES(" + 
                                     ConvertToText(dr,1) + "," +
                                     ConvertToText(dr,2) + "," +
                                     ConvertToText(dr,3) + "," +
@@ -884,7 +882,7 @@ public static class DbMigrationService
 
                     while (dr.Read())
                     {
-                        var pgSql = @"INSERT INTO Vendor VALUES(" + dr[0].ToString() + "," +
+                        var pgSql = @"INSERT INTO Vendor (code,description,rating,creationdate,startdate,enddate) VALUES(" + 
                                     ConvertToText(dr,1) + "," +
                                     ConvertToText(dr,2) + "," +
                                     ConvertToNumeric(dr,3) + "," +
