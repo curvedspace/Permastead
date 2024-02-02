@@ -1,4 +1,6 @@
-﻿namespace Permastead.ViewModels;
+﻿using DataAccess;
+
+namespace Permastead.ViewModels;
 
 public partial class MainViewModel : ViewModelBase
 {

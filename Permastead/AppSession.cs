@@ -12,6 +12,7 @@ namespace Permastead
 
         public ScoreBoard CurrentScoreboard = new ScoreBoard();
 
+        public Person CurrentUser = new Person();
         
         private AppSession()
         {

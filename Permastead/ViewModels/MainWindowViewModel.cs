@@ -11,6 +11,9 @@ namespace Permastead.ViewModels
 
     public partial class MainWindowViewModel : ViewModelBase
     {
+        [ObservableProperty]
+        private string _currentUser;
+        
         private ViewModelBase[] Views =
         {
             new HomeViewModel(),
@@ -106,6 +109,7 @@ namespace Permastead.ViewModels
         public MainWindowViewModel()
         {
             CurrentView = Views[0];
+            CurrentUser = AppSession.Instance.CurrentUser.FirstName;
         }
         
      }

@@ -54,6 +54,8 @@
                     </Button>
                 </StackPanel>
                 <StackPanel Grid.Row="0" Grid.Column="1" HorizontalAlignment="Right" Orientation="Horizontal">
+                    <TextBlock Margin="5">User: </TextBlock>
+                    <TextBlock Margin="5" Text="{Binding CurrentUser, Mode=TwoWay}"></TextBlock>
                     <Button Name="WeatherButton" ToolTip.Tip="Weather">
                         <!-- <materialIcons:MaterialIcon Kind="WeatherHistory" Margin="0"/> -->
                         <Image Width="16" Height="16" Source="/Assets/weather_clouds.png" />
