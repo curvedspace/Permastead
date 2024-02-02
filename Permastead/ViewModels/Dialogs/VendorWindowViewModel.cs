@@ -37,6 +37,7 @@ public partial class VendorWindowViewModel : ViewModelBase
         {
 
             _vendor.CreationDate = DateTime.Now;
+            
             var rtnValue = VendorService.CommitRecord(AppSession.ServiceMode, _vendor);
             Log.Logger.Information("Vendor: " + _vendor.Description + " saved: " + rtnValue);
 

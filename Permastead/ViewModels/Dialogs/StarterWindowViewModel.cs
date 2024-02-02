@@ -5,6 +5,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Models;
 using Permastead.ViewModels.Views;
+using Services;
 
 namespace Permastead.ViewModels.Dialogs;
 
@@ -64,14 +65,15 @@ public partial class StarterWindowViewModel : ViewModelBase
         if (_seedPacket != null && _seedPacket.Id == 0 && !string.IsNullOrEmpty(_seedPacket.Description))
         {
             _seedPacket.CreationDate = DateTime.Now;
+            _seedPacket.Author = AppSession.Instance.CurrentUser;
  
-            var rtnValue = DataAccess.Local.SeedPacketRepository.Insert(_seedPacket);
+            var rtnValue = SeedPacketService.CommitRecord(AppSession.ServiceMode, SeedPacket);
 
             Console.WriteLine("Saved SeedPacket " + rtnValue);
         }
         else
         {
-            var rtnValue = DataAccess.Local.SeedPacketRepository.Update(_seedPacket);
+            var rtnValue = SeedPacketService.CommitRecord(AppSession.ServiceMode, SeedPacket);
             Console.WriteLine("Updated SeedPacket" + rtnValue);
         }
         

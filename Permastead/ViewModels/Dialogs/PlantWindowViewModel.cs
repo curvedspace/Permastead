@@ -49,6 +49,8 @@ public partial class PlantWindowViewModel : ViewModelBase
             
         using (LogContext.PushProperty("PlantViewModel", this))
         {
+            if (_plant.Id == 0) _plant.Author = AppSession.Instance.CurrentUser;
+            
             Log.Information("Saved planting: " + _plant.Description, rtnValue);
         }
         
