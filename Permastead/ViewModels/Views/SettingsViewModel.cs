@@ -2,10 +2,10 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-
+using System.Linq;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-
+using DataAccess;
 using DataAccess.Local;
 using Models;
 using Services;
@@ -19,6 +19,12 @@ public partial class SettingsViewModel : ViewModelBase
     
     [ObservableProperty]
     private string _databaseLocation;
+    
+    [ObservableProperty] 
+    private ObservableCollection<Person> _people;
+    
+    [ObservableProperty] 
+    private Person _currentUser;
 
     [ObservableProperty] private string _firstName;
     
@@ -31,6 +37,15 @@ public partial class SettingsViewModel : ViewModelBase
     [ObservableProperty] private string _nostrPublicKey;
     
     [ObservableProperty] private string _nostrPrivateKey;
+
+    public bool InLocalMode
+    {
+        get
+        {
+            return (AppSession.ServiceMode == ServiceMode.Local);
+        }
+    }
+    
 
     [ObservableProperty] private ObservableCollection<City>? _cities;
     
@@ -46,10 +61,27 @@ public partial class SettingsViewModel : ViewModelBase
     {
         //set a default db location
         DatabaseLocation = Services.SettingsService.GetLocalDatabaseSource();
-
+        var currentUserId = DataConnection.GetCurrentUserId();
+        
+        _people = new ObservableCollection<Person>(Services.PersonService.GetAllOnsitePeople(AppSession.ServiceMode));
+        CurrentUser = PersonService.GetPersonFromId(AppSession.ServiceMode, currentUserId);
+        
         _homesteadName = "My Homestead";
-        _firstName = "Homesteader";
-        _lastName = "Person";
+        
+        
+        if (_currentUser != null)
+        {
+            FirstName = _currentUser.FirstName;
+            LastName = _currentUser.LastName;
+            CurrentUser = _people.First(x => x.Id == _currentUser.Id);
+        }
+        else
+        {
+            _firstName = "Homesteader";
+            _lastName = "Person";
+        }
+        
+            
         _location = "";
         _country = "";
         _nostrPrivateKey = "";
@@ -57,12 +89,13 @@ public partial class SettingsViewModel : ViewModelBase
         
         
         _initialSettings = SettingsService.GetAllSettings(AppSession.ServiceMode);
+       
 
         try
         {
             HomesteadName = _initialSettings["HNAME"];
-            FirstName = _initialSettings["FNAME"];
-            LastName = _initialSettings["LNAME"];
+            //FirstName = _initialSettings["FNAME"];
+            //LastName = _initialSettings["LNAME"];
             Location = _initialSettings["LOC"];
             Country = _initialSettings["CTRY"];
             NostrPublicKey = _initialSettings["NOSTRPUB"];

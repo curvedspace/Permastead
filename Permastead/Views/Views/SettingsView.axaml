@@ -3,7 +3,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:materialIcons="clr-namespace:Material.Icons.Avalonia;assembly=Material.Icons.Avalonia"
-             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="550"
              xmlns:model="using:Models"
              xmlns:vm="using:Permastead.ViewModels.Views"
              x:DataType="vm:SettingsViewModel"
@@ -23,10 +23,11 @@
                 <TextBlock FontWeight="Bold" Margin="20,24,20,20">Settings</TextBlock>
                 <!-- <Separator MaxWidth="5"></Separator> -->
                 <Button MaxHeight="50" Command="{Binding SaveSettingsCommand}">Save</Button>
-                <Button MaxHeight="50" Margin="20" Command="{Binding MigrateDbToServerCommand}">Migrate Local DB To Server</Button>
+                <Button MaxHeight="50" Margin="20" Command="{Binding MigrateDbToServerCommand}" 
+                        IsEnabled="{Binding InLocalMode}">Migrate Local DB To Server</Button>
             </WrapPanel>
             
-        <Grid ColumnDefinitions="Auto,*,Auto" RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto">
+        <Grid ColumnDefinitions="Auto,*,Auto" RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto">
             <TextBlock Grid.Row="0" Grid.Column="0" Margin="10,17,0,0">Homestead Name:</TextBlock>
             <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding HomesteadName }" Margin="10,10,10,0"></TextBox>
             
@@ -34,23 +35,33 @@
             <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding DatabaseLocation }" Margin="10,10,10,0"></TextBox>
             <Button Name="Location" Grid.Row="1" Grid.Column="2" Margin="0,10,15,0" Click="Location_Button_OnClick">...</Button>
             
-            <TextBlock Grid.Row="2" Grid.Column="0" Margin="10,17,0,0">First Name:</TextBlock>
-            <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding FirstName }" Margin="10,10,10,0"></TextBox>
+            <TextBlock Grid.Row="2" Grid.Column="0" Margin="10,17,10,10">User:</TextBlock>
+            <ComboBox Width="200" Grid.Row="2" Grid.Column="1" Margin="10" ItemsSource="{Binding People, Mode=TwoWay}"
+                      SelectedItem="{Binding CurrentUser, Mode=TwoWay}" AutoScrollToSelectedItem="True">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate >
+                        <TextBlock Text="{Binding FullNameLastFirst}" />
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
             
-            <TextBlock Grid.Row="3" Grid.Column="0" Margin="10,17,0,0">Last Name:</TextBlock>
-            <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding LastName }" Margin="10,10,10,0"></TextBox>
+            <TextBlock Grid.Row="3" Grid.Column="0" Margin="10,10,0,0">First Name:</TextBlock>
+            <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding FirstName }" Margin="10,5,10,0"></TextBox>
             
-            <TextBlock Grid.Row="4" Grid.Column="0" Margin="10,17,0,0">City:</TextBlock>
-            <TextBox Grid.Row="4" Grid.Column="1" Text="{Binding Location }" Margin="10,10,10,0"></TextBox>
+            <TextBlock Grid.Row="4" Grid.Column="0" Margin="10,17,0,0">Last Name:</TextBlock>
+            <TextBox Grid.Row="4" Grid.Column="1" Text="{Binding LastName }" Margin="10,10,10,0"></TextBox>
             
-            <TextBlock Grid.Row="5" Grid.Column="0" Margin="10,17,0,0">Country:</TextBlock>
-            <TextBox Grid.Row="5" Grid.Column="1" Text="{Binding Country }" Margin="10,10,10,0"></TextBox>
+            <TextBlock Grid.Row="5" Grid.Column="0" Margin="10,17,0,0">City:</TextBlock>
+            <TextBox Grid.Row="5" Grid.Column="1" Text="{Binding Location }" Margin="10,10,10,0"></TextBox>
             
-            <TextBlock Grid.Row="6" Grid.Column="0" Margin="10,17,0,0">Nostr Public Key:</TextBlock>
-            <TextBox Grid.Row="6" Grid.Column="1" Text="{Binding NostrPublicKey }" Margin="10,10,10,0"></TextBox>
+            <TextBlock Grid.Row="6" Grid.Column="0" Margin="10,17,0,0">Country:</TextBlock>
+            <TextBox Grid.Row="6" Grid.Column="1" Text="{Binding Country }" Margin="10,10,10,0"></TextBox>
             
-            <TextBlock Grid.Row="7" Grid.Column="0" Margin="10,17,0,0">Nostr Private Key:</TextBlock>
-            <TextBox Grid.Row="7" Grid.Column="1" Text="{Binding NostrPrivateKey }" Margin="10,10,10,0" PasswordChar="*"></TextBox>
+            <TextBlock Grid.Row="7" Grid.Column="0" Margin="10,17,0,0">Nostr Public Key:</TextBlock>
+            <TextBox Grid.Row="7" Grid.Column="1" Text="{Binding NostrPublicKey }" Margin="10,10,10,0"></TextBox>
+            
+            <TextBlock Grid.Row="8" Grid.Column="0" Margin="10,17,0,0">Nostr Private Key:</TextBlock>
+            <TextBox Grid.Row="8" Grid.Column="1" Text="{Binding NostrPrivateKey }" Margin="10,10,10,0" PasswordChar="*"></TextBox>
 
         </Grid>
         </StackPanel>

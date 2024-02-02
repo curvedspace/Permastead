@@ -299,7 +299,8 @@ namespace DataAccess.Server
 				Company VARCHAR (2000) NULL,
 				Email VARCHAR (200) NULL,
 				Comment TEXT NULL,
-				Phone VARCHAR (200) NULL
+				Phone VARCHAR (200) NULL,
+				OnSite BOOLEAN
 			);
 
 			--TODO 

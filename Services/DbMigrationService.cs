@@ -423,7 +423,7 @@ public static class DbMigrationService
 
                     while (dr.Read())
                     {
-                        var pgSql = @"INSERT INTO Person (firstname,lastname,creationdate,startdate,enddate,company,email,comment,phone) VALUES(" + 
+                        var pgSql = @"INSERT INTO Person (firstname,lastname,creationdate,startdate,enddate,company,email,comment,phone,onsite) VALUES(" + 
                                     ConvertToText(dr,1) + "," +
                                     ConvertToText(dr,2) + "," +
                                     ConvertToText(dr,3) + "," +
@@ -432,7 +432,8 @@ public static class DbMigrationService
                                     ConvertToText(dr,6) + "," +
                                     ConvertToText(dr,7) + "," +
                                     ConvertToText(dr,8) + "," +
-                                    ConvertToText(dr,9) + 
+                                    ConvertToText(dr,9) + "," +
+                                    ConvertToBoolean(dr,10) + 
                                     ")";
                         Console.WriteLine(pgSql);
                         RunServerSql(serverConnectionString, pgSql);

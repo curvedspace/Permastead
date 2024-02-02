@@ -4,6 +4,7 @@ using System.Runtime.InteropServices;
 using Dapper;
 
 using Microsoft.Data.Sqlite;
+using Models;
 
 
 namespace DataAccess
@@ -87,6 +88,40 @@ namespace DataAccess
 
             return dbLocation;
 
+        }
+
+        public static long GetCurrentUserId()
+        {
+            long currentUserId = 0;
+            var userFolder = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
+            var isWindows = System.Runtime.InteropServices.RuntimeInformation.IsOSPlatform(OSPlatform.Windows);
+            
+            //try to read in a current_user.txt file
+            FileInfo fi;
+            if (isWindows)
+            {
+                fi = new FileInfo(userFolder + @"\.config\permastead\current_user.txt");
+            }
+            else
+            {
+                //linux or macos
+                fi = new FileInfo(userFolder + @"/.config/permastead/current_user.txt");
+            }
+            
+            if (fi.Exists)
+            {
+                //read in db file location from this file
+                try
+                {
+                    currentUserId = Convert.ToInt64(File.ReadAllText(fi.FullName));
+                }
+                catch (Exception e)
+                {
+                    currentUserId = 0;
+                }
+            }
+
+            return currentUserId;
         }
         
         public static List<T> LoadDataLocal<T, U>(string sql, U parameters, string connectionString)

@@ -14,13 +14,15 @@ namespace DataAccess.Local
 {
     public static class PersonRepository
     {
-        public static List<Person> GetAll(string conn)
+        public static List<Person> GetAll(string conn, bool onsiteOnly = false)
         {
             try
             {
                 using (IDbConnection db = new SqliteConnection(conn))
                 {
-                    string sqlQuery = "SELECT * FROM Person ORDER BY LastName;";
+                    string sqlQuery = "SELECT * FROM Person ORDER BY LastName";
+                    
+                    if (onsiteOnly) sqlQuery = "SELECT * FROM Person WHERE OnSite = 1 ORDER BY LastName";
 
                     return db.Query<Person>(sqlQuery).ToList();
                 }

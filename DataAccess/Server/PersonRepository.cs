@@ -15,13 +15,15 @@ namespace DataAccess.Server
 {
     public static class PersonRepository
     {
-        public static List<Person> GetAll(string conn)
+        public static List<Person> GetAll(string conn, bool onsiteOnly = false)
         {
             try
             {
                 using (IDbConnection db = new NpgsqlConnection(conn))
                 {
                     string sqlQuery = "SELECT * FROM Person ORDER BY LastName;";
+                    
+                    if (onsiteOnly) sqlQuery = "SELECT * FROM Person WHERE OnSite = true ORDER BY LastName";
 
                     return db.Query<Person>(sqlQuery).ToList();
                 }

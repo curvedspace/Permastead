@@ -23,6 +23,22 @@ public class PersonService
         return people;
     }
     
+    public static List<Person> GetAllOnsitePeople(ServiceMode mode)
+    {
+        var people = new List<Person>();
+
+        if (mode == ServiceMode.Local)
+        {
+            people = PersonRepository.GetAll(DataConnection.GetLocalDataSource(), onsiteOnly:true);
+        }
+        else
+        {
+            people = DataAccess.Server.PersonRepository.GetAll(DataConnection.GetServerConnectionString());
+        }
+
+        return people;
+    }
+    
     public static List<string> GetAllCompanies(ServiceMode mode)
     {
         var companies = new List<string>();
