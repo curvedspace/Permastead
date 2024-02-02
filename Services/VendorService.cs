@@ -21,5 +21,39 @@ namespace Services
 
             return vendorList;
         }
+        
+        public static bool CommitRecord(ServiceMode mode, Vendor? vendor)
+        {
+            bool rtnValue = false;
+        
+            if (vendor != null)
+            {
+                if (vendor.Id > 0)
+                {
+                    if (mode == ServiceMode.Local)
+                    {
+                        VendorRepository.Update(vendor);
+                    }
+                    else
+                    {
+                        DataAccess.Server.VendorRepository.Update(vendor);
+                    }
+                }
+                else
+                {
+                    // insert new record
+                    if (mode == ServiceMode.Local)
+                    {
+                        VendorRepository.Insert(vendor);
+                    }
+                    else
+                    {
+                        DataAccess.Server.VendorRepository.Insert(vendor);
+                    }
+                }
+            }
+
+            return rtnValue;
+        }
     }
 }

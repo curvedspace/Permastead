@@ -6,6 +6,7 @@ using CommunityToolkit.Mvvm.Input;
 using Models;
 using Permastead.ViewModels.Views;
 using Serilog;
+using Services;
 
 namespace Permastead.ViewModels.Dialogs;
 
@@ -36,13 +37,13 @@ public partial class VendorWindowViewModel : ViewModelBase
         {
 
             _vendor.CreationDate = DateTime.Now;
-            var rtnValue = DataAccess.Local.VendorRepository.Insert(_vendor);
+            var rtnValue = VendorService.CommitRecord(AppSession.ServiceMode, _vendor);
             Log.Logger.Information("Vendor: " + _vendor.Description + " saved: " + rtnValue);
 
         }
         else
         {
-            var rtnValue = DataAccess.Local.VendorRepository.Update(_vendor);
+            var rtnValue = VendorService.CommitRecord(AppSession.ServiceMode, _vendor);
             
         }
        
