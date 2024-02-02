@@ -124,6 +124,43 @@ namespace DataAccess
             return currentUserId;
         }
         
+        public static bool SetCurrentUserId(long userId)
+        {
+            var userFolder = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
+            var isWindows = System.Runtime.InteropServices.RuntimeInformation.IsOSPlatform(OSPlatform.Windows);
+            
+            //try to read in a current_user.txt file
+            FileInfo fi;
+            if (isWindows)
+            {
+                fi = new FileInfo(userFolder + @"\.config\permastead\current_user.txt");
+            }
+            else
+            {
+                //linux or macos
+                fi = new FileInfo(userFolder + @"/.config/permastead/current_user.txt");
+            }
+            
+            if (fi.Exists)
+            {
+                //write the user id to file location
+                try
+                {
+                    File.WriteAllText(fi.FullName, userId.ToString().Trim());
+                }
+                catch (Exception e)
+                {
+                    return false;
+                }
+            }
+            else
+            {
+                File.WriteAllText(fi.FullName, userId.ToString().Trim());
+            }
+
+            return true;
+        }
+        
         public static List<T> LoadDataLocal<T, U>(string sql, U parameters, string connectionString)
         {
             using (IDbConnection connection = new SqliteConnection(connectionString))
