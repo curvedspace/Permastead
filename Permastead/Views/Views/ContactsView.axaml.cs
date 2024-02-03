@@ -83,7 +83,7 @@ public partial class ContactsView : UserControl
         }
     }
 
-    private void TreeDataGrid_OnSelectionChanging(object? sender, CancelEventArgs e)
+    private void TreeDataGrid_OnSelectionChanged(object? sender, CancelEventArgs e)
     {
         try
         {

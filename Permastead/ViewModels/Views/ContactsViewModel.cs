@@ -109,6 +109,8 @@ public partial class ContactsViewModel : ViewModelBase
             PeopleObservations =
                 new ObservableCollection<PersonObservation>(
                     Services.PersonService.GetObservationsForPerson(AppSession.ServiceMode, CurrentPerson.Id));
+
+            CurrentObservation = new PersonObservation();
         }
         catch (Exception e)
         {

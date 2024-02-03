@@ -22,7 +22,7 @@
         <TreeDataGrid Grid.Column="0" x:Name = "TreeDataGrid" Grid.Row="1" Margin="10" 
                       DoubleTapped="TreeDataGrid_OnDoubleTapped" 
                       Tapped="TreeDataGrid_OnTapped"
-                       SelectionChanging="TreeDataGrid_OnSelectionChanging"
+                       SelectionChanging="TreeDataGrid_OnSelectionChanged"
                       Source="{Binding PersonSource, Mode=TwoWay}"></TreeDataGrid>
         
         <Panel Grid.Column="1" Grid.Row="1" MinWidth="300" MaxWidth="400"

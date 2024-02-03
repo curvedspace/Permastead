@@ -106,6 +106,12 @@ namespace Permastead.ViewModels.Views;
 
         }
 
+        [RelayCommand]
+        private void RefreshData()
+        {
+            RefreshObservations();
+        }
+
         public void RefreshObservations()
         {
             _observations.Clear();
