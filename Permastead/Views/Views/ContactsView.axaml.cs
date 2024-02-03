@@ -1,3 +1,5 @@
+using System;
+using System.ComponentModel;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Input;
@@ -60,5 +62,43 @@ public partial class ContactsView : UserControl
         win.WindowStartupLocation = WindowStartupLocation.CenterScreen;
                 
         win.Show();
+    }
+
+    private void TreeDataGrid_OnTapped(object? sender, TappedEventArgs e)
+    {
+        try
+        {
+            var current = sender as TreeDataGrid;
+            if (current != null)
+            {
+                var person = (Person)current.RowSelection!.SelectedItem;
+                var vm = DataContext as ContactsViewModel;
+                vm.CurrentPerson = person;
+                vm.GetPeopleObservations();
+            }
+        }
+        catch (Exception exception)
+        {
+            Console.WriteLine(exception);
+        }
+    }
+
+    private void TreeDataGrid_OnSelectionChanging(object? sender, CancelEventArgs e)
+    {
+        try
+        {
+            var current = sender as TreeDataGrid;
+            if (current != null)
+            {
+                var person = (Person)current.RowSelection!.SelectedItem;
+                var vm = DataContext as ContactsViewModel;
+                vm.CurrentPerson = person;
+                vm.GetPeopleObservations();
+            }
+        }
+        catch (Exception exception)
+        {
+            Console.WriteLine(exception);
+        }
     }
 }

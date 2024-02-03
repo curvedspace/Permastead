@@ -103,6 +103,32 @@ public class PersonService
         return obs;
     }
 
+    public static bool AddPersonObservation(ServiceMode mode, PersonObservation personObs)
+    {
+        bool rtnValue = false;
+        
+        if (personObs != null)
+        {
+            if (personObs.Person.Id > 0)
+            {
+                // insert new record
+                if (mode == ServiceMode.Local)
+                {
+                    PersonRepository.InsertPersonObservation(
+                        DataConnection.GetLocalDataSource(), personObs);
+                }
+                else
+                {
+                    DataAccess.Server.PersonRepository.InsertPersonObservation(
+                        DataConnection.GetServerConnectionString(), 
+                        personObs);
+                }
+            }
+        }
+
+        return rtnValue;
+    }
+
     public static bool CommitRecord(ServiceMode mode, Person person)
     {
         bool rtnValue = false;
@@ -119,7 +145,6 @@ public class PersonService
                 {
                     DataAccess.Server.PersonRepository.Update(person);
                 }
-                
             }
             else
             {
