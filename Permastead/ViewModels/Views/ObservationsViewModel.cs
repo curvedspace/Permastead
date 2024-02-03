@@ -81,7 +81,7 @@ namespace Permastead.ViewModels.Views;
 
                 newObservation.AsOfDate = DateTime.Now;
                 newObservation.CommentType!.Id = 1;
-                newObservation.Author!.Id = 2;
+                newObservation.Author!.Id = AppSession.Instance.CurrentUser.Id;
                 newObservation.Comment = _comment;
 
                 var rtnValue = Services.ObservationsService.InsertRecord(AppSession.ServiceMode, newObservation);

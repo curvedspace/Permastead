@@ -117,7 +117,7 @@ namespace Permastead.ViewModels.Views;
 
             if (CurrentItem != null && CurrentItem.Id == 0 && !string.IsNullOrEmpty(CurrentItem.Description))
             {
-
+                CurrentItem.Author = AppSession.Instance.CurrentUser;
                 CurrentItem.CreationDate = DateTime.Now;
 
                 var rtnValue = SeedPacketService.CommitRecord(AppSession.ServiceMode, CurrentItem);

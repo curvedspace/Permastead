@@ -131,7 +131,6 @@ public partial class ToDoViewModel : ViewModelBase
 
         if (CurrentItem != null && CurrentItem.Id == 0 && !string.IsNullOrEmpty(CurrentItem.Description))
         {
-
             CurrentItem.CreationDate = DateTime.Now;
 
             var rtnValue = Services.ToDoService.CommitRecord(AppSession.ServiceMode, CurrentItem);

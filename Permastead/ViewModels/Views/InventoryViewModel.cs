@@ -45,6 +45,7 @@ public partial class InventoryViewModel: ViewModelBase
         {
 
             CurrentItem.CreationDate = DateTime.Now;
+            CurrentItem.Author = AppSession.Instance.CurrentUser;
 
             bool rtnValue;
 

@@ -248,7 +248,7 @@ public partial class PlantingsViewModel : ViewModelBase
         try
         {
             //saves the planting observation to database
-            CurrentObservation.Author!.Id = AppSession.Instance.CurrentUser.Id;
+            CurrentObservation.Author = AppSession.Instance.CurrentUser;
             CurrentObservation.Planting = CurrentItem;
             CurrentObservation.AsOfDate = DateTime.Today;
             CurrentObservation.CommentType!.Id = 2;
