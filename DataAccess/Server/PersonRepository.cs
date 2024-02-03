@@ -23,7 +23,7 @@ namespace DataAccess.Server
                 {
                     string sqlQuery = "SELECT * FROM Person ORDER BY LastName;";
                     
-                    if (onsiteOnly) sqlQuery = "SELECT * FROM Person WHERE OnSite = true ORDER BY LastName";
+                    if (onsiteOnly) sqlQuery = "SELECT * FROM Person WHERE OnSite is true ORDER BY LastName";
 
                     return db.Query<Person>(sqlQuery).ToList();
                 }

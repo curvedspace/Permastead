@@ -50,8 +50,8 @@ public class ActObsChartViewModel : ViewModelBase
 
     public ActObsChartViewModel()
     {
-        var actions = Services.ToDoService.GetAllToDos(ServiceMode.Local);
-        var observations = Services.ObservationsService.GetObservations(ServiceMode.Local);
+        var actions = Services.ToDoService.GetAllToDos(AppSession.ServiceMode);
+        var observations = Services.ObservationsService.GetObservations(AppSession.ServiceMode);
 
         var actionsByMonth = new Dictionary<int, double>();
         var observationsByMonth = new Dictionary<int, double>();

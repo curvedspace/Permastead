@@ -33,7 +33,7 @@ public class PersonService
         }
         else
         {
-            people = DataAccess.Server.PersonRepository.GetAll(DataConnection.GetServerConnectionString());
+            people = DataAccess.Server.PersonRepository.GetAll(DataConnection.GetServerConnectionString(), true);
         }
 
         return people;

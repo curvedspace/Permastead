@@ -16,9 +16,8 @@ namespace Permastead
         
         private AppSession()
         {
-            GaiaService = new GaiaService();
-
             ServiceMode = ServiceMode.Local;
+            GaiaService = new GaiaService();
         }
         
         private static readonly Lazy<AppSession> lazy = new Lazy<AppSession>(() => new AppSession());
