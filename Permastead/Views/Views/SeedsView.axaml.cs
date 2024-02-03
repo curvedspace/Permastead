@@ -57,6 +57,25 @@ public partial class SeedsView : UserControl
             
         plantingWindow.Show();
     }
+    
+    private void SeedsGrid_OnTapped(object? sender, TappedEventArgs e)
+    {
+        try
+        {
+            var current = sender as TreeDataGrid;
+            if (current != null)
+            {
+                var packet = (SeedPacket)current.RowSelection!.SelectedItem;
+                var vm = DataContext as SeedsViewModel;
+                vm.CurrentItem = packet;
+                vm.GetObservations();
+            }
+        }
+        catch (Exception exception)
+        {
+            Console.WriteLine(exception);
+        }
+    }
 
     private void TextBox_OnTextChanged(object? sender, TextChangedEventArgs e)
     {

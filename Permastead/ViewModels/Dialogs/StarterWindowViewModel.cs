@@ -44,7 +44,7 @@ public partial class StarterWindowViewModel : ViewModelBase
         
         SeedPacketObservations =
             new ObservableCollection<SeedPacketObservation>(
-                Services.PlantingsService.GetObservationsForSeedPacket(AppSession.ServiceMode, SeedPacket.Id));
+                Services.SeedPacketService.GetObservationsForSeedPacket(AppSession.ServiceMode, SeedPacket.Id));
     }
 
     public StarterWindowViewModel()

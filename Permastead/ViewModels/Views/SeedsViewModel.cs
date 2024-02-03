@@ -7,6 +7,7 @@ using Avalonia.Controls.Models.TreeDataGrid;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Models;
+using Services;
 
 namespace Permastead.ViewModels.Views;
 
@@ -25,6 +26,14 @@ public partial class SeedsViewModel : ViewModelBase
     
     [ObservableProperty] 
     private long _seedsCount;
+    
+    [ObservableProperty] 
+    private bool _showObservations;
+    
+    [ObservableProperty] private SeedPacketObservation _currentObservation = new SeedPacketObservation();
+    
+    [ObservableProperty]
+    private ObservableCollection<SeedPacketObservation> _seedPacketObservations = new ObservableCollection<SeedPacketObservation>();
     
     public FlatTreeDataGridSource<SeedPacket> SeedsSource { get; set; }
 
@@ -84,6 +93,10 @@ public partial class SeedsViewModel : ViewModelBase
         else
             CurrentItem = new SeedPacket();
         
+        SeedPacketObservations =
+            new ObservableCollection<SeedPacketObservation>(
+                Services.SeedPacketService.GetObservationsForSeedPacket(AppSession.ServiceMode, CurrentItem.Id));
+        
         SeedsSource = new FlatTreeDataGridSource<SeedPacket>(Packets)
         {
             Columns =
@@ -116,6 +129,42 @@ public partial class SeedsViewModel : ViewModelBase
         SeedsCount = Packets.Count;
         
         //Console.WriteLine("Refreshed Seeds view: " + SeedsCount);
+    }
+    
+    public void GetObservations()
+    {
+        if (CurrentItem != null)
+        {
+            SeedPacketObservations =
+                new ObservableCollection<SeedPacketObservation>(
+                    Services.SeedPacketService.GetObservationsForSeedPacket(AppSession.ServiceMode, CurrentItem.Id));
+        }
+    }
+    
+    [RelayCommand]
+    private void SaveObservation()
+    {
+        try
+        {
+            //saves the planting observation to database
+            CurrentObservation.Author!.Id = AppSession.Instance.CurrentUser.Id;
+            CurrentObservation.SeedPacket = CurrentItem;
+            CurrentObservation.AsOfDate = DateTime.Today;
+            CurrentObservation.CommentType!.Id = 2;
+            
+            SeedPacketService.AddObservation(AppSession.ServiceMode, CurrentObservation);
+            
+            SeedPacketObservations =
+                new ObservableCollection<SeedPacketObservation>(
+                    Services.SeedPacketService.GetObservationsForSeedPacket(AppSession.ServiceMode, CurrentItem.Id));
+
+            CurrentObservation = new SeedPacketObservation();
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+        }
+        
     }
     
     public SeedsViewModel()
