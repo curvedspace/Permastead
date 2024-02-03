@@ -220,6 +220,32 @@ public static class PlantingsService
 
         return obs;
     }
+    
+    public static bool AddPlantingObservation(ServiceMode mode, PlantingObservation obs)
+    {
+        bool rtnValue = false;
+        
+        if (obs != null)
+        {
+            if (obs.Planting.Id > 0)
+            {
+                // insert new record
+                if (mode == ServiceMode.Local)
+                {
+                    PlantingsRepository.InsertPlantingObservation(
+                        DataConnection.GetLocalDataSource(), obs);
+                }
+                else
+                {
+                    DataAccess.Server.PlantingsRepository.InsertPlantingObservation(
+                        DataConnection.GetServerConnectionString(), 
+                        obs);
+                }
+            }
+        }
+
+        return rtnValue;
+    }
 
     public static List<SeedPacketObservation> GetObservationsForSeedPacket(ServiceMode mode, long id)
     {

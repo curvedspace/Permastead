@@ -42,6 +42,14 @@ public partial class PlantingsViewModel : ViewModelBase
     [ObservableProperty] 
     private Planting _currentItem;
     
+    [ObservableProperty] 
+    private bool _showObservations;
+    
+    [ObservableProperty] private PlantingObservation _currentObservation = new PlantingObservation();
+    
+    [ObservableProperty]
+    private ObservableCollection<PlantingObservation> _plantingObservations = new ObservableCollection<PlantingObservation>();
+    
     [ObservableProperty] private ObservableCollection<Node> _nodes;
 
     [ObservableProperty] private ObservableCollection<Node> _selectedNodes;
@@ -59,6 +67,10 @@ public partial class PlantingsViewModel : ViewModelBase
             _vendors = new ObservableCollection<Vendor>(VendorService.GetAll(AppSession.ServiceMode));
 
             _currentItem = new Planting();
+            
+            PlantingObservations =
+                new ObservableCollection<PlantingObservation>(
+                    Services.PlantingsService.GetObservationsForPlanting(AppSession.ServiceMode, CurrentItem.Id));
 
             RefreshPlantings();
         }
@@ -219,7 +231,43 @@ public partial class PlantingsViewModel : ViewModelBase
         }
 
     }
+    
+    public void GetPeopleObservations()
+    {
+        if (CurrentItem != null)
+        {
+            PlantingObservations =
+                new ObservableCollection<PlantingObservation>(
+                    Services.PlantingsService.GetObservationsForPlanting(AppSession.ServiceMode, CurrentItem.Id));
+        }
+    }
 
+    [RelayCommand]
+    private void SaveObservation()
+    {
+        try
+        {
+            //saves the planting observation to database
+            CurrentObservation.Author!.Id = AppSession.Instance.CurrentUser.Id;
+            CurrentObservation.Planting = CurrentItem;
+            CurrentObservation.AsOfDate = DateTime.Today;
+            CurrentObservation.CommentType!.Id = 2;
+            
+            PlantingsService.AddPlantingObservation(AppSession.ServiceMode, CurrentObservation);
+            
+            PlantingObservations =
+                new ObservableCollection<PlantingObservation>(
+                    Services.PlantingsService.GetObservationsForPlanting(AppSession.ServiceMode, CurrentItem.Id));
+
+            CurrentObservation = new PlantingObservation();
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+        }
+        
+    }
+    
     [RelayCommand]
     private void ResetEvent()
     {

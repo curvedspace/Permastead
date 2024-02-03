@@ -56,6 +56,25 @@ public partial class PlantingsView : UserControl
         }
 
     }
+    
+    private void PlantingsGrid_OnTapped(object? sender, TappedEventArgs e)
+    {
+        try
+        {
+            var current = sender as TreeDataGrid;
+            if (current != null)
+            {
+                var planting = (Planting)current.RowSelection!.SelectedItem;
+                var vm = DataContext as PlantingsViewModel;
+                vm.CurrentItem = planting;
+                vm.GetPeopleObservations();
+            }
+        }
+        catch (Exception exception)
+        {
+            Console.WriteLine(exception);
+        }
+    }
 
     private void PlantingsGrid_OnDoubleTapped(object? sender, TappedEventArgs e)
     {
@@ -241,4 +260,5 @@ public partial class PlantingsView : UserControl
             }
         }
     }
+    
 }
