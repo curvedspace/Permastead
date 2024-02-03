@@ -69,6 +69,9 @@ namespace Permastead.ViewModels.Views;
             
             PlantingYearStartDate = new DateTime(DateTime.Today.Year, 1,1);
             PlantingYearEndDate = new DateTime(DateTime.Today.Year, 12,31);
+
+            // make sure we have an instance instantiated so ServiceMode is set
+            AppSession.Instance.ToString();
             
             //get observations
             Observations = new ObservableCollection<Observation>(Services.ObservationsService.GetObservations(AppSession.ServiceMode));
