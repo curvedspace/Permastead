@@ -634,7 +634,8 @@ namespace DataAccess.Local
 				StartDate TIMESTAMP NOT NULL,
 				EndDate TIMESTAMP,
 				CommentTypeId INTEGER,
-				AuthorId INTEGER
+				AuthorId INTEGER,
+				OnSite INTEGER
 			);
 
 			--FERMENTATION
