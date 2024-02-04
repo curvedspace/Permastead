@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using AIMLbot.AIMLTagHandlers;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
@@ -41,9 +42,17 @@ public partial class DashboardViewModel : ViewModelBase
     [ObservableProperty] private long _totalHarvestedPlants;
     [ObservableProperty] private long _totalActivePlantings;
 
+    // [ObservableProperty] private long _totalPerennials;
+    // [ObservableProperty] private long _totalBiennials;
+    // [ObservableProperty] private long _totalAnnuals;
+    
     public ObservableValue SuccessfulPlantingsValue { get; set; } = new ObservableValue(0);
     public ObservableValue DeadPlantingsValue { get; set; } = new ObservableValue(0);
     public ObservableValue HarvestedPlantingsValue { get; set; } = new ObservableValue(0);
+    
+    public ObservableValue AnnualsValue { get; set; } = new ObservableValue(0);
+    public ObservableValue BiennialsValue { get; set; } = new ObservableValue(0);
+    public ObservableValue PerennialsValue { get; set; } = new ObservableValue(0);
     
     private DateTime PlantingYearStartDate;
         
@@ -75,7 +84,9 @@ public partial class DashboardViewModel : ViewModelBase
         SuccessfulPlantings = 0;
         DeadPlantings = 0;
         TotalHarvestedPlants = 0;
-        
+
+        TotalActivePlantings = 0;
+            
         // get other data
         Plantings = new ObservableCollection<Planting>(Services.PlantingsService.GetPlantings(AppSession.ServiceMode));
         
@@ -149,7 +160,7 @@ public partial class DashboardViewModel : ViewModelBase
                         break;
                 }
 
-                _totalActivePlantings++;
+                TotalActivePlantings++;
             }
         }
       
@@ -158,16 +169,20 @@ public partial class DashboardViewModel : ViewModelBase
         breakdown.Add(biennials);
         breakdown.Add(perennials);
         
-
-        // PlantBreakdownSeries
-        //     = breakdown.AsPieSeries((value, series) => { series.MaxRadialColumnWidth = 60; });
         
+        // PerennialsValue = new ObservableValue(0);
+        // BiennialsValue = new ObservableValue(0);
+        // AnnualsValue = new ObservableValue(0);
+
+        PerennialsValue.Value = perennials;
+        BiennialsValue.Value = biennials;
+        AnnualsValue.Value = annuals;
         
         PlantBreakdownSeries =
             GaugeGenerator.BuildSolidGauge(
-                new GaugeItem(annuals, series => SetStyle("Annuals", series)),
-                new GaugeItem(biennials, series => SetStyle("Biennials", series)),
-                new GaugeItem(perennials, series => SetStyle("Perennials", series)),
+                new GaugeItem(AnnualsValue, series => SetStyle("Annuals", series)),
+                new GaugeItem(BiennialsValue, series => SetStyle("Biennials", series)),
+                new GaugeItem(PerennialsValue, series => SetStyle("Perennials", series)),
                 new GaugeItem(GaugeItem.Background, series =>
                 {
                     series.InnerRadius = 20;
@@ -177,7 +192,9 @@ public partial class DashboardViewModel : ViewModelBase
         SuccessfulPlantingsValue.Value = SuccessfulPlantings;
         DeadPlantingsValue.Value = DeadPlantings;
         HarvestedPlantingsValue.Value = TotalHarvestedPlants;
-        
+
+        // Console.WriteLine(PlantBreakdownSeries.LongCount());
+            
         PlantingSuccessSeries =
             GaugeGenerator.BuildSolidGauge(
                 new GaugeItem(SuccessfulPlantingsValue, series => SetStyle("Successful", series)),
@@ -193,7 +210,7 @@ public partial class DashboardViewModel : ViewModelBase
     {
         ScoreBoard = AppSession.Instance.CurrentScoreboard;
         
-        PlantingYear = DateTime.Now.AddYears(-1).Year;
+        PlantingYear = DateTime.Now.Year;
         
         PlantingYears.Clear();
         PlantingYears.Add(2022);
