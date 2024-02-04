@@ -27,7 +27,7 @@ public class Achievement
                 // we are looking for to drop points offered as the number of records goes up
                 var multiplier = (decimal)Math.Pow((double)IterationMultiplier, Count-1);
                 var computedPoints = InitialPoints * multiplier;
-                if (computedPoints < 0.5m) computedPoints = 0.5m;     //if current points awarded is less than 0.1, cap it there
+                if (computedPoints < 1m) computedPoints = 1m;     // if current points awarded is less than 1, cap it there
 
                 return computedPoints;
             }

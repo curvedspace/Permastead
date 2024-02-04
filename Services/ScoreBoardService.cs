@@ -16,7 +16,7 @@ public static class ScoreBoardService
         {
             {
                 AchievementType.AddObservation,
-                new Achievement() { Type = AchievementType.AddObservation, InitialPoints = 50 }
+                new Achievement() { Type = AchievementType.AddObservation, InitialPoints = 50, IterationMultiplier = 0.75m}
             },
             { AchievementType.AddAction, new Achievement() { Type = AchievementType.AddAction, InitialPoints = 50 } },
             { AchievementType.AddInventory, new Achievement() { Type = AchievementType.AddInventory, InitialPoints = 50 } },
