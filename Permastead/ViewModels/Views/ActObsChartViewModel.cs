@@ -10,19 +10,6 @@ namespace Permastead.ViewModels.Views;
 public class ActObsChartViewModel : ViewModelBase
 {
     public ISeries[] Series { get; set; }
-    // public ISeries[] Series { get; set; } =
-    // {
-    //     new ColumnSeries<double>
-    //     {
-    //         Name = "Actions",
-    //         Values = new double[] { 2, 5, 4 }
-    //     },
-    //     new ColumnSeries<double>
-    //     {
-    //         Name = "Observations",
-    //         Values = new double[] { 3, 1, 6 }
-    //     }
-    // };
 
     public SolidColorPaint LegendTextPaint { get; set; } =
         new SolidColorPaint()

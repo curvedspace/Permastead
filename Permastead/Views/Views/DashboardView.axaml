@@ -89,8 +89,18 @@
     <!-- </Grid> -->
     
     <!-- <Grid ColumnDefinitions="Auto,*" RowDefinitions="Auto,*"> -->
-        <views:ActObsChartView Grid.Column="0"  Grid.ColumnSpan="3" Grid.Row="2"></views:ActObsChartView>
+        <!-- <views:ActObsChartView Grid.Column="0"  Grid.ColumnSpan="3" Grid.Row="2"> -->
+        <!--      -->
+        <!-- </views:ActObsChartView> -->
     <!-- </Grid> -->
         <!-- </StackPanel> -->
+        <Panel Grid.Column="0"  Grid.ColumnSpan="3" Grid.Row="2">
+        <lvc:CartesianChart
+            Series="{Binding ActObsSeries}"
+            XAxes="{Binding XAxes}"
+            LegendTextPaint="{Binding LegendTextPaint}"
+            LegendPosition="Bottom">
+        </lvc:CartesianChart>
+        </Panel>
     </Grid>
 </UserControl>

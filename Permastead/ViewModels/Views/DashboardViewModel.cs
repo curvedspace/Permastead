@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Globalization;
 using System.Linq;
 using AIMLbot.AIMLTagHandlers;
 using CommunityToolkit.Mvvm.ComponentModel;
@@ -28,23 +29,47 @@ public partial class DashboardViewModel : ViewModelBase
     
     public IEnumerable<ISeries> PlantingSuccessSeries { get; set; } 
     
+    public ISeries[] ActObsSeries { get; set; }
+    
+    public SolidColorPaint LegendTextPaint { get; set; } =
+        new SolidColorPaint()
+        {
+            Color = new SKColor(240, 240, 240)
+        };
+    
+    public Axis[] XAxes { get; set; } =
+    {
+        new Axis
+        {
+            Labels = new string[] { "January", "February", "March", "April", "May", "June", "July", "August","September","October","November","December" },
+            LabelsRotation = 0,
+            SeparatorsPaint = new SolidColorPaint(new SKColor(200, 200, 200)),
+            SeparatorsAtCenter = false,
+            TicksPaint = new SolidColorPaint(new SKColor(200, 200, 200)),
+            TicksAtCenter = true,
+            // By default the axis tries to optimize the number of 
+            // labels to fit the available space, 
+            // when you need to force the axis to show all the labels then you must: 
+            ForceStepToMin = true, 
+            MinStep = 1 
+        }
+    };
+    
+    
     [ObservableProperty] 
     private ObservableCollection<Planting> _plantings = new ObservableCollection<Planting>();
     
-    [ObservableProperty] private int _plantingYear;
+    [ObservableProperty] private string _plantingYear;
     
     [ObservableProperty] 
-    private ObservableCollection<int> _plantingYears = new ObservableCollection<int>();
+    private ObservableCollection<string> _plantingYears = new ObservableCollection<string>();
     
     [ObservableProperty] private long _totalPlantings;
     [ObservableProperty] private long _successfulPlantings;
     [ObservableProperty] private long _deadPlantings;
     [ObservableProperty] private long _totalHarvestedPlants;
     [ObservableProperty] private long _totalActivePlantings;
-
-    // [ObservableProperty] private long _totalPerennials;
-    // [ObservableProperty] private long _totalBiennials;
-    // [ObservableProperty] private long _totalAnnuals;
+    
     
     public ObservableValue SuccessfulPlantingsValue { get; set; } = new ObservableValue(0);
     public ObservableValue DeadPlantingsValue { get; set; } = new ObservableValue(0);
@@ -54,19 +79,11 @@ public partial class DashboardViewModel : ViewModelBase
     public ObservableValue BiennialsValue { get; set; } = new ObservableValue(0);
     public ObservableValue PerennialsValue { get; set; } = new ObservableValue(0);
     
-    private DateTime PlantingYearStartDate;
+    private DateTime _plantingYearStartDate;
         
-    private DateTime PlantingYearEndDate;
-
-    // public LabelVisual Title { get; set; } =
-    //     new LabelVisual
-    //     {
-    //         Text = "My chart title",
-    //         TextSize = 25,
-    //         Padding = new LiveChartsCore.Drawing.Padding(15),
-    //         Paint = new SolidColorPaint(SKColors.DarkSlateGray)
-    //     };
-
+    private DateTime _plantingYearEndDate;
+    
+    
     [RelayCommand]
     private void RefreshData()
     {
@@ -76,9 +93,18 @@ public partial class DashboardViewModel : ViewModelBase
     public void RefreshDataOnly()
     {
         Console.WriteLine("Refreshing Dashboard data for year " + PlantingYear);
+
+        if (PlantingYear == "ALL")
+        {
+            _plantingYearStartDate = new DateTime(1970, 1,1);
+            _plantingYearEndDate = new DateTime(2100, 12,31);
+        }
+        else
+        {
+            _plantingYearStartDate = new DateTime(Convert.ToInt32(PlantingYear), 1,1);
+            _plantingYearEndDate = new DateTime(Convert.ToInt32(PlantingYear), 12,31);
+        }
         
-        PlantingYearStartDate = new DateTime(PlantingYear, 1,1);
-        PlantingYearEndDate = new DateTime(PlantingYear, 12,31);
         
         // reset counters
         SuccessfulPlantings = 0;
@@ -93,7 +119,7 @@ public partial class DashboardViewModel : ViewModelBase
         //compute the success rate for the current growing year
         foreach (var p in Plantings)
         {
-            if (p.EndDate >= PlantingYearEndDate || p.StartDate >= PlantingYearStartDate)
+            if (p.EndDate >= _plantingYearEndDate || p.StartDate >= _plantingYearStartDate)
             {
                 TotalPlantings++;
 
@@ -125,18 +151,6 @@ public partial class DashboardViewModel : ViewModelBase
                     series.DataLabelsPosition = PolarLabelsPosition.ChartCenter;
                 }));
         
-        // PlantBreakdownSeries =
-        // new[] { 25, 35, 30, 10 }.AsPieSeries((value, series) => { series.MaxRadialColumnWidth = 60; });
-        //
-        // PlantingSuccessSeries =
-        //     new[] { 15, 20, 65}.AsPieSeries((value, series) => { series.MaxRadialColumnWidth = 60; });
-
-      //   var success = new List<double>();
-      //   success.Add(Convert.ToDouble(TotalHarvestedPlants/TotalPlantings) * 100);
-      //   success.Add(Convert.ToDouble(DeadPlantings/TotalPlantings) * 100);
-      //   success.Add(Convert.ToDouble((TotalPlantings - TotalHarvestedPlants - DeadPlantings) / TotalPlantings) * 100);
-      //
-      // PlantingSuccessSeries = success.AsPieSeries((value, series) => { series.MaxRadialColumnWidth = 60; });
         
       //get plant breakdown
         Int32 annuals = 0;
@@ -145,7 +159,7 @@ public partial class DashboardViewModel : ViewModelBase
       
         foreach (var p in Plantings)
         {
-            if (p.EndDate >= PlantingYearEndDate || p.StartDate >= PlantingYearStartDate)
+            if (p.EndDate >= _plantingYearEndDate || p.StartDate >= _plantingYearStartDate)
             {
                 switch (p.SeedPacket.Seasonality.Code)
                 {
@@ -170,10 +184,6 @@ public partial class DashboardViewModel : ViewModelBase
         breakdown.Add(perennials);
         
         
-        // PerennialsValue = new ObservableValue(0);
-        // BiennialsValue = new ObservableValue(0);
-        // AnnualsValue = new ObservableValue(0);
-
         PerennialsValue.Value = perennials;
         BiennialsValue.Value = biennials;
         AnnualsValue.Value = annuals;
@@ -192,8 +202,6 @@ public partial class DashboardViewModel : ViewModelBase
         SuccessfulPlantingsValue.Value = SuccessfulPlantings;
         DeadPlantingsValue.Value = DeadPlantings;
         HarvestedPlantingsValue.Value = TotalHarvestedPlants;
-
-        // Console.WriteLine(PlantBreakdownSeries.LongCount());
             
         PlantingSuccessSeries =
             GaugeGenerator.BuildSolidGauge(
@@ -204,18 +212,21 @@ public partial class DashboardViewModel : ViewModelBase
                 {
                     series.InnerRadius = 20;
                 }));
+
+        CreateObsActChart();
     }
     
     public DashboardViewModel()
     {
         ScoreBoard = AppSession.Instance.CurrentScoreboard;
         
-        PlantingYear = DateTime.Now.Year;
+        PlantingYear = DateTime.Now.Year.ToString(CultureInfo.CurrentCulture);
         
         PlantingYears.Clear();
-        PlantingYears.Add(2022);
-        PlantingYears.Add(2023);
-        PlantingYears.Add(2024);
+        PlantingYears.Add("2022");
+        PlantingYears.Add("2023");
+        PlantingYears.Add("2024");
+        PlantingYears.Add("ALL");
         
         RefreshDataOnly();
         
@@ -230,5 +241,45 @@ public partial class DashboardViewModel : ViewModelBase
         series.InnerRadius = 20;
         series.RelativeOuterRadius = 8;
         series.RelativeInnerRadius = 8;
+    }
+
+    private void CreateObsActChart()
+    {
+        var actions = Services.ToDoService.GetAllToDos(AppSession.ServiceMode);
+        var observations = Services.ObservationsService.GetObservations(AppSession.ServiceMode);
+
+        var actionsByMonth = new Dictionary<int, double>();
+        var observationsByMonth = new Dictionary<int, double>();
+        
+        //set up the dictionaries
+        for (int i = 1; i <= 12; i++)
+        {
+            actionsByMonth.Add(i,0);
+            observationsByMonth.Add(i,0);
+        }
+        
+        //tally up the actions and observations by month
+        foreach (var a in actions)
+        {
+            if (a.CreationDate >= _plantingYearStartDate && a.CreationDate <= _plantingYearEndDate)
+                actionsByMonth[a.DueDate.Date.Month] += 1;
+        }
+        
+        foreach (var o in observations)
+        {
+            if (o.AsOfDate >= _plantingYearStartDate && o.AsOfDate <= _plantingYearEndDate)
+                observationsByMonth[o.AsOfDate.Date.Month] += 1;
+        }
+
+        var actSeries = new ColumnSeries<double>();
+        actSeries.Name = "Actions";
+        actSeries.Values = actionsByMonth.Values;
+        
+        var obsSeries = new ColumnSeries<double>();
+        obsSeries.Name = "Observations";
+        obsSeries.Values = observationsByMonth.Values;
+
+        ActObsSeries = new[] { actSeries, obsSeries };
+        OnPropertyChanged(nameof(ActObsSeries));
     }
 }
