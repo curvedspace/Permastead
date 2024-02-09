@@ -73,7 +73,10 @@ public partial class SettingsViewModel : ViewModelBase
         {
             FirstName = _currentUser.FirstName;
             LastName = _currentUser.LastName;
-            CurrentUser = _people.First(x => x.Id == _currentUser.Id);
+            
+            if (_people.Count > 0)
+                CurrentUser = _people.First(x => x.Id == _currentUser.Id);
+            
             AppSession.Instance.CurrentUser = CurrentUser;
         }
         else
