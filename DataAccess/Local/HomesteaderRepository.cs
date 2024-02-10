@@ -845,10 +845,10 @@ namespace DataAccess.Local
 
             #region Person
 
-            var person = new Person { FirstName = "System", LastName = "Agent" };
+            var person = new Person { FirstName = "System", LastName = "Agent", IsOnSite = true };
             PersonRepository.Insert(person);
 
-            person = new Person { FirstName = "Homesteader", LastName = "Person" };
+            person = new Person { FirstName = "Homesteader", LastName = "Person", IsOnSite = true };
             PersonRepository.Insert(person);
 
             #endregion
