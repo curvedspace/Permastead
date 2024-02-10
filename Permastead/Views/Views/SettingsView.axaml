@@ -24,7 +24,8 @@
                 <!-- <Separator MaxWidth="5"></Separator> -->
                 <Button MaxHeight="50" Command="{Binding SaveSettingsCommand}">Save</Button>
                 <Button MaxHeight="50" Margin="20" Command="{Binding MigrateDbToServerCommand}" 
-                        IsEnabled="{Binding InLocalMode}">Migrate Local DB To Server</Button>
+                        IsEnabled="{Binding ShowMigrateDataButton}">Migrate Local DB To Server</Button>
+                <TextBlock Margin="20,25,0,0" IsVisible="{Binding InServerMode}">Server Mode</TextBlock>
             </WrapPanel>
             
         <Grid ColumnDefinitions="Auto,*,Auto" RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto">

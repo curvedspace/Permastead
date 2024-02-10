@@ -38,14 +38,37 @@ public partial class SettingsViewModel : ViewModelBase
     
     [ObservableProperty] private string _nostrPrivateKey;
 
+    public bool InServerMode
+    {
+        get
+        {
+            return (AppSession.ServiceMode == ServiceMode.Server && !string.IsNullOrEmpty(DataAccess.DataConnection.GetServerConnectionString()));
+        }
+    }
+    
     public bool InLocalMode
     {
         get
         {
-            return (AppSession.ServiceMode == ServiceMode.Local);
+            return !InServerMode;
         }
     }
     
+    public bool ServerDbExists
+    {
+        get
+        {
+            return (!string.IsNullOrEmpty(DataAccess.DataConnection.GetServerConnectionString()));
+        }
+    }
+
+    public bool ShowMigrateDataButton
+    {
+        get
+        {
+            return (InLocalMode && !string.IsNullOrEmpty(DataAccess.DataConnection.GetServerConnectionString()));
+        }
+    }
 
     [ObservableProperty] private ObservableCollection<City>? _cities;
     

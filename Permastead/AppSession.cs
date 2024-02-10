@@ -16,7 +16,24 @@ namespace Permastead
         
         private AppSession()
         {
-            ServiceMode = ServiceMode.Local;
+            // if we have a connection string for a postgresql server, start up in server mode
+            try
+            {
+                if (!string.IsNullOrEmpty(DataAccess.DataConnection.GetServerConnectionString()))
+                {
+                    ServiceMode = ServiceMode.Server;
+                }
+                else
+                {
+                    ServiceMode = ServiceMode.Local;
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                ServiceMode = ServiceMode.Local;
+            }
+            
             GaiaService = new GaiaService();
         }
         
