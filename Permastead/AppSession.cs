@@ -33,8 +33,16 @@ namespace Permastead
                 Console.WriteLine(e);
                 ServiceMode = ServiceMode.Local;
             }
+
+            try
+            {
+                GaiaService = new GaiaService();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
             
-            GaiaService = new GaiaService();
         }
         
         private static readonly Lazy<AppSession> lazy = new Lazy<AppSession>(() => new AppSession());
