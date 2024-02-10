@@ -56,8 +56,8 @@ namespace DataAccess.Local
             {
                 using (IDbConnection db = new SqliteConnection(DataConnection.GetLocalDataSource()))
                 {
-                    string sqlQuery = "INSERT INTO Person (FirstName, LastName, CreationDate, StartDate, EndDate, Company, Email, Phone, Comment) " +
-                                      "VALUES(@FirstName,@LastName,CURRENT_DATE,@StartDate,@EndDate,@Company,@Email,@Phone,@Comment);";
+                    string sqlQuery = "INSERT INTO Person (FirstName, LastName, CreationDate, StartDate, EndDate, Company, Email, Phone, OnSite, Comment) " +
+                                      "VALUES(@FirstName,@LastName,CURRENT_DATE,@StartDate,@EndDate,@Company,@Email,@Phone,@OnSite,@Comment);";
 
                     return (db.Execute(sqlQuery, person) == 1);
                 }
@@ -78,7 +78,7 @@ namespace DataAccess.Local
                     {
                         string sqlQuery =
                             "UPDATE Person SET FirstName = @FirstName, StartDate = @StartDate, EndDate = @EndDate, LastName = @LastName, " +
-                            "Company = @Company, Email = @Email, Phone = @Phone, Comment = @Comment " +
+                            "Company = @Company, Email = @Email, Phone = @Phone, OnSite = @OnSite, Comment = @Comment " +
                             "WHERE Id = @Id;";
 
                         return (db.Execute(sqlQuery, person) == 1);
@@ -100,7 +100,7 @@ namespace DataAccess.Local
             Person person = new Person();
 
             var sql = "SELECT p.Id, p.FirstName, p.LastName, " +
-                      "p.CreationDate, p.StartDate, p.EndDate, p.Company, p.Email, p.Phone, p.Comment " +
+                      "p.CreationDate, p.StartDate, p.EndDate, p.Company, p.Email, p.Phone, p.OnSite, p.Comment " +
                       "FROM Person p  " +
                       "WHERE p.Id = @id ";
 
@@ -128,7 +128,17 @@ namespace DataAccess.Local
                         person.Company = dr[6].ToString();
                         person.Email = dr[7].ToString();
                         person.Phone = dr[8].ToString();
-                        person.Comment = dr[9].ToString();
+
+                        if (string.IsNullOrEmpty(dr[9].ToString()))
+                        {
+                            person.OnSite = false;
+                        }
+                        else
+                        {
+                            person.OnSite = Convert.ToBoolean(dr[9]);
+                        }
+                        
+                        person.Comment = dr[10].ToString();
                     }
                 }
 

@@ -43,6 +43,7 @@
         <Image Grid.Row="7" Grid.Column="0"  Margin="10" Width="32" Height="32" Source="/Assets/outlook_new_meeting.png" />
 
         <StackPanel Grid.Row="7" Grid.Column="3" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,0,0">
+            <CheckBox x:Name="OnSite" Margin="0,0,50,0" IsChecked="{Binding Person.OnSite}">Is Onsite</CheckBox>
             <Button x:Name="SaveButton" Margin="10" Click="SaveButton_OnClick">Save</Button>
             <Button x:Name="CancelButton" Margin="10" Click="CancelButton_OnClick" >Cancel</Button>
         </StackPanel>

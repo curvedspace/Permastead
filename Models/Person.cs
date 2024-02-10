@@ -22,7 +22,7 @@ public class Person
     
     public string? Phone { get; set; }
     
-    public bool IsOnSite { get; set; }
+    public bool OnSite { get; set; }
     public string? Comment { get; set; }
 
     public IList<PersonRole> Roles {get; set;}
@@ -96,7 +96,7 @@ public class Person
         this.CreationDate = DateTime.Now;
         this.StartDate = DateTime.Today;
         this.EndDate = DateTime.MaxValue;
-        this.IsOnSite = false;
+        this.OnSite = false;
     }
 
     public Person(long id) : this()
@@ -123,7 +123,7 @@ public class Person
             Id = 1,
             FirstName = "Gaia",
             LastName = "AI",
-            IsOnSite = true,
+            OnSite = true,
             MailingAddress = Address.None()
         };
 
