@@ -19,6 +19,8 @@ public class WeatherDescriptorJsonConverter : Newtonsoft.Json.JsonConverter
                        throw new JsonSerializationException("No humidity property");
         var temperature = mainToken.SelectToken("current_condition[0].temp_C")?.Value<int>() ??
                           throw new JsonSerializationException("No temperature property");
+        var cloudCover = mainToken.SelectToken("current_condition[0].cloudcover")?.Value<int>() ??
+                          throw new JsonSerializationException("No cloud cover property");
         var weatherState = mainToken.SelectToken("current_condition[0].weatherDesc[0].value")?.Value<string>() ??
                            throw new JsonSerializationException("No weather state property");
         var feelTemperuate = mainToken.SelectToken("current_condition[0].FeelsLikeC")?.Value<int>() ??
@@ -35,6 +37,11 @@ public class WeatherDescriptorJsonConverter : Newtonsoft.Json.JsonConverter
         var obsTime = mainToken.SelectToken("current_condition[0].localObsDateTime")?.Value<DateTime>() ??
                       throw new JsonSerializationException("No observation time property");
 
+        // var moonPhase = ""; 
+        
+        var moonPhase = mainToken.SelectToken("weather[0].astronomy[0].moon_phase")?.Value<string>() ??
+                        throw new JsonSerializationException("No moon phase property");
+
         //ContextManager.Context.Logger.Info("Recieve weather state: " + weatherState);
 
         return new WeatherDescriptor
@@ -42,11 +49,13 @@ public class WeatherDescriptorJsonConverter : Newtonsoft.Json.JsonConverter
             Humidity = humidity,
             Temperature = temperature,
             FeelTemperature = feelTemperuate,
+            CloudCover = cloudCover,
             Pressure = pressure,
             Visibility = visibilityMiles,
             Wind = wind,
             UvIndex = uvIndex,
             WeatherStateAlias = weatherState,
+            MoonPhase = moonPhase,
             ObservationTime = obsTime
         };
     }
@@ -60,11 +69,14 @@ public class WeatherDescriptor
 {
     public int Temperature { get; init; }
     public int FeelTemperature { get; init; }
+    public int CloudCover { get; init; }
     public int Humidity { get; init; }
     public int Pressure { get; init; }
     public int Visibility { get; init; }
     public int Wind { get; init; }
     public int UvIndex { get; init; }
+    
+    public string MoonPhase { get; init; }
     public string WeatherStateAlias { get; init; }
     
     public DateTime ObservationTime { get; init; }
