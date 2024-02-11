@@ -44,6 +44,10 @@ public class WeatherDescriptorJsonConverter : Newtonsoft.Json.JsonConverter
 
         //ContextManager.Context.Logger.Info("Recieve weather state: " + weatherState);
 
+        var forecast = new List<ForecastItem>();
+        // var itemCount = mainToken.SelectToken("weather[0].hourly")?.LongCount<int>() ??
+        //                 throw new JsonSerializationException("No hourly forecast property");
+
         return new WeatherDescriptor
         {
             Humidity = humidity,
@@ -80,4 +84,16 @@ public class WeatherDescriptor
     public string WeatherStateAlias { get; init; }
     
     public DateTime ObservationTime { get; init; }
+
+    public List<ForecastItem> Forecast { get; init; } = new List<ForecastItem>();
+}
+
+public class ForecastItem
+{
+    public int FeelTemperature { get; init; }
+    public int WindChill { get; init; }
+    public int WindGust { get; init; }
+    public int Humidity { get; init; }
+    public int Pressure { get; init; }
+    public int Visibility { get; init; }
 }
