@@ -77,6 +77,8 @@ public class WeatherService : IWeatherService, IDisposable
         //ContextManager.Context.Logger.Info("Command update image is executed");
         Console.WriteLine(json);
         
+        WeatherModel.Root myClass = JsonConvert.DeserializeObject<WeatherModel.Root>(json);
+        
         return JsonConvert.DeserializeObject<WeatherDescriptor>(json) ??
                throw new JsonSerializationException("Bad deserialization weather description");
     }
