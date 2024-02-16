@@ -41,10 +41,10 @@
                     <Button Name="InventoryButton" ToolTip.Tip="Inventory " Command="{Binding OpenInventoryViewCommand}">
                         <Image Width="16" Height="16" Source="/Assets/clipboard_invoice.png" />
                     </Button>
-                    <Button Name="SeedsButton" ToolTip.Tip="Seeds " Command="{Binding OpenSeedsViewCommand}">
+                    <Button Name="SeedsButton" ToolTip.Tip="Seeds " Margin="20,0,0,0" Command="{Binding OpenSeedsViewCommand}">
                         <Image Width="16" Height="16" Source="/Assets/bean.png" />
                     </Button>
-                    <Button Name="PlantsButton" ToolTip.Tip="Plantings " Command="{Binding OpenPlantingsViewCommand}">
+                    <Button Name="PlantsButton" ToolTip.Tip="Plantings " Margin="0,0,20,0" Command="{Binding OpenPlantingsViewCommand}">
                         <!-- <materialIcons:MaterialIcon Kind="Leaf" Margin="0"/> -->
                         <Image Width="16" Height="16" Source="/Assets/leaf_plant.png" />
                     </Button>
@@ -52,14 +52,14 @@
                         <!-- <materialIcons:MaterialIcon Kind="PeopleGroup" Margin="0"/> -->
                         <Image Width="16" Height="16" Source="/Assets/outlook_new_meeting.png" />
                     </Button>
+                    <Button Name="WeatherButton" ToolTip.Tip="Weather" Margin="20,0,0,0" Command="{Binding OpenWeatherViewCommand}">
+                        <!-- <materialIcons:MaterialIcon Kind="WeatherHistory" Margin="0"/> -->
+                        <Image Width="16" Height="16" Source="/Assets/weather_clouds.png" />
+                    </Button>
                 </StackPanel>
                 <StackPanel Grid.Row="0" Grid.Column="1" HorizontalAlignment="Right" Orientation="Horizontal">
                     <TextBlock Margin="5">User: </TextBlock>
                     <TextBlock Margin="5" Text="{Binding CurrentUser, Mode=TwoWay}"></TextBlock>
-                    <Button Name="WeatherButton" ToolTip.Tip="Weather" Command="{Binding OpenWeatherViewCommand}">
-                        <!-- <materialIcons:MaterialIcon Kind="WeatherHistory" Margin="0"/> -->
-                        <Image Width="16" Height="16" Source="/Assets/weather_clouds.png" />
-                    </Button>
                     <Button Name="SettingsButton" ToolTip.Tip="Settings"  Command="{Binding OpenSettingsViewCommand}">
                         <!-- <materialIcons:MaterialIcon Kind="Settings" Margin="0"/> -->
                         <Image Width="16" Height="16" Source="/Assets/setting_tools.png" />

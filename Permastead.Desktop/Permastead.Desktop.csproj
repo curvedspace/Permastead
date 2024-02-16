@@ -10,8 +10,8 @@
     <StartupObject></StartupObject>
     <AssemblyVersion>0.0.3</AssemblyVersion>
     <FileVersion>0.0.3</FileVersion>
-    <Version>0.0.1</Version>
-    <PublishSingleFile>false</PublishSingleFile>
+    <Version>0.0.3</Version>
+    <PublishSingleFile>true</PublishSingleFile>
     <ApplicationIcon>..\Permastead\Assets\permastead.ico</ApplicationIcon>
   </PropertyGroup>
 
