@@ -6,7 +6,44 @@
              xmlns:vm="using:Permastead.ViewModels.Views"
              x:DataType="vm:WeatherViewModel" 
              x:Class="Permastead.Views.Views.WeatherView">
-    <StackPanel>
-        <TextBlock FontSize="24" Text="{Binding WeatherForecast}" TextAlignment="Center"></TextBlock>
+    <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
+        <TextBlock TextAlignment="Center" FontSize="36" Padding="20" Text="{Binding WeatherLocation}"></TextBlock>
+        <WrapPanel Margin="50">
+            <Border BorderBrush="White" CornerRadius="5" BorderThickness="2" Padding="25" Margin="10">
+                <StackPanel Orientation="Vertical">
+                    <StackPanel Orientation="Horizontal" Margin="5">
+                        <TextBlock>As Of: </TextBlock>
+                        <TextBlock Text="{Binding WeatherTimestamp}"></TextBlock>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="5">
+                        <TextBlock>Condition: </TextBlock>
+                        <TextBlock Text="{Binding  WeatherStatus}"></TextBlock>
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+            <Border BorderBrush="White" CornerRadius="5" BorderThickness="2" Padding="25" Margin="10">
+                <StackPanel Orientation="Vertical">
+                    <StackPanel Orientation="Horizontal" Margin="5">
+                        <TextBlock>Temperature: </TextBlock>
+                        <TextBlock Text="{Binding Temperature}"></TextBlock>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="5">
+                        <TextBlock>Humidity: </TextBlock>
+                        <TextBlock Text="{Binding Humidity}"></TextBlock>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="5">
+                        <TextBlock>Cloud Cover: </TextBlock>
+                        <TextBlock Text="{Binding CloudClover}"></TextBlock>
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+            <Border BorderBrush="White" CornerRadius="5" BorderThickness="2" Padding="25" Margin="10">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock>Moon Phase: </TextBlock>
+                    <TextBlock Text="{Binding MoonPhase}"></TextBlock>
+                </StackPanel>
+            </Border>
+        </WrapPanel>
+        <!-- <TextBlock FontSize="24" Text="{Binding WeatherForecast}" TextAlignment="Center"></TextBlock> -->
     </StackPanel>
 </UserControl>

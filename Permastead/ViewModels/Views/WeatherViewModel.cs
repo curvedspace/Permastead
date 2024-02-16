@@ -1,4 +1,5 @@
 using System;
+using System.Globalization;
 using System.Threading.Tasks;
 using CommunityToolkit.Mvvm.ComponentModel;
 using Models;
@@ -9,6 +10,14 @@ namespace Permastead.ViewModels.Views;
 public partial class WeatherViewModel : ViewModelBase
 {
     [ObservableProperty] private string _weatherForecast = "Weather Unknown";
+
+    [ObservableProperty] private string _weatherTimestamp = "";
+    [ObservableProperty] private string _weatherLocation = "";
+    [ObservableProperty] private string _weatherStatus = "";
+    [ObservableProperty] private string _temperature = "";
+    [ObservableProperty] private string _humidity = "";
+    [ObservableProperty] private string _cloudClover = "";
+    [ObservableProperty] private string _moonPhase = "";
     
     public WeatherViewModel()
     {
@@ -47,7 +56,14 @@ public partial class WeatherViewModel : ViewModelBase
                                   ", Temperature: " + results.Temperature + 
                                   ", Humidity: " + results.Humidity +
                                   ", Moon Phase: " + results.MoonPhase;
-                
+
+                WeatherTimestamp = results.ObservationTime.ToString(CultureInfo.CurrentCulture);
+                WeatherLocation = "Current weather for " + city.Name + ", " + city.Country;
+                Temperature = results.Temperature.ToString(CultureInfo.CurrentCulture);
+                Humidity = results.Humidity.ToString(CultureInfo.CurrentCulture);
+                CloudClover = results.CloudCover.ToString(CultureInfo.CurrentCulture);
+                MoonPhase = results.MoonPhase.ToString(CultureInfo.CurrentCulture);
+                WeatherStatus = results.WeatherStateAlias.ToString(CultureInfo.CurrentCulture);
             }
             catch (Exception e)
             {
