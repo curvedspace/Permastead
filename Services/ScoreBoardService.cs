@@ -242,7 +242,7 @@ public static class ScoreBoardService
         foreach (var e in events)
         {
             
-            if (e.NextDate > DateTime.Today && e.LastTriggerDate < DateTime.Today)
+            if (e.NextDate >= DateTime.Today && e.LastTriggerDate < DateTime.Today)
             {
                 //we have a possible action trigger
                 if (e.NextDate.Date.AddDays(e.WarningDays * -1) < DateTime.Now)
@@ -261,14 +261,15 @@ public static class ScoreBoardService
                             t.StartDate = DateTime.Today;
                             t.ToDoStatus.Id = 1;
                             t.ToDoType.Id = 1;
-                            
-                            var rtn = ToDoRepository.Insert(todo: t);
+
+                            var rtn = ToDoService.CommitRecord(mode, t); //ToDoRepository.Insert(todo: t);
                             
                             newList.Add("Action: " + t.Description + " (" + e.NextDate.ToShortDateString() + ")");
                             
                             e.LastTriggerDate = DateTime.Today;
                             // update the event so we know it was triggered
-                            AnEventRepository.Update(e);
+                            EventsService.CommitRecord(mode, e);
+                            //AnEventRepository.Update(e);
                             
                         }
                     }

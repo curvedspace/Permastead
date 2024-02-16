@@ -36,7 +36,7 @@ namespace Permastead
 
             try
             {
-                GaiaService = new GaiaService();
+                GaiaService = new GaiaService(ServiceMode);
             }
             catch (Exception e)
             {

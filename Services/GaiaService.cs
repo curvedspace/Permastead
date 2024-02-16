@@ -14,7 +14,7 @@ public class GaiaService
     
     public ObservableCollection<RequestResponse> RequestResponses = new ObservableCollection<RequestResponse>();
     
-    public GaiaService()
+    public GaiaService(ServiceMode mode)
     {
         _gaia = new Bot();
         
@@ -30,11 +30,11 @@ public class GaiaService
         _gaia.IsAcceptingUserInput = true; // This switches the user input back on
         
         AddResponse("Hello there, welcome to Permastead.");
-        AddResponse("Quote of the day: " + '\n' + Services.QuoteService.GetRandomQuote(ServiceMode.Local).ToString());
+        AddResponse("Quote of the day: " + '\n' + Services.QuoteService.GetRandomQuote(mode).ToString());
 
         var updateBuilder = new StringBuilder();
-        var updates = new ObservableCollection<string>(ScoreBoardService.CheckForNewToDos(ServiceMode.Local));
-        var upcomingTodos = ToDoService.GetUpcomingToDos(ServiceMode.Local, 3);
+        var updates = new ObservableCollection<string>(ScoreBoardService.CheckForNewToDos(mode));
+        var upcomingTodos = ToDoService.GetUpcomingToDos(mode, 3);
 
         if (upcomingTodos.Count > 0)
         {

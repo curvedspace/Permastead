@@ -268,7 +268,7 @@ namespace DataAccess.Server
                 "AND tds.Description != 'Complete' " +
                 "AND td.Description = @description";
 
-            using (IDbConnection connection = new NpgsqlConnection(DataConnection.GetLocalDataSource()))
+            using (IDbConnection connection = new NpgsqlConnection(DataConnection.GetServerConnectionString()))
             {
                 connection.Open();
                 using (var command = connection.CreateCommand())
