@@ -206,14 +206,15 @@ public partial class PlantingsViewModel : ViewModelBase
     [RelayCommand]
     private void SaveEvent()
     {
-        //if there is a comment, save it.
-
+        // Saves a planting record
+        bool rtnValue;
+        
         if (CurrentItem != null && CurrentItem.Id == 0 && !string.IsNullOrEmpty(CurrentItem.Description))
         {
 
             CurrentItem.CreationDate = DateTime.Now;
- 
-            var rtnValue = DataAccess.Local.PlantingsRepository.Insert(CurrentItem);
+
+            rtnValue = PlantingsService.CommitRecord(AppSession.ServiceMode, CurrentItem);
             
             if (rtnValue)
             {
@@ -226,7 +227,7 @@ public partial class PlantingsViewModel : ViewModelBase
         }
         else
         {
-            var rtnValue = DataAccess.Local.PlantingsRepository.Update(CurrentItem);
+            rtnValue = PlantingsService.CommitRecord(AppSession.ServiceMode, CurrentItem);
             RefreshPlantings();
         }
 

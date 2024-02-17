@@ -15,6 +15,10 @@ namespace Services
             {
                 plants = PlantRepository.GetPlants(DataConnection.GetLocalDataSource());
             }
+            else
+            {
+                plants = DataAccess.Server.PlantRepository.GetPlants(DataConnection.GetServerConnectionString());
+            }
 
             return plants;
         }
@@ -26,6 +30,10 @@ namespace Services
             if (mode == ServiceMode.Local)
             {
                 plant = PlantRepository.GetPlantFromId(DataConnection.GetLocalDataSource(), id);
+            }
+            else
+            {
+                plant = DataAccess.Server.PlantRepository.GetPlantFromId(DataConnection.GetServerConnectionString(), id);
             }
 
             return plant;
@@ -39,12 +47,22 @@ namespace Services
             {
                 if (plant.Id > 0)
                 {
-                    PlantRepository.Update(plant);
+                    if (serviceMode == ServiceMode.Local)
+                        PlantRepository.Update(plant);
+                    else
+                    {
+                        DataAccess.Server.PlantRepository.Update(plant);
+                    }
                 }
                 else
                 {
                     // insert new record
-                    PlantRepository.Insert(plant);
+                    if (serviceMode == ServiceMode.Local)
+                        PlantRepository.Insert(plant);
+                    else
+                    {
+                        DataAccess.Server.PlantRepository.Insert(plant);
+                    }
                 }
             }
 

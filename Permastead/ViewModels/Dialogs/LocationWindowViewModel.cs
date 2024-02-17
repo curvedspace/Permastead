@@ -6,6 +6,7 @@ using CommunityToolkit.Mvvm.Input;
 using Models;
 using Permastead.ViewModels.Views;
 using Serilog;
+using Services;
 
 namespace Permastead.ViewModels.Dialogs;
 
@@ -38,21 +39,35 @@ public partial class LocationWindowViewModel : ViewModelBase
     // The method that will be executed when the command is invoked
     public void SaveRecord()
     {
-
+        bool rtnValue;
+        
         if (_bed != null && _bed.Id == 0 && !string.IsNullOrEmpty(_bed.Description))
         {
         
             _bed.CreationDate = DateTime.Now;
-            var rtnValue = DataAccess.Local.GardenBedRepository.Insert(_bed);
+
+            if (AppSession.ServiceMode == ServiceMode.Local)
+            {
+                rtnValue = DataAccess.Local.GardenBedRepository.Insert(_bed);
+            }
+            else
+            {
+                rtnValue = DataAccess.Server.GardenBedRepository.Insert(_bed);
+            }
+            
             Log.Logger.Information("Planting Location: " + _bed.Description + " saved: " + rtnValue);
         
         }
         else
         {
-            var rtnValue = DataAccess.Local.GardenBedRepository.Update(_bed);
-            
+            if (AppSession.ServiceMode == ServiceMode.Local)
+            {
+                rtnValue = DataAccess.Local.GardenBedRepository.Update(_bed);
+            }
+            else
+            {
+                rtnValue = DataAccess.Server.GardenBedRepository.Update(_bed);
+            }
         }
-
     }
-
 }

@@ -80,29 +80,4 @@ public partial class StarterWindowViewModel : ViewModelBase
         ControlViewModel.RefreshDataOnly();
 
     }
-    
-    // public void SaveObservation()
-    // {
-    //     try
-    //     {
-    //         //saves the seed packet observation to database
-    //         CurrentObservation.Author.Id = 2;
-    //         CurrentObservation.SeedPacket = SeedPacket;
-    //         CurrentObservation.AsOfDate = DateTime.Today;
-    //         CurrentObservation.CommentType.Id = 2;
-    //
-    //         DataAccess.Local.SeedPacketRepository.InsertSeedPacketObservation(DataAccess.DataConnection.GetLocalDataSource(),
-    //             CurrentObservation);
-    //     
-    //         SeedPacketObservations =
-    //             new ObservableCollection<SeedPacketObservation>(
-    //                 Services.PlantingsService.GetObservationsForSeedPacket(AppSession.ServiceMode, SeedPacket.Id));
-    //     }
-    //     catch (Exception e)
-    //     {
-    //         Console.WriteLine(e);
-    //         
-    //     }
-    //     
-    // }
 }

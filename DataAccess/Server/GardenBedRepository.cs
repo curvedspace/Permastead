@@ -45,7 +45,7 @@ public class GardenBedRepository
                 using (IDbCommand command = connection.CreateCommand())
                 {
                     command.CommandText = sql;
-                    command.Parameters.Add(new SqliteParameter("@Id", id));
+                    command.Parameters.Add(new NpgsqlParameter("@Id", id));
                 
                     var dr = command.ExecuteReader();
 

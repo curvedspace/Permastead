@@ -78,7 +78,7 @@ namespace DataAccess.Server
                 using (IDbCommand command = connection.CreateCommand())
                 {
                     command.CommandText = sql;
-                    command.Parameters.Add(new SqliteParameter("@id", id));
+                    command.Parameters.Add(new NpgsqlParameter("@id", id));
                     
                     var dr = command.ExecuteReader();
 
