@@ -20,4 +20,5 @@ Thanks
 - dan0v from Amplitude Soundboard for the publishing code
 - wttr.in weather service
 - Nikita Shishkin for weather project
+- Beto Rodriguez for LiveCharts2
 - The entire Avalonia team
