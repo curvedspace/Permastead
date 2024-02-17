@@ -43,6 +43,10 @@
                         <TextBlock>Cloud Cover: </TextBlock>
                         <TextBlock Text="{Binding CloudClover}"></TextBlock>
                     </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="5">
+                        <TextBlock>Preceipitation: </TextBlock>
+                        <TextBlock Text="{Binding Precipitation}"></TextBlock>
+                    </StackPanel>
                 </StackPanel>
             </Border>
             <Border BorderBrush="White" CornerRadius="5" BorderThickness="2" Padding="25" Margin="10">
