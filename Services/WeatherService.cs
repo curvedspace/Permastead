@@ -66,6 +66,8 @@ public class WeatherService : IWeatherService, IDisposable
     private const string Url = @"https://wttr.in/";
     private readonly HttpClient _client = new();
 
+    public WeatherModel.Root? ModelRoot;
+
     public async Task<WeatherDescriptor> UpdateWeather(City city)
     {
         var url = Path.Combine(Url, city.Name + "," + city.Country + "?format=j1");
@@ -77,7 +79,7 @@ public class WeatherService : IWeatherService, IDisposable
         //ContextManager.Context.Logger.Info("Command update image is executed");
         Console.WriteLine(json);
         
-        WeatherModel.Root myClass = JsonConvert.DeserializeObject<WeatherModel.Root>(json);
+        ModelRoot = JsonConvert.DeserializeObject<WeatherModel.Root>(json);
         
         return JsonConvert.DeserializeObject<WeatherDescriptor>(json) ??
                throw new JsonSerializationException("Bad deserialization weather description");

@@ -18,6 +18,12 @@ public partial class WeatherViewModel : ViewModelBase
     [ObservableProperty] private string _humidity = "";
     [ObservableProperty] private string _cloudClover = "";
     [ObservableProperty] private string _moonPhase = "";
+    [ObservableProperty] private string _moonRise = "";
+    [ObservableProperty] private string _moonSet = "";
+    [ObservableProperty] private string _moonIllumination = "";
+
+    [ObservableProperty] private string _sunRise = "";
+    [ObservableProperty] private string _sunSet = "";
     
     public WeatherViewModel()
     {
@@ -64,6 +70,14 @@ public partial class WeatherViewModel : ViewModelBase
                 CloudClover = results.CloudCover.ToString(CultureInfo.CurrentCulture);
                 MoonPhase = results.MoonPhase.ToString(CultureInfo.CurrentCulture);
                 WeatherStatus = results.WeatherStateAlias.ToString(CultureInfo.CurrentCulture);
+                
+                SunRise = ws.ModelRoot!.weather[0].astronomy[0].sunrise;
+                SunSet = ws.ModelRoot!.weather[0].astronomy[0].sunset;
+                
+                MoonRise = ws.ModelRoot!.weather[0].astronomy[0].moonrise;
+                MoonSet = ws.ModelRoot!.weather[0].astronomy[0].moonset;
+                MoonIllumination = ws.ModelRoot!.weather[0].astronomy[0].moon_illumination;
+                
             }
             catch (Exception e)
             {

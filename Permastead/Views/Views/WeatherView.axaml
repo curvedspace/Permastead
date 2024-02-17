@@ -19,6 +19,14 @@
                         <TextBlock>Condition: </TextBlock>
                         <TextBlock Text="{Binding  WeatherStatus}"></TextBlock>
                     </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="5">
+                        <TextBlock>Sunrise: </TextBlock>
+                        <TextBlock Text="{Binding  SunRise}"></TextBlock>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="5">
+                        <TextBlock>Sunset: </TextBlock>
+                        <TextBlock Text="{Binding  SunSet}"></TextBlock>
+                    </StackPanel>
                 </StackPanel>
             </Border>
             <Border BorderBrush="White" CornerRadius="5" BorderThickness="2" Padding="25" Margin="10">
@@ -38,10 +46,24 @@
                 </StackPanel>
             </Border>
             <Border BorderBrush="White" CornerRadius="5" BorderThickness="2" Padding="25" Margin="10">
-                <StackPanel Orientation="Horizontal">
+                <StackPanel Orientation="Vertical">
+                <StackPanel Orientation="Horizontal" Margin="5">
+                    <TextBlock>Moon Rise: </TextBlock>
+                    <TextBlock Text="{Binding MoonRise}"></TextBlock>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="5">
+                    <TextBlock>Moon Set: </TextBlock>
+                    <TextBlock Text="{Binding MoonSet}"></TextBlock>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="5">
                     <TextBlock>Moon Phase: </TextBlock>
                     <TextBlock Text="{Binding MoonPhase}"></TextBlock>
                 </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="5">
+                        <TextBlock>Illumination: </TextBlock>
+                        <TextBlock Text="{Binding MoonIllumination}"></TextBlock>
+                    </StackPanel>
+            </StackPanel>
             </Border>
         </WrapPanel>
         <!-- <TextBlock FontSize="24" Text="{Binding WeatherForecast}" TextAlignment="Center"></TextBlock> -->
