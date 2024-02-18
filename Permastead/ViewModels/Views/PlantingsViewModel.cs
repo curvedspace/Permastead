@@ -181,6 +181,8 @@ public partial class PlantingsViewModel : ViewModelBase
                 new TextColumn<Planting, string>
                     ("Description", x => x.Description),
                 new TextColumn<Planting, string>
+                    ("State", x => x.State.Description),
+                new TextColumn<Planting, string>
                     ("Author", x => x.Author.FirstName),
                 new TextColumn<Planting, string>
                     ("Type", x => x.Plant.Description),
