@@ -1,4 +1,5 @@
 using System;
+using System.Collections.ObjectModel;
 using System.Globalization;
 using System.Threading.Tasks;
 using CommunityToolkit.Mvvm.ComponentModel;
@@ -24,6 +25,9 @@ public partial class WeatherViewModel : ViewModelBase
     [ObservableProperty] private string _moonIllumination = "";
     [ObservableProperty] private string _sunRise = "";
     [ObservableProperty] private string _sunSet = "";
+
+    public ObservableCollection<WeatherModel.Weather> WeatherForecastItems { get; set; } =
+        new ObservableCollection<WeatherModel.Weather>();
     
     public WeatherViewModel()
     {
@@ -78,7 +82,9 @@ public partial class WeatherViewModel : ViewModelBase
                 MoonRise = ws.ModelRoot!.weather[0].astronomy[0].moonrise;
                 MoonSet = ws.ModelRoot!.weather[0].astronomy[0].moonset;
                 MoonIllumination = ws.ModelRoot!.weather[0].astronomy[0].moon_illumination;
-                
+
+                WeatherForecastItems = new ObservableCollection<WeatherModel.Weather>(ws.ModelRoot.weather);
+
             }
             catch (Exception e)
             {
