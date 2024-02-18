@@ -22,6 +22,7 @@ namespace Permastead.ViewModels
             new ToDoViewModel(),
             new EventsViewModel(),
             new InventoryViewModel(),
+            new PlantsViewModel(),
             new SeedsViewModel(),
             new PlantingsViewModel(),
             new ContactsViewModel(),
@@ -80,37 +81,44 @@ namespace Permastead.ViewModels
         }
         
         [RelayCommand]
-        private void OpenSeedsView()
+        private void OpenPlantsView()
         {
             CurrentView = Views[6];
+            CurrentViewName = "Plants";
+        }
+        
+        [RelayCommand]
+        private void OpenSeedsView()
+        {
+            CurrentView = Views[7];
             CurrentViewName = "Seeds";
         }
         
         [RelayCommand]
         private void OpenPlantingsView()
         {
-            CurrentView = Views[7];
+            CurrentView = Views[8];
             CurrentViewName = "Plantings";
         }
         
         [RelayCommand]
         private void OpenPeopleView()
         {
-            CurrentView = Views[8];
+            CurrentView = Views[9];
             CurrentViewName = "People";
         }
         
         [RelayCommand]
         private void OpenWeatherView()
         {
-            CurrentView = Views[9];
+            CurrentView = Views[10];
             CurrentViewName = "Weather";
         }
         
         [RelayCommand]
         private void OpenSettingsView()
         {
-            CurrentView = Views[10];
+            CurrentView = Views[11];
             CurrentViewName = "Settings";
         }
 

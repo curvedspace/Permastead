@@ -1,0 +1,146 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="750"
+             xmlns:vm="using:Permastead.ViewModels.Views"
+             x:DataType="vm:PlantsViewModel"
+             x:Class="Permastead.Views.Views.PlantsView">
+    
+    <Grid ColumnDefinitions="*,Auto" RowDefinitions="Auto,*">
+        <WrapPanel>
+            <Image Margin="20" Width="24" Height="24" Source="/Assets/plant.png" />
+            <TextBlock FontWeight="Bold" Margin="20,24,20,20">Plants</TextBlock>
+            <Button Command="{Binding RefreshDataCommand}" x:Name="Refresh" HorizontalAlignment="Right" Margin="10,0">Refresh</Button> 
+            <Button Tapped="Add_OnTapped" x:Name="Add" HorizontalAlignment="Right" IsEnabled="False" Margin="0,0">Add</Button> 
+           
+            <TextBlock Name="PlantCount" Text="{Binding PlantsCount , StringFormat='{}{0} total'}" Margin="20,24,20,20"></TextBlock>
+        </WrapPanel>
+        
+        <Panel Grid.Column="0" Grid.Row="1">
+            
+            <SplitView IsPaneOpen="True"
+                       DisplayMode="Inline"
+                       OpenPaneLength="300">
+                <SplitView.Pane>
+                    <ScrollViewer >
+                        <ListBox x:Name="PlantsList" Tapped="PlantsList_OnTapped" ItemsSource="{Binding Plants, Mode=TwoWay}">
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <Border CornerRadius="4">
+                                        <TextBlock TextWrapping="Wrap" Text="{Binding Description}"></TextBlock>
+                                    </Border>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+                    </ScrollViewer>
+                </SplitView.Pane>
+        
+                <Grid Focusable="True" RowDefinitions="Auto,Auto,Auto,*,Auto">
+        
+        <StackPanel Grid.Row="1" VerticalAlignment="Top" HorizontalAlignment="Stretch">
+            <Border Grid.Row="2" BorderBrush="{DynamicResource TextControlBorderBrush}"
+                    BorderThickness="2"
+                    CornerRadius="3"
+                    Padding="10" Margin="20">
+            <Grid ColumnDefinitions="Auto,*,Auto,*" RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,*"  Margin="10">
+                <TextBlock Grid.Row="0" Grid.Column="0" Margin="10,10,0,0">ID:</TextBlock>
+                <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding CurrentPlant.Id }" IsEnabled="False" Margin="10,10,10,10"></TextBox>
+                <Label Grid.Row="0" Margin="10,10,10,10" Grid.Column="2">Code:</Label>
+                <TextBox Grid.Row="0" Grid.Column="3" Text="{Binding CurrentPlant.Code }" Margin="10,10,10,10"></TextBox>
+                <TextBlock Grid.Row="1" Grid.Column="0" Margin="10,10,10,10">Description:</TextBlock>
+                <TextBox Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3"  Text="{Binding CurrentPlant.Description }" Margin="10,10,10,10"></TextBox>
+        
+                <Label Grid.Row="2" Grid.Column="0" Margin="10">Family: </Label>
+                <TextBox Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3" Margin="10" Text="{Binding CurrentPlant.Family}"></TextBox>
+        
+                <Label Grid.Row="3" Grid.Column="0" Margin="10">Start Date:</Label>
+                <CalendarDatePicker Grid.Row="3" Grid.Column="1" Name = "EndDate" Margin="10" SelectedDate="{Binding CurrentPlant.StartDate, Mode=TwoWay}">
+                </CalendarDatePicker>
+        
+                <Label Grid.Row="3" Grid.Column="2" Margin="10">End Date:</Label>
+                <CalendarDatePicker Grid.Row="3" Grid.Column="3" Name = "LastTrigger" Margin="10" SelectedDate="{Binding CurrentPlant.EndDate, Mode=TwoWay}">
+                </CalendarDatePicker>
+                
+                <Label Grid.Row="4" Grid.Column="0" Margin="10">Comment: </Label>
+                <TextBox Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="3" Margin="10" Height="100" TextWrapping="Wrap" Text="{Binding CurrentPlant.Comment}"></TextBox>
+                
+            </Grid>
+            </Border>
+        </StackPanel>
+            
+        <Grid Grid.Row="3" ColumnDefinitions="*,*" RowDefinitions="Auto,*,Auto"  Margin="0">
+            <Border Grid.Column="0" Grid.Row="1"  BorderBrush="{DynamicResource TextControlBorderBrush}"
+                    BorderThickness="2"
+                    CornerRadius="3"
+                    Padding="10" Margin="20">
+                <ScrollViewer>
+                    <StackPanel Margin="5">
+                        <TextBlock Margin="0 ">Starters:</TextBlock>
+                        <ItemsControl ItemsSource="{Binding SeedPackets, Mode=TwoWay}" >
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Border Margin="0,10,0,0"
+                                            CornerRadius="5"
+                                            BorderBrush="LightSlateGray" BorderThickness="1"
+                                            Padding="5">
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Margin="5 0" Text="{Binding Vendor.Description }"/>
+                                            <TextBlock Text="{Binding Code}"/>
+                                            <TextBlock Margin="5 0" Text="{Binding Description }"/>
+                                            <TextBlock Text="{Binding StartDate,StringFormat='yyyy-MM-dd'}"/>
+                                        </StackPanel>
+                                    </Border>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </StackPanel>
+                </ScrollViewer>
+                
+            </Border>
+            <Border Grid.Column="1" Grid.Row="1" BorderBrush="{DynamicResource TextControlBorderBrush}"
+                    BorderThickness="2"
+                    CornerRadius="3"
+                    Padding="10" Margin="20">
+                <ScrollViewer>
+                    <StackPanel Margin="5">
+                        <TextBlock Margin="0 ">Plantings:</TextBlock>
+                        <ItemsControl ItemsSource="{Binding Plantings, Mode=TwoWay}" >
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Border Margin="0,10,0,0"
+                                            CornerRadius="5"
+                                            BorderBrush="LightBlue" BorderThickness="1"
+                                            Padding="5">
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Margin="5 0" Text="{Binding Bed.Code }"/>
+                                            <TextBlock Text="{Binding Code}"/>
+                                            <TextBlock Margin="5 0" Text="{Binding Description }"/>
+                                            <TextBlock Text="{Binding StartDate,StringFormat='yyyy-MM-dd'}"/>
+                                            <TextBlock Foreground="{Binding Colour}" Margin="5 0" 
+                                                       Text="{Binding State.Description }"/>
+                                        </StackPanel>
+                                    </Border>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </StackPanel>
+                </ScrollViewer>
+            </Border>
+        </Grid>
+        
+        <Image Grid.Row="4" Grid.Column="0" HorizontalAlignment="Left" Margin="20" Width="32" Height="32" Source="/Assets/plant.png" />
+        
+        <StackPanel Grid.Row="4" Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,10,0">
+            <!-- <Button Name="SaveButton" Margin="10" Click="SaveButton_OnClick" >Save</Button> -->
+            <!-- <Button Name="CancelButton" Margin="10" Click="CancelButton_OnClick">Cancel</Button> -->
+        </StackPanel>
+    
+    </Grid>
+     
+
+            </SplitView>
+        </Panel>
+        
+    </Grid>
+</UserControl>
