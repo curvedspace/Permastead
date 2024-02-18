@@ -1,3 +1,5 @@
+using System.Reflection;
+
 namespace Models;
 
 public class WeatherModel
@@ -92,6 +94,31 @@ public class WeatherModel
         public string winddirDegree { get; set; }
         public string windspeedKmph { get; set; }
         public string windspeedMiles { get; set; }
+
+        public string DisplayTime
+        {
+            get
+            {
+                switch (time.Length)
+                {
+                    case 0:
+                        return "";
+                        break;
+                    case 1:
+                        return "000" + time;
+                        break;
+                    case 3:
+                        return "0" + time;
+                        break;
+                    case 4:
+                        return time;
+                        break;
+                    default:
+                        return "";
+                        break;
+                }
+            }
+        }
         
         public string Conditions
         {

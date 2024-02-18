@@ -91,7 +91,7 @@
                                 <TextBlock  Margin="0,0,0,5" Text="{Binding date}"/>
                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                                     <Label>Avg: </Label>
-                                    <TextBlock Margin="5 2" FontWeight="Bold" 
+                                    <TextBlock Margin="5 2"
                                                Text="{Binding  avgtempC }"/>
                                 </StackPanel>
                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
@@ -112,11 +112,11 @@
                                 <DataTemplate>
                                     <Border Margin="0,0,0,0"
                                             CornerRadius="5"
-                                            BorderBrush="Gray" BorderThickness="1"
+                                            BorderBrush="Gray" BorderThickness="0"
                                             Padding="2">
                                         <StackPanel Orientation="Horizontal">
                                             
-                                            <TextBlock Margin="5,2" Text="{Binding time}"/>
+                                            <TextBlock Margin="5,2" Text="{Binding DisplayTime}"/>
                                             
                                             <Label>Temp: </Label>
                                             <TextBlock Margin="5 2" FontWeight="Bold" Text="{Binding  tempC }"/>
