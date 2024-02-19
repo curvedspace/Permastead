@@ -26,7 +26,7 @@
                         <!-- <materialIcons:MaterialIcon Kind="EyeCheck" Margin="0"/> -->
                         <Image Width="16" Height="16" Source="/Assets/statistics.png" />
                     </Button>
-                    <Button Name="ObservationsButton" ToolTip.Tip="Observations " Command="{Binding OpenObservationViewCommand}">
+                    <Button Name="ObservationsButton" ToolTip.Tip="Observations " Margin="20,0,0,0" Command="{Binding OpenObservationViewCommand}">
                         <!-- <materialIcons:MaterialIcon Kind="EyeCheck" Margin="0"/> -->
                         <Image Width="16" Height="16" Source="/Assets/web_template_editor.png" />
                     </Button>
