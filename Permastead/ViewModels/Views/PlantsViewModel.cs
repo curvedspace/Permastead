@@ -3,6 +3,8 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Models;
 using Permastead.Views.Views;
+using Serilog;
+using Serilog.Context;
 
 namespace Permastead.ViewModels.Views;
 
@@ -57,5 +59,22 @@ public partial class PlantsViewModel : ViewModelBase
 
     }
 
+    public void SavePlant()
+    {
+        bool rtnValue;
+
+        rtnValue = Services.PlantService.CommitRecord(AppSession.ServiceMode, CurrentPlant);
+        
+        OnPropertyChanged(nameof(CurrentPlant));
+            
+        using (LogContext.PushProperty("PlantsViewModel", this))
+        {
+            if (CurrentPlant.Id == 0) CurrentPlant.Author = AppSession.Instance.CurrentUser;
+            Log.Information("Saved planting: " + CurrentPlant.Description, rtnValue);
+        }
+        
+        RefreshDataOnly();
+        
+    }
     
 }

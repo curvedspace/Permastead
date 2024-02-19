@@ -2,6 +2,7 @@ using System;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Input;
+using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml;
 using Models;
 using Permastead.ViewModels.Dialogs;
@@ -37,7 +38,19 @@ public partial class PlantsView : UserControl
             Console.WriteLine(exception);
             
         }
-        
+    }
 
+    private void SaveButton_OnClick(object? sender, RoutedEventArgs e)
+    {
+        try
+        {
+            PlantsViewModel vm  = (PlantsViewModel)DataContext;
+            vm.SavePlant();
+
+        }
+        catch (Exception exception)
+        {
+            Console.WriteLine(exception);
+        }
     }
 }
