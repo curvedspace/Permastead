@@ -140,6 +140,15 @@ namespace Services
                     rtnValue = ObservationRepository.InsertObservation(DataConnection.GetLocalDataSource(), obs);
                 else
                 {
+                    rtnValue = ObservationRepository.UpdateObservation(DataConnection.GetLocalDataSource(), obs);
+                }
+            }
+            else
+            {
+                if (obs.Id == 0)
+                    rtnValue = DataAccess.Server.ObservationRepository.InsertObservation(DataConnection.GetServerConnectionString(), obs);
+                else
+                {
                     rtnValue = DataAccess.Server.ObservationRepository.UpdateObservation(DataConnection.GetServerConnectionString(), obs);
                 }
             }
