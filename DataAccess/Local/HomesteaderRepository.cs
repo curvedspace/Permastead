@@ -515,6 +515,19 @@ namespace DataAccess.Local
 				AuthorId INTEGER
 			);
 
+			-- INVENTORY OBSERVATION
+			DROP TABLE IF EXISTS InventoryObservation;
+			CREATE TABLE IF NOT EXISTS InventoryObservation(
+				Id INTEGER PRIMARY KEY,
+				InventoryId INTEGER NOT NULL,
+				Comment TEXT NOT NULL,
+				CreationDate TIMESTAMP,
+				StartDate TIMESTAMP NOT NULL,
+				EndDate TIMESTAMP,
+				CommentTypeId INTEGER,
+				AuthorId INTEGER
+			);
+
 			-- OBSERVATION
 			DROP TABLE IF EXISTS Observation;
 			CREATE TABLE IF NOT EXISTS Observation(

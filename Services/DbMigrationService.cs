@@ -373,6 +373,42 @@ public static class DbMigrationService
             Console.WriteLine(e);
         }
         
+                
+        // InventoryObservation
+        try
+        {
+            using (IDbConnection connection = new SqliteConnection(localConnectionString))
+            {
+                var sql = "SELECT * FROM InventoryObservation;";
+                connection.Open();
+
+                using (IDbCommand command = connection.CreateCommand())
+                {
+                    command.CommandText = sql;
+                    var dr = command.ExecuteReader();
+
+                    while (dr.Read())
+                    {
+                        var pgSql = @"INSERT INTO InventoryObservation (inventoryid,comment,creationdate,startdate,enddate,commenttypeid,authorid) VALUES(" + 
+                                    ConvertToNumeric(dr,1) + "," +
+                                    ConvertToText(dr,2) + "," +
+                                    ConvertToText(dr,3) + "," +
+                                    ConvertToText(dr,4) + "," +
+                                    ConvertToDateTime(dr,5) + "," +
+                                    ConvertToNumeric(dr,6) + "," +
+                                    ConvertToNumeric(dr,7) + 
+                                    ")";
+                        Console.WriteLine(pgSql);
+                        RunServerSql(serverConnectionString, pgSql);
+                    }
+                }
+            }
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+        }
+        
         // Observation
         try
         {

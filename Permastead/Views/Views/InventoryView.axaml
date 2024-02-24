@@ -13,7 +13,7 @@
         <vm:InventoryViewModel/>
     </Design.DataContext>
  
-    <Grid ColumnDefinitions="*" RowDefinitions="Auto,*">
+    <Grid ColumnDefinitions="*,Auto" RowDefinitions="Auto,*">
     
       <WrapPanel>
         <Image Margin="20" Width="24" Height="24"  Source="/Assets/clipboard_invoice.png" />
@@ -23,14 +23,34 @@
       <!-- <Button Command="{Binding SaveToDoCommand}" Name="Save" HorizontalAlignment="Right" Margin="10,10,0,10">Add</Button> -->
         <Button Click="Add_OnClick" x:Name="Add" HorizontalAlignment="Right" Margin="10,20">Add</Button> 
         <CheckBox Name="ForSaleOnly" Command="{Binding RefreshInventoryCommand}" IsChecked="{Binding ForSaleOnly, Mode=TwoWay}" Margin="20,0,0,0">For Sale Only</CheckBox>
+        <ToggleButton x:Name="ShowObservations" IsChecked="{Binding ShowObservations}" HorizontalAlignment="Right" Margin="20,0">Show Observations</ToggleButton> 
         <TextBlock Name="InventoryCount" Text="{Binding InventoryCount, StringFormat='{}{0} total'}" Margin="20,26,20,20"></TextBlock>
       </WrapPanel>
    
        
       <TreeDataGrid x:Name="TreeDataGrid" Grid.Row="1" Margin="10" 
                     DoubleTapped="TreeDataGrid_OnDoubleTapped"
+                    Tapped="TreeDataGrid_OnTapped"
                     Source="{Binding InventorySource, Mode=TwoWay}"></TreeDataGrid>
     
+      <Panel Grid.Column="1" Grid.Row="1" MinWidth="300" MaxWidth="400"
+             IsVisible="{Binding ShowObservations}">
+        <StackPanel>
+          <TextBlock TextAlignment="Center" Text="{Binding CurrentItem.Description}"></TextBlock>
+          <TextBox Width="290" Text="{Binding CurrentObservation.Comment}"></TextBox>
+          <Button HorizontalAlignment="Center" Command="{Binding SaveObservationCommand}" Name="AddObservationButton">Add Observation</Button>
+          <ListBox Name="PlantingObservationsList" ItemsSource="{Binding InventoryObservations, Mode=TwoWay }" 
+                   Margin="30" ScrollViewer.VerticalScrollBarVisibility="Auto">
+            <ListBox.ItemTemplate>
+              <DataTemplate>
+                <Border CornerRadius="4">
+                  <TextBlock TextWrapping="WrapWithOverflow" Text="{Binding FullDescription }"></TextBlock>
+                </Border>
+              </DataTemplate>
+            </ListBox.ItemTemplate>
+          </ListBox>
+        </StackPanel>
+      </Panel>
   </Grid>
 
 </UserControl>

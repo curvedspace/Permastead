@@ -88,4 +88,61 @@ public class InventoryService
         
     }
     
+    public static List<InventoryObservation> GetObservationsForInventoryItem(ServiceMode mode, long id)
+    {
+        var obs = new List<InventoryObservation>();
+
+        if (mode == ServiceMode.Local)
+        {
+            obs = InventoryRepository.GetAllObservationsForInventoryItem(DataConnection.GetLocalDataSource(), id);
+        }
+        else
+        {
+            obs = DataAccess.Server.InventoryRepository.GetAllObservationsForInventoryItem(DataConnection.GetServerConnectionString(), id);
+        }
+
+        return obs;
+    }
+    
+    public static List<InventoryObservation> GetAllPersonObservations(ServiceMode mode)
+    {
+        var obs = new List<InventoryObservation>();
+
+        if (mode == ServiceMode.Local)
+        {
+            obs = InventoryRepository.GetAllInventoryObservations(DataConnection.GetLocalDataSource());
+        }
+        else
+        {
+            obs = DataAccess.Server.InventoryRepository.GetAllInventoryObservations(DataConnection.GetServerConnectionString());
+        }
+
+        return obs;
+    }
+
+    public static bool AddInventoryObservation(ServiceMode mode, InventoryObservation obs)
+    {
+        bool rtnValue = false;
+        
+        if (obs != null)
+        {
+            if (obs.Inventory.Id > 0)
+            {
+                // insert new record
+                if (mode == ServiceMode.Local)
+                {
+                    InventoryRepository.InsertInventoryObservation(
+                        DataConnection.GetLocalDataSource(), obs);
+                }
+                else
+                {
+                    DataAccess.Server.InventoryRepository.InsertInventoryObservation(
+                        DataConnection.GetServerConnectionString(), 
+                        obs);
+                }
+            }
+        }
+
+        return rtnValue;
+    }
 }

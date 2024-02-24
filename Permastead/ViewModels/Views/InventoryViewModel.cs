@@ -34,8 +34,24 @@ public partial class InventoryViewModel: ViewModelBase
     [ObservableProperty] 
     private bool _forSaleOnly = false;
     
+    [ObservableProperty] 
+    private bool _showObservations;
+    
+    [ObservableProperty] private InventoryObservation _currentObservation = new InventoryObservation();
+    
+    [ObservableProperty]
+    private ObservableCollection<InventoryObservation> _inventoryObservations = new ObservableCollection<InventoryObservation>();
+    
     public FlatTreeDataGridSource<Inventory> InventorySource { get; set; }
 
+    public void GetInventoryObservations()
+    {
+        if (CurrentItem != null)
+        {
+            InventoryObservations = new ObservableCollection<InventoryObservation>(Services.InventoryService.GetObservationsForInventoryItem(AppSession.ServiceMode, CurrentItem.Id));
+        }
+    }
+    
     [RelayCommand]
     // The method that will be executed when the command is invoked
     private void SaveToDo()
@@ -94,6 +110,8 @@ public partial class InventoryViewModel: ViewModelBase
             RefreshInventory();
             
             if (_inventory.Count > 0) CurrentItem = _inventory.FirstOrDefault();
+            
+            GetInventoryObservations();
         }
         catch (Exception ex)
         {
@@ -105,6 +123,32 @@ public partial class InventoryViewModel: ViewModelBase
     private void RefreshInventory()
     {
         this.RefreshData();
+    }
+    
+    [RelayCommand]
+    private void SaveObservation()
+    {
+        try
+        {
+            //saves the planting observation to database
+            CurrentObservation.Author!.Id = AppSession.Instance.CurrentUser.Id;
+            CurrentObservation.Inventory = CurrentItem;
+            CurrentObservation.AsOfDate = DateTime.Today;
+            CurrentObservation.CommentType!.Id = 2;
+            
+            InventoryService.AddInventoryObservation(AppSession.ServiceMode, CurrentObservation);
+            
+            InventoryObservations =
+                new ObservableCollection<InventoryObservation>(
+                    Services.InventoryService.GetObservationsForInventoryItem(AppSession.ServiceMode, CurrentItem.Id));
+
+            CurrentObservation = new InventoryObservation();
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+        }
+        
     }
 
     public void RefreshData()
@@ -159,15 +203,17 @@ public partial class InventoryViewModel: ViewModelBase
                     ("Original Value", x => x.OriginalValue),
                 new TextColumn<Inventory, double>
                     ("Current Value", x => x.CurrentValue),
-                new CheckBoxColumn<Inventory>
-                (
-                    "For Sale",
-                    x => x.ForSale,
-                    (o, v) => o.ForSale = v,
-                    options: new()
-                    {
-                        CanUserResizeColumn = false, CanUserSortColumn = true
-                    }),
+                new TextColumn<Inventory, bool>
+                    ("For Sale", x => x.ForSale),
+                // new CheckBoxColumn<Inventory>
+                // (
+                //     "For Sale",
+                //     x => x.ForSale,
+                //     (o, v) => o.ForSale = v,
+                //     options: new()
+                //     {
+                //         CanUserResizeColumn = false, CanUserSortColumn = true
+                //     }),
                 new TextColumn<Inventory, string>
                     ("Notes", x => x.Notes)
             },

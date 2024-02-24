@@ -30,6 +30,7 @@ public partial class InventoryView : UserControl
             var vm = (InventoryViewModel)DataContext;
             
             vm.CurrentItem = (Inventory)current.RowSelection!.SelectedItem;
+            vm.GetInventoryObservations();
         }
     }
 
