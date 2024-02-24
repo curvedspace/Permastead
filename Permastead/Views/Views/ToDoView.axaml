@@ -14,7 +14,7 @@
         <vm:ToDoViewModel/>
     </Design.DataContext>
     
-    <Grid ColumnDefinitions="*" RowDefinitions="Auto, Auto, Auto, Auto,*">
+    <Grid ColumnDefinitions="*" RowDefinitions="Auto,*">
     
       <WrapPanel>
       <!-- <materialIcons:MaterialIcon Kind="Shovel" Margin="20"/> -->
@@ -32,14 +32,14 @@
       
     </WrapPanel>
       
-    <Panel Grid.Row="3">
-      <TreeDataGrid x:Name="TodoGrid" Grid.Row="1" Margin="10" Source="{Binding ToDosSource, Mode=TwoWay}" 
+    <!-- <Panel > -->
+      <TreeDataGrid Grid.Row="1" x:Name="TodoGrid" Margin="10" Source="{Binding ToDosSource, Mode=TwoWay}" 
                     Tapped="TodoGrid_OnTapped"
                     DoubleTapped="TodoGrid_OnDoubleTapped"
                     CanUserResizeColumns="True">
       </TreeDataGrid>
       
-    </Panel>
+    <!-- </Panel> -->
     
   </Grid>
 </UserControl>
