@@ -72,5 +72,6 @@ public partial class ToDoView : UserControl
         win.WindowStartupLocation = WindowStartupLocation.CenterScreen;
                 
         win.Show();
+        
     }
 }

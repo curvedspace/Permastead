@@ -63,7 +63,12 @@ public partial class ToDoViewModel : ViewModelBase
     }
 
     [RelayCommand]
-    private void RefreshToDo()
+    private void Refresh()
+    {
+        RefreshToDo();
+    }
+
+    public void RefreshToDo()
     {
         _todos.Clear();
         _activeToDos = 0;
@@ -97,6 +102,8 @@ public partial class ToDoViewModel : ViewModelBase
             TextTrimming = TextTrimming.None,
             TextWrapping = TextWrapping.Wrap, TextAlignment = TextAlignment.Center
         };
+        
+        OnPropertyChanged(nameof(_todos));
         
         ToDosSource = new FlatTreeDataGridSource<ToDo>(_todos)
         {
@@ -147,6 +154,12 @@ public partial class ToDoViewModel : ViewModelBase
         else
         {
             var rtnValue = Services.ToDoService.CommitRecord(AppSession.ServiceMode, CurrentItem);
+            
+            if (rtnValue)
+            {
+                _todos.Add(CurrentItem);
+            }
+            
             RefreshToDo();
         }
     }

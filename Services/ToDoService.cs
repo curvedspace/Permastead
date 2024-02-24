@@ -110,11 +110,11 @@ namespace Services
                 {
                     if (mode == ServiceMode.Local)
                     {
-                        ToDoRepository.Update(todo);
+                        rtnValue = ToDoRepository.Update(todo);
                     }
                     else
                     {
-                        DataAccess.Server.ToDoRepository.Update(todo);
+                        rtnValue = DataAccess.Server.ToDoRepository.Update(todo);
                     }
                 }
                 else
@@ -122,11 +122,11 @@ namespace Services
                     // insert new record
                     if (mode == ServiceMode.Local)
                     {
-                        ToDoRepository.Insert(todo);
+                        rtnValue = ToDoRepository.Insert(todo);
                     }
                     else
                     {
-                        DataAccess.Server.ToDoRepository.Insert(todo);
+                        rtnValue = DataAccess.Server.ToDoRepository.Insert(todo);
                     }
                 }
             }
