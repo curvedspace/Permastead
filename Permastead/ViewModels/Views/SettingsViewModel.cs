@@ -176,5 +176,10 @@ public partial class SettingsViewModel : ViewModelBase
         Services.DbMigrationService.MigrateLocalToServer(DataAccess.DataConnection.GetLocalDataSource(), DataAccess.DataConnection.GetServerDataSource());
     }
 
+    [RelayCommand]
+    private void MigrateDbToLocal()
+    {
+        Services.DbMigrationService.MigrateServerToLocal(DataAccess.DataConnection.GetLocalDataSource(), DataAccess.DataConnection.GetServerDataSource());
+    }
 
 }

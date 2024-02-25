@@ -952,7 +952,19 @@ public static class DbMigrationService
         Console.WriteLine("Migrating to Local DB");
         
         // drop/setup the tables
-        DataAccess.Local.HomesteaderRepository.DatabaseExists();
+        var exists = DataAccess.Local.HomesteaderRepository.DatabaseExists(false, false);
+        if (exists)
+        {
+            var expectedPath = DataAccess.DataConnection.GetDefaultDatabaseLocation();
+            var fi = new FileInfo(expectedPath);
+            
+            if (fi.Exists)
+            {
+                fi.Delete();
+            }
+            
+            DataAccess.Local.HomesteaderRepository.CreateDatabase(false);
+        }
         
         // now migrate the tables
         

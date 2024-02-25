@@ -13,7 +13,7 @@ namespace DataAccess.Local
         /// </summary>
         /// <param name="forceReset">If true, forces a database recreation.</param>
         /// <returns>True if the local database exists, False if it can't be found or created.</returns>
-        public static bool DatabaseExists(bool forceReset = false)
+        public static bool DatabaseExists(bool forceReset = false, bool populateDefaultData = true)
         {
             var rtnValue = false;
             var expectedPath = DataAccess.DataConnection.GetDefaultDatabaseLocation();
@@ -32,7 +32,7 @@ namespace DataAccess.Local
                     if (fi.Directory != null)
                     {
 	                    fi.Directory.Create();
-	                    CreateDatabase();
+	                    CreateDatabase(populateDefaultData);
 	                    rtnValue = true;
                     }
                     else
@@ -54,12 +54,12 @@ namespace DataAccess.Local
         /// Creates the Sqlite database, or recreates it if it already exists.
         /// </summary>
         /// <returns></returns>
-        private static bool CreateDatabase()
+        public static bool CreateDatabase(bool populateDefaultData)
         {
             var rtnValue = false;
 
             CreateSchema();
-            CreateData();
+            if (populateDefaultData) CreateData();
 
             return rtnValue;
         }
