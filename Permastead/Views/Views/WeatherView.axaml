@@ -46,7 +46,7 @@
                         <TextBlock Text="{Binding CloudClover}"></TextBlock>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" Margin="5">
-                        <TextBlock>Preceipitation: </TextBlock>
+                        <TextBlock>Precipitation: </TextBlock>
                         <TextBlock Text="{Binding Precipitation}"></TextBlock>
                     </StackPanel>
                 </StackPanel>
@@ -95,11 +95,11 @@
                                                Text="{Binding  avgtempC }"/>
                                 </StackPanel>
                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                    <Label>Max: </Label>
+                                    <Label>High: </Label>
                                     <TextBlock Margin="2" Text="{Binding maxtempC}"/>
                                 </StackPanel>
                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                    <Label>Min: </Label>
+                                    <Label>Low: </Label>
                                     <TextBlock Margin="2" Text="{Binding mintempC}"/>
                                 </StackPanel>
                                 
