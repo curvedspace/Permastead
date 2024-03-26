@@ -1089,6 +1089,9 @@ namespace DataAccess.Local
             p = new Plant { Author = new Person(1), Code = "PUMPKIN", Description = "Pumpkin" };
             PlantRepository.Insert(p);
 
+            p = new Plant { Author = new Person(1), Code = "CURRANT", Description = "Currant" };
+            PlantRepository.Insert(p);
+            
             #endregion
 
             #region ToDos
