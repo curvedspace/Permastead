@@ -577,6 +577,8 @@ namespace DataAccess.Local
 				EndDate TIMESTAMP,
 				Generations INTEGER,
 				SeasonalityId INTEGER,
+				PacketCount INTEGER,
+				Exchange BOOLEAN,
 				Species TEXT,
 				PlantId INTEGER,
 				VendorId INTEGER,

@@ -119,6 +119,10 @@ public partial class SeedsViewModel : ViewModelBase
                     ("DTH", x => x.DaysToHarvest),
                 new TextColumn<SeedPacket, long>
                     ("Gens", x => x.Generations),
+                new TextColumn<SeedPacket, long>
+                    ("Count", x => x.PacketCount),
+                new TextColumn<SeedPacket, bool>
+                    ("Exchange", x => x.Exchange),
                 new TextColumn<SeedPacket, string>
                     ("Vendor", x => x.Vendor.Description),
                 new TextColumn<SeedPacket, string>

@@ -554,6 +554,8 @@ namespace DataAccess.Server
 				Code TEXT,
 				Generations INTEGER,
 				SeasonalityId INTEGER,
+				PacketCount INTEGER,
+				Exchange BOOLEAN,
 				Species TEXT
 			);
 

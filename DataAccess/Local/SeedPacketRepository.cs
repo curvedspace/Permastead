@@ -27,7 +27,7 @@ public class SeedPacketRepository
                 string sqlQuery =
                     "SELECT sp.Id, sp.Description, sp.Instructions, sp.DaysToHarvest, sp.CreationDate, sp.StartDate, sp.EndDate," +
                     "v.Id, v.Code, v.Description, p.Id, p.FirstName, p.LastName, p2.Id, p2.Code, p2.Description, sp.Code, sp.Generations, " +
-                    "s.Id, s.Code, s.Description, sp.Species " +
+                    "s.Id, s.Code, s.Description, sp.Species, sp.PacketCount, sp.Exchange " +
                     "FROM SeedPacket sp, Vendor v, Person p, Plant p2, Seasonality s " +
                     "WHERE sp.PlantId = p2.Id AND sp.VendorId = v.Id AND sp.AuthorId = p.Id AND s.Id = sp.SeasonalityId AND sp.Id = @id";
                 
@@ -76,6 +76,9 @@ public class SeedPacketRepository
                         
                         packet.IsPlanted = currentPackets.Contains(packet.Id);
                         
+                        packet.PacketCount = Convert.ToInt64(dr[22].ToString());
+                        packet.Exchange =  Convert.ToBoolean(Convert.ToInt32(dr[23].ToString()));
+                        
                     }
                 }
             }
@@ -94,8 +97,8 @@ public class SeedPacketRepository
         {
             using (IDbConnection db = new SqliteConnection(DataConnection.GetLocalDataSource()))
             {
-                string sqlQuery = "INSERT INTO SeedPacket (Code, Description, Instructions, DaysToHarvest, CreationDate, StartDate, EndDate, PlantId, VendorId, AuthorId, Generations, SeasonalityId, Species) " +
-                                  "VALUES(@Code, @Description, @Instructions, @DaysToHarvest, CURRENT_DATE, @StartDate, @EndDate, @PlantId, @VendorId, @AuthorId, @Generations, @SeasonalityId, @Species);";
+                string sqlQuery = "INSERT INTO SeedPacket (Code, Description, Instructions, DaysToHarvest, CreationDate, StartDate, EndDate, PlantId, VendorId, AuthorId, Generations, SeasonalityId, Species, PacketCount, Exchange) " +
+                                  "VALUES(@Code, @Description, @Instructions, @DaysToHarvest, CURRENT_DATE, @StartDate, @EndDate, @PlantId, @VendorId, @AuthorId, @Generations, @SeasonalityId, @Species, @PacketCount, @Exchange);";
 
                 return (db.Execute(sqlQuery, seedPacket) == 1);
             }
@@ -115,7 +118,7 @@ public class SeedPacketRepository
                 string sqlQuery = "UPDATE SeedPacket SET Code = @Code, Description = @Description, " +
                     "Instructions = @Instructions, DaysToHarvest = @DaysToHarvest, StartDate = @StartDate, " +
                     "EndDate = @EndDate, PlantId = @PlantId, VendorId = @VendorId, AuthorId = @AuthorId, Generations = @Generations, " +
-                    "SeasonalityId = @SeasonalityId, Species = @Species " +
+                    "SeasonalityId = @SeasonalityId, Species = @Species, PacketCount = @PacketCount, Exchange = @Exchange " +
                     "WHERE Id = @Id;";
 
                 return (db.Execute(sqlQuery, seedPacket) == 1);
@@ -137,7 +140,7 @@ public class SeedPacketRepository
 
         string sqlQuery = "SELECT sp.Id, sp.Description, sp.Instructions, sp.DaysToHarvest, sp.CreationDate, sp.StartDate, sp.EndDate," +
                     "v.Id, v.Code, v.Description, p.Id, p.FirstName, p.LastName, p2.Id, p2.Code, p2.Description, sp.Code, sp.Generations, " +
-                    "s.Id, s.Code, s.Description, sp.Species " +
+                    "s.Id, s.Code, s.Description, sp.Species, sp.PacketCount, sp.Exchange " +
                     "FROM SeedPacket sp, Vendor v, Person p, Plant p2, Seasonality s " +
                     "WHERE sp.PlantId = p2.Id AND sp.VendorId = v.Id AND s.Id = sp.SeasonalityId AND sp.AuthorId = p.Id ORDER BY p2.Description";
 
@@ -185,6 +188,9 @@ public class SeedPacketRepository
                     packet.Seasonality.Description = dr[20].ToString();
                     
                     packet.Species = dr[21].ToString();
+                    
+                    packet.PacketCount = Convert.ToInt64(dr[22].ToString());
+                    packet.Exchange =  Convert.ToBoolean(Convert.ToInt32(dr[23].ToString()));
 
                     packets.Add(packet);
                 }
@@ -204,7 +210,7 @@ public class SeedPacketRepository
 
         string sqlQuery = "SELECT sp.Id, sp.Description, sp.Instructions, sp.DaysToHarvest, sp.CreationDate, sp.StartDate, sp.EndDate," +
                     "v.Id, v.Code, v.Description, p.Id, p.FirstName, p.LastName, p2.Id, p2.Code, p2.Description, sp.Code, sp.Generations, " +
-                    "s.Id, s.Code, s.Description, sp.Species " +
+                    "s.Id, s.Code, s.Description, sp.Species, sp.PacketCount, sp.Exchange " +
                     "FROM SeedPacket sp, Vendor v, Person p, Plant p2, Seasonality s " +
                     "WHERE sp.PlantId = p2.Id AND sp.VendorId = v.Id AND s.Id = sp.SeasonalityId AND sp.AuthorId = p.Id " + 
                     "AND sp.PlantId = @id " +
@@ -254,6 +260,9 @@ public class SeedPacketRepository
                     packet.Seasonality.Description = dr[20].ToString();
                     
                     packet.Species = dr[21].ToString();
+                    
+                    packet.PacketCount = Convert.ToInt64(dr[22].ToString());
+                    packet.Exchange =  Convert.ToBoolean(Convert.ToInt32(dr[23].ToString()));
 
                     packets.Add(packet);
                 }
@@ -273,7 +282,7 @@ public class SeedPacketRepository
 
         string sqlQuery = "SELECT sp.Id, sp.Description, sp.Instructions, sp.DaysToHarvest, sp.CreationDate, sp.StartDate, sp.EndDate," +
                     "v.Id, v.Code, v.Description, p.Id, p.FirstName, p.LastName, p2.Id, p2.Code, p2.Description, sp.Code, sp.Generations, " +
-                    "s.Id, s.Code, s.Description, sp.Species " +
+                    "s.Id, s.Code, s.Description, sp.Species, sp.PacketCount, sp.Exchange " +
                     "FROM SeedPacket sp, Vendor v, Person p, Plant p2, Seasonality s " +
                     "WHERE sp.PlantId = p2.Id AND sp.VendorId = v.Id AND s.Id = sp.SeasonalityId AND sp.AuthorId = p.Id ORDER BY sp.Description";
 
@@ -320,6 +329,9 @@ public class SeedPacketRepository
                     packet.Species = dr[21].ToString();
                     
                     packet.IsPlanted = currentPackets.Contains(packet.Id);
+                    
+                    packet.PacketCount = Convert.ToInt64(dr[22].ToString());
+                    packet.Exchange =  Convert.ToBoolean(Convert.ToInt32(dr[23].ToString()));
 
                     packets.Add(packet);
                 }

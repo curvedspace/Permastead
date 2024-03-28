@@ -46,6 +46,10 @@ public class SeedPacket
 
     public DateTime CreationDate { get; set; } = DateTime.UtcNow;
 
+    public bool Exchange { get; set; }
+    
+    public long PacketCount { get; set; } = 1;
+
     public override bool Equals(object? obj)
     {
         if (obj == null) return false;
@@ -97,6 +101,7 @@ public class SeedPacket
 
         this.StartDate = DateTime.UtcNow;
         this.EndDate = new DateTime(2100, 12, 31);
-        
+
+        this.Exchange = false;
     }
 }
