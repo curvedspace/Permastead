@@ -92,7 +92,7 @@ namespace DataAccess
 
         public static long GetCurrentUserId()
         {
-            long currentUserId = 0;
+            long currentUserId = 2; //default to main user
             var userFolder = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
             var isWindows = System.Runtime.InteropServices.RuntimeInformation.IsOSPlatform(OSPlatform.Windows);
             
@@ -117,7 +117,7 @@ namespace DataAccess
                 }
                 catch (Exception e)
                 {
-                    currentUserId = 0;
+                    currentUserId = 2; //default to main user
                 }
             }
 
