@@ -102,7 +102,7 @@ public class GaiaService
         }
         else
         {
-            rtnList = DataAccess.Server.ObservationRepository.SearchObservations(DataConnection.GetLocalDataSource(), inputString);
+            rtnList = DataAccess.Server.ObservationRepository.SearchObservations(DataConnection.GetServerConnectionString(), inputString);
         }
         
         return rtnList; 
