@@ -60,12 +60,7 @@ public partial class PlantingsViewModel : ViewModelBase
     {
         try
         {
-            _beds = new ObservableCollection<GardenBed>(Services.PlantingsService.GetGardenBeds(AppSession.ServiceMode));
-            _seedPackets = new ObservableCollection<SeedPacket>(Services.PlantingsService.GetSeedPackets(AppSession.ServiceMode, false));
-            _plants = new ObservableCollection<Plant>(Services.PlantingsService.GetPlants(AppSession.ServiceMode));
-            _people = new ObservableCollection<Person>(Services.PersonService.GetAllPeople(AppSession.ServiceMode));
-            _vendors = new ObservableCollection<Vendor>(VendorService.GetAll(AppSession.ServiceMode));
-
+            
             _currentItem = new Planting();
             
             PlantingObservations =
@@ -84,6 +79,13 @@ public partial class PlantingsViewModel : ViewModelBase
     [RelayCommand]
     private void RefreshPlantings()
     {
+        _beds = new ObservableCollection<GardenBed>(Services.PlantingsService.GetGardenBeds(AppSession.ServiceMode));
+        _seedPackets = new ObservableCollection<SeedPacket>(Services.PlantingsService.GetSeedPackets(AppSession.ServiceMode, false));
+        _plants = new ObservableCollection<Plant>(Services.PlantingsService.GetPlants(AppSession.ServiceMode));
+        _people = new ObservableCollection<Person>(Services.PersonService.GetAllPeople(AppSession.ServiceMode));
+        _vendors = new ObservableCollection<Vendor>(VendorService.GetAll(AppSession.ServiceMode));
+
+        
         SelectedNodes = new ObservableCollection<Node>();
         Nodes = new ObservableCollection<Node>();
         
