@@ -277,6 +277,10 @@ public static class ScoreBoardService
                     {
                         //just post as a warning for dashboard?
                         newList.Add("Informational: " + e.Description + " (" + e.NextDate.ToShortDateString() + ")");
+                        
+                        e.LastTriggerDate = DateTime.Today;
+                        // update the event so we know it was triggered
+                        EventsService.CommitRecord(mode, e);
                     }
                 }
             }
