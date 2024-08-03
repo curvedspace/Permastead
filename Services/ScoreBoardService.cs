@@ -257,7 +257,7 @@ public static class ScoreBoardService
                             t.Assigner = new Person(1);
                             t.Description = e.Description;
                             t.CreationDate = DateTime.Now;
-                            t.DueDate = e.NextDate;
+                            t.DueDate = e.NextDate.AddDays(e.WarningDays);
                             t.StartDate = DateTime.Today;
                             t.ToDoStatus.Id = 1;
                             t.ToDoType.Id = 1;

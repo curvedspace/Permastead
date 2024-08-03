@@ -80,7 +80,7 @@ public class AnEvent
             }
             
             // check for values in the past, meaning we missed the date. In this case set NextDate to now
-            if (rtnDate < DateTime.Today && LastUpdatedDate < DateTime.Today)
+            if (rtnDate < DateTime.Today && LastUpdatedDate < DateTime.Today && LastUpdatedDate <= DateTime.Today.AddDays(-1 * WarningDays))
                 rtnDate = DateTime.Today;
 
             return rtnDate;
