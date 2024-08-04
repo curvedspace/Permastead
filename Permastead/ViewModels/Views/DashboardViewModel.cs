@@ -246,7 +246,7 @@ public partial class DashboardViewModel : ViewModelBase
     private void CreateObsActChart()
     {
         var actions = Services.ToDoService.GetAllToDos(AppSession.ServiceMode);
-        var observations = Services.ObservationsService.GetObservations(AppSession.ServiceMode);
+        var observations = Services.ObservationsService.GetObservationsForAllEntities(AppSession.ServiceMode);
 
         var actionsByMonth = new Dictionary<int, double>();
         var observationsByMonth = new Dictionary<int, double>();
