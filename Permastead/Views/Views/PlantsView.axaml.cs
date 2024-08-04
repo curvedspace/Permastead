@@ -7,6 +7,7 @@ using Avalonia.Markup.Xaml;
 using Models;
 using Permastead.ViewModels.Dialogs;
 using Permastead.ViewModels.Views;
+using Permastead.Views.Dialogs;
 
 namespace Permastead.Views.Views;
 
@@ -19,7 +20,31 @@ public partial class PlantsView : UserControl
 
     private void Add_OnTapped(object? sender, TappedEventArgs e)
     {
+        // add a new plant via a dialog
+        try
+        {
+            PlantsViewModel plantVm  = (PlantsViewModel)DataContext;
+            
+            
+            var plantWindow = new PlantWindow();
+            var vm = new PlantWindowViewModel();
+            
+            plantWindow.DataContext = vm;
         
+            plantWindow.Topmost = true;
+            plantWindow.Width = 900;
+            plantWindow.Height = 700;
+            plantWindow.Opacity = 0.95;
+            plantWindow.Title = "New Plant";
+            plantWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+                
+            plantWindow.Show();
+
+        }
+        catch (Exception exception)
+        {
+            Console.WriteLine(exception);
+        }
     }
 
     private void PlantsList_OnTapped(object? sender, TappedEventArgs e)
