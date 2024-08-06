@@ -79,4 +79,14 @@ public partial class InventoryView : UserControl
                 
         win.Show();
     }
+
+    private void AddGroupMenuItem_OnClick(object? sender, RoutedEventArgs e)
+    {
+        
+    }
+
+    private void AddTypeMenuItem_OnClick(object? sender, RoutedEventArgs e)
+    {
+        
+    }
 }
