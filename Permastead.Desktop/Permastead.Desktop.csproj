@@ -8,15 +8,15 @@
     <BuiltInComInteropSupport>true</BuiltInComInteropSupport>
     <ApplicationManifest>app.manifest</ApplicationManifest>
     <StartupObject></StartupObject>
-    <AssemblyVersion>0.0.4</AssemblyVersion>
-    <FileVersion>0.0.4</FileVersion>
+    <AssemblyVersion>0.0.5</AssemblyVersion>
+    <FileVersion>0.0.5</FileVersion>
     <Version>0.0.3</Version>
     <PublishSingleFile>true</PublishSingleFile>
     <ApplicationIcon>..\Permastead\Assets\permastead.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Avalonia.Desktop" Version="11.1.1" />
+    <PackageReference Include="Avalonia.Desktop" Version="11.1.2" />
   </ItemGroup>
 
   <ItemGroup>
