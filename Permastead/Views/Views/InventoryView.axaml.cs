@@ -82,11 +82,35 @@ public partial class InventoryView : UserControl
 
     private void AddGroupMenuItem_OnClick(object? sender, RoutedEventArgs e)
     {
+        var win = new InventoryGroupWindow();
+        var vm = new InventoryGroupWindowViewModel(new InventoryGroup(), (InventoryViewModel)DataContext);
         
+        win.DataContext = vm;
+        
+        win.Topmost = true;
+        win.Width = 600;
+        win.Height = 300;
+        win.Opacity = 0.95;
+        win.Title = "New Inventory Group";
+        win.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+                
+        win.Show();
     }
 
     private void AddTypeMenuItem_OnClick(object? sender, RoutedEventArgs e)
     {
+        var win = new InventoryTypeWindow();
+        var vm = new InventoryTypeWindowViewModel(new InventoryType(), (InventoryViewModel)DataContext);
         
+        win.DataContext = vm;
+        
+        win.Topmost = true;
+        win.Width = 600;
+        win.Height = 300;
+        win.Opacity = 0.95;
+        win.Title = "New Inventory Type";
+        win.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+                
+        win.Show();
     }
 }

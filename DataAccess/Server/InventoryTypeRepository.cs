@@ -43,5 +43,33 @@ namespace DataAccess.Server
                 return false;
             }
         }
+        
+        
+        public static bool Update(InventoryType type)
+        {
+            try
+            {
+                
+                if (type != null)
+                {
+                    using (IDbConnection db = new NpgsqlConnection(DataConnection.GetServerConnectionString()))
+                    {
+                        string sqlQuery =
+                            "UPDATE InventoryType SET Description = @Description, AuthorId = @AuthorId, StartDate = @StartDate, EndDate = @EndDate " +
+                            "WHERE Id = @Id;";
+
+                        return (db.Execute(sqlQuery, type) == 1);
+                    }
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch
+            {
+                return false;
+            }
+        }
     }
 }

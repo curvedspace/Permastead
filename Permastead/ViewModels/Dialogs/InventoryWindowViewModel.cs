@@ -31,8 +31,8 @@ public partial class InventoryWindowViewModel: ViewModelBase
         try
         {
             //get code tables
-            _inventoryGroups = new ObservableCollection<InventoryGroup>(Services.InventoryService.GetAllInventoryGroups(AppSession.ServiceMode));
-            _inventoryTypes = new ObservableCollection<InventoryType>(Services.InventoryService.GetAllInventoryTypes(AppSession.ServiceMode));
+            _inventoryGroups = new ObservableCollection<InventoryGroup>(Services.InventoryGroupService.GetAllInventoryGroups(AppSession.ServiceMode));
+            _inventoryTypes = new ObservableCollection<InventoryType>(Services.InventoryTypeService.GetAllInventoryTypes(AppSession.ServiceMode));
             _people = new ObservableCollection<Person>(Services.PersonService.GetAllPeople(AppSession.ServiceMode));
             
             _currentItem = new Inventory();
@@ -74,4 +74,5 @@ public partial class InventoryWindowViewModel: ViewModelBase
         ControlViewModel.RefreshData();
         
     }
+    
 }

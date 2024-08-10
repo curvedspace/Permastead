@@ -101,8 +101,8 @@ public partial class InventoryViewModel: ViewModelBase
         try
         {
             //get code tables
-            _inventoryGroups = new ObservableCollection<InventoryGroup>(Services.InventoryService.GetAllInventoryGroups(AppSession.ServiceMode));
-            _inventoryTypes = new ObservableCollection<InventoryType>(Services.InventoryService.GetAllInventoryTypes(AppSession.ServiceMode));
+            _inventoryGroups = new ObservableCollection<InventoryGroup>(Services.InventoryGroupService.GetAllInventoryGroups(AppSession.ServiceMode));
+            _inventoryTypes = new ObservableCollection<InventoryType>(Services.InventoryTypeService.GetAllInventoryTypes(AppSession.ServiceMode));
             _people = new ObservableCollection<Person>(Services.PersonService.GetAllPeople(AppSession.ServiceMode));
             
             _currentItem = new Inventory();
@@ -155,6 +155,9 @@ public partial class InventoryViewModel: ViewModelBase
     {
         _inventory.Clear();
 
+        _inventoryGroups = new ObservableCollection<InventoryGroup>(Services.InventoryGroupService.GetAllInventoryGroups(AppSession.ServiceMode));
+        _inventoryTypes = new ObservableCollection<InventoryType>(Services.InventoryTypeService.GetAllInventoryTypes(AppSession.ServiceMode));
+        
         var invList = Services.InventoryService.GetAllInventory(AppSession.ServiceMode);
 
         foreach (var inv in invList)

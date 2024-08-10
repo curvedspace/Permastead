@@ -23,38 +23,6 @@ public class InventoryService
         return inventoryList;
     }
     
-    public static List<InventoryGroup> GetAllInventoryGroups(ServiceMode mode)
-    {
-        var myList = new List<InventoryGroup>();
-
-        if (mode == ServiceMode.Local)
-        {
-            myList = InventoryGroupRepository.GetAll(DataConnection.GetLocalDataSource());
-        }
-        else
-        {
-            myList = DataAccess.Server.InventoryGroupRepository.GetAll(DataConnection.GetServerConnectionString());
-        }
-
-        return myList;
-    }
-    
-    public static List<InventoryType> GetAllInventoryTypes(ServiceMode mode)
-    {
-        var myList = new List<InventoryType>();
-
-        if (mode == ServiceMode.Local)
-        {
-            myList = InventoryTypeRepository.GetAll(DataConnection.GetLocalDataSource());
-        }
-        else
-        {
-            myList = DataAccess.Server.InventoryTypeRepository.GetAll(DataConnection.GetServerConnectionString());
-        }
-
-        return myList;
-    }
-    
     public static bool CommitRecord(ServiceMode mode, Inventory inventory)
     {
         bool rtnValue = false;

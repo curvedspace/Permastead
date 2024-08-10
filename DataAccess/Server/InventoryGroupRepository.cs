@@ -44,5 +44,32 @@ namespace DataAccess.Server
                 return false;
             }
         }
+        
+        public static bool Update(InventoryGroup group)
+        {
+            try
+            {
+                
+                if (group != null)
+                {
+                    using (IDbConnection db = new NpgsqlConnection(DataConnection.GetServerConnectionString()))
+                    {
+                        string sqlQuery =
+                            "UPDATE InventoryGroup SET Description = @Description, AuthorId = @AuthorId, StartDate = @StartDate, EndDate = @EndDate " +
+                            "WHERE Id = @Id;";
+
+                        return (db.Execute(sqlQuery, group) == 1);
+                    }
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch
+            {
+                return false;
+            }
+        }
     }
 }
