@@ -1,4 +1,5 @@
 using System.Data.Common;
+using DataAccess;
 using DataAccess.Local;
 using Models;
 using Serilog;
@@ -287,5 +288,21 @@ public static class ScoreBoardService
         }
         
         return newList;
+    }
+
+    public static int GetEarliestRecordYear(ServiceMode mode)
+    {
+        DateTime earliestDate;
+        
+        if (mode == ServiceMode.Local)
+        {
+            earliestDate = ObservationRepository.GetEarliestObservationDate(DataConnection.GetLocalDataSource());
+        }
+        else
+        {
+            earliestDate = DataAccess.Server.ObservationRepository.GetEarliestObservationDate(DataConnection.GetServerConnectionString());
+        }
+
+        return earliestDate.Year;
     }
 }

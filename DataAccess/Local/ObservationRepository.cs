@@ -62,6 +62,32 @@ namespace DataAccess.Local
             }
         }
 
+        public static DateTime GetEarliestObservationDate(string connectionString)
+        {
+            var firstObsDate = DateTime.Today;
+
+            var sql = "SELECT MIN(o.CreationDate) " +
+                      "FROM Observation o ";
+
+            using (IDbConnection connection = new SqliteConnection(connectionString))
+            {
+                connection.Open();
+
+                using (IDbCommand command = connection.CreateCommand())
+                {
+                    command.CommandText = sql;
+                    var dr = command.ExecuteReader();
+
+                    while (dr.Read())
+                    {
+                        firstObsDate = Convert.ToDateTime(dr[0].ToString());
+                    }
+                }
+
+                return firstObsDate;
+            }
+        }
+        
         public static StringBuilder SearchObservations(string connectionString, string searchTerm)
         {
             var sql = "SELECT o.Comment, o.CreationDate FROM Observation o WHERE o.Comment LIKE '%" + searchTerm + "%' ORDER BY o.CreationDate DESC";

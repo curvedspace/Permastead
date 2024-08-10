@@ -15,6 +15,7 @@ using LiveChartsCore.SkiaSharpView.Extensions;
 using LiveChartsCore.SkiaSharpView.Painting;
 using LiveChartsCore.SkiaSharpView.VisualElements;
 using Models;
+using Services;
 using SkiaSharp;
 
 namespace Permastead.ViewModels.Views;
@@ -219,13 +220,26 @@ public partial class DashboardViewModel : ViewModelBase
     public DashboardViewModel()
     {
         ScoreBoard = AppSession.Instance.CurrentScoreboard;
-        
         PlantingYear = DateTime.Now.Year.ToString(CultureInfo.CurrentCulture);
         
+        //setup dropdown to cover all the years we have data for
+        //get earliest record
+        int firstYear = ScoreBoardService.GetEarliestRecordYear(AppSession.ServiceMode);
+
         PlantingYears.Clear();
-        PlantingYears.Add("2022");
-        PlantingYears.Add("2023");
-        PlantingYears.Add("2024");
+        
+        if (firstYear != DateTime.Today.Year)
+        {
+            for (int year = firstYear; year <= DateTime.Today.Year; year++)
+            {
+                PlantingYears.Add(year.ToString());
+            }
+        }
+        else
+        {
+            PlantingYears.Add(firstYear.ToString());
+        }
+        
         PlantingYears.Add("ALL");
         
         RefreshDataOnly();
