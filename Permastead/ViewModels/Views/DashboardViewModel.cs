@@ -88,6 +88,9 @@ public partial class DashboardViewModel : ViewModelBase
     [RelayCommand]
     private void RefreshData()
     {
+        ScoreBoard = ScoreBoardService.ComputeTotalScore(AppSession.ServiceMode);
+        AppSession.Instance.CurrentScoreboard = ScoreBoard;
+        
         RefreshDataOnly();
     }
 
