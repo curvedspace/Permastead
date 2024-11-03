@@ -62,6 +62,54 @@ namespace DataAccess.Local
             }
         }
 
+        public static Observation GetYearInReviewObservation(string connectionString, int year)
+        {
+            Observation o = null;
+
+            var sql = "SELECT o.Comment, o.CreationDate, o.StartDate, o.EndDate, o.CommentTypeId, " +
+                      "ct.Description, o.AuthorId, p.FirstName, p.LastName, o.Id " +
+                      "FROM Observation o, CommentType ct, Person p " +
+                      "WHERE ct.Id = o.CommentTypeId AND ct.code = 'YIR' " +
+                      "AND o.startDate = '" + year + "-01-01' " +
+                      "AND p.Id = o.AuthorId ORDER BY o.Id DESC";
+
+            using (IDbConnection connection = new SqliteConnection(connectionString))
+            {
+                connection.Open();
+
+                using (IDbCommand command = connection.CreateCommand())
+                {
+                    command.CommandText = sql;
+                    var dr = command.ExecuteReader();
+
+                    while (dr.Read())
+                    {
+                        o = new Observation();
+
+                        o.Comment = dr[0].ToString()!;
+                        o.CreationDate = Convert.ToDateTime(dr[1].ToString());
+                        o.StartDate = Convert.ToDateTime(dr[2].ToString());
+                        o.EndDate = Convert.ToDateTime(dr[3].ToString());
+
+                        o.CommentType = new CommentType();
+                        o.CommentType.Id = Convert.ToInt64(dr[4].ToString());
+                        o.CommentType.Description = dr[5].ToString();
+
+                        o.Author = new Person();
+                        o.Author.Id = Convert.ToInt64(dr[6].ToString());
+                        o.Author.FirstName = dr[7].ToString();
+                        o.Author.LastName = dr[8].ToString();
+
+                        o.Id = Convert.ToInt64(dr[9].ToString());
+                        o.AsOfDate = o.CreationDate;
+                        
+                    }
+                }
+            }
+            
+            return o;
+        }
+        
         public static DateTime GetEarliestObservationDate(string connectionString)
         {
             var firstObsDate = DateTime.Today;

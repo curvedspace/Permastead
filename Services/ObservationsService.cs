@@ -184,5 +184,46 @@ namespace Services
 
             return wordCount;
         }
+
+        public static Observation GetCurrentYearInReview(ServiceMode mode, int year)
+        {
+            // try to get the existing YIR record
+            Observation obs = null;
+            
+            if (mode == ServiceMode.Local)
+            { 
+                obs = ObservationRepository.GetYearInReviewObservation(DataConnection.GetLocalDataSource(), year);
+            }
+            else
+            { 
+                obs = DataAccess.Server.ObservationRepository.GetYearInReviewObservation(DataConnection.GetServerConnectionString(), year);
+            }
+            
+            if (obs == null)
+            {
+                // get a default year in review comment if none found
+                obs = new Observation()
+                {
+                    AsOfDate = DateTime.Now,
+                    Author = Person.Gaia(),
+                    StartDate = new DateTime(year, 1, 1),
+                    EndDate = new DateTime(year, 12, 31),
+                    CommentType = new CommentType(),
+                    Comment = ""
+                };
+            
+                var commentTypes = GetCommentTypes(mode);
+
+                foreach (var ct in commentTypes)
+                {
+                    if (ct.Code == "YIR")
+                        obs.CommentType = ct;
+                }
+
+            }
+            
+            return obs;
+
+        }
     }
 }

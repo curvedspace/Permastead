@@ -5,7 +5,7 @@
              xmlns:lvc="using:LiveChartsCore.SkiaSharpView.Avalonia"
              xmlns:vm="using:Permastead.ViewModels.Views"
              xmlns:views="using:Permastead.Views.Views"
-             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             mc:Ignorable="d" d:DesignWidth="1400" d:DesignHeight="850"
              x:DataType="vm:DashboardViewModel"
              x:CompileBindings="True"
              x:Class="Permastead.Views.Views.DashboardView">
@@ -26,6 +26,7 @@
             </ComboBox>
             
             <TextBlock Margin="20,24,20,20" Text="{Binding ScoreBoard}" ></TextBlock>
+            <ProgressBar ShowProgressText="True" Foreground="Green" Background="Black" Width="500" Value="{Binding LevelProgress}"></ProgressBar>
         </WrapPanel>
         
         <!-- <StackPanel> -->
@@ -46,15 +47,19 @@
             </lvc:PieChart>
         </Grid>
         
-        <Grid Grid.Column= "1" Grid.Row="1" ColumnDefinitions="*" RowDefinitions="Auto,*">
-            <Label Grid.Column="0" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="10">Level Progress Percent</Label>
-            <lvc:PieChart Grid.Column="0" Grid.Row="1"
-                Series="{Binding Series}"
-                InitialRotation="-90"
-                AnimationsSpeed="00:00:02.800"
-                MinValue="0"
-                MaxValue="100">
-            </lvc:PieChart>
+        <Grid Grid.Column= "1" Grid.Row="1" ColumnDefinitions="*" RowDefinitions="Auto,*,Auto">
+            <Label Grid.Column="0" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="10">Year In Review</Label>
+            <!-- <lvc:PieChart Grid.Column="0" Grid.Row="1" -->
+            <!--     Series="{Binding Series}" -->
+            <!--     InitialRotation="-90" -->
+            <!--     AnimationsSpeed="00:00:02.800" -->
+            <!--     MinValue="0" -->
+            <!--     MaxValue="100"> -->
+            <!-- </lvc:PieChart> -->
+            <TextBox Grid.Row="1" Margin="20" AcceptsReturn="True" TextWrapping="Wrap" FontSize="18"
+                     Text="{Binding YearInReview.Comment}"/>
+            <Button Grid.Row="2" x:Name="Save" HorizontalAlignment="Center" Margin="20,20" 
+                    Command="{Binding SaveYearInReviewCommentCommand}">Save</Button>
         </Grid>
         
         <Grid Grid.Column="2" Grid.Row="1" ColumnDefinitions="*" RowDefinitions="Auto,*">

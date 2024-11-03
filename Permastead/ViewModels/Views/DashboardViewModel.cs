@@ -32,6 +32,8 @@ public partial class DashboardViewModel : ViewModelBase
     
     public ISeries[] ActObsSeries { get; set; }
     
+    public decimal LevelProgress {get => _scoreBoard.LevelProgress *  100;}
+    
     public SolidColorPaint LegendTextPaint { get; set; } =
         new SolidColorPaint()
         {
@@ -56,6 +58,7 @@ public partial class DashboardViewModel : ViewModelBase
         }
     };
     
+    [ObservableProperty] private Observation _yearInReview;
     
     [ObservableProperty] 
     private ObservableCollection<Planting> _plantings = new ObservableCollection<Planting>();
@@ -92,8 +95,15 @@ public partial class DashboardViewModel : ViewModelBase
         AppSession.Instance.CurrentScoreboard = ScoreBoard;
         
         RefreshDataOnly();
+
     }
 
+    [RelayCommand]
+    private void SaveYearInReviewComment()
+    {
+        ObservationsService.CommitRecord(AppSession.ServiceMode, YearInReview);
+    }
+    
     public void RefreshDataOnly()
     {
         Console.WriteLine("Refreshing Dashboard data for year " + PlantingYear);
@@ -109,6 +119,9 @@ public partial class DashboardViewModel : ViewModelBase
             _plantingYearEndDate = new DateTime(Convert.ToInt32(PlantingYear), 12,31);
         }
         
+        YearInReview = ObservationsService.GetCurrentYearInReview(AppSession.ServiceMode, Convert.ToInt32(PlantingYear));
+        YearInReview.StartDate = _plantingYearStartDate;
+        YearInReview.EndDate = _plantingYearEndDate;
         
         // reset counters
         SuccessfulPlantings = 0;
@@ -222,8 +235,10 @@ public partial class DashboardViewModel : ViewModelBase
     
     public DashboardViewModel()
     {
+        
         ScoreBoard = AppSession.Instance.CurrentScoreboard;
         PlantingYear = DateTime.Now.Year.ToString(CultureInfo.CurrentCulture);
+        YearInReview = ObservationsService.GetCurrentYearInReview(AppSession.ServiceMode, Convert.ToInt32(PlantingYear));
         
         //setup dropdown to cover all the years we have data for
         //get earliest record

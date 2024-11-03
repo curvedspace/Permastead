@@ -848,6 +848,9 @@ namespace DataAccess.Local
 
             ct = new CommentType { Code = "NEWS", Description = "News", Author = new Person(1) };
             CommentTypeRepository.Insert(ct);
+            
+            ct = new CommentType { Code = "YIR", Description = "Year In Review", Author = new Person(1) };
+            CommentTypeRepository.Insert(ct);
 
 			#endregion
 
