@@ -26,7 +26,7 @@
             </ComboBox>
             
             <TextBlock Margin="20,24,20,20" Text="{Binding ScoreBoard}" ></TextBlock>
-            <ProgressBar ShowProgressText="True" Foreground="Green" Background="Black" Width="500" Value="{Binding LevelProgress}"></ProgressBar>
+            <ProgressBar ShowProgressText="True" Foreground="DodgerBlue" Background="Black" Width="500" Value="{Binding LevelProgress}"></ProgressBar>
         </WrapPanel>
         
         <!-- <StackPanel> -->

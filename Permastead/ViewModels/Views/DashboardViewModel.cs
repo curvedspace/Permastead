@@ -118,8 +118,16 @@ public partial class DashboardViewModel : ViewModelBase
             _plantingYearStartDate = new DateTime(Convert.ToInt32(PlantingYear), 1,1);
             _plantingYearEndDate = new DateTime(Convert.ToInt32(PlantingYear), 12,31);
         }
+
+        if (PlantingYear == "ALL")
+        {
+            YearInReview = new Observation();
+        }
+        else
+        {
+            YearInReview = ObservationsService.GetCurrentYearInReview(AppSession.ServiceMode, Convert.ToInt32(PlantingYear));
+        }
         
-        YearInReview = ObservationsService.GetCurrentYearInReview(AppSession.ServiceMode, Convert.ToInt32(PlantingYear));
         YearInReview.StartDate = _plantingYearStartDate;
         YearInReview.EndDate = _plantingYearEndDate;
         
