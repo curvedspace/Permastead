@@ -128,7 +128,15 @@ namespace DataAccess.Local
 
                     while (dr.Read())
                     {
-                        firstObsDate = Convert.ToDateTime(dr[0].ToString());
+                        try
+                        {
+                            firstObsDate = Convert.ToDateTime(dr[0].ToString());
+                        }
+                        catch (Exception e)
+                        {
+                            firstObsDate = DateTime.Today;
+                        }
+                        
                     }
                 }
 
