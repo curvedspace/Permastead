@@ -48,7 +48,7 @@
     
       <Grid Grid.Row="2" ColumnDefinitions="Auto,*,Auto">
         <TextBlock Text="You: " Margin="20,20,20,20"> </TextBlock>
-        <TextBox Grid.Column="1" Text="{Binding Request}" x:Name="RequestTextBox"
+        <TextBox Grid.Column="1" Text="{Binding Request}" Margin="5" x:Name="RequestTextBox"
                  Watermark="Enter your question"
                  TextWrapping="Wrap"
                  AcceptsReturn="False"
@@ -56,7 +56,7 @@
                  FontSize="12">
         </TextBox>
 
-        <Button Grid.Column="2" Command="{Binding SendRequestCommand}" HotKey="Return">Send</Button>
+        <Button Grid.Column="2" Margin="5,5,25,5" Command="{Binding SendRequestCommand}" HotKey="Return">Send</Button>
       </Grid>
       
   </Grid>
