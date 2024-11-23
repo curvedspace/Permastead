@@ -3,7 +3,7 @@ using System.Windows.Input;
 
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-
+using Models;
 using Permastead.ViewModels.Views;
 
 namespace Permastead.ViewModels
@@ -11,6 +11,9 @@ namespace Permastead.ViewModels
 
     public partial class MainWindowViewModel : ViewModelBase
     {
+        
+        [ObservableProperty] private ScoreBoard _scoreBoard;
+        
         [ObservableProperty]
         private string _currentUser;
         
@@ -30,6 +33,7 @@ namespace Permastead.ViewModels
             new SettingsViewModel()
         };
         
+        public decimal LevelProgress {get => _scoreBoard.LevelProgress *  100;}
 
         [ObservableProperty] 
         private ViewModelBase _CurrentView;
@@ -126,6 +130,9 @@ namespace Permastead.ViewModels
         {
             CurrentView = Views[0];
             CurrentUser = AppSession.Instance.CurrentUser.FirstName;
+            CurrentViewName = "Home";
+            
+            ScoreBoard = AppSession.Instance.CurrentScoreboard;
         }
         
      }
