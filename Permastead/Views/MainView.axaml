@@ -47,9 +47,13 @@
                     <Button Name="SeedsButton" ToolTip.Tip="Seeds " Margin="0,0,0,0" Command="{Binding OpenSeedsViewCommand}">
                         <Image Width="16" Height="16" Source="/Assets/bean.png" />
                     </Button>
-                    <Button Name="PlantingsButton" ToolTip.Tip="Plantings " Margin="0,0,20,0" Command="{Binding OpenPlantingsViewCommand}">
+                    <Button Name="PlantingsButton" ToolTip.Tip="Plantings " Margin="0,0,0,0" Command="{Binding OpenPlantingsViewCommand}">
                         <!-- <materialIcons:MaterialIcon Kind="Leaf" Margin="0"/> -->
                         <Image Width="16" Height="16" Source="/Assets/leaf_plant.png" />
+                    </Button>
+                    <Button Name="HarvestsButton" ToolTip.Tip="Harvests " Margin="0,0,20,0" Command="{Binding OpenHarvestsViewCommand}">
+                        <!-- <materialIcons:MaterialIcon Kind="Leaf" Margin="0"/> -->
+                        <Image Width="16" Height="16" Source="/Assets/basket.png" />
                     </Button>
                     <Button Name="PeopleButton" ToolTip.Tip="People " Command="{Binding OpenPeopleViewCommand}">
                         <!-- <materialIcons:MaterialIcon Kind="PeopleGroup" Margin="0"/> -->
