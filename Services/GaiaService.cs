@@ -39,6 +39,7 @@ public class GaiaService
         if (upcomingTodos.Count > 0)
         {
             updateBuilder.AppendLine("Here are your upcoming events:");
+            updateBuilder.AppendLine("");
             foreach (var t in upcomingTodos)
             {
                 updateBuilder.AppendLine(t.Description + " (" + t.DueDate.Date.ToShortDateString() + ", " +
@@ -53,7 +54,7 @@ public class GaiaService
         
         if (upcomingTodos.Count == 0)
         {
-            AddResponse("I just checked the database and you have no upcoming events.");
+            AddResponse("I have checked the database and you have no upcoming events.");
         }
         else
         {
