@@ -70,7 +70,7 @@ namespace DataAccess.Local
                       "ct.Description, o.AuthorId, p.FirstName, p.LastName, o.Id " +
                       "FROM Observation o, CommentType ct, Person p " +
                       "WHERE ct.Id = o.CommentTypeId AND ct.code = 'YIR' " +
-                      "AND o.startDate = '" + year + "-01-01' " +
+                      "AND o.startDate >= '" + year + "-01-01' " +
                       "AND p.Id = o.AuthorId ORDER BY o.Id DESC";
 
             using (IDbConnection connection = new SqliteConnection(connectionString))
@@ -174,7 +174,7 @@ namespace DataAccess.Local
             var rtnValue = false;
 
             var sql = "INSERT INTO Observation (Comment, CreationDate, StartDate, EndDate, CommentTypeId, AuthorId) " +
-                "VALUES($comment, CURRENT_DATE, CURRENT_DATE, '9999-12-31', $commentTypeId, $authorId) ";
+                "VALUES($comment, CURRENT_DATE, $startDate, $endDate, $commentTypeId, $authorId) ";
 
             using (var connection = new SqliteConnection(connectionString))
             {
@@ -184,6 +184,8 @@ namespace DataAccess.Local
                 {
                     command.CommandText = sql;
                     command.Parameters.AddWithValue("$comment", obs.Comment);
+                    command.Parameters.AddWithValue("$startDate", obs.StartDate);
+                    command.Parameters.AddWithValue("$endDate", obs.EndDate);
                     command.Parameters.AddWithValue("$commentTypeId", obs.CommentType!.Id);
                     command.Parameters.AddWithValue("$authorId", obs.Author!.Id);
 
