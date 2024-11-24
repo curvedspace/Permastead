@@ -41,6 +41,10 @@
                     <Button Name="InventoryButton" ToolTip.Tip="Inventory " Command="{Binding OpenInventoryViewCommand}">
                         <Image Width="16" Height="16" Source="/Assets/clipboard_invoice.png" />
                     </Button>
+                    <Button Name="ProceduresButton" ToolTip.Tip="Standard Operating Procedures " Command="{Binding OpenProceduresViewCommand}">
+                        <Image Width="16" Height="16" Source="/Assets/books_infront.png" />
+                    </Button>
+                    
                     <Button Name="PlantsButton" ToolTip.Tip="Plants " Margin="20,0,0,0" Command="{Binding OpenPlantsViewCommand}">
                         <Image Width="16" Height="16" Source="/Assets/plant.png" />
                     </Button>
@@ -51,10 +55,19 @@
                         <!-- <materialIcons:MaterialIcon Kind="Leaf" Margin="0"/> -->
                         <Image Width="16" Height="16" Source="/Assets/leaf_plant.png" />
                     </Button>
-                    <Button Name="HarvestsButton" ToolTip.Tip="Harvests " Margin="0,0,20,0" Command="{Binding OpenHarvestsViewCommand}">
+                    <Button Name="AnimalsButton" ToolTip.Tip="Animals " Margin="0,0,20,0" Command="{Binding OpenAnimalsViewCommand}">
+                        <!-- <materialIcons:MaterialIcon Kind="Leaf" Margin="0"/> -->
+                        <Image Width="16" Height="16" Source="/Assets/burro.png" />
+                    </Button>
+                    
+                    <Button Name="HarvestsButton" ToolTip.Tip="Harvests " Margin="0,0,0,0" Command="{Binding OpenHarvestsViewCommand}">
                         <!-- <materialIcons:MaterialIcon Kind="Leaf" Margin="0"/> -->
                         <Image Width="16" Height="16" Source="/Assets/basket.png" />
                     </Button>
+                    <Button Name="PreservationButton" ToolTip.Tip="Food Preservation " Margin="0,0,20,0" Command="{Binding OpenPreservationViewCommand}">
+                        <Image Width="16" Height="16" Source="/Assets/database_red.png" />
+                    </Button>
+                    
                     <Button Name="PeopleButton" ToolTip.Tip="People " Command="{Binding OpenPeopleViewCommand}">
                         <!-- <materialIcons:MaterialIcon Kind="PeopleGroup" Margin="0"/> -->
                         <Image Width="16" Height="16" Source="/Assets/outlook_new_meeting.png" />

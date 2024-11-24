@@ -25,10 +25,13 @@ namespace Permastead.ViewModels
             new ToDoViewModel(),
             new EventsViewModel(),
             new InventoryViewModel(),
+            new ProceduresViewModel(),
             new PlantsViewModel(),
             new SeedsViewModel(),
             new PlantingsViewModel(),
+            new AnimalsViewModel(),
             new HarvestsViewModel(),
+            new ProceduresViewModel(),
             new ContactsViewModel(),
             new WeatherViewModel(),
             new SettingsViewModel()
@@ -86,51 +89,73 @@ namespace Permastead.ViewModels
         }
         
         [RelayCommand]
-        private void OpenPlantsView()
+        private void OpenProceduresView()
         {
             CurrentView = Views[6];
+            CurrentViewName = "Procedures";
+        }
+        
+        
+        [RelayCommand]
+        private void OpenPlantsView()
+        {
+            CurrentView = Views[7];
             CurrentViewName = "Plants";
         }
         
         [RelayCommand]
         private void OpenSeedsView()
         {
-            CurrentView = Views[7];
+            CurrentView = Views[8];
             CurrentViewName = "Seeds";
         }
         
         [RelayCommand]
         private void OpenPlantingsView()
         {
-            CurrentView = Views[8];
+            CurrentView = Views[9];
             CurrentViewName = "Plantings";
+        }
+        
+        [RelayCommand]
+        private void OpenAnimalsView()
+        {
+            CurrentView = Views[10];
+            CurrentViewName = "Animals";
         }
         
         [RelayCommand]
         private void OpenHarvestsView()
         {
-            CurrentView = Views[9];
+            CurrentView = Views[11];
             CurrentViewName = "Harvests";
+        }
+        
+        [RelayCommand]
+        private void OpenPreservationView()
+        {
+            CurrentView = Views[12];
+            CurrentViewName = "Food Preservation";
         }
         
         [RelayCommand]
         private void OpenPeopleView()
         {
-            CurrentView = Views[10];
+            CurrentView = Views[13];
             CurrentViewName = "People";
         }
         
         [RelayCommand]
         private void OpenWeatherView()
         {
-            CurrentView = Views[11];
+            CurrentView = Views[14];
             CurrentViewName = "Weather";
         }
         
         [RelayCommand]
         private void OpenSettingsView()
         {
-            CurrentView = Views[12];
+            CurrentView = Views[15];
             CurrentViewName = "Settings";
         }
 
