@@ -19,23 +19,18 @@
             <Grid RowDefinitions="Auto,*,Auto" ColumnDefinitions="Auto,*" Margin="0" >
                 <StackPanel Grid.Row="0" Grid.Column="0" Margin="0,0,0,0" HorizontalAlignment="Left" Orientation="Horizontal">
                     <Button Name="HomeButton" ToolTip.Tip="Home " Command="{Binding OpenHomeViewCommand}">
-                        <!-- <materialIcons:MaterialIcon Kind="Home" Margin="0"/> -->
                         <Image Width="16" Height="16" Source="/Assets/house_one.png" />
                     </Button>
                     <Button Name="DashboardButton" ToolTip.Tip="Dashboard " Command="{Binding OpenDashboardViewCommand}">
-                        <!-- <materialIcons:MaterialIcon Kind="EyeCheck" Margin="0"/> -->
                         <Image Width="16" Height="16" Source="/Assets/statistics.png" />
                     </Button>
                     <Button Name="ObservationsButton" ToolTip.Tip="Observations " Margin="20,0,0,0" Command="{Binding OpenObservationViewCommand}">
-                        <!-- <materialIcons:MaterialIcon Kind="EyeCheck" Margin="0"/> -->
                         <Image Width="16" Height="16" Source="/Assets/web_template_editor.png" />
                     </Button>
                     <Button Name="ActionsButton" ToolTip.Tip="Actions " Command="{Binding OpenToDoViewCommand}">
-                        <!-- <materialIcons:MaterialIcon Kind="Shovel" Margin="0"/> -->
                         <Image Width="16" Height="16" Source="/Assets/showel.png" />
                     </Button>
                     <Button Name="EventsButton" ToolTip.Tip="Events " Command="{Binding OpenEventsViewCommand}">
-                        <!-- <materialIcons:MaterialIcon Kind="Calendars" Margin="0"/> -->
                         <Image Width="16" Height="16" Source="/Assets/clock_red.png" />
                     </Button>
                     <Button Name="InventoryButton" ToolTip.Tip="Inventory " Command="{Binding OpenInventoryViewCommand}">
@@ -52,16 +47,13 @@
                         <Image Width="16" Height="16" Source="/Assets/bean.png" />
                     </Button>
                     <Button Name="PlantingsButton" ToolTip.Tip="Plantings " Margin="0,0,0,0" Command="{Binding OpenPlantingsViewCommand}">
-                        <!-- <materialIcons:MaterialIcon Kind="Leaf" Margin="0"/> -->
                         <Image Width="16" Height="16" Source="/Assets/leaf_plant.png" />
                     </Button>
                     <Button Name="AnimalsButton" ToolTip.Tip="Animals " Margin="0,0,20,0" Command="{Binding OpenAnimalsViewCommand}">
-                        <!-- <materialIcons:MaterialIcon Kind="Leaf" Margin="0"/> -->
                         <Image Width="16" Height="16" Source="/Assets/burro.png" />
                     </Button>
                     
                     <Button Name="HarvestsButton" ToolTip.Tip="Harvests " Margin="0,0,0,0" Command="{Binding OpenHarvestsViewCommand}">
-                        <!-- <materialIcons:MaterialIcon Kind="Leaf" Margin="0"/> -->
                         <Image Width="16" Height="16" Source="/Assets/basket.png" />
                     </Button>
                     <Button Name="PreservationButton" ToolTip.Tip="Food Preservation " Margin="0,0,20,0" Command="{Binding OpenPreservationViewCommand}">
@@ -69,11 +61,9 @@
                     </Button>
                     
                     <Button Name="PeopleButton" ToolTip.Tip="People " Command="{Binding OpenPeopleViewCommand}">
-                        <!-- <materialIcons:MaterialIcon Kind="PeopleGroup" Margin="0"/> -->
                         <Image Width="16" Height="16" Source="/Assets/outlook_new_meeting.png" />
                     </Button>
                     <Button Name="WeatherButton" ToolTip.Tip="Weather" Margin="20,0,0,0" Command="{Binding OpenWeatherViewCommand}">
-                        <!-- <materialIcons:MaterialIcon Kind="WeatherHistory" Margin="0"/> -->
                         <Image Width="16" Height="16" Source="/Assets/weather_clouds.png" />
                     </Button>
                 </StackPanel>
@@ -92,11 +82,14 @@
             </Grid>
      
         </StackPanel>
+            
         <TransitioningContentControl Grid.Row="1" Content="{Binding CurrentView}">
             <!-- <TransitioningContentControl.PageTransition> -->
             <!--     <PageSlide Orientation="Vertical" Duration="0:00:00.250" /> -->
             <!-- </TransitioningContentControl.PageTransition> -->
         </TransitioningContentControl>
+            
+            <!-- Bottom status bar -->
         <Panel Grid.Row="2" VerticalAlignment="Bottom" Margin="0,0,0,0">
             <Border Background="{StaticResource ButtonBackgroundPointerOver}"
                     BorderBrush="{StaticResource AccentButtonForeground}"
