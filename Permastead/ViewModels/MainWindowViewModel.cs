@@ -5,6 +5,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Models;
 using Permastead.ViewModels.Views;
+using Permastead.Views;
 
 namespace Permastead.ViewModels
 {
@@ -13,6 +14,14 @@ namespace Permastead.ViewModels
     {
         
         [ObservableProperty] private ScoreBoard _scoreBoard;
+        
+        [ObservableProperty] private bool _gaiaOpen;
+        
+        public GaiaWindow GaiaWindow {
+            get;
+            set;
+        }
+
         
         [ObservableProperty]
         private string _currentUser;
@@ -158,6 +167,31 @@ namespace Permastead.ViewModels
             CurrentView = Views[15];
             CurrentViewName = "Settings";
         }
+        
+        [RelayCommand]
+        private void OpenGaiaView()
+        {
+            if (_gaiaOpen)
+            {
+                if (GaiaWindow != null && GaiaWindow.IsLoaded)
+                {
+                    this.GaiaWindow.Show();
+                }
+                else
+                {
+                    GaiaWindow = new GaiaWindow();
+                    this.GaiaWindow.Show();
+                }
+
+            }
+            else
+            {
+                if (GaiaWindow != null)
+                {
+                    this.GaiaWindow.Hide();
+                }
+            }
+        }
 
         public MainWindowViewModel()
         {
@@ -166,6 +200,8 @@ namespace Permastead.ViewModels
             CurrentViewName = "Home";
             
             ScoreBoard = AppSession.Instance.CurrentScoreboard;
+            
+            GaiaWindow = new GaiaWindow();
         }
         
      }

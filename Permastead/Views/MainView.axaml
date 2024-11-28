@@ -83,9 +83,11 @@
                     <TextBlock Margin="5">User: </TextBlock>
                     <TextBlock Margin="5" Text="{Binding CurrentUser, Mode=TwoWay}"></TextBlock>
                     <Button Name="SettingsButton" ToolTip.Tip="Settings"  Command="{Binding OpenSettingsViewCommand}">
-                        <!-- <materialIcons:MaterialIcon Kind="Settings" Margin="0"/> -->
                         <Image Width="16" Height="16" Source="/Assets/setting_tools.png" />
                     </Button>
+                    <ToggleButton IsChecked="{Binding GaiaOpen}" Name="GaiaButton" ToolTip.Tip="Settings"  Command="{Binding OpenGaiaViewCommand} ">
+                        <Image Width="16" Height="16" Source="/Assets/earth_night.png" />
+                    </ToggleButton>
                 </StackPanel>
             </Grid>
      

@@ -8,6 +8,7 @@ namespace Permastead.Views;
 
 public partial class MainWindow : Window
 {
+    
     public MainWindow()
     {
         InitializeComponent();
@@ -21,7 +22,7 @@ public partial class MainWindow : Window
 #if DEBUG
             this.AttachDevTools();
 #endif
-                
+            
         }
         catch (Exception ex)
         {
