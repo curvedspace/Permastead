@@ -182,7 +182,6 @@ namespace Permastead.ViewModels
                     GaiaWindow = new GaiaWindow();
                     this.GaiaWindow.Show();
                 }
-
             }
             else
             {

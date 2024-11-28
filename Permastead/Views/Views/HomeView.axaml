@@ -22,8 +22,6 @@
           Text="{Binding People.Count, StringFormat={}{0:0}}"
           VerticalAlignment="Center" />
       </StackPanel>
-        
-        <!-- Text="{Binding TotalScoreNormalized, StringFormat={}{0:0.00%}}" -->
               
       <StackPanel Grid.Row="1" Grid.Column="0" VerticalAlignment="Center">
           <TextBlock Grid.Row="1" FontSize="20"  TextAlignment="Center" Margin="10">Obs/Action Ratio</TextBlock>
@@ -114,15 +112,15 @@
          
      </StackPanel>
       
-      <Panel Grid.Row="1" Grid.Column="1">
-      <Border Background="Transparent"
-              BorderBrush="Transparent"
-              BorderThickness="1"
-              CornerRadius="5"
-              Padding="10" Margin="10,0,10,0">
-          <views:GaiaView HorizontalAlignment="Center" VerticalAlignment="Stretch" MinWidth="1000" MinHeight="600"> </views:GaiaView>
-      </Border>
-    </Panel>
+        <Panel Grid.Row="1" Grid.Column="1">
+          <Border Background="Transparent"
+                  BorderBrush="Transparent"
+                  BorderThickness="1"
+                  CornerRadius="5"
+                  Padding="10" Margin="10,0,10,0">
+              <views:ToDoView HorizontalAlignment="Center" VerticalAlignment="Stretch" MinWidth="1000" MinHeight="600"> </views:ToDoView>
+          </Border>
+        </Panel>
      
       <Panel Grid.Row="2" Grid.Column = "1" VerticalAlignment="Bottom" Margin="0,0,0,0">
           <TextBlock Height="20" Margin="2,0,0,20" TextAlignment="Center" Text="{Binding WeatherForecast}"></TextBlock>
