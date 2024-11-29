@@ -91,22 +91,22 @@
          
          
          <!-- <Grid DockPanel.Dock="Bottom" ColumnDefinitions="Auto, *, Auto" RowDefinitions="Auto,*" VerticalAlignment="Bottom"> -->
-         <!--     <TextBlock Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="0"  -->
+         <!--     <TextBlock Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="0" -->
          <!--                Margin="10" FontSize="20" -->
          <!--                HorizontalAlignment="Center">Planting Success Rate</TextBlock> -->
-         <!--      -->
+         <!-- -->
          <!--     <TextBlock Grid.Column="0" VerticalAlignment="Center" TextAlignment="Left" FontSize="16" -->
          <!--                Text="{Binding GrowingSeason}"></TextBlock> -->
-         <!--      -->
+         <!-- -->
          <!--     <ProgressBar Grid.Column="1" Margin="80,50,80,50" Height="30" ShowProgressText="True" -->
-         <!--                  Value="{Binding SuccessfulPlantings}"  -->
-         <!--                  Minimum="0"  -->
+         <!--                  Value="{Binding SuccessfulPlantings}" -->
+         <!--                  Minimum="0" -->
          <!--                  Maximum="{Binding TotalPlantings}"></ProgressBar> -->
-         <!--      -->
-         <!--      -->
+         <!-- -->
+         <!-- -->
          <!--     <TextBlock Grid.Column="2" VerticalAlignment="Center" TextAlignment="Right" FontSize="16" -->
          <!--                Text="{Binding TotalPlantStats}"></TextBlock> -->
-         <!--      -->
+         <!-- -->
          <!--     <TextBlock FontSize="20" HorizontalAlignment="Center" Grid.ColumnSpan="3" Grid.Row="1" Text="{Binding WeatherForecast}"></TextBlock> -->
          <!-- </Grid> -->
          
@@ -118,7 +118,7 @@
                   BorderThickness="1"
                   CornerRadius="5"
                   Padding="10" Margin="10,0,10,0">
-              <views:ToDoView HorizontalAlignment="Center" VerticalAlignment="Stretch" MinWidth="1000" MinHeight="600"> </views:ToDoView>
+              <views:ToDoView HorizontalAlignment="Center" VerticalAlignment="Center" MinWidth="1000" MinHeight="600"> </views:ToDoView>
           </Border>
         </Panel>
      
