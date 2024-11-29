@@ -75,7 +75,7 @@
                     <Button Name="SettingsButton" ToolTip.Tip="Settings"  Command="{Binding OpenSettingsViewCommand}">
                         <Image Width="16" Height="16" Source="/Assets/setting_tools.png" />
                     </Button>
-                    <ToggleButton IsChecked="{Binding GaiaOpen}" Name="GaiaButton" ToolTip.Tip="Settings"  Command="{Binding OpenGaiaViewCommand} ">
+                    <ToggleButton IsChecked="{Binding GaiaOpen}" Name="GaiaButton" ToolTip.Tip="Gaia AI Chatbot"  Command="{Binding OpenGaiaViewCommand} ">
                         <Image Width="16" Height="16" Source="/Assets/earth_night.png" />
                     </ToggleButton>
                 </StackPanel>
