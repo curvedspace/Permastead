@@ -11,11 +11,17 @@
              xmlns:lvc="using:LiveChartsCore.SkiaSharpView.Avalonia"
              x:DataType="vm:HomeViewModel" x:CompileBindings="True">
     
-    <Grid RowDefinitions="Auto,Auto,Auto,Auto,*,Auto" ColumnDefinitions="*,*,*" Margin="20">
+    <Grid RowDefinitions="Auto,Auto,Auto,Auto,*,Auto,Auto,Auto" ColumnDefinitions="*,*,*" Margin="20">
     
       <StackPanel Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="1">
         <TextBlock HorizontalAlignment="Center" FontSize="32" Text="{Binding CurrentDateDisplay}"></TextBlock>
       </StackPanel>
+        
+        <StackPanel Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3">
+            <TextBlock HorizontalAlignment="Center" FontSize="24" VerticalAlignment="Center" TextWrapping="WrapWithOverflow"
+                       Margin="20"
+                       Text="{Binding WeatherForecast}"></TextBlock>
+        </StackPanel>
         
         <StackPanel Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="1" VerticalAlignment="Center">
             <TextBlock HorizontalAlignment="Center" FontSize="32" VerticalAlignment="Center" TextWrapping="WrapWithOverflow"
@@ -56,48 +62,82 @@
         <!-- </Panel> -->
         <TextBlock Grid.Column="2" Grid.Row="3" VerticalAlignment="Bottom" HorizontalAlignment="Center">Record Counts (Last 30 Days)</TextBlock>
         
-        <StackPanel Grid.Row="5" Grid.ColumnSpan="3" Grid.Column="0">
+        <TextBlock Grid.Column="1" Grid.Row="5" Margin="20" FontSize="20" VerticalAlignment="Bottom" HorizontalAlignment="Center">All-Time Statistics</TextBlock>
+        
+        <StackPanel Grid.Row="6" Grid.ColumnSpan="3" Grid.Column="0">
             <Grid ColumnDefinitions="*,*,*,*,*,*,*,*">
-                <TextBlock Grid.Column="0" FontSize="16" TextAlignment="Center" Margin="5,20,0,0">Seed Types:</TextBlock>
+                <TextBlock Grid.Column="0" FontSize="16" TextAlignment="Center" Margin="5,10,0,0">People:</TextBlock>
                 <TextBlock Grid.Column="1"
                            FontSize="16" 
-                           Margin="0,20,0,20"
-                           Name="Seeds"
+                           Margin="0,10,0,20"
+                           Name="Starters"
                            ToolTip.Tip="The number of seed packets you have recorded. "
-                           Text="{Binding SeedPackets.Count}"
-                           VerticalAlignment="Center" HorizontalAlignment="Left" />
-                <TextBlock Grid.Column="2" FontSize="16" TextAlignment="Center" Margin="5,20,0,0">People:</TextBlock>
-                <TextBlock Grid.Column="3"
-                           FontSize="16" 
-                           Margin="0,20,0,20"
-                           Name="People"
-                           ToolTip.Tip="The number of people you have in your contact list. "
                            Text="{Binding People.Count}"
                            VerticalAlignment="Center" HorizontalAlignment="Left" />
-                <TextBlock Grid.Column="4" FontSize="16" TextAlignment="Center" Margin="5,20,0,0">Plantings:</TextBlock>
+                <TextBlock Grid.Column="2" FontSize="16" TextAlignment="Center" Margin="5,10,0,0">Harvests:</TextBlock>
+                <TextBlock Grid.Column="3"
+                           FontSize="16" 
+                           Margin="0,10,0,20"
+                           Name="People"
+                           ToolTip.Tip="The number of people you have in your contact list. "
+                           Text="{Binding Harvests.Count}"
+                           VerticalAlignment="Center" HorizontalAlignment="Left" />
+                <TextBlock Grid.Column="4" FontSize="16" TextAlignment="Center" Margin="5,10,0,0">Plantings:</TextBlock>
                 <TextBlock Grid.Column="5"
                            FontSize="16" 
-                           Margin="0,20,0,20"
+                           Margin="0,10,0,20"
                            Name="Plantings"
                            ToolTip.Tip="The number of plantings you have done. "
                            Text="{Binding Plantings.Count}"
                            VerticalAlignment="Center" HorizontalAlignment="Left" />
-                <TextBlock Grid.Column="6" FontSize="16" TextAlignment="Center" Margin="5,20,0,0">Inventory:</TextBlock>
+                <TextBlock Grid.Column="6" FontSize="16" TextAlignment="Center" Margin="5,10,0,0">Inventory:</TextBlock>
                 <TextBlock Grid.Column="7"
                            FontSize="16" 
-                           Margin="0,20,0,20"
+                           Margin="0,10,0,20"
                            Name="Inventory"
                            ToolTip.Tip="The number of plantings you have done. "
                            Text="{Binding InventoryItems.Count}"
                            VerticalAlignment="Center" HorizontalAlignment="Left" />
             </Grid>
         </StackPanel>
-        
-        <StackPanel Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3">
-            <TextBlock HorizontalAlignment="Center" FontSize="24" VerticalAlignment="Center" TextWrapping="WrapWithOverflow"
-                       Margin="20"
-                       Text="{Binding WeatherForecast}"></TextBlock>
+        <StackPanel Grid.Row="7" Grid.ColumnSpan="3" Grid.Column="0">
+            <Grid ColumnDefinitions="*,*,*,*,*,*,*,*">
+                <TextBlock Grid.Column="0" FontSize="16" TextAlignment="Center" Margin="5,10,0,0">Seed Bank:</TextBlock>
+                <TextBlock Grid.Column="1"
+                           FontSize="16" 
+                           Margin="0,10,0,20"
+                           Name="Seeds"
+                           ToolTip.Tip="The number of seed packets you have recorded. "
+                           Text="{Binding SeedPackets.Count}"
+                           VerticalAlignment="Center" HorizontalAlignment="Left" />
+                <TextBlock Grid.Column="2" FontSize="16" TextAlignment="Center" Margin="5,10,0,0">Plants:</TextBlock>
+                <TextBlock Grid.Column="3"
+                           FontSize="16" 
+                           Margin="0,10,0,20"
+                           Name="Plants"
+                           ToolTip.Tip="The number of people you have in your contact list. "
+                           Text="{Binding Plants.Count}"
+                           VerticalAlignment="Center" HorizontalAlignment="Left" />
+                <TextBlock Grid.Column="4" FontSize="16" TextAlignment="Center" Margin="5,10,0,0">Actions:</TextBlock>
+                <TextBlock Grid.Column="5"
+                           FontSize="16" 
+                           Margin="0,10,0,20"
+                           Name="Harvests"
+                           ToolTip.Tip="The number of plantings you have done. "
+                           Text="{Binding Harvests.Count}"
+                           VerticalAlignment="Center" HorizontalAlignment="Left" />
+                <TextBlock Grid.Column="6" FontSize="16" TextAlignment="Center" Margin="5,10,0,0">Observations:</TextBlock>
+                <TextBlock Grid.Column="7"
+                           FontSize="16" 
+                           Margin="0,10,0,20"
+                           Name="Observations"
+                           ToolTip.Tip="The number of plantings you have done. "
+                           Text="{Binding Observations.Count}"
+                           VerticalAlignment="Center" HorizontalAlignment="Left" />
+            </Grid>
         </StackPanel>
+        
+        
         
     </Grid>
     

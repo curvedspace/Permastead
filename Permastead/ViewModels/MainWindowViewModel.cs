@@ -1,6 +1,6 @@
 ﻿using System.Diagnostics;
 using System.Windows.Input;
-
+using Avalonia.Controls;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Models;
@@ -180,6 +180,8 @@ namespace Permastead.ViewModels
                 else
                 {
                     GaiaWindow = new GaiaWindow();
+                    
+                    this.GaiaWindow.Width = 600;
                     this.GaiaWindow.Show();
                 }
             }

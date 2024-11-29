@@ -48,6 +48,9 @@ namespace Permastead.ViewModels.Views;
         [ObservableProperty] 
         private ObservableCollection<Person> _people = new ObservableCollection<Person>();
         
+        [ObservableProperty] 
+        private ObservableCollection<Harvest> _harvests = new ObservableCollection<Harvest>();
+        
         [ObservableProperty]
         private string? _statistics;
         
