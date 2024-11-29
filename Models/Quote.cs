@@ -18,7 +18,7 @@ public class Quote
 
     public override string ToString()
     {
-        return this.Description + " (" + this.AuthorName + ")";
+        return this.Description + "\n" + "\n" + " -" + this.AuthorName + " ";
     }
 
     public Quote()

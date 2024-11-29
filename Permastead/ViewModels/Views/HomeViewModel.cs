@@ -1,9 +1,20 @@
 ﻿
 using System;
 using System.Collections.ObjectModel;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using CommunityToolkit.Mvvm.ComponentModel;
 
+using LiveChartsCore;
+using LiveChartsCore.SkiaSharpView;
+using LiveChartsCore.SkiaSharpView.Extensions;
+using LiveChartsCore.VisualElements;
+using LiveChartsCore.SkiaSharpView.Drawing;
+using LiveChartsCore.SkiaSharpView.VisualElements;
+using LiveChartsCore.Defaults;
+
+using CommunityToolkit.Mvvm.Input;
+using LiveChartsCore.Measure;
 using Models;
 using Services;
 
@@ -11,6 +22,12 @@ namespace Permastead.ViewModels.Views;
 
     public partial class HomeViewModel : ViewModelBase
     {
+        public IEnumerable<ISeries> Series { get; set; }
+        
+        public IEnumerable<ISeries> SeriesStats { get; set; }
+        public IEnumerable<VisualElement<SkiaSharpDrawingContext>> VisualElements { get; set; }
+        private NeedleVisual Needle { get; set; }
+        
         public QuoteViewModel QuoteViewModel { get; set; } = new QuoteViewModel();
 
         [ObservableProperty] 
@@ -40,6 +57,11 @@ namespace Permastead.ViewModels.Views;
         [ObservableProperty] private string _CurrentDateDisplay = DateTime.Now.ToLongDateString();
 
         [ObservableProperty] private string _weatherForecast = "Weather Unknown";
+        
+        public ObservableValue PlantingsValue { get; set; } = new ObservableValue(0);
+        public ObservableValue HarvestsValue { get; set; } = new ObservableValue(0);
+        public ObservableValue InventoryValue { get; set; } = new ObservableValue(0);
+        public ObservableValue ObservationsValue { get; set; } = new ObservableValue(0);
 
         public string GrowingSeason => "Growing Season: " + PlantingYearEndDate.Year.ToString();
 
@@ -64,8 +86,48 @@ namespace Permastead.ViewModels.Views;
         
         public HomeViewModel()
         {
+            
+            var sectionsOuter = 130;
+            var sectionsWidth = 20;
+
+            Needle = new NeedleVisual
+            {
+                Value = 45
+            };
+
+            Series = GaugeGenerator.BuildAngularGaugeSections(
+                new GaugeItem(40, s => SetStyle(sectionsOuter, sectionsWidth, s)),
+                new GaugeItem(20, s => SetStyle(sectionsOuter, sectionsWidth, s)),
+                new GaugeItem(40, s => SetStyle(sectionsOuter, sectionsWidth, s)));
+
+            VisualElements =
+            [
+                new AngularTicksVisual
+                {
+                    LabelsSize = 16,
+                    LabelsOuterOffset = 15,
+                    OuterOffset = 65,
+                    TicksLength = 20
+                },
+                Needle
+            ];
+            
+            OnPropertyChanged(nameof(Series));
+            
+         SeriesStats  =
+            GaugeGenerator.BuildSolidGauge(
+                new GaugeItem(HarvestsValue, series => SetStyleStats("Harvests", series)),
+                new GaugeItem(PlantingsValue, series => SetStyleStats("Plantings", series)),
+                new GaugeItem(InventoryValue, series => SetStyleStats("Inventory", series)),
+                new GaugeItem(ObservationsValue, series => SetStyleStats("Observations", series)),
+                new GaugeItem(GaugeItem.Background, series =>
+                {
+                    series.InnerRadius = 20;
+                }));
+            
             this.QuoteViewModel.Quote.Description = "This is a test quote";
             this.QuoteViewModel.Quote.AuthorName = "Anonymous";
+            
             
             PlantingYearStartDate = new DateTime(DateTime.Today.Year, 1,1);
             PlantingYearEndDate = new DateTime(DateTime.Today.Year, 12,31);
@@ -87,9 +149,9 @@ namespace Permastead.ViewModels.Views;
 
             decimal ratio = 0;
 
-            if (scoreBoard.Actions > 0)
+            if (scoreBoard.Actions > 0 || scoreBoard.Observations > 0)
             {
-                ratio = (scoreBoard.Observations / scoreBoard.Actions);
+                ratio = (scoreBoard.Actions / (scoreBoard.Actions + scoreBoard.Observations));
             }
             
             ObservationsToActionRatio = ratio;
@@ -100,7 +162,29 @@ namespace Permastead.ViewModels.Views;
             SeedPackets = new ObservableCollection<SeedPacket>(PlantingsService.GetSeedPackets(AppSession.ServiceMode));
             Plants = new ObservableCollection<Plant>(PlantingsService.GetPlants(AppSession.ServiceMode));
             People = new ObservableCollection<Person>(PersonService.GetAllPeople(AppSession.ServiceMode));
-
+            
+            GetQuote();
+            
+            var startDateWindow = DateTime.Today.AddDays(-30);
+            this.PlantingsValue.Value = 0;
+            this.HarvestsValue.Value = 0;
+            this.InventoryValue.Value = 0;
+            this.ObservationsValue.Value = 0;
+            
+            Needle.Value = Convert.ToDouble(ratio * 100);
+            
+            //compute the observations count
+            foreach (var obs in Observations)
+            {
+                if (obs.StartDate >= startDateWindow) this.ObservationsValue.Value += 1;
+            }
+            
+            //compute the actions count
+            foreach (var inv in InventoryItems)
+            {
+                if (inv.StartDate >= startDateWindow) this.InventoryValue.Value += 1;
+            }
+            
             //compute the success rate for the current growing year
             foreach (var p in Plantings)
             {
@@ -117,6 +201,11 @@ namespace Permastead.ViewModels.Views;
                     {
                         TotalHarvestedPlants++;
                     }
+
+                    if (p.StartDate >= startDateWindow)
+                    {
+                        this.PlantingsValue.Value += 1;
+                    }
                 }
             }
 
@@ -128,7 +217,7 @@ namespace Permastead.ViewModels.Views;
                 var t = new Task(GetWeatherAsync);
                 t.Start();
                 t.Wait();
-
+                
             }
             catch (Exception e)
             {
@@ -171,6 +260,24 @@ namespace Permastead.ViewModels.Views;
                 WeatherForecast = "";
             }
             
+        }
+        
+        private static void SetStyle(
+            double sectionsOuter, double sectionsWidth, PieSeries<ObservableValue> series)
+        {
+            series.OuterRadiusOffset = sectionsOuter;
+            series.MaxRadialColumnWidth = sectionsWidth;
+        }
+        
+        public static void SetStyleStats(string name, PieSeries<ObservableValue> series)
+        {
+            series.Name = name;
+            series.DataLabelsPosition = PolarLabelsPosition.Start;
+            series.DataLabelsFormatter =
+                point => $"{point.Coordinate.PrimaryValue} {point.Context.Series.Name}";
+            series.InnerRadius = 20;
+            series.RelativeOuterRadius = 8;
+            series.RelativeInnerRadius = 8;
         }
 
     }

@@ -6,125 +6,99 @@
              xmlns:vm="using:Permastead.ViewModels.Views"
              mc:Ignorable="d"
              d:DesignWidth="1800" d:DesignHeight="1000"
+             xmlns:lv="clr-namespace:LiveChartsCore;assembly=LiveChartsCore"
              xmlns:views="clr-namespace:Permastead.Views.Views"
+             xmlns:lvc="using:LiveChartsCore.SkiaSharpView.Avalonia"
              x:DataType="vm:HomeViewModel" x:CompileBindings="True">
     
-    <Grid RowDefinitions="Auto,*,Auto,Auto" ColumnDefinitions="Auto,*,Auto" Margin="20">
+    <Grid RowDefinitions="Auto,Auto,Auto,Auto,*,Auto" ColumnDefinitions="*,*,*" Margin="20">
     
-      <StackPanel Grid.Row="0" Grid.Column="0">
-      <TextBlock FontSize="20" TextAlignment="Center" Margin="5,40,0,10">People</TextBlock>
-      <TextBlock
-          FontSize="20" 
-          Margin="0,5,0,0"
-          Name="TextPercent"
-          ToolTip.Tip="The number of contacts. "
-          HorizontalAlignment="Center"
-          Text="{Binding People.Count, StringFormat={}{0:0}}"
-          VerticalAlignment="Center" />
+      <StackPanel Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="1">
+        <TextBlock HorizontalAlignment="Center" FontSize="32" Text="{Binding CurrentDateDisplay}"></TextBlock>
       </StackPanel>
-              
-      <StackPanel Grid.Row="1" Grid.Column="0" VerticalAlignment="Center">
-          <TextBlock Grid.Row="1" FontSize="20"  TextAlignment="Center" Margin="10">Obs/Action Ratio</TextBlock>
-          
-              <TextBlock
-                  FontSize="20" 
-                  Margin="0,5,0,5"
-                  Name="ObservationActionRatio"
-                  ToolTip.Tip="The ratio of the number of observations recorded to actions. "
-                  HorizontalAlignment="Center"
-                  Text="{Binding ObservationsToActionRatio, StringFormat={}{0:0.00}}"
-                  VerticalAlignment="Center" />
-      </StackPanel>
-      
-      <StackPanel Grid.Row="2" Grid.Column="0" VerticalAlignment="Center">
-        <TextBlock FontSize="20"  TextAlignment="Center" Margin="5,20,0,10">Inventory</TextBlock>
-        <TextBlock
-            FontSize="20" 
-            Margin="0,5,0,5"
-            Name="InventoryCount"
-            ToolTip.Tip="The number of items in your homestead inventory. "
-            Text="{Binding InventoryItems.Count}"
-            VerticalAlignment="Center" HorizontalAlignment="Center" />
         
-      </StackPanel>
-      
-          <StackPanel Grid.Row="0" Grid.Column="2">
-            
-            <TextBlock FontSize="20" TextAlignment="Center" Margin="5,20,0,10">Plants</TextBlock>
-            
-                <TextBlock
-                    FontSize="20" 
-                    Margin="0,5,0,50"
-                    Name="Plants"
-                    ToolTip.Tip="The number of different plant types in the database. "
-                    HorizontalAlignment="Center"
-                    Text="{Binding Plants.Count}"
-                    VerticalAlignment="Center" />
-                          
-          </StackPanel>
-      <StackPanel Grid.Row="1" Grid.Column="2" VerticalAlignment="Center">
-            <TextBlock FontSize="20" TextAlignment="Center" Margin="5,30,0,0">Plantings</TextBlock>
-            <TextBlock
-                FontSize="20" 
-                Margin="0,20,0,0"
-                Name="TextPercent2"
-                ToolTip.Tip="The number of current plantings you have going. "
-                Text="{Binding Plantings.Count}"
-                VerticalAlignment="Center" HorizontalAlignment="Center" />
-              
-      </StackPanel>
-      <StackPanel Grid.Row="2" Grid.Column="2" VerticalAlignment="Center">
-          <TextBlock FontSize="20" TextAlignment="Center" Margin="5,20,0,0">Seed Types</TextBlock>
-          <TextBlock
-              FontSize="20" 
-              Margin="0,20,0,20"
-              Name="Seeds"
-              ToolTip.Tip="The number of seed packets you have recorded. "
-              Text="{Binding SeedPackets.Count}"
-              VerticalAlignment="Center" HorizontalAlignment="Center" />
-          
-      </StackPanel>
-     
-     <StackPanel Grid.Row="0" Grid.Column="1" VerticalAlignment="Stretch">
-         <TextBlock FontSize="24" ToolTip.Tip="The current date. " 
-                    TextAlignment="Center" Text="{Binding CurrentDateDisplay}" Margin="20,0,20,0"></TextBlock>
-         
-         
-         <!-- <Grid DockPanel.Dock="Bottom" ColumnDefinitions="Auto, *, Auto" RowDefinitions="Auto,*" VerticalAlignment="Bottom"> -->
-         <!--     <TextBlock Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="0" -->
-         <!--                Margin="10" FontSize="20" -->
-         <!--                HorizontalAlignment="Center">Planting Success Rate</TextBlock> -->
-         <!-- -->
-         <!--     <TextBlock Grid.Column="0" VerticalAlignment="Center" TextAlignment="Left" FontSize="16" -->
-         <!--                Text="{Binding GrowingSeason}"></TextBlock> -->
-         <!-- -->
-         <!--     <ProgressBar Grid.Column="1" Margin="80,50,80,50" Height="30" ShowProgressText="True" -->
-         <!--                  Value="{Binding SuccessfulPlantings}" -->
-         <!--                  Minimum="0" -->
-         <!--                  Maximum="{Binding TotalPlantings}"></ProgressBar> -->
-         <!-- -->
-         <!-- -->
-         <!--     <TextBlock Grid.Column="2" VerticalAlignment="Center" TextAlignment="Right" FontSize="16" -->
-         <!--                Text="{Binding TotalPlantStats}"></TextBlock> -->
-         <!-- -->
-         <!--     <TextBlock FontSize="20" HorizontalAlignment="Center" Grid.ColumnSpan="3" Grid.Row="1" Text="{Binding WeatherForecast}"></TextBlock> -->
-         <!-- </Grid> -->
-         
-     </StackPanel>
-      
-        <Panel Grid.Row="1" Grid.Column="1">
-          <Border Background="Transparent"
-                  BorderBrush="Transparent"
-                  BorderThickness="1"
-                  CornerRadius="5"
-                  Padding="10" Margin="10,0,10,0">
-              <views:ToDoView HorizontalAlignment="Center" VerticalAlignment="Center" MinWidth="1000" MinHeight="600"> </views:ToDoView>
-          </Border>
-        </Panel>
-     
-      <Panel Grid.Row="2" Grid.Column = "1" VerticalAlignment="Bottom" Margin="0,0,0,0">
-          <TextBlock Height="20" Margin="2,0,0,20" TextAlignment="Center" Text="{Binding WeatherForecast}"></TextBlock>
-      </Panel>
-</Grid>
+        <StackPanel Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="1" VerticalAlignment="Center">
+            <TextBlock HorizontalAlignment="Center" FontSize="32" VerticalAlignment="Center" TextWrapping="WrapWithOverflow"
+                       Text="{Binding QuoteViewModel.QuoteText}"></TextBlock>
+        </StackPanel>
+        
+        
+        <lvc:PieChart Grid.Row="4" Grid.Column="0" Margin="100,10,100,10"
+            Series="{Binding Series}"
+            VisualElements="{Binding VisualElements}"
+            InitialRotation="-225"
+            MaxAngle="270"
+            MinValue="0"
+            MaxValue="100"
+            AnimationsSpeed="00:00:02.500">
+        </lvc:PieChart>
+        
+        <lvc:PieChart Grid.Row="4" Grid.Column="2" Margin="100,10,100,10"
+                      Series="{Binding SeriesStats}"
+                      InitialRotation="45"
+                      MaxAngle="270"
+                      MinValue="0"
+                      MaxValue="100"
+                      AnimationsSpeed="00:00:02.500">
+        </lvc:PieChart>
+        
+        <TextBlock Grid.Column="0" Grid.Row="3" VerticalAlignment="Bottom" HorizontalAlignment="Center">Actions to Observations Ratio (Last 30 Days)</TextBlock>
+        <TextBlock Grid.Column="1" Grid.Row="3" Margin="10,50,10,10" VerticalAlignment="Bottom" HorizontalAlignment="Center">Daily Quote</TextBlock>
+        <!-- <TextBlock Grid.Column="1" Grid.Row="2" FontSize="32" VerticalAlignment="Center" HorizontalAlignment="Center">Some bullshit</TextBlock> -->
+        <!-- <Panel Grid.Row="3" Grid.Column="1"> -->
+        <!--     <Border Background="Transparent" -->
+        <!--             BorderBrush="Transparent" -->
+        <!--             BorderThickness="1" -->
+        <!--             CornerRadius="5" -->
+        <!--             Padding="10" Margin="10,0,10,0"> -->
+        <!--         <views:ToDoView HorizontalAlignment="Center" VerticalAlignment="Center" MinWidth="1000" MinHeight="600"> </views:ToDoView> -->
+        <!--     </Border> -->
+        <!-- </Panel> -->
+        <TextBlock Grid.Column="2" Grid.Row="3" VerticalAlignment="Bottom" HorizontalAlignment="Center">Record Counts (Last 30 Days)</TextBlock>
+        
+        <StackPanel Grid.Row="5" Grid.ColumnSpan="3" Grid.Column="0">
+            <Grid ColumnDefinitions="*,*,*,*,*,*,*,*">
+                <TextBlock Grid.Column="0" FontSize="16" TextAlignment="Center" Margin="5,20,0,0">Seed Types:</TextBlock>
+                <TextBlock Grid.Column="1"
+                           FontSize="16" 
+                           Margin="0,20,0,20"
+                           Name="Seeds"
+                           ToolTip.Tip="The number of seed packets you have recorded. "
+                           Text="{Binding SeedPackets.Count}"
+                           VerticalAlignment="Center" HorizontalAlignment="Left" />
+                <TextBlock Grid.Column="2" FontSize="16" TextAlignment="Center" Margin="5,20,0,0">People:</TextBlock>
+                <TextBlock Grid.Column="3"
+                           FontSize="16" 
+                           Margin="0,20,0,20"
+                           Name="People"
+                           ToolTip.Tip="The number of people you have in your contact list. "
+                           Text="{Binding People.Count}"
+                           VerticalAlignment="Center" HorizontalAlignment="Left" />
+                <TextBlock Grid.Column="4" FontSize="16" TextAlignment="Center" Margin="5,20,0,0">Plantings:</TextBlock>
+                <TextBlock Grid.Column="5"
+                           FontSize="16" 
+                           Margin="0,20,0,20"
+                           Name="Plantings"
+                           ToolTip.Tip="The number of plantings you have done. "
+                           Text="{Binding Plantings.Count}"
+                           VerticalAlignment="Center" HorizontalAlignment="Left" />
+                <TextBlock Grid.Column="6" FontSize="16" TextAlignment="Center" Margin="5,20,0,0">Inventory:</TextBlock>
+                <TextBlock Grid.Column="7"
+                           FontSize="16" 
+                           Margin="0,20,0,20"
+                           Name="Inventory"
+                           ToolTip.Tip="The number of plantings you have done. "
+                           Text="{Binding InventoryItems.Count}"
+                           VerticalAlignment="Center" HorizontalAlignment="Left" />
+            </Grid>
+        </StackPanel>
+        
+        <StackPanel Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3">
+            <TextBlock HorizontalAlignment="Center" FontSize="24" VerticalAlignment="Center" TextWrapping="WrapWithOverflow"
+                       Margin="20"
+                       Text="{Binding WeatherForecast}"></TextBlock>
+        </StackPanel>
+        
+    </Grid>
     
 </UserControl>
