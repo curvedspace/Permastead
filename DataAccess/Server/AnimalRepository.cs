@@ -17,7 +17,7 @@ public class AnimalRepository
                       "p.FirstName AuthorFirstName, p.LastName AuthorLastName, " +
                       "a.nickname, a.breed, a.birthday, " + 
                       "a.StartDate, a.EndDate, a.comment " +
-                      "FROM Animal a, Animalype at, Person p  " +
+                      "FROM Animal a, AnimalType at, Person p  " +
                       "WHERE a.AnimalTypeId = at.Id " +
                       "AND a.AuthorId = p.Id " +
                       "ORDER BY a.StartDate DESC";
@@ -48,9 +48,14 @@ public class AnimalRepository
                         animal.NickName = dr[7].ToString();
                         animal.Breed = dr[8].ToString();
                         
-                        animal.Birthday = Convert.ToDateTime(dr[9].ToString());
-                        animal.StartDate = Convert.ToDateTime(dr[10].ToString());
-                        animal.EndDate = Convert.ToDateTime(dr[11].ToString());
+                        if (dr[9] != DBNull.Value)
+                            animal.Birthday = Convert.ToDateTime(dr[9].ToString());
+                        
+                        if (dr[10] != DBNull.Value)
+                            animal.StartDate = Convert.ToDateTime(dr[10].ToString());
+                        
+                        if (dr[11] != DBNull.Value)
+                            animal.EndDate = Convert.ToDateTime(dr[11].ToString());
                         
                         animal.Comment = dr[12].ToString();
 

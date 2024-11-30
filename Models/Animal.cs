@@ -15,13 +15,29 @@ public class Animal
 
     public DateTime Birthday { get; set; }
     
+    public string BirthdayString => this.Birthday.ToShortDateString();
+    
     public DateTime StartDate { get; set; }
     
+    public string StartDateString => this.StartDate.ToShortDateString();
+    
     public DateTime EndDate { get; set; }
+    
+    public string EndDateString => this.EndDate.ToShortDateString();
     
     public Person? Author { get; set; }
     
     public string? Comment { get; set; }
+    
+    /// <summary>
+    /// Indicates is the item is currently active, meaning it's start date is earlier than today
+    /// and it's end date is in the future.
+    /// </summary>
+    /// <returns></returns>
+    public bool IsCurrent()
+    {
+        return (DateTime.UtcNow > StartDate) && (DateTime.UtcNow < EndDate);
+    }
 
     public Animal()
     {
