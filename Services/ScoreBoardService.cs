@@ -3,14 +3,20 @@ using DataAccess;
 using DataAccess.Local;
 using Models;
 using Serilog;
+using Serilog.Core;
 
 namespace Services;
 
 public static class ScoreBoardService
 {
-    public static ScoreBoard ComputeTotalScore(ServiceMode mode)
+    public static ScoreBoard ComputeTotalScore(ServiceMode mode, int periodLookBack = 30)
     {
         var scoreBoard = new ScoreBoard();
+        
+        var periodStartDate = DateTime.Now.AddDays(-periodLookBack);
+        long periodObservations = 0;
+        long periodActions = 0;
+        decimal periodActObsRatio = 0;
 
         //set up achievements
         var achievements = new Dictionary<AchievementType,Achievement>
@@ -49,6 +55,11 @@ public static class ScoreBoardService
         {
             obsAchievement.Count += 1;
             scoreBoard.TotalScore += obsAchievement.CurrentPoints;
+            
+            if (ob.StartDate >= periodStartDate)
+            {
+                periodObservations += 1;
+            }
         }
 
         //inventory
@@ -108,8 +119,19 @@ public static class ScoreBoardService
         {
             actionAchievement.Count += 1;
             scoreBoard.TotalScore += actionAchievement.CurrentPoints;
-        }
             
+            if (todo.StartDate >= periodStartDate)
+            {
+                periodActions += 1;
+            }
+        }
+
+        if (periodObservations > 0)
+        {
+            periodActObsRatio = ((1m * periodActions / (periodActions + periodObservations)) * 100m);
+        }
+
+        scoreBoard.ActionsToObservationsRatio = periodActObsRatio;
         
         //bonus computation - actions
         if (todos.Count >= 10) scoreBoard.TotalScore += 10;

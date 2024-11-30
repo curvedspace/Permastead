@@ -153,14 +153,14 @@ namespace Permastead.ViewModels.Views;
             // this should represent how close, in a scale of 1-100, that we are to the next level
             TotalScoreNormalized = Math.Round((this._totalScore - scoreBoard.LevelMin) / (scoreBoard.LevelMax - scoreBoard.LevelMin),4);
 
-            decimal ratio = 0;
-
-            if (scoreBoard.Actions > 0 || scoreBoard.Observations > 0)
-            {
-                ratio = (scoreBoard.Actions / (scoreBoard.Actions + scoreBoard.Observations));
-            }
+            // decimal ratio = 0;
+            //
+            // if (scoreBoard.Actions > 0 || scoreBoard.Observations > 0)
+            // {
+            //     ratio = (scoreBoard.Actions / (scoreBoard.Actions + scoreBoard.Observations));
+            // }
             
-            ObservationsToActionRatio = ratio;
+            ObservationsToActionRatio = scoreBoard.ActionsToObservationsRatio;
             
             // get other data
             Plantings = new ObservableCollection<Planting>(PlantingsService.GetPlantings(AppSession.ServiceMode));
@@ -178,7 +178,7 @@ namespace Permastead.ViewModels.Views;
             this.InventoryValue.Value = 0;
             this.ObservationsValue.Value = 0;
             
-            Needle.Value = Convert.ToDouble(ratio * 100);
+            Needle.Value = Convert.ToDouble(ObservationsToActionRatio);
             
             //compute the observations count
             foreach (var obs in Observations)

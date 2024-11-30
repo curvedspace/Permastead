@@ -50,16 +50,6 @@
         
         <TextBlock Grid.Column="0" Grid.Row="3" VerticalAlignment="Bottom" HorizontalAlignment="Center">Actions to Observations Ratio (Last 30 Days)</TextBlock>
         <TextBlock Grid.Column="1" Grid.Row="3" Margin="10,50,10,10" VerticalAlignment="Bottom" HorizontalAlignment="Center">Daily Quote</TextBlock>
-        <!-- <TextBlock Grid.Column="1" Grid.Row="2" FontSize="32" VerticalAlignment="Center" HorizontalAlignment="Center">Some bullshit</TextBlock> -->
-        <!-- <Panel Grid.Row="3" Grid.Column="1"> -->
-        <!--     <Border Background="Transparent" -->
-        <!--             BorderBrush="Transparent" -->
-        <!--             BorderThickness="1" -->
-        <!--             CornerRadius="5" -->
-        <!--             Padding="10" Margin="10,0,10,0"> -->
-        <!--         <views:ToDoView HorizontalAlignment="Center" VerticalAlignment="Center" MinWidth="1000" MinHeight="600"> </views:ToDoView> -->
-        <!--     </Border> -->
-        <!-- </Panel> -->
         <TextBlock Grid.Column="2" Grid.Row="3" VerticalAlignment="Bottom" HorizontalAlignment="Center">Record Counts (Last 30 Days)</TextBlock>
         
         <TextBlock Grid.Column="1" Grid.Row="5" Margin="20" FontSize="20" VerticalAlignment="Bottom" HorizontalAlignment="Center">All-Time Statistics</TextBlock>

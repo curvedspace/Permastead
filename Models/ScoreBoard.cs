@@ -19,6 +19,8 @@ public class ScoreBoard
     public decimal Plantings { get; set; }
     
     public decimal SeedPackets { get; set; }
+    
+    public decimal ActionsToObservationsRatio { get; set; }
 
     public decimal LevelProgress
     {
