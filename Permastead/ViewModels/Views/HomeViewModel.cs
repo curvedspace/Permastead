@@ -51,6 +51,9 @@ namespace Permastead.ViewModels.Views;
         [ObservableProperty] 
         private ObservableCollection<Harvest> _harvests = new ObservableCollection<Harvest>();
         
+        [ObservableProperty] 
+        private ObservableCollection<ToDo> _toDos = new ObservableCollection<ToDo>();
+        
         [ObservableProperty]
         private string? _statistics;
         
@@ -165,6 +168,7 @@ namespace Permastead.ViewModels.Views;
             SeedPackets = new ObservableCollection<SeedPacket>(PlantingsService.GetSeedPackets(AppSession.ServiceMode));
             Plants = new ObservableCollection<Plant>(PlantingsService.GetPlants(AppSession.ServiceMode));
             People = new ObservableCollection<Person>(PersonService.GetAllPeople(AppSession.ServiceMode));
+            ToDos = new ObservableCollection<ToDo>(ToDoService.GetAllToDos(AppSession.ServiceMode));
             
             GetQuote();
             
