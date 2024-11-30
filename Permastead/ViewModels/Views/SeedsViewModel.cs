@@ -101,8 +101,8 @@ public partial class SeedsViewModel : ViewModelBase
         {
             Columns =
             {
-                new TextColumn<SeedPacket, DateTime>
-                    ("Date", x => x.CreationDate),
+                new TextColumn<SeedPacket, string>
+                    ("Date", x => x.CreationDateString),
                 new TextColumn<SeedPacket, string>
                     ("Code", x => x.Code),
                 new TextColumn<SeedPacket, string>

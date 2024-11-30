@@ -45,6 +45,8 @@ public class SeedPacket
     public DateTime EndDate { get; set; } = DateTime.MaxValue;
 
     public DateTime CreationDate { get; set; } = DateTime.UtcNow;
+    
+    public string CreationDateString => this.CreationDate.ToShortDateString();
 
     public bool Exchange { get; set; }
     
