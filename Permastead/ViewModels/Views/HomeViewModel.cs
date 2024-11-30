@@ -153,13 +153,7 @@ namespace Permastead.ViewModels.Views;
             // this should represent how close, in a scale of 1-100, that we are to the next level
             TotalScoreNormalized = Math.Round((this._totalScore - scoreBoard.LevelMin) / (scoreBoard.LevelMax - scoreBoard.LevelMin),4);
 
-            // decimal ratio = 0;
-            //
-            // if (scoreBoard.Actions > 0 || scoreBoard.Observations > 0)
-            // {
-            //     ratio = (scoreBoard.Actions / (scoreBoard.Actions + scoreBoard.Observations));
-            // }
-            
+           
             ObservationsToActionRatio = scoreBoard.ActionsToObservationsRatio;
             
             // get other data
