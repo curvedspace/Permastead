@@ -181,7 +181,7 @@ namespace Permastead.ViewModels
                 {
                     GaiaWindow = new GaiaWindow();
                     
-                    this.GaiaWindow.Width = 600;
+                    this.GaiaWindow.Width = 700;
                     this.GaiaWindow.Show();
                 }
             }
