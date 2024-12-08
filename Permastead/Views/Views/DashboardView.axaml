@@ -43,7 +43,7 @@
                           MaxAngle="270"
                           MinValue="0"
                           AnimationsSpeed="00:00:02.500"
-                          MaxValue="{Binding TotalActivePlantings}">
+                          MaxValue="{Binding TotalYearPlantings}">
             </lvc:PieChart>
         </Grid>
         
@@ -76,7 +76,7 @@
                 MaxAngle="270"
                 MinValue="0"
                 AnimationsSpeed="00:00:03.000"
-                MaxValue="{Binding TotalActivePlantings}">
+                MaxValue="{Binding TotalYearPlantings}">
             </lvc:PieChart>
         </Grid>
         <!-- </Panel> -->

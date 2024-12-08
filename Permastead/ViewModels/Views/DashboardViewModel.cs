@@ -73,12 +73,13 @@ public partial class DashboardViewModel : ViewModelBase
     [ObservableProperty] private long _deadPlantings;
     [ObservableProperty] private long _totalHarvestedPlants;
     [ObservableProperty] private long _totalActivePlantings;
+    [ObservableProperty] private long _totalYearPlantings;
     
     
     public ObservableValue SuccessfulPlantingsValue { get; set; } = new ObservableValue(0);
     public ObservableValue DeadPlantingsValue { get; set; } = new ObservableValue(0);
     public ObservableValue HarvestedPlantingsValue { get; set; } = new ObservableValue(0);
-    
+   
     public ObservableValue AnnualsValue { get; set; } = new ObservableValue(0);
     public ObservableValue BiennialsValue { get; set; } = new ObservableValue(0);
     public ObservableValue PerennialsValue { get; set; } = new ObservableValue(0);
@@ -137,6 +138,7 @@ public partial class DashboardViewModel : ViewModelBase
         TotalHarvestedPlants = 0;
 
         TotalActivePlantings = 0;
+        TotalYearPlantings = 0;
             
         // get other data
         Plantings = new ObservableCollection<Planting>(Services.PlantingsService.GetPlantings(AppSession.ServiceMode));
@@ -144,15 +146,15 @@ public partial class DashboardViewModel : ViewModelBase
         //compute the success rate for the current growing year
         foreach (var p in Plantings)
         {
-            if (p.EndDate >= _plantingYearEndDate || p.StartDate >= _plantingYearStartDate)
+            if (PlantingYear == "ALL")
             {
-                TotalPlantings++;
-
+                TotalYearPlantings += 1;
+                
                 if (p.State.Code != "DEAD" && p.State.Code != "H")
                 {
                     SuccessfulPlantings++;
                 }
-                
+                    
                 if (p.State.Code == "DEAD")
                 {
                     DeadPlantings++;
@@ -161,6 +163,32 @@ public partial class DashboardViewModel : ViewModelBase
                 if (p.State.Code == "H")
                 {
                     TotalHarvestedPlants++;
+                }
+            }
+            else
+            {
+                if (p.StartDate.Year == _plantingYearStartDate.Year || p.EndDate >= _plantingYearEndDate )
+                {
+                    if (p.StartDate.Year == _plantingYearStartDate.Year)
+                    {
+                        TotalYearPlantings++;
+                        TotalPlantings++;
+                    }
+
+                    if (p.State.Code != "DEAD" && p.State.Code != "H" && p.StartDate.Year == _plantingYearStartDate.Year)
+                    {
+                        SuccessfulPlantings++;
+                    }
+                    
+                    if (p.State.Code == "DEAD" && p.EndDate.Year == _plantingYearEndDate.Year)
+                    {
+                        DeadPlantings++;
+                    }
+
+                    if (p.State.Code == "H" && p.EndDate.Year == _plantingYearEndDate.Year)
+                    {
+                        TotalHarvestedPlants++;
+                    }
                 }
             }
         }
@@ -184,8 +212,9 @@ public partial class DashboardViewModel : ViewModelBase
       
         foreach (var p in Plantings)
         {
-            if (p.EndDate >= _plantingYearEndDate || p.StartDate >= _plantingYearStartDate)
+            if (PlantingYear == "ALL")
             {
+
                 switch (p.SeedPacket.Seasonality.Code)
                 {
                     case "A":
@@ -201,6 +230,27 @@ public partial class DashboardViewModel : ViewModelBase
 
                 TotalActivePlantings++;
             }
+            else
+            {
+                if (p.EndDate >= _plantingYearEndDate && p.StartDate.Year == _plantingYearStartDate.Year)
+                {
+                    switch (p.SeedPacket.Seasonality.Code)
+                    {
+                        case "A":
+                            annuals++;
+                            break;
+                        case "B":
+                            biennials++;
+                            break;
+                        case "P":
+                            perennials++;
+                            break;
+                    }
+
+                    TotalActivePlantings++;
+                }
+            }
+            
         }
       
         var breakdown = new List<int>();
@@ -230,15 +280,18 @@ public partial class DashboardViewModel : ViewModelBase
             
         PlantingSuccessSeries =
             GaugeGenerator.BuildSolidGauge(
-                new GaugeItem(SuccessfulPlantingsValue, series => SetStyle("Successful", series)),
                 new GaugeItem(DeadPlantingsValue, series => SetStyle("Deceased", series)),
                 new GaugeItem(HarvestedPlantingsValue, series => SetStyle("Harvested", series)),
+                new GaugeItem(SuccessfulPlantingsValue, series => SetStyle("Successful", series)),
                 new GaugeItem(GaugeItem.Background, series =>
                 {
                     series.InnerRadius = 20;
                 }));
 
         CreateObsActChart();
+        
+        Console.WriteLine("Total for year " + TotalYearPlantings);
+        Console.WriteLine("");
     }
     
     public DashboardViewModel()
