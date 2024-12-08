@@ -111,6 +111,19 @@ namespace DataAccess.Local
 				CreationDate TIMESTAMP
 			);
 
+			-- PROCEDURE
+			DROP TABLE IF EXISTS Procedure;
+			CREATE TABLE IF NOT EXISTS Procedure(
+				Id INTEGER PRIMARY KEY,
+				Category VARCHAR (255) UNIQUE NOT NULL,
+				Name TEXT NOT NULL,
+				Content TEXT NOT NULL,
+				AuthorId INTEGER,
+				CreationDate TIMESTAMP NOT NULL,
+				LastUpdated TIMESTAMP NOT NULL,
+				EndDate TIMESTAMP
+			);
+
 			-- LOCATION
 			DROP TABLE IF EXISTS Location;
 			CREATE TABLE IF NOT EXISTS Location(

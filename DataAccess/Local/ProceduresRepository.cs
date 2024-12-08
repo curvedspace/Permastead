@@ -1,13 +1,13 @@
 using System.Data;
 using Dapper;
+using Microsoft.Data.Sqlite;
 using Models;
-using Npgsql;
 
-namespace DataAccess.Server;
+namespace DataAccess.Local;
 
 public class ProceduresRepository
 {
-    public static List<StandardOperatingProcedure> GetAll(string connectionString)
+        public static List<StandardOperatingProcedure> GetAll(string connectionString)
     {
         var myProcedures = new List<StandardOperatingProcedure>();
         StandardOperatingProcedure sop;
@@ -15,12 +15,19 @@ public class ProceduresRepository
         try
         {
 
-            var sql = "SELECT p.Id, p.Category, p.Name, p.Content, p.AuthorId, p1.FirstName, p1.LastName, p.LastUpdated, p.CreationDate, p.EndDate " +
-                      "FROM Procedure p, Person p1 " +
-                      "WHERE p.AuthorId = p1.Id " +
-                      "ORDER BY p.Category, p.Name ASC";
+            var sql = "SELECT e.Id, e.Description, e.EventTypeId, et.Description EventTypeDesc, e.AssignerId, " +
+                      "p1.FirstName AssignerFirstName, p1.LastName AssignerLastName, " +
+                      "e.AssigneeId, p2.FirstName AssigneeFirstName, p2.LastName AssigneeLastName, " +
+                      "e.CreationDate, e.StartDate, e.EndDate, e.FrequencyId, f.Code FreqCode, f.Description FreqDesc, " +
+                      "e.ToDoTrigger, e.WarningDays, e.LastTriggerDate, e.LastUpdatedDate " +
+                      "FROM Event e, EventType et, Person p1, Person p2, Frequency f " +
+                      "WHERE e.EventTypeId = et.Id " +
+                      "AND e.AssignerId = p1.Id " +
+                      "AND e.AssigneeId = p2.Id " +
+                      "AND e.FrequencyId = f.Id " + 
+                      "ORDER BY e.LastUpdatedDate DESC";
 
-            using (IDbConnection connection = new NpgsqlConnection(connectionString))
+            using (IDbConnection connection = new SqliteConnection(connectionString))
             {
                 connection.Open();
 
@@ -69,7 +76,7 @@ public class ProceduresRepository
         {
             if (sop != null)
             {
-                using (IDbConnection db = new NpgsqlConnection(DataConnection.GetServerConnectionString()))
+                using (IDbConnection db = new SqliteConnection(DataConnection.GetLocalDataSource()))
                 {
                     string sqlQuery =
                         "INSERT INTO Procedure (Category, Name, Content, EndDate, AuthorId, " + 
@@ -97,7 +104,7 @@ public class ProceduresRepository
         {
             if (sop != null)
             {
-                using (IDbConnection db = new NpgsqlConnection(DataConnection.GetServerConnectionString()))
+                using (IDbConnection db = new SqliteConnection(DataConnection.GetLocalDataSource()))
                 {
                     string sqlQuery =
                         "UPDATE Procedure SET Category = @Category, Name = @Name, Content = @Content, EndDate = @EndDate, " +
@@ -119,3 +126,4 @@ public class ProceduresRepository
         }
     }
 }
+
