@@ -36,7 +36,7 @@
                     <Button Name="InventoryButton" ToolTip.Tip="Inventory " Command="{Binding OpenInventoryViewCommand}">
                         <Image Width="16" Height="16" Source="/Assets/clipboard_invoice.png" />
                     </Button>
-                    <Button Name="ProceduresButton" ToolTip.Tip="Standard Operating Procedures " Command="{Binding OpenProceduresViewCommand}">
+                    <Button Name="ProceduresButton" ToolTip.Tip="Procedures " Command="{Binding OpenProceduresViewCommand}">
                         <Image Width="16" Height="16" Source="/Assets/books_infront.png" />
                     </Button>
                     

@@ -40,7 +40,7 @@ namespace Permastead.ViewModels
             new PlantingsViewModel(),
             new AnimalsViewModel(),
             new HarvestsViewModel(),
-            new ProceduresViewModel(),
+            new PreservationViewModel(),
             new ContactsViewModel(),
             new WeatherViewModel(),
             new SettingsViewModel()

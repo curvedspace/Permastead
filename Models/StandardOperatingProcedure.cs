@@ -10,6 +10,30 @@ public class StandardOperatingProcedure
     
     public DateTime EndDate { get; set; }
     
+    public string Name { get; set; }
+    
+    public string Category { get; set; }
+    
     public string Content { get; set; }
+    
+    public string FullDescription { get => $"{Category}: {Name}"; }
+    
+    /// <summary>
+    /// Indicates is the item is currently active, meaning it's start date is earlier than today
+    /// and it's end date is in the future.
+    /// </summary>
+    /// <returns></returns>
+    public bool IsCurrent()
+    {
+        return (DateTime.UtcNow > CreationDate) && (DateTime.UtcNow < EndDate);
+    }
+
+    public StandardOperatingProcedure()
+    {
+        CreationDate = DateTime.UtcNow;
+        LastUpdatedDate = DateTime.UtcNow;
+        
+        EndDate = DateTime.MaxValue;
+    }
     
 }

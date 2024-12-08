@@ -2,7 +2,79 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             mc:Ignorable="d" d:DesignWidth="1000" d:DesignHeight="450"
+             xmlns:vm="using:Permastead.ViewModels.Views"
+             x:DataType="vm:ProceduresViewModel"
              x:Class="Permastead.Views.Views.ProceduresView">
     
+    <!--This is design time only-->
+    <Design.DataContext>
+        <vm:ProceduresViewModel/>
+    </Design.DataContext>
+    
+    <Grid ColumnDefinitions="*,Auto" RowDefinitions="Auto,*">
+        <StackPanel>
+            <WrapPanel>
+                <Image Margin="20" Width="24" Height="24" Source="/Assets/books_infront.png" />
+                <TextBlock FontWeight="Bold" Margin="20,26,20,20">Procedures</TextBlock>
+                <!-- <Separator MaxWidth="5"></Separator> -->
+                <Button Command="{Binding RefreshDataCommand}" x:Name="Refresh" HorizontalAlignment="Right" Margin="10,0">Refresh</Button> 
+                <Button x:Name="Add" HorizontalAlignment="Right" Margin="0,20">Add</Button> 
+                <Label Margin="25,24,0,20">Search:</Label>
+                <TextBox x:Name="SearchBox" Text="{Binding SearchText}" Watermark="Enter search text" Width="200" 
+                         Margin="20,20,20,20" KeyDown="SearchBox_OnKeyDown" ></TextBox>
+                <Button Command="{Binding ClearSearchCommand}" Margin="5,20,20,20">Clear</Button>
+                
+                <CheckBox Name="CurrentOnly" Command="{Binding RefreshDataCommand}" IsChecked="{Binding CurrentOnly, Mode=TwoWay}"
+                          Margin="0">Current Only</CheckBox>
+                <TextBlock Name="ProceduresCount" Text="{Binding ProcedureCount, StringFormat='{}{0} total'}" Margin="20,27,20,20"></TextBlock>
+            </WrapPanel>
+        </StackPanel>
+        
+        <Panel Grid.Column="0" Grid.Row="1">
+            <SplitView IsPaneOpen="True"
+                       DisplayMode="Inline"
+                       OpenPaneLength="500">
+                <SplitView.Pane>
+                    
+                    <ScrollViewer >
+                        <ListBox x:Name="PlantsList" Tapped="InputElement_OnTapped" ItemsSource="{Binding Procedures, Mode=TwoWay}">
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <Border CornerRadius="4">
+                                        <TextBlock TextWrapping="Wrap" Text="{Binding FullDescription}"></TextBlock>
+                                    </Border>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+                    </ScrollViewer>
+                    
+                </SplitView.Pane>
+
+                <Grid RowDefinitions="Auto,*">
+                    <WrapPanel Margin="10">
+                        <Button Margin="5">Update</Button>
+                        <TextBlock HorizontalAlignment="Center" TextAlignment="Center" Text="Name: " Margin="10,15,10,10"></TextBlock>
+                        <TextBox TextAlignment="Center" Text="{Binding CurrentItem.Name}" Margin="10"></TextBox>
+                        <TextBlock HorizontalAlignment="Center" TextAlignment="Center" Text="Category: " Margin="10,15,10,10"></TextBlock>
+                        <TextBox TextAlignment="Center" Text="{Binding CurrentItem.Category}" Margin="10"></TextBox>
+                        <TextBlock HorizontalAlignment="Center" TextAlignment="Center" Text="Created: " Margin="10,15,10,10"></TextBlock>
+                        <TextBlock TextAlignment="Center" Text="{Binding CurrentItem.CreationDate}" Margin="10,15,10,10"></TextBlock>
+                        <TextBlock HorizontalAlignment="Center" TextAlignment="Center" Text="Last Update: " Margin="10,15,10,10"></TextBlock>
+                        <TextBlock TextAlignment="Center" Text="{Binding CurrentItem.LastUpdatedDate}" Margin="10,15,10,10"></TextBlock>
+                    </WrapPanel>
+                    <ScrollViewer Grid.Row="1">
+                    <TextBox Text="{Binding CurrentItem.Content}"
+                             FontSize="24"
+                             TextWrapping="WrapWithOverflow"
+                             VerticalAlignment="Center"
+                             AcceptsReturn="True"
+                             AcceptsTab="True"
+                             HorizontalAlignment="Center"/>
+                    </ScrollViewer>
+                </Grid>
+            </SplitView>
+        </Panel>
+        
+    </Grid>
 </UserControl>
