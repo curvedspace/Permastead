@@ -1,4 +1,5 @@
 using DataAccess;
+using DataAccess.Local;
 using Models;
 
 namespace Services;
@@ -11,7 +12,7 @@ public class ProceduresService
 
         if (mode == ServiceMode.Local)
         {
-            //sops = AnimalRepository.GetAll(DataConnection.GetLocalDataSource());
+            sops = ProceduresRepository.GetAll(DataConnection.GetLocalDataSource());
         }
         else
         {
@@ -29,26 +30,24 @@ public class ProceduresService
         {
             if (mode == ServiceMode.Local)
             {
-                //AnEventRepository.Update(currentItem);
+                ProceduresRepository.Update(currentItem);
             }
             else
             {
                 DataAccess.Server.ProceduresRepository.Update(currentItem);
             }
-            
         }
         else
         {
             // insert new record
             if (mode == ServiceMode.Local)
             {
-                //AnEventRepository.Insert(currentItem);
+                ProceduresRepository.Insert(currentItem);
             }
             else
             {
                 DataAccess.Server.ProceduresRepository.Insert(currentItem);
             }
-            
         }
         
         return rtnValue;
