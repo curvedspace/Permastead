@@ -10,13 +10,18 @@ public class StandardOperatingProcedure
     
     public DateTime EndDate { get; set; }
     
-    public string Name { get; set; }
+    public string? Name { get; set; }
     
-    public string Category { get; set; }
+    public string? Category { get; set; }
     
-    public string Content { get; set; }
+    public string? Content { get; set; }
     
     public string FullDescription { get => $"{Category}: {Name}"; }
+    
+    public Person Author { get; set; }
+    
+
+    public long AuthorId { get { return this.Author.Id; } }
     
     /// <summary>
     /// Indicates is the item is currently active, meaning it's start date is earlier than today
@@ -32,7 +37,7 @@ public class StandardOperatingProcedure
     {
         CreationDate = DateTime.UtcNow;
         LastUpdatedDate = DateTime.UtcNow;
-        
+        Author = Person.Gaia();
         EndDate = DateTime.MaxValue;
     }
     

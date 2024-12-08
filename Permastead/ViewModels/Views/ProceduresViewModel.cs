@@ -1,3 +1,4 @@
+using System;
 using System.Collections.ObjectModel;
 using System.Linq;
 using Avalonia.Controls;
@@ -5,6 +6,7 @@ using Avalonia.Controls.Models.TreeDataGrid;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Models;
+using Services;
 
 namespace Permastead.ViewModels.Views;
 
@@ -37,7 +39,7 @@ public partial class  ProceduresViewModel : ViewModelBase
     {
         Procedures.Clear();
         
-        var procedures = new ObservableCollection<StandardOperatingProcedure>();
+        var procedures = Services.ProceduresService.GetAllProcedures(AppSession.ServiceMode);
         
         var caseAdjustedFilterText = filterText.Trim().ToLowerInvariant();
         
@@ -85,6 +87,24 @@ public partial class  ProceduresViewModel : ViewModelBase
     {
         SearchText = "";
         RefreshDataOnly(SearchText);
+    }
+
+    [RelayCommand]
+    private void UpdateRecord()
+    {
+        try
+        {
+            //saves the SOP to database
+            CurrentItem.Author!.Id = AppSession.Instance.CurrentUser.Id;
+            CurrentItem.LastUpdatedDate = DateTime.Now;
+            
+            ProceduresService.CommitRecord(AppSession.ServiceMode, CurrentItem);
+            
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+        }
     }
     
     public ProceduresViewModel()
