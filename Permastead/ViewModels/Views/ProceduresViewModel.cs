@@ -87,6 +87,7 @@ public partial class  ProceduresViewModel : ViewModelBase
     {
         SearchText = "";
         RefreshDataOnly(SearchText);
+        CurrentItem = new StandardOperatingProcedure();
     }
 
     [RelayCommand]
@@ -99,7 +100,7 @@ public partial class  ProceduresViewModel : ViewModelBase
             CurrentItem.LastUpdatedDate = DateTime.Now;
             
             ProceduresService.CommitRecord(AppSession.ServiceMode, CurrentItem);
-            
+            RefreshData();
         }
         catch (Exception e)
         {
