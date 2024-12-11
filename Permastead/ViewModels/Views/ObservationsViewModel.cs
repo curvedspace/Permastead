@@ -53,9 +53,17 @@ namespace Permastead.ViewModels.Views;
         
         #endregion
         
+        [ObservableProperty] private string _searchText = "";
+        
         [ObservableProperty] 
         private ObservableCollection<Observation> _observations = new ObservableCollection<Observation>();
         
+        [RelayCommand]
+        private void ClearSearch()
+        {
+            SearchText = "";
+            RefreshObservations(SearchText);
+        }
 
         public ObservationsViewModel()
         {
@@ -112,16 +120,28 @@ namespace Permastead.ViewModels.Views;
             RefreshObservations();
         }
 
-        public void RefreshObservations()
+        public void RefreshObservations(string searchText = "")
         {
             _observations.Clear();
             var obs = Services.ObservationsService.GetObservationsForAllEntities(AppSession.ServiceMode);
             
+            var caseAdjustedFilterText = searchText.Trim().ToLowerInvariant();
 
             //finally, sort by date, add to collection for display
             foreach (var o in obs.OrderByDescending(x=>x.AsOfDate))
             {
-                _observations.Add(o);
+                if (string.IsNullOrEmpty(caseAdjustedFilterText))
+                {
+                    _observations.Add(o);
+                }
+                else
+                {
+                    if (o.Comment.ToLowerInvariant().Contains(caseAdjustedFilterText) ||
+                        o.FullDescription.Contains(caseAdjustedFilterText))
+                    {
+                        _observations.Add(o);
+                    }
+                }
             }
 
             WordCount = ObservationsService.GetObservationWordCount(_observations.ToList());

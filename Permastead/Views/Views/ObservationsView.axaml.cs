@@ -62,4 +62,36 @@ public partial class ObservationsView : UserControl
         }
         
     }
+    
+    private void SearchBox_OnTextChanged(object? sender, TextChangedEventArgs e)
+    {
+        Console.WriteLine(sender.ToString() + ": " + e);
+    }
+
+    private void SearchBox_OnKeyDown(object? sender, KeyEventArgs e)
+    {
+        // if the key is return, do a search and filter the grid data
+        if (e.Key == Key.Return)
+        {
+            
+            var vm = (ObservationsViewModel)this.DataContext;
+            var textValue = vm.SearchText;
+
+            if (vm != null)
+            {
+                vm.RefreshObservations(textValue);
+            }
+        }
+
+        if (e.Key == Key.Escape)
+        {
+            var vm = (ObservationsViewModel)this.DataContext;
+
+            if (vm != null)
+            {
+                vm.SearchText = "";
+                vm.RefreshObservations(vm.SearchText);
+            }
+        }
+    }
 }

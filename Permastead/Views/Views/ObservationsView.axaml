@@ -2,10 +2,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:materialIcons="clr-namespace:Material.Icons.Avalonia;assembly=Material.Icons.Avalonia"
-             xmlns:model="using:Models"
              xmlns:vm="using:Permastead.ViewModels.Views"
-             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             mc:Ignorable="d" d:DesignWidth="1000" d:DesignHeight="450"
              x:DataType="vm:ObservationsViewModel"
              x:Class="Permastead.Views.Views.ObservationsView">
   
@@ -24,6 +22,12 @@
           <!-- <Separator MaxWidth="5" Foreground="Black"></Separator> -->
           <Button Command="{Binding RefreshDataCommand}" x:Name="Refresh" HorizontalAlignment="Right" Margin="10,0">Refresh</Button> 
           <Button Command="{Binding SaveObservationCommand, Mode=TwoWay}" Name="Save" HorizontalAlignment="Right" Margin="10,0">Save</Button>
+          
+          <Label Margin="25,24,0,20">Search:</Label>
+          <TextBox x:Name="SearchBox" Text="{Binding SearchText}" Watermark="Enter search text" Width="200" Margin="20,20,20,20" 
+                   KeyDown="SearchBox_OnKeyDown" TextChanged="SearchBox_OnTextChanged"></TextBox>
+          <Button Command="{Binding ClearSearchCommand}" Margin="5,20,20,20">Clear</Button>
+          
           <!-- <Separator MaxWidth="5" Foreground="Black"></Separator> -->
           <StackPanel  Orientation="Horizontal" ToolTip.Tip = "Shows the number of observations, the overall word count and the average words per observation">
             <TextBlock Margin="24">Statistics:</TextBlock>
@@ -34,8 +38,10 @@
         </WrapPanel>
       
         <Panel Grid.Row="1" Height="100" Margin="30,10,30,0">
-          <TextBlock>Enter  Text:</TextBlock>
-          <TextBox Text="{Binding Comment, Mode=TwoWay}" Name="ObservationText" TextWrapping="Wrap" Height="60" FontSize="14"></TextBox>
+          <TextBox Text="{Binding Comment, Mode=TwoWay}" Name="ObservationText" 
+                   Watermark="Enter your observation."
+                   UseFloatingWatermark="True"
+                   TextWrapping="Wrap" Height="60" FontSize="14"></TextBox>
         </Panel>
       
     
