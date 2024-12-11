@@ -116,7 +116,7 @@ namespace Permastead.ViewModels
         private void OpenSeedsView()
         {
             CurrentView = Views[8];
-            CurrentViewName = "Seeds";
+            CurrentViewName = "Starters";
         }
         
         [RelayCommand]

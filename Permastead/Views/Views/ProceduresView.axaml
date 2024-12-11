@@ -65,6 +65,9 @@
                     <ScrollViewer Grid.Row="1">
                     <TextBox Text="{Binding CurrentItem.Content}"
                              FontSize="24"
+                             MinHeight="200"
+                             MinWidth="500"
+                             Watermark="Enter the procedure text."
                              TextWrapping="WrapWithOverflow"
                              VerticalAlignment="Center"
                              AcceptsReturn="True"

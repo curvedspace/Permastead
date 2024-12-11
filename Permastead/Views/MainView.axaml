@@ -43,7 +43,7 @@
                     <Button Name="PlantsButton" ToolTip.Tip="Plants " Margin="20,0,0,0" Command="{Binding OpenPlantsViewCommand}">
                         <Image Width="16" Height="16" Source="/Assets/plant.png" />
                     </Button>
-                    <Button Name="SeedsButton" ToolTip.Tip="Seeds " Margin="0,0,0,0" Command="{Binding OpenSeedsViewCommand}">
+                    <Button Name="SeedsButton" ToolTip.Tip="Starters " Margin="0,0,0,0" Command="{Binding OpenSeedsViewCommand}">
                         <Image Width="16" Height="16" Source="/Assets/bean.png" />
                     </Button>
                     <Button Name="PlantingsButton" ToolTip.Tip="Plantings " Margin="0,0,0,0" Command="{Binding OpenPlantingsViewCommand}">
