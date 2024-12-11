@@ -25,7 +25,7 @@
                        SelectionChanging="TreeDataGrid_OnSelectionChanged"
                       Source="{Binding PersonSource, Mode=TwoWay}"></TreeDataGrid>
         
-        <Panel Grid.Column="1" Grid.Row="1" MinWidth="300" MaxWidth="400"
+        <Panel Grid.Column="1" Grid.Row="1" MinWidth="300" MaxWidth="400" Background="{DynamicResource  ButtonBackgroundPointerOver}"
                IsVisible="{Binding ShowObservations}">
         <StackPanel>
             <TextBlock TextAlignment="Center" Text="{Binding CurrentPerson.FullNameLastFirst}"></TextBlock>

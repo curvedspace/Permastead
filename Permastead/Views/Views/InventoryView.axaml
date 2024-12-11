@@ -45,7 +45,7 @@
                     Tapped="TreeDataGrid_OnTapped"
                     Source="{Binding InventorySource, Mode=TwoWay}"></TreeDataGrid>
     
-      <Panel Grid.Column="1" Grid.Row="1" MinWidth="300" MaxWidth="400"
+      <Panel Grid.Column="1" Grid.Row="1" MinWidth="300" MaxWidth="400" Background="{DynamicResource  ButtonBackgroundPointerOver}"
              IsVisible="{Binding ShowObservations}">
         <StackPanel>
           <TextBlock TextAlignment="Center" Text="{Binding CurrentItem.Description}"></TextBlock>
