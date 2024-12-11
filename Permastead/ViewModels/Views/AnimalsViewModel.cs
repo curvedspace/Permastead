@@ -6,6 +6,7 @@ using Avalonia.Controls.Models.TreeDataGrid;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Models;
+using Services;
 
 namespace Permastead.ViewModels.Views;
 
@@ -29,6 +30,11 @@ public partial class AnimalsViewModel : ViewModelBase
     [ObservableProperty] 
     private bool _showObservations;
     
+    [ObservableProperty] private AnimalObservation _currentObservation = new AnimalObservation();
+    
+    [ObservableProperty]
+    private ObservableCollection<AnimalObservation> _animalObservations = new ObservableCollection<AnimalObservation>();
+    
     [ObservableProperty]
     private string _searchText = "";
     
@@ -38,6 +44,16 @@ public partial class AnimalsViewModel : ViewModelBase
     private void RefreshData()
     {
         RefreshDataOnly(SearchText);
+    }
+    
+    public void GetAnimalObservations()
+    {
+        if (CurrentItem != null)
+        {
+            AnimalObservations =
+                new ObservableCollection<AnimalObservation>(
+                    Services.AnimalService.GetObservationsForAnimal(AppSession.ServiceMode, CurrentItem.Id));
+        }
     }
     
     [RelayCommand]
@@ -117,6 +133,31 @@ public partial class AnimalsViewModel : ViewModelBase
     {
         SearchText = "";
         RefreshDataOnly(SearchText);
+    }
+    
+    [RelayCommand]
+    private void SaveObservation()
+    {
+        try
+        {
+            //saves the planting observation to database
+            CurrentObservation.Author = AppSession.Instance.CurrentUser;
+            CurrentObservation.Animal = CurrentItem;
+            CurrentObservation.AsOfDate = DateTime.Today;
+            CurrentObservation.CommentType!.Id = 2;
+            
+            AnimalService.AddAnimalObservation(AppSession.ServiceMode, CurrentObservation);
+            
+            AnimalObservations =
+                new ObservableCollection<AnimalObservation>(Services.AnimalService.GetObservationsForAnimal(AppSession.ServiceMode, CurrentItem.Id));
+
+            CurrentObservation = new AnimalObservation();
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+        }
+        
     }
     
     public AnimalsViewModel()

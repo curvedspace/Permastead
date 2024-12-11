@@ -21,4 +21,62 @@ public class AnimalService
 
         return myAnimals;
     }
+
+    public static List<AnimalObservation> GetObservationsForAnimal(ServiceMode mode, long id)
+    {
+        var obs = new List<AnimalObservation>();
+
+        if (mode == ServiceMode.Local)
+        {
+            obs = AnimalRepository.GetAllObservationsForAnimal(DataConnection.GetLocalDataSource(), id);
+        }
+        else
+        {
+            obs = DataAccess.Server.AnimalRepository.GetAllObservationsForAnimal(DataConnection.GetServerConnectionString(), id);
+        }
+
+        return obs;
+    }
+    
+    public static List<AnimalObservation> GetAnimalObservations(ServiceMode mode)
+    {
+        var obs = new List<AnimalObservation>();
+
+        if (mode == ServiceMode.Local)
+        {
+            obs = AnimalRepository.GetAllAnimalObservations(DataConnection.GetLocalDataSource());
+        }
+        else
+        {
+            obs = DataAccess.Server.AnimalRepository.GetAllAnimalObservations(DataConnection.GetServerConnectionString());
+        }
+
+        return obs;
+    }
+    
+    public static bool AddAnimalObservation(ServiceMode mode, AnimalObservation obs)
+    {
+        bool rtnValue = false;
+        
+        if (obs != null)
+        {
+            if (obs.Animal.Id > 0)
+            {
+                // insert new record
+                if (mode == ServiceMode.Local)
+                {
+                    AnimalRepository.InsertAnimalObservation(
+                        DataConnection.GetLocalDataSource(), obs);
+                }
+                else
+                {
+                    DataAccess.Server.AnimalRepository.InsertAnimalObservation(
+                        DataConnection.GetServerConnectionString(), 
+                        obs);
+                }
+            }
+        }
+
+        return rtnValue;
+    }
 }

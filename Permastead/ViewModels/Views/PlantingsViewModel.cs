@@ -237,7 +237,7 @@ public partial class PlantingsViewModel : ViewModelBase
 
     }
     
-    public void GetPeopleObservations()
+    public void GetPlantingObservations()
     {
         if (CurrentItem != null)
         {

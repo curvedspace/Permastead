@@ -1,7 +1,9 @@
+using System;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Input;
 using Avalonia.Markup.Xaml;
+using Models;
 using Permastead.ViewModels.Views;
 
 namespace Permastead.Views.Views;
@@ -36,6 +38,25 @@ public partial class AnimalsView : UserControl
                 vm.SearchText = "";
                 vm.RefreshDataOnly(vm.SearchText);
             }
+        }
+    }
+    
+    private void AnimalsGrid_OnTapped(object? sender, TappedEventArgs e)
+    {
+        try
+        {
+            var current = sender as TreeDataGrid;
+            if (current != null)
+            {
+                var animal = (Animal)current.RowSelection!.SelectedItem;
+                var vm = DataContext as AnimalsViewModel;
+                vm.CurrentItem = animal;
+                vm.GetAnimalObservations();
+            }
+        }
+        catch (Exception exception)
+        {
+            Console.WriteLine(exception);
         }
     }
 }

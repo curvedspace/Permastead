@@ -67,7 +67,7 @@ public partial class PlantingsView : UserControl
                 var planting = (Planting)current.RowSelection!.SelectedItem;
                 var vm = DataContext as PlantingsViewModel;
                 vm.CurrentItem = planting;
-                vm.GetPeopleObservations();
+                vm.GetPlantingObservations();
             }
         }
         catch (Exception exception)

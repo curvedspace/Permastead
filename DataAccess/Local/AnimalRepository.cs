@@ -68,4 +68,144 @@ public class AnimalRepository
             return myAnimals;
         }
     }
+    
+        public static bool InsertAnimalObservation(string connectionString, AnimalObservation obs)
+    {
+        var rtnValue = false;
+
+        var sql = "INSERT INTO AnimalObservation (AnimalId, Comment, CreationDate, StartDate, EndDate, CommentTypeId, AuthorId) " +
+                  "VALUES($animalId, $comment, CURRENT_DATE, CURRENT_DATE, '9999-12-31', $commentTypeId, $authorId) ";
+
+        using (var connection = new SqliteConnection(connectionString))
+        {
+            connection.Open();
+
+            using (var command = connection.CreateCommand())
+            {
+                command.CommandText = sql;
+                command.Parameters.AddWithValue("plantingId", obs.AnimalId);
+                command.Parameters.AddWithValue("$comment", obs.Comment);
+                command.Parameters.AddWithValue("$commentTypeId", obs.CommentType!.Id);
+                command.Parameters.AddWithValue("$authorId", obs.Author!.Id);
+
+                rtnValue = (command.ExecuteNonQuery() == 1);
+            }
+        }
+
+        return rtnValue;
+    }
+
+    public static List<AnimalObservation> GetAllAnimalObservations(string connectionString)
+    {
+        {
+            var myObs = new List<AnimalObservation>();
+            AnimalObservation o;
+
+            var sql = "SELECT o.Comment, o.CreationDate, o.StartDate, o.EndDate, o.CommentTypeId, " +
+                      "ct.Description, o.AuthorId, p.FirstName, p.LastName, o.Id, o.AnimalId, a.Name " +
+                      "FROM Animalbservation o, CommentType ct, Person p, Animal a " +
+                      "WHERE ct.Id = o.CommentTypeId " +
+                      "AND o.AnimalId = a.Id " +
+                      "AND p.Id = o.AuthorId ORDER BY o.Id DESC";
+
+            using (SqliteConnection connection = new SqliteConnection(connectionString))
+            {
+                connection.Open();
+
+                using (SqliteCommand command = connection.CreateCommand())
+                {
+                    command.CommandText = sql;
+                    
+                    var dr = command.ExecuteReader();
+
+                    while (dr.Read())
+                    {
+                        o = new AnimalObservation();
+                        
+                        o.Comment = dr[0].ToString()!;
+                        o.CreationDate = Convert.ToDateTime(dr[1].ToString());
+                        o.StartDate = Convert.ToDateTime(dr[2].ToString());
+                        o.EndDate = Convert.ToDateTime(dr[3].ToString());
+
+                        o.CommentType = new CommentType();
+                        o.CommentType.Id = Convert.ToInt64(dr[4].ToString());
+                        o.CommentType.Description = dr[5].ToString();
+
+                        o.Author = new Person();
+                        o.Author.Id = Convert.ToInt64(dr[6].ToString());
+                        o.Author.FirstName = dr[7].ToString();
+                        o.Author.LastName = dr[8].ToString();
+
+                        o.Id = Convert.ToInt64(dr[9].ToString());
+                        o.Animal.Id = Convert.ToInt64(dr[10].ToString());
+                        o.Animal.Name = dr[11].ToString();
+                        
+                        o.AsOfDate = o.CreationDate;
+
+                        myObs.Add(o);
+                    }
+                }
+
+                return myObs;
+            }
+        }
+    }
+      
+    public static List<AnimalObservation> GetAllObservationsForAnimal(string connectionString, long animalId)
+    {
+        {
+            var myObs = new List<AnimalObservation>();
+            AnimalObservation o;
+
+            var sql = "SELECT o.Comment, o.CreationDate, o.StartDate, o.EndDate, o.CommentTypeId, " +
+                      "ct.Description, o.AuthorId, p.FirstName, p.LastName, o.Id, o.AnimalId, a.Name " +
+                      "FROM PlantingObservation o, CommentType ct, Person p, Animal a " +
+                      "WHERE ct.Id = o.CommentTypeId " +
+                      "AND o.AnimalId = a.Id " +
+                      "AND o.AnimalId = @Id " +
+                      "AND p.Id = o.AuthorId ORDER BY o.Id DESC";
+
+            using (SqliteConnection connection = new SqliteConnection(connectionString))
+            {
+                connection.Open();
+
+                using (SqliteCommand command = connection.CreateCommand())
+                {
+                    command.CommandText = sql;
+                    command.Parameters.AddWithValue("@Id", animalId);
+                    
+                    var dr = command.ExecuteReader();
+
+                    while (dr.Read())
+                    {
+                        o = new AnimalObservation();
+                        
+                        o.Comment = dr[0].ToString()!;
+                        o.CreationDate = Convert.ToDateTime(dr[1].ToString());
+                        o.StartDate = Convert.ToDateTime(dr[2].ToString());
+                        o.EndDate = Convert.ToDateTime(dr[3].ToString());
+
+                        o.CommentType = new CommentType();
+                        o.CommentType.Id = Convert.ToInt64(dr[4].ToString());
+                        o.CommentType.Description = dr[5].ToString();
+
+                        o.Author = new Person();
+                        o.Author.Id = Convert.ToInt64(dr[6].ToString());
+                        o.Author.FirstName = dr[7].ToString();
+                        o.Author.LastName = dr[8].ToString();
+
+                        o.Id = Convert.ToInt64(dr[9].ToString());
+                        o.Animal.Id = Convert.ToInt64(dr[10].ToString());
+                        o.Animal.Name = dr[11].ToString();
+                        
+                        o.AsOfDate = o.CreationDate;
+
+                        myObs.Add(o);
+                    }
+                }
+
+                return myObs;
+            }
+        }
+    }
 }

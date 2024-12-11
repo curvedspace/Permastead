@@ -626,6 +626,19 @@ namespace DataAccess.Server
 				AuthorId INTEGER
 			);
 
+			-- ANIMAL OBSERVATION
+			DROP TABLE IF EXISTS AnimalObservation;
+			CREATE TABLE IF NOT EXISTS AnimalObservation(
+				Id integer primary key generated always as identity,
+				AnimalId INTEGER NOT NULL,
+				Comment TEXT NOT NULL,
+				CreationDate TIMESTAMP,
+				StartDate TIMESTAMP NOT NULL,
+				EndDate TIMESTAMP,
+				CommentTypeId INTEGER,
+				AuthorId INTEGER
+			);
+
 			--FERMENTATION
 			DROP TABLE IF EXISTS Fermentation;
 			CREATE TABLE IF NOT EXISTS Fermentation(
