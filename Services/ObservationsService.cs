@@ -37,6 +37,7 @@ namespace Services
             var plantingObs = PlantingsService.GetPlantingObservations(mode);
             var seedPacketObs = PlantingsService.GetSeedPacketObservations(mode);
             var personObs = PersonService.GetAllPersonObservations(mode);
+            var animalsObs = AnimalService.GetAnimalObservations(mode);
             
             // add the planting observations 
             foreach (var po in plantingObs)
@@ -90,6 +91,25 @@ namespace Services
                     EndDate = po.EndDate,
                     Id = po.Id,
                     StartDate = po.StartDate
+                };
+                
+                observations.Add(newObs);
+            }
+            
+            // add the animal observations 
+            foreach (var ao in animalsObs)
+            {
+                var newObs = new Observation()
+                {
+                    AsOfDate = ao.AsOfDate,
+                    Author = ao.Author,
+                    Annotation = "(A:" + ao.Animal.Name + ")",
+                    Comment =  ao.Comment,
+                    CommentType = ao.CommentType,
+                    CreationDate = ao.CreationDate,
+                    EndDate = ao.EndDate,
+                    Id = ao.Id,
+                    StartDate = ao.StartDate
                 };
                 
                 observations.Add(newObs);

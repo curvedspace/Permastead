@@ -109,7 +109,7 @@ public class AnimalRepository
                       "ct.Description, o.AuthorId, p.FirstName, p.LastName, o.Id, o.AnimalId, a.Name " +
                       "FROM AnimalObservation o, CommentType ct, Person p, Animal a " +
                       "WHERE ct.Id = o.CommentTypeId " +
-                      "AND o.PlantingId = a.Id " +
+                      "AND o.AnimalId = a.Id " +
                       "AND p.Id = o.AuthorId ORDER BY o.Id DESC";
 
             using (IDbConnection connection = new NpgsqlConnection(connectionString))

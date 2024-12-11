@@ -69,7 +69,7 @@ public class AnimalRepository
         }
     }
     
-        public static bool InsertAnimalObservation(string connectionString, AnimalObservation obs)
+    public static bool InsertAnimalObservation(string connectionString, AnimalObservation obs)
     {
         var rtnValue = false;
 
