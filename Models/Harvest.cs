@@ -29,6 +29,8 @@ public class Harvest
     public MeasurementUnit Units { get; set; }
     
     public DateTime CreationDate { get; set; }
+    
+    public DateTime HarvestDate { get; set; }
 
     public DateTime LastUpdatedDate { get; set; }
 
@@ -37,6 +39,7 @@ public class Harvest
     public Harvest()
     {
         this.CreationDate = DateTime.Now;
+        this.HarvestDate = DateTime.Today;
         this.Type = new HarvestType();
         this.HarvestAuxId = 0;
         this.Units = new MeasurementUnit();

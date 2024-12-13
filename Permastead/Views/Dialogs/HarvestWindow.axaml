@@ -1,0 +1,63 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        xmlns:vm="using:Permastead.ViewModels.Dialogs"
+        x:Class="Permastead.Views.Dialogs.HarvestWindow"
+        x:DataType="vm:HarvestWindowViewModel"
+        x:CompileBindings="True"
+        Title="HarvestWindow">
+  
+        <Grid ColumnDefinitions="Auto,Auto,Auto,*" RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,*,Auto" Margin="10">
+            <RadioButton GroupName="HarvestType" Content="Plant" VerticalAlignment="Stretch" Margin="10"></RadioButton>
+            <RadioButton Grid.Row="0" Grid.Column="1" GroupName="HarvestType" Content="Animal" VerticalAlignment="Stretch" Margin="10"></RadioButton>
+            <RadioButton Grid.Row="0" Grid.Column="2" GroupName="HarvestType" Content="Material" VerticalAlignment="Stretch" Margin="10"></RadioButton>
+            <RadioButton Grid.Row="0" Grid.Column="3" GroupName="HarvestType" Content="Other" VerticalAlignment="Stretch" Margin="10"></RadioButton>
+            <Separator Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="4"  Margin="10"></Separator>
+            <TextBlock Grid.Row="2" Grid.Column="0" Margin="10,15,0,0">ID:</TextBlock>
+            <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding CurrentItem.Id}" IsEnabled="False" Margin="10,10,10,10"></TextBox>
+            
+            <Label Grid.Row="2" Grid.Column="2" Margin="10,15,0,0">Name: </Label>
+            <TextBox Grid.Row="2" Grid.Column="3" Margin="10" Text="{Binding CurrentItem.Description}"></TextBox>
+            
+          <Label Grid.Row="3" Margin="10,10,10,10" Grid.Column="0">Date:</Label>
+          <CalendarDatePicker x:Name="StartDate" Margin="10,5,0,0" Grid.Row="3" Grid.Column="1" SelectedDate="{Binding CurrentItem.HarvestDate, Mode=TwoWay}">
+          </CalendarDatePicker>
+          
+          <TextBlock Grid.Row="3" Grid.Column="2" Margin="10,15,10,10">Linked Entity:</TextBlock>
+          <ComboBox Width="300" Grid.Row="3" Grid.Column="3" Grid.ColumnSpan="1" Margin="10" ItemsSource="{Binding Entities, Mode=TwoWay}"
+                    SelectedItem="{Binding CurrentItem.HarvestAuxId, Mode=TwoWay}" AutoScrollToSelectedItem="True">
+            <ComboBox.ItemTemplate>
+              <DataTemplate >
+                <TextBlock Text="{Binding  Name}" />
+              </DataTemplate>
+            </ComboBox.ItemTemplate>
+          </ComboBox>
+          
+          <Label Grid.Row="4" Margin="10,10,10,10" Grid.Column="0">Units:</Label>
+          <TextBox Grid.Row="4" Grid.Column="1" Text="{Binding CurrentItem.Units}" Margin="10,10,10,10"></TextBox>
+          
+          <TextBlock Grid.Row="4" Grid.Column="2" Margin="10,15,10,10">Measurement Type:</TextBlock>
+          <ComboBox Width="300" Grid.Row="4" Grid.Column="3" Grid.ColumnSpan="1" Margin="10" ItemsSource="{Binding MeasurementUnits, Mode=TwoWay}"
+                    SelectedItem="{Binding CurrentItem.HarvestAuxId, Mode=TwoWay}" AutoScrollToSelectedItem="True">
+            <ComboBox.ItemTemplate>
+              <DataTemplate >
+                <TextBlock Text="{Binding  Description}" />
+              </DataTemplate>
+            </ComboBox.ItemTemplate>
+          </ComboBox>
+          
+          <TextBlock Grid.Row="7" Grid.Column="0" Margin="10">Description:</TextBlock>
+          <TextBox Grid.Row="7" Grid.Column="1" Grid.ColumnSpan="3" 
+                   Text="{Binding CurrentItem.Comment }" TextWrapping="Wrap" Margin="10,10,10,10"></TextBox>
+          
+          <Image Grid.Row="8" Grid.Column="0"  Margin="10" Width="32" Height="32" Source="/Assets/basket.png" />
+          
+          <StackPanel Grid.Row="8" Grid.Column="3" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,0,0">
+            <Button x:Name="SaveButton" Margin="10" Click="SaveButton_OnClick">Save</Button>
+            <Button x:Name="CancelButton" Margin="10" Click="CancelButton_OnClick" >Cancel</Button>
+          </StackPanel>
+      </Grid>
+        
+</Window>
