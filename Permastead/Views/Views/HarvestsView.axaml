@@ -2,7 +2,39 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-             x:Class="Permastead.Views.Views.HarvestsView">
+             mc:Ignorable="d" d:DesignWidth="1000" d:DesignHeight="450"
+             xmlns:vm="using:Permastead.ViewModels.Views"
+             x:Class="Permastead.Views.Views.HarvestsView"
+             x:DataType="vm:HarvestsViewModel">
+ 
+     <!--This is design time only-->
+    <Design.DataContext>
+        <vm:HarvestsViewModel/>
+    </Design.DataContext>
     
+        <Grid ColumnDefinitions="*,Auto" RowDefinitions="Auto,*">
+        <StackPanel>
+            <WrapPanel>
+                <Image Margin="20" Width="24" Height="24" Source="/Assets/basket.png" />
+                <TextBlock FontWeight="Bold" Margin="20,26,20,20">Harvests</TextBlock>
+                <!-- <Separator MaxWidth="5"></Separator> -->
+                <Button Command="{Binding RefreshDataCommand}" x:Name="Refresh" HorizontalAlignment="Right" Margin="10,0">Refresh</Button> 
+                <Button x:Name="Add" HorizontalAlignment="Right" Margin="0,20">Add</Button> 
+                <Label Margin="25,24,0,20">Search:</Label>
+                <TextBox x:Name="SearchBox" Text="{Binding SearchText }" Watermark="Enter search text" Width="200" 
+                         Margin="20,20,20,20" KeyDown="SearchBox_OnKeyDown" ></TextBox>
+                <Button Command="{Binding ClearSearchCommand}" Margin="5,20,20,20">Clear</Button>
+                
+                <TextBlock Name="AnimalCount" Text="{Binding HarvestsCount, StringFormat='{}{0} total'}" Margin="20,27,20,20"></TextBlock>
+            </WrapPanel>
+        </StackPanel>
+        
+        <Panel Grid.Column="0" Grid.Row="1">
+            <TreeDataGrid x:Name="HarvestsGrid" Grid.Row="1" Margin="10" Source="{Binding HarvestSource, Mode=TwoWay}" 
+                          Tapped="HarvestsGrid_OnTapped"
+                          CanUserResizeColumns="True">
+            </TreeDataGrid>
+        </Panel>
+        
+    </Grid>
 </UserControl>

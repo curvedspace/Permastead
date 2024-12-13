@@ -22,7 +22,9 @@ public class Harvest
         }
     }
     
-    public long HarvestAuxId { get; set; }
+    public Entity HarvestEntity { get; set; }
+    
+    public long HarvestAuxId => this.HarvestEntity.Id;
 
     public long Measurement { get; set; }
     
@@ -31,6 +33,8 @@ public class Harvest
     public DateTime CreationDate { get; set; }
     
     public DateTime HarvestDate { get; set; }
+    
+    public string HarvestDateString => this.HarvestDate.ToShortDateString();
 
     public DateTime LastUpdatedDate { get; set; }
 
@@ -41,7 +45,7 @@ public class Harvest
         this.CreationDate = DateTime.Now;
         this.HarvestDate = DateTime.Today;
         this.Type = new HarvestType();
-        this.HarvestAuxId = 0;
+        this.HarvestEntity = new Entity();
         this.Units = new MeasurementUnit();
     }
 }
