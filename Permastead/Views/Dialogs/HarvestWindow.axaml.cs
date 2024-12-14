@@ -20,6 +20,6 @@ public partial class HarvestWindow : Window
 
     private void CancelButton_OnClick(object? sender, RoutedEventArgs e)
     {
-
+        this.Close();
     }
 }
