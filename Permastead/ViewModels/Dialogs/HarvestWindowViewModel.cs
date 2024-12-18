@@ -16,6 +16,9 @@ public partial class HarvestWindowViewModel : ViewModelBase
     [ObservableProperty] 
     private ObservableCollection<MeasurementUnit> _measurementUnits;
     
+    [ObservableProperty] 
+    private ObservableCollection<HarvestType> _harvestTypes;
+    
     private HarvestsViewModel _controlViewModel { get; set;  } = new HarvestsViewModel();
 
     public HarvestWindowViewModel()
@@ -27,6 +30,7 @@ public partial class HarvestWindowViewModel : ViewModelBase
         _currentItem.HarvestType!.Id = 1;
         
         _measurementUnits = new ObservableCollection<MeasurementUnit>(Services.MeasurementsService.GetAllMeasurementTypes(AppSession.ServiceMode));
+        _harvestTypes = new ObservableCollection<HarvestType>(Services.HarvestService.GetAllHarvestTypes(AppSession.ServiceMode));
     }
     
     public HarvestWindowViewModel(Harvest item, HarvestsViewModel obsVm) : this()

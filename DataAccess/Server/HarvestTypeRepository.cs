@@ -13,7 +13,7 @@ public class HarvestTypeRepository
         {
             using (IDbConnection db = new NpgsqlConnection(conn))
             {
-                string sqlQuery = "SELECT * FROM InventoryType ORDER BY Description;";
+                string sqlQuery = "SELECT * FROM HarvestType ORDER BY Description;";
 
                 return db.Query<HarvestType>(sqlQuery).ToList();
             }
