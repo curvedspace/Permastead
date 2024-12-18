@@ -329,4 +329,20 @@ public static class PlantingsService
         return rtnValue;
         
     }
+    
+    public static List<Entity> GetPlantingsAsEntityList(ServiceMode mode)
+    {
+        var items = new List<Entity>();
+        var plantings = GetPlantings(mode).OrderBy(x => x.Description);
+
+        foreach (var plt in plantings)
+        {
+            var entity = new Entity();
+            entity.Id = plt.Id;
+            entity.Name = plt.Description + " (" + plt.Bed.Description + ")";
+            items.Add(entity);
+        }
+
+        return items;
+    }
 }

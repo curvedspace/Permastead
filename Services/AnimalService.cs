@@ -79,4 +79,20 @@ public class AnimalService
 
         return rtnValue;
     }
+
+    public static List<Entity> GetAnimalsAsEntityList(ServiceMode mode)
+    {
+        var items = new List<Entity>();
+        var animals = GetAllAnimals(mode);
+
+        foreach (var animal in animals)
+        {
+            var entity = new Entity();
+            entity.Id = animal.Id;
+            entity.Name = animal.Name;
+            items.Add(entity);
+        }
+
+        return items;
+    }
 }

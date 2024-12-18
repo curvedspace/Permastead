@@ -40,15 +40,36 @@ public partial class HarvestWindowViewModel : ViewModelBase
         OtherList = new List<Entity>();
         OtherList.Add( new Entity { Id = 0, Name = "Not Available" });
         
-        AnimalsList = new List<Entity>();
-        PlantingsList = new List<Entity>();
+        AnimalsList = Services.AnimalService.GetAnimalsAsEntityList(AppSession.ServiceMode);
+        PlantingsList = Services.PlantingsService.GetPlantingsAsEntityList(AppSession.ServiceMode);
     }
     
     public HarvestWindowViewModel(Harvest item, HarvestsViewModel obsVm) : this()
     {
         _currentItem = item;
         _controlViewModel = obsVm;
+        this.SetEntityList();
+    }
 
+    public void SetEntityList()
+    {
+        if (CurrentItem != null && CurrentItem.HarvestType != null)
+        {
+            switch (CurrentItem.HarvestType.Description)
+            {
+                case "Animal":
+                    Entities = new ObservableCollection<Entity>(AnimalsList);
+                    break;
+                
+                case "Plant":
+                    Entities = new ObservableCollection<Entity>(PlantingsList);
+                    break;
+                
+                default:
+                    Entities = new ObservableCollection<Entity>(OtherList);
+                    break;
+            }
+        }
     }
     
 }

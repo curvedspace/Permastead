@@ -43,21 +43,22 @@ public partial class HarvestWindow : Window
             // load the aux values (entities) based on the harvest type
             var vm  = (HarvestWindowViewModel)DataContext;
             vm.Entities.Clear();
-
-            switch (harvestType.Description)
-            {
-                case "Animal":
-                    vm.Entities = new ObservableCollection<Entity>(vm.AnimalsList);
-                    break;
-                
-                case "Plant":
-                    vm.Entities = new ObservableCollection<Entity>(vm.PlantingsList);
-                    break;
-                
-                default:
-                    vm.Entities = new ObservableCollection<Entity>(vm.OtherList);
-                    break;
-            }
+            vm.SetEntityList(); 
+            
+            // switch (harvestType.Description)
+            // {
+            //     case "Animal":
+            //         vm.Entities = new ObservableCollection<Entity>(vm.AnimalsList);
+            //         break;
+            //     
+            //     case "Plant":
+            //         vm.Entities = new ObservableCollection<Entity>(vm.PlantingsList);
+            //         break;
+            //     
+            //     default:
+            //         vm.Entities = new ObservableCollection<Entity>(vm.OtherList);
+            //         break;
+            // }
         }
             
     }
