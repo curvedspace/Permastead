@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using CommunityToolkit.Mvvm.ComponentModel;
 using Models;
@@ -19,6 +20,10 @@ public partial class HarvestWindowViewModel : ViewModelBase
     [ObservableProperty] 
     private ObservableCollection<HarvestType> _harvestTypes;
     
+    public List<Entity> PlantingsList;
+    public List<Entity> AnimalsList;
+    public List<Entity> OtherList;
+    
     private HarvestsViewModel _controlViewModel { get; set;  } = new HarvestsViewModel();
 
     public HarvestWindowViewModel()
@@ -31,6 +36,12 @@ public partial class HarvestWindowViewModel : ViewModelBase
         
         _measurementUnits = new ObservableCollection<MeasurementUnit>(Services.MeasurementsService.GetAllMeasurementTypes(AppSession.ServiceMode));
         _harvestTypes = new ObservableCollection<HarvestType>(Services.HarvestService.GetAllHarvestTypes(AppSession.ServiceMode));
+        
+        OtherList = new List<Entity>();
+        OtherList.Add( new Entity { Id = 0, Name = "Not Available" });
+        
+        AnimalsList = new List<Entity>();
+        PlantingsList = new List<Entity>();
     }
     
     public HarvestWindowViewModel(Harvest item, HarvestsViewModel obsVm) : this()
