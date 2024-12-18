@@ -16,7 +16,7 @@ public class HarvestTest
         Assert.Equal("My Harvest", harvest.Description);
 
         Assert.NotNull(harvest.Units);
-        Assert.NotNull(harvest.Type);
+        Assert.NotNull(harvest.HarvestType);
 
     }
 }

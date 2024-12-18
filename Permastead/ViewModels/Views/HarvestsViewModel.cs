@@ -34,15 +34,16 @@ public partial class HarvestsViewModel : ViewModelBase
     [RelayCommand]
     private void RefreshData()
     {
+        //_measurementUnits = Services.HarvestService.GetAllHarvests()
+            
         RefreshDataOnly(SearchText);
     }
     
-     public void RefreshDataOnly(string filterText = "")
+    public void RefreshDataOnly(string filterText = "")
     {
         Harvests.Clear();
-        MeasurementUnits.Clear();
 
-        var harvests = new List<Harvest>(); //Services.AnimalService.GetAllAnimals(AppSession.ServiceMode);
+        var harvests = Services.HarvestService.GetAllHarvests(AppSession.ServiceMode);
         var caseAdjustedFilterText = filterText.Trim().ToLowerInvariant();
         
         foreach (var harvest in harvests)
@@ -54,7 +55,8 @@ public partial class HarvestsViewModel : ViewModelBase
             else
             {
                 if (harvest.Description.ToLowerInvariant().Contains(caseAdjustedFilterText) ||
-                    harvest.Type.Description!.ToLowerInvariant().Contains(caseAdjustedFilterText) ||
+                    harvest.HarvestType.Description!.ToLowerInvariant().Contains(caseAdjustedFilterText) ||
+                    harvest.HarvestEntity.Name!.ToLowerInvariant().Contains(caseAdjustedFilterText) ||
                     harvest.Comment.ToLowerInvariant().Contains(caseAdjustedFilterText))
                 {
                     Harvests.Add(harvest);
@@ -67,13 +69,19 @@ public partial class HarvestsViewModel : ViewModelBase
             Columns =
             {
                 new TextColumn<Harvest, string>
-                    ("Date", x => x.HarvestDateString),
+                    ("Harvest Date", x => x.HarvestDateString),
                 new TextColumn<Harvest, string>
                     ("Description", x => x.Description),
                 new TextColumn<Harvest, string>
-                    ("Units", x => x.Units.ToString()),
+                    ("Entity Name", x => x.HarvestEntity.Name),
+                new TextColumn<Harvest, string>
+                    ("Harvest Type", x => x.HarvestType!.Description),
                 new TextColumn<Harvest, long>
                     ("Measurement", x => x.Measurement),
+                new TextColumn<Harvest, string>
+                    ("Units", x => x.Units.Description),
+                new TextColumn<Harvest, string>
+                    ("Author", x => x.Author!.FullName()),
                 new TextColumn<Harvest, string>
                     ("Comment", x => x.Comment)
             },
@@ -93,6 +101,11 @@ public partial class HarvestsViewModel : ViewModelBase
     {
         SearchText = "";
         RefreshDataOnly(SearchText);
+    }
+    
+    public HarvestsViewModel()
+    {
+        RefreshDataOnly();
     }
     
 }

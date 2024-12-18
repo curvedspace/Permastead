@@ -25,13 +25,14 @@
                          Margin="20,20,20,20" KeyDown="SearchBox_OnKeyDown" ></TextBox>
                 <Button Command="{Binding ClearSearchCommand}" Margin="5,20,20,20">Clear</Button>
                 
-                <TextBlock Name="AnimalCount" Text="{Binding HarvestsCount, StringFormat='{}{0} total'}" Margin="20,27,20,20"></TextBlock>
+                <TextBlock Name="HarvestCount" Text="{Binding HarvestsCount, StringFormat='{}{0} total'}" Margin="20,27,20,20"></TextBlock>
             </WrapPanel>
         </StackPanel>
         
         <Panel Grid.Column="0" Grid.Row="1">
             <TreeDataGrid x:Name="HarvestsGrid" Grid.Row="1" Margin="10" Source="{Binding HarvestSource, Mode=TwoWay}" 
                           Tapped="HarvestsGrid_OnTapped"
+                          DoubleTapped="HarvestGrid_OnDoubleTapped" 
                           CanUserResizeColumns="True">
             </TreeDataGrid>
         </Panel>

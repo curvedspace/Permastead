@@ -496,6 +496,17 @@ namespace DataAccess.Local
 				AuthorId INTEGER
 			);
 
+			-- HARVESTTYPE
+			DROP TABLE IF EXISTS HarvestType;
+			CREATE TABLE IF NOT EXISTS HarvestType(
+				Id INTEGER PRIMARY KEY,
+				Description VARCHAR (2000) NOT NULL,
+				CreationDate TIMESTAMP,
+				StartDate TIMESTAMP NOT NULL,
+				EndDate TIMESTAMP,
+				AuthorId INTEGER
+			);
+
 			-- INVENTORYGROUP
 			DROP TABLE IF EXISTS InventoryGroup;
 			CREATE TABLE IF NOT EXISTS InventoryGroup(

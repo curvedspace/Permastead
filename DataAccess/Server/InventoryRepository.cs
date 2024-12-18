@@ -1,6 +1,5 @@
 using System.Data;
 using Dapper;
-using Microsoft.Data.Sqlite;
 using Models;
 using Npgsql;
 

@@ -6,13 +6,13 @@ public class Harvest
 
     public string? Description { get; set; }
     
-    public HarvestType? Type { get; set; }
+    public HarvestType? HarvestType { get; set; }
     
     public long HarvestTypeId
     {
         get
         {
-            var harvestType = this.Type;
+            var harvestType = this.HarvestType;
             if (harvestType != null) 
                 return harvestType.Id;
             else
@@ -37,6 +37,23 @@ public class Harvest
     public string HarvestDateString => this.HarvestDate.ToShortDateString();
 
     public DateTime LastUpdatedDate { get; set; }
+    
+    public Person? Author { get; set; }
+    
+    public long AuthorId 
+    { 
+        get
+        {
+            if (Author != null)
+            {
+                return Author.Id;
+            }
+            else
+            {
+                return 0;
+            }
+        } 
+    }
 
     public string Comment { get; set; }
 
@@ -44,7 +61,7 @@ public class Harvest
     {
         this.CreationDate = DateTime.Now;
         this.HarvestDate = DateTime.Today;
-        this.Type = new HarvestType();
+        this.HarvestType = new HarvestType() {Id = 1, Description = "Plant"};
         this.HarvestEntity = new Entity();
         this.Units = new MeasurementUnit();
     }

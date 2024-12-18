@@ -2,7 +2,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        mc:Ignorable="d" d:DesignWidth="1000" d:DesignHeight="450"
         xmlns:vm="using:Permastead.ViewModels.Dialogs"
         x:Class="Permastead.Views.Dialogs.HarvestWindow"
         x:DataType="vm:HarvestWindowViewModel"
@@ -10,10 +10,15 @@
         Title="HarvestWindow">
   
         <Grid ColumnDefinitions="Auto,Auto,Auto,*" RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,*,Auto" Margin="10">
-            <RadioButton GroupName="HarvestType" Content="Plant" VerticalAlignment="Stretch" Margin="10"></RadioButton>
-            <RadioButton Grid.Row="0" Grid.Column="1" GroupName="HarvestType" Content="Animal" VerticalAlignment="Stretch" Margin="10"></RadioButton>
-            <RadioButton Grid.Row="0" Grid.Column="2" GroupName="HarvestType" Content="Material" VerticalAlignment="Stretch" Margin="10"></RadioButton>
-            <RadioButton Grid.Row="0" Grid.Column="3" GroupName="HarvestType" Content="Other" VerticalAlignment="Stretch" Margin="10"></RadioButton>
+          
+          <TextBlock Grid.Row="0" Grid.Column="0" Margin="10,15,0,0">Type:</TextBlock>
+            <WrapPanel Grid.Row="0" Grid.Column="1">
+              <RadioButton GroupName="HarvestType" Content="Plant" VerticalAlignment="Stretch" IsChecked="True" Margin="10"></RadioButton>
+              <RadioButton GroupName="HarvestType" Content="Animal" VerticalAlignment="Stretch" Margin="10"></RadioButton>
+              <RadioButton GroupName="HarvestType" Content="Material" VerticalAlignment="Stretch" Margin="10"></RadioButton>
+              <RadioButton GroupName="HarvestType" Content="Other" VerticalAlignment="Stretch" Margin="10"></RadioButton>
+            </WrapPanel>
+          
             <Separator Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="4"  Margin="10"></Separator>
             <TextBlock Grid.Row="2" Grid.Column="0" Margin="10,15,0,0">ID:</TextBlock>
             <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding CurrentItem.Id}" IsEnabled="False" Margin="10,10,10,10"></TextBox>
@@ -27,7 +32,7 @@
           
           <TextBlock Grid.Row="3" Grid.Column="2" Margin="10,15,10,10">Linked Entity:</TextBlock>
           <ComboBox Width="300" Grid.Row="3" Grid.Column="3" Grid.ColumnSpan="1" Margin="10" ItemsSource="{Binding Entities, Mode=TwoWay}"
-                    SelectedItem="{Binding CurrentItem.HarvestAuxId, Mode=TwoWay}" AutoScrollToSelectedItem="True">
+                    SelectedItem="{Binding CurrentItem.HarvestEntity, Mode=TwoWay}" AutoScrollToSelectedItem="True">
             <ComboBox.ItemTemplate>
               <DataTemplate >
                 <TextBlock Text="{Binding  Name}" />
@@ -35,12 +40,12 @@
             </ComboBox.ItemTemplate>
           </ComboBox>
           
-          <Label Grid.Row="4" Margin="10,10,10,10" Grid.Column="0">Units:</Label>
-          <TextBox Grid.Row="4" Grid.Column="1" Text="{Binding CurrentItem.Units}" Margin="10,10,10,10"></TextBox>
+          <Label Grid.Row="4" Margin="10,10,10,10" Grid.Column="0">Count:</Label>
+          <TextBox Grid.Row="4" Grid.Column="1" Text="{Binding CurrentItem.Measurement}" Margin="10,10,10,10"></TextBox>
           
           <TextBlock Grid.Row="4" Grid.Column="2" Margin="10,15,10,10">Measurement Type:</TextBlock>
           <ComboBox Width="300" Grid.Row="4" Grid.Column="3" Grid.ColumnSpan="1" Margin="10" ItemsSource="{Binding MeasurementUnits, Mode=TwoWay}"
-                    SelectedItem="{Binding CurrentItem.HarvestAuxId, Mode=TwoWay}" AutoScrollToSelectedItem="True">
+                    SelectedItem="{Binding CurrentItem.Units, Mode=TwoWay}" AutoScrollToSelectedItem="True">
             <ComboBox.ItemTemplate>
               <DataTemplate >
                 <TextBlock Text="{Binding  Description}" />
