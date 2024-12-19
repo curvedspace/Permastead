@@ -10,6 +10,8 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 
 using Models;
+using Permastead.ViewModels.Dialogs;
+using Permastead.Views.Dialogs;
 using Services;
 
 namespace Permastead.ViewModels.Views;
@@ -66,6 +68,51 @@ public partial class ToDoViewModel : ViewModelBase
     private void Refresh()
     {
         RefreshToDo();
+    }
+
+    [RelayCommand]
+    private void EditToDo()
+    {
+        // open the selected planting in a window for viewing/editing
+        var actionWindow = new ActionWindow();
+        
+        if (CurrentItem != null)
+        {
+            //get underlying view's viewmodel
+            var vm = new ActionWindowViewModel(CurrentItem, this);
+            
+            actionWindow.DataContext = vm;
+        
+            actionWindow.Topmost = true;
+            actionWindow.Width = 700;
+            actionWindow.Height = 450;
+            actionWindow.Opacity = 0.95;
+            actionWindow.Title = "Action Item - Due in " + CurrentItem.DaysUntilDue + " day(s).";
+        }
+
+        actionWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+           
+        actionWindow.Show();
+    }
+    
+    [RelayCommand]
+    private void ResolveToDo()
+    {
+        if (CurrentItem != null)
+        {
+            //set the status to complete
+            var statuses = Services.ToDoService.GetAllToDoStatuses(AppSession.ServiceMode);
+            
+            if (statuses != null)
+            {
+                ToDoStatus completeStatus = statuses.FirstOrDefault(x => x.Description == "Complete");
+                CurrentItem.ToDoStatus = completeStatus;
+                SaveData();
+                RefreshToDo();
+            }
+
+        }
+
     }
 
     public void RefreshToDo()

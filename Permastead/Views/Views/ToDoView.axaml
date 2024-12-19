@@ -31,15 +31,33 @@
       <TextBlock Name="ActiveCount" Text="{Binding ActiveToDos, StringFormat='{}{0} active'}" Margin="20,24,20,20"></TextBlock>
       
     </WrapPanel>
-      
-    <!-- <Panel > -->
+
       <TreeDataGrid Grid.Row="1" x:Name="TodoGrid" Margin="10" Source="{Binding ToDosSource, Mode=TwoWay}" 
                     Tapped="TodoGrid_OnTapped"
                     DoubleTapped="TodoGrid_OnDoubleTapped"
                     CanUserResizeColumns="True">
+          
+          <TreeDataGrid.ContextMenu>
+              <ContextMenu>
+                        
+                  <MenuItem Command="{Binding EditToDoCommand}" Header="Edit...">
+                      <MenuItem.Icon>
+                          <PathIcon Data="{StaticResource edit_settings_regular}"/>
+                      </MenuItem.Icon>
+                  </MenuItem>
+                                  
+                  <Separator></Separator>
+                  
+                  <MenuItem Command="{Binding ResolveToDoCommand}" Header="Mark Item as Completed">
+                      <MenuItem.Icon>
+                          <PathIcon Data="{StaticResource checkmark_lock_regular}"/>
+                      </MenuItem.Icon>
+                  </MenuItem>
+                        
+              </ContextMenu>
+          </TreeDataGrid.ContextMenu>
+          
       </TreeDataGrid>
-      
-    <!-- </Panel> -->
     
   </Grid>
 </UserControl>
