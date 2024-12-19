@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 using System.Windows.Input;
+using AIMLbot.AIMLTagHandlers;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Models;
