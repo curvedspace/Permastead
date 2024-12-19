@@ -62,6 +62,9 @@ namespace Permastead.ViewModels.Views;
         
         [ObservableProperty]
         private double _totalScore;
+        
+        [ObservableProperty]
+        private string _upcomingEvents;
 
         [ObservableProperty] private string _CurrentDateDisplay = DateTime.Now.ToLongDateString();
 
@@ -98,6 +101,8 @@ namespace Permastead.ViewModels.Views;
             
             var sectionsOuter = 130;
             var sectionsWidth = 20;
+
+            _upcomingEvents = "I have checked the database and you have no upcoming events.";
 
             Needle = new NeedleVisual
             {
@@ -227,6 +232,8 @@ namespace Permastead.ViewModels.Views;
             
             TotalPlantStats = "Total: " + TotalPlantings + " Harvested: " + TotalHarvestedPlants + " Failed: " +
                               (TotalPlantings - SuccessfulPlantings);
+
+            _upcomingEvents = AppSession.Instance.GaiaService.InitialWelcomeMessage;
 
             try
             {

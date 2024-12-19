@@ -12,6 +12,8 @@ public class GaiaService
     private Bot _gaia;
     private User _user;
     
+    public string InitialWelcomeMessage { get; set; }
+    
     public ObservableCollection<RequestResponse> RequestResponses = new ObservableCollection<RequestResponse>();
     
     public GaiaService(ServiceMode mode)
@@ -54,12 +56,14 @@ public class GaiaService
         
         if (upcomingTodos.Count == 0)
         {
-            AddResponse("I have checked the database and you have no upcoming events.");
+            InitialWelcomeMessage = "I have checked the database and you have no upcoming events.";
         }
         else
         {
-            AddResponse(updateBuilder.ToString());
+            InitialWelcomeMessage = updateBuilder.ToString();
         }
+        
+        AddResponse(InitialWelcomeMessage);
     }
 
     public string GetResponse(string inputString, ServiceMode mode)

@@ -23,11 +23,16 @@
                        Text="{Binding WeatherForecast}"></TextBlock>
         </StackPanel>
         
-        <StackPanel Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="1" VerticalAlignment="Center">
+        <Grid Grid.Row="4" Grid.Column="1" Grid.ColumnDefinitions="*" Grid.RowDefinitions="Auto,Auto">
+        <StackPanel Grid.ColumnSpan="1" VerticalAlignment="Center" Margin="80">
             <TextBlock HorizontalAlignment="Center" FontSize="32" VerticalAlignment="Center" TextWrapping="WrapWithOverflow"
                        Text="{Binding QuoteViewModel.QuoteText}"></TextBlock>
         </StackPanel>
-        
+            <StackPanel Grid.Row="1" Grid.ColumnSpan="1" VerticalAlignment="Center" Margin="10,80,10,50">
+                <TextBlock HorizontalAlignment="Center" FontSize="24" VerticalAlignment="Bottom" TextWrapping="WrapWithOverflow"
+                           Text="{Binding UpcomingEvents}"></TextBlock>
+            </StackPanel>
+        </Grid>
         
         <lvc:PieChart Grid.Row="4" Grid.Column="0" Margin="100,10,100,10"
             Series="{Binding Series}"
