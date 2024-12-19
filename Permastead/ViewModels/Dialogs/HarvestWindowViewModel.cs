@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using CommunityToolkit.Mvvm.ComponentModel;
 using Models;
 using Permastead.ViewModels.Views;
@@ -32,7 +33,6 @@ public partial class HarvestWindowViewModel : ViewModelBase
         _entities.Add( new Entity {Id = 0, Name = "Unknown" });
         
         _currentItem = new Harvest();
-        _currentItem.HarvestType!.Id = 1;
         
         _measurementUnits = new ObservableCollection<MeasurementUnit>(Services.MeasurementsService.GetAllMeasurementTypes(AppSession.ServiceMode));
         _harvestTypes = new ObservableCollection<HarvestType>(Services.HarvestService.GetAllHarvestTypes(AppSession.ServiceMode));
@@ -42,13 +42,20 @@ public partial class HarvestWindowViewModel : ViewModelBase
         
         AnimalsList = Services.AnimalService.GetAnimalsAsEntityList(AppSession.ServiceMode);
         PlantingsList = Services.PlantingsService.GetPlantingsAsEntityList(AppSession.ServiceMode);
+        
+        this.SetEntityList();
     }
     
     public HarvestWindowViewModel(Harvest item, HarvestsViewModel obsVm) : this()
     {
-        _currentItem = item;
+        CurrentItem = item;
         _controlViewModel = obsVm;
         this.SetEntityList();
+        
+        CurrentItem = item;
+        
+        // now we have to reset the harvest entity so the databinding works (not sure why this is necessary)
+        CurrentItem.HarvestEntity = Entities.First( x => x.Id == item.HarvestEntity.Id);
     }
 
     public void SetEntityList()
@@ -70,6 +77,9 @@ public partial class HarvestWindowViewModel : ViewModelBase
                     break;
             }
         }
+        else
+        {
+            Entities = new ObservableCollection<Entity>(OtherList);
+        }
     }
-    
 }
