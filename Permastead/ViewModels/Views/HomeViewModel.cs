@@ -163,6 +163,7 @@ namespace Permastead.ViewModels.Views;
             Plants = new ObservableCollection<Plant>(PlantingsService.GetPlants(AppSession.ServiceMode));
             People = new ObservableCollection<Person>(PersonService.GetAllPeople(AppSession.ServiceMode));
             ToDos = new ObservableCollection<ToDo>(ToDoService.GetAllToDos(AppSession.ServiceMode));
+            Harvests = new ObservableCollection<Harvest>(HarvestService.GetAllHarvests(AppSession.ServiceMode));
             
             GetQuote();
             
@@ -184,6 +185,12 @@ namespace Permastead.ViewModels.Views;
             foreach (var inv in InventoryItems)
             {
                 if (inv.StartDate >= startDateWindow) this.InventoryValue.Value += 1;
+            }
+            
+            //compute the harvests count
+            foreach (var item in Harvests)
+            {
+                if (item.HarvestDate >= startDateWindow) this.HarvestsValue.Value += 1;
             }
             
             //compute the success rate for the current growing year
