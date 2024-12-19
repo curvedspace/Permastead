@@ -71,7 +71,26 @@
         <TreeDataGrid x:Name="PlantingsGrid" Grid.Row="1" Margin="10" Source="{Binding PlantingsSource}" 
                       DoubleTapped="PlantingsGrid_OnDoubleTapped"
                       Tapped="PlantingsGrid_OnTapped"
-                      CanUserResizeColumns="True"></TreeDataGrid>
+                      CanUserResizeColumns="True">
+        
+            <TreeDataGrid.ContextMenu>
+              <ContextMenu>
+                <MenuItem Header="Edit...">
+                  <MenuItem.Icon>
+                    <PathIcon Data="{StaticResource edit_settings_regular}"/>
+                  </MenuItem.Icon>
+                </MenuItem>
+                                      
+                <Separator></Separator>
+                <MenuItem Header="Create a Harvest...">
+                  <MenuItem.Icon>
+                    <PathIcon Data="{StaticResource scales_regular}"/>
+                  </MenuItem.Icon>
+                </MenuItem>
+                            
+              </ContextMenu>
+            </TreeDataGrid.ContextMenu>   
+        </TreeDataGrid>
         
         </SplitView>
     </Panel>

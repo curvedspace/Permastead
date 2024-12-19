@@ -34,6 +34,27 @@
                           DoubleTapped="SeedsGrid_OnDoubleTapped"
                           Tapped="SeedsGrid_OnTapped"
                           CanUserResizeColumns="True">
+                
+                <TreeDataGrid.ContextMenu>
+                    <ContextMenu>
+                        
+                        <!-- <MenuItem Command="{Binding EditHarvestCommand}" Header="Edit..."> -->
+                        <MenuItem Header="Edit...">
+                            <MenuItem.Icon>
+                                <PathIcon Data="{StaticResource edit_settings_regular}"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
+                                  
+                        <Separator></Separator>
+                        <MenuItem Header="Create a Planting...">
+                            <MenuItem.Icon>
+                                <PathIcon Data="{StaticResource leaf_two_regular}"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        
+                    </ContextMenu>
+                </TreeDataGrid.ContextMenu>   
+                
             </TreeDataGrid>
         </Panel>
         
