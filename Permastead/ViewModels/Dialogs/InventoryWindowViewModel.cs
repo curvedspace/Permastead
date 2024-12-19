@@ -36,10 +36,7 @@ public partial class InventoryWindowViewModel: ViewModelBase
             _people = new ObservableCollection<Person>(Services.PersonService.GetAllPeople(AppSession.ServiceMode));
             
             _currentItem = new Inventory();
-           
-            //RefreshInventory();
             
-            //if (_inventory.Count > 0) CurrentItem = _inventory.FirstOrDefault();
         }
         catch (Exception ex)
         {

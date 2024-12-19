@@ -15,15 +15,15 @@ public class HarvestRepository
             Harvest item;
 
             string sqlQuery =
-                "select h.id, h.harvesttypeid, ht.description, h.auxid, pl.description as auxname, h.description, h.measurement, h.measurementtypeid, mt.code, mt.description, h.comment, h.creationdate, h.harvestdate, h.authorid, p.firstname, p.lastname " + 
+                "select h.id, h.harvesttypeid, ht.description, h.harvestentityid, pl.description as auxname, h.description, h.measurement, h.measurementtypeid, mt.code, mt.description, h.comment, h.creationdate, h.harvestdate, h.authorid, p.firstname, p.lastname " + 
                 "from harvest h, harvesttype ht, measurementtype mt, person p, planting pl "+ 
-                "where h.harvesttypeid = ht.id and h.auxid = pl.id and ht.description = 'Plant' and h.authorid = p.id and h.measurementtypeid = mt.id " + 
-                "union select h.id, h.harvesttypeid, ht.description, h.auxid, a.name as auxname, h.description, h.measurement, h.measurementtypeid, mt.code, mt.description, h.comment, h.creationdate, h.harvestdate, h.authorid, p.firstname, p.lastname " + 
+                "where h.harvesttypeid = ht.id and h.harvestentityid = pl.id and ht.description = 'Plant' and h.authorid = p.id and h.measurementtypeid = mt.id " + 
+                "union select h.id, h.harvesttypeid, ht.description, h.harvestentityid, a.name as auxname, h.description, h.measurement, h.measurementtypeid, mt.code, mt.description, h.comment, h.creationdate, h.harvestdate, h.authorid, p.firstname, p.lastname " + 
                 "from harvest h, harvesttype ht, measurementtype mt, person p, animal a " + 
                 "where h.harvesttypeid = ht.id and ht.description = 'Animal' and h.authorid = p.id and h.measurementtypeid = mt.id " + 
-                "union select h.id, h.harvesttypeid, ht.description, h.auxid, 'Unknown' as auxname, h.description, h.measurement, h.measurementtypeid, mt.code, mt.description, h.comment, h.creationdate, h.harvestdate, h.authorid, p.firstname, p.lastname " + 
+                "union select h.id, h.harvesttypeid, ht.description, h.harvestentityid, 'Unknown' as auxname, h.description, h.measurement, h.measurementtypeid, mt.code, mt.description, h.comment, h.creationdate, h.harvestdate, h.authorid, p.firstname, p.lastname " + 
                 "from harvest h, harvesttype ht, measurementtype mt, person p, animal a where h.harvesttypeid = ht.id and ht.description = 'Material' and h.authorid = p.id and h.measurementtypeid = mt.id " + 
-                "union select h.id, h.harvesttypeid, ht.description, h.auxid, 'Unknown' as auxname, h.description, h.measurement, h.measurementtypeid, mt.code, mt.description, h.comment, h.creationdate, h.harvestdate, h.authorid, p.firstname, p.lastname " + 
+                "union select h.id, h.harvesttypeid, ht.description, h.harvestentityid, 'Unknown' as auxname, h.description, h.measurement, h.measurementtypeid, mt.code, mt.description, h.comment, h.creationdate, h.harvestdate, h.authorid, p.firstname, p.lastname " + 
                 "from harvest h, harvesttype ht, measurementtype mt, person p, animal a where h.harvesttypeid = ht.id and ht.description = 'Other' and h.authorid = p.id and h.measurementtypeid = mt.id ";
 
             using (IDbConnection connection = new NpgsqlConnection(conn))
@@ -70,11 +70,49 @@ public class HarvestRepository
                 }
             }
 
+            harvests = harvests.OrderByDescending(h => h.HarvestDate).ToList();
             return harvests;
         }
         catch
         {
             return new List<Harvest>();
+        }
+    }
+    
+    public static bool Insert(Harvest item)
+    {
+        try
+        {
+            using (IDbConnection db = new NpgsqlConnection(DataConnection.GetServerConnectionString()))
+            {
+                string sqlQuery = "INSERT INTO Harvest (HarvestTypeId, HarvestEntityId, Description, Measurement, MeasurementTypeId, Comment, AuthorId, CreationDate, HarvestDate) " +
+                                  "VALUES(@HarvestTypeId, @HarvestEntityId, @Description, @Measurement, @MeasurementTypeId, @Comment, @AuthorId, CURRENT_DATE, @HarvestDate);";
+        
+                return (db.Execute(sqlQuery, item) == 1);
+            }
+        }
+        catch
+        {
+            return false;
+        }
+    }
+    
+    public static bool Update(Harvest item)
+    {
+        try
+        {
+            using (IDbConnection db = new NpgsqlConnection(DataConnection.GetServerConnectionString()))
+            {
+                string sqlQuery = "UPDATE Harvest SET HarvestTypeId = @HarvestTypeId, HarvestEntityId = @HarvestEntityId, Description = @Description, HarvestDate = @HarvestDate, Measurement = @Measurement, " +
+                                  "MeasurementTypeId = @MeasurementTypeId, Comment = @Comment, AuthorId = @AuthorId " + 
+                                  "WHERE Id = @Id;";
+
+                return (db.Execute(sqlQuery, item) == 1);
+            }
+        }
+        catch
+        {
+            return false;
         }
     }
 }

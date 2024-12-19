@@ -37,4 +37,37 @@ public class HarvestService
 
         return harvests;
     }
+    
+    public static bool CommitRecord(ServiceMode mode, Harvest item)
+    {
+        bool rtnValue = false;
+        
+        if (item.Id > 0)
+        {
+            if (mode == ServiceMode.Local)
+            {
+                //HarvestRepository.Update(item);
+            }
+            else
+            {
+                DataAccess.Server.HarvestRepository.Update(item);
+            }
+            
+        }
+        else
+        {
+            // insert new record
+            if (mode == ServiceMode.Local)
+            {
+                //HarvestRepository.Insert(item);
+            }
+            else
+            {
+                DataAccess.Server.HarvestRepository.Insert(item);
+            }
+        }
+
+        return rtnValue;
+        
+    }
 }

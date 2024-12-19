@@ -24,11 +24,13 @@ public class Harvest
     
     public Entity HarvestEntity { get; set; }
     
-    public long HarvestAuxId => this.HarvestEntity.Id;
+    public long HarvestEntityId => this.HarvestEntity.Id;
 
     public long Measurement { get; set; }
     
     public MeasurementUnit Units { get; set; }
+    
+    public long MeasurementTypeId => this.Units.Id;
     
     public DateTime CreationDate { get; set; }
     
@@ -36,8 +38,7 @@ public class Harvest
     
     public string HarvestDateString => this.HarvestDate.ToShortDateString();
 
-    public DateTime LastUpdatedDate { get; set; }
-    
+   
     public Person? Author { get; set; }
     
     public long AuthorId 
@@ -64,5 +65,6 @@ public class Harvest
         this.HarvestType = new HarvestType() {Id = 1, Description = "Plant"};
         this.HarvestEntity = new Entity();
         this.Units = new MeasurementUnit();
+        this.Author = Person.Anonymous();
     }
 }

@@ -4,6 +4,8 @@ using System.Linq;
 using CommunityToolkit.Mvvm.ComponentModel;
 using Models;
 using Permastead.ViewModels.Views;
+using Serilog;
+using Serilog.Context;
 
 namespace Permastead.ViewModels.Dialogs;
 
@@ -25,7 +27,7 @@ public partial class HarvestWindowViewModel : ViewModelBase
     public List<Entity> AnimalsList;
     public List<Entity> OtherList;
     
-    private HarvestsViewModel _controlViewModel { get; set;  } = new HarvestsViewModel();
+    public HarvestsViewModel ControlViewModel { get; set;  } = new HarvestsViewModel();
 
     public HarvestWindowViewModel()
     {
@@ -33,6 +35,7 @@ public partial class HarvestWindowViewModel : ViewModelBase
         _entities.Add( new Entity {Id = 0, Name = "Unknown" });
         
         _currentItem = new Harvest();
+        _currentItem.Author!.Id= 1;
         
         _measurementUnits = new ObservableCollection<MeasurementUnit>(Services.MeasurementsService.GetAllMeasurementTypes(AppSession.ServiceMode));
         _harvestTypes = new ObservableCollection<HarvestType>(Services.HarvestService.GetAllHarvestTypes(AppSession.ServiceMode));
@@ -49,7 +52,7 @@ public partial class HarvestWindowViewModel : ViewModelBase
     public HarvestWindowViewModel(Harvest item, HarvestsViewModel obsVm) : this()
     {
         CurrentItem = item;
-        _controlViewModel = obsVm;
+        ControlViewModel = obsVm;
         this.SetEntityList();
         
         CurrentItem = item;
@@ -81,5 +84,22 @@ public partial class HarvestWindowViewModel : ViewModelBase
         {
             Entities = new ObservableCollection<Entity>(OtherList);
         }
+    }
+    
+    public void SaveRecord()
+    {
+        bool rtnValue;
+
+        rtnValue = Services.HarvestService.CommitRecord(AppSession.ServiceMode, CurrentItem);
+        
+        OnPropertyChanged(nameof(_currentItem));
+            
+        using (LogContext.PushProperty("HarvestWindowViewModel", this))
+        {
+            Log.Information("Saved inventory item: " + CurrentItem.Description, rtnValue);
+        }
+        
+        ControlViewModel.RefreshDataOnly();
+        
     }
 }

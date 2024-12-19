@@ -34,8 +34,6 @@ public partial class HarvestsViewModel : ViewModelBase
     [RelayCommand]
     private void RefreshData()
     {
-        //_measurementUnits = Services.HarvestService.GetAllHarvests()
-            
         RefreshDataOnly(SearchText);
     }
     

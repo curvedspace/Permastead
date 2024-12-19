@@ -20,7 +20,10 @@ public partial class HarvestWindow : Window
 
     private void SaveButton_OnClick(object? sender, RoutedEventArgs e)
     {
+        HarvestWindowViewModel vm  = (HarvestWindowViewModel)DataContext;
+        vm.SaveRecord();
         
+        Close();
     }
 
     private void CancelButton_OnClick(object? sender, RoutedEventArgs e)
@@ -45,21 +48,6 @@ public partial class HarvestWindow : Window
             vm.Entities.Clear();
             vm.SetEntityList(); 
             
-            // switch (harvestType.Description)
-            // {
-            //     case "Animal":
-            //         vm.Entities = new ObservableCollection<Entity>(vm.AnimalsList);
-            //         break;
-            //     
-            //     case "Plant":
-            //         vm.Entities = new ObservableCollection<Entity>(vm.PlantingsList);
-            //         break;
-            //     
-            //     default:
-            //         vm.Entities = new ObservableCollection<Entity>(vm.OtherList);
-            //         break;
-            // }
         }
-            
     }
 }
