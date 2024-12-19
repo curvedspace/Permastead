@@ -136,6 +136,18 @@ namespace DataAccess.Local
 				EndDate TIMESTAMP
 			);
 
+			-- STARTERTYPE
+			DROP TABLE IF EXISTS StarterType;
+			CREATE TABLE IF NOT EXISTS StarterType(
+				Id INTEGER PRIMARY KEY,
+				Code VARCHAR (50) UNIQUE NOT NULL,
+				Description TEXT NOT NULL,
+				AuthorId INTEGER,
+				CreationDate TIMESTAMP,
+				StartDate TIMESTAMP NOT NULL,
+				EndDate TIMESTAMP
+			);
+
 			-- FREQUENCY
 			DROP TABLE IF EXISTS Frequency;
 			CREATE TABLE IF NOT EXISTS Frequency(
