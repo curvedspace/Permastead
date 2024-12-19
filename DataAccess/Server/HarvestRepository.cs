@@ -20,7 +20,7 @@ public class HarvestRepository
                 "where h.harvesttypeid = ht.id and h.harvestentityid = pl.id and ht.description = 'Plant' and h.authorid = p.id and h.measurementtypeid = mt.id " + 
                 "union select h.id, h.harvesttypeid, ht.description, h.harvestentityid, a.name as auxname, h.description, h.measurement, h.measurementtypeid, mt.code, mt.description, h.comment, h.creationdate, h.harvestdate, h.authorid, p.firstname, p.lastname " + 
                 "from harvest h, harvesttype ht, measurementtype mt, person p, animal a " + 
-                "where h.harvesttypeid = ht.id and ht.description = 'Animal' and h.authorid = p.id and h.measurementtypeid = mt.id " + 
+                "where h.harvesttypeid = ht.id and ht.description = 'Animal' and h.harvestentityid = a.id and h.authorid = p.id and h.measurementtypeid = mt.id " + 
                 "union select h.id, h.harvesttypeid, ht.description, h.harvestentityid, 'Unknown' as auxname, h.description, h.measurement, h.measurementtypeid, mt.code, mt.description, h.comment, h.creationdate, h.harvestdate, h.authorid, p.firstname, p.lastname " + 
                 "from harvest h, harvesttype ht, measurementtype mt, person p, animal a where h.harvesttypeid = ht.id and ht.description = 'Material' and h.authorid = p.id and h.measurementtypeid = mt.id " + 
                 "union select h.id, h.harvesttypeid, ht.description, h.harvestentityid, 'Unknown' as auxname, h.description, h.measurement, h.measurementtypeid, mt.code, mt.description, h.comment, h.creationdate, h.harvestdate, h.authorid, p.firstname, p.lastname " + 
