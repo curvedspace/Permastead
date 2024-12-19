@@ -191,7 +191,7 @@ public partial class ToDoViewModel : ViewModelBase
 
             if (rtnValue)
             {
-                _todos.Add(CurrentItem);
+                Todos.Add(CurrentItem);
             }
 
             Console.WriteLine("saved " + rtnValue);
@@ -204,7 +204,7 @@ public partial class ToDoViewModel : ViewModelBase
             
             if (rtnValue)
             {
-                _todos.Add(CurrentItem);
+                Todos.Add(CurrentItem);
             }
             
             RefreshToDo();

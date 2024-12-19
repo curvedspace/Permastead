@@ -61,6 +61,8 @@ public partial class ToDoView : UserControl
     {
         var win = new ActionWindow();
         var vm = new ActionWindowViewModel();
+        vm.ControlViewModel = (ToDoViewModel)DataContext;
+
             
         win.DataContext = vm;
         

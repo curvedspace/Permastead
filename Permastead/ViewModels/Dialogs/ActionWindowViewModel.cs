@@ -24,7 +24,7 @@ public partial class ActionWindowViewModel : ViewModelBase
     [ObservableProperty] 
     private ObservableCollection<Person> _people;
     
-    private ToDoViewModel _controlViewModel { get; set;  } = new ToDoViewModel();
+    public ToDoViewModel ControlViewModel { get; set;  } = new ToDoViewModel();
 
     public ActionWindowViewModel()
     {
@@ -42,7 +42,7 @@ public partial class ActionWindowViewModel : ViewModelBase
     public ActionWindowViewModel(ToDo todo, ToDoViewModel obsVm) : this()
     {
         _currentTodo = todo;
-        _controlViewModel = obsVm;
+        ControlViewModel = obsVm;
 
         if (_currentTodo != null)
         {
@@ -67,6 +67,6 @@ public partial class ActionWindowViewModel : ViewModelBase
             Log.Information("Saved Action: " + _currentTodo.Description, rtnValue);
         }
         
-        _controlViewModel.SaveData();
+        ControlViewModel.SaveData();
     }
 }
