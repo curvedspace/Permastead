@@ -25,6 +25,9 @@ namespace Permastead.ViewModels.Views;
         public IEnumerable<ISeries> Series { get; set; }
         
         public IEnumerable<ISeries> SeriesStats { get; set; }
+        
+        public double? SeriesStatsMaxValue { get; set; }
+        
         public IEnumerable<VisualElement<SkiaSharpDrawingContext>> VisualElements { get; set; }
         private NeedleVisual Needle { get; set; }
         
@@ -217,6 +220,11 @@ namespace Permastead.ViewModels.Views;
                 }
             }
 
+            SeriesStatsMaxValue = ObservationsValue.Value;
+            if (PlantingsValue.Value > SeriesStatsMaxValue) SeriesStatsMaxValue = PlantingsValue.Value;
+            if (InventoryValue.Value > SeriesStatsMaxValue) SeriesStatsMaxValue = InventoryValue.Value;
+            if (HarvestsValue.Value > SeriesStatsMaxValue) SeriesStatsMaxValue = HarvestsValue.Value;
+            
             TotalPlantStats = "Total: " + TotalPlantings + " Harvested: " + TotalHarvestedPlants + " Failed: " +
                               (TotalPlantings - SuccessfulPlantings);
 

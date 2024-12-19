@@ -39,12 +39,12 @@
             AnimationsSpeed="00:00:02.500">
         </lvc:PieChart>
         
-        <lvc:PieChart Grid.Row="4" Grid.Column="2" Margin="100,10,100,10"
+        <lvc:PieChart x:Name="StatsChart" Grid.Row="4" Grid.Column="2" Margin="100,10,100,10"
                       Series="{Binding SeriesStats}"
                       InitialRotation="45"
                       MaxAngle="270"
                       MinValue="0"
-                      MaxValue="100"
+                      MaxValue="{Binding SeriesStatsMaxValue}"
                       AnimationsSpeed="00:00:02.500">
         </lvc:PieChart>
         
