@@ -564,6 +564,45 @@ namespace DataAccess.Local
 				AuthorId INTEGER
 			);
 
+			-- ANIMAL
+			DROP TABLE IF EXISTS Animal;
+			CREATE TABLE IF NOT EXISTS Animal (
+				Id INTEGER PRIMARY KEY,
+				Name TEXT NULL,
+				Nickname TEXT NULL,
+				Breed TEXT NULL,
+				AnimalTypeId INTEGER NULL,
+				Birthday TIMESTAMP NULL,
+				StartDate TIMESTAMP NOT NULL,
+				EndDate TIMESTAMP NOT NULL,
+				Comment TEXT NULL,
+				AuthorId INTEGER NULL
+			);
+
+			-- ANIMAL TYPE
+			CREATE TABLE AnimalType (
+				Id INTEGER PRIMARY KEY,
+				Code varchar(50) NOT NULL,
+				Description TEXT NOT NULL,
+				AuthorId INTEGER NULL,
+				CreationDate timestamp NULL,
+				StartDate timestamp NOT NULL,
+				EndDate timestamp NULL
+			);
+
+			-- ANIMAL OBSERVATION
+			DROP TABLE IF EXISTS AnimalObservation;
+			CREATE TABLE IF NOT EXISTS AnimalObservation(
+				Id INTEGER PRIMARY KEY,
+				AnimalId INTEGER NOT NULL,
+				Comment TEXT NOT NULL,
+				CreationDate TIMESTAMP,
+				StartDate TIMESTAMP NOT NULL,
+				EndDate TIMESTAMP,
+				CommentTypeId INTEGER,
+				AuthorId INTEGER
+			);
+
 			-- OBSERVATION
 			DROP TABLE IF EXISTS Observation;
 			CREATE TABLE IF NOT EXISTS Observation(

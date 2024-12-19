@@ -103,7 +103,7 @@ public class AnimalRepository
 
             var sql = "SELECT o.Comment, o.CreationDate, o.StartDate, o.EndDate, o.CommentTypeId, " +
                       "ct.Description, o.AuthorId, p.FirstName, p.LastName, o.Id, o.AnimalId, a.Name " +
-                      "FROM Animalbservation o, CommentType ct, Person p, Animal a " +
+                      "FROM AnimalObservation o, CommentType ct, Person p, Animal a " +
                       "WHERE ct.Id = o.CommentTypeId " +
                       "AND o.AnimalId = a.Id " +
                       "AND p.Id = o.AuthorId ORDER BY o.Id DESC";
@@ -159,7 +159,7 @@ public class AnimalRepository
 
             var sql = "SELECT o.Comment, o.CreationDate, o.StartDate, o.EndDate, o.CommentTypeId, " +
                       "ct.Description, o.AuthorId, p.FirstName, p.LastName, o.Id, o.AnimalId, a.Name " +
-                      "FROM PlantingObservation o, CommentType ct, Person p, Animal a " +
+                      "FROM AnimalObservation o, CommentType ct, Person p, Animal a " +
                       "WHERE ct.Id = o.CommentTypeId " +
                       "AND o.AnimalId = a.Id " +
                       "AND o.AnimalId = @Id " +
