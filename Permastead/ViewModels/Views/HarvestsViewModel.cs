@@ -6,6 +6,8 @@ using Avalonia.Controls.Models.TreeDataGrid;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Models;
+using Permastead.ViewModels.Dialogs;
+using Permastead.Views.Dialogs;
 
 namespace Permastead.ViewModels.Views;
 
@@ -99,6 +101,40 @@ public partial class HarvestsViewModel : ViewModelBase
     {
         SearchText = "";
         RefreshDataOnly(SearchText);
+    }
+    
+    [RelayCommand]
+    private void EditHarvest()
+    {
+        // open the selected planting in a window for viewing/editing
+        var harvestWindow = new HarvestWindow();
+        
+        
+        if (CurrentItem != null)
+        {
+            //get underlying view's viewmodel
+            var vm = new HarvestWindowViewModel(CurrentItem, this);
+            
+            harvestWindow.DataContext = vm;
+        
+            harvestWindow.Topmost = true;
+            harvestWindow.Width = 1000;
+            harvestWindow.Height = 550;
+            harvestWindow.Opacity = 0.95;
+            harvestWindow.Title = "Harvest - " + CurrentItem.Description;
+        }
+
+        harvestWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+        harvestWindow.Show();
+        
+        RefreshDataOnly(SearchText);
+    }
+    
+    [RelayCommand]
+    private void PreserveHarvest()
+    {
+        // open the selected harvest in a preservation window for viewing/editing
+        
     }
     
     public HarvestsViewModel()
