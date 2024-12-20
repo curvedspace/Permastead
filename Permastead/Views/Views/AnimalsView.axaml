@@ -38,9 +38,20 @@
                           CanUserResizeColumns="True">
                 <TreeDataGrid.ContextMenu>
                     <ContextMenu>
-                        <MenuItem Header="Edit..."/>
+                        
+                        <MenuItem Command="{Binding EditAnimalCommand}" Header="Edit...">
+                            <MenuItem.Icon>
+                                <PathIcon Data="{StaticResource edit_settings_regular}"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
+                                  
                         <Separator></Separator>
-                        <MenuItem Header="Harvest..."/>
+                        <MenuItem Command="{Binding HarvestAnimalCommand}" Header="Harvest..." IsEnabled="False">
+                            <MenuItem.Icon>
+                                <PathIcon Data="{StaticResource food_regular}"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        
                     </ContextMenu>
                 </TreeDataGrid.ContextMenu>   
             </TreeDataGrid>

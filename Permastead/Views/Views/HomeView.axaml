@@ -29,7 +29,7 @@
                        Text="{Binding QuoteViewModel.QuoteText}"></TextBlock>
         </StackPanel>
             <StackPanel Grid.Row="1" Grid.ColumnSpan="1" VerticalAlignment="Center" Margin="10,50,10,50">
-                <TextBlock HorizontalAlignment="Center" FontSize="24" VerticalAlignment="Bottom" TextWrapping="WrapWithOverflow"
+                <TextBlock HorizontalAlignment="Center" FontSize="18" VerticalAlignment="Bottom" TextWrapping="WrapWithOverflow"
                            Text="{Binding UpcomingEvents}"></TextBlock>
             </StackPanel>
         </Grid>

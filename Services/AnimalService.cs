@@ -1,6 +1,7 @@
 using DataAccess;
 using Models;
-using DataAccess.Local;
+using DataAccess.Server;
+using AnimalRepository = DataAccess.Local.AnimalRepository;
 
 namespace Services;
 
@@ -20,6 +21,22 @@ public class AnimalService
         }
 
         return myAnimals;
+    }
+    
+    public static List<AnimalType> GetAllAnimalTypes(ServiceMode mode)
+    {
+        var types = new List<AnimalType>();
+
+        if (mode == ServiceMode.Local)
+        {
+            types = AnimalTypeRepository.GetAll(DataConnection.GetLocalDataSource());
+        }
+        else
+        {
+            types = DataAccess.Server.AnimalTypeRepository.GetAll(DataConnection.GetServerConnectionString());
+        }
+
+        return types;
     }
 
     public static List<AnimalObservation> GetObservationsForAnimal(ServiceMode mode, long id)

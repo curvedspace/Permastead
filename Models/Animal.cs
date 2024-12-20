@@ -27,6 +27,8 @@ public class Animal
     
     public Person? Author { get; set; }
     
+    public bool IsPet { get; set; }
+    
     public string? Comment { get; set; }
     
     /// <summary>

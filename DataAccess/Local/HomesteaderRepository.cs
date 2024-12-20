@@ -575,6 +575,7 @@ namespace DataAccess.Local
 				Birthday TIMESTAMP NULL,
 				StartDate TIMESTAMP NOT NULL,
 				EndDate TIMESTAMP NOT NULL,
+				IsPet BOOLEAN NOT NULL,
 				Comment TEXT NULL,
 				AuthorId INTEGER NULL
 			);

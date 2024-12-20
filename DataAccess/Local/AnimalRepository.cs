@@ -17,7 +17,7 @@ public class AnimalRepository
             var sql = "SELECT a.Id, a.Name, a.AnimalTypeId, at.Description AnimalTypeDesc, a.AuthorId, " +
                       "p.FirstName AuthorFirstName, p.LastName AuthorLastName, " +
                       "a.nickname, a.breed, a.birthday, " + 
-                      "a.StartDate, a.EndDate, a.comment " +
+                      "a.StartDate, a.EndDate, a.comment, a.ispet " +
                       "FROM Animal a, Animalype at, Person p  " +
                       "WHERE a.AnimalTypeId = at.Id " +
                       "AND a.AuthorId = p.Id " +
@@ -54,6 +54,7 @@ public class AnimalRepository
                         animal.EndDate = Convert.ToDateTime(dr[11].ToString());
                         
                         animal.Comment = dr[12].ToString();
+                        animal.IsPet = Convert.ToBoolean(Convert.ToInt32(dr[13].ToString()));
 
                         myAnimals.Add(animal);
                     }

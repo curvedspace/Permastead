@@ -6,6 +6,8 @@ using Avalonia.Controls.Models.TreeDataGrid;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Models;
+using Permastead.ViewModels.Dialogs;
+using Permastead.Views.Dialogs;
 using Services;
 
 namespace Permastead.ViewModels.Views;
@@ -108,13 +110,23 @@ public partial class AnimalsViewModel : ViewModelBase
                 new TextColumn<Animal, string>
                     ("NickName", x => x.NickName),
                 new TextColumn<Animal, string>
-                    ("Author", x => x.Author.FirstName),
+                    ("Author", x => x.Author!.FirstName),
                 new TextColumn<Animal, string>
                     ("Type", x => x.Type.Description),
                 new TextColumn<Animal, string>
                     ("Breed", x => x.Breed),
                 new TextColumn<Animal, string>
                     ("Birthday", x => x.BirthdayString),
+                new CheckBoxColumn<Animal>
+                (
+                    "Is Pet",
+                    x => x.IsPet,
+                    (o, v) => o.IsPet = v,
+                    options: new()
+                    {
+                        CanUserResizeColumn = false, CanUserSortColumn = true
+                    }),
+                
                 new TextColumn<Animal, string>
                     ("Comment", x => x.Comment)
             },
@@ -157,6 +169,39 @@ public partial class AnimalsViewModel : ViewModelBase
         {
             Console.WriteLine(e);
         }
+        
+    }
+
+    [RelayCommand]
+    private void EditAnimal()
+    {
+        // open the selected record in a window for viewing/editing
+        var myWindow = new AnimalWindow();
+        
+        
+        if (CurrentItem != null)
+        {
+            //get underlying view's viewmodel
+            var vm = new AnimalWindowViewModel(CurrentItem, this);
+            
+            myWindow.DataContext = vm;
+        
+            myWindow.Topmost = true;
+            myWindow.Width = 1000;
+            myWindow.Height = 550;
+            myWindow.Opacity = 0.95;
+            myWindow.Title = "Animal - " + CurrentItem.Name;
+        }
+
+        myWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+        myWindow.Show();
+        
+        RefreshDataOnly(SearchText);
+    }
+    
+    [RelayCommand]
+    private void HarvestAnimal()
+    {
         
     }
     
