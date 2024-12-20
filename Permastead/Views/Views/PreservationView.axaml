@@ -58,24 +58,24 @@
             </TreeDataGrid>
         </Panel>
         
-        <!-- <Panel Grid.Column="1" Grid.Row="1" MinWidth="300" MaxWidth="400" Background="{DynamicResource  ButtonBackgroundPointerOver}" -->
-        <!--        IsVisible="{Binding ShowObservations}"> -->
-        <!--     <StackPanel> -->
-        <!--         <TextBlock TextAlignment="Center" Text="{Binding CurrentItem.Name}"></TextBlock> -->
-        <!--         <TextBox Width="290" Text="{Binding CurrentObservation.Comment}"></TextBox> -->
-        <!--         <Button HorizontalAlignment="Center" Command="{Binding SaveObservationCommand}" Name="AddObservationButton">Add Observation</Button> -->
-        <!--         <ListBox Name="AnimalObservationsList" ItemsSource="{Binding AnimalObservations, Mode=TwoWay }" -->
-        <!--                  Margin="30" ScrollViewer.VerticalScrollBarVisibility="Auto"> -->
-        <!--             <ListBox.ItemTemplate> -->
-        <!--                 <DataTemplate> -->
-        <!--                     <Border CornerRadius="4"> -->
-        <!--                         <TextBlock TextWrapping="WrapWithOverflow" Text="{Binding FullDescription}"></TextBlock> -->
-        <!--                     </Border> -->
-        <!--                 </DataTemplate> -->
-        <!--             </ListBox.ItemTemplate> -->
-        <!--         </ListBox> -->
-        <!--     </StackPanel> -->
-        <!-- </Panel> -->
+        <Panel Grid.Column="1" Grid.Row="1" MinWidth="300" MaxWidth="400" Background="{DynamicResource  ButtonBackgroundPointerOver}"
+               IsVisible="{Binding ShowObservations}">
+            <StackPanel>
+                <TextBlock TextAlignment="Center" Text="{Binding CurrentItem.Name}"></TextBlock>
+                <TextBox Width="290" Text="{Binding CurrentObservation.Comment}"></TextBox>
+                <Button HorizontalAlignment="Center" Command="{Binding SaveObservationCommand}" Name="AddObservationButton">Add Observation</Button>
+                <ListBox Name="AnimalObservationsList" ItemsSource="{Binding PreservationObservations, Mode=TwoWay }"
+                         Margin="30" ScrollViewer.VerticalScrollBarVisibility="Auto">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <Border CornerRadius="4">
+                                <TextBlock TextWrapping="WrapWithOverflow" Text="{Binding FullDescription}"></TextBlock>
+                            </Border>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </StackPanel>
+        </Panel>
         
     </Grid>
     
