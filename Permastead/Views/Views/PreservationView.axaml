@@ -3,6 +3,80 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-             x:Class="Permastead.Views.Views.PreservationView">
+             xmlns:vm="using:Permastead.ViewModels.Views"
+             x:Class="Permastead.Views.Views.PreservationView"
+             x:DataType="vm:PreservationViewModel">
+        
+    <!--This is design time only-->
+    <Design.DataContext>
+        <vm:PreservationViewModel/>
+    </Design.DataContext>
+    
+    <Grid ColumnDefinitions="*,Auto" RowDefinitions="Auto,*">
+        <StackPanel>
+            <WrapPanel>
+                <Image Margin="20" Width="24" Height="24" Source="/Assets/database_red.png" />
+                <TextBlock FontWeight="Bold" Margin="20,26,20,20">Food Preservation</TextBlock>
+                <!-- <Separator MaxWidth="5"></Separator> -->
+                <Button Command="{Binding RefreshDataCommand}" x:Name="Refresh" HorizontalAlignment="Right" Margin="10,0">Refresh</Button> 
+                <Button x:Name="Add" HorizontalAlignment="Right" Margin="0,20">Add</Button> 
+                <Label Margin="25,24,0,20">Search:</Label>
+                <TextBox x:Name="SearchBox" Text="{Binding SearchText}" Watermark="Enter search text" Width="200" 
+                         Margin="20,20,20,20" KeyDown="SearchBox_OnKeyDown" ></TextBox>
+                <Button Command="{Binding ClearSearchCommand}" Margin="5,20,20,20">Clear</Button>
+                <ToggleButton x:Name="ShowObservations" IsChecked="{Binding ShowObservations}" HorizontalAlignment="Right"
+                              Margin="30,0">Show Observations</ToggleButton>
+                <CheckBox Name="CurrentOnly" Command="{Binding RefreshDataCommand}" IsChecked="{Binding CurrentOnly, Mode=TwoWay}"
+                          Margin="0">Current Only</CheckBox>
+                <TextBlock Name="AnimalCount" Text="{Binding PreservationCount, StringFormat='{}{0} total'}" Margin="20,27,20,20"></TextBlock>
+            </WrapPanel>
+        </StackPanel>
+        
+        <Panel Grid.Column="0" Grid.Row="1">
+            <TreeDataGrid x:Name="PreservationGrid" Grid.Row="1" Margin="10" Source="{Binding PreservationSource, Mode=TwoWay}" 
+                          Tapped="PreservationGrid_OnTapped"
+                          DoubleTapped="PreservationGrid_OnDoubleTapped"
+                          CanUserResizeColumns="True">
+                <TreeDataGrid.ContextMenu>
+                    <ContextMenu>
+                        
+                        <MenuItem Command="{Binding EditRecordCommand}" Header="Edit...">
+                            <MenuItem.Icon>
+                                <PathIcon Data="{StaticResource edit_settings_regular}"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
+                                  
+                        <!-- <Separator></Separator> -->
+                        <!-- <MenuItem Header="Harvest..." IsEnabled="False"> -->
+                        <!--     <MenuItem.Icon> -->
+                        <!--         <PathIcon Data="{StaticResource food_regular}"/> -->
+                        <!--     </MenuItem.Icon> -->
+                        <!-- </MenuItem> -->
+                        
+                    </ContextMenu>
+                </TreeDataGrid.ContextMenu>   
+            </TreeDataGrid>
+        </Panel>
+        
+        <!-- <Panel Grid.Column="1" Grid.Row="1" MinWidth="300" MaxWidth="400" Background="{DynamicResource  ButtonBackgroundPointerOver}" -->
+        <!--        IsVisible="{Binding ShowObservations}"> -->
+        <!--     <StackPanel> -->
+        <!--         <TextBlock TextAlignment="Center" Text="{Binding CurrentItem.Name}"></TextBlock> -->
+        <!--         <TextBox Width="290" Text="{Binding CurrentObservation.Comment}"></TextBox> -->
+        <!--         <Button HorizontalAlignment="Center" Command="{Binding SaveObservationCommand}" Name="AddObservationButton">Add Observation</Button> -->
+        <!--         <ListBox Name="AnimalObservationsList" ItemsSource="{Binding AnimalObservations, Mode=TwoWay }" -->
+        <!--                  Margin="30" ScrollViewer.VerticalScrollBarVisibility="Auto"> -->
+        <!--             <ListBox.ItemTemplate> -->
+        <!--                 <DataTemplate> -->
+        <!--                     <Border CornerRadius="4"> -->
+        <!--                         <TextBlock TextWrapping="WrapWithOverflow" Text="{Binding FullDescription}"></TextBlock> -->
+        <!--                     </Border> -->
+        <!--                 </DataTemplate> -->
+        <!--             </ListBox.ItemTemplate> -->
+        <!--         </ListBox> -->
+        <!--     </StackPanel> -->
+        <!-- </Panel> -->
+        
+    </Grid>
     
 </UserControl>
