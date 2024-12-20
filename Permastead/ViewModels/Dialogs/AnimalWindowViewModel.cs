@@ -1,4 +1,5 @@
 using System.Collections.ObjectModel;
+using System.Linq;
 using CommunityToolkit.Mvvm.ComponentModel;
 using Models;
 using Permastead.ViewModels.Views;
@@ -36,6 +37,12 @@ public partial class AnimalWindowViewModel : ViewModelBase
         ControlViewModel = obsVm;
         
         CurrentItem = item;
+        
+        if (CurrentItem != null)
+        {
+            CurrentItem.Type = AnimalTypes.First(x => x.Id == CurrentItem.AnimalTypeId);
+            CurrentItem.Author = People.First(x => x.Id == CurrentItem.Author.Id);
+        }
         
     }
 }

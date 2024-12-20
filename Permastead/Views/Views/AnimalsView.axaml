@@ -35,6 +35,7 @@
         <Panel Grid.Column="0" Grid.Row="1">
             <TreeDataGrid x:Name="AnimalsGrid" Grid.Row="1" Margin="10" Source="{Binding AnimalSource, Mode=TwoWay}" 
                           Tapped="AnimalsGrid_OnTapped"
+                          DoubleTapped="AnimalsGrid_OnDoubleTapped"
                           CanUserResizeColumns="True">
                 <TreeDataGrid.ContextMenu>
                     <ContextMenu>

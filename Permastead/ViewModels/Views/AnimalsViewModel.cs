@@ -173,7 +173,7 @@ public partial class AnimalsViewModel : ViewModelBase
     }
 
     [RelayCommand]
-    private void EditAnimal()
+    public void EditAnimal()
     {
         // open the selected record in a window for viewing/editing
         var myWindow = new AnimalWindow();

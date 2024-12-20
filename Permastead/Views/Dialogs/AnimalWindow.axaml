@@ -30,10 +30,24 @@
         </CalendarDatePicker>
 
         <Label Grid.Row="5" Grid.Column="0" Margin="10">Type:</Label>
-        <TextBox Grid.Row="5" Grid.Column="1"  Margin="10" Text="{Binding CurrentItem.Type.Description}"></TextBox>
+        <ComboBox Grid.Row="5" Grid.Column="1" Width="200" Margin="10,10,0,0" ItemsSource="{Binding AnimalTypes} "
+                  SelectedItem="{Binding CurrentItem.Type, Mode=TwoWay}" AutoScrollToSelectedItem="False">
+            <ComboBox.ItemTemplate>
+                <DataTemplate >
+                    <TextBlock Text="{Binding Description, Mode=TwoWay}" />
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
         
-        <!-- <Label Grid.Row="5" Grid.Column="2" Margin="10">Email:</Label> -->
-        <!-- <TextBox Grid.Row="5" Grid.Column="3" Margin="10" Text="{Binding CurrentItem.}"></TextBox> -->
+        <Label Grid.Row="5" Grid.Column="2" Margin="10">Author:</Label>
+        <ComboBox Grid.Row="5" Grid.Column="3" Width="300" Margin="10,10,0,10" ItemsSource="{Binding People} "
+                  SelectedItem="{Binding CurrentItem.Author, Mode=TwoWay}" AutoScrollToSelectedItem="False">
+            <ComboBox.ItemTemplate>
+                <DataTemplate >
+                    <TextBlock Text="{Binding FullNameLastFirst, Mode=TwoWay}" />
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
 
         <Label Grid.Row="6" Grid.Column="0" Margin="10">Comment:</Label>
         <TextBox Grid.Row="6" Grid.Column="1" Grid.ColumnSpan="3" 
