@@ -45,6 +45,16 @@ public partial class PreservationViewModel : ViewModelBase
         RefreshDataOnly(SearchText);
     }
 
+    public void GetPreservationObservations()
+    {
+        if (CurrentItem != null)
+        {
+            PreservationObservations =
+                new ObservableCollection<FoodPreservationObservation>(
+                    Services.FoodPreservationService.GetObservationsForPreservation(AppSession.ServiceMode, CurrentItem.Id));
+        }
+    }
+    
     public void RefreshDataOnly(string filterText = "")
     {
         FoodPreservations.Clear();

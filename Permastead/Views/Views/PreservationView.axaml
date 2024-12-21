@@ -64,7 +64,7 @@
                 <TextBlock TextAlignment="Center" Text="{Binding CurrentItem.Name}"></TextBlock>
                 <TextBox Width="290" Text="{Binding CurrentObservation.Comment}"></TextBox>
                 <Button HorizontalAlignment="Center" Command="{Binding SaveObservationCommand}" Name="AddObservationButton">Add Observation</Button>
-                <ListBox Name="AnimalObservationsList" ItemsSource="{Binding PreservationObservations, Mode=TwoWay }"
+                <ListBox Name="PreservationObservationsList" ItemsSource="{Binding PreservationObservations, Mode=TwoWay }"
                          Margin="30" ScrollViewer.VerticalScrollBarVisibility="Auto">
                     <ListBox.ItemTemplate>
                         <DataTemplate>

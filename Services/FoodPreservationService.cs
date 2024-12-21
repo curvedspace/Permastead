@@ -21,7 +21,7 @@ public class FoodPreservationService
         return items;
     }
     
-    public static List<FoodPreservationType> GetAllHarvestTypes(ServiceMode mode)
+    public static List<FoodPreservationType> GetAllPreservationTypes(ServiceMode mode)
     {
         var items = new List<FoodPreservationType>();
 

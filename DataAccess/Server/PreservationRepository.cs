@@ -223,7 +223,7 @@ public class PreservationRepository
             FoodPreservationObservation o;
 
             var sql = "SELECT o.Comment, o.CreationDate, o.StartDate, o.EndDate, o.CommentTypeId, " +
-                      "ct.Description, o.AuthorId, p.FirstName, p.LastName, o.Id, o.PreservationId, a.Name " +
+                      "ct.Description, o.AuthorId, p.FirstName, p.LastName, o.Id, o.PreservationId, a.Description " +
                       "FROM PreservationObservation o, CommentType ct, Person p, Preservation a " +
                       "WHERE ct.Id = o.CommentTypeId " +
                       "AND o.PreservationId = a.Id " +
