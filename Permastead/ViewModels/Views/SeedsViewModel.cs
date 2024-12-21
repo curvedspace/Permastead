@@ -227,7 +227,7 @@ public partial class SeedsViewModel : ViewModelBase
             plantingWindow.Title = "Planting - " + planting.Description;
             
             plantingWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;
-           plantingWindow.Show();
+            plantingWindow.Show();
         }
 
     }

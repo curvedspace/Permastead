@@ -29,7 +29,7 @@
             </WrapPanel>
         </StackPanel>
         
-        <Panel Grid.Row="1">
+        <Panel Grid.Column="0" Grid.Row="1">
             <TreeDataGrid x:Name="SeedsGrid" Grid.Row="1" Margin="10" Source="{Binding SeedsSource, Mode=TwoWay}" 
                           DoubleTapped="SeedsGrid_OnDoubleTapped"
                           Tapped="SeedsGrid_OnTapped"

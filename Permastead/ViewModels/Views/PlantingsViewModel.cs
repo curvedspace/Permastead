@@ -8,6 +8,8 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 
 using Models;
+using Permastead.ViewModels.Dialogs;
+using Permastead.Views.Dialogs;
 using Serilog;
 using Services;
 
@@ -284,7 +286,30 @@ public partial class PlantingsViewModel : ViewModelBase
         
     }
     
-    
+    [RelayCommand]
+    public void EditPlanting()
+    {
+        // open the selected planting in a window for viewing/editing
+        var plantingWindow = new PlantingWindow();
+        
+        //get the selected row in the list
+        var current = CurrentItem;
+        if (current != null)
+        {
+            var vm = new PlantingWindowViewModel(current, this);
+
+            plantingWindow.DataContext = vm;
+
+            plantingWindow.Topmost = true;
+            plantingWindow.Width = 1000;
+            plantingWindow.Height = 600;
+            plantingWindow.Opacity = 0.95;
+            plantingWindow.Title = "Planting - " + current.Description;
+            plantingWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+            plantingWindow.Show();
+        }
+
+    }
 }
 
 public class Node

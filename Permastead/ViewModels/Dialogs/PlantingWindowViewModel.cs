@@ -33,7 +33,7 @@ public partial class PlantingWindowViewModel : ViewModelBase
     [ObservableProperty]
     private ObservableCollection<PlantingObservation> _plantingObservations = new ObservableCollection<PlantingObservation>();
     
-    private PlantingsViewModel _controlViewModel { get; set;  } = new PlantingsViewModel();
+    public PlantingsViewModel ControlViewModel { get; set;  } = new PlantingsViewModel();
     
     public PlantingWindowViewModel() 
     {
@@ -47,7 +47,7 @@ public partial class PlantingWindowViewModel : ViewModelBase
     public PlantingWindowViewModel(Planting planting, PlantingsViewModel obsVm) : this()
     {
         _planting = planting;
-        _controlViewModel = obsVm;
+        ControlViewModel = obsVm;
         
         if (Planting!.Plant.Id != 0 && _plants.Count > 0) Planting.Plant = Plants.First(x => x.Id == Planting.Plant.Id);
         if (Planting.SeedPacket.Id != 0 && SeedPackets.Count > 0) Planting.SeedPacket = SeedPackets.First(x => x.Id == Planting.SeedPacket.Id);
@@ -69,7 +69,7 @@ public partial class PlantingWindowViewModel : ViewModelBase
             Log.Information("Saved planting: " + _planting.Description, rtnValue);
         }
         
-        _controlViewModel.RefreshData();
+        ControlViewModel.RefreshData();
         
     }
     
@@ -87,7 +87,7 @@ public partial class PlantingWindowViewModel : ViewModelBase
             Log.Information("Harevsted planting: " + Planting.Description, rtnValue);
         }
         
-        _controlViewModel.RefreshData();
+        ControlViewModel.RefreshData();
     }
     
     public void TerminatePlanting()
@@ -104,7 +104,7 @@ public partial class PlantingWindowViewModel : ViewModelBase
             Log.Information("Terminated planting: " + Planting.Description, rtnValue);
         }
         
-        _controlViewModel.RefreshData();
+        ControlViewModel.RefreshData();
         
     }
 }

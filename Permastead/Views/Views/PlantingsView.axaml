@@ -75,7 +75,7 @@
         
             <TreeDataGrid.ContextMenu>
               <ContextMenu>
-                <MenuItem Header="Edit...">
+                <MenuItem Command="{Binding EditPlantingCommand}" Header="Edit...">
                   <MenuItem.Icon>
                     <PathIcon Data="{StaticResource edit_settings_regular}"/>
                   </MenuItem.Icon>
