@@ -28,7 +28,7 @@
                               Margin="30,0">Show Observations</ToggleButton>
                 <CheckBox Name="CurrentOnly" Command="{Binding RefreshDataCommand}" IsChecked="{Binding CurrentOnly, Mode=TwoWay}"
                           Margin="0">Current Only</CheckBox>
-                <TextBlock Name="AnimalCount" Text="{Binding PreservationCount, StringFormat='{}{0} total'}" Margin="20,27,20,20"></TextBlock>
+                <TextBlock Name="PreservationCount" Text="{Binding PreservationCount, StringFormat='{}{0} total'}" Margin="20,27,20,20"></TextBlock>
             </WrapPanel>
         </StackPanel>
         
