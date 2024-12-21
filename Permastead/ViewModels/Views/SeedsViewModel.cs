@@ -7,6 +7,8 @@ using Avalonia.Controls.Models.TreeDataGrid;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Models;
+using Permastead.ViewModels.Dialogs;
+using Permastead.Views.Dialogs;
 using Services;
 
 namespace Permastead.ViewModels.Views;
@@ -169,6 +171,65 @@ public partial class SeedsViewModel : ViewModelBase
             Console.WriteLine(e);
         }
         
+    }
+
+    [RelayCommand]
+    public void EditStarter()
+    {
+        // open the selected planting in a window for viewing/editing
+        var plantingWindow = new StarterWindow();
+        
+        //get the selected row in the list
+        var current = CurrentItem;
+        if (current != null)
+        {
+            var vm = new StarterWindowViewModel(current);
+            vm.ControlViewModel = this;
+
+            plantingWindow.DataContext = vm;
+
+            plantingWindow.Topmost = true;
+            plantingWindow.Width = 1000;
+            plantingWindow.Height = 600;
+            plantingWindow.Opacity = 0.95;
+            plantingWindow.Title = "Starter - " + current.Description;
+            plantingWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+            plantingWindow.Show();
+        }
+
+    }
+    
+    [RelayCommand]
+    public void CreatePlanting()
+    {
+        // open the selected planting in a window for viewing/editing
+        var plantingWindow = new PlantingWindow();
+        
+        //get the selected row in the list
+        var current = CurrentItem;
+        if (current != null)
+        {
+            var planting = new Planting();
+            planting.SeedPacket = CurrentItem;
+            planting.Description = CurrentItem.Description;
+            planting.Plant = CurrentItem.Plant;
+            planting.Author.Id = AppSession.Instance.CurrentUser.Id;
+            
+            //get underlying view's viewmodel
+            var vm = new PlantingWindowViewModel(planting,  new PlantingsViewModel());
+            
+            plantingWindow.DataContext = vm;
+        
+            plantingWindow.Topmost = true;
+            plantingWindow.Width = 900;
+            plantingWindow.Height = 500;
+            plantingWindow.Opacity = 0.95;
+            plantingWindow.Title = "Planting - " + planting.Description;
+            
+            plantingWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+           plantingWindow.Show();
+        }
+
     }
     
     public SeedsViewModel()
