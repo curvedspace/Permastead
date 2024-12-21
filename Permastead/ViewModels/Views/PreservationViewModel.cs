@@ -113,10 +113,10 @@ public partial class PreservationViewModel : ViewModelBase
             CurrentObservation.AsOfDate = DateTime.Today;
             CurrentObservation.CommentType!.Id = 2;
             
-            //AnimalService.AddAnimalObservation(AppSession.ServiceMode, CurrentObservation);
+            FoodPreservationService.AddPreservationObservation(AppSession.ServiceMode, CurrentObservation);
             
-            // AnimalObservations =
-            //     new ObservableCollection<AnimalObservation>(Services.AnimalService.GetObservationsForAnimal(AppSession.ServiceMode, CurrentItem.Id));
+            PreservationObservations =
+                 new ObservableCollection<FoodPreservationObservation>(Services.FoodPreservationService.GetObservationsForPreservation(AppSession.ServiceMode, CurrentItem.Id));
 
             CurrentObservation = new FoodPreservationObservation();
         }

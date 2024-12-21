@@ -133,4 +133,144 @@ public class PreservationRepository
             return false;
         }
     }
+    
+    public static bool InsertPreservationObservation(string connectionString, FoodPreservationObservation obs)
+    {
+        var rtnValue = false;
+
+        var sql = "INSERT INTO PreservationObservation (PreservationId, Comment, CreationDate, StartDate, EndDate, CommentTypeId, AuthorId) " +
+                  "VALUES(:preservationId, :comment, CURRENT_DATE, CURRENT_DATE, '9999-12-31', :commentTypeId, :authorId) ";
+
+        using (var connection = new NpgsqlConnection(connectionString))
+        {
+            connection.Open();
+
+            using (var command = connection.CreateCommand())
+            {
+                command.CommandText = sql;
+                command.Parameters.AddWithValue(":preservationId", obs.FoodPreservationId);
+                command.Parameters.AddWithValue(":comment", obs.Comment);
+                command.Parameters.AddWithValue(":commentTypeId", obs.CommentType!.Id);
+                command.Parameters.AddWithValue(":authorId", obs.Author!.Id);
+
+                rtnValue = (command.ExecuteNonQuery() == 1);
+            }
+        }
+
+        return rtnValue;
+    }
+
+    public static List<FoodPreservationObservation> GetAllPreservationObservations(string connectionString)
+    {
+        {
+            var myObs = new List<FoodPreservationObservation>();
+            FoodPreservationObservation o;
+
+            var sql = "SELECT o.Comment, o.CreationDate, o.StartDate, o.EndDate, o.CommentTypeId, " +
+                      "ct.Description, o.AuthorId, p.FirstName, p.LastName, o.Id, o.PreservationId, a.Name " +
+                      "FROM PreservationObservation o, CommentType ct, Person p, Preservation a " +
+                      "WHERE ct.Id = o.CommentTypeId " +
+                      "AND o.PreservationId = a.Id " +
+                      "AND p.Id = o.AuthorId ORDER BY o.Id DESC";
+
+            using (IDbConnection connection = new NpgsqlConnection(connectionString))
+            {
+                connection.Open();
+
+                using (IDbCommand command = connection.CreateCommand())
+                {
+                    command.CommandText = sql;
+                    
+                    var dr = command.ExecuteReader();
+
+                    while (dr.Read())
+                    {
+                        o = new FoodPreservationObservation();
+                        
+                        o.Comment = dr[0].ToString()!;
+                        o.CreationDate = Convert.ToDateTime(dr[1].ToString());
+                        o.StartDate = Convert.ToDateTime(dr[2].ToString());
+                        o.EndDate = Convert.ToDateTime(dr[3].ToString());
+
+                        o.CommentType = new CommentType();
+                        o.CommentType.Id = Convert.ToInt64(dr[4].ToString());
+                        o.CommentType.Description = dr[5].ToString();
+
+                        o.Author = new Person();
+                        o.Author.Id = Convert.ToInt64(dr[6].ToString());
+                        o.Author.FirstName = dr[7].ToString();
+                        o.Author.LastName = dr[8].ToString();
+
+                        o.Id = Convert.ToInt64(dr[9].ToString());
+                        o.FoodPreservation.Id = Convert.ToInt64(dr[10].ToString());
+                        o.FoodPreservation.Name = dr[11].ToString()!;
+                        
+                        o.AsOfDate = o.CreationDate;
+
+                        myObs.Add(o);
+                    }
+                }
+
+                return myObs;
+            }
+        }
+    }
+      
+    public static List<FoodPreservationObservation> GetAllObservationsForPreservation(string connectionString, long preservationId)
+    {
+        {
+            var myObs = new List<FoodPreservationObservation>();
+            FoodPreservationObservation o;
+
+            var sql = "SELECT o.Comment, o.CreationDate, o.StartDate, o.EndDate, o.CommentTypeId, " +
+                      "ct.Description, o.AuthorId, p.FirstName, p.LastName, o.Id, o.PreservationId, a.Name " +
+                      "FROM PreservationObservation o, CommentType ct, Person p, Preservation a " +
+                      "WHERE ct.Id = o.CommentTypeId " +
+                      "AND o.PreservationId = a.Id " +
+                      "AND o.PreservationId = @Id " +
+                      "AND p.Id = o.AuthorId ORDER BY o.Id DESC";
+
+            using (NpgsqlConnection connection = new NpgsqlConnection(connectionString))
+            {
+                connection.Open();
+
+                using (NpgsqlCommand command = connection.CreateCommand())
+                {
+                    command.CommandText = sql;
+                    command.Parameters.AddWithValue("@Id", preservationId);
+                    
+                    var dr = command.ExecuteReader();
+
+                    while (dr.Read())
+                    {
+                        o = new FoodPreservationObservation();
+                        
+                        o.Comment = dr[0].ToString()!;
+                        o.CreationDate = Convert.ToDateTime(dr[1].ToString());
+                        o.StartDate = Convert.ToDateTime(dr[2].ToString());
+                        o.EndDate = Convert.ToDateTime(dr[3].ToString());
+
+                        o.CommentType = new CommentType();
+                        o.CommentType.Id = Convert.ToInt64(dr[4].ToString());
+                        o.CommentType.Description = dr[5].ToString();
+
+                        o.Author = new Person();
+                        o.Author.Id = Convert.ToInt64(dr[6].ToString());
+                        o.Author.FirstName = dr[7].ToString();
+                        o.Author.LastName = dr[8].ToString();
+
+                        o.Id = Convert.ToInt64(dr[9].ToString());
+                        o.FoodPreservation.Id = Convert.ToInt64(dr[10].ToString());
+                        o.FoodPreservation.Name = dr[11].ToString()!;
+                        
+                        o.AsOfDate = o.CreationDate;
+
+                        myObs.Add(o);
+                    }
+                }
+
+                return myObs;
+            }
+        }
+    }
 }

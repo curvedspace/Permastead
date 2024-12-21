@@ -69,4 +69,62 @@ public class FoodPreservationService
         return rtnValue;
         
     }
+    
+    public static List<FoodPreservationObservation> GetObservationsForPreservation(ServiceMode mode, long id)
+    {
+        var obs = new List<FoodPreservationObservation>();
+
+        if (mode == ServiceMode.Local)
+        {
+            // obs = AnimalRepository.GetAllObservationsForAnimal(DataConnection.GetLocalDataSource(), id);
+        }
+        else
+        {
+            obs = DataAccess.Server.PreservationRepository.GetAllObservationsForPreservation(DataConnection.GetServerConnectionString(), id);
+        }
+
+        return obs;
+    }
+    
+    public static List<FoodPreservationObservation> GetAnimalObservations(ServiceMode mode)
+    {
+        var obs = new List<FoodPreservationObservation>();
+
+        if (mode == ServiceMode.Local)
+        {
+            // obs = AnimalRepository.GetAllAnimalObservations(DataConnection.GetLocalDataSource());
+        }
+        else
+        {
+            obs = DataAccess.Server.PreservationRepository.GetAllPreservationObservations(DataConnection.GetServerConnectionString());
+        }
+
+        return obs;
+    }
+    
+    public static bool AddPreservationObservation(ServiceMode mode, FoodPreservationObservation obs)
+    {
+        bool rtnValue = false;
+        
+        if (obs != null)
+        {
+            if (obs.FoodPreservation.Id > 0)
+            {
+                // insert new record
+                if (mode == ServiceMode.Local)
+                {
+                    // AnimalRepository.InsertAnimalObservation(
+                    //     DataConnection.GetLocalDataSource(), obs);
+                }
+                else
+                {
+                    DataAccess.Server.PreservationRepository.InsertPreservationObservation(
+                        DataConnection.GetServerConnectionString(), 
+                        obs);
+                }
+            }
+        }
+
+        return rtnValue;
+    }
 }
