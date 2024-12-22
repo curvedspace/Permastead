@@ -82,7 +82,7 @@
                 </MenuItem>
                                       
                 <Separator></Separator>
-                <MenuItem Header="Create a Harvest...">
+                <MenuItem Command="{Binding CreateHarvestCommand}" Header="Create a Harvest...">
                   <MenuItem.Icon>
                     <PathIcon Data="{StaticResource scales_regular}"/>
                   </MenuItem.Icon>

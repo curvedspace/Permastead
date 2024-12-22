@@ -47,7 +47,7 @@
                         </MenuItem>
                                   
                         <Separator></Separator>
-                        <MenuItem Command="{Binding HarvestAnimalCommand}" Header="Harvest..." IsEnabled="False">
+                        <MenuItem Command="{Binding HarvestAnimalCommand}" Header="Harvest..." IsEnabled="{Binding CurrentItem.IsNotPet}">
                             <MenuItem.Icon>
                                 <PathIcon Data="{StaticResource food_regular}"/>
                             </MenuItem.Icon>

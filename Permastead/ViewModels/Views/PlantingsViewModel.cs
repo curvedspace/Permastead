@@ -6,7 +6,7 @@ using Avalonia.Controls;
 using Avalonia.Controls.Models.TreeDataGrid;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using Models;
 using Permastead.ViewModels.Dialogs;
 using Permastead.Views.Dialogs;
@@ -308,7 +308,52 @@ public partial class PlantingsViewModel : ViewModelBase
             plantingWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;
             plantingWindow.Show();
         }
+    }
+    
+    [RelayCommand]
+    public void CreateHarvest()
+    {
+        try
+        {
+            // open the selected planting in a harvest window 
+            var harvestWindow = new HarvestWindow();
+        
+            //get the selected row in the list
+            var current = CurrentItem;
+        
+            if (current != null)
+            {
+                var harvest = new Harvest();
+                harvest.Author = AppSession.Instance.CurrentUser;
+                harvest.Description = current.Description;
+            
+                var harvestTypes = HarvestService.GetAllHarvestTypes(AppSession.ServiceMode);
+                var plantType = harvestTypes.FirstOrDefault(x => x.Description.ToLowerInvariant() == "plant");
 
+                harvest.HarvestType = plantType;
+                harvest.HarvestEntity.Id = current.Id;
+
+                var hvm = new HarvestsViewModel();
+                hvm.CurrentItem = harvest;
+            
+            
+                var vm = new HarvestWindowViewModel(harvest, hvm);
+
+                harvestWindow.DataContext = vm;
+
+                harvestWindow.Topmost = true;
+                harvestWindow.Width = 1000;
+                harvestWindow.Height = 600;
+                harvestWindow.Opacity = 0.95;
+                harvestWindow.Title = "Harvest - " + current.Description;
+                harvestWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+                harvestWindow.Show();
+            }
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+        }
     }
 }
 

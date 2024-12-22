@@ -29,6 +29,8 @@ public class Animal
     
     public bool IsPet { get; set; }
     
+    public bool IsNotPet => !this.IsPet;
+    
     public string? Comment { get; set; }
     
     /// <summary>

@@ -202,7 +202,47 @@ public partial class AnimalsViewModel : ViewModelBase
     [RelayCommand]
     private void HarvestAnimal()
     {
+        try
+        {
+            // open the selected planting in a harvest window 
+            var harvestWindow = new HarvestWindow();
         
+            //get the selected row in the list
+            var current = CurrentItem;
+        
+            if (current != null)
+            {
+                var harvest = new Harvest();
+                harvest.Author = AppSession.Instance.CurrentUser;
+                harvest.Description = current.Name;
+            
+                var harvestTypes = HarvestService.GetAllHarvestTypes(AppSession.ServiceMode);
+                var plantType = harvestTypes.FirstOrDefault(x => x.Description!.ToLowerInvariant() == "animal");
+
+                harvest.HarvestType = plantType;
+                harvest.HarvestEntity.Id = current.Id;
+
+                var hvm = new HarvestsViewModel();
+                hvm.CurrentItem = harvest;
+            
+            
+                var vm = new HarvestWindowViewModel(harvest, hvm);
+
+                harvestWindow.DataContext = vm;
+
+                harvestWindow.Topmost = true;
+                harvestWindow.Width = 1000;
+                harvestWindow.Height = 600;
+                harvestWindow.Opacity = 0.95;
+                harvestWindow.Title = "Harvest - " + current.Name;
+                harvestWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+                harvestWindow.Show();
+            }
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+        }
     }
     
     public AnimalsViewModel()
