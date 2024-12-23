@@ -70,4 +70,23 @@ public class HarvestService
         return rtnValue;
         
     }
+
+    public static bool DeleteRecord(ServiceMode mode, Harvest item)
+    {
+        bool rtnValue = false;
+        
+        if (item.Id > 0)
+        {
+            if (mode == ServiceMode.Local)
+            {
+                //HarvestRepository.Delete(item);
+            }
+            else
+            {
+                DataAccess.Server.HarvestRepository.Delete(item);
+            }
+        }
+        
+        return rtnValue;
+    }
 }

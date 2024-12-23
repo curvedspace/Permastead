@@ -43,8 +43,15 @@
                                 <PathIcon Data="{StaticResource edit_settings_regular}"/>
                             </MenuItem.Icon>
                         </MenuItem>
+                        
+                        <MenuItem Command="{Binding DeleteHarvestCommand}" Header="Remove Item">
+                            <MenuItem.Icon>
+                                <PathIcon Data="{StaticResource delete_regular}"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
                                   
                         <Separator></Separator>
+                        
                         <MenuItem Header="Preserve...">
                             <MenuItem.Icon>
                                 <PathIcon Data="{StaticResource clock_alarm_regular}"/>

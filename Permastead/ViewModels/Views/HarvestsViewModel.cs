@@ -137,6 +137,18 @@ public partial class HarvestsViewModel : ViewModelBase
         
     }
     
+    [RelayCommand]
+    private void DeleteHarvest()
+    {
+        // remove the currently selected item
+        if (CurrentItem != null)
+        {
+            Services.HarvestService.DeleteRecord(AppSession.ServiceMode, CurrentItem);
+            RefreshDataOnly();
+        }
+        
+    }
+    
     public HarvestsViewModel()
     {
         RefreshDataOnly();

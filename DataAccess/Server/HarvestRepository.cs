@@ -115,4 +115,29 @@ public class HarvestRepository
             return false;
         }
     }
+
+    public static bool Delete(Harvest item)
+    {
+        try
+        {
+            if (item != null)
+            {
+                using (IDbConnection db = new NpgsqlConnection(DataConnection.GetServerConnectionString()))
+                {
+                    string sqlQuery = "DELETE FROM Harvest WHERE Id = @Id;";
+        
+                    return (db.Execute(sqlQuery, item) == 1);
+                }
+            }
+            else
+            {
+                return false;
+            }
+            
+        }
+        catch
+        {
+            return false;
+        }
+    }
 }
