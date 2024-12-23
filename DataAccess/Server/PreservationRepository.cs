@@ -16,21 +16,21 @@ public class PreservationRepository
 
             string sqlQuery = "select p.id, p.description, p.creationdate, p.startdate, p.enddate, p.rating, p.measurement, " +
             "p.measurementtypeid, m.code, m.description, p.comment, p.preservationtypeid,  " +
-            "pt.description, p.authorid, p2.firstname, p2.lastname, p.preservationentityid, h.description  " +
+            "pt.description, p.authorid, p2.firstname, p2.lastname, p.harvestid, h.description  " +
             "from preservation p, preservationtype pt, measurementtype m, person p2, harvest h  " +
             "where p.measurementtypeid = m.id  " +
             "and p.preservationtypeid = pt.id  " +
             "and p.authorid = p2.id  " +
-            "and p.preservationentityid = h.id  " +
+            "and p.harvestid = h.id  " +
             "union  " +
             "select p.id, p.description, p.creationdate, p.startdate, p.enddate, p.rating, p.measurement,  " +
             "p.measurementtypeid, m.code, m.description, p.comment, p.preservationtypeid,  " +
-            "pt.description, p.authorid, p2.firstname, p2.lastname, p.preservationentityid, 'Unavailable'  " +
+            "pt.description, p.authorid, p2.firstname, p2.lastname, p.harvestid, 'Unavailable'  " +
             "from preservation p, preservationtype pt, measurementtype m, person p2  " +
             "where p.measurementtypeid = m.id  " +
             "and p.preservationtypeid = pt.id  " +
             "and p.authorid = p2.id  " +
-            "and p.preservationentityid is null ";
+            "and p.harvestid is null ";
 
             using (IDbConnection connection = new NpgsqlConnection(conn))
             {
@@ -61,10 +61,10 @@ public class PreservationRepository
                         item.Units.Description = dr[9].ToString()!;
                         item.Comment = dr[10].ToString()!;
                             
-                        if (item.Type != null)
+                        if (item.PreservationType != null)
                         {
-                            item.Type.Id = Convert.ToInt64(dr[11].ToString());
-                            item.Type.Description = dr[12].ToString()!;
+                            item.PreservationType.Id = Convert.ToInt64(dr[11].ToString());
+                            item.PreservationType.Description = dr[12].ToString()!;
                         }
                         
                         item.Author = new Person();
@@ -74,14 +74,14 @@ public class PreservationRepository
 
                         if (dr[16] != DBNull.Value)
                         {
-                            item.PreservationEntity.Id = Convert.ToInt64(dr[16].ToString());
+                            item.Harvest.Id = Convert.ToInt64(dr[16].ToString());
                         }
                         else
                         {
-                            item.PreservationEntity.Id = 0;
+                            item.Harvest.Id = 0;
                         }
                         
-                        item.PreservationEntity.Name = dr[17].ToString();
+                        item.Harvest.Description = dr[17].ToString();
                         
                         foodPreservations.Add(item);
                     }
@@ -103,8 +103,8 @@ public class PreservationRepository
         {
             using (IDbConnection db = new NpgsqlConnection(DataConnection.GetServerConnectionString()))
             {
-                string sqlQuery = "INSERT INTO Preservation (HarvestTypeId, HarvestEntityId, Description, Measurement, MeasurementTypeId, Comment, AuthorId, CreationDate, HarvestDate) " +
-                                  "VALUES(@HarvestTypeId, @HarvestEntityId, @Description, @Measurement, @MeasurementTypeId, @Comment, @AuthorId, CURRENT_DATE, @HarvestDate);";
+                string sqlQuery = "INSERT INTO Preservation (PreservationTypeId, HarvestId, Description, Measurement, MeasurementTypeId, Comment, AuthorId, CreationDate, StartDate) " +
+                                  "VALUES(@PreservationTypeId, @HarvestId, @Description, @Measurement, @MeasurementTypeId, @Comment, @AuthorId, CURRENT_DATE, @StartDate);";
         
                 return (db.Execute(sqlQuery, item) == 1);
             }
@@ -121,8 +121,8 @@ public class PreservationRepository
         {
             using (IDbConnection db = new NpgsqlConnection(DataConnection.GetServerConnectionString()))
             {
-                string sqlQuery = "UPDATE Preservation SET HarvestTypeId = @HarvestTypeId, HarvestEntityId = @HarvestEntityId, Description = @Description, HarvestDate = @HarvestDate, Measurement = @Measurement, " +
-                                  "MeasurementTypeId = @MeasurementTypeId, Comment = @Comment, AuthorId = @AuthorId " + 
+                string sqlQuery = "UPDATE Preservation SET Description = @Description, StartDate = @StartDate, Measurement = @Measurement, Rating = @Rating, " +
+                                  "MeasurementTypeId = @MeasurementTypeId, Comment = @Comment, AuthorId = @AuthorId, HarvestId = @HarvestId, PreservationTypeId = @PreservationTypeId " + 
                                   "WHERE Id = @Id;";
 
                 return (db.Execute(sqlQuery, item) == 1);

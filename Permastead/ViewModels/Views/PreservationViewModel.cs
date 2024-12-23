@@ -71,8 +71,8 @@ public partial class PreservationViewModel : ViewModelBase
             else
             {
                 if (item.Name.ToLowerInvariant().Contains(caseAdjustedFilterText) ||
-                    item.Type.Description!.ToLowerInvariant().Contains(caseAdjustedFilterText) ||
-                    item.PreservationEntity.Name!.ToLowerInvariant().Contains(caseAdjustedFilterText) ||
+                    item.PreservationType.Description!.ToLowerInvariant().Contains(caseAdjustedFilterText) ||
+                    item.Harvest.Description!.ToLowerInvariant().Contains(caseAdjustedFilterText) ||
                     item.Comment.ToLowerInvariant().Contains(caseAdjustedFilterText))
                 {
                     FoodPreservations.Add(item);
@@ -89,9 +89,9 @@ public partial class PreservationViewModel : ViewModelBase
                 new TextColumn<FoodPreservation, string>
                     ("Name", x => x.Name),
                 new TextColumn<FoodPreservation, string>
-                    ("Entity Name", x => x.PreservationEntity.Name),
+                    ("Harvest", x => x.Harvest.Description),
                 new TextColumn<FoodPreservation, string>
-                    ("Harvest Type", x => x.Type!.Description),
+                    ("Harvest Type", x => x.PreservationType!.Description),
                 new TextColumn<FoodPreservation, long>
                     ("Measurement", x => x.Measurement),
                 new TextColumn<FoodPreservation, string>
@@ -147,7 +147,25 @@ public partial class PreservationViewModel : ViewModelBase
     [RelayCommand]
     public void EditRecord()
     {
+        // open the selected row in a window for viewing/editing
+        var preservationWindow = new PreservationWindow();
         
+        //get the selected row in the list
+        var current = CurrentItem;
+        if (current != null)
+        {
+            var vm = new PreservationWindowViewModel(current, this);
+
+            preservationWindow.DataContext = vm;
+
+            preservationWindow.Topmost = true;
+            preservationWindow.Width = 1000;
+            preservationWindow.Height = 600;
+            preservationWindow.Opacity = 0.95;
+            preservationWindow.Title = "Preservation - " + current.Name;
+            preservationWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+            preservationWindow.Show();
+        }
     }
     
     public PreservationViewModel()

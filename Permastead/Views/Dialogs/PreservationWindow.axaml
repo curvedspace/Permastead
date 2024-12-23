@@ -2,21 +2,21 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         xmlns:vm="using:Permastead.ViewModels.Dialogs"
-        x:Class="Permastead.Views.Dialogs.HarvestWindow"
-        x:DataType="vm:HarvestWindowViewModel"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="Permastead.Views.Dialogs.PreservationWindow"
+        x:DataType="vm:PreservationWindowViewModel"
         x:CompileBindings="True"
-        Title="Harvest Window">
-  
+        Title="Preservation Window">
+    
         <Grid ColumnDefinitions="Auto,Auto,Auto,*" RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,*,Auto" Margin="10">
           
           <TextBlock Grid.Row="1" Grid.Column="0" Margin="10,15,0,0">ID:</TextBlock>
           <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding CurrentItem.Id}" IsEnabled="False" Margin="10,10,10,10"></TextBox>
             
           <TextBlock Grid.Row="1" Grid.Column="2" Margin="10,15,0,0">Type:</TextBlock>
-          <ComboBox Width="300" Grid.Row="1" Grid.Column="3" Grid.ColumnSpan="1" Margin="10" ItemsSource="{Binding HarvestTypes, Mode=TwoWay}"
-                   SelectionChanged="SelectingItemsControl_OnSelectionChanged" SelectedItem="{Binding CurrentItem.HarvestType, Mode=TwoWay}" AutoScrollToSelectedItem="True">
+          <ComboBox Width="300" Grid.Row="1" Grid.Column="3" Grid.ColumnSpan="1" Margin="10" ItemsSource="{Binding PreservationTypes, Mode=TwoWay}"
+                   SelectionChanged="SelectingItemsControl_OnSelectionChanged" SelectedItem="{Binding CurrentItem.PreservationType, Mode=TwoWay}" AutoScrollToSelectedItem="True">
             <ComboBox.ItemTemplate>
               <DataTemplate >
                 <TextBlock Text="{Binding Description}" />
@@ -25,18 +25,18 @@
           </ComboBox>
           
           <Label Grid.Row="2" Grid.Column="0" Margin="10,15,0,0">Name: </Label>
-          <TextBox Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3" Margin="10" Text="{Binding CurrentItem.Description}"></TextBox>
+          <TextBox Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3" Margin="10" Text="{Binding CurrentItem.Name}"></TextBox>
             
           <Label Grid.Row="3" Margin="10,10,10,10" Grid.Column="0">Date:</Label>
-          <CalendarDatePicker x:Name="StartDate" Margin="10,5,0,0" Grid.Row="3" Grid.Column="1" SelectedDate="{Binding CurrentItem.HarvestDate, Mode=TwoWay}">
+          <CalendarDatePicker x:Name="StartDate" Margin="10,5,0,0" Grid.Row="3" Grid.Column="1" SelectedDate="{Binding CurrentItem.StartDate, Mode=TwoWay}">
           </CalendarDatePicker>
           
-          <TextBlock Grid.Row="3" Grid.Column="2" Margin="10,15,10,10">Linked Entity:</TextBlock>
-          <ComboBox Width="300" Grid.Row="3" Grid.Column="3" Grid.ColumnSpan="1" Margin="10" ItemsSource="{Binding Entities, Mode=TwoWay}"
-                    SelectedItem="{Binding CurrentItem.HarvestEntity, Mode=TwoWay}" AutoScrollToSelectedItem="True">
+          <TextBlock Grid.Row="3" Grid.Column="2" Margin="10,15,10,10">Harvest:</TextBlock>
+          <ComboBox Width="300" Grid.Row="3" Grid.Column="3" Grid.ColumnSpan="1" Margin="10" ItemsSource="{Binding Harvests, Mode=TwoWay}"
+                    SelectedItem="{Binding CurrentItem.Harvest, Mode=TwoWay}" AutoScrollToSelectedItem="True">
             <ComboBox.ItemTemplate>
               <DataTemplate >
-                <TextBlock Text="{Binding  Name}" />
+                <TextBlock Text="{Binding  Description}" />
               </DataTemplate>
             </ComboBox.ItemTemplate>
           </ComboBox>
@@ -65,5 +65,5 @@
             <Button x:Name="CancelButton" Margin="10" Click="CancelButton_OnClick" >Cancel</Button>
           </StackPanel>
       </Grid>
-        
+  
 </Window>

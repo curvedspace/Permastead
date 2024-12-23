@@ -17,7 +17,7 @@ public class FoodPreservationTest
         Assert.Equal("My Saurkraut", foodPres.Name);
 
         Assert.NotNull(foodPres.Units);
-        Assert.NotNull(foodPres.Type);
+        Assert.NotNull(foodPres.PreservationType);
 
     }
 

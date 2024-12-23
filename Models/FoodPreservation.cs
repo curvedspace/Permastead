@@ -6,16 +6,34 @@ public class FoodPreservation
     
     public string Name { get; set; }
     
-    public FoodPreservationType? Type { get; set; }
+    public FoodPreservationType? PreservationType { get; set; }
     
-    public Entity PreservationEntity { get; set; }
+    public long PreservationTypeId 
+    { 
+        get
+        {
+            if (PreservationType != null)
+            {
+                return PreservationType.Id;
+            }
+            else
+            {
+                return 0;
+            }
+        } 
+    }
     
-    public long PreservationEntityId => this.PreservationEntity.Id;
+    public Harvest Harvest { get; set; }
+    
+    public long HarvestId => this.Harvest.Id;
     
     public long Rating { get; set; }
+    
     public long Measurement { get; set; }
     
     public MeasurementUnit Units { get; set; }
+    
+    public long MeasurementTypeId => this.Units.Id;
     
     public string Comment { get; set; }
     
@@ -54,9 +72,9 @@ public class FoodPreservation
     {
         this.CreationDate = DateTime.Now;
         this.Units = new MeasurementUnit();
-        this.Type = new FoodPreservationType();
+        this.PreservationType = new FoodPreservationType();
         this.Author = Person.Anonymous();
-        this.PreservationEntity = new Entity();
+        this.Harvest = new Harvest();
     }
     
 }
