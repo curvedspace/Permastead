@@ -112,4 +112,37 @@ public class AnimalService
 
         return items;
     }
+    
+    public static bool CommitRecord(ServiceMode mode, Animal item)
+    {
+        bool rtnValue = false;
+        
+        if (item.Id > 0)
+        {
+            if (mode == ServiceMode.Local)
+            {
+                //HarvestRepository.Update(item);
+            }
+            else
+            {
+                DataAccess.Server.AnimalRepository.Update(item);
+            }
+            
+        }
+        else
+        {
+            // insert new record
+            if (mode == ServiceMode.Local)
+            {
+                //HarvestRepository.Insert(item);
+            }
+            else
+            {
+                DataAccess.Server.AnimalRepository.Insert(item);
+            }
+        }
+
+        return rtnValue;
+        
+    }
 }

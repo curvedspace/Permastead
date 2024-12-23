@@ -3,6 +3,8 @@ using System.Linq;
 using CommunityToolkit.Mvvm.ComponentModel;
 using Models;
 using Permastead.ViewModels.Views;
+using Serilog;
+using Serilog.Context;
 using Services;
 
 namespace Permastead.ViewModels.Dialogs;
@@ -19,6 +21,23 @@ public partial class AnimalWindowViewModel : ViewModelBase
     private ObservableCollection<Person> _people;
     
     public AnimalsViewModel ControlViewModel { get; set;  } = new AnimalsViewModel();
+    
+    public void SaveRecord()
+    {
+        bool rtnValue;
+
+        rtnValue = Services.AnimalService.CommitRecord(AppSession.ServiceMode, CurrentItem);
+        
+        OnPropertyChanged(nameof(_currentItem));
+            
+        using (LogContext.PushProperty("HarvestWindowViewModel", this))
+        {
+            Log.Information("Saved inventory item: " + CurrentItem.Name, rtnValue);
+        }
+        
+        ControlViewModel.RefreshDataOnly();
+        
+    }
     
     public AnimalWindowViewModel()
     {
@@ -40,7 +59,7 @@ public partial class AnimalWindowViewModel : ViewModelBase
         
         if (CurrentItem != null)
         {
-            CurrentItem.Type = AnimalTypes.First(x => x.Id == CurrentItem.AnimalTypeId);
+            if (CurrentItem.AnimalTypeId > 0) CurrentItem.Type = AnimalTypes.First(x => x.Id == CurrentItem.AnimalTypeId);
             CurrentItem.Author = People.First(x => x.Id == CurrentItem.Author.Id);
         }
         

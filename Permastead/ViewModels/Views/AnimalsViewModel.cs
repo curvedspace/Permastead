@@ -187,7 +187,7 @@ public partial class AnimalsViewModel : ViewModelBase
             myWindow.DataContext = vm;
         
             myWindow.Topmost = true;
-            myWindow.Width = 1000;
+            myWindow.Width = 800;
             myWindow.Height = 550;
             myWindow.Opacity = 0.95;
             myWindow.Title = "Animal - " + CurrentItem.Name;
@@ -197,6 +197,31 @@ public partial class AnimalsViewModel : ViewModelBase
         myWindow.Show();
         
         RefreshDataOnly(SearchText);
+    }
+    
+    [RelayCommand]
+    public void AddRecord()
+    {
+        var myAnimal = new Animal();
+        myAnimal.Author = AppSession.Instance.CurrentUser;
+        myAnimal.StartDate = DateTime.Today;
+        myAnimal.Birthday = DateTime.Today;
+        myAnimal.EndDate = DateTime.MaxValue;
+        
+        
+        var vm = new AnimalWindowViewModel(myAnimal, this);
+            
+        var win = new AnimalWindow();
+        win.DataContext = vm;
+        
+        win.Topmost = true;
+        win.Width = 800;
+        win.Height = 550;
+        win.Opacity = 0.95;
+        win.Title = "New Animal";
+        win.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+                
+        win.Show();
     }
     
     [RelayCommand]

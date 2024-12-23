@@ -27,6 +27,8 @@ public class Animal
     
     public Person? Author { get; set; }
     
+    public long AuthorId => this.Author!.Id;
+    
     public bool IsPet { get; set; }
     
     public bool IsNotPet => !this.IsPet;
@@ -53,6 +55,8 @@ public class Animal
         Name = name;
         NickName = nickName;
         Breed = breed;
+        Author = Person.Gaia();
+        
         this.Type = new AnimalType();
     }
 }

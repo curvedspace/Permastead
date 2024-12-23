@@ -130,6 +130,7 @@ public partial class HarvestsViewModel : ViewModelBase
         RefreshDataOnly(SearchText);
     }
     
+    
     [RelayCommand]
     private void PreserveHarvest()
     {

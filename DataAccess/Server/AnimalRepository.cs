@@ -1,4 +1,5 @@
 using System.Data;
+using Dapper;
 using Models;
 using Npgsql;
 
@@ -75,6 +76,42 @@ public class AnimalRepository
         }
     }
 
+    public static bool Insert(Animal item)
+    {
+        try
+        {
+            using (IDbConnection db = new NpgsqlConnection(DataConnection.GetServerConnectionString()))
+            {
+                string sqlQuery = "INSERT INTO Animal (AnimalTypeId, Nickname, Name, Breed, AuthorId, Comment, Birthday, StartDate, EndDate, IsPet) " +
+                                  "VALUES(@AnimalTypeId, @Nickname, @Name, @Breed, @AuthorId, @Comment, @Birthday, @StartDate, @EndDate, @IsPet);";
+        
+                return (db.Execute(sqlQuery, item) == 1);
+            }
+        }
+        catch
+        {
+            return false;
+        }
+    }
+    
+    public static bool Update(Animal item)
+    {
+        try
+        {
+            using (IDbConnection db = new NpgsqlConnection(DataConnection.GetServerConnectionString()))
+            {
+                string sqlQuery = "UPDATE Animal SET AnimalTypeId = @AnimalTypeId, Nickname = @Nickname, Name = @Name, Breed = @Breed, Birthday = @Birthday, " +
+                                  "StartDate = @StartDate, Comment = @Comment, AuthorId = @AuthorId, EndDate = @EndDate, IsPet = @IsPet " + 
+                                  "WHERE Id = @Id;";
+
+                return (db.Execute(sqlQuery, item) == 1);
+            }
+        }
+        catch
+        {
+            return false;
+        }
+    }
     public static bool InsertAnimalObservation(string connectionString, AnimalObservation obs)
     {
         var rtnValue = false;
