@@ -4,6 +4,7 @@ using Avalonia.Controls;
 using Avalonia.Input;
 using Avalonia.Markup.Xaml;
 using Models;
+using Permastead.ViewModels.Dialogs;
 using Permastead.ViewModels.Views;
 
 namespace Permastead.Views.Views;
@@ -37,6 +38,17 @@ public partial class PreservationView : UserControl
 
     private void PreservationGrid_OnDoubleTapped(object? sender, TappedEventArgs e)
     {
+        
+        //get the selected row in the list
+        var current = sender as TreeDataGrid;
+        if (current != null)
+        {
+            var item = (FoodPreservation)current.RowSelection!.SelectedItem;
+            
+            //get underlying view's viewmodel
+            var vm = new PreservationWindowViewModel(item, (PreservationViewModel)DataContext);
+            
+        }
         
     }
 

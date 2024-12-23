@@ -33,7 +33,7 @@
           </ComboBox.ItemTemplate>
         </ComboBox>
         
-        <TextBlock Grid.Column="2" Grid.Row="2" Margin="10,15,0,0">Seed Packet:</TextBlock>
+        <TextBlock Grid.Column="2" Grid.Row="2" Margin="10,15,0,0">Starter:</TextBlock>
         <ComboBox Grid.Column="3" Grid.Row="2" Margin="10" Width="300" ItemsSource="{Binding SeedPackets} "
                   SelectedItem="{Binding Planting.SeedPacket, Mode=TwoWay}" AutoScrollToSelectedItem="False">
           <ComboBox.ItemTemplate>
