@@ -98,17 +98,39 @@ public class PreservationRepository
         }
     }
     
-    public static bool Insert(FoodPreservation item)
+    public static bool Insert(string connectionString, FoodPreservation item)
     {
         try
         {
-            using (IDbConnection db = new NpgsqlConnection(DataConnection.GetServerConnectionString()))
+            bool rtnValue = false;
+            
+            using (var connection = new NpgsqlConnection(connectionString))
             {
-                string sqlQuery = "INSERT INTO Preservation (PreservationTypeId, HarvestId, Description, Measurement, MeasurementTypeId, Comment, AuthorId, CreationDate, StartDate) " +
-                                  "VALUES(@PreservationTypeId, @HarvestId, @Description, @Measurement, @MeasurementTypeId, @Comment, @AuthorId, CURRENT_DATE, @StartDate);";
+                string sqlQuery = "INSERT INTO Preservation (PreservationTypeId, HarvestId, Description, Measurement, Rating, MeasurementTypeId, Comment, AuthorId, CreationDate, StartDate) " +
+                                  "VALUES(:preservationTypeId, :harvestId, :description, :measurement, :rating, :measurementTypeId, :comment, :authorId, CURRENT_DATE, :startDate);";
         
-                return (db.Execute(sqlQuery, item) == 1);
+                connection.Open();
+
+                using (var command = connection.CreateCommand())
+                {
+                    command.CommandText = sqlQuery;
+                    
+                    command.Parameters.AddWithValue(":description", item.Name);
+                    command.Parameters.AddWithValue(":startDate", item.StartDate);
+                    command.Parameters.AddWithValue(":measurement", item.Measurement);
+                    command.Parameters.AddWithValue(":rating", item.Rating);
+                    command.Parameters.AddWithValue(":measurementTypeId", item.MeasurementTypeId);
+                    command.Parameters.AddWithValue(":comment", item.Comment);
+                    command.Parameters.AddWithValue(":authorId", item.Author!.Id);
+                    command.Parameters.AddWithValue(":harvestId", item.HarvestId);
+                    command.Parameters.AddWithValue(":preservationTypeId", item.PreservationTypeId);
+                    
+                    rtnValue = (command.ExecuteNonQuery() == 1);
+                }
+
             }
+            
+            return rtnValue;
         }
         catch
         {

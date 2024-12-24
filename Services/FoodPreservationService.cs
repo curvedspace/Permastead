@@ -62,7 +62,7 @@ public class FoodPreservationService
             }
             else
             {
-                DataAccess.Server.PreservationRepository.Insert(item);
+                DataAccess.Server.PreservationRepository.Insert(DataConnection.GetServerConnectionString(),item);
             }
         }
 
