@@ -44,6 +44,41 @@ public class Animal
     {
         return (DateTime.UtcNow > StartDate) && (DateTime.UtcNow < EndDate);
     }
+    
+    public string Age
+    {
+        get
+        {
+            string calculatedAge = "Unavailable.";
+            DateTime measurementDate = DateTime.Now;
+
+            if (this.EndDate < measurementDate)
+            {
+                // if there is an end date in the past, the plant is dead.
+                // use this end date as the basis for measuring its age.
+                measurementDate = this.EndDate;
+            }
+            
+            if (measurementDate < this.Birthday)
+            {
+                calculatedAge = "Not yet planted.";
+            }
+            else
+            {
+                
+                if ((measurementDate - this.Birthday).Days <= 365)
+                {
+                    calculatedAge = (measurementDate - this.Birthday).Days + " day(s).";
+                }
+                else
+                {
+                    calculatedAge = ((measurementDate - this.Birthday).Days / 365).ToString("0.##") + " year(s).";
+                }
+            }
+
+            return calculatedAge;
+        }
+    }
 
     public Animal()
     {

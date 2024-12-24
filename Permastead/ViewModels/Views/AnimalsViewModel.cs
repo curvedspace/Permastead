@@ -117,6 +117,8 @@ public partial class AnimalsViewModel : ViewModelBase
                     ("Breed", x => x.Breed),
                 new TextColumn<Animal, string>
                     ("Birthday", x => x.BirthdayString),
+                new TextColumn<Animal, string>
+                    ("Age", x => x.Age),
                 new CheckBoxColumn<Animal>
                 (
                     "Is Pet",
@@ -256,8 +258,8 @@ public partial class AnimalsViewModel : ViewModelBase
                 harvestWindow.DataContext = vm;
 
                 harvestWindow.Topmost = true;
-                harvestWindow.Width = 1000;
-                harvestWindow.Height = 600;
+                harvestWindow.Width = 800;
+                harvestWindow.Height = 550;
                 harvestWindow.Opacity = 0.95;
                 harvestWindow.Title = "Harvest - " + current.Name;
                 harvestWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;
