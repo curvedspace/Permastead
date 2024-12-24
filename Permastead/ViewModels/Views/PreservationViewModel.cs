@@ -168,6 +168,36 @@ public partial class PreservationViewModel : ViewModelBase
         }
     }
     
+    [RelayCommand]
+    public void AddRecord()
+    {
+        // open the selected row in a window for viewing/editing
+        var preservationWindow = new PreservationWindow();
+        
+        //get the selected row in the list
+        var current = new FoodPreservation();
+        current.Author = AppSession.Instance.CurrentUser;
+        current.StartDate = DateTime.Today;
+        current.Measurement = 1;
+        current.EndDate = DateTime.MaxValue;
+
+        
+        if (current != null)
+        {
+            var vm = new PreservationWindowViewModel(current, this);
+
+            preservationWindow.DataContext = vm;
+
+            preservationWindow.Topmost = true;
+            preservationWindow.Width = 800;
+            preservationWindow.Height = 500;
+            preservationWindow.Opacity = 0.95;
+            preservationWindow.Title = "New Preservation";
+            preservationWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+            preservationWindow.Show();
+        }
+    }
+    
     public PreservationViewModel()
     {
         RefreshDataOnly();

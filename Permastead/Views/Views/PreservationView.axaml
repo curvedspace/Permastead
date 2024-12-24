@@ -19,7 +19,7 @@
                 <TextBlock FontWeight="Bold" Margin="20,26,20,20">Food Preservation</TextBlock>
                 <!-- <Separator MaxWidth="5"></Separator> -->
                 <Button Command="{Binding RefreshDataCommand}" x:Name="Refresh" HorizontalAlignment="Right" Margin="10,0">Refresh</Button> 
-                <Button x:Name="Add" HorizontalAlignment="Right" Margin="0,20">Add</Button> 
+                <Button Command="{Binding AddRecordCommand}" x:Name="Add" HorizontalAlignment="Right" Margin="0,20">Add</Button> 
                 <Label Margin="25,24,0,20">Search:</Label>
                 <TextBox x:Name="SearchBox" Text="{Binding SearchText}" Watermark="Enter search text" Width="200" 
                          Margin="20,20,20,20" KeyDown="SearchBox_OnKeyDown" ></TextBox>
