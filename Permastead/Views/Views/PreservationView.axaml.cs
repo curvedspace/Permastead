@@ -47,7 +47,7 @@ public partial class PreservationView : UserControl
             
             //get underlying view's viewmodel
             var vm = new PreservationWindowViewModel(item, (PreservationViewModel)DataContext);
-            
+            vm.ControlViewModel.EditRecord();
         }
         
     }

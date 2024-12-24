@@ -159,8 +159,8 @@ public partial class PreservationViewModel : ViewModelBase
             preservationWindow.DataContext = vm;
 
             preservationWindow.Topmost = true;
-            preservationWindow.Width = 1000;
-            preservationWindow.Height = 600;
+            preservationWindow.Width = 800;
+            preservationWindow.Height = 500;
             preservationWindow.Opacity = 0.95;
             preservationWindow.Title = "Preservation - " + current.Name;
             preservationWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;

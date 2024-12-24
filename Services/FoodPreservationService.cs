@@ -49,7 +49,7 @@ public class FoodPreservationService
             }
             else
             {
-                DataAccess.Server.PreservationRepository.Update(item);
+                DataAccess.Server.PreservationRepository.Update(DataConnection.GetServerConnectionString(), item);
             }
             
         }

@@ -1,4 +1,5 @@
 using System.Data;
+using System.Diagnostics.Metrics;
 using Dapper;
 using Models;
 using Npgsql;
@@ -30,7 +31,7 @@ public class PreservationRepository
             "where p.measurementtypeid = m.id  " +
             "and p.preservationtypeid = pt.id  " +
             "and p.authorid = p2.id  " +
-            "and p.harvestid is null ";
+            "and (p.harvestid is null or p.harvestid = 0)";
 
             using (IDbConnection connection = new NpgsqlConnection(conn))
             {
@@ -115,18 +116,41 @@ public class PreservationRepository
         }
     }
     
-    public static bool Update(FoodPreservation item)
+    public static bool Update(string connectionString, FoodPreservation item)
     {
         try
         {
-            using (IDbConnection db = new NpgsqlConnection(DataConnection.GetServerConnectionString()))
+            bool rtnValue = false;
+            
+            using (var connection = new NpgsqlConnection(connectionString))
             {
-                string sqlQuery = "UPDATE Preservation SET Description = @Description, StartDate = @StartDate, Measurement = @Measurement, Rating = @Rating, " +
-                                  "MeasurementTypeId = @MeasurementTypeId, Comment = @Comment, AuthorId = @AuthorId, HarvestId = @HarvestId, PreservationTypeId = @PreservationTypeId " + 
-                                  "WHERE Id = @Id;";
+                string sqlQuery = "UPDATE Preservation SET Description = :description, StartDate = :startDate, Measurement = :measurement, Rating = :rating, " +
+                                  "MeasurementTypeId = :measurementTypeId, Comment = :comment, AuthorId = :authorId, HarvestId = :harvestId, PreservationTypeId = :preservationTypeId " + 
+                                  "WHERE Id = :id;";
 
-                return (db.Execute(sqlQuery, item) == 1);
+                connection.Open();
+
+                using (var command = connection.CreateCommand())
+                {
+                    command.CommandText = sqlQuery;
+                    
+                    command.Parameters.AddWithValue(":description", item.Name);
+                    command.Parameters.AddWithValue(":startDate", item.StartDate);
+                    command.Parameters.AddWithValue(":measurement", item.Measurement);
+                    command.Parameters.AddWithValue(":rating", item.Rating);
+                    command.Parameters.AddWithValue(":measurementTypeId", item.MeasurementTypeId);
+                    command.Parameters.AddWithValue(":comment", item.Comment);
+                    command.Parameters.AddWithValue(":authorId", item.Author!.Id);
+                    command.Parameters.AddWithValue(":harvestId", item.HarvestId);
+                    command.Parameters.AddWithValue(":preservationTypeId", item.PreservationTypeId);
+                    command.Parameters.AddWithValue(":id", item.Id);
+                    
+                    rtnValue = (command.ExecuteNonQuery() == 1);
+                }
+                
             }
+            
+            return rtnValue;
         }
         catch
         {
