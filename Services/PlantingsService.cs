@@ -135,6 +135,22 @@ public static class PlantingsService
         return states;
     }
     
+    public static List<StarterType> GetStarterTypes(ServiceMode mode)
+    {
+        var types = new List<StarterType>();
+
+        if (mode == ServiceMode.Local)
+        {
+            types = StarterTypeRepository.GetAll(DataConnection.GetLocalDataSource());
+        }
+        else
+        {
+            types = DataAccess.Server.StarterTypeRepository.GetAll(DataConnection.GetServerConnectionString());
+        }
+
+        return types;
+    }
+    
     public static List<Seasonality> GetSeasonalities(ServiceMode mode)
     {
         var seasonalities = new List<Seasonality>();

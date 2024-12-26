@@ -2,7 +2,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        mc:Ignorable="d" d:DesignWidth="810" d:DesignHeight="600"
+        mc:Ignorable="d" d:DesignWidth="810" d:DesignHeight="650"
         x:Class="Permastead.Views.Dialogs.StarterWindow"
         xmlns:vm="using:Permastead.ViewModels.Dialogs"
         x:DataType="vm:StarterWindowViewModel" x:CompileBindings="True"
@@ -96,27 +96,22 @@
           <TextBox Grid.Row="7" Grid.Column="3" Grid.ColumnSpan="1" Grid.RowSpan="1"  
                    Text="{Binding SeedPacket.Species }" TextWrapping="Wrap" Margin="10,10,10,10"></TextBox>
         
-        <TextBlock Grid.Row="8" Grid.Column="0" Margin="10">Instructions:</TextBlock>
-        <TextBox Grid.Row="8" Grid.Column="1" Grid.ColumnSpan="3" Grid.RowSpan="2"  
+          <TextBlock Grid.Row="8" Grid.Column="0" Margin="10,10" >Starter Type:</TextBlock>
+          <ComboBox Grid.Row="8" Grid.Column="1" Width="200" Margin="10" ItemsSource="{Binding StarterTypes} "
+                    SelectedItem="{Binding SeedPacket.StarterType, Mode=TwoWay}" AutoScrollToSelectedItem="False">
+            <ComboBox.ItemTemplate>
+              <DataTemplate >
+                <TextBlock Text="{Binding Description, Mode=TwoWay}" />
+              </DataTemplate>
+            </ComboBox.ItemTemplate>
+          </ComboBox>
+          
+        <TextBlock Grid.Row="9" Grid.Column="0" Margin="10">Instructions:</TextBlock>
+        <TextBox Grid.Row="9" Grid.Column="1" Grid.ColumnSpan="3" Grid.RowSpan="2"  
                  Text="{Binding SeedPacket.Instructions }" TextWrapping="Wrap" Margin="10,10,10,10"></TextBox>
         
       </Grid>
       </Border>
-      
-      <!-- <Panel Grid.Row="2"> -->
-      <!-- -->
-      <!--   <ListBox Name="SeedPacketObservationsList" ItemsSource="{Binding SeedPacketObservations, Mode=TwoWay }"  -->
-      <!--            Margin="30" ScrollViewer.VerticalScrollBarVisibility="Auto"> -->
-      <!--     <ListBox.ItemTemplate> -->
-      <!--       <DataTemplate> -->
-      <!--         <Border CornerRadius="4"> -->
-      <!--           <TextBlock Text="{Binding FullDescription}"></TextBlock> -->
-      <!--         </Border> -->
-      <!--       </DataTemplate> -->
-      <!--     </ListBox.ItemTemplate> -->
-      <!--   </ListBox> -->
-      <!-- -->
-      <!-- </Panel> -->
       
     </StackPanel>
     

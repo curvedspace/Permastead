@@ -41,7 +41,7 @@ public partial class SeedsView : UserControl
         
                 plantingWindow.Topmost = true;
                 plantingWindow.Width = 1000;
-                plantingWindow.Height = 600;
+                plantingWindow.Height = 650;
                 plantingWindow.Opacity = 0.95;
                 plantingWindow.Title = "Starter - " + seedPacket.Description;
             }
@@ -118,7 +118,7 @@ public partial class SeedsView : UserControl
         
         win.Topmost = true;
         win.Width = 800;
-        win.Height = 600;
+        win.Height = 650;
         win.Opacity = 0.95;
         win.Title = "New Plant Starter";
         win.WindowStartupLocation = WindowStartupLocation.CenterScreen;

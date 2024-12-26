@@ -658,7 +658,8 @@ namespace DataAccess.Local
 				Species TEXT,
 				PlantId INTEGER,
 				VendorId INTEGER,
-				AuthorId INTEGER
+				AuthorId INTEGER,
+				StarterTypeId INTEGER
 			);
 
 			-- SEED PACKET OBSERVATION

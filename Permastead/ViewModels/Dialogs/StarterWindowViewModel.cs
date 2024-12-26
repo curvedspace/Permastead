@@ -27,6 +27,9 @@ public partial class StarterWindowViewModel : ViewModelBase
     private ObservableCollection<Seasonality> _seasonalities;
     
     [ObservableProperty]
+    private ObservableCollection<StarterType> _starterTypes;
+    
+    [ObservableProperty]
     private ObservableCollection<SeedPacketObservation> _seedPacketObservations = new ObservableCollection<SeedPacketObservation>();
     
     [ObservableProperty] private SeedPacketObservation _currentObservation = new SeedPacketObservation();
@@ -41,6 +44,7 @@ public partial class StarterWindowViewModel : ViewModelBase
         if (_seedPacket.Author.Id != 0 && _people.Count > 0) _seedPacket.Author = _people.First(x => x.Id == _seedPacket.Author.Id);
         if (_seedPacket.Vendor.Id != 0 && _vendors.Count > 0) _seedPacket.Vendor = _vendors.First(x => x.Id == _seedPacket.VendorId);
         if (_seedPacket.Seasonality.Id != 0 && _seasonalities.Count > 0) _seedPacket.Seasonality = _seasonalities.First(x => x.Id == _seedPacket.Seasonality.Id);
+        if (_seedPacket.StarterType.Id != 0 && _starterTypes.Count > 0) _seedPacket.StarterType = _starterTypes.First(x => x.Id == _seedPacket.StarterType.Id);
         
         SeedPacketObservations =
             new ObservableCollection<SeedPacketObservation>(
@@ -55,6 +59,7 @@ public partial class StarterWindowViewModel : ViewModelBase
         _people = new ObservableCollection<Person>(Services.PersonService.GetAllPeople(AppSession.ServiceMode));
         _vendors = new ObservableCollection<Vendor>(Services.VendorService.GetAll(AppSession.ServiceMode));
         _seasonalities = new ObservableCollection<Seasonality>(Services.PlantingsService.GetSeasonalities(AppSession.ServiceMode));
+        _starterTypes = new ObservableCollection<StarterType>(Services.PlantingsService.GetStarterTypes(AppSession.ServiceMode));
     }
     
     // The method that will be executed when the command is invoked

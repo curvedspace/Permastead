@@ -117,6 +117,8 @@ public partial class SeedsViewModel : ViewModelBase
                     ("Seasonality", x => x.Seasonality.Description),
                 new TextColumn<SeedPacket, string>
                     ("Species", x => x.Species),
+                new TextColumn<SeedPacket, string>
+                    ("Starter Type", x => x.StarterType!.Description),
                 new TextColumn<SeedPacket, int>
                     ("DTH", x => x.DaysToHarvest),
                 new TextColumn<SeedPacket, long>
@@ -190,7 +192,7 @@ public partial class SeedsViewModel : ViewModelBase
 
             plantingWindow.Topmost = true;
             plantingWindow.Width = 1000;
-            plantingWindow.Height = 600;
+            plantingWindow.Height = 650;
             plantingWindow.Opacity = 0.95;
             plantingWindow.Title = "Starter - " + current.Description;
             plantingWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;
