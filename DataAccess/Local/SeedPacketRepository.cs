@@ -28,7 +28,7 @@ public class SeedPacketRepository
                     "SELECT sp.Id, sp.Description, sp.Instructions, sp.DaysToHarvest, sp.CreationDate, sp.StartDate, sp.EndDate," +
                     "v.Id, v.Code, v.Description, p.Id, p.FirstName, p.LastName, p2.Id, p2.Code, p2.Description, sp.Code, sp.Generations, " +
                     "s.Id, s.Code, s.Description, sp.Species, sp.PacketCount, sp.Exchange, st.Id, st.Code, st.Description " +
-                    "FROM SeedPacket sp, Vendor v, Person p, Plant p2, Seasonality s " +
+                    "FROM SeedPacket sp, Vendor v, Person p, Plant p2, Seasonality s, StarterType st " +
                     "WHERE sp.PlantId = p2.Id AND sp.VendorId = v.Id AND sp.AuthorId = p.Id AND s.Id = sp.SeasonalityId AND sp.Id = @id";
                 
                 connection.Open();
@@ -145,7 +145,7 @@ public class SeedPacketRepository
         string sqlQuery = "SELECT sp.Id, sp.Description, sp.Instructions, sp.DaysToHarvest, sp.CreationDate, sp.StartDate, sp.EndDate," +
                     "v.Id, v.Code, v.Description, p.Id, p.FirstName, p.LastName, p2.Id, p2.Code, p2.Description, sp.Code, sp.Generations, " +
                     "s.Id, s.Code, s.Description, sp.Species, sp.PacketCount, sp.Exchange, st.Id, st.Code, st.Description " +
-                    "FROM SeedPacket sp, Vendor v, Person p, Plant p2, Seasonality s " +
+                    "FROM SeedPacket sp, Vendor v, Person p, Plant p2, Seasonality s, StarterType st " +
                     "WHERE sp.PlantId = p2.Id AND sp.VendorId = v.Id AND s.Id = sp.SeasonalityId AND sp.AuthorId = p.Id ORDER BY p2.Description";
 
         using (IDbConnection connection = new SqliteConnection(connectionString))
@@ -219,7 +219,7 @@ public class SeedPacketRepository
         string sqlQuery = "SELECT sp.Id, sp.Description, sp.Instructions, sp.DaysToHarvest, sp.CreationDate, sp.StartDate, sp.EndDate," +
                     "v.Id, v.Code, v.Description, p.Id, p.FirstName, p.LastName, p2.Id, p2.Code, p2.Description, sp.Code, sp.Generations, " +
                     "s.Id, s.Code, s.Description, sp.Species, sp.PacketCount, sp.Exchange, st.Id, st.Code, st.Description " +
-                    "FROM SeedPacket sp, Vendor v, Person p, Plant p2, Seasonality s " +
+                    "FROM SeedPacket sp, Vendor v, Person p, Plant p2, Seasonality s, StarterType st " +
                     "WHERE sp.PlantId = p2.Id AND sp.VendorId = v.Id AND s.Id = sp.SeasonalityId AND sp.AuthorId = p.Id " + 
                     "AND sp.PlantId = @id " +
                     "ORDER BY p2.Description";
@@ -295,7 +295,7 @@ public class SeedPacketRepository
         string sqlQuery = "SELECT sp.Id, sp.Description, sp.Instructions, sp.DaysToHarvest, sp.CreationDate, sp.StartDate, sp.EndDate," +
                     "v.Id, v.Code, v.Description, p.Id, p.FirstName, p.LastName, p2.Id, p2.Code, p2.Description, sp.Code, sp.Generations, " +
                     "s.Id, s.Code, s.Description, sp.Species, sp.PacketCount, sp.Exchange, st.Id, st.Code, st.Description " +
-                    "FROM SeedPacket sp, Vendor v, Person p, Plant p2, Seasonality s " +
+                    "FROM SeedPacket sp, Vendor v, Person p, Plant p2, Seasonality s, StarterType st " +
                     "WHERE sp.PlantId = p2.Id AND sp.VendorId = v.Id AND s.Id = sp.SeasonalityId AND sp.AuthorId = p.Id ORDER BY sp.Description";
 
         using (IDbConnection connection = new SqliteConnection(connectionString))
