@@ -12,7 +12,7 @@ public class HarvestService
 
         if (mode == ServiceMode.Local)
         {
-            //myAnimals = HarvestRepository.GetAll(DataConnection.GetLocalDataSource());
+            harvests = DataAccess.Local.HarvestRepository.GetAll(DataConnection.GetLocalDataSource());
         }
         else
         {
@@ -46,7 +46,7 @@ public class HarvestService
         {
             if (mode == ServiceMode.Local)
             {
-                //HarvestRepository.Update(item);
+                HarvestRepository.Update(item);
             }
             else
             {
@@ -59,7 +59,7 @@ public class HarvestService
             // insert new record
             if (mode == ServiceMode.Local)
             {
-                //HarvestRepository.Insert(item);
+                HarvestRepository.Insert(item);
             }
             else
             {
@@ -79,7 +79,7 @@ public class HarvestService
         {
             if (mode == ServiceMode.Local)
             {
-                //HarvestRepository.Delete(item);
+                HarvestRepository.Delete(item);
             }
             else
             {

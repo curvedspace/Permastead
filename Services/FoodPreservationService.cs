@@ -11,7 +11,7 @@ public class FoodPreservationService
 
         if (mode == ServiceMode.Local)
         {
-            //myAnimals = HarvestRepository.GetAll(DataConnection.GetLocalDataSource());
+            items = DataAccess.Local.PreservationRepository.GetAll(DataConnection.GetLocalDataSource());
         }
         else
         {
@@ -27,7 +27,7 @@ public class FoodPreservationService
 
         if (mode == ServiceMode.Local)
         {
-            //harvests =  PreservationTypeRepository.GetAll(DataConnection.GetLocalDataSource());
+            items = DataAccess.Local.PreservationTypeRepository.GetAll(DataConnection.GetLocalDataSource());
         }
         else
         {
@@ -45,7 +45,7 @@ public class FoodPreservationService
         {
             if (mode == ServiceMode.Local)
             {
-                //HarvestRepository.Update(item);
+                DataAccess.Local.PreservationRepository.Update(DataConnection.GetLocalDataSource(), item);
             }
             else
             {
@@ -58,7 +58,7 @@ public class FoodPreservationService
             // insert new record
             if (mode == ServiceMode.Local)
             {
-                //HarvestRepository.Insert(item);
+                DataAccess.Local.PreservationRepository.Insert(DataConnection.GetLocalDataSource(),item);
             }
             else
             {
@@ -76,27 +76,11 @@ public class FoodPreservationService
 
         if (mode == ServiceMode.Local)
         {
-            // obs = AnimalRepository.GetAllObservationsForAnimal(DataConnection.GetLocalDataSource(), id);
+            obs = DataAccess.Local.PreservationRepository.GetAllObservationsForPreservation(DataConnection.GetLocalDataSource(), id);
         }
         else
         {
             obs = DataAccess.Server.PreservationRepository.GetAllObservationsForPreservation(DataConnection.GetServerConnectionString(), id);
-        }
-
-        return obs;
-    }
-    
-    public static List<FoodPreservationObservation> GetAnimalObservations(ServiceMode mode)
-    {
-        var obs = new List<FoodPreservationObservation>();
-
-        if (mode == ServiceMode.Local)
-        {
-            // obs = AnimalRepository.GetAllAnimalObservations(DataConnection.GetLocalDataSource());
-        }
-        else
-        {
-            obs = DataAccess.Server.PreservationRepository.GetAllPreservationObservations(DataConnection.GetServerConnectionString());
         }
 
         return obs;
@@ -113,8 +97,9 @@ public class FoodPreservationService
                 // insert new record
                 if (mode == ServiceMode.Local)
                 {
-                    // AnimalRepository.InsertAnimalObservation(
-                    //     DataConnection.GetLocalDataSource(), obs);
+                    DataAccess.Local.PreservationRepository.InsertPreservationObservation(
+                        DataConnection.GetLocalDataSource(), 
+                        obs);
                 }
                 else
                 {
