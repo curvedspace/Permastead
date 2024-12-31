@@ -11,7 +11,7 @@ public class MeasurementsService
 
         if (mode == ServiceMode.Local)
         {
-            //myAnimals = HarvestRepository.GetAll(DataConnection.GetLocalDataSource());
+            items = DataAccess.Local.MeasurementUnitRepository.GetAll(DataConnection.GetLocalDataSource());
         }
         else
         {
