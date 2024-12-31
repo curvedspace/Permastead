@@ -730,6 +730,52 @@ namespace DataAccess.Local
 				OnSite INTEGER
 			);
 
+
+			-- PRESERVATION OBSERVATION
+			DROP TABLE IF EXISTS PreservationObservation;
+			CREATE TABLE IF NOT EXISTS PreservationObservation(
+				Id INTEGER PRIMARY KEY,
+				PreservationId INTEGER NOT NULL,
+				Comment TEXT NOT NULL,
+				CreationDate TIMESTAMP,
+				StartDate TIMESTAMP NOT NULL,
+				EndDate TIMESTAMP,
+				CommentTypeId INTEGER,
+				AuthorId INTEGER
+			);
+
+			-- PRESERVATION
+			DROP TABLE IF EXISTS Preservation;
+			CREATE TABLE Preservation (
+				Id INTEGER PRIMARY KEY,
+				Description text NOT NULL,
+				CreationDate timestamp NULL,
+				StartDate timestamp NOT NULL,
+				EndDate timestamp NULL,
+				Rating INTEGER NULL,
+				Measurement INTEGER NULL,
+				MeasurementTypeId INTEGER NULL,
+				AuthorId INTEGER NULL,
+				PreservationTypeId INTEGER NOT NULL,
+				Comment text NULL,
+				HarvestId INTEGER NULL
+			);
+
+			-- HARVEST
+			DROP TABLE IF EXISTS Harvest;
+			CREATE TABLE Harvest (
+				Id INTEGER PRIMARY KEY,
+				Description text NOT NULL,
+				HarvestTypeId INTEGER NOT NULL,
+				HarvestEntityId INTEGER NOT NULL,
+				Measurement INTEGER NOT NULL,
+				MeasurementTypeId INTEGER NOT NULL,
+				Comment text NULL,
+				CreationDate timestamp NULL,
+				HarvestDate timestamp NOT NULL,
+				AuthorId INTEGER NULL
+			);
+
 			--FERMENTATION
 			DROP TABLE IF EXISTS Fermentation;
 			CREATE TABLE IF NOT EXISTS Fermentation(

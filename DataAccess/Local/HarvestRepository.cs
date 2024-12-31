@@ -88,7 +88,7 @@ public class HarvestRepository
     {
         try
         {
-            using (IDbConnection db = new SqliteConnection(DataConnection.GetServerConnectionString()))
+            using (IDbConnection db = new SqliteConnection(DataConnection.GetLocalDataSource()))
             {
                 string sqlQuery = "INSERT INTO Harvest (HarvestTypeId, HarvestEntityId, Description, Measurement, MeasurementTypeId, Comment, AuthorId, CreationDate, HarvestDate) " +
                                   "VALUES(@HarvestTypeId, @HarvestEntityId, @Description, @Measurement, @MeasurementTypeId, @Comment, @AuthorId, CURRENT_DATE, @HarvestDate);";
@@ -106,7 +106,7 @@ public class HarvestRepository
     {
         try
         {
-            using (IDbConnection db = new SqliteConnection(DataConnection.GetServerConnectionString()))
+            using (IDbConnection db = new SqliteConnection(DataConnection.GetLocalDataSource()))
             {
                 string sqlQuery = "UPDATE Harvest SET HarvestTypeId = @HarvestTypeId, HarvestEntityId = @HarvestEntityId, Description = @Description, HarvestDate = @HarvestDate, Measurement = @Measurement, " +
                                   "MeasurementTypeId = @MeasurementTypeId, Comment = @Comment, AuthorId = @AuthorId " + 
@@ -127,7 +127,7 @@ public class HarvestRepository
         {
             if (item != null)
             {
-                using (IDbConnection db = new SqliteConnection(DataConnection.GetServerConnectionString()))
+                using (IDbConnection db = new SqliteConnection(DataConnection.GetLocalDataSource()))
                 {
                     string sqlQuery = "DELETE FROM Harvest WHERE Id = @Id;";
         
