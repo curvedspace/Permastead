@@ -12,7 +12,7 @@ public class AnimalType : CodeTable
         this.CreationDate = DateTime.Now;
         this.StartDate = DateTime.Today;
         this.EndDate = DateTime.MaxValue;
-        this.Author = Person.Anonymous();
+        this.Author = Person.Gaia();
     }
 
     public AnimalType(long id) : base()
