@@ -31,7 +31,7 @@ public class StarterTypeRepository
             using (IDbConnection db = new SqliteConnection(DataConnection.GetLocalDataSource()))
             {
                 string sqlQuery = "INSERT INTO StarterType (Code, Description, CreationDate, StartDate, EndDate) " +
-                                  "VALUES(@Description, CURRENT_DATE, @StartDate, @EndDate);";
+                                  "VALUES(@Code, @Description, CURRENT_DATE, @StartDate, @EndDate);";
 
                 return (db.Execute(sqlQuery, st) == 1);
             }

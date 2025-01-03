@@ -32,7 +32,7 @@ public class PreservationTypeRepository
             using (IDbConnection db = new SqliteConnection(DataConnection.GetLocalDataSource()))
             {
                 string sqlQuery = "INSERT INTO PreservationType (Code, Description, CreationDate, StartDate, EndDate, AuthorId) " +
-                                  "VALUES(@Description, CURRENT_DATE, @StartDate, @EndDate, @AuthorId);";
+                                  "VALUES(@Code, @Description, CURRENT_DATE, @StartDate, @EndDate, @AuthorId);";
 
                 return (db.Execute(sqlQuery, iType) == 1);
             }
