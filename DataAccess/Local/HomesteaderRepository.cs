@@ -1400,53 +1400,53 @@ namespace DataAccess.Local
             
             #region StarterTypes
             
-            var st = new StarterType() { Description = "Seeds" };
+            var st = new StarterType() { Code = "SEED", Description = "Seeds" };
             StarterTypeRepository.Insert(st);
             
-            st = new StarterType() { Description = "Bare Root" };
+            st = new StarterType() { Code = "BROOT", Description = "Bare Root" };
             StarterTypeRepository.Insert(st);
             
-            st = new StarterType() { Description = "Cutting" };
+            st = new StarterType() { Code = "CUT", Description = "Cutting" };
             StarterTypeRepository.Insert(st);
             
-            st = new StarterType() { Description = "Purchased Plant" };
+            st = new StarterType() { Code = "PURCHPLNT", Description = "Purchased Plant" };
             StarterTypeRepository.Insert(st);
             
-            st = new StarterType() { Description = "Sapling" };
+            st = new StarterType() { Code = "SAPL", Description = "Sapling" };
             StarterTypeRepository.Insert(st);
             
             #endregion
             
             #region AnimalTypes
             
-            var animalType = new AnimalType() { Description = "Cat" };
+            var animalType = new AnimalType() { Code = "CAT", Description = "Cat" };
             AnimalTypeRepsoitory.Insert(animalType);
             
-            animalType = new AnimalType() { Description = "Duck" };
+            animalType = new AnimalType() { Code = "DUCK", Description = "Duck" };
             AnimalTypeRepsoitory.Insert(animalType);
             
-            animalType = new AnimalType() { Description = "Dog" };
+            animalType = new AnimalType() { Code = "DOG", Description = "Dog" };
             AnimalTypeRepsoitory.Insert(animalType);
             
-            animalType = new AnimalType() { Description = "Cow" };
+            animalType = new AnimalType() { Code = "COW", Description = "Cow" };
             AnimalTypeRepsoitory.Insert(animalType);
             
-            animalType = new AnimalType() { Description = "Goose" };
+            animalType = new AnimalType() { Code = "GOOSE", Description = "Goose" };
             AnimalTypeRepsoitory.Insert(animalType);
             
-            animalType = new AnimalType() { Description = "Chicken" };
+            animalType = new AnimalType() { Code = "CHICK", Description = "Chicken" };
             AnimalTypeRepsoitory.Insert(animalType);
             
-            animalType = new AnimalType() { Description = "Goat" };
+            animalType = new AnimalType() { Code = "GOAT", Description = "Goat" };
             AnimalTypeRepsoitory.Insert(animalType);
             
-            animalType = new AnimalType() { Description = "Fish" };
+            animalType = new AnimalType() { Code = "FISH", Description = "Fish" };
             AnimalTypeRepsoitory.Insert(animalType);
             
-            animalType = new AnimalType() { Description = "Pig" };
+            animalType = new AnimalType() { Code = "PIG", Description = "Pig" };
             AnimalTypeRepsoitory.Insert(animalType);
             
-            animalType = new AnimalType() { Description = "Rabbit" };
+            animalType = new AnimalType() { Code = "RABBIT", Description = "Rabbit" };
             AnimalTypeRepsoitory.Insert(animalType);
             
             #endregion
