@@ -30,7 +30,7 @@ public class AnimalTypeRepsoitory
         {
             using (IDbConnection db = new SqliteConnection(DataConnection.GetLocalDataSource()))
             {
-                string sqlQuery = "INSERT INTO AnimalType (Description, CreationDate, StartDate, EndDate) " +
+                string sqlQuery = "INSERT INTO AnimalType (Code, Description, CreationDate, StartDate, EndDate) " +
                                   "VALUES(@Description, CURRENT_DATE, @StartDate, @EndDate);";
 
                 return (db.Execute(sqlQuery, at) == 1);

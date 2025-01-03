@@ -148,6 +148,18 @@ namespace DataAccess.Local
 				EndDate TIMESTAMP
 			);
 
+			-- PRESERVATIONTYPE
+			DROP TABLE IF EXISTS PreservationType;
+			CREATE TABLE IF NOT EXISTS PreservationType(
+				Id INTEGER PRIMARY KEY,
+				Code VARCHAR (50) UNIQUE NOT NULL,
+				Description TEXT NOT NULL,
+				AuthorId INTEGER,
+				CreationDate TIMESTAMP,
+				StartDate TIMESTAMP NOT NULL,
+				EndDate TIMESTAMP
+			);
+
 			-- FREQUENCY
 			DROP TABLE IF EXISTS Frequency;
 			CREATE TABLE IF NOT EXISTS Frequency(
