@@ -55,7 +55,7 @@ public partial class PlantsViewModel : ViewModelBase
         }
         
         PlantsCount = _plants.Count;
-        GetMetaData();
+        if (CurrentPlant != null) GetMetaData();
 
     }
 
