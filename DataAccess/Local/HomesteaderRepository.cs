@@ -152,7 +152,6 @@ namespace DataAccess.Local
 			DROP TABLE IF EXISTS PreservationType;
 			CREATE TABLE IF NOT EXISTS PreservationType(
 				Id INTEGER PRIMARY KEY,
-				Code VARCHAR (50) UNIQUE NOT NULL,
 				Description TEXT NOT NULL,
 				AuthorId INTEGER,
 				CreationDate TIMESTAMP,
@@ -1460,6 +1459,26 @@ namespace DataAccess.Local
             
             animalType = new AnimalType() { Code = "RABBIT", Description = "Rabbit" };
             AnimalTypeRepsoitory.Insert(animalType);
+            
+            #endregion
+            
+            #region PreservationTypes
+            
+            var pType = new FoodPreservationType() { Description = "Canning" };
+            PreservationTypeRepository.Insert(pType);
+            
+            pType = new FoodPreservationType() { Description = "Fermentation" };
+            PreservationTypeRepository.Insert(pType);
+            
+            pType = new FoodPreservationType() { Description = "Pickling" };
+            PreservationTypeRepository.Insert(pType);
+            
+            pType = new FoodPreservationType() { Description = "Freezing" };
+            PreservationTypeRepository.Insert(pType);
+            
+            pType = new FoodPreservationType() { Description = "Dehydration" };
+            PreservationTypeRepository.Insert(pType);
+            
             
             #endregion
             
