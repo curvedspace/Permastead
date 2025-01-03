@@ -23,4 +23,22 @@ public class AnimalTypeRepsoitory
             return new List<AnimalType>();
         }
     }
+    
+    public static bool Insert(AnimalType at)
+    {
+        try
+        {
+            using (IDbConnection db = new SqliteConnection(DataConnection.GetLocalDataSource()))
+            {
+                string sqlQuery = "INSERT INTO AnimalType (Description, CreationDate, StartDate, EndDate) " +
+                                  "VALUES(@Description, CURRENT_DATE, @StartDate, @EndDate);";
+
+                return (db.Execute(sqlQuery, at) == 1);
+            }
+        }
+        catch
+        {
+            return false;
+        }
+    }
 }

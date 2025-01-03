@@ -23,4 +23,22 @@ public class StarterTypeRepository
             return new List<StarterType>();
         }
     }
+    
+    public static bool Insert(StarterType st)
+    {
+        try
+        {
+            using (IDbConnection db = new SqliteConnection(DataConnection.GetLocalDataSource()))
+            {
+                string sqlQuery = "INSERT INTO StarterType (Description, CreationDate, StartDate, EndDate) " +
+                                  "VALUES(@Description, CURRENT_DATE, @StartDate, @EndDate);";
+
+                return (db.Execute(sqlQuery, st) == 1);
+            }
+        }
+        catch
+        {
+            return false;
+        }
+    }
 }

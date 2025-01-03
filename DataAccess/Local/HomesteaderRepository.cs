@@ -1398,6 +1398,59 @@ namespace DataAccess.Local
             
             #endregion
             
+            #region StarterTypes
+            
+            var st = new StarterType() { Description = "Seeds" };
+            StarterTypeRepository.Insert(st);
+            
+            st = new StarterType() { Description = "Bare Root" };
+            StarterTypeRepository.Insert(st);
+            
+            st = new StarterType() { Description = "Cutting" };
+            StarterTypeRepository.Insert(st);
+            
+            st = new StarterType() { Description = "Purchased Plant" };
+            StarterTypeRepository.Insert(st);
+            
+            st = new StarterType() { Description = "Sapling" };
+            StarterTypeRepository.Insert(st);
+            
+            #endregion
+            
+            #region AnimalTypes
+            
+            var animalType = new AnimalType() { Description = "Cat" };
+            AnimalTypeRepsoitory.Insert(animalType);
+            
+            animalType = new AnimalType() { Description = "Duck" };
+            AnimalTypeRepsoitory.Insert(animalType);
+            
+            animalType = new AnimalType() { Description = "Dog" };
+            AnimalTypeRepsoitory.Insert(animalType);
+            
+            animalType = new AnimalType() { Description = "Cow" };
+            AnimalTypeRepsoitory.Insert(animalType);
+            
+            animalType = new AnimalType() { Description = "Goose" };
+            AnimalTypeRepsoitory.Insert(animalType);
+            
+            animalType = new AnimalType() { Description = "Chicken" };
+            AnimalTypeRepsoitory.Insert(animalType);
+            
+            animalType = new AnimalType() { Description = "Goat" };
+            AnimalTypeRepsoitory.Insert(animalType);
+            
+            animalType = new AnimalType() { Description = "Fish" };
+            AnimalTypeRepsoitory.Insert(animalType);
+            
+            animalType = new AnimalType() { Description = "Pig" };
+            AnimalTypeRepsoitory.Insert(animalType);
+            
+            animalType = new AnimalType() { Description = "Rabbit" };
+            AnimalTypeRepsoitory.Insert(animalType);
+            
+            #endregion
+            
             #region SeedPacket
             
             var sp = new SeedPacket() { Description = "Not Available", Instructions = "Not available", Author = Person.Gaia(), Vendor = new Vendor(1), Seasonality = new Seasonality(1),  Plant = new Plant(1)};
