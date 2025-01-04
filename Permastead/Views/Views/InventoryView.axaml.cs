@@ -113,4 +113,31 @@ public partial class InventoryView : UserControl
                 
         win.Show();
     }
+
+    private void SearchBox_OnKeyDown(object? sender, KeyEventArgs e)
+    {
+        // if the key is return, do a search and filter the grid data
+        if (e.Key == Key.Return)
+        {
+            
+            var vm = (InventoryViewModel)this.DataContext;
+            var textValue = vm.SearchText;
+
+            if (vm != null)
+            {
+                vm.RefreshData(textValue);
+            }
+        }
+
+        if (e.Key == Key.Escape)
+        {
+            var vm = (InventoryViewModel)this.DataContext;
+
+            if (vm != null)
+            {
+                vm.SearchText = "";
+                vm.RefreshData(vm.SearchText);
+            }
+        }
+    }
 }

@@ -37,6 +37,9 @@ public partial class InventoryViewModel: ViewModelBase
     [ObservableProperty] 
     private bool _showObservations;
     
+    [ObservableProperty]
+    private string _searchText = "";
+    
     [ObservableProperty] private InventoryObservation _currentObservation = new InventoryObservation();
     
     [ObservableProperty]
@@ -96,6 +99,13 @@ public partial class InventoryViewModel: ViewModelBase
         
     }
     
+    [RelayCommand]
+    private void ClearSearch()
+    {
+        SearchText = "";
+        RefreshData(SearchText);
+    }
+    
     public InventoryViewModel()
     {
         try
@@ -122,7 +132,7 @@ public partial class InventoryViewModel: ViewModelBase
     [RelayCommand]
     private void RefreshInventory()
     {
-        this.RefreshData();
+        this.RefreshData(SearchText);
     }
     
     [RelayCommand]
@@ -151,7 +161,7 @@ public partial class InventoryViewModel: ViewModelBase
         
     }
 
-    public void RefreshData()
+    public void RefreshData(string filterText = "")
     {
         _inventory.Clear();
 
@@ -159,20 +169,42 @@ public partial class InventoryViewModel: ViewModelBase
         _inventoryTypes = new ObservableCollection<InventoryType>(Services.InventoryTypeService.GetAllInventoryTypes(AppSession.ServiceMode));
         
         var invList = Services.InventoryService.GetAllInventory(AppSession.ServiceMode);
+        var caseAdjustedFilterText = filterText.Trim().ToLowerInvariant();
 
         foreach (var inv in invList)
         {
             inv.InventoryGroup = _inventoryGroups.First(x => x.Id == inv.InventoryGroup.Id);
             inv.InventoryType = _inventoryTypes.First(x => x.Id == inv.InventoryType.Id);
             inv.Author = _people.First(x => x.Id == inv.Author.Id);
-
-            if (_forSaleOnly)
+            
+            if (string.IsNullOrEmpty(caseAdjustedFilterText))
             {
-                if (inv.ForSale) _inventory.Add(inv);
+                if (_forSaleOnly)
+                {
+                    if (inv.ForSale) _inventory.Add(inv);
+                }
+                else
+                {
+                    _inventory.Add(inv);
+                }
             }
             else
             {
-                _inventory.Add(inv);
+                if (inv.Description.ToLowerInvariant().Contains(caseAdjustedFilterText) ||
+                    inv.InventoryGroup.Description!.ToLowerInvariant().Contains(caseAdjustedFilterText) ||
+                    inv.Notes.ToLowerInvariant().Contains(caseAdjustedFilterText) ||
+                    inv.Brand.ToLowerInvariant().Contains(caseAdjustedFilterText) ||
+                    inv.InventoryType.Description.ToLowerInvariant().Contains(caseAdjustedFilterText))
+                {
+                    if (_forSaleOnly)
+                    {
+                        if (inv.ForSale) _inventory.Add(inv);
+                    }
+                    else
+                    {
+                        _inventory.Add(inv);
+                    }
+                }
             }
         }
         
