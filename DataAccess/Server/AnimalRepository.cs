@@ -112,6 +112,7 @@ public class AnimalRepository
             return false;
         }
     }
+    
     public static bool InsertAnimalObservation(string connectionString, AnimalObservation obs)
     {
         var rtnValue = false;

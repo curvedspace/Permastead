@@ -19,7 +19,7 @@ public class AnimalRepository
                       "p.FirstName AuthorFirstName, p.LastName AuthorLastName, " +
                       "a.nickname, a.breed, a.birthday, " + 
                       "a.StartDate, a.EndDate, a.comment, a.ispet " +
-                      "FROM Animal a, Animalype at, Person p  " +
+                      "FROM Animal a, AnimalType at, Person p  " +
                       "WHERE a.AnimalTypeId = at.Id " +
                       "AND a.AuthorId = p.Id " +
                       "ORDER BY a.StartDate DESC";
@@ -85,7 +85,7 @@ public class AnimalRepository
             using (var command = connection.CreateCommand())
             {
                 command.CommandText = sql;
-                command.Parameters.AddWithValue("plantingId", obs.AnimalId);
+                command.Parameters.AddWithValue("$animalId", obs.AnimalId);
                 command.Parameters.AddWithValue("$comment", obs.Comment);
                 command.Parameters.AddWithValue("$commentTypeId", obs.CommentType!.Id);
                 command.Parameters.AddWithValue("$authorId", obs.Author!.Id);
@@ -217,8 +217,8 @@ public class AnimalRepository
         {
             using (IDbConnection db = new SqliteConnection(DataConnection.GetLocalDataSource()))
             {
-                string sqlQuery = "INSERT INTO Animal (AnimalTypeId, Nickname, Name, Breed, AuthorId, Comment, Birthday, StartDate, EndDate, IsPet) " +
-                                                    "VALUES(@AnimalTypeId, @Nickname, @Name, @Breed, @AuthorId, @Comment, @Birthday, @StartDate, @EndDate, @IsPet);";
+                string sqlQuery = "INSERT INTO Animal (AnimalTypeId, NickName, Name, Breed, AuthorId, Comment, Birthday, StartDate, EndDate, IsPet) " +
+                                                    "VALUES(@AnimalTypeId, @NickName, @Name, @Breed, @AuthorId, @Comment, @Birthday, @StartDate, @EndDate, @IsPet);";
 
                 return (db.Execute(sqlQuery, animal) == 1);
             }
@@ -238,7 +238,7 @@ public class AnimalRepository
             {
                 using (IDbConnection db = new SqliteConnection(DataConnection.GetLocalDataSource()))
                 {
-                    string sqlQuery = "UPDATE Animal SET AnimalTypeId = @AnimalTypeId, Nickname = @Nickname, Name = @Name, Breed = @Breed, Birthday = @Birthday, " +
+                    string sqlQuery = "UPDATE Animal SET AnimalTypeId = @AnimalTypeId, Nickname = @NickName, Name = @Name, Breed = @Breed, Birthday = @Birthday, " +
                                       "StartDate = @StartDate, Comment = @Comment, AuthorId = @AuthorId, EndDate = @EndDate, IsPet = @IsPet " + 
                                       "WHERE Id = @Id;";
 

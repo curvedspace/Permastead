@@ -11,6 +11,7 @@ public class Animal
     public string? Breed { get; set; }
     
     public AnimalType Type { get; set; }
+    
     public long AnimalTypeId => this.Type.Id;
 
     public DateTime Birthday { get; set; }
