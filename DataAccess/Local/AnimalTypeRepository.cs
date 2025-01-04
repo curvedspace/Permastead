@@ -5,7 +5,7 @@ using Models;
 
 namespace DataAccess.Local;
 
-public class AnimalTypeRepsoitory
+public class AnimalTypeRepository
 {
     public static List<AnimalType> GetAll(string conn)
     {

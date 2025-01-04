@@ -1431,34 +1431,34 @@ namespace DataAccess.Local
             #region AnimalTypes
             
             var animalType = new AnimalType() { Code = "CAT", Description = "Cat" };
-            AnimalTypeRepsoitory.Insert(animalType);
+            AnimalTypeRepository.Insert(animalType);
             
             animalType = new AnimalType() { Code = "DUCK", Description = "Duck" };
-            AnimalTypeRepsoitory.Insert(animalType);
+            AnimalTypeRepository.Insert(animalType);
             
             animalType = new AnimalType() { Code = "DOG", Description = "Dog" };
-            AnimalTypeRepsoitory.Insert(animalType);
+            AnimalTypeRepository.Insert(animalType);
             
             animalType = new AnimalType() { Code = "COW", Description = "Cow" };
-            AnimalTypeRepsoitory.Insert(animalType);
+            AnimalTypeRepository.Insert(animalType);
             
             animalType = new AnimalType() { Code = "GOOSE", Description = "Goose" };
-            AnimalTypeRepsoitory.Insert(animalType);
+            AnimalTypeRepository.Insert(animalType);
             
             animalType = new AnimalType() { Code = "CHICK", Description = "Chicken" };
-            AnimalTypeRepsoitory.Insert(animalType);
+            AnimalTypeRepository.Insert(animalType);
             
             animalType = new AnimalType() { Code = "GOAT", Description = "Goat" };
-            AnimalTypeRepsoitory.Insert(animalType);
+            AnimalTypeRepository.Insert(animalType);
             
             animalType = new AnimalType() { Code = "FISH", Description = "Fish" };
-            AnimalTypeRepsoitory.Insert(animalType);
+            AnimalTypeRepository.Insert(animalType);
             
             animalType = new AnimalType() { Code = "PIG", Description = "Pig" };
-            AnimalTypeRepsoitory.Insert(animalType);
+            AnimalTypeRepository.Insert(animalType);
             
             animalType = new AnimalType() { Code = "RABBIT", Description = "Rabbit" };
-            AnimalTypeRepsoitory.Insert(animalType);
+            AnimalTypeRepository.Insert(animalType);
             
             #endregion
             
@@ -1479,6 +1479,22 @@ namespace DataAccess.Local
             pType = new FoodPreservationType() { Description = "Dehydration" };
             PreservationTypeRepository.Insert(pType);
             
+            
+            #endregion
+            
+            #region HarvestTypes
+            
+            var harvestType = new HarvestType() { Description = "Plant" };
+            HarvestTypeRepository.Insert(harvestType);
+            
+            harvestType = new HarvestType() { Description = "Animal" };
+            HarvestTypeRepository.Insert(harvestType);
+            
+            harvestType = new HarvestType() { Description = "Materials" };
+            HarvestTypeRepository.Insert(harvestType);
+            
+            harvestType = new HarvestType() { Description = "Other" };
+            HarvestTypeRepository.Insert(harvestType);
             
             #endregion
             

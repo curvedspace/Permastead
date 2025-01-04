@@ -146,7 +146,7 @@ public class SeedPacketRepository
                     "v.Id, v.Code, v.Description, p.Id, p.FirstName, p.LastName, p2.Id, p2.Code, p2.Description, sp.Code, sp.Generations, " +
                     "s.Id, s.Code, s.Description, sp.Species, sp.PacketCount, sp.Exchange, st.Id, st.Code, st.Description " +
                     "FROM SeedPacket sp, Vendor v, Person p, Plant p2, Seasonality s, StarterType st " +
-                    "WHERE sp.PlantId = p2.Id AND sp.VendorId = v.Id AND s.Id = sp.SeasonalityId AND sp.AuthorId = p.Id ORDER BY p2.Description";
+                    "WHERE sp.PlantId = p2.Id AND sp.VendorId = v.Id AND s.Id = sp.SeasonalityId AND sp.StarterTypeId = st.Id AND sp.AuthorId = p.Id ORDER BY p2.Description";
 
         using (IDbConnection connection = new SqliteConnection(connectionString))
         {

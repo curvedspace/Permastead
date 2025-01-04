@@ -1,4 +1,5 @@
 using System.Data;
+using Dapper;
 using Microsoft.Data.Sqlite;
 using Models;
 
@@ -207,6 +208,51 @@ public class AnimalRepository
 
                 return myObs;
             }
+        }
+    }
+    
+    public static bool Insert(Animal animal)
+    {
+        try
+        {
+            using (IDbConnection db = new SqliteConnection(DataConnection.GetLocalDataSource()))
+            {
+                string sqlQuery = "INSERT INTO Animal (AnimalTypeId, Nickname, Name, Breed, AuthorId, Comment, Birthday, StartDate, EndDate, IsPet) " +
+                                                    "VALUES(@AnimalTypeId, @Nickname, @Name, @Breed, @AuthorId, @Comment, @Birthday, @StartDate, @EndDate, @IsPet);";
+
+                return (db.Execute(sqlQuery, animal) == 1);
+            }
+        }
+        catch
+        {
+            return false;
+        }
+    }
+    
+    public static bool Update(Animal animal)
+    {
+        try
+        {
+            
+            if (animal != null)
+            {
+                using (IDbConnection db = new SqliteConnection(DataConnection.GetLocalDataSource()))
+                {
+                    string sqlQuery = "UPDATE Animal SET AnimalTypeId = @AnimalTypeId, Nickname = @Nickname, Name = @Name, Breed = @Breed, Birthday = @Birthday, " +
+                                      "StartDate = @StartDate, Comment = @Comment, AuthorId = @AuthorId, EndDate = @EndDate, IsPet = @IsPet " + 
+                                      "WHERE Id = @Id;";
+
+                    return (db.Execute(sqlQuery, animal) == 1);
+                }
+            }
+            else
+            {
+                return false;
+            }
+        }
+        catch
+        {
+            return false;
         }
     }
 }

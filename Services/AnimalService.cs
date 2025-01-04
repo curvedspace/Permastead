@@ -2,6 +2,7 @@ using DataAccess;
 using Models;
 using DataAccess.Server;
 using AnimalRepository = DataAccess.Local.AnimalRepository;
+using AnimalTypeRepository = DataAccess.Local.AnimalTypeRepository;
 
 namespace Services;
 
@@ -29,7 +30,7 @@ public class AnimalService
 
         if (mode == ServiceMode.Local)
         {
-            types = AnimalTypeRepository.GetAll(DataConnection.GetLocalDataSource());
+            types = DataAccess.Local.AnimalTypeRepository.GetAll(DataConnection.GetLocalDataSource());
         }
         else
         {
@@ -121,7 +122,7 @@ public class AnimalService
         {
             if (mode == ServiceMode.Local)
             {
-                //HarvestRepository.Update(item);
+                AnimalRepository.Update(item);
             }
             else
             {
@@ -134,7 +135,7 @@ public class AnimalService
             // insert new record
             if (mode == ServiceMode.Local)
             {
-                //HarvestRepository.Insert(item);
+                AnimalRepository.Insert(item);
             }
             else
             {
