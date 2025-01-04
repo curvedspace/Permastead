@@ -1016,6 +1016,9 @@ namespace DataAccess.Local
 
             var mu = new MeasurementUnit { Code = "M", Description = "Metre(s)", Author = new Person(1) };
             MeasurementUnitRepository.Insert(mu);
+            
+            mu = new MeasurementUnit { Code = "item", Description = "Item(s)", Author = new Person(1) };
+            MeasurementUnitRepository.Insert(mu);
 
             mu = new MeasurementUnit { Code = "cm", Description = "Centimetre(s)", Author = new Person(1) };
             MeasurementUnitRepository.Insert(mu);
