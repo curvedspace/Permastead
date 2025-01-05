@@ -592,6 +592,7 @@ namespace DataAccess.Local
 			);
 
 			-- ANIMAL TYPE
+			DROP TABLE IF EXISTS AnimalType;
 			CREATE TABLE AnimalType (
 				Id INTEGER PRIMARY KEY,
 				Code varchar(50) NOT NULL,
