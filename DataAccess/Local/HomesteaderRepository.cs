@@ -1153,7 +1153,7 @@ namespace DataAccess.Local
             var p = new Plant { Author = new Person(1), Code = "UNK", Description = "Unknown" };
             PlantRepository.Insert(p);
 
-            p = new Plant { Author = new Person(1), Code = "PEPPER", Description = "Pepper" };
+            p = new Plant { Author = new Person(1), Code = "PEPPER", Description = "Pepper", Family = "Solanaceae", Comment = "The terms bell pepper (US, Canada, Philippines), pepper or sweet pepper (UK, Ireland, Canada, South Africa, Zimbabwe), and capsicum (Australia, Bangladesh, India, Malaysia, New Zealand, Pakistan and Sri Lanka) are often used for any of the large bell-shaped peppers, regardless of their color. The fruit is simply referred to as a \"pepper\", or additionally by color (\"green pepper\" or red, yellow, orange, purple, brown, black)."};
             PlantRepository.Insert(p);
 
             p = new Plant { Author = new Person(1), Code = "POTATO", Description = "Potato" };
