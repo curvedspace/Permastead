@@ -136,7 +136,7 @@ namespace DataAccess.Local
 				EndDate TIMESTAMP
 			);
 
-			-- STARTERTYPE
+			-- STARTER TYPE
 			DROP TABLE IF EXISTS StarterType;
 			CREATE TABLE IF NOT EXISTS StarterType(
 				Id INTEGER PRIMARY KEY,
@@ -148,7 +148,7 @@ namespace DataAccess.Local
 				EndDate TIMESTAMP
 			);
 
-			-- PRESERVATIONTYPE
+			-- PRESERVATION TYPE
 			DROP TABLE IF EXISTS PreservationType;
 			CREATE TABLE IF NOT EXISTS PreservationType(
 				Id INTEGER PRIMARY KEY,
@@ -484,7 +484,7 @@ namespace DataAccess.Local
 			);
 
 
-			-- MEASUREMENTTYPE
+			-- MEASUREMENT TYPE
 			DROP TABLE IF EXISTS MeasurementType;
 			CREATE TABLE IF NOT EXISTS MeasurementType(
 				Id INTEGER PRIMARY KEY,
@@ -496,7 +496,7 @@ namespace DataAccess.Local
 				AuthorId integer
 			);
 
-			-- COMMENTTYPE
+			-- COMMENT TYPE
 			DROP TABLE IF EXISTS CommentType;
 			CREATE TABLE IF NOT EXISTS CommentType(
 				Id INTEGER PRIMARY KEY,
@@ -508,7 +508,7 @@ namespace DataAccess.Local
 				AuthorId integer
 			);
 
-			-- INVENTORYTYPE
+			-- INVENTORY TYPE
 			DROP TABLE IF EXISTS InventoryType;
 			CREATE TABLE IF NOT EXISTS InventoryType(
 				Id INTEGER PRIMARY KEY,
@@ -519,7 +519,7 @@ namespace DataAccess.Local
 				AuthorId INTEGER
 			);
 
-			-- HARVESTTYPE
+			-- HARVEST TYPE
 			DROP TABLE IF EXISTS HarvestType;
 			CREATE TABLE IF NOT EXISTS HarvestType(
 				Id INTEGER PRIMARY KEY,
@@ -530,7 +530,7 @@ namespace DataAccess.Local
 				AuthorId INTEGER
 			);
 
-			-- INVENTORYGROUP
+			-- INVENTORY GROUP
 			DROP TABLE IF EXISTS InventoryGroup;
 			CREATE TABLE IF NOT EXISTS InventoryGroup(
 				Id INTEGER PRIMARY KEY,
@@ -738,8 +738,7 @@ namespace DataAccess.Local
 				StartDate TIMESTAMP NOT NULL,
 				EndDate TIMESTAMP,
 				CommentTypeId INTEGER,
-				AuthorId INTEGER,
-				OnSite INTEGER
+				AuthorId INTEGER
 			);
 
 

@@ -968,6 +968,40 @@ public static class DbMigrationService
         
         // now migrate the tables
         
+        // AnimalType
+        try
+        {
+            using (IDbConnection connection = new NpgsqlConnection(serverConnectionString))
+            {
+                var sql = "SELECT * FROM AnimalType;";
+                connection.Open();
+
+                using (IDbCommand command = connection.CreateCommand())
+                {
+                    command.CommandText = sql;
+                    var dr = command.ExecuteReader();
+
+                    while (dr.Read())
+                    {
+                        var pgSql = @"INSERT INTO AnimalType VALUES(" + dr[0].ToString() + "," +
+                                    "'" + dr[1].ToString() + "'," +
+                                    "'" + dr[2].ToString() + "'," +
+                                    "'" + dr[3].ToString() + "'," +
+                                    ConvertToDateTime(dr,4) + "," +
+                                    ConvertToDateTime(dr,5) + "," +
+                                    ConvertToDateTime(dr,6) +
+                                    ")";
+                        Console.WriteLine(pgSql);
+                        RunLocalSql(localConnectionString, pgSql);
+                    }
+                }
+            }
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+        }
+        
         // CommentType
         try
         {
@@ -1026,7 +1060,7 @@ public static class DbMigrationService
                                     "'" + dr[6].ToString() + "'," +
                                     ConvertToDateTime(dr,7) + "," +
                                     dr[8].ToString() + "," +
-                                    (dr[9].ToString()=="1") + "," + //boolean conversion
+                                    ConvertToBoolean(dr,9) + "," +
                                     dr[10].ToString() + "," +
                                     "'" + dr[11].ToString() + "'," +
                                     "'" + dr[12].ToString() + "'" +
@@ -1374,13 +1408,14 @@ public static class DbMigrationService
                         var pgSql = @"INSERT INTO Person VALUES(" + dr[0].ToString() + "," +
                                     ConvertToText(dr,1) + "," +
                                     ConvertToText(dr,2) + "," +
-                                    ConvertToText(dr,3) + "," +
-                                    ConvertToText(dr,4) + "," +
+                                    ConvertToDateTime(dr,3) + "," +
+                                    ConvertToDateTime(dr,4) + "," +
                                     ConvertToDateTime(dr,5) + "," +
                                     ConvertToText(dr,6) + "," +
                                     ConvertToText(dr,7) + "," +
                                     ConvertToText(dr,8) + "," +
-                                    ConvertToText(dr,9) + 
+                                    ConvertToText(dr,9) + "," +
+                                    (dr[10].ToString()=="1") + //boolean conversion
                                     ")";
                         Console.WriteLine(pgSql);
                         RunLocalSql(localConnectionString, pgSql);
@@ -1574,6 +1609,39 @@ public static class DbMigrationService
             Console.WriteLine(e);
         }
         
+        // Quote
+        try
+        {
+            using (IDbConnection connection = new NpgsqlConnection(serverConnectionString))
+            {
+                var sql = "SELECT * FROM Quote;";
+                connection.Open();
+
+                using (IDbCommand command = connection.CreateCommand())
+                {
+                    command.CommandText = sql;
+                    var dr = command.ExecuteReader();
+
+                    while (dr.Read())
+                    {
+                        var pgSql = @"INSERT INTO Quote VALUES(" + dr[0].ToString() + "," +
+                                    ConvertToText(dr,1) + "," +
+                                    ConvertToText(dr,2) + "," +
+                                    ConvertToDateTime(dr,3) + "," +
+                                    ConvertToDateTime(dr,4) + "," +
+                                    ConvertToDateTime(dr,5) +
+                                    ")";
+                        Console.WriteLine(pgSql);
+                        RunLocalSql(localConnectionString, pgSql);
+                    }
+                }
+            }
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+        }
+        
         // Seasonality
         try
         {
@@ -1594,7 +1662,8 @@ public static class DbMigrationService
                                     ConvertToText(dr,2) + "," +
                                     ConvertToText(dr,3) + "," +
                                     ConvertToText(dr,4) + "," +
-                                    ConvertToDateTime(dr,5) +
+                                    ConvertToDateTime(dr,5) + "," +
+                                    ConvertToNumeric(dr,6) + 
                                     ")";
                         Console.WriteLine(pgSql);
                         RunLocalSql(localConnectionString, pgSql);
@@ -1635,7 +1704,10 @@ public static class DbMigrationService
                                     ConvertToText(dr,10) + "," +
                                     ConvertToNumeric(dr,11) + "," +
                                     ConvertToNumeric(dr,12) + "," +
-                                    ConvertToText(dr,13) + 
+                                    ConvertToText(dr,13) + "," +
+                                    ConvertToNumeric(dr,14) + "," +
+                                    (dr[15].ToString()=="1") + "," + //boolean conversion
+                                    ConvertToNumeric(dr,16) +
                                     ")";
                         Console.WriteLine(pgSql);
                         RunLocalSql(localConnectionString, pgSql);
@@ -1900,21 +1972,46 @@ public static class DbMigrationService
     
     private static string ConvertToNumeric(IDataReader dr, int index)
     {
-        // escape out any single quotes in the text
-        return dr[index].ToString();
+        // return null if blank
+        if (!string.IsNullOrEmpty(dr[index].ToString()))
+        {
+            return dr[index].ToString();
+        }
+        else
+        {
+            return "null";
+        }
+       
     }
     
     private static bool ConvertToBoolean(IDataReader dr, int index)
     {
-        // escape out any single quotes in the text
-        return (dr[index].ToString() == "1");
+        // return false if string is blank or null
+        if (string.IsNullOrEmpty(dr[index].ToString()))
+        {
+            return false;
+        }
+        else
+        {
+            return (dr[index].ToString() == "1");
+        }
+        
     }
     
     private static string ConvertToDateTime(IDataReader dr, int index)
     {
         // make sure we don't go over 9999 as the year
-        var myDateTime = Convert.ToDateTime(dr[index].ToString());
+        DateTime myDateTime;
 
+        if (!string.IsNullOrEmpty(dr[index].ToString()))
+        {
+            myDateTime = Convert.ToDateTime(dr[index].ToString());
+        }
+        else
+        {
+            return "null";
+        }
+        
         if (myDateTime.Year > 9999)
         {
             myDateTime = new DateTime(9999, myDateTime.Month, myDateTime.Day);
