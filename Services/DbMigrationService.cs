@@ -968,6 +968,79 @@ public static class DbMigrationService
         
         // now migrate the tables
         
+        // Animal
+        try
+        {
+            using (IDbConnection connection = new NpgsqlConnection(serverConnectionString))
+            {
+                var sql = "SELECT * FROM Animal;";
+                connection.Open();
+
+                using (IDbCommand command = connection.CreateCommand())
+                {
+                    command.CommandText = sql;
+                    var dr = command.ExecuteReader();
+
+                    while (dr.Read())
+                    {
+                        var pgSql = @"INSERT INTO Animal VALUES(" + dr[0].ToString() + "," +
+                                    ConvertToText(dr,1) + "," +
+                                    ConvertToText(dr,2) + "," +
+                                    ConvertToText(dr,3) + "," +
+                                    ConvertToNumeric(dr,4) + "," +
+                                    ConvertToDateTime(dr,5) + "," +
+                                    ConvertToDateTime(dr,6) + "," +
+                                    ConvertToDateTime(dr,7) + "," +
+                                    ConvertToText(dr,8) + "," +
+                                    ConvertToNumeric(dr,9) + "," +
+                                    ConvertToBoolean(dr,10) + 
+                                    ")";
+                        Console.WriteLine(pgSql);
+                        RunLocalSql(localConnectionString, pgSql);
+                    }
+                }
+            }
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+        }
+        
+        // AnimalObservation
+        try
+        {
+            using (IDbConnection connection = new NpgsqlConnection(serverConnectionString))
+            {
+                var sql = "SELECT * FROM AnimalObservation;";
+                connection.Open();
+
+                using (IDbCommand command = connection.CreateCommand())
+                {
+                    command.CommandText = sql;
+                    var dr = command.ExecuteReader();
+
+                    while (dr.Read())
+                    {
+                        var pgSql = @"INSERT INTO AnimalObservation VALUES(" + dr[0].ToString() + "," +
+                                    ConvertToNumeric(dr,1) + "," +
+                                    ConvertToText(dr,2) + "," +
+                                    ConvertToDateTime(dr,3) + "," +
+                                    ConvertToDateTime(dr,4) + "," +
+                                    ConvertToDateTime(dr,5) + "," +
+                                    ConvertToNumeric(dr,6) + "," +
+                                    ConvertToNumeric(dr,7) + 
+                                    ")";
+                        Console.WriteLine(pgSql);
+                        RunLocalSql(localConnectionString, pgSql);
+                    }
+                }
+            }
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+        }
+        
         // AnimalType
         try
         {
@@ -1246,6 +1319,76 @@ public static class DbMigrationService
             Console.WriteLine(e);
         }
         
+        // Harvest
+        try
+        {
+            using (IDbConnection connection = new NpgsqlConnection(serverConnectionString))
+            {
+                var sql = "SELECT * FROM Harvest;";
+                connection.Open();
+
+                using (IDbCommand command = connection.CreateCommand())
+                {
+                    command.CommandText = sql;
+                    var dr = command.ExecuteReader();
+
+                    while (dr.Read())
+                    {
+                        var pgSql = @"INSERT INTO Harvest VALUES(" + dr[0].ToString() + "," +
+                                    ConvertToNumeric(dr, 1) + ", " +
+                                    ConvertToNumeric(dr, 2) + ", " +
+                                    ConvertToText(dr,3) + "," +
+                                    ConvertToNumeric(dr, 4) + ", " +
+                                    ConvertToNumeric(dr, 5) + ", " +
+                                    ConvertToText(dr,6) + "," +
+                                    ConvertToDateTime(dr,7) + "," +
+                                    ConvertToDateTime(dr,8) + "," +
+                                    ConvertToNumeric(dr,9) +
+                                    ")";
+                        Console.WriteLine(pgSql);
+                        RunLocalSql(localConnectionString, pgSql);
+                    }
+                }
+            }
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+        }
+        
+        // HarvestType
+        try
+        {
+            using (IDbConnection connection = new NpgsqlConnection(serverConnectionString))
+            {
+                var sql = "SELECT * FROM HarvestType;";
+                connection.Open();
+
+                using (IDbCommand command = connection.CreateCommand())
+                {
+                    command.CommandText = sql;
+                    var dr = command.ExecuteReader();
+
+                    while (dr.Read())
+                    {
+                        var pgSql = @"INSERT INTO HarvestType VALUES(" + dr[0].ToString() + "," +
+                                    ConvertToText(dr,1) + "," +
+                                    ConvertToDateTime(dr,2) + "," +
+                                    ConvertToDateTime(dr,3) + "," +
+                                    ConvertToDateTime(dr,4) + "," +
+                                    ConvertToNumeric(dr,5) +
+                                    ")";
+                        Console.WriteLine(pgSql);
+                        RunLocalSql(localConnectionString, pgSql);
+                    }
+                }
+            }
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+        }
+        
         // InventoryGroup
         try
         {
@@ -1343,6 +1486,41 @@ public static class DbMigrationService
                                     ConvertToText(dr,13) + "," +
                                     ConvertToNumeric(dr,14) + "," +
                                     ConvertToBoolean(dr,15) + 
+                                    ")";
+                        Console.WriteLine(pgSql);
+                        RunLocalSql(localConnectionString, pgSql);
+                    }
+                }
+            }
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+        }
+        
+        // InventoryObservation
+        try
+        {
+            using (IDbConnection connection = new NpgsqlConnection(serverConnectionString))
+            {
+                var sql = "SELECT * FROM InventoryObservation;";
+                connection.Open();
+
+                using (IDbCommand command = connection.CreateCommand())
+                {
+                    command.CommandText = sql;
+                    var dr = command.ExecuteReader();
+
+                    while (dr.Read())
+                    {
+                        var pgSql = @"INSERT INTO InventoryObservation VALUES(" + dr[0].ToString() + "," +
+                                    ConvertToNumeric(dr,1) + "," +
+                                    ConvertToText(dr,2) + "," +
+                                    ConvertToDateTime(dr,3) + "," +
+                                    ConvertToDateTime(dr,4) + "," +
+                                    ConvertToDateTime(dr,5) + "," +
+                                    ConvertToNumeric(dr,6) + "," +
+                                    ConvertToNumeric(dr,7) + 
                                     ")";
                         Console.WriteLine(pgSql);
                         RunLocalSql(localConnectionString, pgSql);
@@ -1609,6 +1787,148 @@ public static class DbMigrationService
             Console.WriteLine(e);
         }
         
+        //Preservation
+        try
+        {
+            using (IDbConnection connection = new NpgsqlConnection(serverConnectionString))
+            {
+                var sql = "SELECT * FROM Preservation;";
+                connection.Open();
+
+                using (IDbCommand command = connection.CreateCommand())
+                {
+                    command.CommandText = sql;
+                    var dr = command.ExecuteReader();
+
+                    while (dr.Read())
+                    {
+                        var pgSql = @"INSERT INTO Preservation VALUES(" + dr[0].ToString() + "," +
+                                    ConvertToText(dr,1) + "," +
+                                    ConvertToDateTime(dr,2) + "," +
+                                    ConvertToDateTime(dr,3) + "," +
+                                    ConvertToDateTime(dr,4) + "," +
+                                    ConvertToNumeric(dr,5) + "," +
+                                    ConvertToNumeric(dr,6) + "," +
+                                    ConvertToNumeric(dr,7) + "," +
+                                    ConvertToNumeric(dr,8) + "," +
+                                    ConvertToNumeric(dr,9) + "," +
+                                    ConvertToText(dr,10) + "," +
+                                    ConvertToNumeric(dr,11) +
+                                    ")";
+                        Console.WriteLine(pgSql);
+                        RunLocalSql(localConnectionString, pgSql);
+                    }
+                }
+            }
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+        }
+        
+        // PreservationObservation
+        try
+        {
+            using (IDbConnection connection = new NpgsqlConnection(serverConnectionString))
+            {
+                var sql = "SELECT * FROM PreservationObservation;";
+                connection.Open();
+
+                using (IDbCommand command = connection.CreateCommand())
+                {
+                    command.CommandText = sql;
+                    var dr = command.ExecuteReader();
+
+                    while (dr.Read())
+                    {
+                        var pgSql = @"INSERT INTO PreservationObservation VALUES(" + dr[0].ToString() + "," +
+                                    ConvertToNumeric(dr,1) + "," +
+                                    ConvertToText(dr,2) + "," +
+                                    ConvertToDateTime(dr,3) + "," +
+                                    ConvertToDateTime(dr,4) + "," +
+                                    ConvertToDateTime(dr,5) + "," +
+                                    ConvertToNumeric(dr,6) + "," +
+                                    ConvertToNumeric(dr,7) + 
+                                    ")";
+                        Console.WriteLine(pgSql);
+                        RunLocalSql(localConnectionString, pgSql);
+                    }
+                }
+            }
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+        }
+        
+        // PreservationType
+        try
+        {
+            using (IDbConnection connection = new NpgsqlConnection(serverConnectionString))
+            {
+                var sql = "SELECT * FROM PreservationType;";
+                connection.Open();
+
+                using (IDbCommand command = connection.CreateCommand())
+                {
+                    command.CommandText = sql;
+                    var dr = command.ExecuteReader();
+
+                    while (dr.Read())
+                    {
+                        var pgSql = @"INSERT INTO PreservationType VALUES(" + dr[0].ToString() + "," +
+                                    ConvertToText(dr,1) + "," +
+                                    ConvertToDateTime(dr,2) + "," +
+                                    ConvertToDateTime(dr,3) + "," +
+                                    ConvertToDateTime(dr,4) + "," +
+                                    ConvertToNumeric(dr,5) +
+                                    ")";
+                        Console.WriteLine(pgSql);
+                        RunLocalSql(localConnectionString, pgSql);
+                    }
+                }
+            }
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+        }
+        
+        //Procedure
+        try
+        {
+            using (IDbConnection connection = new NpgsqlConnection(serverConnectionString))
+            {
+                var sql = "SELECT * FROM Procedure;";
+                connection.Open();
+
+                using (IDbCommand command = connection.CreateCommand())
+                {
+                    command.CommandText = sql;
+                    var dr = command.ExecuteReader();
+
+                    while (dr.Read())
+                    {
+                        var pgSql = @"INSERT INTO Procedure VALUES(" + dr[0].ToString() + "," +
+                                    ConvertToText(dr,1) + "," +
+                                    ConvertToText(dr,2) + "," +
+                                    ConvertToText(dr,3) + "," +
+                                    ConvertToNumeric(dr,4) + "," +
+                                    ConvertToDateTime(dr,5) + "," +
+                                    ConvertToDateTime(dr,6) + "," +
+                                    ConvertToDateTime(dr,7) +
+                                    ")";
+                        Console.WriteLine(pgSql);
+                        RunLocalSql(localConnectionString, pgSql);
+                    }
+                }
+            }
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+        }
+        
         // Quote
         try
         {
@@ -1775,6 +2095,40 @@ public static class DbMigrationService
                                     ConvertToText(dr,1) + "," +
                                     ConvertToText(dr,2) + "," +
                                     ConvertToText(dr,3) + 
+                                    ")";
+                        Console.WriteLine(pgSql);
+                        RunLocalSql(localConnectionString, pgSql);
+                    }
+                }
+            }
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+        }
+        
+        // StarterType
+        try
+        {
+            using (IDbConnection connection = new NpgsqlConnection(serverConnectionString))
+            {
+                var sql = "SELECT * FROM StarterType;";
+                connection.Open();
+
+                using (IDbCommand command = connection.CreateCommand())
+                {
+                    command.CommandText = sql;
+                    var dr = command.ExecuteReader();
+
+                    while (dr.Read())
+                    {
+                        var pgSql = @"INSERT INTO StarterType VALUES(" + dr[0].ToString() + "," +
+                                    ConvertToText(dr,1) + "," +
+                                    ConvertToText(dr,2) + "," +
+                                    ConvertToDateTime(dr,3) + "," +
+                                    ConvertToDateTime(dr,4) + "," +
+                                    ConvertToDateTime(dr,5) + "," +
+                                    ConvertToNumeric(dr,6) +
                                     ")";
                         Console.WriteLine(pgSql);
                         RunLocalSql(localConnectionString, pgSql);

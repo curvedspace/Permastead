@@ -115,7 +115,7 @@ namespace DataAccess.Local
 			DROP TABLE IF EXISTS Procedure;
 			CREATE TABLE IF NOT EXISTS Procedure(
 				Id INTEGER PRIMARY KEY,
-				Category VARCHAR (255) UNIQUE NOT NULL,
+				Category VARCHAR (255) NOT NULL,
 				Name TEXT NOT NULL,
 				Content TEXT NOT NULL,
 				AuthorId INTEGER,
@@ -141,11 +141,11 @@ namespace DataAccess.Local
 			CREATE TABLE IF NOT EXISTS StarterType(
 				Id INTEGER PRIMARY KEY,
 				Code VARCHAR (50) UNIQUE NOT NULL,
-				Description TEXT NOT NULL,
-				AuthorId INTEGER,
+				Description TEXT NOT NULL,		
 				CreationDate TIMESTAMP,
 				StartDate TIMESTAMP NOT NULL,
-				EndDate TIMESTAMP
+				EndDate TIMESTAMP,
+				AuthorId INTEGER
 			);
 
 			-- PRESERVATION TYPE
@@ -153,10 +153,10 @@ namespace DataAccess.Local
 			CREATE TABLE IF NOT EXISTS PreservationType(
 				Id INTEGER PRIMARY KEY,
 				Description TEXT NOT NULL,
-				AuthorId INTEGER,
 				CreationDate TIMESTAMP,
 				StartDate TIMESTAMP NOT NULL,
-				EndDate TIMESTAMP
+				EndDate TIMESTAMP,
+				AuthorId INTEGER
 			);
 
 			-- FREQUENCY
