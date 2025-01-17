@@ -36,6 +36,6 @@ public class ScoreBoard
 
     public override string ToString()
     {
-        return "Total Score: " + string.Format("{0:0.0}", TotalScore) + $"    Level: {Level}";
+        return "Total Score: " + string.Format("{0:0.0}", TotalScore) + $"    Level: {Level}    Progress: {Math.Round(LevelProgress * 100, 2)}%";
     }
 }
