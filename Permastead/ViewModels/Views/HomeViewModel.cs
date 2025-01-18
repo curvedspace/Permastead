@@ -58,6 +58,9 @@ namespace Permastead.ViewModels.Views;
         private ObservableCollection<ToDo> _toDos = new ObservableCollection<ToDo>();
         
         [ObservableProperty]
+        private ObservableCollection<FoodPreservation> _preservations = new ObservableCollection<FoodPreservation>();
+        
+        [ObservableProperty]
         private string? _statistics;
         
         [ObservableProperty]
@@ -75,7 +78,7 @@ namespace Permastead.ViewModels.Views;
         public ObservableValue PlantingsValue { get; set; } = new ObservableValue(0);
         public ObservableValue HarvestsValue { get; set; } = new ObservableValue(0);
         public ObservableValue InventoryValue { get; set; } = new ObservableValue(0);
-        public ObservableValue ObservationsValue { get; set; } = new ObservableValue(0);
+        public ObservableValue FoodPreservationValue { get; set; } = new ObservableValue(0);
 
         public string GrowingSeason => "Growing Season: " + PlantingYearEndDate.Year.ToString();
 
@@ -136,8 +139,8 @@ namespace Permastead.ViewModels.Views;
                 new GaugeItem(StartersValue, series => SetStyleStats("Starters", series)),
                 new GaugeItem(PlantingsValue, series => SetStyleStats("Plantings", series)),
                 new GaugeItem(HarvestsValue, series => SetStyleStats("Harvests", series)),
+                new GaugeItem(FoodPreservationValue, series => SetStyleStats("Preservations", series)),
                 new GaugeItem(InventoryValue, series => SetStyleStats("Inventory", series)),
-                new GaugeItem(ObservationsValue, series => SetStyleStats("Observations", series)),
                 new GaugeItem(GaugeItem.Background, series =>
                 {
                     series.InnerRadius = 20;
@@ -176,6 +179,7 @@ namespace Permastead.ViewModels.Views;
             People = new ObservableCollection<Person>(PersonService.GetAllPeople(AppSession.ServiceMode));
             ToDos = new ObservableCollection<ToDo>(ToDoService.GetAllToDos(AppSession.ServiceMode));
             Harvests = new ObservableCollection<Harvest>(HarvestService.GetAllHarvests(AppSession.ServiceMode));
+            Preservations = new ObservableCollection<FoodPreservation>(FoodPreservationService.GetAll(AppSession.ServiceMode));
             
             GetQuote();
             
@@ -183,7 +187,7 @@ namespace Permastead.ViewModels.Views;
             this.PlantingsValue.Value = 0;
             this.HarvestsValue.Value = 0;
             this.InventoryValue.Value = 0;
-            this.ObservationsValue.Value = 0;
+            this.FoodPreservationValue.Value = 0;
             
             Needle.Value = Convert.ToDouble(ObservationsToActionRatio);
             
@@ -200,9 +204,9 @@ namespace Permastead.ViewModels.Views;
             }
             
             //compute the observations count
-            foreach (var obs in Observations)
+            foreach (var pres in Preservations)
             {
-                if (obs.StartDate >= startDateWindow) this.ObservationsValue.Value += 1;
+                if (pres.StartDate >= startDateWindow) this.FoodPreservationValue.Value += 1;
             }
             
             //compute the actions count
@@ -241,7 +245,7 @@ namespace Permastead.ViewModels.Views;
                 }
             }
 
-            SeriesStatsMaxValue = ObservationsValue.Value;
+            SeriesStatsMaxValue = FoodPreservationValue.Value;
             if (PlantsValue.Value > SeriesStatsMaxValue) SeriesStatsMaxValue = PlantsValue.Value;
             if (StartersValue.Value > SeriesStatsMaxValue) SeriesStatsMaxValue = StartersValue.Value;
             if (PlantingsValue.Value > SeriesStatsMaxValue) SeriesStatsMaxValue = PlantingsValue.Value;
