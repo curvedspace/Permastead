@@ -70,6 +70,8 @@ namespace Permastead.ViewModels.Views;
 
         [ObservableProperty] private string _weatherForecast = "Weather Unknown";
         
+        public ObservableValue PlantsValue { get; set; } = new ObservableValue(0);
+        public ObservableValue StartersValue { get; set; } = new ObservableValue(0);
         public ObservableValue PlantingsValue { get; set; } = new ObservableValue(0);
         public ObservableValue HarvestsValue { get; set; } = new ObservableValue(0);
         public ObservableValue InventoryValue { get; set; } = new ObservableValue(0);
@@ -130,8 +132,10 @@ namespace Permastead.ViewModels.Views;
             
          SeriesStats  =
             GaugeGenerator.BuildSolidGauge(
-                new GaugeItem(HarvestsValue, series => SetStyleStats("Harvests", series)),
+                new GaugeItem(PlantsValue, series => SetStyleStats("Plants", series)),
+                new GaugeItem(StartersValue, series => SetStyleStats("Starters", series)),
                 new GaugeItem(PlantingsValue, series => SetStyleStats("Plantings", series)),
+                new GaugeItem(HarvestsValue, series => SetStyleStats("Harvests", series)),
                 new GaugeItem(InventoryValue, series => SetStyleStats("Inventory", series)),
                 new GaugeItem(ObservationsValue, series => SetStyleStats("Observations", series)),
                 new GaugeItem(GaugeItem.Background, series =>
@@ -183,6 +187,18 @@ namespace Permastead.ViewModels.Views;
             
             Needle.Value = Convert.ToDouble(ObservationsToActionRatio);
             
+            //compute the plants count
+            foreach (var plant in Plants)
+            {
+                if (plant.StartDate >= startDateWindow) this.PlantsValue.Value += 1;
+            }
+            
+            //compute the starters count
+            foreach (var seed in SeedPackets)
+            {
+                if (seed.StartDate >= startDateWindow) this.StartersValue.Value += 1;
+            }
+            
             //compute the observations count
             foreach (var obs in Observations)
             {
@@ -226,6 +242,8 @@ namespace Permastead.ViewModels.Views;
             }
 
             SeriesStatsMaxValue = ObservationsValue.Value;
+            if (PlantsValue.Value > SeriesStatsMaxValue) SeriesStatsMaxValue = PlantsValue.Value;
+            if (StartersValue.Value > SeriesStatsMaxValue) SeriesStatsMaxValue = StartersValue.Value;
             if (PlantingsValue.Value > SeriesStatsMaxValue) SeriesStatsMaxValue = PlantingsValue.Value;
             if (InventoryValue.Value > SeriesStatsMaxValue) SeriesStatsMaxValue = InventoryValue.Value;
             if (HarvestsValue.Value > SeriesStatsMaxValue) SeriesStatsMaxValue = HarvestsValue.Value;
