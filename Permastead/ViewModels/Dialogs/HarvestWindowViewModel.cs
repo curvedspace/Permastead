@@ -76,7 +76,19 @@ public partial class HarvestWindowViewModel : ViewModelBase
                     break;
                 
                 default:
+                    
+                    if (CurrentItem.HarvestEntity != null)
+                    {
+                        CurrentItem.HarvestEntity.Id = 0;
+                    }
+                    else
+                    {
+                        CurrentItem.HarvestEntity = new Entity();
+                        CurrentItem.HarvestEntity.Id = 0;
+                    }
+                    
                     Entities = new ObservableCollection<Entity>(OtherList);
+                    
                     break;
             }
         }
