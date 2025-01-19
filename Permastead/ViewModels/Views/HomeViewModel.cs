@@ -72,7 +72,7 @@ namespace Permastead.ViewModels.Views;
         [ObservableProperty] private string _CurrentDateDisplay = DateTime.Now.ToLongDateString();
 
         [ObservableProperty] private string _weatherForecast = "Weather Unknown";
-        
+
         public ObservableValue PlantsValue { get; set; } = new ObservableValue(0);
         public ObservableValue StartersValue { get; set; } = new ObservableValue(0);
         public ObservableValue PlantingsValue { get; set; } = new ObservableValue(0);
@@ -101,6 +101,8 @@ namespace Permastead.ViewModels.Views;
         [ObservableProperty] private long _totalHarvestedPlants;
         [ObservableProperty] private string _totalPlantStats;
         
+        [ObservableProperty] private long _inventoryCount;
+        
         public HomeViewModel()
         {
             
@@ -109,42 +111,6 @@ namespace Permastead.ViewModels.Views;
 
             _upcomingEvents = "I have checked the database and you have no upcoming events.";
 
-            Needle = new NeedleVisual
-            {
-                Value = 45
-            };
-
-            Series = GaugeGenerator.BuildAngularGaugeSections(
-                new GaugeItem(40, s => SetStyle(sectionsOuter, sectionsWidth, s)),
-                new GaugeItem(20, s => SetStyle(sectionsOuter, sectionsWidth, s)),
-                new GaugeItem(40, s => SetStyle(sectionsOuter, sectionsWidth, s)));
-
-            VisualElements =
-            [
-                new AngularTicksVisual
-                {
-                    LabelsSize = 16,
-                    LabelsOuterOffset = 15,
-                    OuterOffset = 65,
-                    TicksLength = 20
-                },
-                Needle
-            ];
-            
-            OnPropertyChanged(nameof(Series));
-            
-         SeriesStats  =
-            GaugeGenerator.BuildSolidGauge(
-                new GaugeItem(PlantsValue, series => SetStyleStats("Plants", series)),
-                new GaugeItem(StartersValue, series => SetStyleStats("Starters", series)),
-                new GaugeItem(PlantingsValue, series => SetStyleStats("Plantings", series)),
-                new GaugeItem(HarvestsValue, series => SetStyleStats("Harvests", series)),
-                new GaugeItem(FoodPreservationValue, series => SetStyleStats("Preservations", series)),
-                new GaugeItem(InventoryValue, series => SetStyleStats("Inventory", series)),
-                new GaugeItem(GaugeItem.Background, series =>
-                {
-                    series.InnerRadius = 20;
-                }));
             
             this.QuoteViewModel.Quote.Description = "This is a test quote";
             this.QuoteViewModel.Quote.AuthorName = "Anonymous";
@@ -174,6 +140,8 @@ namespace Permastead.ViewModels.Views;
             // get other data
             Plantings = new ObservableCollection<Planting>(PlantingsService.GetPlantings(AppSession.ServiceMode));
             InventoryItems = new ObservableCollection<Inventory>(InventoryService.GetAllInventory(AppSession.ServiceMode));
+            
+            
             SeedPackets = new ObservableCollection<SeedPacket>(PlantingsService.GetSeedPackets(AppSession.ServiceMode));
             Plants = new ObservableCollection<Plant>(PlantingsService.GetPlants(AppSession.ServiceMode));
             People = new ObservableCollection<Person>(PersonService.GetAllPeople(AppSession.ServiceMode));
@@ -189,7 +157,7 @@ namespace Permastead.ViewModels.Views;
             this.InventoryValue.Value = 0;
             this.FoodPreservationValue.Value = 0;
             
-            Needle.Value = Convert.ToDouble(ObservationsToActionRatio);
+            InventoryCount = InventoryItems.Count;
             
             //compute the plants count
             foreach (var plant in Plants)
@@ -246,6 +214,7 @@ namespace Permastead.ViewModels.Views;
             }
 
             SeriesStatsMaxValue = FoodPreservationValue.Value;
+            
             if (PlantsValue.Value > SeriesStatsMaxValue) SeriesStatsMaxValue = PlantsValue.Value;
             if (StartersValue.Value > SeriesStatsMaxValue) SeriesStatsMaxValue = StartersValue.Value;
             if (PlantingsValue.Value > SeriesStatsMaxValue) SeriesStatsMaxValue = PlantingsValue.Value;
@@ -257,6 +226,45 @@ namespace Permastead.ViewModels.Views;
 
             _upcomingEvents = AppSession.Instance.GaiaService.InitialWelcomeMessage;
 
+            Needle = new NeedleVisual
+            {
+                Value = 45
+            };
+
+            Series = GaugeGenerator.BuildAngularGaugeSections(
+                new GaugeItem(40, s => SetStyle(sectionsOuter, sectionsWidth, s)),
+                new GaugeItem(20, s => SetStyle(sectionsOuter, sectionsWidth, s)),
+                new GaugeItem(40, s => SetStyle(sectionsOuter, sectionsWidth, s)));
+
+            VisualElements =
+            [
+                new AngularTicksVisual
+                {
+                    LabelsSize = 16,
+                    LabelsOuterOffset = 15,
+                    OuterOffset = 65,
+                    TicksLength = 20
+                },
+                Needle
+            ];
+            
+            OnPropertyChanged(nameof(Series));
+            
+            SeriesStats  =
+                GaugeGenerator.BuildSolidGauge(
+                    new GaugeItem(PlantsValue, series => SetStyleStats("Plants", series)),
+                    new GaugeItem(StartersValue, series => SetStyleStats("Starters", series)),
+                    new GaugeItem(PlantingsValue, series => SetStyleStats("Plantings", series)),
+                    new GaugeItem(HarvestsValue, series => SetStyleStats("Harvests", series)),
+                    new GaugeItem(FoodPreservationValue, series => SetStyleStats("Preservations", series)),
+                    new GaugeItem(InventoryValue, series => SetStyleStats("Inventory", series)),
+                    new GaugeItem(GaugeItem.Background, series =>
+                    {
+                        series.InnerRadius = 20;
+                    }));
+            
+            Needle.Value = Convert.ToDouble(ObservationsToActionRatio);
+            
             try
             {
                 var t = new Task(GetWeatherAsync);
