@@ -52,7 +52,7 @@
                                   
                         <Separator></Separator>
                         
-                        <MenuItem Header="Preserve...">
+                        <MenuItem Command="{Binding PreserveHarvestCommand}" Header="Preserve...">
                             <MenuItem.Icon>
                                 <PathIcon Data="{StaticResource clock_alarm_regular}"/>
                             </MenuItem.Icon>

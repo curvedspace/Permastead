@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -135,6 +136,43 @@ public partial class HarvestsViewModel : ViewModelBase
     private void PreserveHarvest()
     {
         // open the selected harvest in a preservation window for viewing/editing
+        try
+        {
+            // open the selected planting in a harvest window 
+            var preservationWindow = new PreservationWindow();
+        
+            //get the selected row in the list
+            var current = CurrentItem;
+        
+            if (current != null)
+            {
+                var pres = new FoodPreservation();
+                pres.Author = AppSession.Instance.CurrentUser;
+                pres.Name = current.Description;
+                pres.StartDate = DateTime.Today;
+                
+                var pvm = new PreservationViewModel();
+                pvm.CurrentItem = pres;
+
+                
+                var vm = new PreservationWindowViewModel(pres, pvm);
+
+                preservationWindow.DataContext = vm;
+
+                preservationWindow.Topmost = true;
+                preservationWindow.Width = 800;
+                preservationWindow.Height = 500;
+                preservationWindow.Opacity = 0.95;
+                preservationWindow.Title = "Preservation - " + current.Description;
+                preservationWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+                preservationWindow.Show();
+                
+            }
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+        }
         
     }
     
