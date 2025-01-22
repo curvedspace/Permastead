@@ -23,6 +23,22 @@ public class InventoryService
         return inventoryList;
     }
     
+    public static List<string> GetAllBrands(ServiceMode mode)
+    {
+        var brands = new List<string>();
+
+        if (mode == ServiceMode.Local)
+        {
+            brands = InventoryRepository.GetAllBrands(DataConnection.GetLocalDataSource());
+        }
+        else
+        {
+            brands = DataAccess.Server.InventoryRepository.GetAllBrands(DataConnection.GetServerConnectionString());
+        }
+
+        return brands;
+    }
+    
     public static bool CommitRecord(ServiceMode mode, Inventory inventory)
     {
         bool rtnValue = false;
