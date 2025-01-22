@@ -6,6 +6,8 @@
              xmlns:vm="using:Permastead.ViewModels.Views"
              mc:Ignorable="d"
              d:DesignWidth="1800" d:DesignHeight="1000"
+             xmlns:semi="https://irihi.tech/semi"
+             xmlns:u="https://irihi.tech/ursa"
              xmlns:lv="clr-namespace:LiveChartsCore;assembly=LiveChartsCore"
              xmlns:views="clr-namespace:Permastead.Views.Views"
              xmlns:lvc="using:LiveChartsCore.SkiaSharpView.Avalonia"
@@ -21,6 +23,9 @@
             <TextBlock HorizontalAlignment="Center" FontSize="24" VerticalAlignment="Center" TextWrapping="WrapWithOverflow"
                        Margin="20"
                        Text="{Binding WeatherForecast}"></TextBlock>
+            <!-- <u:Marquee  -->
+            <!--     Content="{Binding WeatherForecast}"> -->
+            <!-- </u:Marquee> -->
         </StackPanel>
         
         <Grid Grid.Row="4" Grid.Column="1" Grid.ColumnDefinitions="*" Grid.RowDefinitions="*,*">
