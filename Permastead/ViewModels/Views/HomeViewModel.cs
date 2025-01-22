@@ -106,10 +106,7 @@ namespace Permastead.ViewModels.Views;
         
         public HomeViewModel()
         {
-            
-            var sectionsOuter = 130;
-            var sectionsWidth = 20;
-
+           
             _upcomingEvents = "I have checked the database and you have no upcoming events.";
 
             
@@ -122,6 +119,16 @@ namespace Permastead.ViewModels.Views;
 
             // make sure we have an instance instantiated so ServiceMode is set
             AppSession.Instance.ToString();
+            
+            RefreshData();
+            GetQuote();
+            
+        }
+
+        public void RefreshData()
+        {
+            var sectionsOuter = 130;
+            var sectionsWidth = 20;
             
             //get observations
             Observations = new ObservableCollection<Observation>(Services.ObservationsService.GetObservations(AppSession.ServiceMode));
@@ -148,16 +155,16 @@ namespace Permastead.ViewModels.Views;
             Harvests = new ObservableCollection<Harvest>(HarvestService.GetAllHarvests(AppSession.ServiceMode));
             Preservations = new ObservableCollection<FoodPreservation>(FoodPreservationService.GetAll(AppSession.ServiceMode));
             
-            GetQuote();
-            
             var startDateWindow = DateTime.Today.AddDays(-30);
+            
             this.PlantingsValue.Value = 0;
             this.HarvestsValue.Value = 0;
             this.InventoryValue.Value = 0;
             this.FoodPreservationValue.Value = 0;
+            this.StartersValue.Value = 0;
+            this.PlantsValue.Value = 0;
             
             InventoryCount = InventoryItems.Count;
-            OnPropertyChanged(nameof(InventoryCount));
             
             //compute the plants count
             foreach (var plant in Plants)
@@ -180,7 +187,7 @@ namespace Permastead.ViewModels.Views;
             //compute the actions count
             foreach (var inv in InventoryItems)
             {
-                if (inv.StartDate >= startDateWindow) this.InventoryValue.Value += 1;
+                if (inv.CreationDate >= startDateWindow) this.InventoryValue.Value += 1;
             }
             
             //compute the harvests count
@@ -277,7 +284,7 @@ namespace Permastead.ViewModels.Views;
                 Console.WriteLine(e);
             }
         }
-
+        
         public void GetQuote()
         {
             this.QuoteViewModel.Quote = Services.QuoteService.GetRandomQuote(AppSession.ServiceMode);

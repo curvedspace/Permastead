@@ -60,6 +60,11 @@ namespace Permastead.ViewModels
         {
             CurrentView = Views[0];
             CurrentViewName = "Home";
+
+            var vm = CurrentView as HomeViewModel;
+            
+            // when we click on Home, refresh the data
+            vm.RefreshData();
         }
         
         [RelayCommand]
