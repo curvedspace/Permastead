@@ -66,6 +66,9 @@ namespace Permastead.ViewModels.Views;
         private string? _statistics;
         
         [ObservableProperty]
+        private string? _allTimeStatistics;
+        
+        [ObservableProperty]
         private double _totalScore;
         
         [ObservableProperty]
@@ -165,7 +168,18 @@ namespace Permastead.ViewModels.Views;
             this.PlantsValue.Value = 0;
             
             InventoryCount = InventoryItems.Count;
-            
+
+            AllTimeStatistics = "                                    " +  
+                                "***  Actions: " + ToDos.Count + "   " +
+                                "Observations: " + Observations.Count + "   " +
+                                "People: " + People.Count + "   " +
+                                "Plants: " + Plants.Count + "   " +
+                                "Starters: " + SeedPackets.Count + "   " +
+                                "Plantings: " + Plantings.Count + "   " +
+                                "Harvests: " + Harvests.Count + "   " +
+                                "Preservations: " + Preservations.Count + "   " +
+                                "Inventory: " + InventoryItems.Count + "   ***";
+                                
             //compute the plants count
             foreach (var plant in Plants)
             {
