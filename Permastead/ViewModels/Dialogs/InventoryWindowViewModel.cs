@@ -22,6 +22,9 @@ public partial class InventoryWindowViewModel: ViewModelBase
     private ObservableCollection<Person> _people;
     
     [ObservableProperty] 
+    private ObservableCollection<string> _brands;
+    
+    [ObservableProperty] 
     private Inventory _currentItem;
     
     public InventoryViewModel ControlViewModel { get; set;  } = new InventoryViewModel();
@@ -34,6 +37,7 @@ public partial class InventoryWindowViewModel: ViewModelBase
             _inventoryGroups = new ObservableCollection<InventoryGroup>(Services.InventoryGroupService.GetAllInventoryGroups(AppSession.ServiceMode));
             _inventoryTypes = new ObservableCollection<InventoryType>(Services.InventoryTypeService.GetAllInventoryTypes(AppSession.ServiceMode));
             _people = new ObservableCollection<Person>(Services.PersonService.GetAllPeople(AppSession.ServiceMode));
+            _brands = new ObservableCollection<string>(Services.InventoryService.GetAllBrands(AppSession.ServiceMode));
             
             _currentItem = new Inventory();
             

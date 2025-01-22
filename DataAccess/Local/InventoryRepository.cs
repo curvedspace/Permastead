@@ -75,6 +75,44 @@ public static class InventoryRepository
         }
     }
     
+    public static List<string> GetAllBrands(string conn)
+    {
+        try
+        {
+            var brands = new List<string>();
+            Inventory inv;
+
+            string sqlQuery =
+                "SELECT DISTINCT(i.Brand) " +
+                "FROM Inventory i ";
+
+            using (IDbConnection connection = new SqliteConnection(conn))
+            {
+                connection.Open();
+
+                using (IDbCommand command = connection.CreateCommand())
+                {
+                    command.CommandText = sqlQuery;
+                    var dr = command.ExecuteReader();
+
+                    while (dr.Read())
+                    {
+                        if (!brands.Contains(dr[0].ToString().Trim()))
+                        {
+                            brands.Add(dr[0].ToString().Trim());
+                        }
+                    }
+                }
+            }
+
+            return brands;
+        }
+        catch
+        {
+            return new List<string>();
+        }
+    }
+    
     public static bool Insert(Inventory inventory)
     {
         try

@@ -21,7 +21,7 @@
         <!-- </CalendarDatePicker> -->
         
         <Label Grid.Row="0" Grid.Column="2" Margin="10,15,0,0">Brand: </Label>
-        <TextBox Grid.Row="0" Grid.Column="3" Margin="10" Text="{Binding CurrentItem.Brand}"></TextBox>
+        <AutoCompleteBox Grid.Row="0" Grid.Column="3" Margin="10" ItemsSource="{Binding Brands}" Text="{Binding CurrentItem.Brand}"></AutoCompleteBox>
         
         <TextBlock Grid.Row="1" Grid.Column="0" Margin="10,15,10,10">Description:</TextBlock>
         <TextBox Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3"  Text="{Binding CurrentItem.Description }" Margin="10,10,10,10"></TextBox>
