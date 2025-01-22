@@ -91,7 +91,7 @@
                            Margin="0,10,0,20"
                            Name="Inventory"
                            ToolTip.Tip="The number of items you have in your inventory. "
-                           Text="{Binding InventoryCount}"
+                           Text="{Binding InventoryCount, Mode=TwoWay}"
                            VerticalAlignment="Center" HorizontalAlignment="Left" />
             </Grid>
         </StackPanel>

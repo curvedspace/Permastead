@@ -30,14 +30,14 @@ public partial class App : Application
         {
             if (!DataAccess.Local.HomesteaderRepository.DatabaseExists())
             {
-                Log.Logger.Information("New database created.");
+                Log.Logger.Information("New SQLite database created.");
             }
         }
         else
         {
             if (!DataAccess.Server.HomesteaderRepository.DatabaseExists())
             {
-                Log.Logger.Information("New database created.");
+                Log.Logger.Information("New Postgresql database created.");
             }
         }
         

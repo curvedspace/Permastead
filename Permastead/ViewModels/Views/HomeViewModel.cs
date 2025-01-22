@@ -31,6 +31,8 @@ namespace Permastead.ViewModels.Views;
         public IEnumerable<VisualElement<SkiaSharpDrawingContext>> VisualElements { get; set; }
         private NeedleVisual Needle { get; set; }
         
+        [ObservableProperty] private long _inventoryCount;
+        
         public QuoteViewModel QuoteViewModel { get; set; } = new QuoteViewModel();
 
         [ObservableProperty] 
@@ -101,7 +103,6 @@ namespace Permastead.ViewModels.Views;
         [ObservableProperty] private long _totalHarvestedPlants;
         [ObservableProperty] private string _totalPlantStats;
         
-        [ObservableProperty] private long _inventoryCount;
         
         public HomeViewModel()
         {
@@ -140,8 +141,6 @@ namespace Permastead.ViewModels.Views;
             // get other data
             Plantings = new ObservableCollection<Planting>(PlantingsService.GetPlantings(AppSession.ServiceMode));
             InventoryItems = new ObservableCollection<Inventory>(InventoryService.GetAllInventory(AppSession.ServiceMode));
-            
-            
             SeedPackets = new ObservableCollection<SeedPacket>(PlantingsService.GetSeedPackets(AppSession.ServiceMode));
             Plants = new ObservableCollection<Plant>(PlantingsService.GetPlants(AppSession.ServiceMode));
             People = new ObservableCollection<Person>(PersonService.GetAllPeople(AppSession.ServiceMode));
@@ -158,6 +157,7 @@ namespace Permastead.ViewModels.Views;
             this.FoodPreservationValue.Value = 0;
             
             InventoryCount = InventoryItems.Count;
+            OnPropertyChanged(nameof(InventoryCount));
             
             //compute the plants count
             foreach (var plant in Plants)
