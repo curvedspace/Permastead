@@ -113,6 +113,44 @@ public static class InventoryRepository
         }
     }
     
+    public static List<string> GetAllRooms(string conn)
+    {
+        try
+        {
+            var objs = new List<string>();
+            Inventory inv;
+
+            string sqlQuery =
+                "SELECT DISTINCT(i.Room) " +
+                "FROM Inventory i ";
+
+            using (IDbConnection connection = new NpgsqlConnection(conn))
+            {
+                connection.Open();
+
+                using (IDbCommand command = connection.CreateCommand())
+                {
+                    command.CommandText = sqlQuery;
+                    var dr = command.ExecuteReader();
+
+                    while (dr.Read())
+                    {
+                        if (!objs.Contains(dr[0].ToString().Trim()))
+                        {
+                            objs.Add(dr[0].ToString().Trim());
+                        }
+                    }
+                }
+            }
+
+            return objs;
+        }
+        catch
+        {
+            return new List<string>();
+        }
+    }
+    
     public static bool Insert(Inventory inventory)
     {
         try

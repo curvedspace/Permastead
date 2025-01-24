@@ -39,6 +39,22 @@ public class InventoryService
         return brands;
     }
     
+    public static List<string> GetAllRooms(ServiceMode mode)
+    {
+        var rooms = new List<string>();
+
+        if (mode == ServiceMode.Local)
+        {
+            rooms = InventoryRepository.GetAllBrands(DataConnection.GetLocalDataSource());
+        }
+        else
+        {
+            rooms = DataAccess.Server.InventoryRepository.GetAllBrands(DataConnection.GetServerConnectionString());
+        }
+
+        return rooms;
+    }
+    
     public static bool CommitRecord(ServiceMode mode, Inventory inventory)
     {
         bool rtnValue = false;

@@ -113,6 +113,44 @@ public static class InventoryRepository
         }
     }
     
+    public static List<string> GetAllRooms(string conn)
+    {
+        try
+        {
+            var allRooms = new List<string>();
+            Inventory inv;
+
+            string sqlQuery =
+                "SELECT DISTINCT(i.Room) " +
+                "FROM Inventory i ";
+
+            using (IDbConnection connection = new SqliteConnection(conn))
+            {
+                connection.Open();
+
+                using (IDbCommand command = connection.CreateCommand())
+                {
+                    command.CommandText = sqlQuery;
+                    var dr = command.ExecuteReader();
+
+                    while (dr.Read())
+                    {
+                        if (!allRooms.Contains(dr[0].ToString().Trim()))
+                        {
+                            allRooms.Add(dr[0].ToString().Trim());
+                        }
+                    }
+                }
+            }
+
+            return allRooms;
+        }
+        catch
+        {
+            return new List<string>();
+        }
+    }
+    
     public static bool Insert(Inventory inventory)
     {
         try

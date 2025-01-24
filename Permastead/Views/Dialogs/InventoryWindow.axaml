@@ -76,7 +76,8 @@
         <TextBox Grid.Row="5" Grid.Column="3" Margin="10" Text="{Binding CurrentItem.Quantity}"></TextBox>
         
         <Label Grid.Row="6" Grid.Column="0" Margin="10,15,0,0">Room: </Label>
-        <TextBox Grid.Row="6" Grid.Column="1" Margin="10" Text="{Binding CurrentItem.Room}"></TextBox>
+        <AutoCompleteBox Grid.Row="6" Grid.Column="1" Margin="10" ItemsSource="{Binding Rooms}" Text="{Binding CurrentItem.Room}"></AutoCompleteBox>
+
         
         <CheckBox Grid.Row="6" Grid.Column="3" Name="ForSale" IsChecked="{Binding CurrentItem.ForSale, Mode=TwoWay}" Margin="5,10,10,10">For Sale?</CheckBox>
         
