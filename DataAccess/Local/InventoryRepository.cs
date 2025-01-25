@@ -228,9 +228,9 @@ public static class InventoryRepository
         {
             using (IDbConnection db = new SqliteConnection(DataConnection.GetLocalDataSource()))
             {
-                string sqlQuery = "INSERT INTO Inventory (Description, StartDate, EndDate, CreationDate, InventoryTypeId, InventoryGroupId, AuthorId, OriginalValue," +
+                string sqlQuery = "INSERT INTO Inventory (Description, StartDate, EndDate, CreationDate, IType, IGroup, AuthorId, OriginalValue," +
                     "CurrentValue, Brand, Notes, Room, Quantity, ForSale, LastUpdated) " +
-                    "VALUES(@Description, @StartDate, @EndDate, CURRENT_DATE, @InventoryTypeId, @InventoryGroupId, @AuthorId, @OriginalValue, @CurrentValue, " +
+                    "VALUES(@Description, @StartDate, @EndDate, CURRENT_DATE, @InventoryType, @InventoryGroup, @AuthorId, @OriginalValue, @CurrentValue, " +
                     "@Brand, @Notes, @Room, @Quantity, @ForSale, CURRENT_TIMESTAMP);";
 
                 return (db.Execute(sqlQuery, inventory) == 1);
@@ -251,8 +251,8 @@ public static class InventoryRepository
                 using (IDbConnection db = new SqliteConnection(DataConnection.GetLocalDataSource()))
                 {
                     string sqlQuery =
-                        "UPDATE Inventory SET Description = @Description, StartDate = @StartDate, EndDate = @EndDate, InventoryTypeId = @InventoryTypeId, " +
-                        "InventoryGroupId = @InventoryGroupId, AuthorId = @AuthorId, OriginalValue = @OriginalValue, CurrentValue = @CurrentValue, " +
+                        "UPDATE Inventory SET Description = @Description, StartDate = @StartDate, EndDate = @EndDate, IType = @InventoryType, " +
+                        "IGroup = @InventoryGroup, AuthorId = @AuthorId, OriginalValue = @OriginalValue, CurrentValue = @CurrentValue, " +
                         "Brand = @Brand, Notes = @Notes, Room = @Room, Quantity = @Quantity, ForSale = @ForSale, LastUpdated = CURRENT_TIMESTAMP " +
                         "WHERE Id = @Id;";
 
