@@ -173,8 +173,8 @@ public partial class InventoryViewModel: ViewModelBase
 
         foreach (var inv in invList)
         {
-            inv.InventoryGroup = _inventoryGroups.First(x => x.Id == inv.InventoryGroup.Id);
-            inv.InventoryType = _inventoryTypes.First(x => x.Id == inv.InventoryType.Id);
+            //inv.InventoryGroup = _inventoryGroups.First(x => x.Id == inv.InventoryGroup.Id);
+            //inv.InventoryType = _inventoryTypes.First(x => x.Id == inv.InventoryType.Id);
             inv.Author = _people.First(x => x.Id == inv.Author.Id);
             
             if (string.IsNullOrEmpty(caseAdjustedFilterText))
@@ -191,10 +191,10 @@ public partial class InventoryViewModel: ViewModelBase
             else
             {
                 if (inv.Description.ToLowerInvariant().Contains(caseAdjustedFilterText) ||
-                    inv.InventoryGroup.Description!.ToLowerInvariant().Contains(caseAdjustedFilterText) ||
+                    inv.InventoryGroup!.ToLowerInvariant().Contains(caseAdjustedFilterText) ||
                     inv.Notes.ToLowerInvariant().Contains(caseAdjustedFilterText) ||
                     inv.Brand.ToLowerInvariant().Contains(caseAdjustedFilterText) ||
-                    inv.InventoryType.Description.ToLowerInvariant().Contains(caseAdjustedFilterText))
+                    inv.InventoryType.ToLowerInvariant().Contains(caseAdjustedFilterText))
                 {
                     if (_forSaleOnly)
                     {
@@ -229,9 +229,9 @@ public partial class InventoryViewModel: ViewModelBase
                 new TextColumn<Inventory, string>
                     ("Room", x => x.Room),
                 new TextColumn<Inventory, string>
-                    ("Group", x => x.InventoryGroup.Description),
+                    ("Group", x => x.InventoryGroup),
                 new TextColumn<Inventory, string>
-                    ("Type", x => x.InventoryType.Description),
+                    ("Type", x => x.InventoryType),
                 new TextColumn<Inventory, long>
                     ("Quantity", x => x.Quantity,GridLength.Auto,centered),
                 new TextColumn<Inventory, double>

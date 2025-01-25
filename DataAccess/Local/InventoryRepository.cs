@@ -15,13 +15,11 @@ public static class InventoryRepository
             Inventory inv;
 
             string sqlQuery =
-                "SELECT i.Id, i.Description, i.InventoryGroupId, i.InventoryTypeId, i.OriginalValue, i.CurrentValue, " +
+                "SELECT i.Id, i.Description, i.IGroup, i.IType, i.OriginalValue, i.CurrentValue, " +
                 "i.Brand, i.Notes, i.CreationDate, i.StartDate, i.EndDate, i.LastUpdated, i.AuthorId, p.FirstName, p.LastName,  " +
-                "it.Description it_desc, ig.Description ig_desc, i.Room, i.Quantity, i.ForSale " +
-                "FROM Inventory i, InventoryGroup ig, InventoryType it, Person p " +
-                "WHERE i.InventoryGroupId  = ig.Id  " +
-                "AND i.InventoryTypeId  = it.Id  " +
-                "AND i.AuthorId = p.Id ";
+                "i.Room, i.Quantity, i.ForSale " +
+                "FROM Inventory i, Person p " +
+                "WHERE i.AuthorId = p.Id ";
 
             using (IDbConnection connection = new SqliteConnection(conn))
             {
@@ -37,8 +35,8 @@ public static class InventoryRepository
                         inv = new Inventory();
                         inv.Id = Convert.ToInt64(dr[0].ToString());
                         inv.Description = dr[1].ToString()!;
-                        inv.InventoryGroup.Id = Convert.ToInt64(dr[2].ToString());
-                        inv.InventoryType.Id = Convert.ToInt64(dr[3].ToString());
+                        inv.InventoryGroup = dr[2].ToString()!;
+                        inv.InventoryType = dr[3].ToString()!;
                         inv.OriginalValue = Convert.ToDouble(dr[4].ToString());
                         inv.CurrentValue = Convert.ToDouble(dr[5].ToString());
                         inv.Brand = dr[6].ToString()!;
@@ -53,14 +51,11 @@ public static class InventoryRepository
                         inv.Author.Id = Convert.ToInt64(dr[12].ToString());
                         inv.Author.FirstName = dr[13].ToString();
                         inv.Author.LastName = dr[14].ToString();
-                        
-                        inv.InventoryType.Description = dr[15].ToString();
-                        inv.InventoryGroup.Description = dr[16].ToString();
 
-                        inv.Room = dr[17].ToString()!;
-                        inv.Quantity = Convert.ToInt64(dr[18].ToString());
+                        inv.Room = dr[15].ToString()!;
+                        inv.Quantity = Convert.ToInt64(dr[16].ToString());
                         
-                        inv.ForSale = dr[19].ToString() == "1";
+                        inv.ForSale = dr[17].ToString() == "1";
 
                         myInventory.Add(inv);
                     }
@@ -122,6 +117,82 @@ public static class InventoryRepository
 
             string sqlQuery =
                 "SELECT DISTINCT(i.Room) " +
+                "FROM Inventory i ";
+
+            using (IDbConnection connection = new SqliteConnection(conn))
+            {
+                connection.Open();
+
+                using (IDbCommand command = connection.CreateCommand())
+                {
+                    command.CommandText = sqlQuery;
+                    var dr = command.ExecuteReader();
+
+                    while (dr.Read())
+                    {
+                        if (!allRooms.Contains(dr[0].ToString().Trim()))
+                        {
+                            allRooms.Add(dr[0].ToString().Trim());
+                        }
+                    }
+                }
+            }
+
+            return allRooms;
+        }
+        catch
+        {
+            return new List<string>();
+        }
+    }
+    
+    public static List<string> GetAllGroups(string conn)
+    {
+        try
+        {
+            var allRooms = new List<string>();
+            Inventory inv;
+
+            string sqlQuery =
+                "SELECT DISTINCT(i.Igroup) " +
+                "FROM Inventory i ";
+
+            using (IDbConnection connection = new SqliteConnection(conn))
+            {
+                connection.Open();
+
+                using (IDbCommand command = connection.CreateCommand())
+                {
+                    command.CommandText = sqlQuery;
+                    var dr = command.ExecuteReader();
+
+                    while (dr.Read())
+                    {
+                        if (!allRooms.Contains(dr[0].ToString().Trim()))
+                        {
+                            allRooms.Add(dr[0].ToString().Trim());
+                        }
+                    }
+                }
+            }
+
+            return allRooms;
+        }
+        catch
+        {
+            return new List<string>();
+        }
+    }
+    
+    public static List<string> GetAllTypes(string conn)
+    {
+        try
+        {
+            var allRooms = new List<string>();
+            Inventory inv;
+
+            string sqlQuery =
+                "SELECT DISTINCT(i.Itype) " +
                 "FROM Inventory i ";
 
             using (IDbConnection connection = new SqliteConnection(conn))

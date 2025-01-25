@@ -6,13 +6,9 @@ public class Inventory
 
     public string Description { get; set; } = String.Empty;
     
-    public InventoryGroup InventoryGroup { get; set; }
+    public string InventoryGroup { get; set; }
     
-    public long InventoryGroupId { get { return this.InventoryGroup.Id; } }
-    
-    public InventoryType InventoryType { get; set; }
-    
-    public long InventoryTypeId { get { return this.InventoryType.Id; } }
+    public string InventoryType { get; set; }
     
     public double OriginalValue { get; set; }
     
@@ -92,8 +88,8 @@ public class Inventory
         this.CreationDate = DateTime.Now;
         this.EndDate = DateTime.MaxValue;
         this.Author = Person.Anonymous();
-        this.InventoryGroup = new InventoryGroup();
-        this.InventoryType = new InventoryType();
+        this.InventoryGroup = "";
+        this.InventoryType = "";
         this.Quantity = 1;
         this.ForSale = false;
         this.Brand = "Unknown";

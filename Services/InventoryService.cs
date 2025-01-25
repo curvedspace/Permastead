@@ -45,14 +45,97 @@ public class InventoryService
 
         if (mode == ServiceMode.Local)
         {
-            rooms = InventoryRepository.GetAllBrands(DataConnection.GetLocalDataSource());
+            rooms = InventoryRepository.GetAllRooms(DataConnection.GetLocalDataSource());
         }
         else
         {
-            rooms = DataAccess.Server.InventoryRepository.GetAllBrands(DataConnection.GetServerConnectionString());
+            rooms = DataAccess.Server.InventoryRepository.GetAllRooms(DataConnection.GetServerConnectionString());
         }
 
         return rooms;
+    }
+    
+    public static List<string> GetAllGroups(ServiceMode mode)
+    {
+        var list = new List<string>();
+
+        if (mode == ServiceMode.Local)
+        {
+            //get the list from the table
+            list = InventoryRepository.GetAllGroups(DataConnection.GetLocalDataSource());
+            
+            //supplement with the reference table
+            var defaults = InventoryGroupService.GetAllInventoryGroups(mode);
+            foreach (var group in defaults)
+            {
+                if (!list.Contains(group.Description))
+                {
+                    list.Add(group.Description);
+                }
+            }
+
+            list.Sort();
+            
+        }
+        else
+        {
+            list = DataAccess.Server.InventoryRepository.GetAllGroups(DataConnection.GetServerConnectionString());
+            
+            //supplement with the reference table
+            var defaults = InventoryGroupService.GetAllInventoryGroups(mode);
+            foreach (var group in defaults)
+            {
+                if (!list.Contains(group.Description))
+                {
+                    list.Add(group.Description);
+                }
+            }
+
+            list.Sort();
+            
+        }
+
+        return list;
+    }
+    
+    public static List<string> GetAllTypes(ServiceMode mode)
+    {
+        var list = new List<string>();
+
+        if (mode == ServiceMode.Local)
+        {
+            list = InventoryRepository.GetAllBrands(DataConnection.GetLocalDataSource());
+            
+            //supplement with the reference table
+            var defaults = InventoryTypeService.GetAllInventoryTypes(mode);
+            foreach (var inventoryType in defaults)
+            {
+                if (!list.Contains(inventoryType.Description))
+                {
+                    list.Add(inventoryType.Description);
+                }
+            }
+
+            list.Sort();
+        }
+        else
+        {
+            list = DataAccess.Server.InventoryRepository.GetAllTypes(DataConnection.GetServerConnectionString());
+            
+            //supplement with the reference table
+            var defaults = InventoryTypeService.GetAllInventoryTypes(mode);
+            foreach (var inventoryType in defaults)
+            {
+                if (!list.Contains(inventoryType.Description))
+                {
+                    list.Add(inventoryType.Description);
+                }
+            }
+
+            list.Sort();
+        }
+
+        return list;
     }
     
     public static bool CommitRecord(ServiceMode mode, Inventory inventory)

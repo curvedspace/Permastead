@@ -27,24 +27,26 @@
         <TextBox Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3"  Text="{Binding CurrentItem.Description }" Margin="10,10,10,10"></TextBox>
         
         <TextBlock Grid.Row="2" Grid.Column="0" Margin="10,15,10,10">Inventory Group:</TextBlock>
-        <ComboBox Width="200" Grid.Row="2" Grid.Column="1" Margin="10" ItemsSource="{Binding InventoryGroups, Mode=TwoWay}"
-                   SelectedItem="{Binding CurrentItem.InventoryGroup, Mode=TwoWay}" AutoScrollToSelectedItem="True">
-          <ComboBox.ItemTemplate>
-            <DataTemplate >
-              <TextBlock Text="{Binding Description}" />
-            </DataTemplate>
-          </ComboBox.ItemTemplate>
-        </ComboBox>
+        <AutoCompleteBox Grid.Row="2" Grid.Column="1" Margin="10" ItemsSource="{Binding InventoryGroups}" Text="{Binding CurrentItem.InventoryGroup}"></AutoCompleteBox>
+        <!-- <ComboBox Width="200" Grid.Row="2" Grid.Column="1" Margin="10" ItemsSource="{Binding InventoryGroups, Mode=TwoWay}" -->
+        <!--            SelectedItem="{Binding CurrentItem.InventoryGroup, Mode=TwoWay}" AutoScrollToSelectedItem="True"> -->
+        <!--   <ComboBox.ItemTemplate> -->
+        <!--     <DataTemplate > -->
+        <!--       <TextBlock Text="{Binding Description}" /> -->
+        <!--     </DataTemplate> -->
+        <!--   </ComboBox.ItemTemplate> -->
+        <!-- </ComboBox> -->
         
         <TextBlock Grid.Column="2" Grid.Row="2" Margin="10,15,0,0">Inventory Type:</TextBlock>
-        <ComboBox Grid.Column="3" Grid.Row="2" Margin="10" Width="300" ItemsSource="{Binding InventoryTypes} "
-                  SelectedItem="{Binding CurrentItem.InventoryType, Mode=TwoWay}" AutoScrollToSelectedItem="False">
-          <ComboBox.ItemTemplate>
-            <DataTemplate >
-              <TextBlock Text="{Binding Description, Mode=TwoWay}" />
-            </DataTemplate>
-          </ComboBox.ItemTemplate>
-        </ComboBox>
+        <AutoCompleteBox Grid.Row="2" Grid.Column="3" Margin="10" ItemsSource="{Binding InventoryTypes}" Text="{Binding CurrentItem.InventoryType}"></AutoCompleteBox>
+        <!-- <ComboBox Grid.Column="3" Grid.Row="2" Margin="10" Width="300" ItemsSource="{Binding InventoryTypes} " -->
+        <!--           SelectedItem="{Binding CurrentItem.InventoryType, Mode=TwoWay}" AutoScrollToSelectedItem="False"> -->
+        <!--   <ComboBox.ItemTemplate> -->
+        <!--     <DataTemplate > -->
+        <!--       <TextBlock Text="{Binding Description, Mode=TwoWay}" /> -->
+        <!--     </DataTemplate> -->
+        <!--   </ComboBox.ItemTemplate> -->
+        <!-- </ComboBox> -->
     
         <Label Grid.Row="3" Grid.Column="0" Margin="10,15,0,0">Original Value: </Label>
         <TextBox Grid.Row="3" Grid.Column="1" Margin="10" Text="{Binding CurrentItem.OriginalValue}"></TextBox>

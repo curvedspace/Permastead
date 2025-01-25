@@ -486,8 +486,8 @@ namespace DataAccess.Server
 			CREATE TABLE IF NOT EXISTS Inventory(
 				Id integer primary key generated always as identity,
 				Description VARCHAR (2000) NOT NULL,
-				InventoryGroupId INTEGER NOT NULL,
-				InventoryTypeId INTEGER NOT NULL,
+				Igroup TEXT,
+				Itype TEXT,
 				OriginalValue REAL,
 				CurrentValue REAL,	
 				Brand TEXT,

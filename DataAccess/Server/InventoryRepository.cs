@@ -15,13 +15,11 @@ public static class InventoryRepository
             Inventory inv;
 
             string sqlQuery =
-                "SELECT i.Id, i.Description, i.InventoryGroupId, i.InventoryTypeId, i.OriginalValue, i.CurrentValue, " +
+                "SELECT i.Id, i.Description, i.IGroup, i.IType, i.OriginalValue, i.CurrentValue, " +
                 "i.Brand, i.Notes, i.CreationDate, i.StartDate, i.EndDate, i.LastUpdated, i.AuthorId, p.FirstName, p.LastName,  " +
-                "it.Description it_desc, ig.Description ig_desc, i.Room, i.Quantity, i.ForSale " +
-                "FROM Inventory i, InventoryGroup ig, InventoryType it, Person p " +
-                "WHERE i.InventoryGroupId  = ig.Id  " +
-                "AND i.InventoryTypeId  = it.Id  " +
-                "AND i.AuthorId = p.Id ";
+                "i.Room, i.Quantity, i.ForSale " +
+                "FROM Inventory i, Person p " +
+                "WHERE i.AuthorId = p.Id ";
 
             using (IDbConnection connection = new NpgsqlConnection(conn))
             {
@@ -37,8 +35,8 @@ public static class InventoryRepository
                         inv = new Inventory();
                         inv.Id = Convert.ToInt64(dr[0].ToString());
                         inv.Description = dr[1].ToString()!;
-                        inv.InventoryGroup.Id = Convert.ToInt64(dr[2].ToString());
-                        inv.InventoryType.Id = Convert.ToInt64(dr[3].ToString());
+                        inv.InventoryGroup = dr[2].ToString()!;
+                        inv.InventoryType = dr[3].ToString()!;
                         inv.OriginalValue = Convert.ToDouble(dr[4].ToString());
                         inv.CurrentValue = Convert.ToDouble(dr[5].ToString());
                         inv.Brand = dr[6].ToString()!;
@@ -54,13 +52,10 @@ public static class InventoryRepository
                         inv.Author.FirstName = dr[13].ToString();
                         inv.Author.LastName = dr[14].ToString();
                         
-                        inv.InventoryType.Description = dr[15].ToString();
-                        inv.InventoryGroup.Description = dr[16].ToString();
-
-                        inv.Room = dr[17].ToString()!;
-                        inv.Quantity = Convert.ToInt64(dr[18].ToString());
+                        inv.Room = dr[15].ToString()!;
+                        inv.Quantity = Convert.ToInt64(dr[16].ToString());
                         
-                        inv.ForSale = Convert.ToBoolean(dr[19].ToString());
+                        inv.ForSale = Convert.ToBoolean(dr[17].ToString());
 
                         myInventory.Add(inv);
                     }
@@ -151,15 +146,91 @@ public static class InventoryRepository
         }
     }
     
+    public static List<string> GetAllGroups(string conn)
+    {
+        try
+        {
+            var objs = new List<string>();
+            Inventory inv;
+
+            string sqlQuery =
+                "SELECT DISTINCT(i.Igroup) " +
+                "FROM Inventory i ";
+
+            using (IDbConnection connection = new NpgsqlConnection(conn))
+            {
+                connection.Open();
+
+                using (IDbCommand command = connection.CreateCommand())
+                {
+                    command.CommandText = sqlQuery;
+                    var dr = command.ExecuteReader();
+
+                    while (dr.Read())
+                    {
+                        if (!objs.Contains(dr[0].ToString().Trim()))
+                        {
+                            objs.Add(dr[0].ToString().Trim());
+                        }
+                    }
+                }
+            }
+
+            return objs;
+        }
+        catch
+        {
+            return new List<string>();
+        }
+    }
+    
+    public static List<string> GetAllTypes(string conn)
+    {
+        try
+        {
+            var objs = new List<string>();
+            Inventory inv;
+
+            string sqlQuery =
+                "SELECT DISTINCT(i.Itype) " +
+                "FROM Inventory i ";
+
+            using (IDbConnection connection = new NpgsqlConnection(conn))
+            {
+                connection.Open();
+
+                using (IDbCommand command = connection.CreateCommand())
+                {
+                    command.CommandText = sqlQuery;
+                    var dr = command.ExecuteReader();
+
+                    while (dr.Read())
+                    {
+                        if (!objs.Contains(dr[0].ToString().Trim()))
+                        {
+                            objs.Add(dr[0].ToString().Trim());
+                        }
+                    }
+                }
+            }
+
+            return objs;
+        }
+        catch
+        {
+            return new List<string>();
+        }
+    }
+    
     public static bool Insert(Inventory inventory)
     {
         try
         {
             using (IDbConnection db = new NpgsqlConnection(DataConnection.GetServerConnectionString()))
             {
-                string sqlQuery = "INSERT INTO Inventory (Description, StartDate, EndDate, CreationDate, InventoryTypeId, InventoryGroupId, AuthorId, OriginalValue," +
+                string sqlQuery = "INSERT INTO Inventory (Description, StartDate, EndDate, CreationDate, IType, IGroup, AuthorId, OriginalValue," +
                     "CurrentValue, Brand, Notes, Room, Quantity, ForSale, LastUpdated) " +
-                    "VALUES(@Description, @StartDate, @EndDate, CURRENT_DATE, @InventoryTypeId, @InventoryGroupId, @AuthorId, @OriginalValue, @CurrentValue, " +
+                    "VALUES(@Description, @StartDate, @EndDate, CURRENT_DATE, @InventoryType, @InventoryGroup, @AuthorId, @OriginalValue, @CurrentValue, " +
                     "@Brand, @Notes, @Room, @Quantity, @ForSale, CURRENT_TIMESTAMP);";
 
                 return (db.Execute(sqlQuery, inventory) == 1);
@@ -180,8 +251,8 @@ public static class InventoryRepository
                 using (IDbConnection db = new NpgsqlConnection(DataConnection.GetServerConnectionString()))
                 {
                     string sqlQuery =
-                        "UPDATE Inventory SET Description = @Description, StartDate = @StartDate, EndDate = @EndDate, InventoryTypeId = @InventoryTypeId, " +
-                        "InventoryGroupId = @InventoryGroupId, AuthorId = @AuthorId, OriginalValue = @OriginalValue, CurrentValue = @CurrentValue, " +
+                        "UPDATE Inventory SET Description = @Description, StartDate = @StartDate, EndDate = @EndDate, IType = @InventoryType, " +
+                        "IGroup = @InventoryGroup, AuthorId = @AuthorId, OriginalValue = @OriginalValue, CurrentValue = @CurrentValue, " +
                         "Brand = @Brand, Notes = @Notes, Room = @Room, Quantity = @Quantity, ForSale = @ForSale, LastUpdated = CURRENT_TIMESTAMP " +
                         "WHERE Id = @Id;";
 

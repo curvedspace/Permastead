@@ -13,10 +13,10 @@ namespace Permastead.ViewModels.Dialogs;
 public partial class InventoryWindowViewModel: ViewModelBase
 {
     [ObservableProperty] 
-    private ObservableCollection<InventoryGroup> _inventoryGroups;
+    private ObservableCollection<string> _inventoryGroups;
     
     [ObservableProperty] 
-    private ObservableCollection<InventoryType> _inventoryTypes;
+    private ObservableCollection<string> _inventoryTypes;
     
     [ObservableProperty] 
     private ObservableCollection<Person> _people;
@@ -37,8 +37,8 @@ public partial class InventoryWindowViewModel: ViewModelBase
         try
         {
             //get code tables
-            _inventoryGroups = new ObservableCollection<InventoryGroup>(Services.InventoryGroupService.GetAllInventoryGroups(AppSession.ServiceMode));
-            _inventoryTypes = new ObservableCollection<InventoryType>(Services.InventoryTypeService.GetAllInventoryTypes(AppSession.ServiceMode));
+            _inventoryGroups = new ObservableCollection<string>(Services.InventoryService.GetAllGroups(AppSession.ServiceMode));
+            _inventoryTypes = new ObservableCollection<string>(Services.InventoryService.GetAllTypes(AppSession.ServiceMode));
             _people = new ObservableCollection<Person>(Services.PersonService.GetAllPeople(AppSession.ServiceMode));
             _brands = new ObservableCollection<string>(Services.InventoryService.GetAllBrands(AppSession.ServiceMode));
             _rooms = new ObservableCollection<string>(Services.InventoryService.GetAllRooms(AppSession.ServiceMode));
@@ -57,8 +57,8 @@ public partial class InventoryWindowViewModel: ViewModelBase
         _currentItem = inventory;
         ControlViewModel = obsVm;
         
-        _currentItem.InventoryGroup = _inventoryGroups.First(x => x.Id == inventory.InventoryGroup.Id);
-        _currentItem.InventoryType = _inventoryTypes.First(x => x.Id == inventory.InventoryType.Id);
+        //_currentItem.InventoryGroup = _inventoryGroups.First(x => x.Id == inventory.InventoryGroup.Id);
+        //_currentItem.InventoryType = _inventoryTypes.First(x => x.Id == inventory.InventoryType.Id);
         _currentItem.Author = _people.First(x => x.Id == inventory.Author.Id);
 
     }
