@@ -6,6 +6,7 @@
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="Permastead.Views.MainWindow"
         Icon="/Assets/App.png"
+        WindowStartupLocation="CenterScreen"
         Title="Permastead">
         <views:MainView />
 </Window>
