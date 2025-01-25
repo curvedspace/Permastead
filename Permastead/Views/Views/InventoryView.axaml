@@ -21,17 +21,18 @@
       <TextBlock FontWeight="Bold" Margin="20,24,20,20">Inventory</TextBlock>
       <Button Command="{Binding RefreshInventoryCommand}" Name="Refresh" HorizontalAlignment="Right" Margin="10,10,0,10">Refresh</Button>
       <!-- <Button Command="{Binding SaveToDoCommand}" Name="Save" HorizontalAlignment="Right" Margin="10,10,0,10">Add</Button> -->
+      <Button Tapped="Add_OnClick" x:Name="Add" HorizontalAlignment="Right" Margin="20,20">Add</Button> 
         
-        <SplitButton x:Name="AddButton" Content="Add Inventory" Margin="20,20,20,20" >
-          <SplitButton.Flyout>
-            <MenuFlyout Placement="Bottom">
-              <MenuItem Header="Item..." Click="Add_OnClick" />
-              <Separator/>
-              <MenuItem Header="Group..." Click="AddGroupMenuItem_OnClick"/>
-              <MenuItem Header="Type..." Click="AddTypeMenuItem_OnClick"/>
-            </MenuFlyout>
-          </SplitButton.Flyout>
-        </SplitButton>
+        <!-- <SplitButton x:Name="AddButton" Content="Add Inventory" Margin="20,20,20,20" > -->
+        <!--   <SplitButton.Flyout> -->
+        <!--     <MenuFlyout Placement="Bottom"> -->
+        <!--       <MenuItem Header="Item..." Click="Add_OnClick" /> -->
+        <!--       <Separator/> -->
+        <!--       <MenuItem Header="Group..." Click="AddGroupMenuItem_OnClick"/> -->
+        <!--       <MenuItem Header="Type..." Click="AddTypeMenuItem_OnClick"/> -->
+        <!--     </MenuFlyout> -->
+        <!--   </SplitButton.Flyout> -->
+        <!-- </SplitButton> -->
         
         <!-- <Button Click="Add_OnClick" x:Name="Add" HorizontalAlignment="Right" Margin="10,20">Add</Button>  -->
         
