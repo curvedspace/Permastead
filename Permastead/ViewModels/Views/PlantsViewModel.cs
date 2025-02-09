@@ -1,7 +1,10 @@
 using System.Collections.ObjectModel;
+using Avalonia.Controls;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Models;
+using Permastead.ViewModels.Dialogs;
+using Permastead.Views.Dialogs;
 using Permastead.Views.Views;
 using Serilog;
 using Serilog.Context;
@@ -29,6 +32,42 @@ public partial class PlantsViewModel : ViewModelBase
     private void RefreshData()
     {
         RefreshDataOnly();
+    }
+
+    [RelayCommand]
+    private void DeletePlant()
+    {
+        
+    }
+    
+    [RelayCommand]
+    private void AddStarter()
+    {
+        var win = new StarterWindow();
+        
+        var newSeedPacket = new SeedPacket();
+        newSeedPacket.Author = AppSession.Instance.CurrentUser;
+        newSeedPacket.Description = CurrentPlant.Description;
+        newSeedPacket.Plant!.Id = CurrentPlant.Id;
+        newSeedPacket.Code = CurrentPlant.Code;
+
+        
+        var seedsVm = new SeedsViewModel();
+        var vm = new StarterWindowViewModel(newSeedPacket);
+        
+        
+        vm.ControlViewModel =  new SeedsViewModel();
+        
+        win.DataContext = vm;
+        
+        win.Topmost = true;
+        win.Width = 800;
+        win.Height = 650;
+        win.Opacity = 0.95;
+        win.Title = "New Plant Starter";
+        win.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+                
+        win.Show();
     }
 
     public PlantsViewModel()

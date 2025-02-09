@@ -32,6 +32,27 @@
                                     </Border>
                                 </DataTemplate>
                             </ListBox.ItemTemplate>
+                            
+                            <ListBox.ContextMenu>
+                            <ContextMenu>
+                            
+                                <MenuItem Command="{Binding AddStarterCommand}" Header="Create a Starter..." IsEnabled="True">
+                                    <MenuItem.Icon>
+                                        <PathIcon Data="{StaticResource add_square_regular}"/>
+                                    </MenuItem.Icon>
+                                </MenuItem>
+                            
+                                <Separator></Separator>
+                                
+                                <MenuItem IsEnabled="False" Command="{Binding DeletePlantCommand}" Header="Remove Plant From List...">
+                                    <MenuItem.Icon>
+                                        <PathIcon Data="{StaticResource delete_regular}"/>
+                                    </MenuItem.Icon>
+                                </MenuItem>
+                                
+                            </ContextMenu>
+                            </ListBox.ContextMenu>
+                            
                         </ListBox>
                     </ScrollViewer>
                 </SplitView.Pane>
