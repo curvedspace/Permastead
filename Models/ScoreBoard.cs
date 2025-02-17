@@ -20,6 +20,10 @@ public class ScoreBoard
     
     public decimal SeedPackets { get; set; }
     
+    public decimal Harvests { get; set; }
+    
+    public decimal Preservations { get; set; }
+    
     public decimal ActionsToObservationsRatio { get; set; }
 
     public decimal LevelProgress

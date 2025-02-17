@@ -12,6 +12,8 @@ public enum AchievementType
     EngageBot,
     SaveSeed,
     TagMistake,
-    TagFixMistake
+    TagFixMistake,
+    AddHarvest,
+    AddPreservation
     
 }

@@ -31,7 +31,9 @@ public static class ScoreBoardService
             { AchievementType.AddEvent, new Achievement() { Type = AchievementType.AddEvent, InitialPoints = 100 } },
             { AchievementType.AddFermentation, new Achievement() { Type = AchievementType.AddObservation, InitialPoints = 100 } },
             { AchievementType.AddSeedPacket, new Achievement() { Type = AchievementType.AddSeedPacket, InitialPoints = 100 } },
-            { AchievementType.SaveSeed, new Achievement() { Type = AchievementType.SaveSeed, InitialPoints = 50 } }
+            { AchievementType.SaveSeed, new Achievement() { Type = AchievementType.SaveSeed, InitialPoints = 50 } },
+            { AchievementType.AddHarvest, new Achievement() { Type = AchievementType.AddHarvest, InitialPoints = 100 } },
+            { AchievementType.AddPreservation, new Achievement() { Type = AchievementType.AddPreservation, InitialPoints = 100 } }
         };
 
         var obs = ObservationsService.GetObservationsForAllEntities(mode);
@@ -40,12 +42,16 @@ public static class ScoreBoardService
         var plantings = PlantingsService.GetPlantings(mode);
         var seedPackets = PlantingsService.GetSeedPackets(mode);
         var events = EventsService.GetAllEvents(mode);
+        var harvests = HarvestService.GetAllHarvests(mode);
+        var preservations = FoodPreservationService.GetAll(mode);
 
         scoreBoard.Actions = todos.Count;
         scoreBoard.Observations = obs.Count;
         scoreBoard.Plantings = plantings.Count;
         scoreBoard.SeedPackets = seedPackets.Count;
         scoreBoard.Events = events.Count;
+        scoreBoard.Harvests = harvests.Count;
+        scoreBoard.Preservations = preservations.Count;
 
         //iterate through data
        
@@ -92,6 +98,22 @@ public static class ScoreBoardService
         {
             eventAchievement.Count += 1;
             scoreBoard.TotalScore += eventAchievement.CurrentPoints;
+        }
+        
+        //events
+        var harvestsAchievement = achievements[AchievementType.AddHarvest];
+        foreach (var e in harvests)
+        {
+            harvestsAchievement.Count += 1;
+            scoreBoard.TotalScore += harvestsAchievement.CurrentPoints;
+        }
+        
+        //events
+        var preservationAchievement = achievements[AchievementType.AddPreservation];
+        foreach (var e in preservations)
+        {
+            preservationAchievement.Count += 1;
+            scoreBoard.TotalScore += preservationAchievement.CurrentPoints;
         }
 
         // bonus calculation - observations
