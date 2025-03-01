@@ -20,7 +20,7 @@ namespace DataAccess.Local
             var sql = "SELECT p.Description, p.Comment, p.Family, p.Url, p.CreationDate, p.StartDate, p.EndDate, p.AuthorId, " + 
                 "per.FirstName, per.LastName, p.Id, p.code " +
                 "FROM Plant p, Person per " + 
-                "WHERE per.Id = p.AuthorId ORDER BY p.Description ASC";
+                "WHERE per.Id = p.AuthorId AND (p.EndDate is null OR p.EndDate > DATE()) ORDER BY p.Description ASC";
 
             using (IDbConnection connection = new SqliteConnection(connectionString))
             {

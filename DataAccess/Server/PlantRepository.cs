@@ -21,7 +21,7 @@ namespace DataAccess.Server
             var sql = "SELECT p.Description, p.Comment, p.Family, p.Url, p.CreationDate, p.StartDate, p.EndDate, p.AuthorId, " + 
                 "per.FirstName, per.LastName, p.Id, p.code " +
                 "FROM Plant p, Person per " + 
-                "WHERE per.Id = p.AuthorId ORDER BY p.Description ASC";
+                "WHERE per.Id = p.AuthorId AND (p.EndDate is null OR p.EndDate > CURRENT_DATE+1) ORDER BY p.Description ASC";
 
             using (IDbConnection connection = new NpgsqlConnection(connectionString))
             {
@@ -138,6 +138,23 @@ namespace DataAccess.Server
                     string sqlQuery = "UPDATE Plant SET Code = @Code, Description = @Description, StartDate = @StartDate, EndDate = @EndDate, " +
                                       "Comment = @Comment, Family = @Family, Url = @Url, AuthorId = @AuthorId " + 
                                       "WHERE Id = @Id;";
+
+                    return (db.Execute(sqlQuery, plant) == 1);
+                }
+            }
+            catch
+            {
+                return false;
+            }
+        }
+        
+        public static bool Delete(Plant plant)
+        {
+            try
+            {
+                using (IDbConnection db = new NpgsqlConnection(DataConnection.GetServerConnectionString()))
+                {
+                    string sqlQuery = "UPDATE Plant SET EndDate = @EndDate WHERE Id = @Id;";
 
                     return (db.Execute(sqlQuery, plant) == 1);
                 }

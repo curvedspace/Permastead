@@ -68,5 +68,28 @@ namespace Services
 
             return rtnValue;
         }
+
+        public static bool DeleteRecord(ServiceMode serviceMode, Plant? plant)
+        {
+            if (plant != null)
+            {
+                
+                if (serviceMode == ServiceMode.Local)
+                {
+                    plant.EndDate = DateTime.Now;
+                    return CommitRecord(serviceMode, plant);
+                }
+                else
+                {
+                    plant.EndDate = DateTime.Now;
+                    return CommitRecord(serviceMode, plant);
+                }
+            }
+            else
+            {
+                return false;
+            }
+            
+        }
     }
 }

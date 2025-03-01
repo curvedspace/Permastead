@@ -37,7 +37,19 @@ public partial class PlantsViewModel : ViewModelBase
     [RelayCommand]
     private void DeletePlant()
     {
+        bool rtnValue;
+
+        rtnValue = Services.PlantService.DeleteRecord(AppSession.ServiceMode, CurrentPlant);
         
+        OnPropertyChanged(nameof(CurrentPlant));
+            
+        using (LogContext.PushProperty("PlantsViewModel", this))
+        {
+            if (CurrentPlant.Id == 0) CurrentPlant.Author = AppSession.Instance.CurrentUser;
+            Log.Information("Removed plant: " + CurrentPlant.Description, rtnValue);
+        }
+        
+        RefreshDataOnly();
     }
     
     [RelayCommand]
