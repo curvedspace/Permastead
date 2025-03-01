@@ -78,4 +78,35 @@ public partial class PlantsView : UserControl
             Console.WriteLine(exception);
         }
     }
+
+    private void SearchBox_OnKeyDown(object? sender, KeyEventArgs e)
+    {
+        // if the key is return, do a search and filter the grid data
+        if (e.Key == Key.Return)
+        {
+            var textValue = SearchBox.Text;
+            var vm = (PlantsViewModel)this.DataContext;
+
+            if (vm != null)
+            {
+                vm.RefreshDataOnly(textValue);
+            }
+        }
+
+        if (e.Key == Key.Escape)
+        {
+            var vm = (PlantsViewModel)this.DataContext;
+
+            if (vm != null)
+            {
+                vm.SearchText = "";
+                vm.RefreshDataOnly(vm.SearchText);
+            }
+        }
+    }
+
+    private void TextBox_OnTextChanged(object? sender, TextChangedEventArgs e)
+    {
+        
+    }
 }

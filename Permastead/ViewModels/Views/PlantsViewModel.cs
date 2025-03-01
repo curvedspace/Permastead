@@ -28,10 +28,13 @@ public partial class PlantsViewModel : ViewModelBase
     [ObservableProperty] 
     private long _plantsCount;
     
+    [ObservableProperty] private string _searchText = "";
+    
+
     [RelayCommand]
     private void RefreshData()
     {
-        RefreshDataOnly();
+        RefreshDataOnly(SearchText);
     }
 
     [RelayCommand]
@@ -50,6 +53,13 @@ public partial class PlantsViewModel : ViewModelBase
         }
         
         RefreshDataOnly();
+    }
+    
+    [RelayCommand]
+    private void ClearSearch()
+    {
+        SearchText = "";
+        RefreshDataOnly(SearchText);
     }
     
     [RelayCommand]
@@ -91,18 +101,33 @@ public partial class PlantsViewModel : ViewModelBase
     {
         SeedPackets = new ObservableCollection<SeedPacket>(Services.PlantingsService.GetSeedPacketForPlant(AppSession.ServiceMode, CurrentPlant.Id));
         Plantings = new ObservableCollection<Planting>(Services.PlantingsService.GetPlantingsForPlant(AppSession.ServiceMode, CurrentPlant.Id));
-        
     }
     
-    public void RefreshDataOnly()
+    public void RefreshDataOnly(string filterText = "")
     {
         var myPlants = Services.PlantService.GetAllPlants(AppSession.ServiceMode);
+        var caseAdjustedFilterText = filterText.Trim().ToLowerInvariant();
 
-        _plants.Clear();
+        Plants.Clear();
+        
         foreach (var p in myPlants)
         {
-            _plants.Add(p);
-            if (CurrentPlant == null) CurrentPlant = p;
+            
+            if (string.IsNullOrEmpty(caseAdjustedFilterText))
+            {
+                _plants.Add(p);
+                if (CurrentPlant == null) CurrentPlant = p;
+            }
+            else
+            {
+                if (p.Description.ToLowerInvariant().Contains(caseAdjustedFilterText) ||
+                    p.Comment.ToLowerInvariant().Contains(caseAdjustedFilterText) ||
+                    p.Family.ToLowerInvariant().Contains(caseAdjustedFilterText))
+                {
+                    _plants.Add(p);
+                }
+            }
+            
         }
         
         PlantsCount = _plants.Count;

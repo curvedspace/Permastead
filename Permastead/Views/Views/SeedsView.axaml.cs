@@ -79,7 +79,7 @@ public partial class SeedsView : UserControl
 
     private void TextBox_OnTextChanged(object? sender, TextChangedEventArgs e)
     {
-        Console.WriteLine(sender.ToString() + ": " + e);
+        //Console.WriteLine(sender.ToString() + ": " + e);
     }
 
     private void SearchBox_OnKeyDown(object? sender, KeyEventArgs e)
