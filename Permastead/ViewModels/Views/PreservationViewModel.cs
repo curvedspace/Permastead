@@ -197,6 +197,39 @@ public partial class PreservationViewModel : ViewModelBase
             preservationWindow.Show();
         }
     }
+
+    [RelayCommand]
+    public void CreateInventoryRecord()
+    {
+        // open the selected planting in a window for viewing/editing
+        var inventoryWindow = new InventoryWindow();
+        
+        //get the selected row in the list
+        var current = CurrentItem;
+        
+        if (current != null)
+        {
+            var vm = new InventoryWindowViewModel();
+
+            vm.CurrentItem.Description = CurrentItem.Name;
+            vm.CurrentItem.Brand = "Homemade";
+            vm.CurrentItem.Quantity = 1;
+            vm.CurrentItem.InventoryGroup = "Food";
+            vm.CurrentItem.InventoryType = "Preserved";
+            vm.CurrentItem.Room = "Kitchen";
+            vm.CurrentItem.Author = vm.People.First(x => x.Id == AppSession.Instance.CurrentUser.Id);
+
+            inventoryWindow.DataContext = vm;
+
+            inventoryWindow.Topmost = true;
+            inventoryWindow.Width = 1000;
+            inventoryWindow.Height = 650;
+            inventoryWindow.Opacity = 0.95;
+            inventoryWindow.Title = "Inventory - " + current.Name;
+            inventoryWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+            inventoryWindow.Show();
+        }
+    }
     
     public PreservationViewModel()
     {

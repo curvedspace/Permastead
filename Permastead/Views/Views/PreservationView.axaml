@@ -47,7 +47,7 @@
                         </MenuItem>
                                   
                         <Separator></Separator>
-                        <MenuItem Header="Move to Inventory..." IsEnabled="True">
+                        <MenuItem Command="{Binding CreateInventoryRecordCommand}" Header="Move to Inventory..." IsEnabled="True">
                             <MenuItem.Icon>
                                 <PathIcon Data="{StaticResource clipboard_letter_regular}"/>
                             </MenuItem.Icon>
