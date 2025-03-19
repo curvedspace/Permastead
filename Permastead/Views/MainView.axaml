@@ -23,6 +23,9 @@
                     <Button Name="DashboardButton" ToolTip.Tip="Dashboard " Command="{Binding OpenDashboardViewCommand}">
                         <Image Width="16" Height="16" Source="/Assets/statistics.png" />
                     </Button>
+                    <Button Name="FinderButton" ToolTip.Tip="Finder " Command="{Binding OpenFinderViewCommand}">
+                        <Image Width="16" Height="16" Source="/Assets/magnifier.png" />
+                    </Button>
                     <Button Name="ObservationsButton" ToolTip.Tip="Observations " Margin="20,0,0,0" Command="{Binding OpenObservationViewCommand}">
                         <Image Width="16" Height="16" Source="/Assets/web_template_editor.png" />
                     </Button>

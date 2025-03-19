@@ -30,6 +30,7 @@ namespace Permastead.ViewModels
         {
             new HomeViewModel(),
             new DashboardViewModel(),
+            new FinderViewModel(),
             new ObservationsViewModel(),
             new ToDoViewModel(),
             new EventsViewModel(),
@@ -73,39 +74,46 @@ namespace Permastead.ViewModels
             CurrentView = Views[1];
             CurrentViewName = "Dashboard";
         }
+        
+        [RelayCommand]
+        private void OpenFinderView()
+        {
+            CurrentView = Views[2];
+            CurrentViewName = "Finder";
+        }
 
         [RelayCommand]
         private void OpenObservationView()
         {
-            CurrentView = Views[2];
+            CurrentView = Views[3];
             CurrentViewName = "Observations";
         }
         
         [RelayCommand]
         private void OpenToDoView()
         {
-            CurrentView = Views[3];
+            CurrentView = Views[4];
             CurrentViewName = "Actions";
         }
         
         [RelayCommand]
         private void OpenEventsView()
         {
-            CurrentView = Views[4];
+            CurrentView = Views[5];
             CurrentViewName = "Events";
         }
         
         [RelayCommand]
         private void OpenInventoryView()
         {
-            CurrentView = Views[5];
+            CurrentView = Views[6];
             CurrentViewName = "Inventory";
         }
         
         [RelayCommand]
         private void OpenProceduresView()
         {
-            CurrentView = Views[6];
+            CurrentView = Views[7];
             CurrentViewName = "Procedures";
         }
         
@@ -113,63 +121,63 @@ namespace Permastead.ViewModels
         [RelayCommand]
         private void OpenPlantsView()
         {
-            CurrentView = Views[7];
+            CurrentView = Views[8];
             CurrentViewName = "Plants";
         }
         
         [RelayCommand]
         private void OpenSeedsView()
         {
-            CurrentView = Views[8];
+            CurrentView = Views[9];
             CurrentViewName = "Starters";
         }
         
         [RelayCommand]
         private void OpenPlantingsView()
         {
-            CurrentView = Views[9];
+            CurrentView = Views[10];
             CurrentViewName = "Plantings";
         }
         
         [RelayCommand]
         private void OpenAnimalsView()
         {
-            CurrentView = Views[10];
+            CurrentView = Views[11];
             CurrentViewName = "Animals";
         }
         
         [RelayCommand]
         private void OpenHarvestsView()
         {
-            CurrentView = Views[11];
+            CurrentView = Views[12];
             CurrentViewName = "Harvests";
         }
         
         [RelayCommand]
         private void OpenPreservationView()
         {
-            CurrentView = Views[12];
+            CurrentView = Views[13];
             CurrentViewName = "Food Preservation";
         }
         
         [RelayCommand]
         private void OpenPeopleView()
         {
-            CurrentView = Views[13];
+            CurrentView = Views[14];
             CurrentViewName = "People";
         }
         
         [RelayCommand]
         private void OpenWeatherView()
         {
-            CurrentView = Views[14];
+            CurrentView = Views[15];
             CurrentViewName = "Weather";
         }
         
         [RelayCommand]
         private void OpenSettingsView()
         {
-            CurrentView = Views[15];
+            CurrentView = Views[16];
             CurrentViewName = "Settings";
         }
         
