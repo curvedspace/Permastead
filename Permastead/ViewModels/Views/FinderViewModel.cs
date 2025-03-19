@@ -69,6 +69,8 @@ public partial class FinderViewModel : ViewModelBase
                 new TextColumn<SearchResult, string>
                     ("Entity Name", x => x.Entity.Name),
                 new TextColumn<SearchResult, string>
+                    ("Sub Type", x => x.SubType),
+                new TextColumn<SearchResult, string>
                     ("Field", x => x.FieldName),
                 new TextColumn<SearchResult, string>
                     ("Text Found", x => x.SearchText)

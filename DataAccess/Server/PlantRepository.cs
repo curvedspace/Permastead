@@ -88,6 +88,7 @@ namespace DataAccess.Server
                         result.IsCurrent = true;
                         result.Entity.Id = Convert.ToInt64(dr[10].ToString());
                         result.Entity.Name = "Plant";
+                        result.SubType = dr[0].ToString()!;
                         result.FieldName = "Comment";
                         result.SearchText = dr[1].ToString()!;
 
@@ -119,6 +120,7 @@ namespace DataAccess.Server
                         result.IsCurrent = true;
                         result.Entity.Id = Convert.ToInt64(dr[10].ToString());
                         result.Entity.Name = "Plant";
+                        result.SubType = dr[0].ToString()!;
                         result.FieldName = "Description";
                         result.SearchText = dr[0].ToString()!;
 
@@ -150,6 +152,7 @@ namespace DataAccess.Server
                         result.IsCurrent = true;
                         result.Entity.Id = Convert.ToInt64(dr[10].ToString());
                         result.Entity.Name = "Plant";
+                        result.SubType = dr[0].ToString()!;
                         result.FieldName = "Family";
                         result.SearchText = dr[2].ToString()!;
 

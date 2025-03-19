@@ -171,7 +171,7 @@ namespace DataAccess.Local
 
         public static List<SearchResult> GetSearchResults(string connectionString, string searchText)
         {
-            var sql = "SELECT o.Comment, o.CreationDate, o.Id FROM Observation o WHERE lower(o.Comment) LIKE '%" + searchText.ToLowerInvariant() + "%' ORDER BY o.CreationDate DESC";
+            var sql = "SELECT o.Comment, o.CreationDate, o.Id, ct.Description FROM Observation o, CommentType ct  WHERE  ct.Id = o.CommentTypeId AND lower(o.Comment) LIKE '%" + searchText.ToLowerInvariant() + "%' ORDER BY o.CreationDate DESC";
             var results = new List<SearchResult>();
 
             using (IDbConnection connection = new SqliteConnection(connectionString))
@@ -190,6 +190,7 @@ namespace DataAccess.Local
                         result.IsCurrent = true;
                         result.Entity.Id =  Convert.ToInt64(dr[2].ToString());
                         result.Entity.Name = "Observation";
+                        result.SubType = dr[3].ToString()!;
                         result.FieldName = "Comment";
                         result.SearchText = dr[0].ToString()!;
                         

@@ -8,6 +8,8 @@ public class SearchResult
     
     public Entity Entity { get; set; }
     
+    public string SubType { get; set; }
+    
     public string FieldName { get; set; }
     
     public string SearchText { get; set; }
@@ -18,6 +20,7 @@ public class SearchResult
     {
         AsOfDate = DateTime.Now;
         Entity = new Entity();
+        SubType = "";
         FieldName = "";
         SearchText = "";
         IsCurrent = false;

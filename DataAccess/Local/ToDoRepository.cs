@@ -106,6 +106,7 @@ namespace DataAccess.Local
                         result.IsCurrent = true;
                         result.Entity.Id =  Convert.ToInt64(dr[0].ToString());
                         result.Entity.Name = "Action";
+                        result.SubType = dr[7].ToString()!;
                         result.FieldName = "Description";
                         result.SearchText = dr[1].ToString()!;
                         
