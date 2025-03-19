@@ -169,6 +169,38 @@ namespace DataAccess.Local
             return sb;
         }
 
+        public static List<SearchResult> GetSearchResults(string connectionString, string searchText)
+        {
+            var sql = "SELECT o.Comment, o.CreationDate, o.Id FROM Observation o WHERE lower(o.Comment) LIKE '%" + searchText.ToLowerInvariant() + "%' ORDER BY o.CreationDate DESC";
+            var results = new List<SearchResult>();
+
+            using (IDbConnection connection = new SqliteConnection(connectionString))
+            {
+                connection.Open();
+
+                using (IDbCommand command = connection.CreateCommand())
+                {
+                    command.CommandText = sql;
+                    var dr = command.ExecuteReader();
+
+                    while (dr.Read())
+                    {
+                        var result = new SearchResult();
+                        result.AsOfDate = Convert.ToDateTime(dr[1].ToString());
+                        result.IsCurrent = true;
+                        result.Entity.Id =  Convert.ToInt64(dr[2].ToString());
+                        result.Entity.Name = "Observation";
+                        result.FieldName = "Comment";
+                        result.SearchText = dr[0].ToString()!;
+                        
+                        results.Add(result);
+                    }
+                }
+            }
+
+            return results;
+        }
+        
         public static bool InsertObservation(string connectionString, Observation obs)
         {
             var rtnValue = false;
