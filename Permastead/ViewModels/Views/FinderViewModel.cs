@@ -29,6 +29,9 @@ public partial class FinderViewModel : ViewModelBase
 
     [ObservableProperty]
     private SearchResult _currentItem;
+    
+    [ObservableProperty]
+    private bool _haveResults;
 
     public FlatTreeDataGridSource<SearchResult> SearchResultsSource { get; set; }
     
@@ -38,6 +41,7 @@ public partial class FinderViewModel : ViewModelBase
         SearchText = "";
         Results.Clear();
         ResultsCount = Results.Count;
+        HaveResults = false;
     }
     
     [RelayCommand]
@@ -49,6 +53,7 @@ public partial class FinderViewModel : ViewModelBase
     public void RefreshDataOnly(string textValue)
     {
         Results.Clear();
+        HaveResults = false;
         
         var tempResults = new List<SearchResult>();
         
@@ -83,6 +88,8 @@ public partial class FinderViewModel : ViewModelBase
             CurrentItem = new SearchResult();
 
         ResultsCount = Results.Count;
+        
+        if (ResultsCount > 0) HaveResults = true;
     }
     
     public FinderViewModel()
