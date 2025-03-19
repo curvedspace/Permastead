@@ -60,7 +60,7 @@ namespace DataAccess.Local
             }
         }
 
-         public static List<SearchResult> GetSearchResults(string connectionString, string searchText)
+        public static List<SearchResult> GetSearchResults(string connectionString, string searchText)
         {
             var results = new List<SearchResult>();
             

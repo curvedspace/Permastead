@@ -35,11 +35,21 @@ public class FinderService
             //now plants
             if (mode == ServiceMode.Local)
             {
-                //items.AddRange(DataAccess.Local.ToDoRepository.GetSearchResults(DataConnection.GetServerConnectionString(),  searchText));
+                items.AddRange(DataAccess.Local.ToDoRepository.GetSearchResults(DataConnection.GetServerConnectionString(),  searchText));
             }
             else
             {
                 items.AddRange(DataAccess.Server.PlantRepository.GetSearchResults(DataConnection.GetServerConnectionString(),  searchText));
+            }
+            
+            //now inventory
+            if (mode == ServiceMode.Local)
+            {
+                items.AddRange(DataAccess.Local.InventoryRepository.GetSearchResults(DataConnection.GetServerConnectionString(),  searchText));
+            }
+            else
+            {
+                items.AddRange(DataAccess.Server.InventoryRepository.GetSearchResults(DataConnection.GetServerConnectionString(),  searchText));
             }
         }
         

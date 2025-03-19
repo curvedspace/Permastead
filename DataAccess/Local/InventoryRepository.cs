@@ -70,6 +70,114 @@ public static class InventoryRepository
         }
     }
     
+    public static List<SearchResult> GetSearchResults(string connectionString, string searchText)
+        {
+            var results = new List<SearchResult>();
+            
+            var sql = "SELECT i.Id, i.Description, i.IGroup, i.IType, i.OriginalValue, i.CurrentValue, " +
+                "i.Brand, i.Notes, i.CreationDate, i.StartDate, i.EndDate, i.LastUpdated, i.AuthorId, p.FirstName, p.LastName,  " +
+                "i.Room, i.Quantity, i.ForSale " +
+                "FROM Inventory i, Person p " +
+                "WHERE i.AuthorId = p.Id " +
+                "AND lower(i.Description) LIKE '%" + searchText.ToLowerInvariant() + "%' " +
+                "ORDER BY i.CreationDate DESC";
+
+            using (IDbConnection connection = new SqliteConnection(connectionString))
+            {
+                connection.Open();
+
+                using (IDbCommand command = connection.CreateCommand())
+                {
+                    command.CommandText = sql;
+                    var dr = command.ExecuteReader();
+
+                    while (dr.Read())
+                    {
+                        var result = new SearchResult();
+                        result.AsOfDate = Convert.ToDateTime(dr[8].ToString());
+                        result.IsCurrent = true;
+                        result.Entity.Id = Convert.ToInt64(dr[0].ToString());
+                        result.Entity.Name = "Inventory";
+                        result.SubType = dr[1].ToString()!;
+                        result.FieldName = "Description";
+                        result.SearchText = dr[1].ToString()!;
+
+                        results.Add(result);
+                    }
+                }
+            }
+
+            sql = "SELECT i.Id, i.Description, i.IGroup, i.IType, i.OriginalValue, i.CurrentValue, " +
+                "i.Brand, i.Notes, i.CreationDate, i.StartDate, i.EndDate, i.LastUpdated, i.AuthorId, p.FirstName, p.LastName,  " +
+                "i.Room, i.Quantity, i.ForSale " +
+                "FROM Inventory i, Person p " +
+                "WHERE i.AuthorId = p.Id " +
+                "AND lower(i.Brand) LIKE '%" + searchText.ToLowerInvariant() + "%' " +
+                "ORDER BY i.CreationDate DESC";
+
+            using (IDbConnection connection = new SqliteConnection(connectionString))
+            {
+                connection.Open();
+
+                using (IDbCommand command = connection.CreateCommand())
+                {
+                    command.CommandText = sql;
+                    var dr = command.ExecuteReader();
+
+                    while (dr.Read())
+                    {
+                        var result = new SearchResult();
+                        result.AsOfDate = Convert.ToDateTime(dr[8].ToString());
+                        result.IsCurrent = true;
+                        result.Entity.Id = Convert.ToInt64(dr[0].ToString());
+                        result.Entity.Name = "Inventory";
+                        result.SubType = dr[1].ToString()!;
+                        result.FieldName = "Brand";
+                        result.SearchText = dr[6].ToString()!;
+
+                        results.Add(result);
+                    }
+                }
+            }
+
+            sql = "SELECT i.Id, i.Description, i.IGroup, i.IType, i.OriginalValue, i.CurrentValue, " +
+                  "i.Brand, i.Notes, i.CreationDate, i.StartDate, i.EndDate, i.LastUpdated, i.AuthorId, p.FirstName, p.LastName,  " +
+                  "i.Room, i.Quantity, i.ForSale " +
+                  "FROM Inventory i, Person p " +
+                  "WHERE i.AuthorId = p.Id " +
+                  "AND lower(i.Notes) LIKE '%" + searchText.ToLowerInvariant() + "%' " +
+                  "ORDER BY i.CreationDate DESC";
+
+            using (IDbConnection connection = new SqliteConnection(connectionString))
+            {
+                connection.Open();
+
+                using (IDbCommand command = connection.CreateCommand())
+                {
+                    command.CommandText = sql;
+                    var dr = command.ExecuteReader();
+
+                    while (dr.Read())
+                    {
+                        var result = new SearchResult();
+                        result.AsOfDate = Convert.ToDateTime(dr[8].ToString());
+                        result.IsCurrent = true;
+                        result.Entity.Id = Convert.ToInt64(dr[0].ToString());
+                        result.Entity.Name = "Inventory";
+                        result.SubType = dr[1].ToString()!;
+                        result.FieldName = "Notes";
+                        result.SearchText = dr[7].ToString()!;
+
+                        results.Add(result);
+                    }
+                }
+
+            }
+            
+            return results;
+            
+        }
+    
     public static List<string> GetAllBrands(string conn)
     {
         try
