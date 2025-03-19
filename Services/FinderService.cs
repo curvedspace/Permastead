@@ -15,7 +15,7 @@ public class FinderService
             // start with observations
             if (mode == ServiceMode.Local)
             {
-                items = DataAccess.Local.ObservationRepository.GetSearchResults(DataConnection.GetServerConnectionString(),  searchText);
+                items = DataAccess.Local.ObservationRepository.GetSearchResults(DataConnection.GetLocalDataSource(),  searchText);
             }
             else
             {
@@ -25,7 +25,7 @@ public class FinderService
             //search ToDos
             if (mode == ServiceMode.Local)
             {
-                items.AddRange(DataAccess.Local.ToDoRepository.GetSearchResults(DataConnection.GetServerConnectionString(),  searchText));
+                items.AddRange(DataAccess.Local.ToDoRepository.GetSearchResults(DataConnection.GetLocalDataSource(),  searchText));
             }
             else
             {
@@ -35,7 +35,7 @@ public class FinderService
             //now plants
             if (mode == ServiceMode.Local)
             {
-                items.AddRange(DataAccess.Local.ToDoRepository.GetSearchResults(DataConnection.GetServerConnectionString(),  searchText));
+                items.AddRange(DataAccess.Local.ToDoRepository.GetSearchResults(DataConnection.GetLocalDataSource(),  searchText));
             }
             else
             {
@@ -45,7 +45,7 @@ public class FinderService
             //now inventory
             if (mode == ServiceMode.Local)
             {
-                items.AddRange(DataAccess.Local.InventoryRepository.GetSearchResults(DataConnection.GetServerConnectionString(),  searchText));
+                items.AddRange(DataAccess.Local.InventoryRepository.GetSearchResults(DataConnection.GetLocalDataSource(),  searchText));
             }
             else
             {
