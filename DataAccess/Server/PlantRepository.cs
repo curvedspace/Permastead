@@ -61,6 +61,108 @@ namespace DataAccess.Server
             }
         }
 
+        public static List<SearchResult> GetSearchResults(string connectionString, string searchText)
+        {
+            var results = new List<SearchResult>();
+            
+            var sql = "SELECT p.Description, p.Comment, p.Family, p.Url, p.CreationDate, p.StartDate, p.EndDate, p.AuthorId, " + 
+                      "per.FirstName, per.LastName, p.Id, p.code " +
+                      "FROM Plant p, Person per " + 
+                      "WHERE per.Id = p.AuthorId AND (p.EndDate is null OR p.EndDate > CURRENT_DATE+1) " + 
+                      "AND lower(p.Comment) LIKE '%" + searchText.ToLowerInvariant() + "%' " +
+                      "ORDER BY p.CreationDate DESC";
+
+            using (IDbConnection connection = new NpgsqlConnection(connectionString))
+            {
+                connection.Open();
+
+                using (IDbCommand command = connection.CreateCommand())
+                {
+                    command.CommandText = sql;
+                    var dr = command.ExecuteReader();
+
+                    while (dr.Read())
+                    {
+                        var result = new SearchResult();
+                        result.AsOfDate = Convert.ToDateTime(dr[4].ToString());
+                        result.IsCurrent = true;
+                        result.Entity.Id = Convert.ToInt64(dr[10].ToString());
+                        result.Entity.Name = "Plant";
+                        result.FieldName = "Comment";
+                        result.SearchText = dr[1].ToString()!;
+
+                        results.Add(result);
+                    }
+                }
+            }
+
+            sql = "SELECT p.Description, p.Comment, p.Family, p.Url, p.CreationDate, p.StartDate, p.EndDate, p.AuthorId, " + 
+                  "per.FirstName, per.LastName, p.Id, p.code " +
+                  "FROM Plant p, Person per " + 
+                  "WHERE per.Id = p.AuthorId AND (p.EndDate is null OR p.EndDate > CURRENT_DATE+1) " + 
+                  "AND lower(p.Description) LIKE '%" + searchText.ToLowerInvariant() + "%' " +
+                  "ORDER BY p.CreationDate DESC";
+
+            using (IDbConnection connection = new NpgsqlConnection(connectionString))
+            {
+                connection.Open();
+
+                using (IDbCommand command = connection.CreateCommand())
+                {
+                    command.CommandText = sql;
+                    var dr = command.ExecuteReader();
+
+                    while (dr.Read())
+                    {
+                        var result = new SearchResult();
+                        result.AsOfDate = Convert.ToDateTime(dr[4].ToString());
+                        result.IsCurrent = true;
+                        result.Entity.Id = Convert.ToInt64(dr[10].ToString());
+                        result.Entity.Name = "Plant";
+                        result.FieldName = "Description";
+                        result.SearchText = dr[0].ToString()!;
+
+                        results.Add(result);
+                    }
+                }
+            }
+
+            sql = "SELECT p.Description, p.Comment, p.Family, p.Url, p.CreationDate, p.StartDate, p.EndDate, p.AuthorId, " + 
+                  "per.FirstName, per.LastName, p.Id, p.code " +
+                  "FROM Plant p, Person per " + 
+                  "WHERE per.Id = p.AuthorId AND (p.EndDate is null OR p.EndDate > CURRENT_DATE+1) " + 
+                  "AND lower(p.Family) LIKE '%" + searchText.ToLowerInvariant() + "%' " +
+                  "ORDER BY p.CreationDate DESC";
+
+            using (IDbConnection connection = new NpgsqlConnection(connectionString))
+            {
+                connection.Open();
+
+                using (IDbCommand command = connection.CreateCommand())
+                {
+                    command.CommandText = sql;
+                    var dr = command.ExecuteReader();
+
+                    while (dr.Read())
+                    {
+                        var result = new SearchResult();
+                        result.AsOfDate = Convert.ToDateTime(dr[4].ToString());
+                        result.IsCurrent = true;
+                        result.Entity.Id = Convert.ToInt64(dr[10].ToString());
+                        result.Entity.Name = "Plant";
+                        result.FieldName = "Family";
+                        result.SearchText = dr[2].ToString()!;
+
+                        results.Add(result);
+                    }
+                }
+
+            }
+            
+            return results;
+            
+        }
+
         public static Plant GetPlantFromId(string connectionString, long id)
         {
             Plant plant = new Plant();

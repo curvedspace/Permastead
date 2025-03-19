@@ -58,8 +58,7 @@ public partial class FinderViewModel : ViewModelBase
         {
             Results.Add(result);
         }
-        
-        //Results = new ObservableCollection<SearchResult>(tempResults);
+
         
         SearchResultsSource = new FlatTreeDataGridSource<SearchResult>(Results)
         {

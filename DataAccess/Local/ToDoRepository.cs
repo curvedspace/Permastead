@@ -75,10 +75,9 @@ namespace DataAccess.Local
             }
         }
 
-        public static List<ToDo> GetSearchResults(string connectionString, string searchText)
+        public static List<SearchResult> GetSearchResults(string connectionString, string searchText)
         {
-            var myTodos = new List<ToDo>();
-            ToDo todo;
+            var results = new List<SearchResult>();
 
             var sql = "SELECT td.Id, td.Description, td.CreationDate, td.StartDate, td.DueDate, td.PercentDone, " +
                 "tdt.Id, tdt.Description, tds.Id, tds.Description,  " +
@@ -102,40 +101,19 @@ namespace DataAccess.Local
 
                     while (dr.Read())
                     {
-                        todo = new ToDo();
-
-                        todo.Id = Convert.ToInt64(dr[0].ToString());
-                        todo.Description = dr[1].ToString();
-                        todo.CreationDate = Convert.ToDateTime(dr[2].ToString());
-                        todo.StartDate = Convert.ToDateTime(dr[3].ToString());
-                        todo.DueDate = DateTime.Parse(dr[4].ToString());
-                        todo.PercentDone = Convert.ToInt16(dr[5].ToString());
-
-                        todo.ToDoType = new ToDoType();
-                        todo.ToDoType.Id = Convert.ToInt64(dr[6].ToString());
-                        todo.ToDoType.Description = dr[7].ToString()!;
-
-                        todo.ToDoStatus = new ToDoStatus();
-                        todo.ToDoStatus.Id = Convert.ToInt64(dr[8].ToString());
-                        todo.ToDoStatus.Description = dr[9].ToString()!;
-
-                        todo.Assigner = new Person();
-                        todo.Assigner.Id = Convert.ToInt64(dr[10].ToString());
-                        todo.Assigner.FirstName = dr[11].ToString();
-                        todo.Assigner.LastName = dr[12].ToString();
-
-                        todo.Assignee = new Person();
-                        todo.Assignee.Id = Convert.ToInt64(dr[13].ToString());
-                        todo.Assignee.FirstName = dr[14].ToString();
-                        todo.Assignee.LastName = dr[15].ToString();
+                        var result = new SearchResult();
+                        result.AsOfDate = Convert.ToDateTime(dr[2].ToString());
+                        result.IsCurrent = true;
+                        result.Entity.Id =  Convert.ToInt64(dr[0].ToString());
+                        result.Entity.Name = "Action";
+                        result.FieldName = "Description";
+                        result.SearchText = dr[1].ToString()!;
                         
-                        todo.LastUpdatedDate = Convert.ToDateTime(dr[16].ToString());
-
-                        myTodos.Add(todo);
+                        results.Add(result);
                     }
                 }
 
-                return myTodos;
+                return results;
             }
         }
         
