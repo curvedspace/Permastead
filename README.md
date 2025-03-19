@@ -8,7 +8,7 @@ Local-first desktop software for managing a homestead using permaculture design.
 - Plants - a plant database
 - Starters view - this shows your current seed inventory and other plant starts like root cuttings or saplings.
 - Plantings View - this show your plantings, both current and historical.
-- Animals - tracks your pets and/or livvestock
+- Animals - tracks your pets and/or livestock
 - Harvests - tracks your harvests over time
 - Preservation - this tracks the food you have preserved by freezing, fermenting, etc.
 
