@@ -17,6 +17,9 @@ Local-first desktop software for managing a homestead using permaculture design.
 Dashboard
 ![screenshot1.png](Docs/screenshot1.png)
 
+Starters View
+![screenshot4.png](Docs/screenshot4.png)
+
 Plantings View
 ![screenshot2.png](Docs/screenshot2.png)
 
