@@ -58,6 +58,9 @@ public class AnEvent
                     case "D":
                         rtnDate = StartDate.Date.AddDays(1);
                         break;
+                    case "O":
+                        rtnDate = StartDate.Date;
+                        break;
                 }
             }
             else
@@ -75,6 +78,9 @@ public class AnEvent
                         break;
                     case "D":
                         rtnDate = LastTriggerDate.Date.AddDays(1);
+                        break;
+                    case "O":
+                        rtnDate = LastTriggerDate.Date;
                         break;
                 }
             }
