@@ -54,7 +54,7 @@ public partial class SeedsViewModel : ViewModelBase
 
     public void RefreshDataOnly(string filterText = "")
     {
-        var myPackets = Services.PlantingsService.GetSeedPackets(AppSession.ServiceMode, true);
+        var myPackets = Services.PlantingsService.GetSeedPackets(AppSession.ServiceMode, true).OrderByDescending(x => x.CreationDate);
         var caseAdjustedFilterText = filterText.Trim().ToLowerInvariant();
         
         Packets.Clear();
@@ -89,7 +89,8 @@ public partial class SeedsViewModel : ViewModelBase
                 }
             }
         }
-        
+
+       
         if (Packets.Count > 0) 
             CurrentItem = Packets.FirstOrDefault()!;
         else

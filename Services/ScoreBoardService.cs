@@ -287,7 +287,7 @@ public static class ScoreBoardService
         foreach (var e in events)
         {
             
-            if (e.NextDate >= DateTime.Today && e.LastTriggerDate < DateTime.Today)
+            if (e.NextDate >= DateTime.Today && e.LastTriggerDate <= DateTime.Today)
             {
                 //we have a possible action trigger
                 if (e.NextDate.Date.AddDays(e.WarningDays * -1) < DateTime.Now)

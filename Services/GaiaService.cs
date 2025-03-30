@@ -40,7 +40,7 @@ public class GaiaService
 
         if (upcomingTodos.Count > 0)
         {
-            updateBuilder.AppendLine("Here are your upcoming events:");
+            updateBuilder.AppendLine("Here are your upcoming todos and events:");
             updateBuilder.AppendLine("");
             foreach (var t in upcomingTodos)
             {
