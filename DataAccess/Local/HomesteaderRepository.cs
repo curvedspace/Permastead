@@ -1482,6 +1482,9 @@ namespace DataAccess.Local
             pType = new FoodPreservationType() { Description = "Dehydration" };
             PreservationTypeRepository.Insert(pType);
             
+            pType = new FoodPreservationType() { Description = "Tincture" };
+            PreservationTypeRepository.Insert(pType);
+            
             
             #endregion
             
