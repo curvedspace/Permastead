@@ -1,4 +1,5 @@
 using System.Data;
+using Common;
 using Dapper;
 using Models;
 using Npgsql;
@@ -100,7 +101,7 @@ public static class InventoryRepository
                         result.Entity.Name = "Inventory";
                         result.SubType = dr[1].ToString()!;
                         result.FieldName = "Description";
-                        result.SearchText = dr[1].ToString()!;
+                        result.SearchText = TextUtils.GetSubstring(dr[1].ToString()!,0,DataConnection.SearchTextLength, true);
 
                         results.Add(result);
                     }

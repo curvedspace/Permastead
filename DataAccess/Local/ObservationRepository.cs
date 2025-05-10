@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using Dapper;
 using Models;
 using System.Text;
+using Common;
 using static System.Reflection.Metadata.BlobBuilder;
 
 namespace DataAccess.Local
@@ -193,7 +194,8 @@ namespace DataAccess.Local
                         result.Entity.Name = "Observation";
                         result.SubType = dr[3].ToString()!;
                         result.FieldName = "Comment";
-                        result.SearchText = dr[0].ToString()!;
+                        result.SearchText = TextUtils.GetSubstring(dr[0].ToString()!,0,DataConnection.SearchTextLength, true);
+
                         
                         results.Add(result);
                     }

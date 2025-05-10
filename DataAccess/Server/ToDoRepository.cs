@@ -5,7 +5,7 @@ using Microsoft.Data.Sqlite;
 using System;
 using System.Collections.Generic;
 using System.Data;
-
+using Common;
 using Models;
 using Npgsql;
 
@@ -109,7 +109,8 @@ namespace DataAccess.Server
                         result.Entity.Name = "Action";
                         result.SubType = dr[7].ToString()!;
                         result.FieldName = "Description";
-                        result.SearchText = dr[1].ToString()!;
+                        result.SearchText = TextUtils.GetSubstring(dr[1].ToString()!,0,DataConnection.SearchTextLength, true);
+
                         
                         results.Add(result);
                     }
