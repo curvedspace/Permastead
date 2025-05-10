@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Services", "Services\Servic
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AimlBot", "AimlBot\AimlBot.csproj", "{F77A549C-6475-4743-A65B-8CC04C0A9BE6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "Common\Common.csproj", "{EBBCDD9D-4860-4D57-BFC6-6C800B438B0A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,11 +53,17 @@ Global
 		{F77A549C-6475-4743-A65B-8CC04C0A9BE6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F77A549C-6475-4743-A65B-8CC04C0A9BE6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F77A549C-6475-4743-A65B-8CC04C0A9BE6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EBBCDD9D-4860-4D57-BFC6-6C800B438B0A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EBBCDD9D-4860-4D57-BFC6-6C800B438B0A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EBBCDD9D-4860-4D57-BFC6-6C800B438B0A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EBBCDD9D-4860-4D57-BFC6-6C800B438B0A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {3FDE9842-668A-4709-A45F-2A23AE33FFB7}
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
 	EndGlobalSection
 EndGlobal

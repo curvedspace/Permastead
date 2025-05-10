@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Text;
+using Common;
 using Models;
 using Npgsql;
 
@@ -90,7 +91,7 @@ namespace DataAccess.Server
                         result.Entity.Name = "Plant";
                         result.SubType = dr[0].ToString()!;
                         result.FieldName = "Comment";
-                        result.SearchText = dr[1].ToString()!;
+                        result.SearchText = TextUtils.GetSubstring(dr[1].ToString()!,0,DataConnection.SearchTextLength, true);
 
                         results.Add(result);
                     }

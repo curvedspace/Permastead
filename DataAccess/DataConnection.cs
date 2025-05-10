@@ -9,8 +9,11 @@ using Models;
 
 namespace DataAccess
 {
+    
     public static class DataConnection 
     {
+        public const int SearchTextLength = 250;
+        
         public static string GetLocalDataSource()
         {
             return @"data source=" + GetDefaultDatabaseLocation() + ";";
@@ -170,5 +173,6 @@ namespace DataAccess
                 return rows;
             }
         }
+        
     }
 }
