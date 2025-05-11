@@ -243,7 +243,10 @@ namespace DataAccess.Server
                         
                         todo.LastUpdatedDate = Convert.ToDateTime(dr[16].ToString());
 
-                        myTodos.Add(todo);
+                        if (todo.ToDoStatus.Description != "Abandoned")
+                        {
+                            myTodos.Add(todo);
+                        }
                     }
                 }
 
