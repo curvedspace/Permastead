@@ -1,4 +1,7 @@
 
+using System.Diagnostics;
+using System.Runtime.CompilerServices;
+
 namespace Models;
 
 public class ToDo
@@ -18,6 +21,32 @@ public class ToDo
     public long DaysUntilDue => new TimeSpan(DueDate.Ticks - DateTime.Now.Ticks).Days + 1;
 
     public int PercentDone { get; set; }
+
+    public double TimeWindowPercent
+    {
+        get
+        {
+            if (DueDate.Date == DateTime.Now.Date)
+            {
+                return 1;
+            }
+            
+            if (StartDate.Date >= DateTime.Now.Date)
+            {
+                return 0;
+            }
+            else
+            {
+                return 100 * (DateTime.Today-StartDate.Date) / (DueDate.Date-StartDate.Date);
+            }
+            
+        }
+    }
+
+    public string TimeWindowPercentText
+    {
+        get { return TimeWindowPercent.ToString("F0"); }
+    }
 
     public ToDoType ToDoType { get; set; }
 

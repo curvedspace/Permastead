@@ -172,6 +172,8 @@ public partial class ToDoViewModel : ViewModelBase
                     ("Status", x => x.ToDoStatus.Description),
                 new TextColumn<ToDo, int>
                     ("% Done", x => x.PercentDone, GridLength.Auto, centered),
+                new TextColumn<ToDo, string>
+                    ("% Window", x => x.TimeWindowPercentText, GridLength.Auto, centered),
                 new TextColumn<ToDo, DateTime>
                     ("Last Updated", x => x.LastUpdatedDate)
             },

@@ -4,7 +4,7 @@ namespace UnitTests.Models;
 public class ToDoTests
 {
     [Fact]
-    public void RoDoTestCreation()
+    public void ToDoTestCreation()
     {
         var todo = new ToDo();
         Assert.True(todo.Id == 0);
@@ -25,5 +25,16 @@ public class ToDoTests
         
         Assert.True("First Last" == todo.Assignee.FullName());
 
+    }
+
+    [Fact]
+    public void ToDoTestWindowPercent()
+    {
+        var todo = new ToDo();
+        
+        todo.StartDate = DateTime.Now.AddDays(-10);
+        todo.DueDate = DateTime.Now.AddDays(15);
+        
+        Assert.InRange(todo.TimeWindowPercent,0,100);
     }
 }
