@@ -1,5 +1,7 @@
 using System.Data;
+using Common;
 using Dapper;
+using Microsoft.Data.Sqlite;
 using Models;
 using Npgsql;
 
@@ -63,6 +65,111 @@ public class ProceduresRepository
         }
     }
     
+    public static List<SearchResult> GetSearchResults(string connectionString, string searchText)
+    {
+        var results = new List<SearchResult>();
+        
+        var sql = "SELECT i.Id, i.Category, i.Name, i.Content, " +
+            "i.CreationDate, i.EndDate, i.LastUpdated, i.AuthorId, p.FirstName, p.LastName  " +
+            "FROM Procedure i, Person p " +
+            "WHERE i.AuthorId = p.Id " +
+            "AND lower(i.Category) LIKE '%" + searchText.ToLowerInvariant() + "%' " +
+            "ORDER BY i.CreationDate DESC";
+
+        using (IDbConnection connection = new NpgsqlConnection(connectionString))
+        {
+            connection.Open();
+
+            using (IDbCommand command = connection.CreateCommand())
+            {
+                command.CommandText = sql;
+                var dr = command.ExecuteReader();
+
+                while (dr.Read())
+                {
+                    var result = new SearchResult();
+                    result.AsOfDate = Convert.ToDateTime(dr[6].ToString());
+                    result.IsCurrent = true;
+                    result.Entity.Id = Convert.ToInt64(dr[0].ToString());
+                    result.Entity.Name = "Procedures";
+                    result.SubType = dr[1].ToString()!;
+                    result.FieldName = "Category";
+                    result.SearchText = TextUtils.GetSubstring(dr[1].ToString()!,0,DataConnection.SearchTextLength, true);
+
+                    results.Add(result);
+                }
+            }
+        }
+
+        sql = "SELECT i.Id, i.Category, i.Name, i.Content, " +
+                  "i.CreationDate, i.EndDate, i.LastUpdated, i.AuthorId, p.FirstName, p.LastName  " +
+                  "FROM Procedure i, Person p " +
+                  "WHERE i.AuthorId = p.Id " +
+                  "AND lower(i.Name) LIKE '%" + searchText.ToLowerInvariant() + "%' " +
+                  "ORDER BY i.CreationDate DESC";
+
+        using (IDbConnection connection = new NpgsqlConnection(connectionString))
+        {
+            connection.Open();
+
+            using (IDbCommand command = connection.CreateCommand())
+            {
+                command.CommandText = sql;
+                var dr = command.ExecuteReader();
+
+                while (dr.Read())
+                {
+                    var result = new SearchResult();
+                    result.AsOfDate = Convert.ToDateTime(dr[6].ToString());
+                    result.IsCurrent = true;
+                    result.Entity.Id = Convert.ToInt64(dr[0].ToString());
+                    result.Entity.Name = "Procedures";
+                    result.SubType = dr[1].ToString()!;
+                    result.FieldName = "Name";
+                    result.SearchText = TextUtils.GetSubstring(dr[2].ToString()!,0,DataConnection.SearchTextLength, true);
+
+                    results.Add(result);
+                }
+            }
+        }
+
+        sql = "SELECT i.Id, i.Category, i.Name, i.Content, " +
+              "i.CreationDate, i.EndDate, i.LastUpdated, i.AuthorId, p.FirstName, p.LastName  " +
+              "FROM Procedure i, Person p " +
+              "WHERE i.AuthorId = p.Id " +
+              "AND lower(i.Content) LIKE '%" + searchText.ToLowerInvariant() + "%' " +
+              "ORDER BY i.CreationDate DESC";
+
+        using (IDbConnection connection = new NpgsqlConnection(connectionString))
+        {
+            connection.Open();
+
+            using (IDbCommand command = connection.CreateCommand())
+            {
+                command.CommandText = sql;
+                var dr = command.ExecuteReader();
+
+                while (dr.Read())
+                {
+                    var result = new SearchResult();
+                    result.AsOfDate = Convert.ToDateTime(dr[6].ToString());
+                    result.IsCurrent = true;
+                    result.Entity.Id = Convert.ToInt64(dr[0].ToString());
+                    result.Entity.Name = "Procedures";
+                    result.SubType = dr[1].ToString()!;
+                    result.FieldName = "Content";
+                    result.SearchText = TextUtils.GetSubstring(dr[3].ToString()!,0,DataConnection.SearchTextLength, true);
+
+                    results.Add(result);
+                }
+            }
+
+        }
+        
+        return results;
+        
+    }
+       
     public static bool Insert(StandardOperatingProcedure sop)
     {
         try
