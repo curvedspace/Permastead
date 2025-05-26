@@ -340,15 +340,18 @@ public partial class DashboardViewModel : ViewModelBase
     {
         var actions = Services.ToDoService.GetAllToDos(AppSession.ServiceMode);
         var observations = Services.ObservationsService.GetObservationsForAllEntities(AppSession.ServiceMode);
+        var plantings = Services.PlantingsService.GetPlantings(AppSession.ServiceMode);
 
         var actionsByMonth = new Dictionary<int, double>();
         var observationsByMonth = new Dictionary<int, double>();
+        var plantingsByMonth = new Dictionary<int, double>();
         
         //set up the dictionaries
         for (int i = 1; i <= 12; i++)
         {
             actionsByMonth.Add(i,0);
             observationsByMonth.Add(i,0);
+            plantingsByMonth.Add(i,0);
         }
         
         //tally up the actions and observations by month
@@ -363,7 +366,14 @@ public partial class DashboardViewModel : ViewModelBase
             if (o.AsOfDate >= _plantingYearStartDate && o.AsOfDate <= _plantingYearEndDate)
                 observationsByMonth[o.AsOfDate.Date.Month] += 1;
         }
+        
+        foreach (var o in plantings)
+        {
+            if (o.CreationDate >= _plantingYearStartDate && o.CreationDate <= _plantingYearEndDate)
+                plantingsByMonth[o.CreationDate.Date.Month] += 1;
+        }
 
+        
         var actSeries = new ColumnSeries<double>();
         actSeries.Name = "Actions";
         actSeries.Values = actionsByMonth.Values;
@@ -371,8 +381,13 @@ public partial class DashboardViewModel : ViewModelBase
         var obsSeries = new ColumnSeries<double>();
         obsSeries.Name = "Observations";
         obsSeries.Values = observationsByMonth.Values;
+        
+        var pltSeries = new ColumnSeries<double>();
+        pltSeries.Name = "Plantings";
+        pltSeries.Values = plantingsByMonth.Values;
 
-        ActObsSeries = new[] { actSeries, obsSeries };
+        ActObsSeries = new[] { actSeries, obsSeries, pltSeries };
+        
         OnPropertyChanged(nameof(ActObsSeries));
     }
 }
