@@ -61,6 +61,16 @@ public class FinderService
             {
                 items.AddRange(DataAccess.Server.ProceduresRepository.GetSearchResults(DataConnection.GetServerConnectionString(),  searchText));
             }
+            
+            //now events
+            if (mode == ServiceMode.Local)
+            {
+                items.AddRange(DataAccess.Local.AnEventRepository.GetSearchResults(DataConnection.GetLocalDataSource(),  searchText));
+            }
+            else
+            {
+                items.AddRange(DataAccess.Server.AnEventRepository.GetSearchResults(DataConnection.GetServerConnectionString(),  searchText));
+            }
         }
         
         

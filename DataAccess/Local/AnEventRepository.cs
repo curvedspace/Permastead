@@ -1,7 +1,9 @@
 using System.Data;
+using Common;
 using Dapper;
 using Microsoft.Data.Sqlite;
 using Models;
+using Npgsql;
 
 namespace DataAccess.Local;
 
@@ -81,6 +83,45 @@ public class AnEventRepository
         {
             return myEvents;
         }
+    }
+    
+    public static List<SearchResult> GetSearchResults(string connectionString, string searchText)
+    {
+        var results = new List<SearchResult>();
+
+        var sql = "SELECT i.Id, i.Description, " +
+                  "i.CreationDate, i.EndDate, i.LastUpdatedDate  " +
+                  "FROM Event i " +
+                  "WHERE lower(i.Description) LIKE '%" + searchText.ToLowerInvariant() + "%' " +
+                  "ORDER BY i.CreationDate DESC";
+
+        using (IDbConnection connection = new SqliteConnection(connectionString))
+        {
+            connection.Open();
+
+            using (IDbCommand command = connection.CreateCommand())
+            {
+                command.CommandText = sql;
+                var dr = command.ExecuteReader();
+
+                while (dr.Read())
+                {
+                    var result = new SearchResult();
+                    result.AsOfDate = Convert.ToDateTime(dr[2].ToString());
+                    result.IsCurrent = true;
+                    result.Entity.Id = Convert.ToInt64(dr[0].ToString());
+                    result.Entity.Name = "Events";
+                    result.SubType = "Description";
+                    result.FieldName = "Description";
+                    result.SearchText = TextUtils.GetSubstring(dr[1].ToString()!, 0, DataConnection.SearchTextLength, true);
+
+                    results.Add(result);
+                }
+            }
+        }
+
+        return results;
+
     }
     
     public static bool Insert(AnEvent myEvent)
