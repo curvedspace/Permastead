@@ -4,10 +4,12 @@ using System.Linq;
 using System.Reactive.Joins;
 using Avalonia.Controls;
 using Avalonia.Controls.Models.TreeDataGrid;
+using Avalonia.Controls.Selection;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Models;
+using Nostr.Client.Identifiers;
 using Permastead.ViewModels.Dialogs;
 using Permastead.Views.Dialogs;
 using Serilog;
@@ -37,6 +39,8 @@ public partial class PlantingsViewModel : ViewModelBase
 
     [ObservableProperty] 
     private long _plantingCount;
+
+    [ObservableProperty] private Node _SelectedNode;
     
     [ObservableProperty] 
     private bool _currentOnly = true;   //show only current plantings by default
@@ -46,6 +50,8 @@ public partial class PlantingsViewModel : ViewModelBase
     
     [ObservableProperty] 
     private bool _showObservations;
+    
+    [ObservableProperty] private string _searchText = "";
     
     [ObservableProperty] private PlantingObservation _currentObservation = new PlantingObservation();
     
@@ -90,6 +96,8 @@ public partial class PlantingsViewModel : ViewModelBase
         
         SelectedNodes = new ObservableCollection<Node>();
         Nodes = new ObservableCollection<Node>();
+
+        SelectedNode = null;
         
         // populate treeview with plants
         var plantsNode = new Node("Plants (" + _plants.Count + ")", new ObservableCollection<Node>());
@@ -119,35 +127,97 @@ public partial class PlantingsViewModel : ViewModelBase
     }
 
     [RelayCommand]
-    private void RefreshDataOnly()
+    private void RefreshDataOnly(string filterText = "")
     {
-        RefreshData();
+        RefreshData(null,filterText);
     }
     
-    public void RefreshData(Node node = null, string searchText = "")
+    public void RefreshData(Node node = null, string filterText = "")
     {
         // clear out plantings, prepare for filtering
         Plantings.Clear();
+
+        if (filterText == null) filterText = "";
+        if (node != null) SelectedNode = node;
         
         var p1 = Services.PlantingsService.GetPlantingsByPlantedDate(AppSession.ServiceMode);
+        var caseAdjustedFilterText = filterText.Trim().ToLowerInvariant();
 
         bool addRecord = false;
         foreach (var o in p1)
         {
             addRecord = false;
 
-            if (node != null)
+            if (SelectedNode != null)
             {
-                switch (node.Type)
+                switch (SelectedNode.Type)
                 {
                     case NodeType.Plant:
-                        if (o.Plant.Description == node.Title) addRecord = true;
+                        if (o.Plant.Description == SelectedNode.Title)
+                        {
+                            if (!string.IsNullOrEmpty(caseAdjustedFilterText))
+                            {
+                                if (o.Description.ToLowerInvariant().Contains(caseAdjustedFilterText) ||
+                                    o.Comment.ToLowerInvariant().Contains(caseAdjustedFilterText) ||
+                                    o.Plant.Description.ToLowerInvariant().Contains(caseAdjustedFilterText))
+                                {
+                                    addRecord = true;
+                                }
+                                else
+                                {
+                                    addRecord = false;
+                                }
+                            }
+                            else
+                            {
+                                addRecord = true;
+                            }
+                        }
+
                         break;
                     case NodeType.GardenBed:
-                        if (o.Bed.Code + ": " + o.Bed.Description == node.Title) addRecord = true;
+                        if (o.Bed.Code + ": " + o.Bed.Description == SelectedNode.Title)
+                        {
+                            if (!string.IsNullOrEmpty(caseAdjustedFilterText))
+                            {
+                                if (o.Description.ToLowerInvariant().Contains(caseAdjustedFilterText) ||
+                                    o.Comment.ToLowerInvariant().Contains(caseAdjustedFilterText) ||
+                                    o.Plant.Description.ToLowerInvariant().Contains(caseAdjustedFilterText))
+                                {
+                                    addRecord = true;
+                                }
+                                else
+                                {
+                                    addRecord = false;
+                                }
+                            }
+                            else
+                            {
+                                addRecord = true;
+                            }
+                        }
                         break;
                     case NodeType.Vendor:
-                        if (o.SeedPacket.Vendor.Description == node.Title) addRecord = true;
+                        if (o.SeedPacket.Vendor.Description == SelectedNode.Title) 
+                        {
+                            if (!string.IsNullOrEmpty(caseAdjustedFilterText))
+                            {
+                                if (o.Description.ToLowerInvariant().Contains(caseAdjustedFilterText) ||
+                                    o.Comment.ToLowerInvariant().Contains(caseAdjustedFilterText) ||
+                                    o.Plant.Description.ToLowerInvariant().Contains(caseAdjustedFilterText))
+                                {
+                                    addRecord = true;
+                                }
+                                else
+                                {
+                                    addRecord = false;
+                                }
+                            }
+                            else
+                            {
+                                addRecord = true;
+                            }
+                        }
                         break;
                     default:
                         addRecord = false;
@@ -156,7 +226,16 @@ public partial class PlantingsViewModel : ViewModelBase
             }
             else
             {
-                addRecord = true;
+                if (o.Description.ToLowerInvariant().Contains(caseAdjustedFilterText) ||
+                    o.Comment.ToLowerInvariant().Contains(caseAdjustedFilterText) ||
+                    o.Plant.Description.ToLowerInvariant().Contains(caseAdjustedFilterText))
+                {
+                    addRecord = true;
+                }
+                else
+                {
+                    addRecord = false;
+                }
             }
             
             if (CurrentOnly)
@@ -354,6 +433,13 @@ public partial class PlantingsViewModel : ViewModelBase
         {
             Console.WriteLine(e);
         }
+    }
+    
+    [RelayCommand]
+    private void ClearSearch()
+    {
+        SearchText = "";
+        RefreshDataOnly(SearchText);
     }
 }
 

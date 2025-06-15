@@ -260,5 +260,35 @@ public partial class PlantingsView : UserControl
             }
         }
     }
-    
+
+    private void SearchBox_OnKeyDown(object? sender, KeyEventArgs e)
+    {
+        // if the key is return, do a search and filter the grid data
+        if (e.Key == Key.Return)
+        {
+            var vm = (PlantingsViewModel)this.DataContext;
+            var textValue = vm.SearchText;
+
+            if (vm != null)
+            {
+                vm.RefreshData(null,textValue);
+            }
+        }
+
+        if (e.Key == Key.Escape)
+        {
+            var vm = (PlantingsViewModel)this.DataContext;
+
+            if (vm != null)
+            {
+                vm.SearchText = "";
+                vm.RefreshData(null,vm.SearchText);
+            }
+        }
+    }
+
+    private void TextBox_OnTextChanged(object? sender, TextChangedEventArgs e)
+    {
+        
+    }
 }
