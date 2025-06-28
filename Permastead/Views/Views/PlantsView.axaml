@@ -74,17 +74,17 @@
                 <Label Grid.Row="0" Margin="10,10,10,10" Grid.Column="2">Code:</Label>
                 
                 <TextBox Grid.Row="0" Grid.Column="3" Text="{Binding CurrentPlant.Code }" Margin="10,10,20,10"></TextBox>
-                <TextBlock Grid.Row="1" Grid.Column="0" Margin="10,20,20,20">Description:</TextBlock>
+                <TextBlock Grid.Row="1" Grid.Column="0" Margin="20,20,20,20">Description:</TextBlock>
                 <TextBox Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3"  Text="{Binding CurrentPlant.Description }" Margin="20"></TextBox>
         
                 <Label Grid.Row="2" Grid.Column="0" Margin="20">Family: </Label>
                 <TextBox Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3" Margin="20,20,20,20" Text="{Binding CurrentPlant.Family}"></TextBox>
         
-                <Label Grid.Row="3" Grid.Column="0" Margin="10">Start Date:</Label>
+                <Label Grid.Row="3" Grid.Column="0" Margin="20">Start Date:</Label>
                 <CalendarDatePicker Grid.Row="3" Grid.Column="1" Name = "EndDate" Margin="10,20,20,20" SelectedDate="{Binding CurrentPlant.StartDate, Mode=TwoWay}">
                 </CalendarDatePicker>
         
-                <Label Grid.Row="3" Grid.Column="2" Margin="10">End Date:</Label>
+                <Label Grid.Row="3" Grid.Column="2" Margin="20">End Date:</Label>
                 <CalendarDatePicker Grid.Row="3" Grid.Column="3" Name = "LastTrigger" Margin="10" SelectedDate="{Binding CurrentPlant.EndDate, Mode=TwoWay}">
                 </CalendarDatePicker>
                 
