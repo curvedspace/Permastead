@@ -5,6 +5,8 @@ using Avalonia.Controls;
 using Avalonia.Input;
 using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml;
+using Avalonia.Media.Imaging;
+using Avalonia.Platform;
 using Avalonia.Platform.Storage;
 using Models;
 using Permastead.ViewModels.Dialogs;
@@ -131,7 +133,16 @@ public partial class PlantsView : UserControl
             await using var stream = await files[0].OpenReadAsync();
             using var streamReader = new StreamReader(stream);
             // Reads all the content of file as a text.
-            var fileContent = await streamReader.ReadToEndAsync();
+            //var fileContent = await streamReader.ReadToEndAsync();
+            
+            var vm = (PlantsViewModel)DataContext;
+            Bitmap pic = new Bitmap(stream);
+
+            if (pic != null)
+            {
+                vm.Picture = pic;
+            }
+            
         }
     }
 }

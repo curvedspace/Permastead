@@ -91,7 +91,7 @@
                 <Panel Grid.Row="0" Grid.RowSpan="4" Grid.Column="4" >
                     
                     <Rectangle Height="300" Width="400" Margin="0"/>
-                    <Image Source="/Assets/plant_icon.png"  Stretch="Fill">
+                    <Image Source="{Binding Picture}"  Stretch="Fill">
                         <Image.ContextFlyout>
                             <MenuFlyout>
                                 <MenuItem Header="Add Image" Click="MenuItemAddImage_OnClick"/>

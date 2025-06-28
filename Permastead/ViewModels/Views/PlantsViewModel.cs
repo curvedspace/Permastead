@@ -1,5 +1,9 @@
+using System;
 using System.Collections.ObjectModel;
+//using System.Drawing;
 using Avalonia.Controls;
+using Avalonia.Platform;
+using Avalonia.Media.Imaging;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Models;
@@ -21,6 +25,9 @@ public partial class PlantsViewModel : ViewModelBase
     
     [ObservableProperty]
     private ObservableCollection<Planting> _plantings = new ObservableCollection<Planting>();
+    
+    [ObservableProperty]
+    private Bitmap picture; 
     
     [ObservableProperty] 
     private Plant _currentPlant;
@@ -95,6 +102,9 @@ public partial class PlantsViewModel : ViewModelBase
     public PlantsViewModel()
     {
         RefreshDataOnly();
+        AssetLoader.GetAssets(new Uri("avares://Permastead"),null);
+        
+        Picture = new Bitmap(AssetLoader.Open(new Uri("avares://Permastead/Assets/plant_icon.png"), null));
     }
 
     public void GetMetaData()
