@@ -1,21 +1,20 @@
 using System;
 using System.Data;
 using System.Collections.Generic;
+using System.Drawing;
+
 using System.Net.Mime;
 using System.Text;
 
+using Npgsql;
 using Dapper;
+using Image = Models.Image;
 
-using Microsoft.Data.Sqlite;
-
-using Models;
-
-namespace DataAccess.Local;
+namespace DataAccess.Server;
 
 public class ImageStoreRepository
 {
-
-    public static Image LoadImage(string fileName)
+    public static Image LoadImageFromFile(string fileName)
     {
         //Create an instance of the Image Class/Object
         //so that we can store the information
@@ -50,52 +49,67 @@ public class ImageStoreRepository
         }
         return image;
     }
-    
-    public static Stream LoadImageStream(string fileName)
+
+    public static Bitmap LoadImageFromDatabase(long id)
     {
-        //Create an instance of the Image Class/Object
-        //so that we can store the information
-        //about the picture an send it back for
-        //processing into the database.
+        Bitmap myImage = null;
         
-        int maxImageSize = 2097152;
+        var sql = "SELECT i.ImageBlob " + 
+                  "FROM ImageStore i " + 
+                  "WHERE i.Id = @Id";
 
-        if (fileName == null || fileName == string.Empty)
-            return null;
-
-        if (fileName != string.Empty && fileName != null)
+        using (IDbConnection connection = new NpgsqlConnection(DataConnection.GetServerDataSource()))
         {
-            
-            //Get file information and calculate the filesize
-            FileInfo info = new FileInfo(fileName);
-            long fileSize = info.Length;
+            connection.Open();
 
-            //re-assign the filesize to calculated filesize
-            maxImageSize = (Int32)fileSize;
-
-            if (File.Exists(fileName))
+            using (IDbCommand command = connection.CreateCommand())
             {
-                //Retrieve image from file and binary it to Object image
-                FileStream stream = File.Open(fileName, FileMode.Open);
-                return stream;
+                command.CommandText = sql;
+                command.Parameters.Add(new NpgsqlParameter("@Id", id));
+               
+                var dr = command.ExecuteReader();
+
+                byte[] imageByte = null;
+                
+                if (dr.Read())
+                {
+                    imageByte = (byte[])dr[0];
+                }
+                dr.Close();
+                
+                if (imageByte != null)
+                {
+                    using (MemoryStream productImageStream = new System.IO.MemoryStream(imageByte))
+                    {
+                        myImage =  new Bitmap(productImageStream, true);
+                    }
+                }
+                
+                // while (dr.Read())
+                // {
+                //     var imageString = dr.GetString(0);
+                //     //var stream = new Stream(imageString);
+                //     //BinaryReader br = new BinaryReader(stream);
+                //     //byte[] data = br.ReadBytes();
+                //     myImage.ImageBlob = byte[](dr.GetString(0));
+                //     myImage.Id = Convert.ToInt64(dr[1].ToString());
+                // }
             }
         }
-
-        return null;
+        return myImage;
     }
 
     public static Image SaveImage(string fileName)
     {
-        Image image = LoadImage(fileName);
+        var image = LoadImageFromFile(fileName);
         
         try
         {
-            using (IDbConnection db = new SqliteConnection(DataConnection.GetLocalDataSource()))
+            using (IDbConnection db = new NpgsqlConnection(DataConnection.GetServerDataSource()))
             {
-                string sqlQuery = "INSERT INTO ImageStore (FileName, ImageBlob, FileSize, CreationDate) " +
-                                  "VALUES(@FileName, @ImageBlob, @FileSize, CURRENT_DATE);";
-        
-                
+                string sqlQuery = "INSERT INTO ImageStore (FileName, ImageGroupId, ImageBlob, CreationDate) " +
+                                  "VALUES(@FileName, 0, @ImageBlob, CURRENT_DATE);";
+
                 if (db.Execute(sqlQuery, image) == 1)
                 {
                     //get the image ID of the new record...dapper does not populate it
@@ -114,7 +128,7 @@ public class ImageStoreRepository
             return image;
         }
     }
-    
+
     private static long GetImageId(string fileName, DateTime creationDate)
     {
         long id = 0;
@@ -123,15 +137,15 @@ public class ImageStoreRepository
                   "WHERE i.FileName = @FileName " +
                   "AND i.CreationDate  = @CreationDate ";
 
-        using (IDbConnection connection = new SqliteConnection(DataConnection.GetLocalDataSource()))
+        using (IDbConnection connection = new NpgsqlConnection(DataConnection.GetServerDataSource()))
         {
             connection.Open();
 
             using (IDbCommand command = connection.CreateCommand())
             {
                 command.CommandText = sql;
-                command.Parameters.Add(new SqliteParameter("@FileName", fileName));
-                command.Parameters.Add(new SqliteParameter("@CreationDate", creationDate));
+                command.Parameters.Add(new NpgsqlParameter("@FileName", fileName));
+                command.Parameters.Add(new NpgsqlParameter("@CreationDate", creationDate));
                 
                 var dr = command.ExecuteReader();
 
@@ -143,4 +157,5 @@ public class ImageStoreRepository
         }
         return id;
     }
+    
 }

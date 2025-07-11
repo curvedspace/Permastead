@@ -239,7 +239,7 @@ namespace DataAccess.Local
                 using (IDbConnection db = new SqliteConnection(DataConnection.GetLocalDataSource()))
                 {
                     string sqlQuery = "UPDATE Plant SET Code = @Code, Description = @Description, StartDate = @StartDate, EndDate = @EndDate, " +
-                                      "Comment = @Comment, Family = @Family, Url = @Url, AuthorId = @AuthorId " + 
+                                      "Comment = @Comment, Family = @Family, Url = @Url, AuthorId = @AuthorId, ImageStoreId = @ImageStoreId " + 
                                       "WHERE Id = @Id;";
 
                     return (db.Execute(sqlQuery, plant) == 1);

@@ -15,12 +15,17 @@ public class Plant : CodeTable
     public Person? Author { get; set; }
 
     public long AuthorId => this.Author!.Id;
+    
+    public Image? Image { get; set; }
+    
+    public long ImageStoreId => this.Image!.Id;
 
     public Plant()
     {
         this.Code = string.Empty;
         this.Description = string.Empty;
         this.Author = Person.Gaia();
+        this.Image = new Image();
     }
     
     public Plant(long id) : this()

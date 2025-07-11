@@ -447,7 +447,8 @@ namespace DataAccess.Local
 				Comment TEXT,
 				Family VARCHAR (2000),
 				Url VARCHAR (2000),
-				AuthorId integer
+				AuthorId integer,
+				ImageStoreId integer
 			);
 
 			-- SEASONALITY

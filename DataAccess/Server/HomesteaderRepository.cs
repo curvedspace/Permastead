@@ -1,6 +1,5 @@
 ﻿
 using System.Data;
-using Microsoft.Data.Sqlite;
 using Microsoft.VisualBasic;
 using Models;
 using Npgsql;
@@ -398,7 +397,8 @@ namespace DataAccess.Server
 				Comment TEXT,
 				Family VARCHAR (2000),
 				Url VARCHAR (2000),
-				AuthorId integer
+				AuthorId integer,
+				ImageStoreId integer
 			);
 
 			-- SEASONALITY

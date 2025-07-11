@@ -1,4 +1,7 @@
-﻿using DataAccess.Local;
+﻿using System.Runtime.InteropServices;
+using Avalonia.Media.Imaging;
+using Avalonia.Platform;
+using DataAccess.Local;
 using DataAccess;
 
 using Models;
@@ -90,6 +93,67 @@ namespace Services
                 return false;
             }
             
+        }
+
+        public static Bitmap GetPlantImage(Plant? plant)
+        {
+            if (plant == null)
+            {
+                AssetLoader.GetAssets(new Uri("avares://Permastead"),null);
+                return new Bitmap(AssetLoader.Open(new Uri("avares://Permastead/Assets/plant_icon.png"), null));
+            }
+            else
+            {
+                //get image location
+                var userFolder = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
+                var isWindows = System.Runtime.InteropServices.RuntimeInformation.IsOSPlatform(OSPlatform.Windows);
+
+                if (isWindows)
+                {
+                    var newLocation = userFolder + @"\.config\permastead\images\plants\" + plant.Id + ".png";
+                    FileInfo fi = new FileInfo(newLocation);
+
+                    if (fi.Exists)
+                    {
+                        {
+                            using var stream = fi.OpenRead();
+                            using (var streamReader = new StreamReader(stream))
+                            {
+                                Bitmap pic = new Bitmap(stream);
+                                return pic;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        AssetLoader.GetAssets(new Uri("avares://Permastead"),null);
+                        return new Bitmap(AssetLoader.Open(new Uri("avares://Permastead/Assets/plant_icon.png"), null));
+                    }
+                    
+                }
+                else
+                {
+                    var newLocation = userFolder + @"/.config/permastead/images/plants/" + plant.Id + ".png";
+                    FileInfo fi = new FileInfo(newLocation);
+
+                    if (fi.Exists)
+                    {
+                        using var stream = fi.OpenRead();
+                        using (var streamReader = new StreamReader(stream))
+                        {
+                            Bitmap pic = new Bitmap(stream);
+                            return pic;
+                        }
+                    }
+                    else
+                    {
+                        //use the default plant photo
+                        AssetLoader.GetAssets(new Uri("avares://Permastead"),null);
+                        return new Bitmap(AssetLoader.Open(new Uri("avares://Permastead/Assets/plant_icon.png"), null));
+                    }
+                }
+                
+            }
         }
     }
 }

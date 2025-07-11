@@ -12,6 +12,7 @@ using Permastead.Views.Dialogs;
 using Permastead.Views.Views;
 using Serilog;
 using Serilog.Context;
+using Services;
 
 namespace Permastead.ViewModels.Views;
 
@@ -111,6 +112,10 @@ public partial class PlantsViewModel : ViewModelBase
     {
         SeedPackets = new ObservableCollection<SeedPacket>(Services.PlantingsService.GetSeedPacketForPlant(AppSession.ServiceMode, CurrentPlant.Id));
         Plantings = new ObservableCollection<Planting>(Services.PlantingsService.GetPlantingsForPlant(AppSession.ServiceMode, CurrentPlant.Id));
+        
+        //look up image, if available, for this plant
+        Picture = PlantService.GetPlantImage(CurrentPlant);
+
     }
     
     public void RefreshDataOnly(string filterText = "")

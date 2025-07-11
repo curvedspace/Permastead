@@ -1,5 +1,6 @@
 using System;
 using System.IO;
+using System.Runtime.InteropServices;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Input;
@@ -8,6 +9,7 @@ using Avalonia.Markup.Xaml;
 using Avalonia.Media.Imaging;
 using Avalonia.Platform;
 using Avalonia.Platform.Storage;
+using DataAccess.Server;
 using Models;
 using Permastead.ViewModels.Dialogs;
 using Permastead.ViewModels.Views;
@@ -129,18 +131,48 @@ public partial class PlantsView : UserControl
 
         if (files.Count >= 1)
         {
+            var vm = (PlantsViewModel)DataContext;
+            
             // Open reading stream from the first file.
             await using var stream = await files[0].OpenReadAsync();
-            using var streamReader = new StreamReader(stream);
-            // Reads all the content of file as a text.
-            //var fileContent = await streamReader.ReadToEndAsync();
-            
-            var vm = (PlantsViewModel)DataContext;
-            Bitmap pic = new Bitmap(stream);
-
-            if (pic != null)
+            using (var streamReader = new StreamReader(stream))
             {
-                vm.Picture = pic;
+                Bitmap pic = new Bitmap(stream);
+                
+                if (pic != null)
+                {
+                    vm.Picture = pic;
+                }
+            }
+      
+            // save the image and update the plant object with the new image id
+            // vm.CurrentPlant.Image = Services.ImageHelperService.SaveImage(AppSession.ServiceMode, files[0].Path.AbsolutePath);
+            //
+            // if (vm.CurrentPlant.Image != null)
+            // {
+            //     Services.PlantService.CommitRecord(AppSession.ServiceMode, vm.CurrentPlant);
+            // }
+            
+            //save the file into the config area
+            FileInfo fi = new FileInfo(files[0].Path.AbsolutePath);
+
+            if (fi.Exists)
+            {
+                var userFolder = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
+                
+                var isWindows = System.Runtime.InteropServices.RuntimeInformation.IsOSPlatform(OSPlatform.Windows);
+
+                if (isWindows)
+                {
+                    var newLocation = userFolder + @"\.config\permastead\images\plants\" + vm.CurrentPlant.Id + ".png";
+                    fi.CopyTo(newLocation);
+                }
+                else
+                {
+                    var newLocation = userFolder + @"/.config/permastead/images/plants/" + vm.CurrentPlant.Id + ".png";
+                    fi.CopyTo(newLocation);
+                }
+                
             }
             
         }
