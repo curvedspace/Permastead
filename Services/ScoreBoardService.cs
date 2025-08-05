@@ -33,6 +33,7 @@ public static class ScoreBoardService
             { AchievementType.AddSeedPacket, new Achievement() { Type = AchievementType.AddSeedPacket, InitialPoints = 100 } },
             { AchievementType.SaveSeed, new Achievement() { Type = AchievementType.SaveSeed, InitialPoints = 50 } },
             { AchievementType.AddHarvest, new Achievement() { Type = AchievementType.AddHarvest, InitialPoints = 100 } },
+            { AchievementType.AddProcedure, new Achievement() { Type = AchievementType.AddProcedure, InitialPoints = 100 } },
             { AchievementType.AddPreservation, new Achievement() { Type = AchievementType.AddPreservation, InitialPoints = 100 } }
         };
 
@@ -44,6 +45,7 @@ public static class ScoreBoardService
         var events = EventsService.GetAllEvents(mode);
         var harvests = HarvestService.GetAllHarvests(mode);
         var preservations = FoodPreservationService.GetAll(mode);
+        var procedures = ProceduresService.GetAllProcedures(mode);
 
         scoreBoard.Actions = todos.Count;
         scoreBoard.Observations = obs.Count;
@@ -51,6 +53,7 @@ public static class ScoreBoardService
         scoreBoard.SeedPackets = seedPackets.Count;
         scoreBoard.Events = events.Count;
         scoreBoard.Harvests = harvests.Count;
+        scoreBoard.Procedures = procedures.Count;
         scoreBoard.Preservations = preservations.Count;
 
         //iterate through data
@@ -100,7 +103,7 @@ public static class ScoreBoardService
             scoreBoard.TotalScore += eventAchievement.CurrentPoints;
         }
         
-        //events
+        //harvests
         var harvestsAchievement = achievements[AchievementType.AddHarvest];
         foreach (var e in harvests)
         {
@@ -108,7 +111,15 @@ public static class ScoreBoardService
             scoreBoard.TotalScore += harvestsAchievement.CurrentPoints;
         }
         
-        //events
+        //procedures
+        var proceduresAchievement = achievements[AchievementType.AddProcedure];
+        foreach (var e in procedures)
+        {
+            proceduresAchievement.Count += 1;
+            scoreBoard.TotalScore += proceduresAchievement.CurrentPoints;
+        }
+        
+        //preservations
         var preservationAchievement = achievements[AchievementType.AddPreservation];
         foreach (var e in preservations)
         {
@@ -188,6 +199,15 @@ public static class ScoreBoardService
         if (seedPackets.Count >= 500) scoreBoard.TotalScore += 500;
         if (seedPackets.Count >= 1000) scoreBoard.TotalScore += 1000;
         if (seedPackets.Count >= 10000) scoreBoard.TotalScore += 10000;
+        
+        //bonus computation - procedures
+        if (procedures.Count >= 10) scoreBoard.TotalScore += 10;
+        if (procedures.Count >= 25) scoreBoard.TotalScore += 25;
+        if (procedures.Count >= 50) scoreBoard.TotalScore += 50;
+        if (procedures.Count >= 100) scoreBoard.TotalScore += 100;
+        if (procedures.Count >= 500) scoreBoard.TotalScore += 500;
+        if (procedures.Count >= 1000) scoreBoard.TotalScore += 1000;
+        if (procedures.Count >= 10000) scoreBoard.TotalScore += 10000;
         
         //bonus computation - events
         if (events.Count >= 10) scoreBoard.TotalScore += 10;

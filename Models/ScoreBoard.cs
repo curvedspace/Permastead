@@ -22,6 +22,7 @@ public class ScoreBoard
     
     public decimal Harvests { get; set; }
     
+    public decimal Procedures { get; set; }
     public decimal Preservations { get; set; }
     
     public decimal ActionsToObservationsRatio { get; set; }
