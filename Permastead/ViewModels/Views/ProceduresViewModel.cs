@@ -111,5 +111,6 @@ public partial class  ProceduresViewModel : ViewModelBase
     public ProceduresViewModel()
     {
         RefreshDataOnly();
+        ClearSearch();
     }
 }
