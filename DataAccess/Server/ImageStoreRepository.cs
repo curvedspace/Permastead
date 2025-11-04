@@ -1,7 +1,9 @@
 using System;
 using System.Data;
 using System.Collections.Generic;
-using System.Drawing;
+//using System.Drawing;
+
+using Avalonia.Media.Imaging;
 
 using System.Net.Mime;
 using System.Text;
@@ -81,7 +83,7 @@ public class ImageStoreRepository
                 {
                     using (MemoryStream productImageStream = new System.IO.MemoryStream(imageByte))
                     {
-                        myImage =  new Bitmap(productImageStream, true);
+                        myImage =  new Bitmap(productImageStream);
                     }
                 }
                 

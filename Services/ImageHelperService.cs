@@ -27,9 +27,9 @@ namespace Services;
     }
     
     
-    public static System.Drawing.Bitmap GetImage(ServiceMode mode, long id)
+    public static Avalonia.Media.Imaging.Bitmap GetImage(ServiceMode mode, long id)
     {
-        System.Drawing.Bitmap rtnValue = null;
+        Bitmap rtnValue = null;
         
         if (id > 0)
         {
