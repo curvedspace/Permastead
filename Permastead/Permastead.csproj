@@ -26,6 +26,7 @@
     <PackageReference Include="Irihi.Ursa.Themes.Semi" Version="1.13.0" />
     <PackageReference Include="LiveChartsCore.SkiaSharpView.Avalonia" Version="2.0.0-rc2" />
     <PackageReference Include="Material.Icons.Avalonia" Version="2.4.1" />
+    <PackageReference Include="NodifyM.Avalonia" Version="1.1.0" />
     <PackageReference Include="Semi.Avalonia" Version="11.3.7" />
   </ItemGroup>
 

@@ -61,6 +61,7 @@
             </FluentTheme.Palettes>
         </FluentTheme>
 
+        <StyleInclude Source="avares://NodifyM.Avalonia/Styles/ControlStyles.axaml"></StyleInclude>
         
         <!-- <StyleInclude Source="avares://Avalonia.Controls.DataGrid/Themes/Fluent.xaml"/>  -->
         <StyleInclude Source="avares://Avalonia.Controls.TreeDataGrid/Themes/Fluent.axaml"/>
