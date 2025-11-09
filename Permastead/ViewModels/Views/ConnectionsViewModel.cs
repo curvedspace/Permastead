@@ -9,7 +9,11 @@ using NodifyM.Avalonia.ViewModelBase;
 namespace Permastead.ViewModels.Views;
 
 
-public class ConnectionsViewModel : ViewModelBase
+public partial class ConnectionsViewModel : ViewModelBase
 {
-    
+    [RelayCommand]
+    private void RefreshData()
+    {
+        //
+    }
 }

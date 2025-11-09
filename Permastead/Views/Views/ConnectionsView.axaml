@@ -3,9 +3,21 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             xmlns:vm="using:Permastead.ViewModels.Views"
              xmlns:views="clr-namespace:Permastead.Views.Views"
-             x:Class="Permastead.Views.Views.ConnectionsView">
-        <Grid>
-            <views:ConnectionNodes></views:ConnectionNodes>
-        </Grid>
+             x:Class="Permastead.Views.Views.ConnectionsView"
+             x:DataType="vm:ConnectionsViewModel">
+    
+    <Grid ColumnDefinitions="*,Auto" RowDefinitions="Auto,*">
+            <StackPanel>
+                <WrapPanel>
+                    <Image Margin="20" Width="24" Height="24" Source="/Assets/node.png" />
+                    <TextBlock FontWeight="Bold" Margin="20,26,20,20">Connections</TextBlock>
+                    <!-- <Separator MaxWidth="5"></Separator> -->
+                    <Button Command="{Binding RefreshDataCommand}" x:Name="Refresh" HorizontalAlignment="Right" Margin="10,0">Refresh</Button> 
+                </WrapPanel>
+            </StackPanel>
+        <views:ConnectionNodes Grid.Row="1"></views:ConnectionNodes>
+    </Grid>
+    
 </UserControl>
