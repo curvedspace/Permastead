@@ -15,7 +15,7 @@ public class ConnectionNodesViewModel : NodifyEditorViewModelBase
         };
         var input1 = new ConnectorViewModelBase()
         {
-            Title = "AS 1",
+            Title = "GAIA",
             Flow = ConnectorViewModelBase.ConnectorFlow.Input
         };
         var output1 = new ConnectorViewModelBase()
@@ -94,6 +94,35 @@ public class ConnectionNodesViewModel : NodifyEditorViewModelBase
         knot1.Connector.IsConnected = true;
         output1.IsConnected = true;
         input1.IsConnected = true;
+
+        var locations = Services.PlantingsService.GetGardenBeds(AppSession.ServiceMode);
+
+        var x = 600;
+        var y = 100;
+        var ctr = 1;
+        foreach (var location in locations)
+        {
+            var tmpNode = new NodeViewModelBase();
+            tmpNode.Title = location.Description;
+            tmpNode.Footer = location.Code;
+            y = y + 70;
+            tmpNode.Location = new Point(x, y);
+            
+            //get plantings for this bed
+            var plantings = Services.PlantingsService.GetPlantings(AppSession.ServiceMode);
+            var tmpInput = new ConnectorViewModelBase()
+            {
+                Title = "Input" + ctr++,
+                Flow = ConnectorViewModelBase.ConnectorFlow.Input
+            };
+            
+            tmpNode.Input = new ObservableCollection<object>();
+            tmpNode.Input.Add(tmpInput);
+            
+            Nodes.Add(tmpNode);
+        }
+        
+        
     }
     
     public override void Connect(ConnectorViewModelBase source, ConnectorViewModelBase target)

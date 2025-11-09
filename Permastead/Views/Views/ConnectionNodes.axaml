@@ -9,8 +9,11 @@
              xmlns:vm="using:Permastead.ViewModels.Views"
              x:DataType="vm:ConnectionNodesViewModel"
              x:Class="Permastead.Views.Views.ConnectionNodes">
-    <Grid>
-        <controls:NodifyEditor x:Name="Editor"
+    <Grid ColumnDefinitions="*" RowDefinitions="Auto,*">
+        <!-- <StackPanel > -->
+        <!--     <TextBlock Margin="40" TextAlignment="Center" Text="Connections" ></TextBlock> -->
+        <!-- </StackPanel> -->
+        <controls:NodifyEditor Grid.Row="1" x:Name="Editor"
                                Background="Transparent"
                                ItemsSource="{Binding Nodes }"
                                Connections="{Binding Connections}"
