@@ -109,7 +109,7 @@ public class ConnectionNodesViewModel : NodifyEditorViewModelBase
             tmpNode.Location = new Point(x, y);
             
             //get plantings for this bed
-            var plantings = Services.PlantingsService.GetPlantings(AppSession.ServiceMode);
+            //var plantings = Services.PlantingsService.GetPlantings(AppSession.ServiceMode);
             var tmpInput = new ConnectorViewModelBase()
             {
                 Title = "Input" + ctr++,
