@@ -290,7 +290,7 @@ public partial class DashboardViewModel : ViewModelBase
 
         CreateObsActChart();
         
-        Console.WriteLine("Total for year " + TotalYearPlantings);
+        Console.WriteLine("Total plantings for year " + TotalYearPlantings);
         Console.WriteLine("");
     }
     
@@ -341,10 +341,12 @@ public partial class DashboardViewModel : ViewModelBase
         var actions = Services.ToDoService.GetAllToDos(AppSession.ServiceMode);
         var observations = Services.ObservationsService.GetObservationsForAllEntities(AppSession.ServiceMode);
         var plantings = Services.PlantingsService.GetPlantings(AppSession.ServiceMode);
+        var harvests = Services.HarvestService.GetAllHarvests(AppSession.ServiceMode);
 
         var actionsByMonth = new Dictionary<int, double>();
         var observationsByMonth = new Dictionary<int, double>();
         var plantingsByMonth = new Dictionary<int, double>();
+        var harvestsByMonth = new Dictionary<int, double>();
         
         //set up the dictionaries
         for (int i = 1; i <= 12; i++)
@@ -352,6 +354,7 @@ public partial class DashboardViewModel : ViewModelBase
             actionsByMonth.Add(i,0);
             observationsByMonth.Add(i,0);
             plantingsByMonth.Add(i,0);
+            harvestsByMonth.Add(i,0);
         }
         
         //tally up the actions and observations by month
@@ -372,6 +375,12 @@ public partial class DashboardViewModel : ViewModelBase
             if (o.CreationDate >= _plantingYearStartDate && o.CreationDate <= _plantingYearEndDate)
                 plantingsByMonth[o.CreationDate.Date.Month] += 1;
         }
+        
+        foreach (var o in harvests)
+        {
+            if (o.CreationDate >= _plantingYearStartDate && o.CreationDate <= _plantingYearEndDate)
+                harvestsByMonth[o.CreationDate.Date.Month] += 1;
+        }
 
         
         var actSeries = new ColumnSeries<double>();
@@ -385,8 +394,12 @@ public partial class DashboardViewModel : ViewModelBase
         var pltSeries = new ColumnSeries<double>();
         pltSeries.Name = "Plantings";
         pltSeries.Values = plantingsByMonth.Values;
+        
+        var hrvSeries = new ColumnSeries<double>();
+        hrvSeries.Name = "Harvests";
+        hrvSeries.Values = harvestsByMonth.Values;
 
-        ActObsSeries = new[] { actSeries, obsSeries, pltSeries };
+        ActObsSeries = new[] { actSeries, obsSeries, pltSeries, hrvSeries };
         
         OnPropertyChanged(nameof(ActObsSeries));
     }
