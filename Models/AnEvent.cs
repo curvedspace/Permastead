@@ -24,6 +24,10 @@ public class AnEvent
     
     public DateTime EndDate { get; set; }
     
+    public DateTime EventStartDate { get; set; }
+    
+    public DateTime EventEndDate { get; set; }
+
     public Frequency Frequency { get; set; }
 
     public long FrequencyId { get { return this.Frequency.Id; } }
@@ -93,6 +97,8 @@ public class AnEvent
         }
     }
 
+    public long EventLength => (this.EventEndDate - this.EventStartDate).Days;
+
     public AnEvent()
     {
         this.Frequency = new Frequency();
@@ -105,6 +111,9 @@ public class AnEvent
         this.EndDate = DateTime.MaxValue;
         this.LastTriggerDate = CreationDate;
         this.LastUpdatedDate = DateTime.Now;
+
+        this.EventStartDate = DateTime.Today;
+        this.EventEndDate = DateTime.Today;
 
         this.Description = string.Empty;
     }

@@ -21,7 +21,7 @@ public class AnEventRepository
                       "p1.FirstName AssignerFirstName, p1.LastName AssignerLastName, " +
                       "e.AssigneeId, p2.FirstName AssigneeFirstName, p2.LastName AssigneeLastName, " +
                       "e.CreationDate, e.StartDate, e.EndDate, e.FrequencyId, f.Code FreqCode, f.Description FreqDesc, " +
-                      "e.ToDoTrigger, e.WarningDays, e.LastTriggerDate, e.LastUpdatedDate " +
+                      "e.ToDoTrigger, e.WarningDays, e.LastTriggerDate, e.LastUpdatedDate, e.EventStartDate, e.EventEndDate " +
                       "FROM Event e, EventType et, Person p1, Person p2, Frequency f " +
                       "WHERE e.EventTypeId = et.Id " +
                       "AND e.AssignerId = p1.Id " +
@@ -70,6 +70,8 @@ public class AnEventRepository
                         anEvent.WarningDays = Convert.ToInt64(dr[17].ToString());
                         anEvent.LastTriggerDate = Convert.ToDateTime(dr[18].ToString());
                         anEvent.LastUpdatedDate = Convert.ToDateTime(dr[19].ToString());
+                        anEvent.EventStartDate = Convert.ToDateTime(dr[20].ToString());
+                        anEvent.EventEndDate = Convert.ToDateTime(dr[21].ToString());
 
                         myEvents.Add(anEvent);
                     }
@@ -134,9 +136,11 @@ public class AnEventRepository
                 {
                     string sqlQuery =
                         "INSERT INTO Event (Description, StartDate, EndDate, EventTypeId, AssignerId, AssigneeId, " + 
-                        "FrequencyId, ToDoTrigger, WarningDays, LastTriggerDate, LastUpdatedDate, CreationDate) " + 
+                        "FrequencyId, ToDoTrigger, WarningDays, LastTriggerDate, LastUpdatedDate, CreationDate, " + 
+                        "EventStartDate, EventEndDate) " +
                         "VALUES (@Description, @StartDate, @EndDate, @AnEventTypeId, @AssignerId, @AssigneeId, " +
-                        "@FrequencyId, @ToDoTrigger, @WarningDays, @LastTriggerDate, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)";
+                        "@FrequencyId, @ToDoTrigger, @WarningDays, @LastTriggerDate, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP," +
+                        "@EventStartDate, @EventEndDate)";
 
                     return (db.Execute(sqlQuery, myEvent) == 1);
                 }

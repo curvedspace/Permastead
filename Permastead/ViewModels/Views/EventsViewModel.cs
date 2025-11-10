@@ -115,6 +115,8 @@ public partial class  EventsViewModel : ViewModelBase
                     ("Frequency", x => x.Frequency.Description),
                 new TextColumn<AnEvent, long>
                     ("Warning Days", x => x.WarningDays),
+                new TextColumn<AnEvent, long>
+                    ("Event Length", x => x.EventLength),
                 new CheckBoxColumn<AnEvent>
                 (
                     "ToDo Trigger",
