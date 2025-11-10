@@ -214,6 +214,12 @@ public partial class InventoryViewModel: ViewModelBase
             TextWrapping = TextWrapping.Wrap, TextAlignment = TextAlignment.Center
         };
         
+        var rightAligned = new TextColumnOptions<Inventory>
+        {
+            TextTrimming = TextTrimming.None,
+            TextWrapping = TextWrapping.Wrap, TextAlignment = TextAlignment.Right
+        };
+        
         InventorySource = new FlatTreeDataGridSource<Inventory>(_inventory)
         {
             Columns =
@@ -235,9 +241,9 @@ public partial class InventoryViewModel: ViewModelBase
                 new TextColumn<Inventory, long>
                     ("Quantity", x => x.Quantity,GridLength.Auto,centered),
                 new TextColumn<Inventory, double>
-                    ("Original Value", x => x.OriginalValue),
+                    ("Original Value", x => x.OriginalValue,GridLength.Auto,rightAligned),
                 new TextColumn<Inventory, double>
-                    ("Current Value", x => x.CurrentValue),
+                    ("Current Value", x => x.CurrentValue,GridLength.Auto,rightAligned),
                 new TextColumn<Inventory, bool>
                     ("For Sale", x => x.ForSale),
                 // new CheckBoxColumn<Inventory>

@@ -102,7 +102,7 @@ public partial class  EventsViewModel : ViewModelBase
             Columns =
             {
                 new TextColumn<AnEvent, DateTime>
-                    ("Next Date", x => x.NextDate),
+                    ("Next Date", x => x.NextDate ),
                 new TextColumn<AnEvent, string>
                     ("Type", x => x.AnEventType.Description),
                 new TextColumn<AnEvent, string>
@@ -114,11 +114,11 @@ public partial class  EventsViewModel : ViewModelBase
                 new TextColumn<AnEvent, string>
                     ("Frequency", x => x.Frequency.Description),
                 new TextColumn<AnEvent, long>
-                    ("Warning Days", x => x.WarningDays),
+                    ("Warning Days", x => x.WarningDays,null,null,centered),
                 new TextColumn<AnEvent, long>
-                    ("Days Until Next", x => x.DaysUntilNext),
+                    ("Days Until Next", x => x.DaysUntilNext,null,null,centered),
                 new TextColumn<AnEvent, long>
-                    ("Event Length", x => x.EventLength),
+                    ("Event Length", x => x.EventLength,null,null,centered),
                 new CheckBoxColumn<AnEvent>
                 (
                     "ToDo Trigger",
