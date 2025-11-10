@@ -1,9 +1,10 @@
 ﻿
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using Models;
+
 using Permastead.ViewModels.Views;
 using Permastead.Views;
+using Models;
 
 namespace Permastead.ViewModels
 {
@@ -29,11 +30,11 @@ namespace Permastead.ViewModels
             new HomeViewModel(),
             new DashboardViewModel(),
             new ConnectionsViewModel(),
+            new CyclesViewModel(),
             new FinderViewModel(),
             new ObservationsViewModel(),
             new ToDoViewModel(),
             new EventsViewModel(),
-            new InventoryViewModel(),
             new ProceduresViewModel(),
             new PlantsViewModel(),
             new SeedsViewModel(),
@@ -41,6 +42,7 @@ namespace Permastead.ViewModels
             new AnimalsViewModel(),
             new HarvestsViewModel(),
             new PreservationViewModel(),
+            new InventoryViewModel(),
             new ContactsViewModel(),
             new WeatherViewModel(),
             new SettingsViewModel()
@@ -49,144 +51,78 @@ namespace Permastead.ViewModels
         public decimal LevelProgress {get => _scoreBoard.LevelProgress *  100;}
 
         [ObservableProperty] 
-        private ViewModelBase _CurrentView;
+        private ViewModelBase _currentView;
   
     
         [ObservableProperty] 
-        private string _CurrentViewName;
+        private string _currentViewName;
 
         [RelayCommand]
         private void OpenHomeView()
         {
-            CurrentView = Views[0];
-            CurrentViewName = "Home";
+            SetupView(ToolbarViews.Home);
 
             var vm = CurrentView as HomeViewModel;
             
             // when we click on Home, refresh the data
-            vm.RefreshData();
+            vm?.RefreshData();
+
         }
         
         [RelayCommand]
-        private void OpenDashboardView()
-        {
-            CurrentView = Views[1];
-            CurrentViewName = "Dashboard";
-        }
+        private void OpenDashboardView() =>  SetupView(ToolbarViews.Dashboard);
         
         [RelayCommand]
-        private void OpenConnectionsView()
-        {
-            CurrentView = Views[2];
-            CurrentViewName = "Connections";
-        }
+        private void OpenConnectionsView() =>  SetupView(ToolbarViews.Connections);
         
         [RelayCommand]
-        private void OpenFinderView()
-        {
-            CurrentView = Views[3];
-            CurrentViewName = "Finder";
-        }
+        private void OpenCyclesView() =>  SetupView(ToolbarViews.Cycles);
+        
+        [RelayCommand]
+        private void OpenFinderView() =>  SetupView(ToolbarViews.Finder);
 
         [RelayCommand]
-        private void OpenObservationView()
-        {
-            CurrentView = Views[4];
-            CurrentViewName = "Observations";
-        }
+        private void OpenObservationView() =>  SetupView(ToolbarViews.Observations);
         
         [RelayCommand]
-        private void OpenToDoView()
-        {
-            CurrentView = Views[5];
-            CurrentViewName = "Actions";
-        }
+        private void OpenToDoView() =>  SetupView(ToolbarViews.Actions);
         
         [RelayCommand]
-        private void OpenEventsView()
-        {
-            CurrentView = Views[6];
-            CurrentViewName = "Events";
-        }
+        private void OpenEventsView() =>  SetupView(ToolbarViews.Events);
         
         [RelayCommand]
-        private void OpenInventoryView()
-        {
-            CurrentView = Views[7];
-            CurrentViewName = "Inventory";
-        }
+        private void OpenProceduresView() =>  SetupView(ToolbarViews.Procedures);
         
         [RelayCommand]
-        private void OpenProceduresView()
-        {
-            CurrentView = Views[8];
-            CurrentViewName = "Procedures";
-        }
-        
+        private void OpenPlantsView() =>  SetupView(ToolbarViews.Plants);
         
         [RelayCommand]
-        private void OpenPlantsView()
-        {
-            CurrentView = Views[9];
-            CurrentViewName = "Plants";
-        }
+        private void OpenSeedsView() =>  SetupView(ToolbarViews.Seeds);
         
         [RelayCommand]
-        private void OpenSeedsView()
-        {
-            CurrentView = Views[10];
-            CurrentViewName = "Starters";
-        }
+        private void OpenPlantingsView() =>  SetupView(ToolbarViews.Plantings);
         
         [RelayCommand]
-        private void OpenPlantingsView()
-        {
-            CurrentView = Views[11];
-            CurrentViewName = "Plantings";
-        }
+        private void OpenAnimalsView() =>  SetupView(ToolbarViews.Animals);
         
         [RelayCommand]
-        private void OpenAnimalsView()
-        {
-            CurrentView = Views[12];
-            CurrentViewName = "Animals";
-        }
+        private void OpenHarvestsView() =>  SetupView(ToolbarViews.Harvests);
         
         [RelayCommand]
-        private void OpenHarvestsView()
-        {
-            CurrentView = Views[13];
-            CurrentViewName = "Harvests";
-        }
+        private void OpenPreservationView() =>  SetupView(ToolbarViews.Preservations);
         
         [RelayCommand]
-        private void OpenPreservationView()
-        {
-            CurrentView = Views[14];
-            CurrentViewName = "Food Preservation";
-        }
+        private void OpenInventoryView() =>  SetupView(ToolbarViews.Inventory);
         
         [RelayCommand]
-        private void OpenPeopleView()
-        {
-            CurrentView = Views[15];
-            CurrentViewName = "People";
-        }
+        private void OpenPeopleView() =>  SetupView(ToolbarViews.People);
         
         [RelayCommand]
-        private void OpenWeatherView()
-        {
-            CurrentView = Views[16];
-            CurrentViewName = "Weather";
-        }
+        private void OpenWeatherView()  =>  SetupView(ToolbarViews.Weather);
         
         [RelayCommand]
-        private void OpenSettingsView()
-        {
-            CurrentView = Views[17];
-            CurrentViewName = "Settings";
-        }
-        
+        private void OpenSettingsView()  =>  SetupView(ToolbarViews.Settings);
+       
         [RelayCommand]
         private void OpenGaiaView()
         {
@@ -212,6 +148,16 @@ namespace Permastead.ViewModels
                 }
             }
         }
+        
+        /// <summary>
+        /// A helper method to select the current view.
+        /// </summary>
+        /// <param name="view">The view to select.</param>
+        private void SetupView(ToolbarViews view)
+        {
+            CurrentView = Views[(int)view];
+            CurrentViewName = view.ToString();
+        }
 
         public MainWindowViewModel()
         {
@@ -225,4 +171,28 @@ namespace Permastead.ViewModels
         }
         
      }
+    
+    public enum ToolbarViews
+    {
+        Home,
+        Dashboard,
+        Connections,
+        Cycles,
+        Finder,
+        Observations,
+        Actions,
+        Events,
+        Procedures,
+        Plants,
+        Seeds,
+        Plantings,
+        Animals,
+        Harvests,
+        Preservations,
+        Inventory,
+        People,
+        Weather,
+        Settings,
+        Gaia
+    }
 }

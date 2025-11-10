@@ -1,0 +1,22 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             xmlns:vm="using:Permastead.ViewModels.Views"
+             xmlns:views="clr-namespace:Permastead.Views.Views"
+             x:DataType="vm:CyclesViewModel"
+             x:Class="Permastead.Views.Views.CyclesView">
+    
+    <Grid ColumnDefinitions="*,Auto" RowDefinitions="Auto,*">
+        <StackPanel>
+            <WrapPanel>
+                <Image Margin="20" Width="24" Height="24" Source="/Assets/file_start_workflow.png" />
+                <TextBlock FontWeight="Bold" Margin="20,26,20,20">Cycles</TextBlock>
+                <!-- <Separator MaxWidth="5"></Separator> -->
+                <Button Command="{Binding RefreshDataCommand}" x:Name="Refresh" HorizontalAlignment="Right" Margin="10,0">Refresh</Button> 
+            </WrapPanel>
+        </StackPanel>
+    </Grid>
+    
+</UserControl>
