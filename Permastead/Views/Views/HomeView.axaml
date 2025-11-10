@@ -39,14 +39,50 @@
             </StackPanel>
         </Grid>
         
-        <lvc:PieChart Grid.Row="4" Grid.Column="0" Margin="100,10,100,10"
-            Series="{Binding Series}"
-            VisualElements="{Binding VisualElements}"
+        <lvc:PieChart Grid.Row="4" Grid.Column="0" x:Name="ObsActChart" Margin="100,10,100,10"
             InitialRotation="-225"
             MaxAngle="270"
             MinValue="0"
             MaxValue="100"
+            Background="#ff0d2644"
             AnimationsSpeed="00:00:02.500">
+            
+            <lvc:PieChart.Series>
+
+                <lvc:XamlAngularGaugeSeries
+                    GaugeValue="40"
+                    OuterRadiusOffset="130"
+                    MaxRadialColumnWidth="20"
+                    CornerRadius="0"/>
+
+                <lvc:XamlAngularGaugeSeries
+                    GaugeValue="20"
+                    OuterRadiusOffset="130"
+                    MaxRadialColumnWidth="20"
+                    CornerRadius="0"/>
+
+                <lvc:XamlAngularGaugeSeries
+                    GaugeValue="40"
+                    OuterRadiusOffset="130"
+                    MaxRadialColumnWidth="20"
+                    CornerRadius="0"/>
+
+            </lvc:PieChart.Series>
+
+            <lvc:PieChart.VisualElements>
+
+                <lvc:XamlNeedle
+                    Width="20"
+                    Value="{Binding  ObservationsToActionRatio}"/>
+
+                <lvc:XamlAngularTicks
+                    LabelsSize="16"
+                    LabelsOuterOffset="15"
+                    OuterOffset="65"
+                    TicksLength="20" />
+
+            </lvc:PieChart.VisualElements>
+            
         </lvc:PieChart>
         
         <lvc:PieChart x:Name="StatsChart" Grid.Row="4" Grid.Column="2" Margin="100,10,100,10"
@@ -55,7 +91,8 @@
                       MaxAngle="270"
                       MinValue="0"
                       MaxValue="{Binding SeriesStatsMaxValue}"
-                      AnimationsSpeed="00:00:02.500">
+                      Background="#ff0d2644"
+                      AnimationsSpeed="00:00:03.000">
         </lvc:PieChart>
         
         <TextBlock Grid.Column="0" Grid.Row="3" VerticalAlignment="Bottom" HorizontalAlignment="Center">Actions to Observations Ratio (Last 30 Days)</TextBlock>

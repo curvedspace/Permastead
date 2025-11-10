@@ -23,6 +23,18 @@ namespace Permastead.ViewModels.Views;
 public partial class DashboardViewModel : ViewModelBase
 {
     [ObservableProperty] private ScoreBoard _scoreBoard;
+    
+    [ObservableProperty] 
+    private double[] _actSeries;
+    
+    [ObservableProperty] 
+    private double[] _obsSeries;
+    
+    [ObservableProperty] 
+    private double[] _pltSeries;
+    
+    [ObservableProperty] 
+    private double[] _hrvSeries;
 
     public IEnumerable<ISeries> Series { get; set; } 
 
@@ -39,6 +51,8 @@ public partial class DashboardViewModel : ViewModelBase
         {
             Color = new SKColor(240, 240, 240)
         };
+
+    [ObservableProperty] public string[] _chartLabels;
     
     public Axis[] XAxes { get; set; } =
     {
@@ -321,6 +335,12 @@ public partial class DashboardViewModel : ViewModelBase
         
         PlantingYears.Add("ALL");
         
+        ChartLabels =
+        [
+            "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November",
+            "December"
+        ];
+
         RefreshDataOnly();
         
     }
@@ -386,6 +406,8 @@ public partial class DashboardViewModel : ViewModelBase
         var actSeries = new ColumnSeries<double>();
         actSeries.Name = "Actions";
         actSeries.Values = actionsByMonth.Values;
+
+        
         
         var obsSeries = new ColumnSeries<double>();
         obsSeries.Name = "Observations";
@@ -400,6 +422,11 @@ public partial class DashboardViewModel : ViewModelBase
         hrvSeries.Values = harvestsByMonth.Values;
 
         ActObsSeries = new[] { actSeries, obsSeries, pltSeries, hrvSeries };
+        
+        ActSeries = actionsByMonth.Values.ToArray();
+        ObsSeries = observationsByMonth.Values.ToArray();
+        PltSeries = plantingsByMonth.Values.ToArray();
+        HrvSeries = harvestsByMonth.Values.ToArray();
         
         OnPropertyChanged(nameof(ActObsSeries));
     }

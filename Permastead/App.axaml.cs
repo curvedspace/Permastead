@@ -45,7 +45,7 @@ public partial class App : Application
         LiveCharts.Configure(config => 
                 config 
                     // you can override the theme 
-                    .AddDarkTheme()  
+                    .AddDefaultTheme()  
             
         ); 
     }

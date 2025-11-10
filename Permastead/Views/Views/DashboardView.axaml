@@ -43,6 +43,7 @@
                           MaxAngle="270"
                           MinValue="0"
                           AnimationsSpeed="00:00:02.500"
+                          Background="#ff0d2644"
                           MaxValue="{Binding TotalYearPlantings}">
             </lvc:PieChart>
         </Grid>
@@ -76,6 +77,7 @@
                 MaxAngle="270"
                 MinValue="0"
                 AnimationsSpeed="00:00:03.000"
+                Background="#ff0d2644"
                 MaxValue="{Binding TotalYearPlantings}">
             </lvc:PieChart>
         </Grid>
@@ -100,12 +102,34 @@
     <!-- </Grid> -->
         <!-- </StackPanel> -->
         <Panel Grid.Column="0"  Grid.ColumnSpan="3" Grid.Row="2">
-        <lvc:CartesianChart
-            Series="{Binding ActObsSeries}"
-            XAxes="{Binding XAxes}"
-            LegendTextPaint="{Binding LegendTextPaint}"
-            LegendPosition="Bottom">
+        <!-- <lvc:CartesianChart -->
+        <!--     Series="{Binding ActObsSeries}" -->
+        <!--     XAxes="{Binding XAxes}" -->
+        <!--     LegendTextPaint="{Binding LegendTextPaint}" -->
+        <!--     LegendPosition="Bottom"> -->
+        <!-- </lvc:CartesianChart> -->
+        
+        <lvc:CartesianChart Background="#ff0d2644">
+        <lvc:CartesianChart.Series>
+            <lvc:XamlColumnSeries SeriesName="ActSeries" Values="{Binding ActSeries}"/>
+            <lvc:XamlColumnSeries SeriesName="ObsSeries" Values="{Binding ObsSeries}"/>
+            <lvc:XamlColumnSeries SeriesName="PlantingsSeries" Values="{Binding PltSeries}"/>
+            <lvc:XamlColumnSeries SeriesName="HarvestsSeries" Values="{Binding HrvSeries}"/>
+        </lvc:CartesianChart.Series>
+        
+            <!-- Labels="{Binding ChartLabels}" -->
+            <lvc:CartesianChart.XAxes>
+                <lvc:XamlAxis
+                    SeparatorsPaint="{lvc:SolidColorPaint Color='#c8c8c8'}"
+                    SeparatorsAtCenter="False"
+                    TicksPaint="{lvc:SolidColorPaint Color='#232323'}"
+                    TicksAtCenter="True"
+                    MinStep="1"
+                    ForceStepToMin="True"/>
+            </lvc:CartesianChart.XAxes>
+        
         </lvc:CartesianChart>
+        
         </Panel>
     </Grid>
 </UserControl>

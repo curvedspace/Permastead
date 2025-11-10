@@ -28,7 +28,7 @@ namespace Permastead.ViewModels.Views;
         
         public double? SeriesStatsMaxValue { get; set; }
         
-        public IEnumerable<VisualElement<SkiaSharpDrawingContext>> VisualElements { get; set; }
+        // public IEnumerable<VisualElement<SkiaSharpDrawingContext>> VisualElements { get; set; }
         private NeedleVisual Needle { get; set; }
         
         [ObservableProperty] private long _inventoryCount;
@@ -257,17 +257,17 @@ namespace Permastead.ViewModels.Views;
                 new GaugeItem(20, s => SetStyle(sectionsOuter, sectionsWidth, s)),
                 new GaugeItem(40, s => SetStyle(sectionsOuter, sectionsWidth, s)));
 
-            VisualElements =
-            [
-                new AngularTicksVisual
-                {
-                    LabelsSize = 16,
-                    LabelsOuterOffset = 15,
-                    OuterOffset = 65,
-                    TicksLength = 20
-                },
-                Needle
-            ];
+            // VisualElements =
+            // [
+            //     new AngularTicksVisual
+            //     {
+            //         LabelsSize = 16,
+            //         LabelsOuterOffset = 15,
+            //         OuterOffset = 65,
+            //         TicksLength = 20
+            //     },
+            //     Needle
+            // ];
             
             OnPropertyChanged(nameof(Series));
             
