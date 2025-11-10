@@ -119,7 +119,7 @@ public partial class InventoryViewModel: ViewModelBase
             
             RefreshInventory();
             
-            if (_inventory.Count > 0) CurrentItem = _inventory.FirstOrDefault();
+            if (_inventory.Count > 0) CurrentItem = Inventory.FirstOrDefault();
             
             GetInventoryObservations();
         }
@@ -163,10 +163,10 @@ public partial class InventoryViewModel: ViewModelBase
 
     public void RefreshData(string filterText = "")
     {
-        _inventory.Clear();
+        Inventory.Clear();
 
-        _inventoryGroups = new ObservableCollection<InventoryGroup>(Services.InventoryGroupService.GetAllInventoryGroups(AppSession.ServiceMode));
-        _inventoryTypes = new ObservableCollection<InventoryType>(Services.InventoryTypeService.GetAllInventoryTypes(AppSession.ServiceMode));
+        InventoryGroups = new ObservableCollection<InventoryGroup>(Services.InventoryGroupService.GetAllInventoryGroups(AppSession.ServiceMode));
+        InventoryTypes = new ObservableCollection<InventoryType>(Services.InventoryTypeService.GetAllInventoryTypes(AppSession.ServiceMode));
         
         var invList = Services.InventoryService.GetAllInventory(AppSession.ServiceMode);
         var caseAdjustedFilterText = filterText.Trim().ToLowerInvariant();
@@ -220,7 +220,7 @@ public partial class InventoryViewModel: ViewModelBase
             TextWrapping = TextWrapping.Wrap, TextAlignment = TextAlignment.Right
         };
         
-        InventorySource = new FlatTreeDataGridSource<Inventory>(_inventory)
+        InventorySource = new FlatTreeDataGridSource<Inventory>(Inventory)
         {
             Columns =
             {

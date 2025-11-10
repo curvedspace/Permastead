@@ -27,7 +27,7 @@
                         <Image Width="16" Height="16" Source="/Assets/node.png" />
                     </Button>
                     <Button Name="CyclesButton" ToolTip.Tip="Cycles " Command="{Binding OpenCyclesViewCommand}">
-                        <Image Width="16" Height="16" Source="/Assets/token_quantifier.png" />
+                        <Image Width="16" Height="16" Source="/Assets/control_repeat_blue.png" />
                     </Button>
                     <Button Name="FinderButton" ToolTip.Tip="Finder " Command="{Binding OpenFinderViewCommand}">
                         <Image Width="16" Height="16" Source="/Assets/magnifier.png" />
