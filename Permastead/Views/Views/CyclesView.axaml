@@ -5,8 +5,13 @@
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              xmlns:vm="using:Permastead.ViewModels.Views"
              xmlns:views="clr-namespace:Permastead.Views.Views"
+             xmlns:lvc="using:LiveChartsCore.SkiaSharpView.Avalonia"
              x:DataType="vm:CyclesViewModel"
              x:Class="Permastead.Views.Views.CyclesView">
+    
+    <UserControl.DataContext>
+        <vm:CyclesViewModel/>
+    </UserControl.DataContext>
     
     <Grid ColumnDefinitions="*,Auto" RowDefinitions="Auto,*">
         <StackPanel>
@@ -17,6 +22,22 @@
                 <Button Command="{Binding RefreshDataCommand}" x:Name="Refresh" HorizontalAlignment="Right" Margin="10,0">Refresh</Button> 
             </WrapPanel>
         </StackPanel>
+        
+        <Grid Grid.Row="1" Grid.Column="0" ColumnDefinitions="*,*,*,*" RowDefinitions="*,*,*">
+            <Grid Grid.Column="1" Grid.Row="1" ColumnDefinitions="*" RowDefinitions="Auto,*">
+                <Label Grid.Column="0" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="10">Birthdays</Label>
+
+                <lvc:PieChart Grid.Row="1" x:Name="People1"
+                              InitialRotation="-90"
+                              MinValue="0"
+                              AnimationsSpeed="00:00:03.000"
+                              Series="{Binding Series}"
+                              MaxValue="100">
+                    
+                </lvc:PieChart>
+                
+            </Grid>
+        </Grid>
     </Grid>
     
 </UserControl>
