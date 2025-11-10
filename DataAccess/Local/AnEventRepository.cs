@@ -167,7 +167,8 @@ public class AnEventRepository
                     string sqlQuery =
                         "UPDATE Event SET Description = @Description, StartDate = @StartDate, EndDate = @EndDate, EventTypeId = @AnEventTypeId, " +
                         "AssignerId = @AssignerId, AssigneeId = @AssigneeId, FrequencyId = @FrequencyId, ToDoTrigger = @ToDoTrigger, " + 
-                        "WarningDays = @WarningDays, LastTriggerDate = @LastTriggerDate, LastUpdatedDate = CURRENT_TIMESTAMP " +
+                        "WarningDays = @WarningDays, LastTriggerDate = @LastTriggerDate, LastUpdatedDate = CURRENT_TIMESTAMP, " +
+                        "EventStartDate = @EventStartDate, EventEndDate = @EventEndDate " +
                         "WHERE Id = @Id;";
 
                     return (db.Execute(sqlQuery, myEvent) == 1);

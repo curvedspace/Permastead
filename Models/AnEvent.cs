@@ -99,6 +99,8 @@ public class AnEvent
 
     public long EventLength => (this.EventEndDate - this.EventStartDate).Days;
 
+    public long DaysUntilNext => (this.NextDate - DateTime.Today).Days;
+    
     public AnEvent()
     {
         this.Frequency = new Frequency();

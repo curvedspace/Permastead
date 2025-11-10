@@ -332,6 +332,8 @@ namespace DataAccess.Server
 				FrequencyId INTEGER,
 				ToDoTrigger BOOLEAN,
 				WarningDays INTEGER,
+				EventStartDate TIMESTAMP,
+				EventEndDate TIMESTAMP,
 				LastTriggerDate TIMESTAMP,
 				LastUpdatedDate TIMESTAMP
 			);

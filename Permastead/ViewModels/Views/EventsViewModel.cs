@@ -116,6 +116,8 @@ public partial class  EventsViewModel : ViewModelBase
                 new TextColumn<AnEvent, long>
                     ("Warning Days", x => x.WarningDays),
                 new TextColumn<AnEvent, long>
+                    ("Days Until Next", x => x.DaysUntilNext),
+                new TextColumn<AnEvent, long>
                     ("Event Length", x => x.EventLength),
                 new CheckBoxColumn<AnEvent>
                 (

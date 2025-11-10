@@ -15,11 +15,19 @@
           <dialogs:EventsWindowViewModel/>
         </Design.DataContext>
         
-        <Grid ColumnDefinitions="Auto,Auto,Auto,*" RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,*,Auto" Margin="10">
+        <Grid ColumnDefinitions="Auto,Auto,Auto,*" RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,*,Auto" Margin="10">
           <TextBlock Grid.Row="0" Grid.Column="0" Margin="10,15,0,0">ID:</TextBlock>
           <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding CurrentItem.Id}" IsEnabled="False" Margin="10,10,10,10"></TextBox>
           <Label Grid.Row="0" Margin="10,10,10,10" Grid.Column="2">Last Triggered:</Label>
           <CalendarDatePicker x:Name="StartDate" Margin="10,5,0,0" Grid.Row="0" Grid.Column="3" SelectedDate="{Binding CurrentItem.LastTriggerDate, Mode=TwoWay}">
+          </CalendarDatePicker>
+          
+          <Label Grid.Row="1" Margin="10,10,10,10" Grid.Column="0">Event Start:</Label>
+          <CalendarDatePicker x:Name="EventStartDate" Margin="10,5,0,0" Grid.Row="1" Grid.Column="1" SelectedDate="{Binding CurrentItem.EventStartDate, Mode=TwoWay}">
+          </CalendarDatePicker>
+          
+          <Label Grid.Row="1" Margin="10,10,10,10" Grid.Column="2">Event Stop:</Label>
+          <CalendarDatePicker x:Name="EventStopDate" Margin="10,5,0,0" Grid.Row="1" Grid.Column="3" SelectedDate="{Binding CurrentItem.EventEndDate, Mode=TwoWay}">
           </CalendarDatePicker>
           
           <TextBlock Grid.Row="2" Grid.Column="0" Margin="10,15,10,10">Frequency:</TextBlock>
@@ -71,13 +79,16 @@
           <CalendarDatePicker x:Name="LastTriggered" IsEnabled="False" Margin="10,5,0,0" Grid.Row="6" Grid.Column="1" SelectedDate="{Binding CurrentItem.LastUpdatedDate, Mode=TwoWay}">
           </CalendarDatePicker>
           
+          <Label Grid.Row="6" Margin="10,10,10,10" Grid.Column="2">Length:</Label>
+          <TextBox Grid.Row="6" Grid.Column="3" Text="{Binding CurrentItem.EventLength}" IsEnabled="False" Margin="10,10,10,10"></TextBox>
+          
           <TextBlock Grid.Row="7" Grid.Column="0" Margin="10">Description:</TextBlock>
-          <TextBox Grid.Row="7" Grid.Column="1" Grid.ColumnSpan="3" 
+          <TextBox Grid.Row="7" Grid.Column="1" Grid.ColumnSpan="3" Grid.RowSpan="2"
                    Text="{Binding CurrentItem.Description }" TextWrapping="Wrap" Margin="10,10,10,10"></TextBox>
           
-          <Image Grid.Row="8" Grid.Column="0"  Margin="10" Width="32" Height="32" Source="/Assets/clock_red.png" />
+          <Image Grid.Row="9" Grid.Column="0"  Margin="10" Width="32" Height="32" Source="/Assets/clock_red.png" />
           
-          <StackPanel Grid.Row="8" Grid.Column="3" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,0,0">
+          <StackPanel Grid.Row="9" Grid.Column="3" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,0,0">
             <Button x:Name="SaveButton" Margin="10" Click="SaveButton_OnClick">Save</Button>
             <Button x:Name="CancelButton" Margin="10" Click="CancelButton_OnClick" >Cancel</Button>
           </StackPanel>
