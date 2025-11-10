@@ -1,6 +1,4 @@
-﻿using System.Diagnostics;
-using System.Windows.Input;
-using Avalonia.Controls;
+﻿
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Models;
