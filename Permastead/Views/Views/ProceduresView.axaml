@@ -53,10 +53,10 @@
                 <Grid RowDefinitions="Auto,*">
                     <WrapPanel Margin="10">
                         <Button Margin="5" Command="{Binding UpdateRecordCommand}">Update</Button>
-                        <TextBlock HorizontalAlignment="Center" TextAlignment="Center" Text="Name: " Margin="10,15,10,10"></TextBlock>
-                        <TextBox TextAlignment="Center" Text="{Binding CurrentItem.Name}" Margin="10"></TextBox>
                         <TextBlock HorizontalAlignment="Center" TextAlignment="Center" Text="Category: " Margin="10,15,10,10"></TextBlock>
                         <TextBox TextAlignment="Center" Text="{Binding CurrentItem.Category}" Margin="10"></TextBox>
+                        <TextBlock HorizontalAlignment="Center" TextAlignment="Center" Text="Name: " Margin="10,15,10,10"></TextBlock>
+                        <TextBox TextAlignment="Center" Text="{Binding CurrentItem.Name}" Margin="10"></TextBox>
                         <TextBlock HorizontalAlignment="Center" TextAlignment="Center" Text="Created: " Margin="10,15,10,10"></TextBlock>
                         <TextBlock TextAlignment="Center" Text="{Binding CurrentItem.CreationDate}" Margin="10,15,10,10"></TextBlock>
                         <TextBlock HorizontalAlignment="Center" TextAlignment="Center" Text="Last Update: " Margin="10,15,10,10"></TextBlock>
