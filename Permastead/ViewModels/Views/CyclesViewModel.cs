@@ -23,6 +23,8 @@ public partial class  CyclesViewModel : ViewModelBase
     public string BirthdayName1 { get; set; } = "";
     public string BirthdayName2 { get; set; } = "";
     public string BirthdayName3 { get; set; } = "";
+
+    public bool BirthdayVisible3 { get; set; } = false;
     
     private List<AnEvent> myEvents { get; set; } = new List<AnEvent>();
     
@@ -87,6 +89,7 @@ public partial class  CyclesViewModel : ViewModelBase
             {
                 BirthdayValue3 = 365 - nextBirthdays[2].DaysUntilNext;
                 BirthdayName3 = nextBirthdays[2].Description!;
+                BirthdayVisible3 = true;
             }
             
         }

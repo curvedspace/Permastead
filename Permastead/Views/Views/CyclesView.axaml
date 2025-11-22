@@ -25,7 +25,7 @@
         
         <Grid Grid.Row="1" Grid.Column="0" ColumnDefinitions="*,*,*,*" RowDefinitions="Auto,*,*,*">
             
-            <Label Grid.Column="0" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="10">Birthdays</Label>
+            <Label Grid.Column="0" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="10">People</Label>
 
             <lvc:PieChart Grid.Row="1" Grid.Column="0" x:Name="People1"
                           InitialRotation="-90"
@@ -73,6 +73,7 @@
                           InitialRotation="-90"
                           Background="#ff0d2644"
                           MinValue="0"
+                          IsVisible="{Binding BirthdayVisible3}"
                           MaxValue="365">
                 <lvc:PieChart.Series>
 
@@ -81,6 +82,7 @@
                         GaugeValue="{Binding BirthdayValue3}"
                         DataLabelsSize="20"
                         SeriesName="{Binding BirthdayName3}"
+                        IsVisible="{Binding BirthdayVisible3}"
                         AnimationsSpeed="00:00:00.500"
                         MaxRadialColumnWidth="50"/>
 
