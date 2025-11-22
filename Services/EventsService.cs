@@ -70,4 +70,31 @@ public class EventsService
         
         return rtnValue;
     }
+    
+    public static List<AnEvent> GetNextBirthdays(ServiceMode mode)
+    {
+        var myEvents = GetAllEvents(mode);
+        
+        myEvents = myEvents.Where(x=>x.AnEventType.Description == "Birthday").OrderBy(x => x.DaysUntilNext).ToList();
+
+        return myEvents;
+    }
+    
+    public static List<AnEvent> GetNextHolidays(ServiceMode mode)
+    {
+        var myEvents = GetAllEvents(mode);
+        
+        myEvents = myEvents.Where(x=>x.AnEventType.Description == "Holiday").OrderBy(x => x.DaysUntilNext).ToList();
+
+        return myEvents;
+    }
+    
+    public static List<AnEvent> GetNextPlaceEvents(ServiceMode mode)
+    {
+        var myEvents = GetAllEvents(mode);
+        
+        myEvents = myEvents.Where(x=>x.AnEventType.Description == "Phenology").OrderBy(x => x.DaysUntilNext).ToList();
+
+        return myEvents;
+    }
 }

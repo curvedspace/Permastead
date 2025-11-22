@@ -23,20 +23,265 @@
             </WrapPanel>
         </StackPanel>
         
-        <Grid Grid.Row="1" Grid.Column="0" ColumnDefinitions="*,*,*,*" RowDefinitions="*,*,*">
-            <Grid Grid.Column="1" Grid.Row="1" ColumnDefinitions="*" RowDefinitions="Auto,*">
-                <Label Grid.Column="0" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="10">Birthdays</Label>
+        <Grid Grid.Row="1" Grid.Column="0" ColumnDefinitions="*,*,*,*" RowDefinitions="Auto,*,*,*">
+            
+            <Label Grid.Column="0" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="10">Birthdays</Label>
 
-                <lvc:PieChart Grid.Row="1" x:Name="People1"
-                              InitialRotation="-90"
-                              MinValue="0"
-                              AnimationsSpeed="00:00:03.000"
-                              Series="{Binding Series}"
-                              MaxValue="100">
-                    
-                </lvc:PieChart>
+            <lvc:PieChart Grid.Row="1" Grid.Column="0" x:Name="People1"
+                          InitialRotation="-90"
+                          Background="#ff0d2644"
+                          MinValue="0"
+                          MaxValue="365">
+                <lvc:PieChart.Series>
+
+                    <lvc:XamlGaugeSeries
+                        GaugeValue="{Binding BirthdayValue1}"
+                        DataLabelsFormatter="{Binding LabelFormatter}"
+                        SeriesName="{Binding BirthdayName1}"
+                        DataLabelsSize="20"
+                        AnimationsSpeed="00:00:00.500"
+                        MaxRadialColumnWidth="50"/>
+
+                    <!-- The background series is used to style the gauge background. -->
+                    <lvc:XamlGaugeBackgroundSeries/>
+
+                </lvc:PieChart.Series>
+            </lvc:PieChart>
+            
+            <lvc:PieChart Grid.Row="2" Grid.Column="0" x:Name="People2"
+                          InitialRotation="-90"
+                          Background="#ff0d2644"
+                          MinValue="0"
+                          MaxValue="365">
+                <lvc:PieChart.Series>
+
+                    <lvc:XamlGaugeSeries
+                        DataLabelsFormatter="{Binding LabelFormatter}"
+                        GaugeValue="{Binding BirthdayValue2}"
+                        SeriesName="{Binding BirthdayName2}"
+                        DataLabelsSize="20"
+                        AnimationsSpeed="00:00:00.500"
+                        MaxRadialColumnWidth="50"/>
+
+                    <!-- The background series is used to style the gauge background. -->
+                    <lvc:XamlGaugeBackgroundSeries/>
+
+                </lvc:PieChart.Series>
+            </lvc:PieChart>
+            
+            <lvc:PieChart Grid.Row="3" Grid.Column="0" x:Name="People3"
+                          InitialRotation="-90"
+                          Background="#ff0d2644"
+                          MinValue="0"
+                          MaxValue="365">
+                <lvc:PieChart.Series>
+
+                    <lvc:XamlGaugeSeries
+                        DataLabelsFormatter="{Binding LabelFormatter}"
+                        GaugeValue="{Binding BirthdayValue3}"
+                        DataLabelsSize="20"
+                        SeriesName="{Binding BirthdayName3}"
+                        AnimationsSpeed="00:00:00.500"
+                        MaxRadialColumnWidth="50"/>
+
+                    <!-- The background series is used to style the gauge background. -->
+                    <lvc:XamlGaugeBackgroundSeries/>
+
+                </lvc:PieChart.Series>
+            </lvc:PieChart>
                 
-            </Grid>
+            <!-- Place -->
+                <Label Grid.Column="1" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="10">Calendar</Label>
+                <lvc:PieChart Grid.Row="1" Grid.Column="1" x:Name="Work1"
+                          InitialRotation="-90"
+                          Background="#ff0d2644"
+                          MinValue="0"
+                          MaxValue="365">
+                <lvc:PieChart.Series>
+
+                    <lvc:XamlGaugeSeries
+                        GaugeValue="{Binding HolidayValue1}"
+                        DataLabelsFormatter="{Binding LabelFormatter}"
+                        SeriesName="{Binding HolidayName1}"
+                        DataLabelsSize="20"
+                        Fill="{lvc:SolidColorPaint Color='#9ACD32'}"
+                        AnimationsSpeed="00:00:01.000"
+                        MaxRadialColumnWidth="50"/>
+
+                    <!-- The background series is used to style the gauge background. -->
+                    <lvc:XamlGaugeBackgroundSeries/>
+
+                </lvc:PieChart.Series>
+            </lvc:PieChart>
+            
+            <lvc:PieChart Grid.Row="2" Grid.Column="1" x:Name="Work2"
+                          InitialRotation="-90"
+                          Background="#ff0d2644"
+                          MinValue="0"
+                          MaxValue="365">
+                <lvc:PieChart.Series>
+
+                    <lvc:XamlGaugeSeries
+                        GaugeValue="{Binding HolidayValue2}"
+                        DataLabelsFormatter="{Binding LabelFormatter}"
+                        SeriesName="{Binding HolidayName2}"
+                        Fill="{lvc:SolidColorPaint Color='#9ACD32'}"
+                        DataLabelsSize="20"
+                        AnimationsSpeed="00:00:01.000"
+                        MaxRadialColumnWidth="50"/>
+
+                    <!-- The background series is used to style the gauge background. -->
+                    <lvc:XamlGaugeBackgroundSeries/>
+
+                </lvc:PieChart.Series>
+            </lvc:PieChart>
+            
+            <lvc:PieChart Grid.Row="3" Grid.Column="1" x:Name="Work3"
+                          InitialRotation="-90"
+                          Background="#ff0d2644"
+                          MinValue="0"
+                          MaxValue="365">
+                <lvc:PieChart.Series>
+
+                    <lvc:XamlGaugeSeries
+                        GaugeValue="{Binding HolidayValue3}"
+                        DataLabelsFormatter="{Binding LabelFormatter}"
+                        SeriesName="{Binding HolidayName3}"
+                        Fill="{lvc:SolidColorPaint Color='#9ACD32'}"
+                        DataLabelsSize="20"
+                        AnimationsSpeed="00:00:01.000"
+                        MaxRadialColumnWidth="50"/>
+
+                    <!-- The background series is used to style the gauge background. -->
+                    <lvc:XamlGaugeBackgroundSeries/>
+
+                </lvc:PieChart.Series>
+            </lvc:PieChart>
+            
+            <Label Grid.Column="2" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="10">Place</Label>
+            <lvc:PieChart Grid.Row="1" Grid.Column="2" x:Name="Place1"
+                          InitialRotation="-90"
+                          Background="#ff0d2644"
+                          MinValue="0"
+                          MaxValue="365">
+                <lvc:PieChart.Series>
+
+                    <lvc:XamlGaugeSeries
+                        GaugeValue="{Binding PlaceValue1}"
+                        DataLabelsFormatter="{Binding LabelFormatter}"
+                        SeriesName="{Binding PlaceName1}"
+                        Fill="{lvc:SolidColorPaint Color='#CCCCCC'}"
+                        DataLabelsSize="20"
+                        AnimationsSpeed="00:00:02.000"
+                        MaxRadialColumnWidth="50"/>
+
+                    <!-- The background series is used to style the gauge background. -->
+                    <lvc:XamlGaugeBackgroundSeries/>
+
+                </lvc:PieChart.Series>
+            </lvc:PieChart>
+            
+            <lvc:PieChart Grid.Row="2" Grid.Column="2" x:Name="Place2"
+                          InitialRotation="-90"
+                          Background="#ff0d2644"
+                          MinValue="0"
+                          MaxValue="365">
+                <lvc:PieChart.Series>
+
+                    <lvc:XamlGaugeSeries
+                        GaugeValue="{Binding PlaceValue2}"
+                        DataLabelsFormatter="{Binding LabelFormatter}"
+                        SeriesName="{Binding PlaceName2}"
+                        Fill="{lvc:SolidColorPaint Color='#CCCCCC'}"
+                        DataLabelsSize="20"
+                        AnimationsSpeed="00:00:02.000"
+                        MaxRadialColumnWidth="50"/>
+
+                    <!-- The background series is used to style the gauge background. -->
+                    <lvc:XamlGaugeBackgroundSeries/>
+
+                </lvc:PieChart.Series>
+            </lvc:PieChart>
+            
+            <lvc:PieChart Grid.Row="3" Grid.Column="2" x:Name="Place3"
+                          InitialRotation="-90"
+                          Background="#ff0d2644"
+                          MinValue="0"
+                          MaxValue="365">
+                <lvc:PieChart.Series>
+
+                    <lvc:XamlGaugeSeries
+                        GaugeValue="{Binding PlaceValue3}"
+                        DataLabelsFormatter="{Binding LabelFormatter}"
+                        SeriesName="{Binding PlaceName3}"
+                        Fill="{lvc:SolidColorPaint Color='#CCCCCC'}"
+                        DataLabelsSize="20"
+                        AnimationsSpeed="00:00:02.000"
+                        MaxRadialColumnWidth="50"/>
+
+                    <!-- The background series is used to style the gauge background. -->
+                    <lvc:XamlGaugeBackgroundSeries/>
+
+                </lvc:PieChart.Series>
+            </lvc:PieChart>
+            <Label Grid.Column="3" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="10">Work</Label>
+            <lvc:PieChart Grid.Row="1" Grid.Column="3" x:Name="Cal1"
+                          InitialRotation="-90"
+                          Background="#ff0d2644"
+                          MinValue="0"
+                          MaxValue="100">
+                <lvc:PieChart.Series>
+
+                    <lvc:XamlGaugeSeries
+                        GaugeValue="{Binding Value}"
+                        DataLabelsSize="20"
+                        AnimationsSpeed="00:00:04.000"
+                        MaxRadialColumnWidth="50"/>
+
+                    <!-- The background series is used to style the gauge background. -->
+                    <lvc:XamlGaugeBackgroundSeries/>
+
+                </lvc:PieChart.Series>
+            </lvc:PieChart>
+            
+            <lvc:PieChart Grid.Row="2" Grid.Column="3" x:Name="Cal2"
+                          InitialRotation="-90"
+                          Background="#ff0d2644"
+                          MinValue="0"
+                          MaxValue="100">
+                <lvc:PieChart.Series>
+
+                    <lvc:XamlGaugeSeries
+                        GaugeValue="{Binding Value2}"
+                        DataLabelsSize="20"
+                        AnimationsSpeed="00:00:04.000"
+                        MaxRadialColumnWidth="50"/>
+
+                    <!-- The background series is used to style the gauge background. -->
+                    <lvc:XamlGaugeBackgroundSeries/>
+
+                </lvc:PieChart.Series>
+            </lvc:PieChart>
+            
+            <lvc:PieChart Grid.Row="3" Grid.Column="3" x:Name="Cal3"
+                          InitialRotation="-90"
+                          Background="#ff0d2644"
+                          MinValue="0"
+                          MaxValue="100">
+                <lvc:PieChart.Series>
+
+                    <lvc:XamlGaugeSeries
+                        DataLabelsFormatter="{Binding LabelFormatter}"
+                        GaugeValue="{Binding Value3}"
+                        DataLabelsSize="20"
+                        AnimationsSpeed="00:00:04.000"
+                        MaxRadialColumnWidth="50"/>
+
+                    <!-- The background series is used to style the gauge background. -->
+                    <lvc:XamlGaugeBackgroundSeries/>
+
+                </lvc:PieChart.Series>
+            </lvc:PieChart>
         </Grid>
     </Grid>
     
