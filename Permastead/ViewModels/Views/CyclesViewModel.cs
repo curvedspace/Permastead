@@ -46,6 +46,15 @@ public partial class  CyclesViewModel : ViewModelBase
     
     private List<AnEvent> myPlaceEvents { get; set; } = new List<AnEvent>();
     
+    public double TodoValue1 { get; set; } = 0;
+    public double TodoValue2 { get; set; } = 0;
+    public double TodoValue3 { get; set; } = 0;
+    
+    public string TodoName1 { get; set; } = "";
+    public string TodoName2 { get; set; } = "";
+    public string TodoName3 { get; set; } = "";
+    
+    
     public IEnumerable<ISeries> Series { get; set; }
     
     public IEnumerable<ISeries> Birthday1 { get; set; }
@@ -54,6 +63,9 @@ public partial class  CyclesViewModel : ViewModelBase
     
     public Func<ChartPoint, string> LabelFormatter { get; set; } =
         point => $"{365 - point.Coordinate.PrimaryValue} days : {point.Context.Series.Name}";
+    
+    public Func<ChartPoint, string> MonthLabelFormatter { get; set; } =
+        point => $"{30 - point.Coordinate.PrimaryValue} days : {point.Context.Series.Name}";
     
     [RelayCommand]
     private void RefreshData()
@@ -117,6 +129,27 @@ public partial class  CyclesViewModel : ViewModelBase
             {
                 PlaceValue3 = 365 - myPlaceEvents[2].DaysUntilNext;
                 PlaceName3 = myPlaceEvents[2].Description!;
+            }
+            
+        }
+        
+        var myTodos = ToDoService.GetActiveTodos(AppSession.ServiceMode);
+        if (myTodos != null)
+        {
+            if (myTodos.Count > 0)
+            {
+                TodoValue1 = 30 - myTodos[0].DaysUntilDue;
+                TodoName1 = myTodos[0].Description!;
+            }
+            if (myTodos.Count > 1)
+            {
+                TodoValue2 = 30 - myTodos[1].DaysUntilDue;
+                TodoName2 = myTodos[1].Description!;
+            }
+            if (myTodos.Count > 2)
+            {
+                TodoValue3 = 30 - myTodos[2].DaysUntilDue;
+                TodoName3 = myTodos[2].Description!;
             }
             
         }

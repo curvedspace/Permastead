@@ -91,7 +91,7 @@
             </lvc:PieChart>
                 
             <!-- Place -->
-                <Label Grid.Column="1" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="10">Calendar</Label>
+                <Label Grid.Column="1" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="10">Holiday Calendar</Label>
                 <lvc:PieChart Grid.Row="1" Grid.Column="1" x:Name="Work1"
                           InitialRotation="-90"
                           Background="#ff0d2644"
@@ -158,7 +158,7 @@
                 </lvc:PieChart.Series>
             </lvc:PieChart>
             
-            <Label Grid.Column="2" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="10">Place</Label>
+            <Label Grid.Column="2" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="10">Phenology</Label>
             <lvc:PieChart Grid.Row="1" Grid.Column="2" x:Name="Place1"
                           InitialRotation="-90"
                           Background="#ff0d2644"
@@ -224,16 +224,19 @@
 
                 </lvc:PieChart.Series>
             </lvc:PieChart>
-            <Label Grid.Column="3" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="10">Work</Label>
+            <Label Grid.Column="3" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="10">TODO List</Label>
             <lvc:PieChart Grid.Row="1" Grid.Column="3" x:Name="Cal1"
                           InitialRotation="-90"
                           Background="#ff0d2644"
                           MinValue="0"
-                          MaxValue="100">
+                          MaxValue="30">
                 <lvc:PieChart.Series>
 
                     <lvc:XamlGaugeSeries
-                        GaugeValue="{Binding Value}"
+                        GaugeValue="{Binding TodoValue1}"
+                        DataLabelsFormatter="{Binding MonthLabelFormatter}"
+                        SeriesName="{Binding TodoName1}"
+                        Fill="{lvc:SolidColorPaint Color='#FF4444'}"
                         DataLabelsSize="20"
                         AnimationsSpeed="00:00:04.000"
                         MaxRadialColumnWidth="50"/>
@@ -248,11 +251,14 @@
                           InitialRotation="-90"
                           Background="#ff0d2644"
                           MinValue="0"
-                          MaxValue="100">
+                          MaxValue="30">
                 <lvc:PieChart.Series>
 
                     <lvc:XamlGaugeSeries
-                        GaugeValue="{Binding Value2}"
+                        GaugeValue="{Binding TodoValue2}"
+                        DataLabelsFormatter="{Binding MonthLabelFormatter}"
+                        SeriesName="{Binding TodoName2}"
+                        Fill="{lvc:SolidColorPaint Color='#FF4444'}"
                         DataLabelsSize="20"
                         AnimationsSpeed="00:00:04.000"
                         MaxRadialColumnWidth="50"/>
@@ -267,12 +273,14 @@
                           InitialRotation="-90"
                           Background="#ff0d2644"
                           MinValue="0"
-                          MaxValue="100">
+                          MaxValue="30">
                 <lvc:PieChart.Series>
 
                     <lvc:XamlGaugeSeries
-                        DataLabelsFormatter="{Binding LabelFormatter}"
-                        GaugeValue="{Binding Value3}"
+                        GaugeValue="{Binding TodoValue3}"
+                        DataLabelsFormatter="{Binding MonthLabelFormatter}"
+                        SeriesName="{Binding TodoName3}"
+                        Fill="{lvc:SolidColorPaint Color='#FF4444'}"
                         DataLabelsSize="20"
                         AnimationsSpeed="00:00:04.000"
                         MaxRadialColumnWidth="50"/>
