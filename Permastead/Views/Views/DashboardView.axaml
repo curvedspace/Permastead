@@ -120,6 +120,7 @@
             <!-- Labels="{Binding ChartLabels}" -->
             <lvc:CartesianChart.XAxes>
                 <lvc:XamlAxis
+                    LabelsAlignment="Middle"
                     SeparatorsPaint="{lvc:SolidColorPaint Color='#c8c8c8'}"
                     SeparatorsAtCenter="False"
                     TicksPaint="{lvc:SolidColorPaint Color='#232323'}"
