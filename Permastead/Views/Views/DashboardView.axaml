@@ -126,6 +126,7 @@
                     TicksAtCenter="True"
                     MinStep="1"
                     ForceStepToMin="True"/>
+                
             </lvc:CartesianChart.XAxes>
         
         </lvc:CartesianChart>

@@ -44,6 +44,10 @@ public partial class DashboardViewModel : ViewModelBase
     
     public ISeries[] ActObsSeries { get; set; }
     
+    
+    public Func<double, string> MonthFormatter { get; set; } =
+        date => new DateTime(1,(int)date+1,1).ToString("MMMM");
+    
     public decimal LevelProgress {get => _scoreBoard.LevelProgress *  100;}
     
     public SolidColorPaint LegendTextPaint { get; set; } =
@@ -52,7 +56,7 @@ public partial class DashboardViewModel : ViewModelBase
             Color = new SKColor(240, 240, 240)
         };
 
-    [ObservableProperty] public string[] _chartLabels;
+    [ObservableProperty] public IList<string> _chartLabels;
     
     public Axis[] XAxes { get; set; } =
     {
