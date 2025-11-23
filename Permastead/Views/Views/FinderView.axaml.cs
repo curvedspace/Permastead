@@ -66,11 +66,12 @@ public partial class FinderView : UserControl
         
                        plantWindow.Topmost = true;
                        plantWindow.Width = 900;
-                       plantWindow.Height = 700;
+                       plantWindow.Height = 500;
                        plantWindow.Opacity = 0.95;
-                       plantWindow.Title = "Edit Plant";
+                       plantWindow.Title = "Edit Plant: " + plant.Description;
                        plantWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;
                 
+                       plantWindow.BottomGrid.IsVisible = false;
                        plantWindow.Show();
                        break;
                        

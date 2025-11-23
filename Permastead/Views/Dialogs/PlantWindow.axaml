@@ -47,7 +47,7 @@
             </Border>
         </StackPanel>
             
-        <Grid Grid.Row="3" ColumnDefinitions="*,*" RowDefinitions="Auto,*,Auto"  Margin="0">
+        <Grid x:Name="BottomGrid" Grid.Row="3" ColumnDefinitions="*,*" RowDefinitions="Auto,*,Auto"  Margin="0">
             <Border Grid.Column="0" Grid.Row="1"  BorderBrush="{DynamicResource TextControlBorderBrush}"
                     BorderThickness="2"
                     CornerRadius="3"
