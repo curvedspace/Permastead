@@ -35,7 +35,7 @@ public class FinderService
             //now plants
             if (mode == ServiceMode.Local)
             {
-                items.AddRange(DataAccess.Local.ToDoRepository.GetSearchResults(DataConnection.GetLocalDataSource(),  searchText));
+                items.AddRange(DataAccess.Local.PlantRepository.GetSearchResults(DataConnection.GetLocalDataSource(),  searchText));
             }
             else
             {
