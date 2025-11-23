@@ -75,7 +75,7 @@ public class EventsService
     {
         var myEvents = GetAllEvents(mode);
         
-        myEvents = myEvents.Where(x=>x.AnEventType.Description == "Birthday").OrderBy(x => x.DaysUntilNext).ToList();
+        myEvents = myEvents.Where(x=> (x.AnEventType.Description == "Birthday" || x.AnEventType.Description == "Anniversary")).OrderBy(x => x.DaysUntilNext).ToList();
 
         return myEvents;
     }

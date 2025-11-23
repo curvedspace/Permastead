@@ -31,6 +31,7 @@
                           InitialRotation="-90"
                           Background="#ff0d2644"
                           MinValue="0"
+                          IsVisible="{Binding BirthdayVisible1}"
                           MaxValue="365">
                 <lvc:PieChart.Series>
 
@@ -52,6 +53,7 @@
                           InitialRotation="-90"
                           Background="#ff0d2644"
                           MinValue="0"
+                          IsVisible="{Binding BirthdayVisible2}"
                           MaxValue="365">
                 <lvc:PieChart.Series>
 
