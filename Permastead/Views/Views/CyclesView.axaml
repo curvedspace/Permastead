@@ -41,7 +41,7 @@
                         SeriesName="{Binding BirthdayName1}"
                         DataLabelsSize="20"
                         AnimationsSpeed="00:00:00.500"
-                        MaxRadialColumnWidth="50"/>
+                        MaxRadialColumnWidth="20"/>
 
                     <!-- The background series is used to style the gauge background. -->
                     <lvc:XamlGaugeBackgroundSeries/>
@@ -63,7 +63,7 @@
                         SeriesName="{Binding BirthdayName2}"
                         DataLabelsSize="20"
                         AnimationsSpeed="00:00:00.500"
-                        MaxRadialColumnWidth="50"/>
+                        MaxRadialColumnWidth="20"/>
 
                     <!-- The background series is used to style the gauge background. -->
                     <lvc:XamlGaugeBackgroundSeries/>
@@ -86,7 +86,7 @@
                         SeriesName="{Binding BirthdayName3}"
                         IsVisible="{Binding BirthdayVisible3}"
                         AnimationsSpeed="00:00:00.500"
-                        MaxRadialColumnWidth="50"/>
+                        MaxRadialColumnWidth="20"/>
 
                     <!-- The background series is used to style the gauge background. -->
                     <lvc:XamlGaugeBackgroundSeries/>
@@ -110,7 +110,7 @@
                         DataLabelsSize="20"
                         Fill="{lvc:SolidColorPaint Color='#9ACD32'}"
                         AnimationsSpeed="00:00:01.000"
-                        MaxRadialColumnWidth="50"/>
+                        MaxRadialColumnWidth="20"/>
 
                     <!-- The background series is used to style the gauge background. -->
                     <lvc:XamlGaugeBackgroundSeries/>
@@ -132,7 +132,7 @@
                         Fill="{lvc:SolidColorPaint Color='#9ACD32'}"
                         DataLabelsSize="20"
                         AnimationsSpeed="00:00:01.000"
-                        MaxRadialColumnWidth="50"/>
+                        MaxRadialColumnWidth="20"/>
 
                     <!-- The background series is used to style the gauge background. -->
                     <lvc:XamlGaugeBackgroundSeries/>
@@ -154,7 +154,7 @@
                         Fill="{lvc:SolidColorPaint Color='#9ACD32'}"
                         DataLabelsSize="20"
                         AnimationsSpeed="00:00:01.000"
-                        MaxRadialColumnWidth="50"/>
+                        MaxRadialColumnWidth="20"/>
 
                     <!-- The background series is used to style the gauge background. -->
                     <lvc:XamlGaugeBackgroundSeries/>
@@ -177,7 +177,7 @@
                         Fill="{lvc:SolidColorPaint Color='#CCCCCC'}"
                         DataLabelsSize="20"
                         AnimationsSpeed="00:00:02.000"
-                        MaxRadialColumnWidth="50"/>
+                        MaxRadialColumnWidth="20"/>
 
                     <!-- The background series is used to style the gauge background. -->
                     <lvc:XamlGaugeBackgroundSeries/>
@@ -199,7 +199,7 @@
                         Fill="{lvc:SolidColorPaint Color='#CCCCCC'}"
                         DataLabelsSize="20"
                         AnimationsSpeed="00:00:02.000"
-                        MaxRadialColumnWidth="50"/>
+                        MaxRadialColumnWidth="20"/>
 
                     <!-- The background series is used to style the gauge background. -->
                     <lvc:XamlGaugeBackgroundSeries/>
@@ -221,7 +221,7 @@
                         Fill="{lvc:SolidColorPaint Color='#CCCCCC'}"
                         DataLabelsSize="20"
                         AnimationsSpeed="00:00:02.000"
-                        MaxRadialColumnWidth="50"/>
+                        MaxRadialColumnWidth="20"/>
 
                     <!-- The background series is used to style the gauge background. -->
                     <lvc:XamlGaugeBackgroundSeries/>
@@ -243,7 +243,7 @@
                         Fill="{lvc:SolidColorPaint Color='#FF4444'}"
                         DataLabelsSize="20"
                         AnimationsSpeed="00:00:04.000"
-                        MaxRadialColumnWidth="50"/>
+                        MaxRadialColumnWidth="20"/>
 
                     <!-- The background series is used to style the gauge background. -->
                     <lvc:XamlGaugeBackgroundSeries/>
@@ -265,7 +265,7 @@
                         Fill="{lvc:SolidColorPaint Color='#FF4444'}"
                         DataLabelsSize="20"
                         AnimationsSpeed="00:00:04.000"
-                        MaxRadialColumnWidth="50"/>
+                        MaxRadialColumnWidth="20"/>
 
                     <!-- The background series is used to style the gauge background. -->
                     <lvc:XamlGaugeBackgroundSeries/>
@@ -287,7 +287,7 @@
                         Fill="{lvc:SolidColorPaint Color='#FF4444'}"
                         DataLabelsSize="20"
                         AnimationsSpeed="00:00:04.000"
-                        MaxRadialColumnWidth="50"/>
+                        MaxRadialColumnWidth="20"/>
 
                     <!-- The background series is used to style the gauge background. -->
                     <lvc:XamlGaugeBackgroundSeries/>
