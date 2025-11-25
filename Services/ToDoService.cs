@@ -23,6 +23,22 @@ namespace Services
             return todos;
         }
         
+        public static ToDo GetToDoById(ServiceMode mode, long id)
+        {
+            ToDo toDo = null;
+
+            if (mode == ServiceMode.Local)
+            {
+                toDo = ToDoRepository.GetToDoFromId(DataConnection.GetLocalDataSource(),id);
+            }
+            else
+            {
+                toDo = DataAccess.Server.ToDoRepository.GetToDoFromId(DataConnection.GetServerConnectionString(),id);
+            }
+
+            return toDo;
+        }
+        
         public static List<ToDo> GetActiveTodos(ServiceMode mode)
         {
             var todos = new List<ToDo>();

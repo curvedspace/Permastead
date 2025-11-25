@@ -76,6 +76,70 @@ namespace DataAccess.Server
             }
         }
 
+        public static ToDo GetToDoFromId(string connectionString, long id)
+        {
+            ToDo todo= null;
+
+            var sql = "SELECT td.Id, td.Description, td.CreationDate, td.StartDate, td.DueDate, td.PercentDone, " +
+                "tdt.Id, tdt.Description, tds.Id, tds.Description,  " +
+                "p1.Id, p1.FirstName, p1.LastName, " +
+                "p2.Id Id2, p2.FirstName fn, p2.LastName ln, td.LastUpdatedDate " +
+                "FROM ToDo td, ToDoType tdt, ToDoStatus tds, Person p1, Person p2 " +
+                "WHERE td.ToDoTypeId = tdt.Id " +
+                "AND td.ToDoStatusId = tds.Id " +
+                "AND td.AssignerId = p1.Id " +
+                "AND td.Id = @id " +
+                "AND td.AssigneeId = p2.Id ORDER BY td.DueDate DESC";
+
+            using (IDbConnection connection = new NpgsqlConnection(connectionString))
+            {
+                connection.Open();
+
+                using (IDbCommand command = connection.CreateCommand())
+                {
+                    command.CommandText = sql;
+                    command.Parameters.Add(new NpgsqlParameter("@id", id));
+                    
+                    var dr = command.ExecuteReader();
+
+                    while (dr.Read())
+                    {
+                        todo = new ToDo();
+
+                        todo.Id = Convert.ToInt64(dr[0].ToString());
+                        todo.Description = dr[1].ToString();
+                        todo.CreationDate = Convert.ToDateTime(dr[2].ToString());
+                        todo.StartDate = Convert.ToDateTime(dr[3].ToString());
+                        todo.DueDate = DateTime.Parse(dr[4].ToString());
+                        todo.PercentDone = Convert.ToInt16(dr[5].ToString());
+
+                        todo.ToDoType = new ToDoType();
+                        todo.ToDoType.Id = Convert.ToInt64(dr[6].ToString());
+                        todo.ToDoType.Description = dr[7].ToString()!;
+
+                        todo.ToDoStatus = new ToDoStatus();
+                        todo.ToDoStatus.Id = Convert.ToInt64(dr[8].ToString());
+                        todo.ToDoStatus.Description = dr[9].ToString()!;
+
+                        todo.Assigner = new Person();
+                        todo.Assigner.Id = Convert.ToInt64(dr[10].ToString());
+                        todo.Assigner.FirstName = dr[11].ToString();
+                        todo.Assigner.LastName = dr[12].ToString();
+
+                        todo.Assignee = new Person();
+                        todo.Assignee.Id = Convert.ToInt64(dr[13].ToString());
+                        todo.Assignee.FirstName = dr[14].ToString();
+                        todo.Assignee.LastName = dr[15].ToString();
+                        
+                        todo.LastUpdatedDate = Convert.ToDateTime(dr[16].ToString());
+                        
+                    }
+                }
+
+                return todo;
+            }
+        }
+        
         public static List<SearchResult> GetSearchResults(string connectionString, string searchText)
         {
             var results = new List<SearchResult>();

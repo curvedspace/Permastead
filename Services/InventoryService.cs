@@ -23,6 +23,22 @@ public class InventoryService
         return inventoryList;
     }
     
+    public static Inventory GetInventoryFromId(ServiceMode mode, long id)
+    {
+        var inventory = new Inventory();
+
+        if (mode == ServiceMode.Local)
+        {
+            inventory = InventoryRepository.GetInventoryFromId(DataConnection.GetLocalDataSource(),id);
+        }
+        else
+        {
+            inventory = DataAccess.Server.InventoryRepository.GetInventoryFromId(DataConnection.GetServerConnectionString(),id);
+        }
+
+        return inventory;
+    }
+    
     public static List<string> GetAllBrands(ServiceMode mode)
     {
         var brands = new List<string>();

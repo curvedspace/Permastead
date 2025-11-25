@@ -57,7 +57,47 @@ public partial class FinderView : UserControl
             {
                 switch (aRecord.Entity.Name)
                 {
-                   case "Plant" :
+                    case "Action":
+                        var actionWindow = new ActionWindow();
+                        
+                        var todo = ToDoService.GetToDoById(AppSession.ServiceMode, aRecord.Entity.Id);
+                        var tdvm = new ToDoViewModel();
+                        var avm = new ActionWindowViewModel(todo, tdvm);
+                        
+                        actionWindow.DataContext = avm;
+                        
+                        actionWindow.Topmost = true;
+                        actionWindow.Width = 700;
+                        actionWindow.Height = 450;
+                        actionWindow.Opacity = 0.95;
+                        actionWindow.Title = "Action Item: " + todo.Description;
+
+                        actionWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+           
+                        actionWindow.Show();
+                        break;
+                    
+                    case "Inventory":
+                        var inventoryWindow = new InventoryWindow();
+                        var inventory = InventoryService.GetInventoryFromId(AppSession.ServiceMode, aRecord.Entity.Id);
+                        
+                        var ivm = new InventoryViewModel();
+                        var iwvm = new InventoryWindowViewModel(inventory, ivm);
+                        
+                        inventoryWindow.DataContext = iwvm;
+    
+                        inventoryWindow.Topmost = true;
+                        inventoryWindow.Width = 900;
+                        inventoryWindow.Height = 550;
+                        inventoryWindow.Opacity = 0.95;
+                        inventoryWindow.Title = "Inventory Item - " + inventory.Description;
+                        
+                        inventoryWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+           
+                        inventoryWindow.Show();
+                        break;
+                    
+                    case "Plant" :
                        var plantWindow = new PlantWindow();
                        var plant = PlantService.GetPlantFromId(AppSession.ServiceMode, aRecord.Entity.Id);
                        var plantWindowViewModel = new PlantWindowViewModel();
@@ -76,7 +116,7 @@ public partial class FinderView : UserControl
                        plantWindow.Show();
                        break;
                    
-                   case "Observation":
+                    case "Observation":
                        var obs = ObservationsService.GetObservationById(AppSession.ServiceMode, aRecord.Entity.Id);
                        var vm = new ObservationWindowViewModel();
                        vm.Observation = obs;

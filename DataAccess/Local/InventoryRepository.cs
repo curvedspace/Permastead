@@ -71,6 +71,69 @@ public static class InventoryRepository
         }
     }
     
+    public static Inventory GetInventoryFromId(string conn, long id)
+    {
+        try
+        {
+            Inventory inv = null;
+
+            string sqlQuery =
+                "SELECT i.Id, i.Description, i.IGroup, i.IType, i.OriginalValue, i.CurrentValue, " +
+                "i.Brand, i.Notes, i.CreationDate, i.StartDate, i.EndDate, i.LastUpdated, i.AuthorId, p.FirstName, p.LastName,  " +
+                "i.Room, i.Quantity, i.ForSale " +
+                "FROM Inventory i, Person p " +
+                "WHERE i.AuthorId = p.Id AND i.Id = @id ";
+
+            using (IDbConnection connection = new SqliteConnection(conn))
+            {
+                connection.Open();
+
+                using (IDbCommand command = connection.CreateCommand())
+                {
+                    command.CommandText = sqlQuery;
+                    command.Parameters.Add(new SqliteParameter("@id", id));
+                    
+                    var dr = command.ExecuteReader();
+
+                    while (dr.Read())
+                    {
+                        inv = new Inventory();
+                        inv.Id = Convert.ToInt64(dr[0].ToString());
+                        inv.Description = dr[1].ToString()!;
+                        inv.InventoryGroup = dr[2].ToString()!;
+                        inv.InventoryType = dr[3].ToString()!;
+                        inv.OriginalValue = Convert.ToDouble(dr[4].ToString());
+                        inv.CurrentValue = Convert.ToDouble(dr[5].ToString());
+                        inv.Brand = dr[6].ToString()!;
+                        inv.Notes = dr[7].ToString()!;
+                        
+                        inv.CreationDate = Convert.ToDateTime(dr[8].ToString());
+                        inv.StartDate = Convert.ToDateTime(dr[9].ToString());
+                        inv.EndDate = Convert.ToDateTime(dr[10].ToString());
+                        inv.LastUpdated = Convert.ToDateTime(dr[11].ToString());
+
+                        inv.Author = new Person();
+                        inv.Author.Id = Convert.ToInt64(dr[12].ToString());
+                        inv.Author.FirstName = dr[13].ToString();
+                        inv.Author.LastName = dr[14].ToString();
+
+                        inv.Room = dr[15].ToString()!;
+                        inv.Quantity = Convert.ToInt64(dr[16].ToString());
+                        
+                        inv.ForSale = dr[17].ToString() == "1";
+                        
+                    }
+                }
+            }
+
+            return inv;
+        }
+        catch
+        {
+            return new Inventory();
+        }
+    }
+    
     public static List<SearchResult> GetSearchResults(string connectionString, string searchText)
         {
             var results = new List<SearchResult>();

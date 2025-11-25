@@ -57,8 +57,6 @@ public partial class InventoryWindowViewModel: ViewModelBase
         _currentItem = inventory;
         ControlViewModel = obsVm;
         
-        //_currentItem.InventoryGroup = _inventoryGroups.First(x => x.Id == inventory.InventoryGroup.Id);
-        //_currentItem.InventoryType = _inventoryTypes.First(x => x.Id == inventory.InventoryType.Id);
         _currentItem.Author = _people.First(x => x.Id == inventory.Author.Id);
 
     }
