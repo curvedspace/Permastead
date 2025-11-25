@@ -245,5 +245,21 @@ namespace Services
             return obs;
 
         }
+
+        public static Observation GetObservationById(ServiceMode mode, long id)
+        {
+            Observation obs = null;
+
+            if (mode == ServiceMode.Local)
+            {
+                obs = ObservationRepository.GetObservationById(DataConnection.GetLocalDataSource(),id);
+            }
+            else
+            {
+                obs = DataAccess.Server.ObservationRepository.GetObservationById(DataConnection.GetServerConnectionString(),id);
+            }
+
+            return obs;
+        }
     }
 }

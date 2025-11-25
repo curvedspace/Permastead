@@ -34,9 +34,8 @@ public partial class PlantWindowViewModel : ViewModelBase
     {
         _plant = plant;
         _controlViewModel = obsVm;
-        
-        _seedPackets = new ObservableCollection<SeedPacket>(Services.PlantingsService.GetSeedPacketForPlant(AppSession.ServiceMode, Plant.Id));
-        _plantings = new ObservableCollection<Planting>(Services.PlantingsService.GetPlantingsForPlant(AppSession.ServiceMode, Plant.Id));
+
+        RefreshData();
     }
 
     public void SavePlant()
@@ -55,6 +54,14 @@ public partial class PlantWindowViewModel : ViewModelBase
         
         _controlViewModel.RefreshData();
         
+    }
+
+    public void RefreshData()
+    {
+        _seedPackets = new ObservableCollection<SeedPacket>(Services.PlantingsService.GetSeedPacketForPlant(AppSession.ServiceMode, Plant.Id));
+        _plantings = new ObservableCollection<Planting>(Services.PlantingsService.GetPlantingsForPlant(AppSession.ServiceMode, Plant.Id));
+        
+        _controlViewModel.RefreshData();
     }
     
 }

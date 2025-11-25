@@ -13,7 +13,7 @@ public class PersonTest
         };
 
         Assert.Equal("Jane Homesteader", person.FullName());
-        Assert.Equal(1, person.Roles.Count);
+        Assert.Single(person.Roles);
         Assert.True(person.IsCustomer());
         
 

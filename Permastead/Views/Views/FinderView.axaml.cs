@@ -62,17 +62,36 @@ public partial class FinderView : UserControl
                        var plant = PlantService.GetPlantFromId(AppSession.ServiceMode, aRecord.Entity.Id);
                        var plantWindowViewModel = new PlantWindowViewModel();
                        plantWindowViewModel.Plant = plant;
+                       plantWindowViewModel.RefreshData();
+                      
                        plantWindow.DataContext = plantWindowViewModel;
         
                        plantWindow.Topmost = true;
                        plantWindow.Width = 900;
-                       plantWindow.Height = 500;
+                       plantWindow.Height = 700;
                        plantWindow.Opacity = 0.95;
                        plantWindow.Title = "Edit Plant: " + plant.Description;
                        plantWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;
-                
-                       plantWindow.BottomGrid.IsVisible = false;
+                       
                        plantWindow.Show();
+                       break;
+                   
+                   case "Observation":
+                       var obs = ObservationsService.GetObservationById(AppSession.ServiceMode, aRecord.Entity.Id);
+                       var vm = new ObservationWindowViewModel();
+                       vm.Observation = obs;
+                       
+                       var obsWindow = new ObservationWindow();
+                       obsWindow.DataContext = vm;
+                       
+                       obsWindow.Topmost = true;
+                       obsWindow.Width = 550;
+                       obsWindow.Height = 350;
+                       obsWindow.Opacity = 0.9;
+                       obsWindow.Title = "Observation";
+                       obsWindow.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+                       
+                       obsWindow.Show();
                        break;
                        
                 }
