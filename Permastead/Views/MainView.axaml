@@ -71,7 +71,7 @@
                     </Button>
                     
                     <Button Name="PeopleButton" ToolTip.Tip="People " Command="{Binding OpenPeopleViewCommand}">
-                        <Image Width="16" Height="16" Source="/Assets/outlook_new_meeting.png" />
+                        <Image Width="16" Height="16" Source="/Assets/contacts.png" />
                     </Button>
                     <Button Name="WeatherButton" ToolTip.Tip="Weather" Margin="20,0,0,0" Command="{Binding OpenWeatherViewCommand}">
                         <Image Width="16" Height="16" Source="/Assets/weather_clouds.png" />
