@@ -6,6 +6,7 @@
              xmlns:vm="using:Permastead.ViewModels.Views"
              mc:Ignorable="d" d:DesignWidth="1400" d:DesignHeight="850"
              x:DataType="vm:DashboardViewModel"
+             x:CompileBindings="False"
              x:Class="Permastead.Views.Views.DashboardView">
     
     <UserControl.DataContext>

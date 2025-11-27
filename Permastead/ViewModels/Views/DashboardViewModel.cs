@@ -56,7 +56,11 @@ public partial class DashboardViewModel : ViewModelBase
             Color = new SKColor(240, 240, 240)
         };
 
-    [ObservableProperty] private IList<string> _chartLabels;
+    public string[] _chartLabels =
+    [
+        "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November",
+        "December"
+    ];
     
     // public Axis[] XAxes { get; set; } =
     // {
@@ -339,11 +343,11 @@ public partial class DashboardViewModel : ViewModelBase
         
         PlantingYears.Add("ALL");
         
-        ChartLabels =
-        [
-            "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November",
-            "December"
-        ];
+        // ChartLabels =
+        // [
+        //     "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November",
+        //     "December"
+        // ];
 
         RefreshDataOnly();
         
