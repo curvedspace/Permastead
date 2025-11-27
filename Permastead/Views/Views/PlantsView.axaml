@@ -96,7 +96,7 @@
                             <MenuFlyout>
                                 <MenuItem Header="Add Image" Click="MenuItemAddImage_OnClick"/>
                                 <MenuItem Header="-"/>
-                                <MenuItem Header="Remove Image"/>        
+                                <MenuItem Header="Remove Image" Click="MenuItemRemoveImage_OnClick"/>   
                             </MenuFlyout>
                         </Image.ContextFlyout>
                     </Image>
