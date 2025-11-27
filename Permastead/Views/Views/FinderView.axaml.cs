@@ -77,6 +77,29 @@ public partial class FinderView : UserControl
                         actionWindow.Show();
                         break;
                     
+                    case "Events":
+                       
+                        var eventWindow = new EventsWindow();
+                        var eventId = aRecord.Entity.Id;
+                        var anEvent = EventsService.GetAllEvents(AppSession.ServiceMode).Find(x => x.Id == eventId);
+        
+                        //get underlying view's viewmodel
+                        var eventsViewModel = new EventsViewModel();
+                        eventsViewModel.CurrentItem = anEvent;
+                        
+                        var evm = new EventsWindowViewModel(anEvent, eventsViewModel);
+        
+                        eventWindow.DataContext = evm;
+                        eventWindow.Topmost = true;
+                        eventWindow.Width = 700;
+                        eventWindow.Height = 450;
+                        eventWindow.Opacity = 0.95;
+                        eventWindow.Title = "Event - " + anEvent.Description;
+                        
+                        eventWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+                        eventWindow.Show();
+                        break;
+                    
                     case "Inventory":
                         var inventoryWindow = new InventoryWindow();
                         var inventory = InventoryService.GetInventoryFromId(AppSession.ServiceMode, aRecord.Entity.Id);
