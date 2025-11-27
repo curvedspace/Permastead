@@ -56,25 +56,25 @@ public partial class DashboardViewModel : ViewModelBase
             Color = new SKColor(240, 240, 240)
         };
 
-    [ObservableProperty] public IList<string> _chartLabels;
+    [ObservableProperty] private IList<string> _chartLabels;
     
-    public Axis[] XAxes { get; set; } =
-    {
-        new Axis
-        {
-            Labels = new string[] { "January", "February", "March", "April", "May", "June", "July", "August","September","October","November","December" },
-            LabelsRotation = 0,
-            SeparatorsPaint = new SolidColorPaint(new SKColor(200, 200, 200)),
-            SeparatorsAtCenter = false,
-            TicksPaint = new SolidColorPaint(new SKColor(200, 200, 200)),
-            TicksAtCenter = true,
-            // By default the axis tries to optimize the number of 
-            // labels to fit the available space, 
-            // when you need to force the axis to show all the labels then you must: 
-            ForceStepToMin = true, 
-            MinStep = 1 
-        }
-    };
+    // public Axis[] XAxes { get; set; } =
+    // {
+    //     new Axis
+    //     {
+    //         Labels = new string[] { "January", "February", "March", "April", "May", "June", "July", "August","September","October","November","December" },
+    //         LabelsRotation = 0,
+    //         SeparatorsPaint = new SolidColorPaint(new SKColor(200, 200, 200)),
+    //         SeparatorsAtCenter = false,
+    //         TicksPaint = new SolidColorPaint(new SKColor(200, 200, 200)),
+    //         TicksAtCenter = true,
+    //         // By default the axis tries to optimize the number of 
+    //         // labels to fit the available space, 
+    //         // when you need to force the axis to show all the labels then you must: 
+    //         ForceStepToMin = true, 
+    //         MinStep = 1 
+    //     }
+    // };
     
     [ObservableProperty] private Observation _yearInReview;
     
