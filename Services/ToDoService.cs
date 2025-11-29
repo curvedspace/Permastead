@@ -149,5 +149,27 @@ namespace Services
 
             return rtnValue;
         }
+
+        public static bool DeleteToDo(ServiceMode mode, ToDo? todo)
+        {
+            bool rtnValue = false;
+        
+            if (todo != null)
+            {
+                if (todo.Id > 0)
+                {
+                    if (mode == ServiceMode.Local)
+                    {
+                        rtnValue = ToDoRepository.Delete(todo);
+                    }
+                    else
+                    {
+                        rtnValue = DataAccess.Server.ToDoRepository.Delete(todo);
+                    }
+                }
+            }
+
+            return rtnValue;
+        }
     }
 }

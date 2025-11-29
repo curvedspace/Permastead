@@ -110,9 +110,20 @@ public partial class ToDoViewModel : ViewModelBase
                 SaveData();
                 RefreshToDo();
             }
-
         }
 
+    }
+
+    [RelayCommand]
+    private void DeleteToDo()
+    {
+        if (CurrentItem != null)
+        {
+            //remove the record
+            ToDoService.DeleteToDo(AppSession.ServiceMode, CurrentItem);
+            RefreshToDo();
+            
+        }
     }
 
     public void RefreshToDo()

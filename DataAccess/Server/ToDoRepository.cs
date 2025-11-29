@@ -368,6 +368,30 @@ namespace DataAccess.Server
                 return false;
             }
         }
+        
+        public static bool Delete(ToDo todo)
+        {
+            try
+            {
+                if (todo != null)
+                {
+                    using (IDbConnection db = new NpgsqlConnection(DataConnection.GetServerConnectionString()))
+                    {
+                        string sqlQuery = "DELETE FROM ToDo WHERE Id = @Id;";
+
+                        return (db.Execute(sqlQuery, todo) == 1);
+                    }
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch
+            {
+                return false;
+            }
+        }
 
         public static bool DoesToDoExist(string? description)
         {

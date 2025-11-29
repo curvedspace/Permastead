@@ -48,6 +48,12 @@
                                   
                   <Separator></Separator>
                   
+                  <MenuItem Command="{Binding DeleteToDoCommand}" Header="Remove Item">
+                      <MenuItem.Icon>
+                          <PathIcon Data="{StaticResource delete_regular}"/>
+                      </MenuItem.Icon>
+                  </MenuItem>
+                  
                   <MenuItem Command="{Binding ResolveToDoCommand}" Header="Mark Item as Completed">
                       <MenuItem.Icon>
                           <PathIcon Data="{StaticResource checkmark_lock_regular}"/>
