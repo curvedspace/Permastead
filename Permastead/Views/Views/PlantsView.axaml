@@ -15,7 +15,8 @@
             <Button Tapped="Add_OnTapped" x:Name="Add" HorizontalAlignment="Right" IsEnabled="True" Margin="0,0">Add</Button> 
             
             <Label Margin="25,24,0,20">Search:</Label>
-            <TextBox x:Name="SearchBox" Text="{Binding SearchText}" Watermark="Enter search text" Width="200" Margin="20,20,20,20" KeyDown="SearchBox_OnKeyDown" TextChanged="TextBox_OnTextChanged"></TextBox>
+            <TextBox x:Name="SearchBox" Text="{Binding SearchText}" Watermark="Enter search text" Width="200" Margin="20,20,20,20" 
+                     KeyDown="SearchBox_OnKeyDown" TextChanged="TextBox_OnTextChanged"></TextBox>
             <Button Command="{Binding ClearSearchCommand}" Margin="5,20,20,20">Clear</Button>
             
             <TextBlock Name="PlantCount" Text="{Binding PlantsCount , StringFormat='{}{0} total'}" Margin="20,24,20,20"></TextBlock>
@@ -40,9 +41,15 @@
                             <ListBox.ContextMenu>
                             <ContextMenu>
                             
-                                <MenuItem Command="{Binding AddStarterCommand}" Header="Create a Starter..." IsEnabled="True">
+                                <MenuItem Command="{Binding AddStarterCommand}" Header="Add a Seed Pack..." IsEnabled="True">
                                     <MenuItem.Icon>
                                         <PathIcon Data="{StaticResource add_square_regular}"/>
+                                    </MenuItem.Icon>
+                                </MenuItem>
+                                
+                                <MenuItem Command="{Binding AddPlantingCommand}" Header="Create a Planting..." IsEnabled="True">
+                                    <MenuItem.Icon>
+                                        <PathIcon Data="{StaticResource leaf_two_regular}"/>
                                     </MenuItem.Icon>
                                 </MenuItem>
                             

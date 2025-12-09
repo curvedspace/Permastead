@@ -100,6 +100,13 @@ public partial class PlantsViewModel : ViewModelBase
         win.Show();
     }
 
+    [RelayCommand]
+    private void AddPlanting()
+    {
+        
+    }
+
+
     public PlantsViewModel()
     {
         RefreshDataOnly();
