@@ -97,4 +97,25 @@ public class EventsService
 
         return myEvents;
     }
+    
+    public static List<AnEvent> GetCurrentHoliday(ServiceMode mode)
+    {
+        var myEvents = GetAllEvents(mode);
+        var myReturn = new List<AnEvent>();
+        
+        myEvents = myEvents.Where(x=>x.AnEventType.Description == "Holiday").ToList();
+
+        foreach (var x in myEvents)
+        {
+            var startDt = new DateTime(DateTime.Today.Year, x.EventStartDate.Month, x.EventStartDate.Day);
+            var endDt = new DateTime(DateTime.Today.Year, x.EventEndDate.Month, x.EventEndDate.Day);
+
+            if (startDt <= DateTime.Today && endDt >= DateTime.Today)
+            {
+                myReturn.Add(x);
+            }
+        }
+
+        return myReturn;
+    }
 }

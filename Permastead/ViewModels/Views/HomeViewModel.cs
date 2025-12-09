@@ -74,6 +74,8 @@ namespace Permastead.ViewModels.Views;
         [ObservableProperty]
         private string _upcomingEvents;
 
+        [ObservableProperty] private string _currentEvents;
+
         [ObservableProperty] private string _CurrentDateDisplay = DateTime.Now.ToLongDateString();
 
         [ObservableProperty] private string _weatherForecast = "Weather Unknown";
@@ -145,7 +147,19 @@ namespace Permastead.ViewModels.Views;
             // this should represent how close, in a scale of 1-100, that we are to the next level
             TotalScoreNormalized = Math.Round((this._totalScore - scoreBoard.LevelMin) / (scoreBoard.LevelMax - scoreBoard.LevelMin),4);
 
-           
+            var currentEvents = Services.EventsService.GetCurrentHoliday(AppSession.ServiceMode);
+
+            if (currentEvents != null && currentEvents.Count > 0)
+            {
+                CurrentDateDisplay = DateTime.Now.ToLongDateString();
+                CurrentEvents = currentEvents[0].Description.ToString();
+                CurrentDateDisplay = CurrentDateDisplay + " (" + CurrentEvents + ")";
+            }
+            else
+            {
+                CurrentEvents = string.Empty;
+            }
+            
             ObservationsToActionRatio = scoreBoard.ActionsToObservationsRatio;
             
             // get other data

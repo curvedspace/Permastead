@@ -59,6 +59,7 @@ public partial class  CyclesViewModel : ViewModelBase
     public string TodoName2 { get; set; } = "";
     public string TodoName3 { get; set; } = "";
     
+    public string CurrentCycle { get; set; } = "";
     
     public IEnumerable<ISeries> Series { get; set; }
     
@@ -168,7 +169,18 @@ public partial class  CyclesViewModel : ViewModelBase
         Birthday1 = GaugeGenerator.BuildSolidGauge();
         Birthday2 = GaugeGenerator.BuildSolidGauge();
         Birthday3 = GaugeGenerator.BuildSolidGauge();
-        
+
+        var currentEvents = Services.EventsService.GetCurrentHoliday(AppSession.ServiceMode);
+
+        if (currentEvents is { Count: > 0 })
+        {
+            CurrentCycle = "Current: " + currentEvents[0].Description.ToString();
+        }
+        else
+        {
+            CurrentCycle = string.Empty;
+        }
+
     }
 
     public CyclesViewModel()

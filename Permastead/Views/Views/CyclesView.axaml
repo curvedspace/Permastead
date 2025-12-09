@@ -20,6 +20,7 @@
                 <TextBlock FontWeight="Bold" Margin="20,26,20,20">Cycles</TextBlock>
                 <!-- <Separator MaxWidth="5"></Separator> -->
                 <Button Command="{Binding RefreshDataCommand}" x:Name="Refresh" HorizontalAlignment="Right" Margin="10,0">Refresh</Button> 
+                <TextBlock Margin="20,26,20,20" Text="{Binding CurrentCycle}"/>
             </WrapPanel>
         </StackPanel>
         
