@@ -1175,16 +1175,16 @@ namespace DataAccess.Local
             p = new Plant { Author = new Person(1), Code = "PARSLEY", Description = "Parsley" };
             PlantRepository.Insert(p);
 
-            p = new Plant { Author = new Person(1), Code = "OREGANO", Description = "Oregano" };
+            p = new Plant { Author = new Person(1), Code = "OREGANO", Description = "Oregano", Tags = "herb"};
             PlantRepository.Insert(p);
 
-            p = new Plant { Author = new Person(1), Code = "CATNIP", Description = "Catnip" };
+            p = new Plant { Author = new Person(1), Code = "CATNIP", Description = "Catnip", Tags = "herb"};
             PlantRepository.Insert(p);
 
             p = new Plant { Author = new Person(1), Code = "SQUASH", Description = "Squash" };
             PlantRepository.Insert(p);
 
-            p = new Plant { Author = new Person(1), Code = "MINT", Description = "Mint" };
+            p = new Plant { Author = new Person(1), Code = "MINT", Description = "Mint", Tags = "herb"};
             PlantRepository.Insert(p);
 
             p = new Plant { Author = new Person(1), Code = "CHIVE", Description = "Chives" };
@@ -1193,7 +1193,7 @@ namespace DataAccess.Local
             p = new Plant { Author = new Person(1), Code = "ARUGULA", Description = "Arugula" };
             PlantRepository.Insert(p);
 
-            p = new Plant { Author = new Person(1), Code = "YARROW", Description = "Yarrow" };
+            p = new Plant { Author = new Person(1), Code = "YARROW", Description = "Yarrow", Tags = "herb bitter"};
             PlantRepository.Insert(p);
             
             p = new Plant { Author = new Person(1), Code = "APPLE", Description = "Apple Tree" };
@@ -1205,13 +1205,13 @@ namespace DataAccess.Local
             p = new Plant { Author = new Person(1), Code = "CHERRY", Description = "Cherry Tree" };
             PlantRepository.Insert(p);
             
-            p = new Plant { Author = new Person(1), Code = "RHUB", Description = "Rhubard" };
+            p = new Plant { Author = new Person(1), Code = "RHUB", Description = "Rhubarb" };
             PlantRepository.Insert(p);
             
             p = new Plant { Author = new Person(1), Code = "TOMATO", Description = "Tomato" };
             PlantRepository.Insert(p);
             
-            p = new Plant { Author = new Person(1), Code = "GARLIC", Description = "Garlic" };
+            p = new Plant { Author = new Person(1), Code = "GARLIC", Description = "Garlic", Tags = "herb warming alterative anti-septic anti-spasmodic carminative diaphoretic tonic vulnerary"};
             PlantRepository.Insert(p);
             
             p = new Plant { Author = new Person(1), Code = "CABBAGE", Description = "Cabbage" };
