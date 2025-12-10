@@ -400,7 +400,8 @@ namespace DataAccess.Server
 				Family VARCHAR (2000),
 				Url VARCHAR (2000),
 				AuthorId integer,
-				ImageStoreId integer
+				ImageStoreId integer,
+				Tags TEXT
 			);
 
 			-- SEASONALITY
