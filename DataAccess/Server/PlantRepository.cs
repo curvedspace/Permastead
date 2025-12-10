@@ -1,7 +1,5 @@
 ﻿using Dapper;
 
-using Microsoft.Data.Sqlite;
-
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -20,7 +18,7 @@ namespace DataAccess.Server
             Plant plant;
 
             var sql = "SELECT p.Description, p.Comment, p.Family, p.Url, p.CreationDate, p.StartDate, p.EndDate, p.AuthorId, " + 
-                "per.FirstName, per.LastName, p.Id, p.code " +
+                "per.FirstName, per.LastName, p.Id, p.code, p.tags " +
                 "FROM Plant p, Person per " + 
                 "WHERE per.Id = p.AuthorId AND (p.EndDate is null OR p.EndDate > CURRENT_DATE+1) ORDER BY p.Description ASC";
 
@@ -53,6 +51,14 @@ namespace DataAccess.Server
 
                         plant.Id = Convert.ToInt64(dr[10].ToString());
                         plant.Code = dr[11].ToString()!;
+                        
+                        var tagText = dr[12].ToString()!.Trim();
+
+                        if (tagText != null && tagText.Length > 0)
+                        {
+                            plant.Tags = tagText.Trim();
+                            plant.TagList = tagText.Split(' ').ToList();
+                        }
 
                         myPlants.Add(plant);
                     }
@@ -92,6 +98,38 @@ namespace DataAccess.Server
                         result.SubType = dr[0].ToString()!;
                         result.FieldName = "Comment";
                         result.SearchText = TextUtils.GetSubstring(dr[1].ToString()!,0,DataConnection.SearchTextLength, true);
+
+                        results.Add(result);
+                    }
+                }
+            }
+            
+            sql = "SELECT p.Description, p.Comment, p.Family, p.Url, p.CreationDate, p.StartDate, p.EndDate, p.AuthorId, " + 
+                  "per.FirstName, per.LastName, p.Id, p.code, p.tags " +
+                  "FROM Plant p, Person per " + 
+                  "WHERE per.Id = p.AuthorId AND (p.EndDate is null OR p.EndDate > CURRENT_DATE+1) " + 
+                  "AND lower(p.Tags) LIKE '%" + searchText.ToLowerInvariant() + "%' " +
+                  "ORDER BY p.CreationDate DESC";
+
+            using (IDbConnection connection = new NpgsqlConnection(connectionString))
+            {
+                connection.Open();
+
+                using (IDbCommand command = connection.CreateCommand())
+                {
+                    command.CommandText = sql;
+                    var dr = command.ExecuteReader();
+
+                    while (dr.Read())
+                    {
+                        var result = new SearchResult();
+                        result.AsOfDate = Convert.ToDateTime(dr[4].ToString());
+                        result.IsCurrent = true;
+                        result.Entity.Id = Convert.ToInt64(dr[10].ToString());
+                        result.Entity.Name = "Plant";
+                        result.SubType = dr[0].ToString()!;
+                        result.FieldName = "Tags";
+                        result.SearchText = dr[12].ToString()!;
 
                         results.Add(result);
                     }
@@ -172,7 +210,7 @@ namespace DataAccess.Server
             Plant plant = new Plant();
 
             var sql = "SELECT p.Description, p.Comment, p.Family, p.Url, p.CreationDate, p.StartDate, p.EndDate, p.AuthorId, " + 
-                "per.FirstName, per.LastName, p.Id, p.code " +
+                "per.FirstName, per.LastName, p.Id, p.code, p.tags " +
                 "FROM Plant p, Person per " + 
                 "WHERE per.Id = p.AuthorId " +
                 "AND p.Id = @id ";
@@ -209,6 +247,13 @@ namespace DataAccess.Server
                         plant.Id = Convert.ToInt64(dr[10].ToString());
                         plant.Code = dr[11].ToString()!;
 
+                        var tagText = dr[12].ToString()!.Trim();
+
+                        if (tagText != null && tagText.Length > 0)
+                        {
+                            plant.Tags = tagText.Trim();
+                            plant.TagList = tagText.Split(' ').ToList();
+                        }
                     }
                 }
             }
@@ -217,14 +262,62 @@ namespace DataAccess.Server
             
         }
 
+        public static List<TagData> GetAllTags(string connectionString)
+        {
+            var tags = new List<TagData>();
+            var sql = "SELECT p.tags " +
+                      "FROM Plant p  " + 
+                      "WHERE (p.EndDate is null OR p.EndDate > CURRENT_DATE+1) ";
+
+            var stringTags = new List<string>();
+            
+            using (IDbConnection connection = new NpgsqlConnection(connectionString))
+            {
+                connection.Open();
+
+                using (IDbCommand command = connection.CreateCommand())
+                {
+                    command.CommandText = sql;
+                    var dr = command.ExecuteReader();
+
+                    
+                    while (dr.Read())
+                    {
+                        if (dr[0].ToString()! != "")
+                        {
+                            var currentTags = dr[0].ToString()!.Trim().Split(' ').ToList();
+                            foreach (var tagData in currentTags)
+                            {
+                                if (!stringTags.Contains(tagData))
+                                {
+                                    stringTags.Add(tagData);
+                                }
+                            }
+                        }
+                    }
+                }
+
+                foreach (var stringTag in stringTags)
+                {
+                    var td = new TagData
+                    {
+                        TagText = stringTag
+                    };
+                    tags.Add(td);
+                }
+            }
+
+            return tags;
+        }
+
         public static bool Insert(Plant plant)
         {
             try
             {
                 using (IDbConnection db = new NpgsqlConnection(DataConnection.GetServerConnectionString()))
                 {
-                    string sqlQuery = "INSERT INTO Plant (Code, Description, StartDate, EndDate, CreationDate, Comment, Family, Url, AuthorId) " +
-                        "VALUES(@Code, @Description, @StartDate, @EndDate, CURRENT_DATE, @Comment, @Family, @Url, @AuthorId);";
+                    string sqlQuery = "INSERT INTO Plant (Code, Description, StartDate, EndDate, CreationDate, Comment, Family, Url, Tags, AuthorId) " +
+                        "VALUES(@Code, @Description, @StartDate, @EndDate, CURRENT_DATE, @Comment, @Family, @Url, @Tags, @AuthorId);";
 
                     return (db.Execute(sqlQuery, plant) == 1);
                 }
@@ -242,7 +335,7 @@ namespace DataAccess.Server
                 using (IDbConnection db = new NpgsqlConnection(DataConnection.GetServerConnectionString()))
                 {
                     string sqlQuery = "UPDATE Plant SET Code = @Code, Description = @Description, StartDate = @StartDate, EndDate = @EndDate, " +
-                                      "Comment = @Comment, Family = @Family, Url = @Url, AuthorId = @AuthorId, ImageStoreId = @ImageStoreId " + 
+                                      "Comment = @Comment, Family = @Family, Url = @Url, AuthorId = @AuthorId, ImageStoreId = @ImageStoreId, Tags = @Tags " + 
                                       "WHERE Id = @Id;";
 
                     return (db.Execute(sqlQuery, plant) == 1);

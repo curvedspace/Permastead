@@ -18,6 +18,11 @@ namespace Permastead.ViewModels.Views;
 
 public partial class PlantsViewModel : ViewModelBase
 {
+    
+    public ObservableCollection<TagData> Items { get; set; }
+    public ObservableCollection<TagData> SelectedItems { get; set; }
+    public AutoCompleteFilterPredicate<object> FilterPredicate { get; set; }
+    
     [ObservableProperty] 
     private ObservableCollection<Plant> _plants = new ObservableCollection<Plant>();
     
@@ -26,6 +31,9 @@ public partial class PlantsViewModel : ViewModelBase
     
     [ObservableProperty]
     private ObservableCollection<Planting> _plantings = new ObservableCollection<Planting>();
+    
+    [ObservableProperty]
+    private ObservableCollection<string> _tags = new ObservableCollection<string>();
     
     [ObservableProperty]
     private Bitmap picture; 
@@ -113,6 +121,28 @@ public partial class PlantsViewModel : ViewModelBase
         AssetLoader.GetAssets(new Uri("avares://Permastead"),null);
         
         Picture = new Bitmap(AssetLoader.Open(new Uri("avares://Permastead/Assets/plant_icon.png"), null));
+
+        Items = new ObservableCollection<TagData>(Services.PlantService.GetAllTags(AppSession.ServiceMode));
+        SelectedItems = new ObservableCollection<TagData>();
+
+        foreach (var tagData in CurrentPlant.TagList)
+        {
+            var td = new TagData
+            {
+                TagText = tagData
+            };
+            SelectedItems.Add(td);
+        }
+        
+        FilterPredicate = Search;
+    }
+    
+    private static bool Search(string? text, object? data)
+    {
+        if (text is null) return true;
+        
+        if (data is not TagData control) return false;
+        return control.TagText.Contains(text, StringComparison.InvariantCultureIgnoreCase);
     }
 
     public void GetMetaData()
@@ -122,6 +152,19 @@ public partial class PlantsViewModel : ViewModelBase
         
         //look up image, if available, for this plant
         Picture = PlantService.GetPlantImage(CurrentPlant);
+        
+        Tags.Clear();
+        Tags.Add("herb");
+        Tags.Add("bitter");
+
+        if (SelectedItems != null)
+        {
+            SelectedItems.Clear();
+            foreach (var tag in CurrentPlant.TagList)
+            {
+                SelectedItems.Add( new TagData { TagText = tag } );
+            }
+        }
 
     }
     
@@ -161,14 +204,26 @@ public partial class PlantsViewModel : ViewModelBase
     {
         bool rtnValue;
 
-        rtnValue = Services.PlantService.CommitRecord(AppSession.ServiceMode, CurrentPlant);
-        
-        OnPropertyChanged(nameof(CurrentPlant));
-            
-        using (LogContext.PushProperty("PlantsViewModel", this))
+        //write out tags into text string for storage
+        if (CurrentPlant != null)
         {
-            if (CurrentPlant.Id == 0) CurrentPlant.Author = AppSession.Instance.CurrentUser;
-            Log.Information("Saved planting: " + CurrentPlant.Description, rtnValue);
+            CurrentPlant.TagList.Clear();
+
+            foreach (var tagData in SelectedItems)
+            {
+                CurrentPlant.TagList.Add(tagData.TagText);
+            }
+            
+            CurrentPlant.SyncTags();
+            rtnValue = Services.PlantService.CommitRecord(AppSession.ServiceMode, CurrentPlant);
+            
+            OnPropertyChanged(nameof(CurrentPlant));
+                
+            using (LogContext.PushProperty("PlantsViewModel", this))
+            {
+                if (CurrentPlant.Id == 0) CurrentPlant.Author = AppSession.Instance.CurrentUser;
+                Log.Information("Saved planting: " + CurrentPlant.Description, rtnValue);
+            }
         }
         
         RefreshDataOnly();

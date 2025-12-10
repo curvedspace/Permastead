@@ -25,6 +25,22 @@ namespace Services
 
             return plants;
         }
+
+        public static List<TagData> GetAllTags(ServiceMode mode)
+        {
+            var tags = new List<TagData>();
+
+            if (mode == ServiceMode.Local)
+            {
+                tags = PlantRepository.GetAllTags(DataConnection.GetLocalDataSource());
+            }
+            else
+            {
+                tags = DataAccess.Server.PlantRepository.GetAllTags(DataConnection.GetServerConnectionString());
+            }
+
+            return tags;
+        }
         
         public static Plant GetPlantFromId(ServiceMode mode, long id) 
         {

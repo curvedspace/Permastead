@@ -7,6 +7,10 @@ public class Plant : CodeTable
     public string PlantType { get; set; } = "Unknown";
 
     public string Comment { get; set; } = "";
+    
+    public string Tags { get; set; } = "";
+    
+    public List<string> TagList { get; set; } = new List<string>();
 
     public string Family { get; set; } = "Unknown";
 
@@ -31,6 +35,15 @@ public class Plant : CodeTable
     public Plant(long id) : this()
     {
         this.Id = id;
+    }
+
+    public void SyncTags()
+    {
+        this.Tags = string.Empty;
+        foreach (var tag in this.TagList)
+        {
+            this.Tags += tag + " ";
+        }
     }
 
 }
