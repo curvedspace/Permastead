@@ -125,14 +125,18 @@ public partial class PlantsViewModel : ViewModelBase
         Items = new ObservableCollection<TagData>(Services.PlantService.GetAllTags(AppSession.ServiceMode));
         SelectedItems = new ObservableCollection<TagData>();
 
-        foreach (var tagData in CurrentPlant.TagList)
+        if (CurrentPlant != null)
         {
-            var td = new TagData
+            foreach (var tagData in CurrentPlant.TagList)
             {
-                TagText = tagData
-            };
-            SelectedItems.Add(td);
+                var td = new TagData
+                {
+                    TagText = tagData
+                };
+                SelectedItems.Add(td);
+            }
         }
+        
         
         FilterPredicate = Search;
     }

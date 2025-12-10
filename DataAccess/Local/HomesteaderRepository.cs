@@ -1196,13 +1196,13 @@ namespace DataAccess.Local
             p = new Plant { Author = new Person(1), Code = "YARROW", Description = "Yarrow", Tags = "herb bitter"};
             PlantRepository.Insert(p);
             
-            p = new Plant { Author = new Person(1), Code = "APPLE", Description = "Apple Tree" };
+            p = new Plant { Author = new Person(1), Code = "APPLE", Description = "Apple Tree", Tags = "tree" };
             PlantRepository.Insert(p);
             
             p = new Plant { Author = new Person(1), Code = "RASP", Description = "Raspberry" };
             PlantRepository.Insert(p);
             
-            p = new Plant { Author = new Person(1), Code = "CHERRY", Description = "Cherry Tree" };
+            p = new Plant { Author = new Person(1), Code = "CHERRY", Description = "Cherry Tree", Tags = "tree" }; 
             PlantRepository.Insert(p);
             
             p = new Plant { Author = new Person(1), Code = "RHUB", Description = "Rhubarb" };

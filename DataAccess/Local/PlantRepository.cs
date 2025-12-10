@@ -315,7 +315,7 @@ namespace DataAccess.Local
             {
                 using (IDbConnection db = new SqliteConnection(DataConnection.GetLocalDataSource()))
                 {
-                    string sqlQuery = "INSERT INTO Plant (Code, Description, StartDate, EndDate, CreationDate, Comment, Family, Url, AuthorId) " +
+                    string sqlQuery = "INSERT INTO Plant (Code, Description, StartDate, EndDate, CreationDate, Comment, Family, Url, Tags, AuthorId) " +
                         "VALUES(@Code, @Description, @StartDate, @EndDate, CURRENT_DATE, @Comment, @Family, @Url, @Tags, @AuthorId);";
 
                     return (db.Execute(sqlQuery, plant) == 1);
