@@ -65,6 +65,8 @@ public partial class PlantingsView : UserControl
             if (current != null)
             {
                 var planting = (Planting)current.RowSelection!.SelectedItem;
+                planting.YieldRatingValue = Convert.ToDouble(planting.YieldRating / 20m);
+                
                 var vm = DataContext as PlantingsViewModel;
                 vm.CurrentItem = planting;
                 vm.GetPlantingObservations();
@@ -86,6 +88,7 @@ public partial class PlantingsView : UserControl
         if (current != null)
         {
             var planting = (Planting)current.RowSelection!.SelectedItem;
+            planting.YieldRatingValue = Convert.ToDouble(planting.YieldRating / 20m);
             
             //get underlying view's viewmodel
             var vm = new PlantingWindowViewModel(planting, (PlantingsViewModel)DataContext);

@@ -19,6 +19,8 @@ public class Planting: CodeTable
 
     public decimal YieldRating { get; set; } = 0;
     
+    public double YieldRatingValue {get ; set;} = 0;
+    
     public PlantingState State { get; set; }
     
     public long PlantingStateId => this.State!.Id;

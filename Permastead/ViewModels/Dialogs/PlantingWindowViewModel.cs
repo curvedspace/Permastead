@@ -12,6 +12,13 @@ namespace Permastead.ViewModels.Dialogs;
 
 public partial class PlantingWindowViewModel : ViewModelBase
 {
+    [ObservableProperty] private bool _allowClear = true;
+    [ObservableProperty] private bool _allowHalf = true;
+    [ObservableProperty] private bool _isEnabled = true;
+
+    [ObservableProperty] private double _defaultValue = 0;
+    [ObservableProperty] private int _count = 5;
+    
     [ObservableProperty]
     private Planting? _planting;
  
@@ -48,18 +55,23 @@ public partial class PlantingWindowViewModel : ViewModelBase
     {
         _planting = planting;
         ControlViewModel = obsVm;
+
+        Planting.YieldRatingValue = Convert.ToDouble(Planting.YieldRating / 20m); //divide by 20 to get the yield in a 0-5 range
         
         if (Planting!.Plant.Id != 0 && _plants.Count > 0) Planting.Plant = Plants.First(x => x.Id == Planting.Plant.Id);
         if (Planting.SeedPacket.Id != 0 && SeedPackets.Count > 0) Planting.SeedPacket = SeedPackets.First(x => x.Id == Planting.SeedPacket.Id);
         if (Planting.Author.Id != 0 && People.Count > 0) Planting.Author = People.First(x => x.Id == Planting.Author.Id);
         if (Planting.State.Id != 0 && PlantingStates.Count > 0) Planting.State = PlantingStates.First(x => x.Id == Planting.State.Id);
+        
+        OnPropertyChanged(nameof(Planting));
     }
 
     
     public void SavePlanting()
     {
         bool rtnValue;
-        
+
+        Planting.YieldRating = (decimal)Planting.YieldRatingValue * 20;
         rtnValue = Services.PlantingsService.CommitRecord(AppSession.ServiceMode, _planting);
         
         OnPropertyChanged(nameof(_planting));
