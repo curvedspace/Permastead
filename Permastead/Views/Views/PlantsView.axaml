@@ -132,7 +132,8 @@
                 </u:MultiAutoCompleteBox>
                 
                 <Label Grid.Row="1" Grid.Column="5" Margin="20,3,20,5">Comment: </Label>
-                <TextBox Grid.Row="2" Grid.Column="5" Grid.ColumnSpan="1" Grid.RowSpan="2" Margin="20" TextWrapping="Wrap" Height="200" 
+                <TextBox Grid.Row="2" Grid.Column="5" Grid.ColumnSpan="1" Grid.RowSpan="2" Margin="20" 
+                         AcceptsReturn="True" TextWrapping="Wrap" Height="200" 
                          Text="{Binding CurrentPlant.Comment}"></TextBox>
                 
             </Grid>
