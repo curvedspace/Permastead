@@ -1510,12 +1510,28 @@ namespace DataAccess.Local
             
             #region SeedPacket
             
-            var sp = new SeedPacket() { Description = "Not Available", Instructions = "Not available", Author = Person.Gaia(), Vendor = new Vendor(1), Seasonality = new Seasonality(1),  Plant = new Plant(1)};
+            var sp = new SeedPacket() { Description = "Not Available", Instructions = "Not available", Author = Person.Gaia(), 
+	            Vendor = new Vendor(1), Seasonality = new Seasonality(1),  Plant = new Plant(1)};
             SeedPacketRepository.Insert(sp);
             
             #endregion
 
-        }
+            #region "Events"
+
+            var e = new AnEvent()
+            {
+	            Description = "Elder Moon", AnEventType = new AnEventType() { Id = 7 },
+	            Frequency = new Frequency(1), EventStartDate = new DateTime(DateTime.Today.Year, 11, 24),
+	            EventEndDate = new DateTime(DateTime.Today.Year, 12, 23), LastTriggerDate = DateTime.Today,
+	            Assignee = new Person(1), Assigner = new Person(1)
+            };
+        
+            AnEventRepository.Insert(e);
+
+            #endregion
+
+
+    }
 
     }
 }
