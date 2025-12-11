@@ -134,6 +134,7 @@ public partial class PlantingWizard : Window
         //finally commit the planting record
         Services.PlantingsService.CommitRecord(AppSession.ServiceMode, vm.CurrentPlanting);
         
+        this.Close();
     }
 
     private void CancelButton_OnClick(object? sender, RoutedEventArgs e)
