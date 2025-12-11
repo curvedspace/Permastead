@@ -45,7 +45,7 @@
         </ComboBox>
         
         <TextBlock Grid.Row="2" Grid.Column="2" Margin="15">Vendor:</TextBlock>
-        <AutoCompleteBox Grid.Row="2" Grid.Column="3" ItemsSource="{Binding Vendors}" 
+        <AutoCompleteBox Grid.Row="2" Grid.Column="3" x:Name = "VendorName" ItemsSource="{Binding Vendors}" 
                 Grid.ColumnSpan="1" Grid.RowSpan="1" Margin="0,10,10,10" 
                 Text="{Binding CurrentPlanting.SeedPacket.Vendor.Description}"></AutoCompleteBox>
           
@@ -70,7 +70,7 @@
           </ComboBox>
 
       
-        <TextBlock Grid.Row="4" Grid.Column="0" Margin="15">Location:</TextBlock>
+        <TextBlock x:Name = "LocationName" Grid.Row="4" Grid.Column="0" Margin="15">Location:</TextBlock>
         <AutoCompleteBox Grid.Row="4" Grid.Column="1" ItemsSource="{Binding Beds}" 
                          Grid.ColumnSpan="1" Grid.RowSpan="1" Margin="10,10,10,10" 
                          Text="{Binding CurrentPlanting.Bed.Description}"></AutoCompleteBox>
@@ -101,7 +101,7 @@
     <Image Grid.Row="1" Grid.Column="0" HorizontalAlignment="Left" Margin="10,15,0,0" Width="32" Height="32" Source="/Assets/leaf_plant.png" />
         
     <StackPanel Grid.Row="1" Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,10,10,0">
-      <Button Name="SaveButton" IsEnabled="False" Margin="10" Click="SaveButton_OnClick" >Save</Button>
+      <Button Name="SaveButton" IsEnabled="True" Margin="10" Click="SaveButton_OnClick" >Save</Button>
       <Button Name="CancelButton" Margin="10" Click="CancelButton_OnClick">Cancel</Button>
     </StackPanel>
     

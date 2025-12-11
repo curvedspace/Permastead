@@ -105,6 +105,7 @@ public class SeedPacket
         this.Author = Person.Gaia();
         this.Seasonality = new Seasonality();
         this.StarterType = new StarterType();
+        this.Instructions = string.Empty;
 
         this.StartDate = DateTime.UtcNow;
         this.EndDate = new DateTime(2100, 12, 31);
