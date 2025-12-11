@@ -27,8 +27,9 @@ public partial class PlantingWizard : Window
         var currentVendor = "";
         
         vm.CurrentPlanting.Author.Id = AppSession.Instance.CurrentUser.Id;
-        vm.CurrentPlanting.StartDate = DateTime.Now;
-        vm.CurrentPlanting.EndDate = DateTime.MinValue;
+        vm.CurrentPlanting.StartDate = DateTime.UtcNow;
+        vm.CurrentPlanting.EndDate = DateTime.MaxValue;
+        vm.CurrentPlanting.Description = vm.CurrentPlant.Description;
 
         if (currentVendorCtrl != null)
         {
@@ -68,8 +69,10 @@ public partial class PlantingWizard : Window
             vm.CurrentPlanting.Plant = vm.CurrentPlant;
             vm.CurrentPlanting.SeedPacket.Code = vm.CurrentPlant.Code;
             vm.CurrentPlanting.SeedPacket.Description = vm.CurrentPlant.Description;
-            vm.CurrentPlanting.SeedPacket.StartDate = DateTime.Today;
+            vm.CurrentPlanting.SeedPacket.StartDate = DateTime.UtcNow;
+            vm.CurrentPlanting.SeedPacket.EndDate = DateTime.MaxValue;
             vm.CurrentPlanting.SeedPacket.Author.Id = AppSession.Instance.CurrentUser.Id;
+            vm.CurrentPlanting.SeedPacket.Plant.Id = vm.CurrentPlant.Id;
             
             Services.SeedPacketService.CommitRecord(AppSession.ServiceMode, vm.CurrentPlanting.SeedPacket);
             
