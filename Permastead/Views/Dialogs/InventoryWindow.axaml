@@ -27,7 +27,8 @@
         <TextBox Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3"  Text="{Binding CurrentItem.Description }" Margin="10,10,10,10"></TextBox>
         
         <TextBlock Grid.Row="2" Grid.Column="0" Margin="10,15,10,10">Inventory Group:</TextBlock>
-        <AutoCompleteBox Grid.Row="2" Grid.Column="1" Margin="10" ItemsSource="{Binding InventoryGroups}" Text="{Binding CurrentItem.InventoryGroup}"></AutoCompleteBox>
+        <AutoCompleteBox Grid.Row="2" Grid.Column="1" Margin="10" ItemsSource="{Binding InventoryGroups}" 
+                         Text="{Binding CurrentItem.InventoryGroup}"></AutoCompleteBox>
         <!-- <ComboBox Width="200" Grid.Row="2" Grid.Column="1" Margin="10" ItemsSource="{Binding InventoryGroups, Mode=TwoWay}" -->
         <!--            SelectedItem="{Binding CurrentItem.InventoryGroup, Mode=TwoWay}" AutoScrollToSelectedItem="True"> -->
         <!--   <ComboBox.ItemTemplate> -->

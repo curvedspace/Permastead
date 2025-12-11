@@ -18,4 +18,9 @@ public class Vendor : CodeTable
     {
         this.Id = id;
     }
+    
+    public override string? ToString()
+    {
+        return this.Description;
+    }
 }

@@ -111,7 +111,32 @@ public partial class PlantsViewModel : ViewModelBase
     [RelayCommand]
     private void AddPlanting()
     {
-        
+        try
+        {
+            var win = new PlantingWizard();
+            var vm = new PlantingWizardViewModel();
+            vm.ControlViewModel = new PlantingsViewModel();
+            
+            // set up some intelligent defaults
+            vm.ControlViewModel.CurrentItem.Description = CurrentPlant.Description;
+            vm.CurrentPlant = CurrentPlant;
+            vm.CurrentPlanting.Code = CurrentPlant.Code;
+            
+            win.DataContext = vm;
+            
+            win.Title = "New Planting: " + CurrentPlant!.Description;
+            win.Topmost = true;
+            win.Width = 800;
+            win.Height = 550;
+            win.Opacity = 0.95;
+            win.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+            
+            win.Show();
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+        }
     }
 
 

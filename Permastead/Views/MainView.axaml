@@ -23,7 +23,7 @@
                     <Button Name="DashboardButton" ToolTip.Tip="Dashboard " Command="{Binding OpenDashboardViewCommand}">
                         <Image Width="16" Height="16" Source="/Assets/statistics.png" />
                     </Button>
-                    <Button Name="ConnectionsButton" ToolTip.Tip="Connections " Command="{Binding OpenConnectionsViewCommand}">
+                    <Button Name="ConnectionsButton" ToolTip.Tip="Connections " IsVisible="False" Command="{Binding OpenConnectionsViewCommand}">
                         <Image Width="16" Height="16" Source="/Assets/node.png" />
                     </Button>
                     <Button Name="CyclesButton" ToolTip.Tip="Cycles " Command="{Binding OpenCyclesViewCommand}">

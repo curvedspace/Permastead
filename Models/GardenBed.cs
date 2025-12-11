@@ -24,4 +24,9 @@ public class GardenBed : CodeTable
         this.Type = new GardenBedType();
         this.Author = Person.Gaia();
     }
+    
+    public override string? ToString()
+    {
+        return this.Description;
+    }
 }
