@@ -1,4 +1,6 @@
-﻿namespace Common;
+﻿using System.Text.RegularExpressions;
+
+namespace Common;
 
 public static class TextUtils
 {
@@ -34,4 +36,14 @@ public static class TextUtils
         }
     }
     
+    /// <summary>
+    ///  Counts number of occurrences of a string in another string
+    /// </summary>
+    /// <param name="val">string containing text</param>
+    /// <param name="stringToMatch">string or pattern find</param>
+    /// <returns>The number of occurrences as an int </returns>
+    public static int CountOccurrences(this string val, string stringToMatch)
+    {
+        return Regex.Matches(val, stringToMatch, RegexOptions.IgnoreCase).Count;
+    }
 }
