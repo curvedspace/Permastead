@@ -1285,7 +1285,7 @@ namespace DataAccess.Local
 				Description = "Learn about Permastead",
 				Assignee = new Person(2),
 				Assigner = new Person(1),
-				DueDate = DateTime.Today.AddMonths(1),
+				DueDate = DateTime.Today.AddDays(14),
 				ToDoStatus = new ToDoStatus(1),
 				ToDoType = new ToDoType(6),	//educational
 				PercentDone = 0
@@ -1518,120 +1518,159 @@ namespace DataAccess.Local
 
             #region "Events"
 
+            var startDate = new DateTime(DateTime.Today.Year, 11, 24);
+            var year = startDate >= DateTime.Today ? startDate.Year - 1 : startDate.Year;
+            startDate = new DateTime(year, startDate.Month, startDate.Day);
             var e = new AnEvent()
             {
 	            Description = "Elder Moon", AnEventType = new AnEventType() { Id = 7 },
-	            Frequency = new Frequency(1), EventStartDate = new DateTime(DateTime.Today.Year, 11, 24),
-	            EventEndDate = new DateTime(DateTime.Today.Year, 12, 23), LastTriggerDate = DateTime.Today,
+	            Frequency = new Frequency(1), EventStartDate = startDate,
+	            EventEndDate = new DateTime(year, 12, 23), LastTriggerDate = startDate,
 	            Assignee = new Person(1), Assigner = new Person(1)
             };
         
             AnEventRepository.Insert(e);
             
+            startDate = new DateTime(DateTime.Today.Year, 12, 24);
+            year = startDate >= DateTime.Today ? startDate.Year - 1 : startDate.Year;
+            startDate = new DateTime(year, startDate.Month, startDate.Day);
             e = new AnEvent()
             {
 	            Description = "Birch Moon", AnEventType = new AnEventType() { Id = 7 },
-	            Frequency = new Frequency(1), EventStartDate = new DateTime(DateTime.Today.Year-1, 12, 24),
-	            EventEndDate = new DateTime(DateTime.Today.Year, 1, 20), LastTriggerDate = DateTime.Today,
+	            Frequency = new Frequency(1), EventStartDate = startDate,
+	            EventEndDate = new DateTime(year+1, 1, 20), LastTriggerDate = startDate,
 	            Assignee = new Person(1), Assigner = new Person(1)
             };
             AnEventRepository.Insert(e);
             
+            startDate = new DateTime(DateTime.Today.Year, 1, 21);
+            year = startDate >= DateTime.Today ? startDate.Year - 1 : startDate.Year;
+            startDate = new DateTime(year, startDate.Month, startDate.Day);
             e = new AnEvent()
             {
 	            Description = "Rowan Moon", AnEventType = new AnEventType() { Id = 7 },
-	            Frequency = new Frequency(1), EventStartDate = new DateTime(DateTime.Today.Year, 1, 21),
-	            EventEndDate = new DateTime(DateTime.Today.Year, 2, 17), LastTriggerDate = DateTime.Today,
+	            Frequency = new Frequency(1), EventStartDate = startDate,
+	            EventEndDate = new DateTime(year, 2, 17), LastTriggerDate = startDate,
 	            Assignee = new Person(1), Assigner = new Person(1)
             };
             AnEventRepository.Insert(e);
             
+            startDate = new DateTime(DateTime.Today.Year, 2, 18);
+            year = startDate >= DateTime.Today ? startDate.Year - 1 : startDate.Year;
+            startDate = new DateTime(year, startDate.Month, startDate.Day);
             e = new AnEvent()
             {
 	            Description = "Ash Moon", AnEventType = new AnEventType() { Id = 7 },
-	            Frequency = new Frequency(1), EventStartDate = new DateTime(DateTime.Today.Year, 2, 18),
-	            EventEndDate = new DateTime(DateTime.Today.Year, 3, 17), LastTriggerDate = DateTime.Today,
+	            Frequency = new Frequency(1), EventStartDate = startDate,
+	            EventEndDate = new DateTime(year, 3, 17), LastTriggerDate = startDate,
 	            Assignee = new Person(1), Assigner = new Person(1)
             };
             AnEventRepository.Insert(e);
             
+            startDate = new DateTime(DateTime.Today.Year, 3, 18);
+            year = startDate >= DateTime.Today ? startDate.Year - 1 : startDate.Year;
+            startDate = new DateTime(year, startDate.Month, startDate.Day);
             e = new AnEvent()
             {
 	            Description = "Alder Moon", AnEventType = new AnEventType() { Id = 7 },
-	            Frequency = new Frequency(1), EventStartDate = new DateTime(DateTime.Today.Year, 3, 18),
-	            EventEndDate = new DateTime(DateTime.Today.Year, 4, 14), LastTriggerDate = DateTime.Today,
+	            Frequency = new Frequency(1), EventStartDate = startDate,
+	            EventEndDate = new DateTime(year, 4, 14), LastTriggerDate = startDate,
 	            Assignee = new Person(1), Assigner = new Person(1)
             };
             AnEventRepository.Insert(e);
 
+            startDate = new DateTime(DateTime.Today.Year, 4, 15);
+            year = startDate >= DateTime.Today ? startDate.Year - 1 : startDate.Year;
+            startDate = new DateTime(year, startDate.Month, startDate.Day);
             e = new AnEvent()
             {
 	            Description = "Willow Moon", AnEventType = new AnEventType() { Id = 7 },
-	            Frequency = new Frequency(1), EventStartDate = new DateTime(DateTime.Today.Year, 4, 15),
-	            EventEndDate = new DateTime(DateTime.Today.Year, 5, 12), LastTriggerDate = DateTime.Today,
+	            Frequency = new Frequency(1), EventStartDate = startDate,
+	            EventEndDate = new DateTime(year, 5, 12), LastTriggerDate = startDate,
 	            Assignee = new Person(1), Assigner = new Person(1)
             };
             AnEventRepository.Insert(e);
             
+            startDate = new DateTime(DateTime.Today.Year, 5, 13);
+            year = startDate >= DateTime.Today ? startDate.Year - 1 : startDate.Year;
+            startDate = new DateTime(year, startDate.Month, startDate.Day);
             e = new AnEvent()
             {
 	            Description = "Hawthorn Moon", AnEventType = new AnEventType() { Id = 7 },
-	            Frequency = new Frequency(1), EventStartDate = new DateTime(DateTime.Today.Year, 5, 13),
-	            EventEndDate = new DateTime(DateTime.Today.Year, 6, 9), LastTriggerDate = DateTime.Today,
+	            Frequency = new Frequency(1), EventStartDate = startDate,
+	            EventEndDate = new DateTime(year, 6, 9), LastTriggerDate = startDate,
 	            Assignee = new Person(1), Assigner = new Person(1)
             };
             AnEventRepository.Insert(e);
             
+            startDate = new DateTime(DateTime.Today.Year, 6, 10);
+            year = startDate >= DateTime.Today ? startDate.Year - 1 : startDate.Year;
+            startDate = new DateTime(year, startDate.Month, startDate.Day);
             e = new AnEvent()
             {
 	            Description = "Oak Moon", AnEventType = new AnEventType() { Id = 7 },
-	            Frequency = new Frequency(1), EventStartDate = new DateTime(DateTime.Today.Year, 6, 10),
-	            EventEndDate = new DateTime(DateTime.Today.Year, 7, 7), LastTriggerDate = DateTime.Today,
+	            Frequency = new Frequency(1), EventStartDate = startDate,
+	            EventEndDate = new DateTime(year, 7, 7), LastTriggerDate = startDate,
 	            Assignee = new Person(1), Assigner = new Person(1)
             };
             AnEventRepository.Insert(e);
             
+            startDate = new DateTime(DateTime.Today.Year, 7, 8);
+            year = startDate >= DateTime.Today ? startDate.Year - 1 : startDate.Year;
+            startDate = new DateTime(year, startDate.Month, startDate.Day);
             e = new AnEvent()
             {
 	            Description = "Holly Moon", AnEventType = new AnEventType() { Id = 7 },
-	            Frequency = new Frequency(1), EventStartDate = new DateTime(DateTime.Today.Year, 7, 8),
-	            EventEndDate = new DateTime(DateTime.Today.Year, 8, 4), LastTriggerDate = DateTime.Today,
+	            Frequency = new Frequency(1), EventStartDate = startDate,
+	            EventEndDate = new DateTime(year, 8, 4), LastTriggerDate = startDate,
 	            Assignee = new Person(1), Assigner = new Person(1)
             };
             AnEventRepository.Insert(e);
             
+            startDate = new DateTime(DateTime.Today.Year, 8, 5);
+            year = startDate >= DateTime.Today ? startDate.Year - 1 : startDate.Year;
+            startDate = new DateTime(year, startDate.Month, startDate.Day);
             e = new AnEvent()
             {
 	            Description = "Hazel Moon", AnEventType = new AnEventType() { Id = 7 },
-	            Frequency = new Frequency(1), EventStartDate = new DateTime(DateTime.Today.Year, 8, 5),
-	            EventEndDate = new DateTime(DateTime.Today.Year, 9, 1), LastTriggerDate = DateTime.Today,
+	            Frequency = new Frequency(1), EventStartDate = startDate,
+	            EventEndDate = new DateTime(year, 9, 1), LastTriggerDate = startDate,
 	            Assignee = new Person(1), Assigner = new Person(1)
             };
             AnEventRepository.Insert(e);
             
+            startDate = new DateTime(DateTime.Today.Year, 9, 2);
+            year = startDate >= DateTime.Today ? startDate.Year - 1 : startDate.Year;
+            startDate = new DateTime(year, startDate.Month, startDate.Day);
             e = new AnEvent()
             {
 	            Description = "Vine Moon", AnEventType = new AnEventType() { Id = 7 },
-	            Frequency = new Frequency(1), EventStartDate = new DateTime(DateTime.Today.Year, 9, 2),
-	            EventEndDate = new DateTime(DateTime.Today.Year, 9, 29), LastTriggerDate = DateTime.Today,
+	            Frequency = new Frequency(1), EventStartDate = startDate,
+	            EventEndDate = new DateTime(year, 9, 29), LastTriggerDate = startDate,
 	            Assignee = new Person(1), Assigner = new Person(1)
             };
             AnEventRepository.Insert(e);
             
+            startDate = new DateTime(DateTime.Today.Year, 9, 30);
+            year = startDate >= DateTime.Today ? startDate.Year - 1 : startDate.Year;
+            startDate = new DateTime(year, startDate.Month, startDate.Day);
             e = new AnEvent()
             {
 	            Description = "Ivy Moon", AnEventType = new AnEventType() { Id = 7 },
-	            Frequency = new Frequency(1), EventStartDate = new DateTime(DateTime.Today.Year, 9, 30),
-	            EventEndDate = new DateTime(DateTime.Today.Year, 10, 27), LastTriggerDate = DateTime.Today,
+	            Frequency = new Frequency(1), EventStartDate = startDate,
+	            EventEndDate = new DateTime(year, 10, 27), LastTriggerDate = startDate,
 	            Assignee = new Person(1), Assigner = new Person(1)
             };
             AnEventRepository.Insert(e);
             
+            startDate = new DateTime(DateTime.Today.Year, 10, 28);
+            year = startDate >= DateTime.Today ? startDate.Year - 1 : startDate.Year;
+            startDate = new DateTime(year, startDate.Month, startDate.Day);
             e = new AnEvent()
             {
 	            Description = "Reed Moon", AnEventType = new AnEventType() { Id = 7 },
-	            Frequency = new Frequency(1), EventStartDate = new DateTime(DateTime.Today.Year, 10, 28),
-	            EventEndDate = new DateTime(DateTime.Today.Year, 11, 23), LastTriggerDate = DateTime.Today,
+	            Frequency = new Frequency(1), EventStartDate = startDate,
+	            EventEndDate = new DateTime(year, 11, 23), LastTriggerDate = startDate,
 	            Assignee = new Person(1), Assigner = new Person(1)
             };
             AnEventRepository.Insert(e);
