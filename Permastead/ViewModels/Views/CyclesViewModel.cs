@@ -25,7 +25,6 @@ public partial class  CyclesViewModel : ViewModelBase
     public string BirthdayName3 { get; set; } = "";
 
     public bool BirthdayVisible1 { get; set; } = false;
-    
     public bool BirthdayVisible2 { get; set; } = false;
     public bool BirthdayVisible3 { get; set; } = false;
     
@@ -39,6 +38,10 @@ public partial class  CyclesViewModel : ViewModelBase
     public string HolidayName2 { get; set; } = "";
     public string HolidayName3 { get; set; } = "";
     
+    public bool HolidayVisible1 { get; set; } = false;
+    public bool HolidayVisible2 { get; set; } = false;
+    public bool HolidayVisible3 { get; set; } = false;
+    
     private List<AnEvent> myHolidays { get; set; } = new List<AnEvent>();
     
     public double PlaceValue1 { get; set; } = 0;
@@ -49,6 +52,10 @@ public partial class  CyclesViewModel : ViewModelBase
     public string PlaceName2 { get; set; } = "";
     public string PlaceName3 { get; set; } = "";
     
+    public bool PlaceVisible1 { get; set; } = false;
+    public bool PlaceVisible2 { get; set; } = false;
+    public bool PlaceVisible3 { get; set; } = false;
+    
     private List<AnEvent> myPlaceEvents { get; set; } = new List<AnEvent>();
     
     public double TodoValue1 { get; set; } = 0;
@@ -58,6 +65,10 @@ public partial class  CyclesViewModel : ViewModelBase
     public string TodoName1 { get; set; } = "";
     public string TodoName2 { get; set; } = "";
     public string TodoName3 { get; set; } = "";
+    
+    public bool ToDoVisible1 { get; set; } = false;
+    public bool ToDoVisible2 { get; set; } = false;
+    public bool ToDoVisible3 { get; set; } = false;
     
     public string CurrentCycle { get; set; } = "";
     
@@ -107,16 +118,19 @@ public partial class  CyclesViewModel : ViewModelBase
             {
                 HolidayValue1 = 365 - nextHolidays[0].DaysUntilNext;
                 HolidayName1 = nextHolidays[0].Description!;
+                HolidayVisible1 = true;
             }
             if (nextHolidays.Count > 1)
             {
                 HolidayValue2 = 365 - nextHolidays[1].DaysUntilNext;
                 HolidayName2 = nextHolidays[1].Description!;
+                HolidayVisible2 = true;
             }
             if (nextHolidays.Count > 2)
             {
                 HolidayValue3 = 365 - nextHolidays[2].DaysUntilNext;
                 HolidayName3 = nextHolidays[2].Description!;
+                HolidayVisible3 = true;
             }
             
         }
@@ -128,16 +142,19 @@ public partial class  CyclesViewModel : ViewModelBase
             {
                 PlaceValue1 = 365 - myPlaceEvents[0].DaysUntilNext;
                 PlaceName1 = myPlaceEvents[0].Description!;
+                PlaceVisible1 = true;
             }
             if (myPlaceEvents.Count > 1)
             {
                 PlaceValue2 = 365 - myPlaceEvents[1].DaysUntilNext;
                 PlaceName2 = myPlaceEvents[1].Description!;
+                PlaceVisible2 = true;
             }
             if (myPlaceEvents.Count > 2)
             {
                 PlaceValue3 = 365 - myPlaceEvents[2].DaysUntilNext;
                 PlaceName3 = myPlaceEvents[2].Description!;
+                PlaceVisible3 = true;
             }
             
         }
@@ -149,16 +166,19 @@ public partial class  CyclesViewModel : ViewModelBase
             {
                 TodoValue1 = 30 - myTodos[0].DaysUntilDue;
                 TodoName1 = myTodos[0].Description!;
+                ToDoVisible1 = true;
             }
             if (myTodos.Count > 1)
             {
                 TodoValue2 = 30 - myTodos[1].DaysUntilDue;
                 TodoName2 = myTodos[1].Description!;
+                ToDoVisible2 = true;
             }
             if (myTodos.Count > 2)
             {
                 TodoValue3 = 30 - myTodos[2].DaysUntilDue;
                 TodoName3 = myTodos[2].Description!;
+                ToDoVisible3 = true;
             }
             
         }

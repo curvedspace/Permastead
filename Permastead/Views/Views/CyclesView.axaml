@@ -101,6 +101,7 @@
                           InitialRotation="-90"
                           Background="#ff0d2644"
                           MinValue="0"
+                          IsVisible="{Binding HolidayVisible1}"
                           MaxValue="365">
                 <lvc:PieChart.Series>
 
@@ -121,6 +122,7 @@
             
             <lvc:PieChart Grid.Row="2" Grid.Column="1" x:Name="Work2"
                           InitialRotation="-90"
+                          IsVisible="{Binding HolidayVisible2}"
                           Background="#ff0d2644"
                           MinValue="0"
                           MaxValue="365">
@@ -143,6 +145,7 @@
             
             <lvc:PieChart Grid.Row="3" Grid.Column="1" x:Name="Work3"
                           InitialRotation="-90"
+                          IsVisible="{Binding HolidayVisible3}"
                           Background="#ff0d2644"
                           MinValue="0"
                           MaxValue="365">
@@ -166,6 +169,7 @@
             <Label Grid.Column="2" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="10">Phenology</Label>
             <lvc:PieChart Grid.Row="1" Grid.Column="2" x:Name="Place1"
                           InitialRotation="-90"
+                          IsVisible="{Binding PlaceVisible1}"
                           Background="#ff0d2644"
                           MinValue="0"
                           MaxValue="365">
@@ -188,6 +192,7 @@
             
             <lvc:PieChart Grid.Row="2" Grid.Column="2" x:Name="Place2"
                           InitialRotation="-90"
+                          IsVisible="{Binding PlaceVisible2}"
                           Background="#ff0d2644"
                           MinValue="0"
                           MaxValue="365">
@@ -210,6 +215,7 @@
             
             <lvc:PieChart Grid.Row="3" Grid.Column="2" x:Name="Place3"
                           InitialRotation="-90"
+                          IsVisible="{Binding PlaceVisible3}"
                           Background="#ff0d2644"
                           MinValue="0"
                           MaxValue="365">
@@ -232,6 +238,7 @@
             <Label Grid.Column="3" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="10">TODO List</Label>
             <lvc:PieChart Grid.Row="1" Grid.Column="3" x:Name="Cal1"
                           InitialRotation="-90"
+                          IsVisible="{Binding ToDoVisible1}"
                           Background="#ff0d2644"
                           MinValue="0"
                           MaxValue="30">
@@ -254,6 +261,7 @@
             
             <lvc:PieChart Grid.Row="2" Grid.Column="3" x:Name="Cal2"
                           InitialRotation="-90"
+                          IsVisible="{Binding ToDoVisible2}"
                           Background="#ff0d2644"
                           MinValue="0"
                           MaxValue="30">
@@ -276,6 +284,7 @@
             
             <lvc:PieChart Grid.Row="3" Grid.Column="3" x:Name="Cal3"
                           InitialRotation="-90"
+                          IsVisible="{Binding ToDoVisible3}"
                           Background="#ff0d2644"
                           MinValue="0"
                           MaxValue="30">
