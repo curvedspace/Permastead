@@ -81,7 +81,9 @@ public static class DbMigrationService
                                     (dr[9].ToString()=="1") + "," + //boolean conversion
                                     dr[10].ToString() + "," +
                                     "'" + dr[11].ToString() + "'," +
-                                    "'" + dr[12].ToString() + "'" +
+                                    "'" + dr[12].ToString() + "'," +
+                                    ConvertToDateTime(dr,13) + "," +
+                                    ConvertToDateTime(dr,14) +
                                     ")";
                         Console.WriteLine(pgSql);
                         RunServerSql(serverConnectionString, pgSql);
@@ -1136,7 +1138,9 @@ public static class DbMigrationService
                                     ConvertToBoolean(dr,9) + "," +
                                     dr[10].ToString() + "," +
                                     "'" + dr[11].ToString() + "'," +
-                                    "'" + dr[12].ToString() + "'" +
+                                    "'" + dr[12].ToString() + "'," +
+                                    ConvertToDateTime(dr,13) + "," +
+                                    ConvertToDateTime(dr,14) + 
                                     ")";
                         Console.WriteLine(pgSql);
                         RunLocalSql(localConnectionString, pgSql);
@@ -1666,7 +1670,9 @@ public static class DbMigrationService
                                     ConvertToText(dr,6) + "," +
                                     ConvertToText(dr,7) + "," +
                                     ConvertToText(dr,8) + "," +
-                                    ConvertToNumeric(dr,9) + 
+                                    ConvertToNumeric(dr,9) + "," +
+                                    ConvertToNumeric(dr,10) + "," +
+                                    ConvertToText(dr,11) +
                                     ")";
                         Console.WriteLine(pgSql);
                         RunLocalSql(localConnectionString, pgSql);
