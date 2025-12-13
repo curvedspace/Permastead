@@ -1,6 +1,7 @@
 using System;
 using System.IO;
 using System.Runtime.InteropServices;
+using System.Xml.Schema;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Input;
@@ -14,6 +15,11 @@ using Models;
 using Permastead.ViewModels.Dialogs;
 using Permastead.ViewModels.Views;
 using Permastead.Views.Dialogs;
+using SixLabors.ImageSharp;
+using SixLabors.ImageSharp.Processing;
+using SixLabors.ImageSharp.Processing.Processors;
+using SixLabors.ImageSharp.Processing.Processors.Transforms;
+using Image = SixLabors.ImageSharp.Image;
 
 namespace Permastead.Views.Views;
 
@@ -127,7 +133,7 @@ public partial class PlantsView : UserControl
             var files = await topLevel!.StorageProvider.OpenFilePickerAsync(new FilePickerOpenOptions
             {
                 Title = "Open Image File",
-                SuggestedFileName = "*.png",
+                SuggestedFileName = "*.jpg",
                 AllowMultiple = false
             });
 
@@ -135,21 +141,23 @@ public partial class PlantsView : UserControl
             {
                 var vm = (PlantsViewModel)DataContext;
 
-                // Open reading stream from the first file.
-                await using var stream = await files[0].OpenReadAsync();
-                using (var streamReader = new StreamReader(stream))
-                {
-                    Bitmap pic = new Bitmap(stream);
+                
+                
+                var image = Image.Load(files[0].Path.AbsolutePath);
+                image.Mutate(x => x.Resize(400, 300));
 
-                    if (pic != null)
-                    {
-                        vm.Picture = pic;
-                    }
-                }
+                float angle = 90;
+                var rp = new RotateProcessor(angle, image.Size);
+
+                image.Mutate(x => x.ApplyProcessor(rp));
+                
+                // image.Save("result.jpg");
 
                 //save the file into the config area
                 FileInfo fi = new FileInfo(files[0].Path.AbsolutePath);
 
+                var newLocation = "";
+                    
                 if (fi.Exists)
                 {
                     var userFolder = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
@@ -158,17 +166,40 @@ public partial class PlantsView : UserControl
 
                     if (isWindows)
                     {
-                        var newLocation = userFolder + @"\.config\permastead\images\plants\" + vm.CurrentPlant.Id + ".png";
-                        fi.CopyTo(newLocation);
+                        newLocation = userFolder + @"\.config\permastead\images\plants\" + vm.CurrentPlant.Id + ".png";
+                        //fi.CopyTo(newLocation);
+                        image.SaveAsPng(newLocation);
                     }
                     else
                     {
-                        var newLocation = userFolder + @"/.config/permastead/images/plants/" + vm.CurrentPlant.Id + ".png";
-                        fi.CopyTo(newLocation);
+                        newLocation = userFolder + @"/.config/permastead/images/plants/" + vm.CurrentPlant.Id + ".png";
+                        //fi.CopyTo(newLocation);
+                        image.SaveAsPng(newLocation);
                     }
 
                 }
+                
+                // Open reading stream from the first file.
+                FileInfo nfi = new FileInfo(newLocation);
+
+                if (nfi.Exists)
+                {
+                    
+                    using var stream = nfi.OpenRead();
+                    {
+                        Bitmap pic = new Bitmap(stream);
+                            
+                        if (pic != null)
+                        {
+                            vm.Picture = pic;
+                        }
+                    }
+                
+                }
+                
             }
+            
+            
 
         }
         catch (Exception exception)

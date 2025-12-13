@@ -28,6 +28,7 @@
     <PackageReference Include="Material.Icons.Avalonia" Version="2.4.1" />
     <PackageReference Include="NodifyM.Avalonia" Version="1.1.4" />
     <PackageReference Include="Semi.Avalonia" Version="11.3.7.1" />
+    <PackageReference Include="SixLabors.ImageSharp" Version="3.1.12" />
   </ItemGroup>
 
   <ItemGroup>
