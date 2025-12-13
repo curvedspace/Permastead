@@ -59,14 +59,15 @@ public static class TextUtils
         if (string.IsNullOrEmpty(val)) return string.Empty;
         
         val = val.Replace(" ", ""); //remove spaces if there are any
-        
-        var maxLength = length-1;
-        
-        if (length < val.Length) 
-            maxLength = length;
-        
-        
-        return val.ToUpperInvariant().Substring(0,maxLength);
+
+        if (val.Length <= length)
+        {
+            return val.ToUpperInvariant();
+        }
+        else
+        {
+            return val.ToUpperInvariant().Substring(0,length);
+        }
         
     }
 }

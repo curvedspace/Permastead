@@ -17,5 +17,8 @@ public class TextUtilsTest
         Assert.Equal("ROWAN", TextUtils.Codify(text,5));
         Assert.Equal("ROWANT", TextUtils.Codify(text,6));
 
+        text = "Garage";
+        Assert.Equal("GARAGE", TextUtils.Codify(text,10));
+        Assert.Equal("GARAG", TextUtils.Codify(text,5));
     }
 }
