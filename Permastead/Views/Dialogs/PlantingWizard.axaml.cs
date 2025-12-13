@@ -4,6 +4,7 @@ using Avalonia.Controls;
 using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml;
 using Models;
+using Common;
 using Permastead.ViewModels.Dialogs;
 using Services;
 
@@ -22,6 +23,7 @@ public partial class PlantingWizard : Window
         
         //check for a new vendor record - if yes, create it and assign ID
         var vendors = Services.VendorService.GetAll(AppSession.ServiceMode);
+        
         bool createVendor = true;
         var currentVendorCtrl = this.FindControl<AutoCompleteBox>("VendorName");
         var currentVendor = "";
@@ -73,6 +75,7 @@ public partial class PlantingWizard : Window
             vm.CurrentPlanting.SeedPacket.EndDate = DateTime.MaxValue;
             vm.CurrentPlanting.SeedPacket.Author.Id = AppSession.Instance.CurrentUser.Id;
             vm.CurrentPlanting.SeedPacket.Plant.Id = vm.CurrentPlant.Id;
+            vm.CurrentPlanting.Comment = vm.CurrentPlanting.SeedPacket.Instructions;
             
             Services.SeedPacketService.CommitRecord(AppSession.ServiceMode, vm.CurrentPlanting.SeedPacket);
             
@@ -109,7 +112,7 @@ public partial class PlantingWizard : Window
             {
                 var newLocation = new GardenBed();
                 newLocation.Description = currentLocation;
-                newLocation.Code = currentLocation.ToUpperInvariant();
+                newLocation.Code = TextUtils.Codify(currentLocation,10);
                 
                 if (AppSession.ServiceMode == ServiceMode.Local)
                 {

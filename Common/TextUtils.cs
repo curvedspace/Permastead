@@ -46,4 +46,22 @@ public static class TextUtils
     {
         return Regex.Matches(val, stringToMatch, RegexOptions.IgnoreCase).Count;
     }
+    
+    /// <summary>
+    /// Creates a "code" value from a passed in string.
+    /// Suitable for code values in databases.
+    /// </summary>
+    /// <param name="val"></param>
+    /// <param name="length"></param>
+    /// <returns></returns>
+    public static string Codify(string val, int length)
+    {
+        if (string.IsNullOrEmpty(val)) return string.Empty;
+        
+        var maxLength = val.Length;
+        if (maxLength > length) maxLength = length;
+        
+        return val.ToUpperInvariant().Substring(0,length);
+        
+    }
 }
