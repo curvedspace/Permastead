@@ -58,10 +58,15 @@ public static class TextUtils
     {
         if (string.IsNullOrEmpty(val)) return string.Empty;
         
-        var maxLength = val.Length;
-        if (maxLength > length) maxLength = length;
+        val = val.Replace(" ", ""); //remove spaces if there are any
         
-        return val.ToUpperInvariant().Substring(0,length);
+        var maxLength = length-1;
+        
+        if (length < val.Length) 
+            maxLength = length;
+        
+        
+        return val.ToUpperInvariant().Substring(0,maxLength);
         
     }
 }
