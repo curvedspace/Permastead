@@ -139,19 +139,25 @@ public partial class PlantsView : UserControl
 
             if (files.Count >= 1)
             {
+                var isWindows = System.Runtime.InteropServices.RuntimeInformation.IsOSPlatform(OSPlatform.Windows);
                 var vm = (PlantsViewModel)DataContext;
-
-                
                 
                 var image = Image.Load(files[0].Path.AbsolutePath);
-                image.Mutate(x => x.Resize(400, 300));
+                if (isWindows)
+                {
+                    image.Mutate(x => x.Resize(400, 300));  //for windows, use 4x3 instead
+                }
+                else
+                {
+                    image.Mutate(x => x.Resize(300, 400));  //for windows, use 4x3 instead
+                }
 
-                float angle = 90;
+                float angle = 0;
+                if (isWindows) angle = 90; //rotate on Windows but not Linux
+                
                 var rp = new RotateProcessor(angle, image.Size);
 
                 image.Mutate(x => x.ApplyProcessor(rp));
-                
-                // image.Save("result.jpg");
 
                 //save the file into the config area
                 FileInfo fi = new FileInfo(files[0].Path.AbsolutePath);
@@ -161,9 +167,7 @@ public partial class PlantsView : UserControl
                 if (fi.Exists)
                 {
                     var userFolder = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
-
-                    var isWindows = System.Runtime.InteropServices.RuntimeInformation.IsOSPlatform(OSPlatform.Windows);
-
+                    
                     if (isWindows)
                     {
                         newLocation = userFolder + @"\.config\permastead\images\plants\" + vm.CurrentPlant.Id + ".png";
@@ -194,13 +198,8 @@ public partial class PlantsView : UserControl
                             vm.Picture = pic;
                         }
                     }
-                
                 }
-                
             }
-            
-            
-
         }
         catch (Exception exception)
         {
