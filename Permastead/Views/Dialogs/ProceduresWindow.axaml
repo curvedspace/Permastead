@@ -1,0 +1,36 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="Permastead.Views.Dialogs.ProceduresWindow"
+        xmlns:vm="using:Permastead.ViewModels.Dialogs"
+        x:DataType="vm:ProceduresWindowViewModel" x:CompileBindings="True"
+        Icon="/Assets/books_infront.png"
+        Title="Procedures Window">
+    
+        <Grid RowDefinitions="Auto,*">
+                <WrapPanel Margin="10">
+                        <Button Margin="5" Command="{Binding UpdateRecordCommand}">Update</Button>
+                        <TextBlock HorizontalAlignment="Center" TextAlignment="Center" Text="Category: " Margin="10,15,10,10"></TextBlock>
+                        <TextBox TextAlignment="Center" Text="{Binding CurrentItem.Category}" Margin="10"></TextBox>
+                        <TextBlock HorizontalAlignment="Center" TextAlignment="Center" Text="Name: " Margin="10,15,10,10"></TextBlock>
+                        <TextBox TextAlignment="Center" Text="{Binding CurrentItem.Name}" Margin="10"></TextBox>
+                        <TextBlock HorizontalAlignment="Center" TextAlignment="Center" Text="Created: " Margin="10,15,10,10"></TextBlock>
+                        <TextBlock TextAlignment="Center" Text="{Binding CurrentItem.CreationDate}" Margin="10,15,10,10"></TextBlock>
+                        <TextBlock HorizontalAlignment="Center" TextAlignment="Center" Text="Last Update: " Margin="10,15,10,10"></TextBlock>
+                        <TextBlock TextAlignment="Center" Text="{Binding CurrentItem.LastUpdatedDate}" Margin="10,15,10,10"></TextBlock>
+                </WrapPanel>
+                <ScrollViewer Grid.Row="1">
+                        <TextBox Text="{Binding CurrentItem.Content}"
+                                 Margin="20"
+                                 FontSize="24"
+                                 Watermark="Enter the procedure text."
+                                 TextWrapping="WrapWithOverflow"
+                                 AcceptsReturn="True"
+                                 AcceptsTab="True"
+                        />
+                </ScrollViewer>
+        </Grid>
+        
+</Window>

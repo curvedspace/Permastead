@@ -138,6 +138,28 @@ public partial class FinderView : UserControl
                        
                        plantWindow.Show();
                        break;
+                    
+                    case "Procedures":
+                        var proceduresWindow = new ProceduresWindow();
+                        var procedure = ProceduresService.GetFromId(AppSession.ServiceMode, aRecord.Entity.Id);
+                        
+                        //var pvm = new ProceduresViewModel();
+                        var pwvm = new ProceduresWindowViewModel();
+                        pwvm.CurrentItem = procedure;
+                        
+                        proceduresWindow.DataContext = pwvm;
+                        
+                        proceduresWindow.Topmost = true;
+                        proceduresWindow.Width = 900;
+                        proceduresWindow.Height = 550;
+                        proceduresWindow.Opacity = 0.95;
+                        proceduresWindow.Title = "Procedure Item - " + procedure.Name;
+                        
+                        proceduresWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+                        
+                        proceduresWindow.Show();
+                        break;
+
                    
                     case "Observation":
                        var obs = ObservationsService.GetObservationById(AppSession.ServiceMode, aRecord.Entity.Id);

@@ -22,6 +22,22 @@ public class ProceduresService
         return sops;
     }
     
+    public static StandardOperatingProcedure GetFromId(ServiceMode mode, long Id)
+    {
+        var sop = new StandardOperatingProcedure();
+
+        if (mode == ServiceMode.Local)
+        {
+            sop = ProceduresRepository.GetFromId(DataConnection.GetLocalDataSource(), Id);
+        }
+        else
+        {
+            sop = DataAccess.Server.ProceduresRepository.GetFromId(DataConnection.GetServerConnectionString(), Id);
+        }
+
+        return sop;
+    }
+    
     public static bool CommitRecord(ServiceMode mode, StandardOperatingProcedure currentItem)
     {
         bool rtnValue = false;

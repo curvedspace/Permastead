@@ -64,6 +64,62 @@ public class ProceduresRepository
         }
     }
     
+    public static StandardOperatingProcedure GetFromId(string connectionString, long id)
+    {
+        StandardOperatingProcedure sop = null;
+
+        try
+        {
+
+            var sql = "SELECT p.Id, p.Category, p.Name, p.Content, p.AuthorId, p1.FirstName, p1.LastName, p.LastUpdated, p.CreationDate, p.EndDate " +
+                      "FROM Procedure p, Person p1 " +
+                      "WHERE p.AuthorId = p1.Id AND p.Id = @Id " +
+                      "ORDER BY p.Category, p.Name ASC";
+
+            using (IDbConnection connection = new SqliteConnection(connectionString))
+            {
+                connection.Open();
+
+                using (IDbCommand command = connection.CreateCommand())
+                {
+                    command.CommandText = sql;
+                    command.Parameters.Add(new SqliteParameter("@id", id));
+                    
+                    var dr = command.ExecuteReader();
+
+                    while (dr.Read())
+                    {
+                        sop = new StandardOperatingProcedure();
+                        
+                        sop.Id = Convert.ToInt64(dr[0].ToString());
+                        sop.Category = dr[1].ToString();
+                        sop.Name = dr[2].ToString();
+                        sop.Content = dr[3].ToString();
+                        
+                        sop.Author = new Person();
+                        sop.Author.Id = Convert.ToInt64(dr[4].ToString());
+                        sop.Author.FirstName = dr[5].ToString();
+                        sop.Author.LastName = dr[6].ToString();
+                        
+                        sop.LastUpdatedDate = Convert.ToDateTime(dr[7].ToString());
+                        sop.CreationDate = Convert.ToDateTime(dr[8].ToString());
+                        
+                        if (dr[9] != DBNull.Value)
+                            sop.EndDate = Convert.ToDateTime(dr[9].ToString());
+                        
+                    }
+                }
+            }
+
+            return sop;
+
+        }
+        catch (Exception)
+        {
+            return sop;
+        }
+    }
+    
     public static List<SearchResult> GetSearchResults(string connectionString, string searchText)
     {
         var results = new List<SearchResult>();
@@ -82,6 +138,7 @@ public class ProceduresRepository
             using (IDbCommand command = connection.CreateCommand())
             {
                 command.CommandText = sql;
+                
                 var dr = command.ExecuteReader();
 
                 while (dr.Read())
