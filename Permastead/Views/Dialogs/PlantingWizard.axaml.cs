@@ -65,7 +65,7 @@ public partial class PlantingWizard : Window
             }
         }
         
-        //now look at seed packet
+        //now look at seed packet, if it does not exist we should create it on the fly
         if (vm.CurrentPlanting.SeedPacket.Id == 0)
         {
             vm.CurrentPlanting.Plant = vm.CurrentPlant;
@@ -77,8 +77,15 @@ public partial class PlantingWizard : Window
             vm.CurrentPlanting.SeedPacket.Plant.Id = vm.CurrentPlant.Id;
             vm.CurrentPlanting.Comment = vm.CurrentPlanting.SeedPacket.Instructions;
             
+            //if the starter is not a seed packet, assume that it needs to be ended today
+            if (vm.CurrentPlanting.SeedPacket.StarterType.Code != "SEED")
+            {
+                vm.CurrentPlanting.SeedPacket.EndDate = DateTime.UtcNow;
+            }
+            
             Services.SeedPacketService.CommitRecord(AppSession.ServiceMode, vm.CurrentPlanting.SeedPacket);
             
+            //now retrieve the new record and assign it
             var seedPackets = Services.PlantingsService.GetSeedPackets(AppSession.ServiceMode);
             foreach (var seedPacket in seedPackets)
             {

@@ -1,7 +1,10 @@
 using System;
 using System.Collections.ObjectModel;
+
 using CommunityToolkit.Mvvm.ComponentModel;
+
 using Models;
+
 using Permastead.ViewModels.Views;
 
 namespace Permastead.ViewModels.Dialogs;
@@ -13,7 +16,6 @@ public partial class PlantingWizardViewModel : ViewModelBase
     
     [ObservableProperty] 
     private Planting? _currentPlanting;
-    
     
     [ObservableProperty]
     private ObservableCollection<Plant> _plants = new ObservableCollection<Plant>();
