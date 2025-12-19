@@ -40,7 +40,7 @@
                  TextWrapping="WrapWithOverflow"
                  Text="{Binding Person.Comment}" Margin="10,10,10,10"></TextBox>
 
-        <Image Grid.Row="7" Grid.Column="0"  Margin="10" Width="32" Height="32" Source="/Assets/outlook_new_meeting.png" />
+        <Image Grid.Row="7" Grid.Column="0"  Margin="10" Width="32" Height="32" Source="/Assets/contacts.png" />
 
         <StackPanel Grid.Row="7" Grid.Column="3" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,0,0">
             <CheckBox x:Name="OnSite" Margin="0,0,50,0" IsChecked="{Binding Person.OnSite}">Is Onsite</CheckBox>
