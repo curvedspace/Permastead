@@ -80,8 +80,8 @@
                 </StackPanel>
                 
                 <StackPanel Grid.Row="0" Grid.Column="1" HorizontalAlignment="Right" Orientation="Horizontal">
-                    <TextBlock Grid.Column="1"  Margin="5" TextAlignment="Center">Level Progress: </TextBlock>
-                    <ProgressBar Grid.Column="2" HorizontalAlignment="Left" ShowProgressText="True" Foreground="DodgerBlue" Background="Black" Width="200" Value="{Binding LevelProgress}"></ProgressBar>
+                    <TextBlock Margin="5" TextAlignment="Center">Level Progress: </TextBlock>
+                    <ProgressBar HorizontalAlignment="Left" ShowProgressText="True" Foreground="DodgerBlue" Background="Black" Width="200" Value="{Binding LevelProgress}"></ProgressBar>
                     <TextBlock Margin="5">User: </TextBlock>
                     <TextBlock Margin="5" Text="{Binding CurrentUser, Mode=TwoWay}"></TextBlock>
                     <Button Name="SettingsButton" ToolTip.Tip="Settings"  Command="{Binding OpenSettingsViewCommand}">

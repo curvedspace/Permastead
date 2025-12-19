@@ -58,7 +58,7 @@
           <TextBox Grid.Row="7" Grid.Column="1" Grid.ColumnSpan="3" 
                    Text="{Binding CurrentItem.Comment }" TextWrapping="Wrap" Margin="10,10,10,10"></TextBox>
           
-          <Image Grid.Row="8" Grid.Column="0"  Margin="10" Width="32" Height="32" Source="/Assets/basket.png" />
+          <Image Grid.Row="8" Grid.Column="0"  Margin="10" Width="32" Height="32" Source="/Assets/jar_empty.png" />
           
           <StackPanel Grid.Row="8" Grid.Column="3" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,0,0">
             <Button x:Name="SaveButton" Margin="10" Click="SaveButton_OnClick">Save</Button>
