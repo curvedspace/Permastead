@@ -63,7 +63,7 @@
                         <Image Width="16" Height="16" Source="/Assets/basket.png" />
                     </Button>
                     <Button Name="PreservationButton" ToolTip.Tip="Preservation " Margin="0,0,20,0" Command="{Binding OpenPreservationViewCommand}">
-                        <Image Width="16" Height="16" Source="/Assets/database_red.png" />
+                        <Image Width="16" Height="16" Source="/Assets/jar_empty.png" />
                     </Button>
                     
                     <Button Name="InventoryButton" ToolTip.Tip="Inventory " Margin="0,0,20,0" Command="{Binding OpenInventoryViewCommand}">
@@ -86,6 +86,9 @@
                     <TextBlock Margin="5" Text="{Binding CurrentUser, Mode=TwoWay}"></TextBlock>
                     <Button Name="SettingsButton" ToolTip.Tip="Settings"  Command="{Binding OpenSettingsViewCommand}">
                         <Image Width="16" Height="16" Source="/Assets/setting_tools.png" />
+                    </Button>
+                    <Button Name="DataButton" ToolTip.Tip="Data Administration"  Command="{Binding OpenDataViewCommand}">
+                        <Image Width="16" Height="16" Source="/Assets/database_blue.png" />
                     </Button>
                     <ToggleButton IsChecked="{Binding GaiaOpen}" Name="GaiaButton" ToolTip.Tip="Gaia AI Chatbot"  Command="{Binding OpenGaiaViewCommand} ">
                         <Image Width="16" Height="16" Source="/Assets/earth_night.png" />

@@ -45,7 +45,8 @@ namespace Permastead.ViewModels
             new InventoryViewModel(),
             new ContactsViewModel(),
             new WeatherViewModel(),
-            new SettingsViewModel()
+            new SettingsViewModel(),
+            new DataViewModel()
         };
         
         public decimal LevelProgress {get => _scoreBoard.LevelProgress *  100;}
@@ -122,6 +123,10 @@ namespace Permastead.ViewModels
         
         [RelayCommand]
         private void OpenSettingsView()  =>  SetupView(ToolbarViews.Settings);
+        
+        [RelayCommand]
+        private void OpenDataView()  =>  SetupView(ToolbarViews.Data);
+
        
         [RelayCommand]
         private void OpenGaiaView()
@@ -193,6 +198,7 @@ namespace Permastead.ViewModels
         People,
         Weather,
         Settings,
+        Data,
         Gaia
     }
 }

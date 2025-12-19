@@ -15,7 +15,7 @@
     <Grid ColumnDefinitions="*,Auto" RowDefinitions="Auto,*">
         <StackPanel>
             <WrapPanel>
-                <Image Margin="20" Width="24" Height="24" Source="/Assets/database_red.png" />
+                <Image Margin="20" Width="24" Height="24" Source="/Assets/jar_empty.png" />
                 <TextBlock FontWeight="Bold" Margin="20,26,20,20">Food Preservation</TextBlock>
                 <!-- <Separator MaxWidth="5"></Separator> -->
                 <Button Command="{Binding RefreshDataCommand}" x:Name="Refresh" HorizontalAlignment="Right" Margin="10,0">Refresh</Button> 
