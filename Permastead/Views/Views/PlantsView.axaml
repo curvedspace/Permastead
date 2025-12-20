@@ -208,7 +208,7 @@
     
                 <Grid ColumnDefinitions="*" RowDefinitions="Auto,Auto,Auto,*,Auto">
     
-        <StackPanel Grid.Row="1" VerticalAlignment="Top" HorizontalAlignment="Stretch">
+        <!-- <StackPanel Grid.Row="1" VerticalAlignment="Top" HorizontalAlignment="Stretch"> -->
             <Border Grid.Row="2" BorderBrush="{DynamicResource TextControlBorderBrush}"
                     BorderThickness="2"
                     CornerRadius="3"
@@ -275,7 +275,7 @@
                 </StackPanel>
             </Grid>
             </Border>
-        </StackPanel>
+        <!-- </StackPanel> -->
     
         <Grid Grid.Row="3" ColumnDefinitions="*,*" RowDefinitions="Auto,*,Auto"  Margin="0">
             
