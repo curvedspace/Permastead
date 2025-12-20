@@ -2,30 +2,166 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d" d:DesignWidth="1500" d:DesignHeight="750"
+             mc:Ignorable="d" d:DesignWidth="1600" d:DesignHeight="950"
              xmlns:u="https://irihi.tech/ursa"
              xmlns:models="using:Models"
              xmlns:vm="using:Permastead.ViewModels.Views"
              x:DataType="vm:PlantsViewModel"
+             x:CompileBindings="True"
              x:Class="Permastead.Views.Views.PlantsView">
     
-    <Grid ColumnDefinitions="*,Auto" RowDefinitions="Auto,*">
+    <!-- <Grid ColumnDefinitions="*" RowDefinitions="Auto,*"> -->
+    <!--     <WrapPanel>  -->
+    <!--     <Image Margin="20" Width="24" Height="24" Source="/Assets/plant.png" />  -->
+    <!--     <TextBlock FontWeight="Bold" Margin="20,24,20,20">Plants</TextBlock>  -->
+    <!--     <Button Command="{Binding RefreshDataCommand}" x:Name="Refresh" HorizontalAlignment="Right" Margin="10,0">Refresh</Button>   -->
+    <!--     <Button Tapped="Add_OnTapped" x:Name="Add" HorizontalAlignment="Right" IsEnabled="True" Margin="0,0">Add</Button>   -->
+    <!--     -->
+    <!--     <Label Margin="25,24,0,20">Search:</Label>  -->
+    <!--     <TextBox x:Name="SearchBox" Text="{Binding SearchText}" Watermark="Enter search text" Width="200" Margin="20,20,20,20"  -->
+    <!--     KeyDown="SearchBox_OnKeyDown" TextChanged="TextBox_OnTextChanged"></TextBox>  -->
+    <!--     <Button Command="{Binding ClearSearchCommand}" Margin="5,20,20,20">Clear</Button>  -->
+    <!-- -->
+    <!--     <TextBlock Name="PlantCount" Text="{Binding PlantsCount , StringFormat='{}{0} total'}" Margin="20,25,20,20"></TextBlock>  -->
+    <!--     </WrapPanel>  -->
+    <!--          -->
+    <!--     <Panel Grid.Row="1"> -->
+    <!--          -->
+    <!--             <SplitView IsPaneOpen="True" -->
+    <!--                    DisplayMode="Inline" -->
+    <!--                    OpenPaneLength="300"> -->
+    <!--             <SplitView.Pane> -->
+    <!--                 <ScrollViewer > -->
+    <!--                     <ListBox x:Name="PlantsList" Tapped="PlantsList_OnTapped" ItemsSource="{Binding Plants, Mode=TwoWay}"> -->
+    <!--                         <ListBox.ItemTemplate> -->
+    <!--                             <DataTemplate> -->
+    <!--                                 <Border CornerRadius="4"> -->
+    <!--                                     <TextBlock TextWrapping="Wrap" Text="{Binding Description}"></TextBlock> -->
+    <!--                                 </Border> -->
+    <!--                             </DataTemplate> -->
+    <!--                         </ListBox.ItemTemplate> -->
+    <!--          -->
+    <!--                         <ListBox.ContextMenu> -->
+    <!--                         <ContextMenu> -->
+    <!--          -->
+    <!--                             <MenuItem Command="{Binding AddStarterCommand}" Header="Add a Seed Pack..." IsEnabled="True"> -->
+    <!--                                 <MenuItem.Icon> -->
+    <!--                                     <PathIcon Data="{StaticResource add_square_regular}"/> -->
+    <!--                                 </MenuItem.Icon> -->
+    <!--                             </MenuItem> -->
+    <!--          -->
+    <!--                             <MenuItem Command="{Binding AddPlantingCommand}" Header="Create a Planting..." IsEnabled="True"> -->
+    <!--                                 <MenuItem.Icon> -->
+    <!--                                     <PathIcon Data="{StaticResource leaf_two_regular}"/> -->
+    <!--                                 </MenuItem.Icon> -->
+    <!--                             </MenuItem> -->
+    <!--          -->
+    <!--                             <Separator></Separator> -->
+    <!--          -->
+    <!--                             <MenuItem IsEnabled="true" Command="{Binding DeletePlantCommand}" Header="Remove Plant From List..."> -->
+    <!--                                 <MenuItem.Icon> -->
+    <!--                                     <PathIcon Data="{StaticResource delete_regular}"/> -->
+    <!--                                 </MenuItem.Icon> -->
+    <!--                             </MenuItem> -->
+    <!--          -->
+    <!--                         </ContextMenu> -->
+    <!--                         </ListBox.ContextMenu> -->
+    <!--          -->
+    <!--                     </ListBox> -->
+    <!--                 </ScrollViewer> -->
+    <!--             </SplitView.Pane> -->
+    <!--                  -->
+    <!--             <Panel> -->
+    <!--                  -->
+    <!--                 <Border BorderBrush="{DynamicResource TextControlBorderBrush}"  -->
+    <!--                         BorderThickness="2"  -->
+    <!--                         CornerRadius="3" -->
+    <!--                         Padding="10" Margin="10,0,10,0"> -->
+    <!--                      -->
+    <!--                     <Grid x:Name="PanelGrid" ColumnDefinitions="Auto,*" RowDefinitions="Auto,Auto"> -->
+    <!--                         <Grid Grid.Column="0" Grid.Row="0" x:Name="FieldsGrid" ColumnDefinitions="Auto,Auto,Auto,Auto" RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto"> -->
+    <!--                             <TextBlock Grid.Row="0" Grid.Column="0" Margin="20,25,20,20">ID:</TextBlock>  -->
+    <!--                             <TextBox Grid.Row="0" Grid.Column="1"  Width="100" Text="{Binding CurrentPlant.Id }" IsEnabled="False" Margin="20"></TextBox>  -->
+    <!--                             <Label Grid.Column="2" Grid.Row="0"  Margin="20,25,20,20" >Code:</Label>  -->
+    <!--                             <TextBox Grid.Column="3" Grid.Row="0" Width="200" Text="{Binding CurrentPlant.Code }" Margin="20"></TextBox>  -->
+    <!--                             <TextBlock Grid.Row="1" Grid.Column="0" Margin="20,30,20,20">Description:</TextBlock>  -->
+    <!--                             <TextBox Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3"  Text="{Binding CurrentPlant.Description }" Margin="20"></TextBox>  -->
+    <!--                             <Label Grid.Row="2" Grid.Column="0" Margin="20">Family: </Label> -->
+    <!--                            <TextBox Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3" Margin="20,20,20,20" Text="{Binding CurrentPlant.Family}"></TextBox> -->
+    <!--                      -->
+    <!--                            <Label Grid.Row="3" Grid.Column="0" Margin="20,25,20,20">Start Date:</Label> -->
+    <!--                            <CalendarDatePicker Grid.Row="3" Grid.Column="1" Name = "EndDate" Margin="20,20,20,20" SelectedDate="{Binding CurrentPlant.StartDate, Mode=TwoWay}"> -->
+    <!--                            </CalendarDatePicker> -->
+    <!--                      -->
+    <!--                            <Label Grid.Row="3" Grid.Column="2" Margin="20,25,20,20">End Date:</Label> -->
+    <!--                            <CalendarDatePicker Grid.Row="3" Grid.Column="3" Name = "LastTrigger" Margin="10" SelectedDate="{Binding CurrentPlant.EndDate, Mode=TwoWay}"> -->
+    <!--                            </CalendarDatePicker> -->
+    <!--                              -->
+    <!--                             ~1~ <u:MultiAutoCompleteBox Grid.Column="0" Grid.Row="4" ItemsSource="{Binding Items}" @1@ -->
+    <!--                             ~1~                         Margin="10" @1@ -->
+    <!--                             ~1~                         InnerLeftContent="Tags" @1@ -->
+    <!--                             ~1~                         SelectedItems="{Binding SelectedItems}" @1@ -->
+    <!--                             ~1~                         ItemFilter="{Binding FilterPredicate}" @1@ -->
+    <!--                             ~1~                         FilterMode="Custom"> @1@ -->
+    <!--                             ~1~     <u:MultiAutoCompleteBox.ItemTemplate> @1@ -->
+    <!--                             ~1~         <DataTemplate DataType="models:TagData"> @1@ -->
+    <!--                             ~1~             <StackPanel Orientation="Horizontal"> @1@ -->
+    <!--                             ~1~                 <TextBlock Text="{Binding TagText}" VerticalAlignment="Center"/> @1@ -->
+    <!--                             ~1~             </StackPanel> @1@ -->
+    <!--                             ~1~         </DataTemplate> @1@ -->
+    <!--                             ~1~     </u:MultiAutoCompleteBox.ItemTemplate> @1@ -->
+    <!--                             ~1~     <u:MultiAutoCompleteBox.SelectedItemTemplate> @1@ -->
+    <!--                             ~1~         <DataTemplate DataType="models:TagData"> @1@ -->
+    <!--                             ~1~             <TextBlock Text="{Binding TagText}" /> @1@ -->
+    <!--                             ~1~         </DataTemplate> @1@ -->
+    <!--                             ~1~     </u:MultiAutoCompleteBox.SelectedItemTemplate> @1@ -->
+    <!--                             ~1~ </u:MultiAutoCompleteBox> @1@ -->
+    <!--                              -->
+    <!--                             <Label Grid.Row="5" Grid.Column="0" Margin="20,20,20,5">Comment: </Label>  -->
+    <!--                             ~1~ <TextBox Grid.Row="6" Grid.Column="1" Grid.ColumnSpan="1" Margin="20" @1@ -->
+    <!--                             ~1~          AcceptsReturn="True"  @1@ -->
+    <!--                             ~1~          TextWrapping="Wrap" @1@ -->
+    <!--                             ~1~          Height="200" @1@ -->
+    <!--                             ~1~          Text="{Binding CurrentPlant.Comment}"> @1@ -->
+    <!--                             ~1~ </TextBox> @1@ -->
+    <!--                              -->
+    <!--                             -->
+    <!--                              -->
+    <!--                         </Grid> -->
+    <!--                        <Border Grid.Column="1" Grid.Row="0" -->
+    <!--                            BorderBrush="{DynamicResource TextControlBorderBrush}"  -->
+    <!--                            BorderThickness="2"  -->
+    <!--                            CornerRadius="3" -->
+    <!--                            Padding="10" Margin="10,0,10,0"> -->
+    <!--                            </Border> -->
+    <!--                     </Grid> -->
+    <!--                      -->
+    <!--                 </Border> -->
+    <!--                  -->
+    <!--             </Panel> -->
+    <!--         </SplitView> -->
+    <!--     </Panel> -->
+    <!-- </Grid> -->
+    
+        
+    <Grid ColumnDefinitions="*" RowDefinitions="Auto,*">
         <WrapPanel>
             <Image Margin="20" Width="24" Height="24" Source="/Assets/plant.png" />
             <TextBlock FontWeight="Bold" Margin="20,24,20,20">Plants</TextBlock>
-            <Button Command="{Binding RefreshDataCommand}" x:Name="Refresh" HorizontalAlignment="Right" Margin="10,0">Refresh</Button> 
-            <Button Tapped="Add_OnTapped" x:Name="Add" HorizontalAlignment="Right" IsEnabled="True" Margin="0,0">Add</Button> 
-            
+            <Button Command="{Binding RefreshDataCommand}" x:Name="Refresh" HorizontalAlignment="Right" Margin="10,0">Refresh</Button>
+            <Button Tapped="Add_OnTapped" x:Name="Add" HorizontalAlignment="Right" IsEnabled="True" Margin="0,0">Add</Button>
+    
             <Label Margin="25,24,0,20">Search:</Label>
-            <TextBox x:Name="SearchBox" Text="{Binding SearchText}" Watermark="Enter search text" Width="200" Margin="20,20,20,20" 
+            <TextBox x:Name="SearchBox" Text="{Binding SearchText}" Watermark="Enter search text" Width="200" Margin="20,20,20,20"
                      KeyDown="SearchBox_OnKeyDown" TextChanged="TextBox_OnTextChanged"></TextBox>
             <Button Command="{Binding ClearSearchCommand}" Margin="5,20,20,20">Clear</Button>
-            
+    
             <TextBlock Name="PlantCount" Text="{Binding PlantsCount , StringFormat='{}{0} total'}" Margin="20,24,20,20"></TextBlock>
         </WrapPanel>
-        
+    
+        <!-- Panel for the view -->
         <Panel Grid.Column="0" Grid.Row="1">
-            
+    
             <SplitView IsPaneOpen="True"
                        DisplayMode="Inline"
                        OpenPaneLength="300">
@@ -39,108 +175,113 @@
                                     </Border>
                                 </DataTemplate>
                             </ListBox.ItemTemplate>
-                            
+    
                             <ListBox.ContextMenu>
                             <ContextMenu>
-                            
+    
                                 <MenuItem Command="{Binding AddStarterCommand}" Header="Add a Seed Pack..." IsEnabled="True">
                                     <MenuItem.Icon>
                                         <PathIcon Data="{StaticResource add_square_regular}"/>
                                     </MenuItem.Icon>
                                 </MenuItem>
-                                
+    
                                 <MenuItem Command="{Binding AddPlantingCommand}" Header="Create a Planting..." IsEnabled="True">
                                     <MenuItem.Icon>
                                         <PathIcon Data="{StaticResource leaf_two_regular}"/>
                                     </MenuItem.Icon>
                                 </MenuItem>
-                            
+    
                                 <Separator></Separator>
-                                
+    
                                 <MenuItem IsEnabled="true" Command="{Binding DeletePlantCommand}" Header="Remove Plant From List...">
                                     <MenuItem.Icon>
                                         <PathIcon Data="{StaticResource delete_regular}"/>
                                     </MenuItem.Icon>
                                 </MenuItem>
-                                
+    
                             </ContextMenu>
                             </ListBox.ContextMenu>
-                            
+    
                         </ListBox>
                     </ScrollViewer>
                 </SplitView.Pane>
-        
-                <Grid Focusable="True" RowDefinitions="Auto,Auto,Auto,*,Auto">
-        
+    
+                <Grid ColumnDefinitions="*" RowDefinitions="Auto,Auto,Auto,*,Auto">
+    
         <StackPanel Grid.Row="1" VerticalAlignment="Top" HorizontalAlignment="Stretch">
             <Border Grid.Row="2" BorderBrush="{DynamicResource TextControlBorderBrush}"
                     BorderThickness="2"
                     CornerRadius="3"
-                    Padding="10" Margin="20">
-            <Grid ColumnDefinitions="Auto,Auto,Auto,Auto,Auto,*" RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,*"  Margin="10">
+                    Padding="10" Margin="10,0,10,10">
+            <Grid ColumnDefinitions="Auto,Auto,Auto,Auto,Auto,*" RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto"  Margin="20">
                 <TextBlock Grid.Row="0" Grid.Column="0" Margin="20">ID:</TextBlock>
                 <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding CurrentPlant.Id }" IsEnabled="False" Margin="20"></TextBox>
                 <Label Grid.Row="0" Margin="20" Grid.Column="2">Code:</Label>
-                
                 <TextBox Grid.Row="0" Grid.Column="3" Text="{Binding CurrentPlant.Code }" Margin="20"></TextBox>
-                <TextBlock Grid.Row="1" Grid.Column="0" Margin="20,20,20,20">Description:</TextBlock>
+                <TextBlock Grid.Row="1" Grid.Column="0" Margin="20,30,20,20">Description:</TextBlock>
                 <TextBox Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3"  Text="{Binding CurrentPlant.Description }" Margin="20"></TextBox>
-        
+    
                 <Label Grid.Row="2" Grid.Column="0" Margin="20">Family: </Label>
                 <TextBox Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3" Margin="20,20,20,20" Text="{Binding CurrentPlant.Family}"></TextBox>
-        
-                <Label Grid.Row="3" Grid.Column="0" Margin="20">Start Date:</Label>
+    
+                <Label Grid.Row="3" Grid.Column="0" Margin="20,40,20,20">Start Date:</Label>
                 <CalendarDatePicker Grid.Row="3" Grid.Column="1" Name = "EndDate" Margin="20,20,20,20" SelectedDate="{Binding CurrentPlant.StartDate, Mode=TwoWay}">
                 </CalendarDatePicker>
-        
-                <Label Grid.Row="3" Grid.Column="2" Margin="20">End Date:</Label>
+    
+                <Label Grid.Row="3" Grid.Column="2" Margin="20,40,20,20">End Date:</Label>
                 <CalendarDatePicker Grid.Row="3" Grid.Column="3" Name = "LastTrigger" Margin="10" SelectedDate="{Binding CurrentPlant.EndDate, Mode=TwoWay}">
                 </CalendarDatePicker>
-                
+    
                 <Panel Grid.Row="0" Grid.RowSpan="4" Grid.Column="4" >
-                    
+    
                     <Rectangle Height="300" Width="400" Margin="0"/>
-                    <Image Source="{Binding Picture}"  Stretch="Uniform">
+                    <Image x:Name="PlantImage" Source="{Binding Picture}" Stretch="Uniform">
                         <Image.ContextFlyout>
                             <MenuFlyout>
                                 <MenuItem Header="Add Image" Click="MenuItemAddImage_OnClick"/>
                                 <MenuItem Header="-"/>
-                                <MenuItem Header="Remove Image" Click="MenuItemRemoveImage_OnClick"/>   
+                                <MenuItem Header="Remove Image" Click="MenuItemRemoveImage_OnClick"/>
                             </MenuFlyout>
                         </Image.ContextFlyout>
                     </Image>
+    
                 </Panel>
-                
-                <u:MultiAutoCompleteBox Grid.Column="5" Grid.Row="0" ItemsSource="{Binding Items}" 
-                                        Margin="20"
-                                        InnerLeftContent="Tags"
-                                        SelectedItems="{Binding SelectedItems}"
-                                        ItemFilter="{Binding FilterPredicate}"
-                                        FilterMode="Custom">
-                    <u:MultiAutoCompleteBox.ItemTemplate>
-                        <DataTemplate DataType="models:TagData">
-                            <StackPanel Orientation="Horizontal">
-                                <TextBlock Text="{Binding TagText}" VerticalAlignment="Center"/>
-                            </StackPanel>
-                        </DataTemplate>
-                    </u:MultiAutoCompleteBox.ItemTemplate>
-                    <u:MultiAutoCompleteBox.SelectedItemTemplate>
-                        <DataTemplate DataType="models:TagData">
-                            <TextBlock Text="{Binding TagText}" />
-                        </DataTemplate>
-                    </u:MultiAutoCompleteBox.SelectedItemTemplate>
-                </u:MultiAutoCompleteBox>
-                
-                <Label Grid.Row="1" Grid.Column="5" Margin="20,3,20,5">Comment: </Label>
-                <TextBox Grid.Row="2" Grid.Column="5" Grid.ColumnSpan="1" Grid.RowSpan="2" Margin="20" 
-                         AcceptsReturn="True" TextWrapping="Wrap" Height="200" 
+    
+                <!-- <u:MultiAutoCompleteBox Grid.Column="5" Grid.Row="0" ItemsSource="{Binding Items}" -->
+                <!--                         Margin="20" -->
+                <!--                         InnerLeftContent="Tags" -->
+                <!--                         SelectedItems="{Binding SelectedItems}" -->
+                <!--                         ItemFilter="{Binding FilterPredicate}" -->
+                <!--                         FilterMode="Custom"> -->
+                <!--     <u:MultiAutoCompleteBox.ItemTemplate> -->
+                <!--         <DataTemplate DataType="models:TagData"> -->
+                <!--             <StackPanel Orientation="Horizontal"> -->
+                <!--                 <TextBlock Text="{Binding TagText}" VerticalAlignment="Center"/> -->
+                <!--             </StackPanel> -->
+                <!--         </DataTemplate> -->
+                <!--     </u:MultiAutoCompleteBox.ItemTemplate> -->
+                <!--     <u:MultiAutoCompleteBox.SelectedItemTemplate> -->
+                <!--         <DataTemplate DataType="models:TagData"> -->
+                <!--             <TextBlock Text="{Binding TagText}" /> -->
+                <!--         </DataTemplate> -->
+                <!--     </u:MultiAutoCompleteBox.SelectedItemTemplate> -->
+                <!-- </u:MultiAutoCompleteBox> -->
+    
+                <Label Grid.Row="0" Grid.Column="5" Margin="20,3,20,5">Comment: </Label>
+                <TextBox Grid.Row="1" Grid.Column="5" Grid.ColumnSpan="1" Grid.RowSpan="3" Margin="20"
+                         AcceptsReturn="True" TextWrapping="Wrap" Height="200"
                          Text="{Binding CurrentPlant.Comment}"></TextBox>
-                
+    
             </Grid>
             </Border>
         </StackPanel>
-            
+    
         <Grid Grid.Row="3" ColumnDefinitions="*,*" RowDefinitions="Auto,*,Auto"  Margin="0">
+            
+            <!-- <TextBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="1" Margin="20" -->
+            <!--          AcceptsReturn="True" TextWrapping="Wrap"  -->
+            <!--          Text="{Binding CurrentPlant.Comment}"></TextBox> -->
+            
             <Border Grid.Column="0" Grid.Row="1"  BorderBrush="{DynamicResource TextControlBorderBrush}"
                     BorderThickness="2"
                     CornerRadius="3"
@@ -167,7 +308,7 @@
                         </ItemsControl>
                     </StackPanel>
                 </ScrollViewer>
-                
+            
             </Border>
             <Border Grid.Column="1" Grid.Row="1" BorderBrush="{DynamicResource TextControlBorderBrush}"
                     BorderThickness="2"
@@ -188,7 +329,7 @@
                                             <TextBlock Text="{Binding Code}"/>
                                             <TextBlock Margin="5 0" Text="{Binding Description }"/>
                                             <TextBlock Text="{Binding StartDate,StringFormat='yyyy-MM-dd'}"/>
-                                            <TextBlock Foreground="{Binding Colour}" Margin="5 0" 
+                                            <TextBlock Foreground="{Binding Colour}" Margin="5 0"
                                                        Text="{Binding State.Description }"/>
                                         </StackPanel>
                                     </Border>
@@ -199,18 +340,39 @@
                 </ScrollViewer>
             </Border>
         </Grid>
-        
+    
+        <Grid Grid.Row="4" ColumnDefinitions="Auto,*,Auto">
         <Image Grid.Row="4" Grid.Column="0" HorizontalAlignment="Left" Margin="20" Width="32" Height="32" Source="/Assets/plant.png" />
+    
+        <u:MultiAutoCompleteBox Grid.Column="1" Grid.Row="4" ItemsSource="{Binding Items}"
+                                Margin="20"
+                                InnerLeftContent="Tags"
+                                SelectedItems="{Binding SelectedItems}"
+                                ItemFilter="{Binding FilterPredicate}"
+                                FilterMode="Custom">
+            <u:MultiAutoCompleteBox.ItemTemplate>
+                <DataTemplate DataType="models:TagData">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding TagText}" VerticalAlignment="Center"/>
+                    </StackPanel>
+                </DataTemplate>
+            </u:MultiAutoCompleteBox.ItemTemplate>
+            <u:MultiAutoCompleteBox.SelectedItemTemplate>
+                <DataTemplate DataType="models:TagData">
+                    <TextBlock Text="{Binding TagText}" />
+                </DataTemplate>
+            </u:MultiAutoCompleteBox.SelectedItemTemplate>
+        </u:MultiAutoCompleteBox>
         
-        <StackPanel Grid.Row="4" Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,10,0">
+        <StackPanel Grid.Row="0" Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,10,0">
             <Button Name="SaveButton" Margin="10" Click="SaveButton_OnClick" >Save</Button>
             <!-- <Button Name="CancelButton" Margin="10" Click="CancelButton_OnClick">Cancel</Button> -->
         </StackPanel>
+        </Grid>
     
-      </Grid>
-                
+        </Grid>
             </SplitView>
         </Panel>
-        
     </Grid>
+    
 </UserControl>
