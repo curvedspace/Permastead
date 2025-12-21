@@ -86,6 +86,21 @@
                 </MenuItem>
                                       
                 <Separator></Separator>
+                
+                <MenuItem Command="{Binding EditPlantingCommand}" IsEnabled="False" Header="Propagate...">
+                  <MenuItem.Icon>
+                    <PathIcon Data="{StaticResource leaf_two_regular}"/>
+                  </MenuItem.Icon>
+                </MenuItem>
+                
+                <MenuItem Command="{Binding EditPlantingCommand}" IsEnabled="False" Header="Save Seeds...">
+                  <MenuItem.Icon>
+                    <PathIcon Data="{StaticResource arrow_sync_circle_regular}"/>
+                  </MenuItem.Icon>
+                </MenuItem>
+                
+                <Separator></Separator>
+                
                 <MenuItem Command="{Binding CreateHarvestCommand}" Header="Create a Harvest...">
                   <MenuItem.Icon>
                     <PathIcon Data="{StaticResource scales_regular}"/>

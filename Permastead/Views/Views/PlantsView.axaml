@@ -156,7 +156,7 @@
                      KeyDown="SearchBox_OnKeyDown" TextChanged="TextBox_OnTextChanged"></TextBox>
             <Button Command="{Binding ClearSearchCommand}" Margin="5,20,20,20">Clear</Button>
     
-            <TextBlock Name="PlantCount" Text="{Binding PlantsCount , StringFormat='{}{0} total'}" Margin="20,24,20,20"></TextBlock>
+            <TextBlock Name="PlantCount" Text="{Binding PlantsCount , StringFormat='{}{0} total'}" Margin="20,30,20,20"></TextBlock>
         </WrapPanel>
     
         <!-- Panel for the view -->
