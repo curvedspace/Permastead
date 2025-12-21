@@ -39,7 +39,7 @@
       <ToggleButton x:Name="ShowObservations" IsChecked="{Binding ShowObservations}" HorizontalAlignment="Right" Margin="20,0">Show Observations</ToggleButton> 
       
       <CheckBox Name="CurrentOnly" Command="{Binding RefreshDataOnlyCommand}" IsChecked="{Binding CurrentOnly, Mode=TwoWay}" Margin="20,0,0,0">Current Only</CheckBox>
-      <TextBlock Name="PlantingCount" Text="{Binding PlantingCount , StringFormat='{}{0} total'}" Margin="20,24,20,20"></TextBlock>
+      <TextBlock Name="PlantingCount" Text="{Binding PlantingCount , StringFormat='{}{0} total'}" Margin="20,28,20,20"></TextBlock>
     </WrapPanel>
      
     <Panel Grid.Row="1">
