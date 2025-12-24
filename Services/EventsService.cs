@@ -110,7 +110,7 @@ public class EventsService
             var startDt = new DateTime(DateTime.Today.Year, x.EventStartDate.Month, x.EventStartDate.Day);
             var endDt = new DateTime(DateTime.Today.Year, x.EventEndDate.Month, x.EventEndDate.Day);
 
-            if (startDt <= DateTime.Today && endDt >= DateTime.Today)
+            if ((startDt <= DateTime.Today && endDt >= DateTime.Today) || startDt == DateTime.Today)
             {
                 myReturn.Add(x);
             }
