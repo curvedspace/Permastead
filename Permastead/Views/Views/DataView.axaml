@@ -7,4 +7,42 @@
              x:Class="Permastead.Views.Views.DataView"
              x:DataType="vm:DataViewModel">
     
+    <!--This is design time only-->
+    <Design.DataContext>
+        <vm:DataViewModel/>
+    </Design.DataContext>
+    
+    <Grid ColumnDefinitions="*,Auto" RowDefinitions="Auto,*">
+        <StackPanel>
+            <WrapPanel>
+                <Image Margin="20" Width="24" Height="24" Source="/Assets/database_blue.png" />
+                <TextBlock FontWeight="Bold" Margin="20,26,20,20">Data Administration</TextBlock>
+                <!-- <Separator MaxWidth="5"></Separator> -->
+                <Button Command="{Binding RefreshDataCommand}" x:Name="Refresh" HorizontalAlignment="Right" Margin="10,0">Refresh</Button> 
+               
+            </WrapPanel>
+        </StackPanel>
+        
+        <Panel Grid.Column="0" Grid.Row="1">
+        <SplitView IsPaneOpen="True"
+                       DisplayMode="Inline"
+                       OpenPaneLength="300">
+                <SplitView.Pane>
+                    <ScrollViewer >
+                        <ListBox x:Name="PlantsList">
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <Border CornerRadius="4">
+                                        <TextBlock TextWrapping="Wrap" Text="Tables"></TextBlock>
+                                    </Border>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+    
+                        </ListBox>
+                    </ScrollViewer>
+                </SplitView.Pane>
+        </SplitView>
+        </Panel>
+    </Grid>
+    
 </UserControl>
