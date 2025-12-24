@@ -1154,7 +1154,37 @@ namespace DataAccess.Local
             
             #region Plants
             
-            var p = new Plant { Author = new Person(1), Code = "UNK", Description = "Unknown" };
+            var p = new Plant { Author = new Person(1), Code = "AGRIM", Description = "Agrimony", Family = "Rosaceae", Tags = "herb astringent bitter diuretic hepatic vulnerary anti-inflammatory",  Comment = "Agrimony herb, scientifically known as Agrimonia eupatoria, is a perennial herbaceous plant belonging to the Rosaceae family. It is native to temperate regions of the Northern Hemisphere and is used for its medicinal properties. Agrimony is traditionally used for conditions affecting the digestive system and liver, as well as for mucosal health and skin issues."};
+            PlantRepository.Insert(p);
+            
+            p = new Plant { Author = new Person(1), Code = "ALDER", Description = "Alder", Family = "Betuloideae", Tags = "herb bitter tree nitrogen-fixer",  Comment = "Alders are trees of the genus Alnus in the birch family Betulaceae. The genus includes about 35 species of monoecious trees and shrubs, a few reaching a large size, distributed throughout the north temperate zone with a few species extending into Central America, as well as the northern and southern Andes. "};
+            PlantRepository.Insert(p);
+            
+            p = new Plant { Author = new Person(1), Code = "ALLHEAL", Description = "Allheal", Family = "Lamiaceae", Tags = "herb",  Comment = "Prunella vulgaris, the common self-heal, heal-all, woundwort, heart-of-the-earth, carpenter's herb, brownwort or blue curls, is a herbaceous plant in the mint family Lamiaceae. Prunella vulgaris is edible. The young leaves and stems can be eaten raw in salads; the plant as a whole can be boiled and eaten as a leaf vegetable; and the aerial parts of the plant can be powdered and brewed in a cold infusion to make a beverage. "};
+            PlantRepository.Insert(p);
+            
+            p = new Plant { Author = new Person(1), Code = "ALMOND", Description = "Almond", Family = "Rosaceae", Tags = "herb",  Comment = "The almond (Prunus amygdalus, syn. Prunus dulcis) is a species of tree from the genus Prunus. Along with the peach, it is classified in the subgenus Amygdalus, distinguished from the other subgenera by corrugations on the shell (endocarp) surrounding the seed. "};
+            PlantRepository.Insert(p);
+            
+            p = new Plant { Author = new Person(1), Code = "ALOEV", Description = "Aloe Vera", Family = "Asphodelaceae", Tags = "herb",  Comment = "Aloe vera is a succulent plant species of the genus Aloe. It is widely distributed, and is considered an invasive species in many world regions. An evergreen perennial, it originates from the Arabian Peninsula, but also grows wild in tropical, semi-tropical, and arid climates around the world. It is cultivated for commercial products, mainly as a topical treatment used over centuries. "};
+            PlantRepository.Insert(p);
+            
+            p = new Plant { Author = new Person(1), Code = "ANGELICA", Description = "Angelica", Family = "Apiaceae", Tags = "herb",  Comment = "Angelica archangelica, commonly known as angelica, garden angelica, wild celery, and Norwegian angelica, is a biennial plant from the family Apiaceae, a subspecies of which is cultivated for its sweetly scented edible stems and roots. "};
+            PlantRepository.Insert(p);
+            
+            p = new Plant { Author = new Person(1), Code = "ANISEHYS", Description = "Anise Hyssop", Family = "Lamiaceae", Tags = "herb pollinator",  Comment = "Anise hyssop, Agastache foeniculum, is a short-lived herbaceous perennial with blue flowers and fragrant foliage that can be used as an ornamental or in the herb garden. "};
+            PlantRepository.Insert(p);
+            
+            p = new Plant { Author = new Person(1), Code = "APPLE", Description = "Apple Tree", Family = "Rosaceae", Tags = "tree",  Comment = "An apple is a round, edible fruit produced by an apple tree (Malus spp., among them the domestic or orchard apple; Malus domestica). Apple trees are cultivated worldwide and are the most widely grown species in the genus Malus. "};
+            PlantRepository.Insert(p);
+            
+            p = new Plant { Author = new Person(1), Code = "ARNICA", Description = "Arnica", Family = "Asteraceae", Tags = "herb",  Comment = "Arnica is a genus of perennial, herbaceous plants in the sunflower family (Asteraceae). The genus name Arnica may be derived from the Greek arni, \"lamb\", in reference to the plants' soft, hairy leaves."};
+            PlantRepository.Insert(p);
+            
+            p = new Plant { Author = new Person(1), Code = "ARUGULA", Description = "Arugula" };
+            PlantRepository.Insert(p);
+            
+            p = new Plant { Author = new Person(1), Code = "UNK", Description = "Unknown" };
             PlantRepository.Insert(p);
 
             p = new Plant { Author = new Person(1), Code = "PEPPER", Description = "Pepper", Family = "Solanaceae", Comment = "The terms bell pepper (US, Canada, Philippines), pepper or sweet pepper (UK, Ireland, Canada, South Africa, Zimbabwe), and capsicum (Australia, Bangladesh, India, Malaysia, New Zealand, Pakistan and Sri Lanka) are often used for any of the large bell-shaped peppers, regardless of their color. The fruit is simply referred to as a \"pepper\", or additionally by color (\"green pepper\" or red, yellow, orange, purple, brown, black)."};
@@ -1188,9 +1218,6 @@ namespace DataAccess.Local
             PlantRepository.Insert(p);
 
             p = new Plant { Author = new Person(1), Code = "CHIVE", Description = "Chives" };
-            PlantRepository.Insert(p);
-
-            p = new Plant { Author = new Person(1), Code = "ARUGULA", Description = "Arugula" };
             PlantRepository.Insert(p);
 
             p = new Plant { Author = new Person(1), Code = "YARROW", Description = "Yarrow", Tags = "herb bitter"};
@@ -1516,7 +1543,9 @@ namespace DataAccess.Local
             
             #endregion
 
-            #region "Events"
+            #region Events
+            
+            // adding in Celtic moons as holidays, obviously these can be replaced with another system should someone want
 
             var startDate = new DateTime(DateTime.Today.Year, 11, 24);
             var year = startDate >= DateTime.Today ? startDate.Year - 1 : startDate.Year;
