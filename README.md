@@ -3,7 +3,7 @@ Local-first desktop software for managing a homestead using permaculture design.
 
 - Observations - these allow you to journal your observations on your property over time.
 - Actions - this is essentially a TODO list that helps keep track of what needs to be done.
-- Events - events are cycilical and can either be informational, or trigger TODOs in your Actions view.
+- Events - events are cyclical and can either be informational, or trigger TODOs in your Actions view.
 - Procedures - stores documentation on procedures for the homestead, various chores, equipment maintenance, recipes, etc.
 - Inventory - this tracks what you have available on the homestead and where it is located
 - People - a list of contacts and their info.
