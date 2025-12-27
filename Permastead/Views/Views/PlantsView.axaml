@@ -350,7 +350,7 @@
         <Grid Grid.Row="4" ColumnDefinitions="Auto,*,Auto">
         <Image Grid.Row="4" Grid.Column="0" HorizontalAlignment="Left" Margin="20" Width="32" Height="32" Source="/Assets/plant.png" />
     
-        <u:MultiAutoCompleteBox Grid.Column="1" Grid.Row="4" ItemsSource="{Binding Items}"
+        <u:MultiAutoCompleteBox ToolTip.Tip = "Allows you to tag a plant with different characteristics." Grid.Column="1" Grid.Row="4" ItemsSource="{Binding Items}"
                                 Margin="20"
                                 InnerLeftContent="Tags"
                                 SelectedItems="{Binding SelectedItems}"
