@@ -48,7 +48,7 @@
                                   
                   <Separator></Separator>
                   
-                  <MenuItem Command="{Binding DeleteToDoCommand}" Header="Remove Item">
+                  <MenuItem Command="{Binding DeleteToDoCommand}" Header="Remove Item...">
                       <MenuItem.Icon>
                           <PathIcon Data="{StaticResource delete_regular}"/>
                       </MenuItem.Icon>

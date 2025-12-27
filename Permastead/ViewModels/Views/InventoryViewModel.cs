@@ -1,14 +1,19 @@
 using System;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Threading.Tasks;
+using System.Windows.Input;
 using Avalonia.Controls;
 using Avalonia.Controls.Models.TreeDataGrid;
 using Avalonia.Media;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Models;
+using Permastead.ViewModels.Dialogs;
+using Permastead.Views.Dialogs;
 using Serilog;
 using Services;
+using Ursa.Controls;
 
 namespace Permastead.ViewModels.Views;
 public partial class InventoryViewModel: ViewModelBase
@@ -46,6 +51,30 @@ public partial class InventoryViewModel: ViewModelBase
     private ObservableCollection<InventoryObservation> _inventoryObservations = new ObservableCollection<InventoryObservation>();
     
     public FlatTreeDataGridSource<Inventory> InventorySource { get; set; }
+    
+    //message box data
+    private readonly string _shortMessage = "Are you sure you want to delete this inventory item?";
+    private string _message;
+    private string? _title = "Deletion Confirmation";
+    
+    public ObservableCollection<MessageBoxIcon> Icons { get; set; }
+    
+    private MessageBoxIcon _selectedIcon;
+    public MessageBoxIcon SelectedIcon
+    {
+        get => _selectedIcon;
+        set => SetProperty(ref _selectedIcon, value);
+    }
+
+    private MessageBoxResult _result;
+    public MessageBoxResult Result
+    {
+        get => _result;
+        set => SetProperty(ref _result, value);
+    }
+    
+    public ICommand YesNoCommand { get; set; }
+
 
     public void GetInventoryObservations()
     {
@@ -122,6 +151,14 @@ public partial class InventoryViewModel: ViewModelBase
             if (_inventory.Count > 0) CurrentItem = Inventory.FirstOrDefault();
             
             GetInventoryObservations();
+            
+            YesNoCommand = new AsyncRelayCommand(OnYesNoAsync);
+            
+            Icons = new ObservableCollection<MessageBoxIcon>(
+                Enum.GetValues<MessageBoxIcon>());
+            SelectedIcon = MessageBoxIcon.Question;
+            _message = _shortMessage;
+
         }
         catch (Exception ex)
         {
@@ -159,6 +196,54 @@ public partial class InventoryViewModel: ViewModelBase
             Console.WriteLine(e);
         }
         
+    }
+
+    [RelayCommand]
+    private void EditInventory()
+    {
+        // open the selected planting in a window for viewing/editing
+        var inventoryWindow = new InventoryWindow();
+
+        var inventory = CurrentItem;
+        if (inventory != null)
+        {
+            //get underlying view's viewmodel
+            var vm = new InventoryWindowViewModel(inventory, this);
+            
+            inventoryWindow.DataContext = vm;
+        
+            inventoryWindow.Topmost = true;
+            inventoryWindow.Width = 900;
+            inventoryWindow.Height = 550;
+            inventoryWindow.Opacity = 0.95;
+            inventoryWindow.Title = "Inventory Item - " + inventory.Description;
+        }
+
+        inventoryWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+           
+        inventoryWindow.Show();
+    }
+    
+    [RelayCommand]
+    private async void DeleteInventory()
+    {
+        try
+        {
+            if (CurrentItem != null)
+            {
+                await OnYesNoAsync();
+
+                if (Result == MessageBoxResult.Yes)
+                {
+                    //remove the record
+                    InventoryService.DeleteRecord(AppSession.ServiceMode, CurrentItem);
+                    RefreshInventory();
+                }
+            }
+        }
+        catch (Exception e)
+        {
+        }
     }
 
     public void RefreshData(string filterText = "")
@@ -261,5 +346,15 @@ public partial class InventoryViewModel: ViewModelBase
         };
         
         InventoryCount = _inventory.Count;
+    }
+    
+    private async Task OnYesNoAsync()
+    {
+        await Show(MessageBoxButton.YesNo);
+    }
+    
+    private async Task Show(MessageBoxButton button)
+    {
+        Result = await MessageBox.ShowAsync(_message, _title, icon: SelectedIcon, button:button);
     }
 }

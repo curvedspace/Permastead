@@ -187,6 +187,28 @@ public class InventoryService
         
     }
     
+    public static bool DeleteRecord(ServiceMode mode, Inventory? inventory)
+    {
+        bool rtnValue = false;
+        
+        if (inventory != null)
+        {
+            if (inventory.Id > 0)
+            {
+                if (mode == ServiceMode.Local)
+                {
+                    rtnValue = InventoryRepository.Delete(inventory);
+                }
+                else
+                {
+                    rtnValue = DataAccess.Server.InventoryRepository.Delete(inventory);
+                }
+            }
+        }
+
+        return rtnValue;
+    }
+    
     public static List<InventoryObservation> GetObservationsForInventoryItem(ServiceMode mode, long id)
     {
         var obs = new List<InventoryObservation>();
@@ -244,4 +266,5 @@ public class InventoryService
 
         return rtnValue;
     }
+    
 }
