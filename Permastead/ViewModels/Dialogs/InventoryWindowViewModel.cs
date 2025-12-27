@@ -7,6 +7,7 @@ using Permastead.ViewModels.Views;
 using Permastead.Views.Dialogs;
 using Serilog;
 using Serilog.Context;
+using Ursa.Controls;
 
 namespace Permastead.ViewModels.Dialogs;
 
@@ -75,6 +76,7 @@ public partial class InventoryWindowViewModel: ViewModelBase
         }
         
         ControlViewModel.RefreshData();
+        ControlViewModel.ToastManager?.Show(new Toast("Inventory has been updated."));
         
     }
     

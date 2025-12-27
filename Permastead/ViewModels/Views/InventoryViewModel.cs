@@ -75,7 +75,8 @@ public partial class InventoryViewModel: ViewModelBase
     
     public ICommand YesNoCommand { get; set; }
 
-
+    public WindowToastManager? ToastManager { get; set; }
+    
     public void GetInventoryObservations()
     {
         if (CurrentItem != null)
@@ -238,6 +239,7 @@ public partial class InventoryViewModel: ViewModelBase
                     //remove the record
                     InventoryService.DeleteRecord(AppSession.ServiceMode, CurrentItem);
                     RefreshInventory();
+                    ToastManager?.Show(new Toast("Inventory record has been removed."));
                 }
             }
         }
