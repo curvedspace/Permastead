@@ -16,7 +16,7 @@
     <Grid RowDefinitions="Auto,Auto,Auto,Auto,*,Auto,Auto,Auto" ColumnDefinitions="*,*,*" Margin="20">
     
       <StackPanel Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="1">
-        <TextBlock HorizontalAlignment="Center" FontSize="32" Text="{Binding CurrentDateDisplay}"></TextBlock>
+        <TextBlock HorizontalAlignment="Center" FontSize="24" Text="{Binding CurrentDateDisplay}"></TextBlock>
       </StackPanel>
         
         <StackPanel Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3">

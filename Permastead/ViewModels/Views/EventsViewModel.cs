@@ -266,7 +266,6 @@ public partial class  EventsViewModel : ViewModelBase
     {
         if (CurrentItem != null)
         {
-            var anEvent = CurrentItem;
 
             await OnYesNoAsync();
 
