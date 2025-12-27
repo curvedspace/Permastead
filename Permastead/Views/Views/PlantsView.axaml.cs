@@ -153,7 +153,7 @@ public partial class PlantsView : UserControl
                 }
 
                 float angle = 0;
-                if (isWindows) angle = 90; //rotate on Windows but not Linux
+                if (isWindows) angle = 0; //rotate on Windows but not Linux
                 
                 var rp = new RotateProcessor(angle, image.Size);
 
