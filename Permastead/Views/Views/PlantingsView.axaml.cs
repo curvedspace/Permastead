@@ -65,11 +65,16 @@ public partial class PlantingsView : UserControl
             if (current != null)
             {
                 var planting = (Planting)current.RowSelection!.SelectedItem;
-                planting.YieldRatingValue = Convert.ToDouble(planting.YieldRating / 20m);
+
+                if (planting != null)
+                {
+                    planting.YieldRatingValue = Convert.ToDouble(planting.YieldRating / 20m);
+
+                    var vm = DataContext as PlantingsViewModel;
+                    vm.CurrentItem = planting;
+                    vm.GetPlantingObservations();
+                }
                 
-                var vm = DataContext as PlantingsViewModel;
-                vm.CurrentItem = planting;
-                vm.GetPlantingObservations();
             }
         }
         catch (Exception exception)
