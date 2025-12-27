@@ -226,6 +226,13 @@ public partial class HarvestsViewModel : ViewModelBase
     public HarvestsViewModel()
     {
         RefreshDataOnly();
+        
+        YesNoCommand = new AsyncRelayCommand(OnYesNoAsync);
+            
+        Icons = new ObservableCollection<MessageBoxIcon>(
+            Enum.GetValues<MessageBoxIcon>());
+        SelectedIcon = MessageBoxIcon.Question;
+        _message = _shortMessage;
     }
     
     private async Task OnYesNoAsync()

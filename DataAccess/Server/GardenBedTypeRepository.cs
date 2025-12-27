@@ -1,15 +1,12 @@
 ﻿using Dapper;
-
-using Models;
-
-using Microsoft.Data.Sqlite;
 using System.Data;
 using Npgsql;
 
+using Models;
 
 namespace DataAccess.Server
 {
-    public class GardenBedTypeRepository
+    public static class GardenBedTypeRepository
     {
         public static List<GardenBedType> GetAll(string conn)
         {

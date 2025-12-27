@@ -162,4 +162,26 @@ public class PersonService
 
         return rtnValue;
     }
+    
+    public static bool DeleteRecord(ServiceMode mode, Person? person)
+    {
+        bool rtnValue = false;
+        
+        if (person != null)
+        {
+            if (person.Id > 0)
+            {
+                if (mode == ServiceMode.Local)
+                {
+                    rtnValue = PersonRepository.Delete(person);
+                }
+                else
+                {
+                    rtnValue = DataAccess.Server.PersonRepository.Delete(person);
+                }
+            }
+        }
+
+        return rtnValue;
+    }
 }

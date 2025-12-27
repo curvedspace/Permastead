@@ -95,6 +95,29 @@ namespace DataAccess.Server
                 return false;
             }
         }
+        
+        public static bool Delete(Person person)
+        {
+            try
+            {
+                if (person != null)
+                {
+                    using (IDbConnection db = new NpgsqlConnection(DataConnection.GetServerConnectionString()))
+                    {
+                        string sqlQuery = "DELETE FROM Person WHERE Id = @Id;";
+                        return (db.Execute(sqlQuery, person) == 1);
+                    }
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch
+            {
+                return false;
+            }
+        }
 
         public static Person GetPersonFromId(string connectionString, long id)
         {

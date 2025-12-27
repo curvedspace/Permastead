@@ -3,10 +3,15 @@ using System.Collections.ObjectModel;
 using Avalonia.Controls;
 using Avalonia.Controls.Models.TreeDataGrid;
 using System.Linq;
+using System.Threading.Tasks;
+using System.Windows.Input;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Models;
+using Permastead.ViewModels.Dialogs;
+using Permastead.Views.Dialogs;
 using Services;
+using Ursa.Controls;
 
 namespace Permastead.ViewModels.Views;
 
@@ -30,10 +35,41 @@ public partial class ContactsViewModel : ViewModelBase
 
     public FlatTreeDataGridSource<Person> PersonSource { get; set; }
     
+    
+    //message box data
+    private readonly string _shortMessage = "Are you sure you want to delete this contact record?";
+    private string _message;
+    private string? _title = "Deletion Confirmation";
+    
+    public ObservableCollection<MessageBoxIcon> Icons { get; set; }
+    
+    private MessageBoxIcon _selectedIcon;
+    public MessageBoxIcon SelectedIcon
+    {
+        get => _selectedIcon;
+        set => SetProperty(ref _selectedIcon, value);
+    }
+
+    private MessageBoxResult _result;
+    public MessageBoxResult Result
+    {
+        get => _result;
+        set => SetProperty(ref _result, value);
+    }
+    
+    public ICommand YesNoCommand { get; set; }
+    
     public ContactsViewModel()
     {
         RefreshDataOnly();
         GetPeopleObservations();
+        
+        YesNoCommand = new AsyncRelayCommand(OnYesNoAsync);
+            
+        Icons = new ObservableCollection<MessageBoxIcon>(
+            Enum.GetValues<MessageBoxIcon>());
+        SelectedIcon = MessageBoxIcon.Question;
+        _message = _shortMessage;
     }
 
     [RelayCommand]
@@ -123,6 +159,65 @@ public partial class ContactsViewModel : ViewModelBase
     private void AddContact()
     {
         
+    }
+
+    [RelayCommand]
+    private void EditContact()
+    {
+        // open the selected planting in a window for viewing/editing
+        var personWindow = new PersonWindow();
+        
+        //get the selected row in the list
+        if (CurrentPerson != null)
+        {
+            
+            //get underlying view's viewmodel
+            var vm = new PersonWindowViewModel(CurrentPerson, this);
+            
+            personWindow.DataContext = vm;
+        
+            personWindow.Topmost = true;
+            personWindow.Width = 900;
+            personWindow.Height = 550;
+            personWindow.Opacity = 0.95;
+            personWindow.Title = "Person - " + CurrentPerson.FullNameLastFirst;
+        }
+
+        personWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+           
+        personWindow.Show();
+    }
+    
+    [RelayCommand]
+    private async void DeleteContact()
+    {
+        try
+        {
+            if (CurrentPerson != null)
+            {
+                await OnYesNoAsync();
+
+                if (Result == MessageBoxResult.Yes)
+                {
+                    //remove the record
+                    Services.PersonService.DeleteRecord(AppSession.ServiceMode, CurrentPerson);
+                    RefreshDataOnly();
+                }
+            }
+        }
+        catch (Exception e)
+        {
+        }
+    }
+    
+    private async Task OnYesNoAsync()
+    {
+        await Show(MessageBoxButton.YesNo);
+    }
+    
+    private async Task Show(MessageBoxButton button)
+    {
+        Result = await MessageBox.ShowAsync(_message, _title, icon: SelectedIcon, button:button);
     }
     
 }

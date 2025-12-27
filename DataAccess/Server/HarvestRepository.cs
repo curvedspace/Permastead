@@ -5,7 +5,7 @@ using Npgsql;
 
 namespace DataAccess.Server;
 
-public class HarvestRepository
+public static class HarvestRepository
 {
     public static List<Harvest> GetAll(string conn)
     {

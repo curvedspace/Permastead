@@ -1,14 +1,9 @@
-﻿using System;
+﻿
 using System.Data;
-using System.Collections.Generic;
-using System.Text;
-
+using Microsoft.Data.Sqlite;
 using Dapper;
 
-using Microsoft.Data.Sqlite;
-
 using Models;
-
 
 namespace DataAccess.Local
 {
@@ -81,6 +76,29 @@ namespace DataAccess.Local
                             "Company = @Company, Email = @Email, Phone = @Phone, OnSite = @OnSite, Comment = @Comment " +
                             "WHERE Id = @Id;";
 
+                        return (db.Execute(sqlQuery, person) == 1);
+                    }
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch
+            {
+                return false;
+            }
+        }
+        
+        public static bool Delete(Person person)
+        {
+            try
+            {
+                if (person != null)
+                {
+                    using (IDbConnection db = new SqliteConnection(DataConnection.GetLocalDataSource()))
+                    {
+                        string sqlQuery = "DELETE FROM Person WHERE Id = @Id;";
                         return (db.Execute(sqlQuery, person) == 1);
                     }
                 }

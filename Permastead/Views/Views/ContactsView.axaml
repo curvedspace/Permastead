@@ -23,7 +23,29 @@
                       DoubleTapped="TreeDataGrid_OnDoubleTapped" 
                       Tapped="TreeDataGrid_OnTapped"
                        SelectionChanging="TreeDataGrid_OnSelectionChanged"
-                      Source="{Binding PersonSource, Mode=TwoWay}"></TreeDataGrid>
+                      Source="{Binding PersonSource, Mode=TwoWay}">
+            
+            <TreeDataGrid.ContextMenu>
+                <ContextMenu>
+                        
+                    <MenuItem Command="{Binding EditContactCommand}" Header="Edit...">
+                        <MenuItem.Icon>
+                            <PathIcon Data="{StaticResource edit_settings_regular}"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                                  
+                    <Separator></Separator>
+                  
+                    <MenuItem Command="{Binding DeleteContactCommand}" Header="Remove Item...">
+                        <MenuItem.Icon>
+                            <PathIcon Data="{StaticResource delete_regular}"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                        
+                </ContextMenu>
+            </TreeDataGrid.ContextMenu>
+            
+        </TreeDataGrid>
         
         <Panel Grid.Column="1" Grid.Row="1" MinWidth="300" MaxWidth="400" Background="{DynamicResource  ButtonBackgroundPointerOver}"
                IsVisible="{Binding ShowObservations}">
