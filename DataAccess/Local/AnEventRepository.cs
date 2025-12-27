@@ -184,5 +184,28 @@ public class AnEventRepository
             return false;
         }
     }
+    
+    public static bool Delete(AnEvent myEvent)
+    {
+        try
+        {
+            if (myEvent != null)
+            {
+                using (IDbConnection db = new SqliteConnection(DataConnection.GetLocalDataSource()))
+                {
+                    string sqlQuery = "DELETE FROM Event WHERE Id = @Id;";
+                    return (db.Execute(sqlQuery, myEvent) == 1);
+                }
+            }
+            else
+            {
+                return false;
+            }
+        }
+        catch
+        {
+            return false;
+        }
+    }
 }
 

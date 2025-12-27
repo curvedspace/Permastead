@@ -8,6 +8,8 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 
 using Models;
+using Permastead.ViewModels.Dialogs;
+using Permastead.Views.Dialogs;
 using Services;
 
 namespace Permastead.ViewModels.Views;
@@ -191,5 +193,45 @@ public partial class  EventsViewModel : ViewModelBase
         // reset the current item
         CurrentItem = new AnEvent();
         OnPropertyChanged(nameof(CurrentItem));
+    }
+
+    [RelayCommand]
+    private void EditEvent()
+    {
+        // open the selected planting in a window for viewing/editing
+        var eventWindow = new EventsWindow();
+        
+        if (CurrentItem != null)
+        {
+            var anEvent = CurrentItem;
+            
+            //get underlying view's viewmodel
+            var vm = new EventsWindowViewModel(anEvent, this);
+            
+            eventWindow.DataContext = vm;
+        
+            eventWindow.Topmost = true;
+            eventWindow.Width = 700;
+            eventWindow.Height = 450;
+            eventWindow.Opacity = 0.95;
+            eventWindow.Title = "Event - " + anEvent.Description;
+        }
+
+        eventWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+           
+        eventWindow.Show();
+    }
+    
+    [RelayCommand]
+    private void RemoveEvent()
+    {
+        if (CurrentItem != null)
+        {
+            var anEvent = CurrentItem;
+            
+            //remove the record
+            EventsService.DeleteEvent(AppSession.ServiceMode, CurrentItem);
+            RefreshEvents();
+        }
     }
 }

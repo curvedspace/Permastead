@@ -122,7 +122,6 @@ public partial class ToDoViewModel : ViewModelBase
             //remove the record
             ToDoService.DeleteToDo(AppSession.ServiceMode, CurrentItem);
             RefreshToDo();
-            
         }
     }
 

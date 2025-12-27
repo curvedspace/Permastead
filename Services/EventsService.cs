@@ -121,4 +121,26 @@ public class EventsService
 
         return myReturn;
     }
+    
+    public static bool DeleteEvent(ServiceMode mode, AnEvent currentItem)
+    {
+        bool rtnValue = false;
+        
+        if (currentItem != null)
+        {
+            if (currentItem.Id > 0)
+            {
+                if (mode == ServiceMode.Local)
+                {
+                    rtnValue = AnEventRepository.Delete(currentItem);
+                }
+                else
+                {
+                    rtnValue = DataAccess.Server.AnEventRepository.Delete(currentItem);
+                }
+            }
+        }
+
+        return rtnValue;
+    }
 }

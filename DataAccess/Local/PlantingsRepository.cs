@@ -318,6 +318,29 @@ public class PlantingsRepository
             return false;
         }
     }
+    
+    public static bool Delete(Planting planting)
+    {
+        try
+        {
+            if (planting != null)
+            {
+                using (IDbConnection db = new SqliteConnection(DataConnection.GetLocalDataSource()))
+                {
+                    string sqlQuery = "DELETE FROM Planting WHERE Id = @Id;";
+                    return (db.Execute(sqlQuery, planting) == 1);
+                }
+            }
+            else
+            {
+                return false;
+            }
+        }
+        catch
+        {
+            return false;
+        }
+    }
 
     public static bool InsertPlantingObservation(string connectionString, PlantingObservation plantingObs)
     {

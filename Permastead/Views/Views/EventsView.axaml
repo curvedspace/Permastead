@@ -31,7 +31,23 @@
     <Panel Grid.Row="1">
       <TreeDataGrid x:Name="EventsGrid" Grid.Row="1" Margin="10" Source="{Binding EventsSource, Mode=TwoWay}" 
                     DoubleTapped="EventsGrid_DoubleTapped"
+                    Tapped="EventsGrid_OnTapped"
                     CanUserResizeColumns="True">
+        <TreeDataGrid.ContextMenu>
+        <ContextMenu>
+          <MenuItem Command="{Binding EditEventCommand}" Header="Edit...">
+            <MenuItem.Icon>
+              <PathIcon Data="{StaticResource edit_settings_regular}"/>
+            </MenuItem.Icon>
+          </MenuItem>
+          <Separator></Separator>
+          <MenuItem Command="{Binding RemoveEventCommand}" Header="Remove Event...">
+            <MenuItem.Icon>
+              <PathIcon Data="{StaticResource delete_regular}"/>
+            </MenuItem.Icon>
+          </MenuItem>
+          </ContextMenu>
+          </TreeDataGrid.ContextMenu>
       </TreeDataGrid>
     </Panel>
     

@@ -442,6 +442,29 @@ public static class InventoryRepository
         }
     }
             
+    public static bool Delete(Inventory inventory)
+    {
+        try
+        {
+            if (inventory != null)
+            {
+                using (IDbConnection db = new NpgsqlConnection(DataConnection.GetServerConnectionString()))
+                {
+                    string sqlQuery = "DELETE FROM Inventory WHERE Id = @Id;";
+                    return (db.Execute(sqlQuery, inventory) == 1);
+                }
+            }
+            else
+            {
+                return false;
+            }
+        }
+        catch
+        {
+            return false;
+        }
+    }
+    
     public static List<InventoryObservation> GetAllObservationsForInventoryItem(string connectionString, long inventoryId)
     {
         {
