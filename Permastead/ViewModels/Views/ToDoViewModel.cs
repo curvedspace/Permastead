@@ -3,6 +3,8 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Threading.Tasks;
+using System.Windows.Input;
 using Avalonia.Controls;
 using Avalonia.Controls.Models.TreeDataGrid;
 using Avalonia.Media;
@@ -13,6 +15,7 @@ using Models;
 using Permastead.ViewModels.Dialogs;
 using Permastead.Views.Dialogs;
 using Services;
+using Ursa.Controls;
 
 namespace Permastead.ViewModels.Views;
 
@@ -44,6 +47,29 @@ public partial class ToDoViewModel : ViewModelBase
     private ToDo _currentItem;
     
     public FlatTreeDataGridSource<ToDo> ToDosSource { get; set; }
+    
+    //message box data
+    private readonly string _shortMessage = "Are you sure you want to delete this action item?";
+    private string _message;
+    private string? _title = "Deletion Confirmation";
+    
+    public ObservableCollection<MessageBoxIcon> Icons { get; set; }
+    
+    private MessageBoxIcon _selectedIcon;
+    public MessageBoxIcon SelectedIcon
+    {
+        get => _selectedIcon;
+        set => SetProperty(ref _selectedIcon, value);
+    }
+
+    private MessageBoxResult _result;
+    public MessageBoxResult Result
+    {
+        get => _result;
+        set => SetProperty(ref _result, value);
+    }
+    
+    public ICommand YesNoCommand { get; set; }
 
 
     [RelayCommand]
@@ -115,13 +141,24 @@ public partial class ToDoViewModel : ViewModelBase
     }
 
     [RelayCommand]
-    private void DeleteToDo()
+    private async void DeleteToDo()
     {
-        if (CurrentItem != null)
+        try
         {
-            //remove the record
-            ToDoService.DeleteToDo(AppSession.ServiceMode, CurrentItem);
-            RefreshToDo();
+            if (CurrentItem != null)
+            {
+                await OnYesNoAsync();
+
+                if (Result == MessageBoxResult.Yes)
+                {
+                    //remove the record
+                    ToDoService.DeleteToDo(AppSession.ServiceMode, CurrentItem);
+                    RefreshToDo();
+                }
+            }
+        }
+        catch (Exception e)
+        {
         }
     }
 
@@ -241,6 +278,13 @@ public partial class ToDoViewModel : ViewModelBase
             RefreshToDo();
             
             if (Todos.Count > 0) CurrentItem = Todos.FirstOrDefault();
+            
+            YesNoCommand = new AsyncRelayCommand(OnYesNoAsync);
+            
+            Icons = new ObservableCollection<MessageBoxIcon>(
+                Enum.GetValues<MessageBoxIcon>());
+            SelectedIcon = MessageBoxIcon.Question;
+            _message = _shortMessage;
 
             
         }
@@ -248,6 +292,16 @@ public partial class ToDoViewModel : ViewModelBase
         {
             throw;
         }
+    }
+    
+    private async Task OnYesNoAsync()
+    {
+        await Show(MessageBoxButton.YesNo);
+    }
+    
+    private async Task Show(MessageBoxButton button)
+    {
+        Result = await MessageBox.ShowAsync(_message, _title, icon: SelectedIcon, button:button);
     }
 }
     
