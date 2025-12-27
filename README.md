@@ -33,4 +33,5 @@ Thanks
 - wttr.in weather service
 - Nikita Shishkin for weather project
 - Beto Rodriguez for LiveCharts2
+- IRIHI Technology for Ursa
 - The entire Avalonia team
