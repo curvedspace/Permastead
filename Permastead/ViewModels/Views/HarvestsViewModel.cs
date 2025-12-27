@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Threading.Tasks;
+using System.Windows.Input;
 using Avalonia.Controls;
 using Avalonia.Controls.Models.TreeDataGrid;
 using CommunityToolkit.Mvvm.ComponentModel;
@@ -9,6 +11,7 @@ using CommunityToolkit.Mvvm.Input;
 using Models;
 using Permastead.ViewModels.Dialogs;
 using Permastead.Views.Dialogs;
+using Ursa.Controls;
 
 namespace Permastead.ViewModels.Views;
 
@@ -33,6 +36,29 @@ public partial class HarvestsViewModel : ViewModelBase
     private string _searchText = "";
     
     public FlatTreeDataGridSource<Harvest> HarvestSource { get; set; }
+    
+    //message box data
+    private readonly string _shortMessage = "Are you sure you want to delete this harvest?";
+    private string _message;
+    private string? _title = "Deletion Confirmation";
+    
+    public ObservableCollection<MessageBoxIcon> Icons { get; set; }
+    
+    private MessageBoxIcon _selectedIcon;
+    public MessageBoxIcon SelectedIcon
+    {
+        get => _selectedIcon;
+        set => SetProperty(ref _selectedIcon, value);
+    }
+
+    private MessageBoxResult _result;
+    public MessageBoxResult Result
+    {
+        get => _result;
+        set => SetProperty(ref _result, value);
+    }
+    
+    public ICommand YesNoCommand { get; set; }
     
     [RelayCommand]
     private void RefreshData()
@@ -95,7 +121,6 @@ public partial class HarvestsViewModel : ViewModelBase
 
         HarvestsCount = Harvests.Count;
     }
-
     
     [RelayCommand]
     private void ClearSearch()
@@ -130,7 +155,6 @@ public partial class HarvestsViewModel : ViewModelBase
         
         RefreshDataOnly(SearchText);
     }
-    
     
     [RelayCommand]
     private void PreserveHarvest()
@@ -177,13 +201,24 @@ public partial class HarvestsViewModel : ViewModelBase
     }
     
     [RelayCommand]
-    private void DeleteHarvest()
+    private async void DeleteHarvest()
     {
-        // remove the currently selected item
-        if (CurrentItem != null)
+        try
         {
-            Services.HarvestService.DeleteRecord(AppSession.ServiceMode, CurrentItem);
-            RefreshDataOnly();
+            if (CurrentItem != null)
+            {
+                await OnYesNoAsync();
+
+                if (Result == MessageBoxResult.Yes)
+                {
+                    //remove the record
+                    Services.HarvestService.DeleteRecord(AppSession.ServiceMode, CurrentItem);
+                    RefreshDataOnly();
+                }
+            }
+        }
+        catch (Exception e)
+        {
         }
         
     }
@@ -193,4 +228,13 @@ public partial class HarvestsViewModel : ViewModelBase
         RefreshDataOnly();
     }
     
+    private async Task OnYesNoAsync()
+    {
+        await Show(MessageBoxButton.YesNo);
+    }
+    
+    private async Task Show(MessageBoxButton button)
+    {
+        Result = await MessageBox.ShowAsync(_message, _title, icon: SelectedIcon, button:button);
+    }
 }
