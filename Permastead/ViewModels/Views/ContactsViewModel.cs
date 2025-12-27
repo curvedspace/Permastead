@@ -59,6 +59,8 @@ public partial class ContactsViewModel : ViewModelBase
     
     public ICommand YesNoCommand { get; set; }
     
+    public WindowToastManager? ToastManager { get; set; }
+    
     public ContactsViewModel()
     {
         RefreshDataOnly();
@@ -147,6 +149,8 @@ public partial class ContactsViewModel : ViewModelBase
                     Services.PersonService.GetObservationsForPerson(AppSession.ServiceMode, CurrentPerson.Id));
 
             CurrentObservation = new PersonObservation();
+            
+            ToastManager?.Show(new Toast("Observation saved!"));
         }
         catch (Exception e)
         {

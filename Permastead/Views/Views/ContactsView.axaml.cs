@@ -8,15 +8,32 @@ using Models;
 using Permastead.ViewModels.Dialogs;
 using Permastead.ViewModels.Views;
 using Permastead.Views.Dialogs;
+using Ursa.Controls;
 
 namespace Permastead.Views.Views;
 
 public partial class ContactsView : UserControl
 {
+    private ContactsViewModel? _viewModel;
+    
     public ContactsView()
     {
         InitializeComponent();
         DataContext = new ContactsViewModel();
+    }
+    
+    protected override void OnAttachedToVisualTree(VisualTreeAttachmentEventArgs e)
+    {
+        base.OnAttachedToVisualTree(e);
+        if (DataContext is not ContactsViewModel vm) return;
+        _viewModel = vm;
+        _viewModel.ToastManager = new WindowToastManager(TopLevel.GetTopLevel(this)) { MaxItems = 3 };
+    }
+
+    protected override void OnDetachedFromVisualTree(VisualTreeAttachmentEventArgs e)
+    {
+        base.OnDetachedFromVisualTree(e);
+        _viewModel?.ToastManager?.Uninstall();
     }
 
     private void TreeDataGrid_OnDoubleTapped(object? sender, TappedEventArgs e)

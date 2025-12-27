@@ -70,6 +70,8 @@ public partial class ToDoViewModel : ViewModelBase
     }
     
     public ICommand YesNoCommand { get; set; }
+    
+    public WindowToastManager? ToastManager { get; set; }
 
 
     [RelayCommand]
@@ -135,6 +137,8 @@ public partial class ToDoViewModel : ViewModelBase
                 CurrentItem.ToDoStatus = completeStatus;
                 SaveData();
                 RefreshToDo();
+                
+                ToastManager?.Show(new Toast("TODO has been resolved."));
             }
         }
 

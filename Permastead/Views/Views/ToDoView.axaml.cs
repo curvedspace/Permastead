@@ -1,4 +1,5 @@
 
+using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Input;
 using Avalonia.Interactivity;
@@ -7,15 +8,31 @@ using Models;
 using Permastead.ViewModels.Dialogs;
 using Permastead.ViewModels.Views;
 using Permastead.Views.Dialogs;
+using Ursa.Controls;
 
 namespace Permastead.Views.Views;
 
 public partial class ToDoView : UserControl
 {
+    private ToDoViewModel? _viewModel;
     public ToDoView()
     {
         InitializeComponent();
         DataContext = new ToDoViewModel();
+    }
+    
+    protected override void OnAttachedToVisualTree(VisualTreeAttachmentEventArgs e)
+    {
+        base.OnAttachedToVisualTree(e);
+        if (DataContext is not ToDoViewModel vm) return;
+        _viewModel = vm;
+        _viewModel.ToastManager = new WindowToastManager(TopLevel.GetTopLevel(this)) { MaxItems = 3 };
+    }
+
+    protected override void OnDetachedFromVisualTree(VisualTreeAttachmentEventArgs e)
+    {
+        base.OnDetachedFromVisualTree(e);
+        _viewModel?.ToastManager?.Uninstall();
     }
 
     private void TodoGrid_OnTapped(object? sender, TappedEventArgs e)
