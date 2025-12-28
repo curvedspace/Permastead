@@ -381,7 +381,7 @@ public partial class PlantingsViewModel : ViewModelBase
             plantingWindow.DataContext = vm;
 
             plantingWindow.Topmost = true;
-            plantingWindow.Width = 1000;
+            plantingWindow.Width = 875;
             plantingWindow.Height = 600;
             plantingWindow.Opacity = 0.95;
             plantingWindow.Title = "Planting - " + current.Description;

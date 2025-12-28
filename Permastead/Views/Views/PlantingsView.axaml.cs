@@ -125,8 +125,8 @@ public partial class PlantingsView : UserControl
         plantingWindow.DataContext = vm;
         
         plantingWindow.Topmost = true;
-        plantingWindow.Width = 900;
-        plantingWindow.Height = 500;
+        plantingWindow.Width = 875;
+        plantingWindow.Height = 550;
         plantingWindow.Opacity = 0.95;
         plantingWindow.Title = "New Planting";
         plantingWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;
