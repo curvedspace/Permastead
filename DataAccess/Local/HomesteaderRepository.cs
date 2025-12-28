@@ -919,6 +919,12 @@ namespace DataAccess.Local
             q = new Quote { Description = "Buy land, they’re not making it anymore.", AuthorName = "Mark Twain" };
             QuoteRepository.Insert(DataConnection.GetLocalDataSource(), q);
             
+            q = new Quote { Description = "Short-term results come from intensity. Long-term results come from consistency.", AuthorName = "Shane Parrish" };
+            QuoteRepository.Insert(DataConnection.GetLocalDataSource(), q);
+            
+            q = new Quote { Description = "The patience you need for big things, is developed by your patience with the little things.", AuthorName = "Kevin Kelly" };
+            QuoteRepository.Insert(DataConnection.GetLocalDataSource(), q);
+            
             #endregion
             
             #region Settings
