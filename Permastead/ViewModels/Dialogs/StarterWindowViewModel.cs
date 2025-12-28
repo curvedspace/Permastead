@@ -60,6 +60,9 @@ public partial class StarterWindowViewModel : ViewModelBase
         _vendors = new ObservableCollection<Vendor>(Services.VendorService.GetAll(AppSession.ServiceMode));
         _seasonalities = new ObservableCollection<Seasonality>(Services.PlantingsService.GetSeasonalities(AppSession.ServiceMode));
         _starterTypes = new ObservableCollection<StarterType>(Services.PlantingsService.GetStarterTypes(AppSession.ServiceMode));
+        
+        _seedPacket.Author = AppSession.Instance.CurrentUser;
+        _seedPacket.Author = _people.First(x => x.Id == _seedPacket.Author.Id);
     }
     
     // The method that will be executed when the command is invoked

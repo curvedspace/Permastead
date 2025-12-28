@@ -112,4 +112,31 @@ public class SeedPacket
 
         this.Exchange = false;
     }
+
+    public SeedPacket Clone(SeedPacket seedPacket)
+    {
+        var copy = new SeedPacket();
+
+        if (seedPacket != null)
+        {
+            copy.Id = seedPacket.Id;
+            copy.Code = seedPacket.Code;
+            copy.Description = seedPacket.Description;
+            copy.Species = seedPacket.Species;
+            copy.Author = seedPacket.Author;
+            copy.StarterType = seedPacket.StarterType;
+            copy.Generations = seedPacket.Generations + 1;
+            copy.DaysToHarvest = seedPacket.DaysToHarvest;
+            copy.Vendor = seedPacket.Vendor;
+            
+            copy.CreationDate = DateTime.UtcNow;
+            copy.StartDate = DateTime.UtcNow;
+            copy.EndDate = copy.StartDate.AddYears(5);
+            
+            copy.Instructions = seedPacket.Instructions;
+            copy.Exchange = seedPacket.Exchange;
+        }
+        
+        return copy;
+    }
 }

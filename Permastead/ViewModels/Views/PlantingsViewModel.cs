@@ -2,6 +2,7 @@ using System;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Reactive.Joins;
+using System.Reactive.PlatformServices;
 using Avalonia.Controls;
 using Avalonia.Controls.Models.TreeDataGrid;
 using Avalonia.Controls.Selection;
@@ -366,7 +367,7 @@ public partial class PlantingsViewModel : ViewModelBase
     }
     
     [RelayCommand]
-    public void EditPlanting()
+    private void EditPlanting()
     {
         // open the selected planting in a window for viewing/editing
         var plantingWindow = new PlantingWindow();
@@ -390,7 +391,7 @@ public partial class PlantingsViewModel : ViewModelBase
     }
     
     [RelayCommand]
-    public void CreateHarvest()
+    private void CreateHarvest()
     {
         try
         {
@@ -432,6 +433,64 @@ public partial class PlantingsViewModel : ViewModelBase
         catch (Exception e)
         {
             Console.WriteLine(e);
+        }
+    }
+
+    [RelayCommand]
+    private void SaveSeeds()
+    {
+        var win = new StarterWindow();
+        
+        if (CurrentItem == null) return;
+
+        var sp = PlantingsService.GetSeedPacketFromId(AppSession.ServiceMode, CurrentItem.SeedPacketId);
+        var vm = new StarterWindowViewModel(sp);
+        
+        vm.SeedPacket.CreationDate = DateTime.Now;
+        vm.SeedPacket.StartDate = DateTime.UtcNow;
+        vm.SeedPacket.EndDate = vm.SeedPacket.StartDate.AddYears(5);
+        vm.SeedPacket.Generations += 1;
+        vm.SeedPacket.Id = 0;   //make it a new record
+            
+        win.DataContext = vm;
+        
+        win.Topmost = true;
+        win.Width = 800;
+        win.Height = 650;
+        win.Opacity = 0.95;
+        win.Title = "Save Seeds from " + CurrentItem.Description;
+        win.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+                
+        win.Show();
+    }
+
+    [RelayCommand]
+    private void PropagatePlanting()
+    {
+        //take the current planting and make a new record from it
+        var plantingWindow = new PlantingWindow();
+        
+        //get the selected row in the list
+        var current = CurrentItem.Clone(CurrentItem);
+        if (current != null)
+        {
+            current.Id = 0;
+            current.StartDate = DateTime.UtcNow;
+            current.YieldRating = 0;
+            current.Author = AppSession.Instance.CurrentUser;
+            current.Comment = "Propagated from mother planting ID: " + CurrentItem.Id + " (" + CurrentItem.SeedPacket.Description + ", " + CurrentItem.StartDate.Year + ")";
+            
+            var vm = new PlantingWindowViewModel(current, this);
+
+            plantingWindow.DataContext = vm;
+
+            plantingWindow.Topmost = true;
+            plantingWindow.Width = 1000;
+            plantingWindow.Height = 600;
+            plantingWindow.Opacity = 0.95;
+            plantingWindow.Title = "Propagation of " + current.Description;
+            plantingWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+            plantingWindow.Show();
         }
     }
     

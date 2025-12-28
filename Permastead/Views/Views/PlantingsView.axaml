@@ -87,13 +87,13 @@
                                       
                 <Separator></Separator>
                 
-                <MenuItem Command="{Binding EditPlantingCommand}" IsEnabled="False" Header="Propagate...">
+                <MenuItem Command="{Binding PropagatePlantingCommand}" IsEnabled="True" Header="Propagate...">
                   <MenuItem.Icon>
                     <PathIcon Data="{StaticResource leaf_two_regular}"/>
                   </MenuItem.Icon>
                 </MenuItem>
                 
-                <MenuItem Command="{Binding EditPlantingCommand}" IsEnabled="False" Header="Save Seeds...">
+                <MenuItem Command="{Binding SaveSeedsCommand}" IsEnabled="True" Header="Save Seeds...">
                   <MenuItem.Icon>
                     <PathIcon Data="{StaticResource arrow_sync_circle_regular}"/>
                   </MenuItem.Icon>

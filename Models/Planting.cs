@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using System.Reflection;
 using Serilog.Core;
 
 namespace Models;
@@ -103,6 +104,27 @@ public class Planting: CodeTable
         this.Author = Person.Anonymous();
         this.Bed = new GardenBed();
         this.Comment = string.Empty;
+    }
+
+    public Planting Clone(Planting planting)
+    {
+        var copy = new Planting();
+
+        if (planting != null)
+        {
+            copy.Comment = planting.Comment;
+            copy.State = planting.State;
+            copy.SeedPacket = planting.SeedPacket.Clone(planting.SeedPacket);
+            copy.Author = planting.Author;
+            copy.YieldRating = planting.YieldRating;
+            copy.Bed = planting.Bed;
+            copy.Plant =  planting.Plant;
+            copy.StartDate = DateTime.UtcNow;
+            copy.Code  = planting.Code;
+            copy.Description = planting.Description;
+        }
+        
+        return copy;
     }
 
 }
