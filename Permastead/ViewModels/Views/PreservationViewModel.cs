@@ -232,6 +232,7 @@ public partial class PreservationViewModel : ViewModelBase
             vm.CurrentItem.InventoryGroup = "Food";
             vm.CurrentItem.InventoryType = "Preserved";
             vm.CurrentItem.Room = "Kitchen";
+            vm.CurrentItem.EndDate = DateTime.Today;
             vm.CurrentItem.Author = vm.People.First(x => x.Id == AppSession.Instance.CurrentUser.Id);
 
             inventoryWindow.DataContext = vm;
