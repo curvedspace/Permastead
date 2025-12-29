@@ -106,7 +106,15 @@
                     <PathIcon Data="{StaticResource scales_regular}"/>
                   </MenuItem.Icon>
                 </MenuItem>
+                
+                <Separator></Separator>
                             
+                <MenuItem Command="{Binding RemovePlantingCommand}" Header="Remove Planting...">
+                  <MenuItem.Icon>
+                    <PathIcon Data="{StaticResource delete_regular}"/>
+                  </MenuItem.Icon>
+                </MenuItem>
+                
               </ContextMenu>
             </TreeDataGrid.ContextMenu>   
         </TreeDataGrid>

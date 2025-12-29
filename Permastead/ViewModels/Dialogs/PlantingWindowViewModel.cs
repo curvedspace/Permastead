@@ -7,6 +7,7 @@ using Models;
 using Permastead.ViewModels.Views;
 using Serilog;
 using Serilog.Context;
+using Ursa.Controls;
 
 namespace Permastead.ViewModels.Dialogs;
 
@@ -82,6 +83,7 @@ public partial class PlantingWindowViewModel : ViewModelBase
         }
         
         ControlViewModel.RefreshData();
+        ControlViewModel.ToastManager?.Show(new Toast("Planting has been updated."));
         
     }
     
@@ -117,6 +119,7 @@ public partial class PlantingWindowViewModel : ViewModelBase
         }
         
         ControlViewModel.RefreshData();
+        ControlViewModel.ToastManager?.Show(new Toast("Planting has been terminated."));
         
     }
 }

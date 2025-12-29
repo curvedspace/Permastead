@@ -346,6 +346,28 @@ public static class PlantingsService
         
     }
     
+    public static bool DeleteRecord(ServiceMode mode, Planting? planting)
+    {
+        bool rtnValue = false;
+        
+        if (planting != null)
+        {
+            if (planting.Id > 0)
+            {
+                if (mode == ServiceMode.Local)
+                {
+                    rtnValue = PlantingsRepository.Delete(planting);
+                }
+                else
+                {
+                    rtnValue = DataAccess.Server.PlantingsRepository.Delete(planting);
+                }
+            }
+        }
+
+        return rtnValue;
+    }
+    
     public static List<Entity> GetPlantingsAsEntityList(ServiceMode mode)
     {
         var items = new List<Entity>();

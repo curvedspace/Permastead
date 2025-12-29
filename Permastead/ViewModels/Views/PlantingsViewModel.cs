@@ -3,6 +3,8 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Reactive.Joins;
 using System.Reactive.PlatformServices;
+using System.Threading.Tasks;
+using System.Windows.Input;
 using Avalonia.Controls;
 using Avalonia.Controls.Models.TreeDataGrid;
 using Avalonia.Controls.Selection;
@@ -15,6 +17,7 @@ using Permastead.ViewModels.Dialogs;
 using Permastead.Views.Dialogs;
 using Serilog;
 using Services;
+using Ursa.Controls;
 
 namespace Permastead.ViewModels.Views;
 
@@ -65,6 +68,31 @@ public partial class PlantingsViewModel : ViewModelBase
     
     public FlatTreeDataGridSource<Planting> PlantingsSource { get; set; }
     
+    //message box data
+    private readonly string _shortMessage = "Are you sure you want to delete this planting?";
+    private string _message;
+    private string? _title = "Deletion Confirmation";
+    
+    public ObservableCollection<MessageBoxIcon> Icons { get; set; }
+    
+    private MessageBoxIcon _selectedIcon;
+    public MessageBoxIcon SelectedIcon
+    {
+        get => _selectedIcon;
+        set => SetProperty(ref _selectedIcon, value);
+    }
+
+    private MessageBoxResult _result;
+    public MessageBoxResult Result
+    {
+        get => _result;
+        set => SetProperty(ref _result, value);
+    }
+    
+    public ICommand YesNoCommand { get; set; }
+    
+    public WindowToastManager? ToastManager { get; set; }
+    
     public PlantingsViewModel()
     {
         try
@@ -77,6 +105,13 @@ public partial class PlantingsViewModel : ViewModelBase
                     Services.PlantingsService.GetObservationsForPlanting(AppSession.ServiceMode, CurrentItem.Id));
 
             RefreshPlantings();
+            
+            YesNoCommand = new AsyncRelayCommand(OnYesNoAsync);
+            
+            Icons = new ObservableCollection<MessageBoxIcon>(
+                Enum.GetValues<MessageBoxIcon>());
+            SelectedIcon = MessageBoxIcon.Question;
+            _message = _shortMessage;
         }
         catch (Exception ex)
         {
@@ -389,6 +424,29 @@ public partial class PlantingsViewModel : ViewModelBase
             plantingWindow.Show();
         }
     }
+
+    [RelayCommand]
+    private async void RemovePlanting()
+    {
+        try
+        {
+            if (CurrentItem != null)
+            {
+                await OnYesNoAsync();
+
+                if (Result == MessageBoxResult.Yes)
+                {
+                    //remove the record
+                    PlantingsService.DeleteRecord(AppSession.ServiceMode, CurrentItem);
+                    RefreshDataOnly(SearchText);
+                    ToastManager?.Show(new Toast("Planting record has been removed."));
+                }
+            }
+        }
+        catch (Exception e)
+        {
+        }
+    }
     
     [RelayCommand]
     private void CreateHarvest()
@@ -499,6 +557,16 @@ public partial class PlantingsViewModel : ViewModelBase
     {
         SearchText = "";
         RefreshDataOnly(SearchText);
+    }
+    
+    private async Task OnYesNoAsync()
+    {
+        await Show(MessageBoxButton.YesNo);
+    }
+    
+    private async Task Show(MessageBoxButton button)
+    {
+        Result = await MessageBox.ShowAsync(_message, _title, icon: SelectedIcon, button:button);
     }
 }
 

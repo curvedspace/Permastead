@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Input;
 using Avalonia.Interactivity;
@@ -11,7 +12,7 @@ using Services;
 using Permastead.ViewModels.Dialogs;
 using Permastead.ViewModels.Views;
 using Permastead.Views.Dialogs;
-
+using Ursa.Controls;
 using Node = Permastead.ViewModels.Views.Node;
 using NodeType = Permastead.ViewModels.Views.NodeType;
 
@@ -19,12 +20,28 @@ namespace Permastead.Views.Views;
 
 public partial class PlantingsView : UserControl
 {
+    private PlantingsViewModel? _viewModel;
+    
     public PlantingsView()
     {
         InitializeComponent();
         DataContext = new PlantingsViewModel();
     }
 
+    protected override void OnAttachedToVisualTree(VisualTreeAttachmentEventArgs e)
+    {
+        base.OnAttachedToVisualTree(e);
+        if (DataContext is not PlantingsViewModel vm) return;
+        _viewModel = vm;
+        _viewModel.ToastManager = new WindowToastManager(TopLevel.GetTopLevel(this)) { MaxItems = 3 };
+    }
+
+    protected override void OnDetachedFromVisualTree(VisualTreeAttachmentEventArgs e)
+    {
+        base.OnDetachedFromVisualTree(e);
+        _viewModel?.ToastManager?.Uninstall();
+    }
+    
     private void InitializeComponent()
     {
         AvaloniaXamlLoader.Load(this);
