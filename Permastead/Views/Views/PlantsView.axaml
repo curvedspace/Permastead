@@ -190,7 +190,7 @@
                                     </MenuItem.Icon>
                                 </MenuItem>
     
-                                <MenuItem Command="{Binding AddPlantingCommand}" Header="Create a Planting..." IsEnabled="True">
+                                <MenuItem Command="{Binding AddPlantingCommand}" Header="Create a New Planting..." IsEnabled="True">
                                     <MenuItem.Icon>
                                         <PathIcon Data="{StaticResource leaf_two_regular}"/>
                                     </MenuItem.Icon>

@@ -1244,7 +1244,7 @@ namespace DataAccess.Local
             p = new Plant { Author = new Person(1), Code = "TOMATO", Description = "Tomato" };
             PlantRepository.Insert(p);
             
-            p = new Plant { Author = new Person(1), Code = "GARLIC", Description = "Garlic", Tags = "herb warming alterative anti-septic anti-spasmodic carminative diaphoretic tonic vulnerary"};
+            p = new Plant { Author = new Person(1), Code = "GARLIC", Description = "Garlic", Tags = "herb warming anthelmintic alterative anti-septic anti-spasmodic carminative diaphoretic tonic vulnerary"};
             PlantRepository.Insert(p);
             
             p = new Plant { Author = new Person(1), Code = "CABBAGE", Description = "Cabbage" };
@@ -1269,6 +1269,9 @@ namespace DataAccess.Local
             PlantRepository.Insert(p);
 
             p = new Plant { Author = new Person(1), Code = "CURRANT", Description = "Currant" };
+            PlantRepository.Insert(p);
+            
+            p = new Plant { Author = new Person(1), Code = "WWOOD", Description = "Wormwood", Family = "Asteraceae", Comment = "Wormwood is characterized by its aromatic, herbaceous, perennial nature and is known for its bitter taste and strong sage-like odor when crushed.", Tags = "herb bitter anthelmintic"};
             PlantRepository.Insert(p);
             
             #endregion

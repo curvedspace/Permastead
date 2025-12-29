@@ -24,10 +24,10 @@
           <MenuFlyout Placement="Bottom">
             <MenuItem Header="Planting..." Click="NewPlantingMenuItem_OnClick" />
             <Separator/>
-            <MenuItem Header="Plant..." Click="NewPlantMenuItem_OnClick"/>
-            <MenuItem Header="Starter " Click="NewStarterMenuItem_OnClick"/>
-            <MenuItem Header="Location " Click="NewLocationMenuItem_OnClick"/>
-            <MenuItem Header="Vendor " Click="NewVendorMenuItem_OnClick"/>
+            <!-- <MenuItem Header="Plant..." Click="NewPlantMenuItem_OnClick"/> -->
+            <!-- <MenuItem Header="Starter " Click="NewStarterMenuItem_OnClick"/> -->
+            <MenuItem Header="Location... " Click="NewLocationMenuItem_OnClick"/>
+            <MenuItem Header="Vendor... " Click="NewVendorMenuItem_OnClick"/>
           </MenuFlyout>
         </SplitButton.Flyout>
       </SplitButton>
