@@ -143,7 +143,7 @@ public partial class HarvestsViewModel : ViewModelBase
         var harvestWindow = new HarvestWindow();
         
         
-        if (CurrentItem != null)
+        if (CurrentItem != null && CurrentItem.Id > 0)
         {
             //get underlying view's viewmodel
             var vm = new HarvestWindowViewModel(CurrentItem, this);
@@ -155,12 +155,11 @@ public partial class HarvestsViewModel : ViewModelBase
             harvestWindow.Height = 550;
             harvestWindow.Opacity = 0.95;
             harvestWindow.Title = "Harvest - " + CurrentItem.Description;
+            harvestWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+            harvestWindow.Show();
+            
+            RefreshDataOnly(SearchText);
         }
-
-        harvestWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;
-        harvestWindow.Show();
-        
-        RefreshDataOnly(SearchText);
     }
     
     [RelayCommand]
@@ -212,7 +211,7 @@ public partial class HarvestsViewModel : ViewModelBase
     {
         try
         {
-            if (CurrentItem != null)
+            if (CurrentItem != null && CurrentItem.Id > 0)
             {
                 await OnYesNoAsync();
 
