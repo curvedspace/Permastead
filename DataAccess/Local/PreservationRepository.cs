@@ -7,7 +7,7 @@ namespace DataAccess.Local;
 
 public class PreservationRepository
 {
-         public static List<FoodPreservation> GetAll(string conn)
+    public static List<FoodPreservation> GetAll(string conn)
     {
         try
         {
@@ -105,8 +105,8 @@ public class PreservationRepository
             
             using (var connection = new SqliteConnection(connectionString))
             {
-                string sqlQuery = "INSERT INTO Preservation (PreservationTypeId, HarvestId, Description, Measurement, Rating, MeasurementTypeId, Comment, AuthorId, CreationDate, StartDate) " +
-                                  "VALUES(:preservationTypeId, :harvestId, :description, :measurement, :rating, :measurementTypeId, :comment, :authorId, CURRENT_DATE, :startDate);";
+                string sqlQuery = "INSERT INTO Preservation (PreservationTypeId, HarvestId, Description, Measurement, Rating, MeasurementTypeId, Comment, AuthorId, CreationDate, StartDate, EndDate) " +
+                                  "VALUES(:preservationTypeId, :harvestId, :description, :measurement, :rating, :measurementTypeId, :comment, :authorId, CURRENT_DATE, :startDate, :endDate);";
         
                 connection.Open();
 
@@ -116,6 +116,7 @@ public class PreservationRepository
                     
                     command.Parameters.AddWithValue(":description", item.Name);
                     command.Parameters.AddWithValue(":startDate", item.StartDate);
+                    command.Parameters.AddWithValue(":endDate", item.EndDate);
                     command.Parameters.AddWithValue(":measurement", item.Measurement);
                     command.Parameters.AddWithValue(":rating", item.Rating);
                     command.Parameters.AddWithValue(":measurementTypeId", item.MeasurementTypeId);
@@ -145,7 +146,7 @@ public class PreservationRepository
             
             using (var connection = new SqliteConnection(connectionString))
             {
-                string sqlQuery = "UPDATE Preservation SET Description = :description, StartDate = :startDate, Measurement = :measurement, Rating = :rating, " +
+                string sqlQuery = "UPDATE Preservation SET Description = :description, StartDate = :startDate, EndDate = :endDate, Measurement = :measurement, Rating = :rating, " +
                                   "MeasurementTypeId = :measurementTypeId, Comment = :comment, AuthorId = :authorId, HarvestId = :harvestId, PreservationTypeId = :preservationTypeId " + 
                                   "WHERE Id = :id;";
 
@@ -157,6 +158,7 @@ public class PreservationRepository
                     
                     command.Parameters.AddWithValue(":description", item.Name);
                     command.Parameters.AddWithValue(":startDate", item.StartDate);
+                    command.Parameters.AddWithValue(":endDate", item.EndDate);
                     command.Parameters.AddWithValue(":measurement", item.Measurement);
                     command.Parameters.AddWithValue(":rating", item.Rating);
                     command.Parameters.AddWithValue(":measurementTypeId", item.MeasurementTypeId);
