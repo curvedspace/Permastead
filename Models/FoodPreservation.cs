@@ -67,6 +67,14 @@ public class FoodPreservation
             }
         } 
     }
+    
+    public bool IsActive()
+    {
+        if ((DateTime.UtcNow > StartDate) && (DateTime.UtcNow < EndDate))
+            return true;
+        else
+            return false;
+    }
 
     public FoodPreservation()
     {
@@ -75,6 +83,8 @@ public class FoodPreservation
         this.PreservationType = new FoodPreservationType();
         this.Author = Person.Anonymous();
         this.Harvest = new Harvest();
+        
+        this.EndDate = DateTime.MaxValue;
     }
     
 }

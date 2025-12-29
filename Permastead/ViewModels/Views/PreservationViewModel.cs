@@ -66,7 +66,15 @@ public partial class PreservationViewModel : ViewModelBase
         {
             if (string.IsNullOrEmpty(caseAdjustedFilterText))
             {
-                FoodPreservations.Add(item);
+                if (CurrentOnly)
+                {
+                    if (item.IsActive()) FoodPreservations.Add(item);
+                }
+                else
+                {
+                    FoodPreservations.Add(item);
+                }
+                
             }
             else
             {
