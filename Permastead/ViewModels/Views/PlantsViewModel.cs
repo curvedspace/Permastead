@@ -1,5 +1,7 @@
 using System;
 using System.Collections.ObjectModel;
+using System.Threading.Tasks;
+using System.Windows.Input;
 
 using Avalonia.Controls;
 using Avalonia.Platform;
@@ -9,13 +11,13 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 
 using Models;
+using Services;
 using Permastead.ViewModels.Dialogs;
 using Permastead.Views.Dialogs;
 using Permastead.Views.Views;
 
 using Serilog;
 using Serilog.Context;
-using Services;
 
 using Ursa.Controls;
 
@@ -51,8 +53,30 @@ public partial class PlantsViewModel : ViewModelBase
     
     [ObservableProperty] private string _searchText = "";
     
-    public WindowToastManager? ToastManager { get; set; }
+//message box data
+    private readonly string _shortMessage = "Are you sure you want to delete this planting?";
+    private string _message;
+    private string? _title = "Deletion Confirmation";
     
+    public ObservableCollection<MessageBoxIcon> Icons { get; set; }
+    
+    private MessageBoxIcon _selectedIcon;
+    public MessageBoxIcon SelectedIcon
+    {
+        get => _selectedIcon;
+        set => SetProperty(ref _selectedIcon, value);
+    }
+
+    private MessageBoxResult _result;
+    public MessageBoxResult Result
+    {
+        get => _result;
+        set => SetProperty(ref _result, value);
+    }
+    
+    public ICommand YesNoCommand { get; set; }
+    
+    public WindowToastManager? ToastManager { get; set; }
 
     [RelayCommand]
     private void RefreshData()
@@ -61,23 +85,39 @@ public partial class PlantsViewModel : ViewModelBase
     }
 
     [RelayCommand]
-    private void DeletePlant()
+    private async void DeletePlant()
     {
         bool rtnValue;
 
-        rtnValue = Services.PlantService.DeleteRecord(AppSession.ServiceMode, CurrentPlant);
-        
-        OnPropertyChanged(nameof(CurrentPlant));
-            
-        using (LogContext.PushProperty("PlantsViewModel", this))
+        try
         {
-            if (CurrentPlant.Id == 0) CurrentPlant.Author = AppSession.Instance.CurrentUser;
-            Log.Information("Removed plant: " + CurrentPlant.Description, rtnValue);
+            if (CurrentPlant != null)
+            {
+                await OnYesNoAsync();
+
+                if (Result == MessageBoxResult.Yes)
+                {
+                    rtnValue = Services.PlantService.DeleteRecord(AppSession.ServiceMode, CurrentPlant);
+                    ToastManager?.Show(new Toast("Plant record (" + CurrentPlant.Description + ") has been removed."));
+
+                    OnPropertyChanged(nameof(CurrentPlant));
+
+                    using (LogContext.PushProperty("PlantsViewModel", this))
+                    {
+                        if (CurrentPlant.Id == 0) CurrentPlant.Author = AppSession.Instance.CurrentUser;
+                        Log.Information("Removed plant: " + CurrentPlant.Description, rtnValue);
+
+                    }
+
+                    RefreshDataOnly();
+                }
+            }
         }
-        
-        RefreshDataOnly();
+        catch (Exception e)
+        {
+        }
     }
-    
+
     [RelayCommand]
     private void ClearSearch()
     {
@@ -169,6 +209,12 @@ public partial class PlantsViewModel : ViewModelBase
             }
         }
         
+        YesNoCommand = new AsyncRelayCommand(OnYesNoAsync);
+            
+        Icons = new ObservableCollection<MessageBoxIcon>(
+            Enum.GetValues<MessageBoxIcon>());
+        SelectedIcon = MessageBoxIcon.Question;
+        _message = _shortMessage;
         
         FilterPredicate = Search;
     }
@@ -252,6 +298,7 @@ public partial class PlantsViewModel : ViewModelBase
             
             CurrentPlant.SyncTags();
             rtnValue = Services.PlantService.CommitRecord(AppSession.ServiceMode, CurrentPlant);
+            ToastManager?.Show(new Toast("Plant record (" + CurrentPlant.Description + ") has been updated."));
             
             OnPropertyChanged(nameof(CurrentPlant));
                 
@@ -264,6 +311,17 @@ public partial class PlantsViewModel : ViewModelBase
         
         RefreshDataOnly();
         
+    }
+    
+        
+    private async Task OnYesNoAsync()
+    {
+        await Show(MessageBoxButton.YesNo);
+    }
+    
+    private async Task Show(MessageBoxButton button)
+    {
+        Result = await MessageBox.ShowAsync(_message, _title, icon: SelectedIcon, button:button);
     }
     
 }
