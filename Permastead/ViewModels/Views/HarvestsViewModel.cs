@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using Avalonia.Controls;
 using Avalonia.Controls.Models.TreeDataGrid;
+using Avalonia.Media;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Models;
@@ -91,6 +92,12 @@ public partial class HarvestsViewModel : ViewModelBase
             }
         }
         
+        var centered = new TextColumnOptions<Harvest>
+        {
+            TextTrimming = TextTrimming.None,
+            TextWrapping = TextWrapping.Wrap, TextAlignment = TextAlignment.Center
+        };
+        
         HarvestSource = new FlatTreeDataGridSource<Harvest>(Harvests)
         {
             Columns =
@@ -104,7 +111,7 @@ public partial class HarvestsViewModel : ViewModelBase
                 new TextColumn<Harvest, string>
                     ("Harvest Type", x => x.HarvestType!.Description),
                 new TextColumn<Harvest, long>
-                    ("Measurement", x => x.Measurement),
+                    ("Measurement", x => x.Measurement, GridLength.Auto, centered),
                 new TextColumn<Harvest, string>
                     ("Units", x => x.Units.Description),
                 new TextColumn<Harvest, string>

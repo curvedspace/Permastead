@@ -3,6 +3,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using Avalonia.Controls;
 using Avalonia.Controls.Models.TreeDataGrid;
+using Avalonia.Media;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Models;
@@ -88,6 +89,12 @@ public partial class PreservationViewModel : ViewModelBase
             }
         }
         
+        var centered = new TextColumnOptions<FoodPreservation>
+        {
+            TextTrimming = TextTrimming.None,
+            TextWrapping = TextWrapping.Wrap, TextAlignment = TextAlignment.Center
+        };
+        
         PreservationSource = new FlatTreeDataGridSource<FoodPreservation>(FoodPreservations)
         {
             Columns =
@@ -101,7 +108,7 @@ public partial class PreservationViewModel : ViewModelBase
                 new TextColumn<FoodPreservation, string>
                     ("Harvest Type", x => x.PreservationType!.Description),
                 new TextColumn<FoodPreservation, long>
-                    ("Measurement", x => x.Measurement),
+                    ("Measurement", x => x.Measurement, GridLength.Auto,centered),
                 new TextColumn<FoodPreservation, string>
                     ("Units", x => x.Units.Description),
                 new TextColumn<FoodPreservation, string>
