@@ -54,12 +54,13 @@ public partial class PlantsView : UserControl
         {
             PlantsViewModel plantVm  = (PlantsViewModel)DataContext;
             
-            
             var plantWindow = new PlantWindow();
             var vm = new PlantWindowViewModel();
             
+            vm.ToastManager = _viewModel?.ToastManager;
+            
             plantWindow.DataContext = vm;
-        
+            
             plantWindow.Topmost = true;
             plantWindow.Width = 900;
             plantWindow.Height = 700;
@@ -98,10 +99,9 @@ public partial class PlantsView : UserControl
     {
         try
         {
-            PlantsViewModel vm  = (PlantsViewModel)DataContext;
-            vm.SavePlant();
+            _viewModel.SavePlant();
+            _viewModel?.ToastManager.Show(new Toast("Plant record (" + _viewModel.CurrentPlant.Description + ") has been updated."));
             
-
         }
         catch (Exception exception)
         {

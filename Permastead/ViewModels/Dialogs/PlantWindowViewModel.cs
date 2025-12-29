@@ -4,6 +4,7 @@ using Models;
 using Permastead.ViewModels.Views;
 using Serilog;
 using Serilog.Context;
+using Ursa.Controls;
 
 namespace Permastead.ViewModels.Dialogs;
 
@@ -22,7 +23,8 @@ public partial class PlantWindowViewModel : ViewModelBase
     [ObservableProperty]
     private ObservableCollection<Planting> _plantings = new ObservableCollection<Planting>();
 
-
+    public WindowToastManager? ToastManager { get; set; }
+    
     private PlantingsViewModel _controlViewModel { get; set;  } = new PlantingsViewModel();
     
     public PlantWindowViewModel()
@@ -51,6 +53,8 @@ public partial class PlantWindowViewModel : ViewModelBase
             if (_plant.Id == 0) _plant.Author = AppSession.Instance.CurrentUser;
             Log.Information("Saved planting: " + _plant.Description, rtnValue);
         }
+        
+        ToastManager.Show(new Toast("Plant record (" + _plant.Description + ") has been updated."));
         
         _controlViewModel.RefreshData();
         

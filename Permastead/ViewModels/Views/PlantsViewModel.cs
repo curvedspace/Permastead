@@ -298,7 +298,6 @@ public partial class PlantsViewModel : ViewModelBase
             
             CurrentPlant.SyncTags();
             rtnValue = Services.PlantService.CommitRecord(AppSession.ServiceMode, CurrentPlant);
-            ToastManager?.Show(new Toast("Plant record (" + CurrentPlant.Description + ") has been updated."));
             
             OnPropertyChanged(nameof(CurrentPlant));
                 
