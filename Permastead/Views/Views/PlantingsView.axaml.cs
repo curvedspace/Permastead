@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Input;
@@ -12,6 +13,7 @@ using Services;
 using Permastead.ViewModels.Dialogs;
 using Permastead.ViewModels.Views;
 using Permastead.Views.Dialogs;
+
 using Ursa.Controls;
 using Node = Permastead.ViewModels.Views.Node;
 using NodeType = Permastead.ViewModels.Views.NodeType;
@@ -125,11 +127,6 @@ public partial class PlantingsView : UserControl
         }
 
         plantingWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;
-            
-        // IReadOnlyList<Window>? windows = ((IClassicDesktopStyleApplicationLifetime)Application.Current.ApplicationLifetime).Windows;
-        // Window? parent = windows.First();
-        //
-        // obsWindow.ShowDialog(parent);
             
         plantingWindow.Show();
     }

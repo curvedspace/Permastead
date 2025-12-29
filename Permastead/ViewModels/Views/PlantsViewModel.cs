@@ -1,18 +1,23 @@
 using System;
 using System.Collections.ObjectModel;
-//using System.Drawing;
+
 using Avalonia.Controls;
 using Avalonia.Platform;
 using Avalonia.Media.Imaging;
+
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+
 using Models;
 using Permastead.ViewModels.Dialogs;
 using Permastead.Views.Dialogs;
 using Permastead.Views.Views;
+
 using Serilog;
 using Serilog.Context;
 using Services;
+
+using Ursa.Controls;
 
 namespace Permastead.ViewModels.Views;
 
@@ -45,6 +50,8 @@ public partial class PlantsViewModel : ViewModelBase
     private long _plantsCount;
     
     [ObservableProperty] private string _searchText = "";
+    
+    public WindowToastManager? ToastManager { get; set; }
     
 
     [RelayCommand]

@@ -19,17 +19,34 @@ using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.Processing;
 using SixLabors.ImageSharp.Processing.Processors;
 using SixLabors.ImageSharp.Processing.Processors.Transforms;
+using Ursa.Controls;
 using Image = SixLabors.ImageSharp.Image;
 
 namespace Permastead.Views.Views;
 
 public partial class PlantsView : UserControl
 {
+    private PlantsViewModel? _viewModel;
+    
     public PlantsView()
     {
         InitializeComponent();
     }
 
+    protected override void OnAttachedToVisualTree(VisualTreeAttachmentEventArgs e)
+    {
+        base.OnAttachedToVisualTree(e);
+        if (DataContext is not PlantsViewModel vm) return;
+        _viewModel = vm;
+        _viewModel.ToastManager = new WindowToastManager(TopLevel.GetTopLevel(this)) { MaxItems = 3 };
+    }
+
+    protected override void OnDetachedFromVisualTree(VisualTreeAttachmentEventArgs e)
+    {
+        base.OnDetachedFromVisualTree(e);
+        _viewModel?.ToastManager?.Uninstall();
+    }
+    
     private void Add_OnTapped(object? sender, TappedEventArgs e)
     {
         // add a new plant via a dialog
@@ -83,6 +100,7 @@ public partial class PlantsView : UserControl
         {
             PlantsViewModel vm  = (PlantsViewModel)DataContext;
             vm.SavePlant();
+            
 
         }
         catch (Exception exception)
@@ -196,6 +214,7 @@ public partial class PlantsView : UserControl
                         if (pic != null)
                         {
                             vm.Picture = pic;
+                            vm.ToastManager?.Show(new Toast("Image has been added for " + vm.CurrentPlant.Description + "."));
                         }
                     }
                 }
@@ -233,6 +252,7 @@ public partial class PlantsView : UserControl
             {
                 fi.Delete();
                 vm.GetMetaData();
+                vm.ToastManager?.Show(new Toast("Image has been removed for " + vm.CurrentPlant.Description + "."));
             }
         
         }
