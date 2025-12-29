@@ -6,14 +6,31 @@ using Avalonia.Input;
 using Avalonia.Markup.Xaml;
 using Models;
 using Permastead.ViewModels.Views;
+using Ursa.Controls;
 
 namespace Permastead.Views.Views;
 
 public partial class ProceduresView : UserControl
 {
+    private ProceduresViewModel? _viewModel;
+    
     public ProceduresView()
     {
         InitializeComponent();
+    }
+    
+    protected override void OnAttachedToVisualTree(VisualTreeAttachmentEventArgs e)
+    {
+        base.OnAttachedToVisualTree(e);
+        if (DataContext is not ProceduresViewModel vm) return;
+        _viewModel = vm;
+        _viewModel.ToastManager = new WindowToastManager(TopLevel.GetTopLevel(this)) { MaxItems = 3 };
+    }
+
+    protected override void OnDetachedFromVisualTree(VisualTreeAttachmentEventArgs e)
+    {
+        base.OnDetachedFromVisualTree(e);
+        _viewModel?.ToastManager?.Uninstall();
     }
     
     private void SearchBox_OnKeyDown(object? sender, KeyEventArgs e)
@@ -46,11 +63,6 @@ public partial class ProceduresView : UserControl
     {
         try
         {
-            //var currentItem = sender as ItemsRepeater;
-            //var current = currentItem.Get as StandardOperatingProcedure;
-            
-            //var vm = (ProceduresViewModel)DataContext;
-            //vm.CurrentItem = current;
             
             var currentItem = sender as ListBox;
             var current = currentItem.SelectedValue as StandardOperatingProcedure;

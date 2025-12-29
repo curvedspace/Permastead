@@ -7,6 +7,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Models;
 using Services;
+using Ursa.Controls;
 
 namespace Permastead.ViewModels.Views;
 
@@ -26,6 +27,8 @@ public partial class  ProceduresViewModel : ViewModelBase
     
     [ObservableProperty]
     private string _searchText = "";
+    
+    public WindowToastManager? ToastManager { get; set; }
     
    
     [RelayCommand]
@@ -100,7 +103,11 @@ public partial class  ProceduresViewModel : ViewModelBase
             CurrentItem.LastUpdatedDate = DateTime.Now;
             
             ProceduresService.CommitRecord(AppSession.ServiceMode, CurrentItem);
+            ToastManager?.Show(new Toast("Procedure (" + CurrentItem.Name + ") has been updated."));
+
+            var savedItem = CurrentItem;
             RefreshData();
+            CurrentItem = savedItem;
         }
         catch (Exception e)
         {
