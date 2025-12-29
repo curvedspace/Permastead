@@ -311,8 +311,8 @@ public partial class InventoryViewModel: ViewModelBase
         {
             Columns =
             {
-                new TextColumn<Inventory, DateTime>
-                    ("Date", x => x.CreationDate),
+                new TextColumn<Inventory, string>
+                    ("Date", x => x.StartDateString),
                 new TextColumn<Inventory, string>
                     ("Brand", x => x.Brand),
                 new TextColumn<Inventory, string>

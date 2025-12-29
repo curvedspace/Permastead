@@ -234,6 +234,8 @@ public partial class PreservationViewModel : ViewModelBase
             vm.CurrentItem.Room = "Kitchen";
             vm.CurrentItem.Author = vm.People.First(x => x.Id == AppSession.Instance.CurrentUser.Id);
 
+            vm.PreservationItem = current;
+
             inventoryWindow.DataContext = vm;
 
             inventoryWindow.Topmost = true;

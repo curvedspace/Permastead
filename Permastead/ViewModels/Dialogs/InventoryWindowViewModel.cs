@@ -7,6 +7,7 @@ using Permastead.ViewModels.Views;
 using Permastead.Views.Dialogs;
 using Serilog;
 using Serilog.Context;
+using Services;
 using Ursa.Controls;
 
 namespace Permastead.ViewModels.Dialogs;
@@ -30,6 +31,9 @@ public partial class InventoryWindowViewModel: ViewModelBase
     
     [ObservableProperty] 
     private Inventory _currentItem;
+    
+    [ObservableProperty] 
+    private FoodPreservation _preservationItem;
     
     public InventoryViewModel ControlViewModel { get; set;  } = new InventoryViewModel();
 
@@ -61,23 +65,29 @@ public partial class InventoryWindowViewModel: ViewModelBase
         _currentItem.Author = _people.First(x => x.Id == inventory.Author.Id);
 
     }
-    
+
     public void SaveRecord()
     {
         bool rtnValue;
 
         rtnValue = Services.InventoryService.CommitRecord(AppSession.ServiceMode, _currentItem);
-        
+
         OnPropertyChanged(nameof(_currentItem));
-            
+
         using (LogContext.PushProperty("PersonViewModel", this))
         {
             Log.Information("Saved inventory item: " + _currentItem.Description, rtnValue);
         }
-        
+
         ControlViewModel.RefreshData();
         ControlViewModel.ToastManager?.Show(new Toast("Inventory has been updated."));
-        
+
+        if (PreservationItem != null)
+        {
+            //set its end date to today to indicate that it has been moved to inventory
+            PreservationItem.EndDate = DateTime.Now;
+            FoodPreservationService.CommitRecord(AppSession.ServiceMode, PreservationItem);
+        }
     }
     
 }
