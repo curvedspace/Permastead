@@ -1000,7 +1000,10 @@ namespace DataAccess.Local
 
 			#region Vendor
 
-			var v = new Vendor { Code = "UNKNOWN", Description = "Unknown", Rating = 0 };
+			var v = new Vendor { Code = "HM", Description = "Homemade", Rating = 0 };
+			VendorRepository.Insert(v);
+			
+			v = new Vendor { Code = "UNKNOWN", Description = "Unknown", Rating = 0 };
             VendorRepository.Insert(v);
 
             #endregion
@@ -1321,7 +1324,7 @@ namespace DataAccess.Local
 				Description = "Learn about Permastead",
 				Assignee = new Person(2),
 				Assigner = new Person(1),
-				DueDate = DateTime.Today.AddDays(14),
+				DueDate = DateTime.Today.AddDays(28),
 				ToDoStatus = new ToDoStatus(1),
 				ToDoType = new ToDoType(6),	//educational
 				PercentDone = 0
