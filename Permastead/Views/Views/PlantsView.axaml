@@ -219,10 +219,10 @@
                     CornerRadius="3"
                     Padding="10" Margin="10,0,10,10">
             <Grid ColumnDefinitions="Auto,Auto,Auto,Auto,Auto,*" RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto"  Margin="20">
-                <TextBlock Grid.Row="0" Grid.Column="0" Margin="20">ID:</TextBlock>
-                <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding CurrentPlant.Id }" IsEnabled="False" Margin="20"></TextBox>
-                <Label Grid.Row="0" Margin="20" Grid.Column="2">Code:</Label>
-                <TextBox Grid.Row="0" Grid.Column="3" Text="{Binding CurrentPlant.Code }" Margin="20"></TextBox>
+                <TextBlock Grid.Row="0" Grid.Column="0" Margin="20,35,10,10">ID:</TextBlock>
+                <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding CurrentPlant.Id }" MaxWidth="100" Margin="20,35,20,20"></TextBlock>
+                <Label Grid.Row="0" Margin="20,35,20,20" Grid.Column="2">Code:</Label>
+                <TextBox Grid.Row="0" Grid.Column="3" Text="{Binding CurrentPlant.Code }" Width="200" Margin="20,30,20,20"></TextBox>
                 <TextBlock Grid.Row="1" Grid.Column="0" Margin="20,30,20,20">Description:</TextBlock>
                 <TextBox Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3"  Text="{Binding CurrentPlant.Description }" Margin="20"></TextBox>
     
