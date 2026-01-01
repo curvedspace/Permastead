@@ -182,7 +182,7 @@ public partial class InventoryViewModel: ViewModelBase
             CurrentObservation.Author!.Id = AppSession.Instance.CurrentUser.Id;
             CurrentObservation.Inventory = CurrentItem;
             CurrentObservation.AsOfDate = DateTime.Today;
-            CurrentObservation.CommentType!.Id = 2;
+            CurrentObservation.CommentType!.Id = 9;
             
             InventoryService.AddInventoryObservation(AppSession.ServiceMode, CurrentObservation);
             

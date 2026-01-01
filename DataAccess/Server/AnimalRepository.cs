@@ -138,6 +138,30 @@ public class AnimalRepository
 
         return rtnValue;
     }
+    
+    public static bool UpdateAnimalObservation(string connectionString, Observation obs)
+    {
+        var rtnValue = false;
+
+        var sql = "UPDATE AnimalObservation SET Comment = @Comment  " +
+                  "WHERE  id = @Id; ";
+
+        using (var connection = new NpgsqlConnection(connectionString))
+        {
+            connection.Open();
+
+            using (var command = connection.CreateCommand())
+            {
+                command.CommandText = sql;
+                command.Parameters.AddWithValue(":id", obs.Id);
+                command.Parameters.AddWithValue(":comment", obs.Comment);
+
+                rtnValue = (command.ExecuteNonQuery() == 1);
+            }
+        }
+
+        return rtnValue;
+    }
 
     public static List<AnimalObservation> GetAllAnimalObservations(string connectionString)
     {
@@ -174,6 +198,8 @@ public class AnimalRepository
                         o.CommentType = new CommentType();
                         o.CommentType.Id = Convert.ToInt64(dr[4].ToString());
                         o.CommentType.Description = dr[5].ToString();
+                        // o.CommentType.Id = -2;
+                        // o.CommentType.Description = "Animal";
 
                         o.Author = new Person();
                         o.Author.Id = Convert.ToInt64(dr[6].ToString());

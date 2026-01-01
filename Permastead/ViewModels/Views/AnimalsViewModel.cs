@@ -158,7 +158,7 @@ public partial class AnimalsViewModel : ViewModelBase
             CurrentObservation.Author = AppSession.Instance.CurrentUser;
             CurrentObservation.Animal = CurrentItem;
             CurrentObservation.AsOfDate = DateTime.Today;
-            CurrentObservation.CommentType!.Id = 2;
+            CurrentObservation.CommentType!.Id = 4;
             
             AnimalService.AddAnimalObservation(AppSession.ServiceMode, CurrentObservation);
             

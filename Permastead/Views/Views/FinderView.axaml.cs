@@ -163,9 +163,8 @@ public partial class FinderView : UserControl
                    
                     case "Observation":
                        var obs = ObservationsService.GetObservationById(AppSession.ServiceMode, aRecord.Entity.Id);
-                       var vm = new ObservationWindowViewModel();
-                       vm.Observation = obs;
                        
+                       var vm = new ObservationWindowViewModel(obs, new ObservationsViewModel());
                        var obsWindow = new ObservationWindow();
                        obsWindow.DataContext = vm;
                        

@@ -37,6 +37,13 @@ public partial class ObservationWindowViewModel : ViewModelBase
     public ObservationWindowViewModel()
     {
         _observation = new Observation();
+        
+        CommentTypes =
+            new ObservableCollection<CommentType>(
+                Services.ObservationsService.GetCommentTypes(AppSession.ServiceMode));
+        // _observation.CommentType = CommentTypes.First(x => x.Id == _observation.CommentType.Id);
+        
+        OnPropertyChanged(nameof(_observation));
     }
     
     public void SaveObservation()

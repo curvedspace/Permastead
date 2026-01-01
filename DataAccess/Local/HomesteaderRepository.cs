@@ -995,6 +995,24 @@ namespace DataAccess.Local
             
             ct = new CommentType { Code = "YIR", Description = "Year In Review", Author = new Person(1) };
             CommentTypeRepository.Insert(ct);
+            
+            ct = new CommentType { Code = "A", Description = "Animal", Author = new Person(1) };
+            CommentTypeRepository.Insert(ct);
+            
+            ct = new CommentType { Code = "S", Description = "Seeds", Author = new Person(1) };
+            CommentTypeRepository.Insert(ct);
+            
+            ct = new CommentType { Code = "C", Description = "Contacts", Author = new Person(1) };
+            CommentTypeRepository.Insert(ct);
+            
+            ct = new CommentType { Code = "PG", Description = "Planting", Author = new Person(1) };
+            CommentTypeRepository.Insert(ct);
+            
+            ct = new CommentType { Code = "PR", Description = "Preservation", Author = new Person(1) };
+            CommentTypeRepository.Insert(ct);
+            
+            ct = new CommentType { Code = "I", Description = "Inventory", Author = new Person(1) };
+            CommentTypeRepository.Insert(ct);
 
 			#endregion
 

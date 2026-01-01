@@ -159,7 +159,7 @@ public partial class SeedsViewModel : ViewModelBase
             CurrentObservation.Author!.Id = AppSession.Instance.CurrentUser.Id;
             CurrentObservation.SeedPacket = CurrentItem;
             CurrentObservation.AsOfDate = DateTime.Today;
-            CurrentObservation.CommentType!.Id = 2;
+            CurrentObservation.CommentType!.Id = 5;
             
             SeedPacketService.AddObservation(AppSession.ServiceMode, CurrentObservation);
             

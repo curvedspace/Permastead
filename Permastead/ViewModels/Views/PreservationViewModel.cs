@@ -138,7 +138,7 @@ public partial class PreservationViewModel : ViewModelBase
             CurrentObservation.Author = AppSession.Instance.CurrentUser;
             CurrentObservation.FoodPreservation = CurrentItem;
             CurrentObservation.AsOfDate = DateTime.Today;
-            CurrentObservation.CommentType!.Id = 2;
+            CurrentObservation.CommentType!.Id = 8;
             
             FoodPreservationService.AddPreservationObservation(AppSession.ServiceMode, CurrentObservation);
             

@@ -373,7 +373,7 @@ public partial class PlantingsViewModel : ViewModelBase
             CurrentObservation.Author = AppSession.Instance.CurrentUser;
             CurrentObservation.Planting = CurrentItem;
             CurrentObservation.AsOfDate = DateTime.Today;
-            CurrentObservation.CommentType!.Id = 2;
+            CurrentObservation.CommentType!.Id = 7;
             
             PlantingsService.AddPlantingObservation(AppSession.ServiceMode, CurrentObservation);
             

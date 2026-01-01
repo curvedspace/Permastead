@@ -131,6 +131,20 @@ namespace Services
                 commentTypes = DataAccess.Server.CommentTypeRepository.GetAll(DataConnection.GetServerConnectionString());
             }
 
+            // var ct = new CommentType() { Id = -1, Code = "C", Description = "Contact" };
+            // commentTypes.Add(ct);
+            //
+            // ct = new CommentType() { Id = -2, Code = "A", Description = "Animal" };
+            // commentTypes.Add(ct);
+            //
+            // ct = new CommentType() { Id = -3, Code = "PG", Description = "Planting" };
+            // commentTypes.Add(ct);
+            //
+            // ct = new CommentType() { Id = -4, Code = "S", Description = "Seeds" };
+            // commentTypes.Add(ct);
+            
+            commentTypes = commentTypes.OrderBy(x => x.Description).ToList();
+            
             return commentTypes;
         }
 
@@ -150,6 +164,13 @@ namespace Services
             return rtnValue;
         }
         
+        /// <summary>
+        /// Commits the observation record to the correct table.
+        /// There are different tables depending on the observation type for updates.
+        /// </summary>
+        /// <param name="mode"></param>
+        /// <param name="obs"></param>
+        /// <returns></returns>
         public static bool CommitRecord(ServiceMode mode, Observation obs)
         {
             var rtnValue = false;
@@ -157,19 +178,67 @@ namespace Services
             if (mode == ServiceMode.Local)
             {
                 if (obs.Id == 0)
+                {
                     rtnValue = ObservationRepository.InsertObservation(DataConnection.GetLocalDataSource(), obs);
+                }
                 else
                 {
-                    rtnValue = ObservationRepository.UpdateObservation(DataConnection.GetLocalDataSource(), obs);
+                    switch (obs.CommentTypeId)
+                    {
+                        case 4: //animal
+                            rtnValue = AnimalRepository.UpdateAnimalObservation(DataConnection.GetLocalDataSource(), obs);
+                            break;
+                        case 5: //contact
+                            break;
+                        case 6: //seeds
+                            break;
+                        case 7: //planting
+                            break;
+                        case 8: //preservation
+                            break;
+                        case 9: //inventory
+                            break;
+                        default:
+                            rtnValue = ObservationRepository.UpdateObservation(DataConnection.GetLocalDataSource(),
+                                obs);
+                            break;
+                    }
                 }
             }
             else
             {
                 if (obs.Id == 0)
-                    rtnValue = DataAccess.Server.ObservationRepository.InsertObservation(DataConnection.GetServerConnectionString(), obs);
+                {
+                    rtnValue = DataAccess.Server.ObservationRepository.InsertObservation(DataConnection.GetServerDataSource(), obs);
+                }
                 else
                 {
-                    rtnValue = DataAccess.Server.ObservationRepository.UpdateObservation(DataConnection.GetServerConnectionString(), obs);
+                    {
+                        switch (obs.CommentTypeId)
+                        {
+                            case 4: //animal
+                                rtnValue = DataAccess.Server.AnimalRepository.UpdateAnimalObservation(DataConnection.GetServerDataSource(), obs);
+                                break;
+                            case 5: //contact
+                                rtnValue = DataAccess.Server.PersonRepository.UpdatePersonObservation(DataConnection.GetServerDataSource(), obs);
+                                break;
+                            case 6: //seeds
+                                rtnValue = DataAccess.Server.SeedPacketRepository.UpdateSeedPacketObservation(DataConnection.GetServerDataSource(), obs);
+                                break;
+                            case 7: //planting
+                                rtnValue = DataAccess.Server.PlantingsRepository.UpdatePlantingObservation(DataConnection.GetServerDataSource(), obs);
+                                break;
+                            case 8: //preservation
+                                rtnValue = DataAccess.Server.PreservationRepository.UpdatePreservationObservation(DataConnection.GetServerDataSource(), obs);
+                                break;
+                            case 9: //inventory
+                                rtnValue = DataAccess.Server.InventoryRepository.UpdateInventoryObservation(DataConnection.GetServerDataSource(), obs);
+                                break;
+                            default:
+                                rtnValue = DataAccess.Server.ObservationRepository.UpdateObservation(DataConnection.GetServerDataSource(), obs);
+                                break;
+                        }
+                    }
                 }
             }
 

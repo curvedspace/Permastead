@@ -382,6 +382,30 @@ public class SeedPacketRepository
 
         return rtnValue;
     }
+    
+    public static bool UpdateSeedPacketObservation(string connectionString, Observation obs)
+    {
+        var rtnValue = false;
+
+        var sql = "UPDATE SeedPacketObservation SET Comment = @Comment  " +
+                  "WHERE  id = @Id; ";
+
+        using (var connection = new SqliteConnection(connectionString))
+        {
+            connection.Open();
+
+            using (var command = connection.CreateCommand())
+            {
+                command.CommandText = sql;
+                command.Parameters.AddWithValue(":id", obs.Id);
+                command.Parameters.AddWithValue(":comment", obs.Comment);
+
+                rtnValue = (command.ExecuteNonQuery() == 1);
+            }
+        }
+
+        return rtnValue;
+    }
 
     public static List<SeedPacketObservation> GetAllObservationsForSeedPacket(string connectionString, long plantingId)
     {
