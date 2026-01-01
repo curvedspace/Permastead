@@ -1,4 +1,5 @@
 using DataAccess;
+using DataAccess.Local;
 using Models;
 
 namespace Services;
@@ -81,6 +82,22 @@ public class FoodPreservationService
         else
         {
             obs = DataAccess.Server.PreservationRepository.GetAllObservationsForPreservation(DataConnection.GetServerConnectionString(), id);
+        }
+
+        return obs;
+    }
+    
+    public static List<FoodPreservationObservation> GetAllPreservationObservations(ServiceMode mode)
+    {
+        var obs = new List<FoodPreservationObservation>();
+
+        if (mode == ServiceMode.Local)
+        {
+            obs = PreservationRepository.GetAllPreservationObservations(DataConnection.GetLocalDataSource());
+        }
+        else
+        {
+            obs = DataAccess.Server.PreservationRepository.GetAllPreservationObservations(DataConnection.GetServerConnectionString());
         }
 
         return obs;

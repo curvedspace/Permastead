@@ -225,7 +225,7 @@ public class InventoryService
         return obs;
     }
     
-    public static List<InventoryObservation> GetAllPersonObservations(ServiceMode mode)
+    public static List<InventoryObservation> GetAllInventoryObservations(ServiceMode mode)
     {
         var obs = new List<InventoryObservation>();
 

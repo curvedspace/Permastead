@@ -38,6 +38,8 @@ namespace Services
             var seedPacketObs = PlantingsService.GetSeedPacketObservations(mode);
             var personObs = PersonService.GetAllPersonObservations(mode);
             var animalsObs = AnimalService.GetAnimalObservations(mode);
+            var invObs = InventoryService.GetAllInventoryObservations(mode);
+            var presObs = FoodPreservationService.GetAllPreservationObservations(mode);
             
             // add the planting observations 
             foreach (var po in plantingObs)
@@ -110,6 +112,44 @@ namespace Services
                     EndDate = ao.EndDate,
                     Id = ao.Id,
                     StartDate = ao.StartDate
+                };
+                
+                observations.Add(newObs);
+            }
+            
+            // add the inventory observations 
+            foreach (var io in invObs)
+            {
+                var newObs = new Observation()
+                {
+                    AsOfDate = io.AsOfDate,
+                    Author = io.Author,
+                    Annotation = "(I:" + io.Inventory.Description + ")",
+                    Comment = io.Comment,
+                    CommentType = io.CommentType,
+                    CreationDate = io.CreationDate,
+                    EndDate = io.EndDate,
+                    Id = io.Id,
+                    StartDate = io.StartDate
+                };
+                
+                observations.Add(newObs);
+            }
+            
+            // add the food preservation observations 
+            foreach (var observation in presObs)
+            {
+                var newObs = new Observation()
+                {
+                    AsOfDate = observation.AsOfDate,
+                    Author = observation.Author,
+                    Annotation = "(PR:" + observation.FoodPreservation.Name + ")",
+                    Comment = observation.Comment,
+                    CommentType = observation.CommentType,
+                    CreationDate = observation.CreationDate,
+                    EndDate = observation.EndDate,
+                    Id = observation.Id,
+                    StartDate = observation.StartDate
                 };
                 
                 observations.Add(newObs);
