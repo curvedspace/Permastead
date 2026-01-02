@@ -251,6 +251,155 @@ namespace DataAccess.Local
                 }
             }
 
+            
+            sql = "SELECT o.Comment, o.CreationDate, o.Id, ct.Description " + 
+                  "FROM PersonObservation o, CommentType ct WHERE ct.Id = o.CommentTypeId AND lower(o.Comment) LIKE '%" + searchText.ToLowerInvariant() + "%' ORDER BY o.CreationDate DESC"; 
+
+            using (IDbConnection connection = new SqliteConnection(connectionString))
+            {
+                connection.Open();
+
+                using (IDbCommand command = connection.CreateCommand())
+                {
+                    command.CommandText = sql;
+                    var dr = command.ExecuteReader();
+
+                    while (dr.Read())
+                    {
+                        var result = new SearchResult();
+                        result.AsOfDate = Convert.ToDateTime(dr[1].ToString());
+                        result.IsCurrent = true;
+                        result.Entity.Id =  Convert.ToInt64(dr[2].ToString());
+                        result.Entity.Name = "Person Observation";
+                        result.SubType = dr[3].ToString()!;
+                        result.FieldName = "Comment";
+                        result.SearchText = TextUtils.GetSubstring(dr[0].ToString()!,0,DataConnection.SearchTextLength, true);
+                        
+                        results.Add(result);
+                    }
+                }
+            }
+            
+            // inventory
+            sql = "SELECT o.Comment, o.CreationDate, o.Id, ct.Description " + 
+                  "FROM InventoryObservation o, CommentType ct WHERE ct.Id = o.CommentTypeId AND lower(o.Comment) LIKE '%" + searchText.ToLowerInvariant() + "%' ORDER BY o.CreationDate DESC"; 
+
+            using (IDbConnection connection = new SqliteConnection(connectionString))
+            {
+                connection.Open();
+
+                using (IDbCommand command = connection.CreateCommand())
+                {
+                    command.CommandText = sql;
+                    var dr = command.ExecuteReader();
+
+                    while (dr.Read())
+                    {
+                        var result = new SearchResult();
+                        result.AsOfDate = Convert.ToDateTime(dr[1].ToString());
+                        result.IsCurrent = true;
+                        result.Entity.Id = Convert.ToInt64(dr[2].ToString());
+                        result.Entity.Name = "Observation";
+                        result.SubType = dr[3].ToString()!;
+                        result.FieldName = "Comment";
+                        result.SearchText =
+                            TextUtils.GetSubstring(dr[0].ToString()!, 0, DataConnection.SearchTextLength, true);
+
+                        results.Add(result);
+                    }
+                }
+            }
+            
+            // animals
+            sql = "SELECT o.Comment, o.CreationDate, o.Id, ct.Description " + 
+                  "FROM AnimalObservation o, CommentType ct WHERE ct.Id = o.CommentTypeId AND lower(o.Comment) LIKE '%" + searchText.ToLowerInvariant() + "%' ORDER BY o.CreationDate DESC"; 
+
+            using (IDbConnection connection = new SqliteConnection(connectionString))
+            {
+                connection.Open();
+
+                using (IDbCommand command = connection.CreateCommand())
+                {
+                    command.CommandText = sql;
+                    var dr = command.ExecuteReader();
+
+                    while (dr.Read())
+                    {
+                        var result = new SearchResult();
+                        result.AsOfDate = Convert.ToDateTime(dr[1].ToString());
+                        result.IsCurrent = true;
+                        result.Entity.Id = Convert.ToInt64(dr[2].ToString());
+                        result.Entity.Name = "Observation";
+                        result.SubType = dr[3].ToString()!;
+                        result.FieldName = "Comment";
+                        result.SearchText =
+                            TextUtils.GetSubstring(dr[0].ToString()!, 0, DataConnection.SearchTextLength, true);
+
+                        results.Add(result);
+                    }
+                }
+            }
+            
+            // seed packet
+            sql = "SELECT o.Comment, o.CreationDate, o.Id, ct.Description " + 
+                  "FROM SeedPacketObservation o, CommentType ct WHERE ct.Id = o.CommentTypeId AND lower(o.Comment) LIKE '%" + searchText.ToLowerInvariant() + "%' ORDER BY o.CreationDate DESC"; 
+
+            using (IDbConnection connection = new SqliteConnection(connectionString))
+            {
+                connection.Open();
+
+                using (IDbCommand command = connection.CreateCommand())
+                {
+                    command.CommandText = sql;
+                    var dr = command.ExecuteReader();
+
+                    while (dr.Read())
+                    {
+                        var result = new SearchResult();
+                        result.AsOfDate = Convert.ToDateTime(dr[1].ToString());
+                        result.IsCurrent = true;
+                        result.Entity.Id = Convert.ToInt64(dr[2].ToString());
+                        result.Entity.Name = "Observation";
+                        result.SubType = dr[3].ToString()!;
+                        result.FieldName = "Comment";
+                        result.SearchText =
+                            TextUtils.GetSubstring(dr[0].ToString()!, 0, DataConnection.SearchTextLength, true);
+
+                        results.Add(result);
+                    }
+                }
+            }
+            
+            // planting
+            sql = "SELECT o.Comment, o.CreationDate, o.Id, ct.Description " + 
+                  "FROM PlantingObservation o, CommentType ct WHERE ct.Id = o.CommentTypeId AND lower(o.Comment) LIKE '%" + searchText.ToLowerInvariant() + "%' ORDER BY o.CreationDate DESC"; 
+
+            using (IDbConnection connection = new SqliteConnection(connectionString))
+            {
+                connection.Open();
+
+                using (IDbCommand command = connection.CreateCommand())
+                {
+                    command.CommandText = sql;
+                    var dr = command.ExecuteReader();
+
+                    while (dr.Read())
+                    {
+                        var result = new SearchResult();
+                        result.AsOfDate = Convert.ToDateTime(dr[1].ToString());
+                        result.IsCurrent = true;
+                        result.Entity.Id = Convert.ToInt64(dr[2].ToString());
+                        result.Entity.Name = "Observation";
+                        result.SubType = dr[3].ToString()!;
+                        result.FieldName = "Comment";
+                        result.SearchText =
+                            TextUtils.GetSubstring(dr[0].ToString()!, 0, DataConnection.SearchTextLength, true);
+
+                        results.Add(result);
+                    }
+                }
+            }
+            
             return results;
         }
         

@@ -170,18 +170,7 @@ namespace Services
             {
                 commentTypes = DataAccess.Server.CommentTypeRepository.GetAll(DataConnection.GetServerConnectionString());
             }
-
-            // var ct = new CommentType() { Id = -1, Code = "C", Description = "Contact" };
-            // commentTypes.Add(ct);
-            //
-            // ct = new CommentType() { Id = -2, Code = "A", Description = "Animal" };
-            // commentTypes.Add(ct);
-            //
-            // ct = new CommentType() { Id = -3, Code = "PG", Description = "Planting" };
-            // commentTypes.Add(ct);
-            //
-            // ct = new CommentType() { Id = -4, Code = "S", Description = "Seeds" };
-            // commentTypes.Add(ct);
+            
             
             commentTypes = commentTypes.OrderBy(x => x.Description).ToList();
             
@@ -229,14 +218,19 @@ namespace Services
                             rtnValue = AnimalRepository.UpdateAnimalObservation(DataConnection.GetLocalDataSource(), obs);
                             break;
                         case 5: //contact
+                            rtnValue = PersonRepository.UpdatePersonObservation(DataConnection.GetLocalDataSource(), obs);
                             break;
                         case 6: //seeds
+                            rtnValue = SeedPacketRepository.UpdateSeedPacketObservation(DataConnection.GetLocalDataSource(), obs);
                             break;
                         case 7: //planting
+                            rtnValue = PlantingsRepository.UpdatePlantingObservation(DataConnection.GetLocalDataSource(), obs);
                             break;
                         case 8: //preservation
+                            rtnValue = PreservationRepository.UpdatePreservationObservation(DataConnection.GetLocalDataSource(), obs);
                             break;
                         case 9: //inventory
+                            rtnValue = InventoryRepository.UpdateInventoryObservation(DataConnection.GetLocalDataSource(), obs);
                             break;
                         default:
                             rtnValue = ObservationRepository.UpdateObservation(DataConnection.GetLocalDataSource(),
