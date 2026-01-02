@@ -159,24 +159,24 @@ public partial class FinderView : UserControl
                         
                         proceduresWindow.Show();
                         break;
+                    
+                    case "Observation": 
+                        var subType = aRecord.SubType;
+                        var obs = ObservationsService.GetObservationById(AppSession.ServiceMode, aRecord.Entity.Id, subType);
+                        
+                        var vm = new ObservationWindowViewModel(obs, new ObservationsViewModel());
+                        var obsWindow = new ObservationWindow();
+                        obsWindow.DataContext = vm;
 
-                   
-                    case "Observation":
-                       var obs = ObservationsService.GetObservationById(AppSession.ServiceMode, aRecord.Entity.Id);
-                       
-                       var vm = new ObservationWindowViewModel(obs, new ObservationsViewModel());
-                       var obsWindow = new ObservationWindow();
-                       obsWindow.DataContext = vm;
-                       
-                       obsWindow.Topmost = true;
-                       obsWindow.Width = 550;
-                       obsWindow.Height = 350;
-                       obsWindow.Opacity = 0.9;
-                       obsWindow.Title = "Observation";
-                       obsWindow.WindowStartupLocation = WindowStartupLocation.CenterOwner;
-                       
-                       obsWindow.Show();
-                       break;
+                        obsWindow.Topmost = true;
+                        obsWindow.Width = 550;
+                        obsWindow.Height = 350;
+                        obsWindow.Opacity = 0.9;
+                        obsWindow.Title = "Observation";
+                        obsWindow.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+
+                        obsWindow.Show();
+                        break;
                        
                 }
             }

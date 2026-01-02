@@ -349,17 +349,68 @@ namespace Services
 
         }
 
-        public static Observation GetObservationById(ServiceMode mode, long id)
+        public static Observation GetObservationById(ServiceMode mode, long id, string subType)
         {
             Observation obs = null;
 
             if (mode == ServiceMode.Local)
             {
-                obs = ObservationRepository.GetObservationById(DataConnection.GetLocalDataSource(),id);
+                switch (subType)
+                {
+                    case "Animal":
+                        obs = AnimalRepository.GetObservationById(DataConnection.GetServerConnectionString(), id);
+                        break;
+                    case "Contact":
+                        obs = PersonRepository.GetObservationById(DataConnection.GetServerConnectionString(), id);
+                        break;
+                    case "Planting":
+                        obs = PlantingsRepository.GetObservationById(DataConnection.GetServerConnectionString(), id);
+                        break;
+                    case "Preservation":
+                        obs = PreservationRepository.GetObservationById(DataConnection.GetServerConnectionString(), id);
+                        break;
+                    case "Inventory":
+                        obs = InventoryRepository.GetObservationById(DataConnection.GetServerConnectionString(), id);
+                        break;
+                    case "Seeds":
+                        obs = SeedPacketRepository.GetObservationById(DataConnection.GetServerConnectionString(), id);
+                        break;
+                    default:
+                    {
+                        obs = ObservationRepository.GetObservationById(DataConnection.GetServerConnectionString(), id);
+                        break;
+                    }
+                }
             }
             else
             {
-                obs = DataAccess.Server.ObservationRepository.GetObservationById(DataConnection.GetServerConnectionString(),id);
+                switch (subType)
+                {
+                    case "Animal":
+                        obs = DataAccess.Server.AnimalRepository.GetObservationById(DataConnection.GetServerConnectionString(),id); 
+                        break;
+                    case "Contact":
+                        obs = DataAccess.Server.PersonRepository.GetObservationById(DataConnection.GetServerConnectionString(),id); 
+                        break;
+                    case "Planting":
+                        obs = DataAccess.Server.PlantingsRepository.GetObservationById(DataConnection.GetServerConnectionString(),id); 
+                        break;
+                    case "Preservation":
+                        obs = DataAccess.Server.PreservationRepository.GetObservationById(DataConnection.GetServerConnectionString(),id); 
+                        break;
+                    case "Inventory":
+                        obs = DataAccess.Server.InventoryRepository.GetObservationById(DataConnection.GetServerConnectionString(),id); 
+                        break;
+                    case "Seeds":
+                        obs = DataAccess.Server.SeedPacketRepository.GetObservationById(DataConnection.GetServerConnectionString(),id); 
+                        break;
+                    default:
+                    {
+                        obs = DataAccess.Server.ObservationRepository.GetObservationById(DataConnection.GetServerConnectionString(),id); 
+                        break;
+                    }
+                }
+                
             }
 
             return obs;
