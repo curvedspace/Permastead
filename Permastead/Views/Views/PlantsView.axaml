@@ -242,7 +242,7 @@
                     <Image x:Name="PlantImage" Margin="20,0,20,0" Height="290" Width="218" Source="{Binding Picture}" Stretch="UniformToFill">
                         <Image.ContextFlyout>
                             <MenuFlyout>
-                                <MenuItem Header="Add Image" Click="MenuItemAddImage_OnClick"/>
+                                <MenuItem Header="Add Image..." Click="MenuItemAddImage_OnClick"/>
                                 <MenuItem Header="-"/>
                                 <MenuItem Header="Remove Image" Click="MenuItemRemoveImage_OnClick"/>
                             </MenuFlyout>
