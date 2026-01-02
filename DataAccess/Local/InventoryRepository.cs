@@ -581,7 +581,7 @@ public static class InventoryRepository
             InventoryObservation o;
 
             var sql = "SELECT o.Comment, o.CreationDate, o.StartDate, o.EndDate, o.CommentTypeId, " +
-                      "ct.Description, o.AuthorId, p.FirstName, p.LastName, o.Id, o.PersonId, pp.Description " +
+                      "ct.Description, o.AuthorId, p.FirstName, p.LastName, o.Id, o.AuthorId, pp.Description " +
                       "FROM InventoryObservation o, CommentType ct, Person p, Inventory pp " +
                       "WHERE ct.Id = o.CommentTypeId " +
                       "AND o.InventoryId = pp.Id " +

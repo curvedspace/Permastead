@@ -270,7 +270,7 @@ namespace DataAccess.Local
                         result.AsOfDate = Convert.ToDateTime(dr[1].ToString());
                         result.IsCurrent = true;
                         result.Entity.Id =  Convert.ToInt64(dr[2].ToString());
-                        result.Entity.Name = "Person Observation";
+                        result.Entity.Name = "Observation";
                         result.SubType = dr[3].ToString()!;
                         result.FieldName = "Comment";
                         result.SearchText = TextUtils.GetSubstring(dr[0].ToString()!,0,DataConnection.SearchTextLength, true);

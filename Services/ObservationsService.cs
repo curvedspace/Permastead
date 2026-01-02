@@ -358,26 +358,26 @@ namespace Services
                 switch (subType)
                 {
                     case "Animal":
-                        obs = AnimalRepository.GetObservationById(DataConnection.GetServerConnectionString(), id);
+                        obs = AnimalRepository.GetObservationById(DataConnection.GetLocalDataSource(), id);
                         break;
                     case "Contact":
-                        obs = PersonRepository.GetObservationById(DataConnection.GetServerConnectionString(), id);
+                        obs = PersonRepository.GetObservationById(DataConnection.GetLocalDataSource(), id);
                         break;
                     case "Planting":
-                        obs = PlantingsRepository.GetObservationById(DataConnection.GetServerConnectionString(), id);
+                        obs = PlantingsRepository.GetObservationById(DataConnection.GetLocalDataSource(), id);
                         break;
                     case "Preservation":
-                        obs = PreservationRepository.GetObservationById(DataConnection.GetServerConnectionString(), id);
+                        obs = PreservationRepository.GetObservationById(DataConnection.GetLocalDataSource(), id);
                         break;
                     case "Inventory":
-                        obs = InventoryRepository.GetObservationById(DataConnection.GetServerConnectionString(), id);
+                        obs = InventoryRepository.GetObservationById(DataConnection.GetLocalDataSource(), id);
                         break;
                     case "Seeds":
-                        obs = SeedPacketRepository.GetObservationById(DataConnection.GetServerConnectionString(), id);
+                        obs = SeedPacketRepository.GetObservationById(DataConnection.GetLocalDataSource(), id);
                         break;
                     default:
                     {
-                        obs = ObservationRepository.GetObservationById(DataConnection.GetServerConnectionString(), id);
+                        obs = ObservationRepository.GetObservationById(DataConnection.GetLocalDataSource(), id);
                         break;
                     }
                 }
