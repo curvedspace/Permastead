@@ -925,6 +925,16 @@ namespace DataAccess.Local
             q = new Quote { Description = "The patience you need for big things, is developed by your patience with the little things.", AuthorName = "Kevin Kelly" };
             QuoteRepository.Insert(DataConnection.GetLocalDataSource(), q);
             
+            q = new Quote { Description = "We’ve lost too much of the beauty of life. I believe that we’re being asked to realign ourselves with the earth.", AuthorName = "Janisse Ray" };
+            QuoteRepository.Insert(DataConnection.GetLocalDataSource(), q);
+            
+            q = new Quote { Description = "Education is the kindling of a flame, not the filling of a vessel.", AuthorName = "Socrates" };
+            QuoteRepository.Insert(DataConnection.GetLocalDataSource(), q);
+            
+            q = new Quote { Description = "Prefer knowledge to wealth, for the one is transitory, the other perpetual.", AuthorName = "Socrates" };
+            QuoteRepository.Insert(DataConnection.GetLocalDataSource(), q);
+
+	        
             #endregion
             
             #region Settings
