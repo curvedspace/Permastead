@@ -933,8 +933,22 @@ namespace DataAccess.Local
             
             q = new Quote { Description = "Prefer knowledge to wealth, for the one is transitory, the other perpetual.", AuthorName = "Socrates" };
             QuoteRepository.Insert(DataConnection.GetLocalDataSource(), q);
+            
+            q = new Quote { Description = "If I had my life to live over, I would start barefoot earlier in the spring and stay that way later in the fall.", AuthorName = "Nadine Stair" };
+            QuoteRepository.Insert(DataConnection.GetLocalDataSource(), q);
+            
+            q = new Quote { Description = "A lack of patience changes the outcome.", AuthorName = "Shane Parrish" };
+            QuoteRepository.Insert(DataConnection.GetLocalDataSource(), q);
 
-	        
+            q = new Quote { Description = "Permaculture is an integrated, evolving system of perennial and self-perpetuating plants and animal species useful to man.", AuthorName = "Bill Mollison" };
+            QuoteRepository.Insert(DataConnection.GetLocalDataSource(), q);
+            
+            q = new Quote { Description = "You don’t have a snail problem, you have a duck deficiency.", AuthorName = "Bill Mollison" };
+            QuoteRepository.Insert(DataConnection.GetLocalDataSource(), q);
+            
+            q = new Quote { Description = "Permaculture challenges what we're doing and thinking - and to that extent it's sedition.", AuthorName = "Bill Mollison" };
+            QuoteRepository.Insert(DataConnection.GetLocalDataSource(), q);
+            
             #endregion
             
             #region Settings
