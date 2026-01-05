@@ -949,6 +949,24 @@ namespace DataAccess.Local
             q = new Quote { Description = "Permaculture challenges what we're doing and thinking - and to that extent it's sedition.", AuthorName = "Bill Mollison" };
             QuoteRepository.Insert(DataConnection.GetLocalDataSource(), q);
             
+            q = new Quote { Description = "I'm certain I don't know what permaculture is. That's what I like about it - it's not dogmatic. But you've got to say it's about the only organized system of design that ever was. And that makes it extremely eerie.", AuthorName = "Bill Mollison" };
+            QuoteRepository.Insert(DataConnection.GetLocalDataSource(), q);
+            
+            q = new Quote { Description = "When the idea of permaculture came to me, it was like a shift in the brain, and suddenly I couldn't write it down fast enough.", AuthorName = "Bill Mollison" };
+            QuoteRepository.Insert(DataConnection.GetLocalDataSource(), q);
+            
+            q = new Quote { Description = "Nature's book always contains the truth; we must only learn to read it.", AuthorName = "Sepp Holzer" };
+            QuoteRepository.Insert(DataConnection.GetLocalDataSource(), q);
+            
+            q = new Quote { Description = "None of the greatest assets of a farm is the sheer ecstasy of life.", AuthorName = "Joel Salatin" };
+            QuoteRepository.Insert(DataConnection.GetLocalDataSource(), q);
+            
+            q = new Quote { Description = "Know you food, know your farmers, and know your kitchen.", AuthorName = "Joel Salatin" };
+            QuoteRepository.Insert(DataConnection.GetLocalDataSource(), q);
+            
+            q = new Quote { Description = "We ask for too much salvation by legislation. All we need to do is empower individuals with the right philosophy and the right information to opt out en masse.", AuthorName = "Joel Salatin" };
+            QuoteRepository.Insert(DataConnection.GetLocalDataSource(), q);
+            
             #endregion
             
             #region Settings
