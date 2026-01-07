@@ -955,6 +955,9 @@ namespace DataAccess.Local
             q = new Quote { Description = "When the idea of permaculture came to me, it was like a shift in the brain, and suddenly I couldn't write it down fast enough.", AuthorName = "Bill Mollison" };
             QuoteRepository.Insert(DataConnection.GetLocalDataSource(), q);
             
+            q = new Quote { Description = "If you only do one thing, collect rainwater.", AuthorName = "Bill Mollison" };
+            QuoteRepository.Insert(DataConnection.GetLocalDataSource(), q);
+            
             q = new Quote { Description = "Nature's book always contains the truth; we must only learn to read it.", AuthorName = "Sepp Holzer" };
             QuoteRepository.Insert(DataConnection.GetLocalDataSource(), q);
             
@@ -965,6 +968,15 @@ namespace DataAccess.Local
             QuoteRepository.Insert(DataConnection.GetLocalDataSource(), q);
             
             q = new Quote { Description = "We ask for too much salvation by legislation. All we need to do is empower individuals with the right philosophy and the right information to opt out en masse.", AuthorName = "Joel Salatin" };
+            QuoteRepository.Insert(DataConnection.GetLocalDataSource(), q);
+            
+            q = new Quote { Description = "While we wait for life, life passes.", AuthorName = "Seneca" };
+            QuoteRepository.Insert(DataConnection.GetLocalDataSource(), q);
+            
+            q = new Quote { Description = "It's not that we have little time, but more that we waste a good deal of it.", AuthorName = "Seneca" };
+            QuoteRepository.Insert(DataConnection.GetLocalDataSource(), q);
+            
+            q = new Quote { Description = "Time discovers truth.", AuthorName = "Seneca" };
             QuoteRepository.Insert(DataConnection.GetLocalDataSource(), q);
             
             #endregion
