@@ -162,6 +162,16 @@ public partial class SettingsViewModel : ViewModelBase
             FirstName = CurrentUser.FirstName;
             LastName = CurrentUser.LastName;
             CurrentUser = People.First(x => x.Id == CurrentUser.Id);
+            
+            AppSession.Instance.CurrentUser = CurrentUser;
+            
+            //save out database location
+            var dbLocation = DatabaseLocationText;
+
+            if (AppSession.ServiceMode == ServiceMode.Local)
+            {
+                DataConnection.SetDefaultDatabaseLocation(dbLocation);
+            }
         }
         catch (Exception e)
         {

@@ -65,6 +65,31 @@ namespace DataAccess
 
         }
         
+        public static void SetDefaultDatabaseLocation(string dbLocation)
+        {
+            var userFolder = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
+            var isWindows = System.Runtime.InteropServices.RuntimeInformation.IsOSPlatform(OSPlatform.Windows);
+            
+            //try to read in a db_location.txt file
+            FileInfo dbLoc;
+            if (isWindows)
+            {
+                dbLoc = new FileInfo(userFolder + @"\.config\permastead\db_location.txt");
+            }
+            else
+            {
+                //linux or macos
+                dbLoc = new FileInfo(userFolder + @"/.config/permastead/db_location.txt");
+            }
+            
+            if (dbLoc.Exists)
+            {
+                //read in db file location from this file
+                File.WriteAllText(dbLoc.FullName, dbLocation);
+            }
+
+        }
+        
         public static string GetServerConnectionString()
         {
             var userFolder = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
