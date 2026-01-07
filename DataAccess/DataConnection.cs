@@ -82,12 +82,10 @@ namespace DataAccess
                 dbLoc = new FileInfo(userFolder + @"/.config/permastead/db_location.txt");
             }
             
-            if (dbLoc.Exists)
-            {
-                //read in db file location from this file
-                File.WriteAllText(dbLoc.FullName, dbLocation);
-            }
 
+            //write out db file location to this file
+            File.WriteAllText(dbLoc.FullName, dbLocation);
+            
         }
         
         public static string GetServerConnectionString()
