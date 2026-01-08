@@ -42,6 +42,26 @@ namespace DataAccess.Server
             }
         }
 
+        public static DataTable GetAll(string connectionString)
+        {
+            var dt = new DataTable();
+            var sql = $"SELECT * FROM quote ";
+
+            using (IDbConnection connection = new NpgsqlConnection(connectionString))
+            {
+                connection.Open();
+
+                using (IDbCommand command = connection.CreateCommand())
+                {
+                    command.CommandText = sql;  
+                    var dr = command.ExecuteReader();
+                    dt.Load(dr);
+                }
+
+                return dt;
+            }
+        }
+        
         public static bool Insert(string connectionString, Quote quote)
         {
             try

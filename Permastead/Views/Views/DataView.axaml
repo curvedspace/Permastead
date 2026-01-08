@@ -29,11 +29,11 @@
                        OpenPaneLength="300">
                 <SplitView.Pane>
                     <ScrollViewer >
-                        <ListBox x:Name="PlantsList">
+                        <ListBox x:Name="TableList" ItemsSource="{Binding Tables, Mode=TwoWay}">
                             <ListBox.ItemTemplate>
                                 <DataTemplate>
                                     <Border CornerRadius="4">
-                                        <TextBlock TextWrapping="Wrap" Text="Tables"></TextBlock>
+                                        <TextBlock Text="{Binding}"></TextBlock>
                                     </Border>
                                 </DataTemplate>
                             </ListBox.ItemTemplate>
@@ -41,6 +41,17 @@
                         </ListBox>
                     </ScrollViewer>
                 </SplitView.Pane>
+            
+            <DataGrid ItemsSource="{Binding Items}"
+                      AutoGenerateColumns="True"
+                      CanUserSortColumns="True"
+                      IsReadOnly="False"
+                      CanUserAddRows="{Binding CanUserAddRows}"
+                      CanUserDeleteRows="{Binding CanUserDeleteRows}"
+                      UseLogicalScrollable="True">
+
+            </DataGrid>
+            
         </SplitView>
         </Panel>
     </Grid>
