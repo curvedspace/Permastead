@@ -110,7 +110,10 @@ public class EventsService
             var startDt = new DateTime(DateTime.Today.Year, x.EventStartDate.Month, x.EventStartDate.Day);
             var endDt = new DateTime(DateTime.Today.Year, x.EventEndDate.Month, x.EventEndDate.Day);
             
-            // if end date is less than start date, assume it crosses a year end 
+            // go back to last year if the end date crosses over a year end
+            if (x.EventStartDate.Year != x.EventEndDate.Year) startDt = startDt.AddYears(-1);
+            
+            // if end date is less than start date, assume it crosses a yearend 
             if (startDt > endDt) endDt = endDt.AddYears(1);
 
             if ((startDt <= DateTime.Today && endDt >= DateTime.Today) || startDt == DateTime.Today)
