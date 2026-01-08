@@ -54,7 +54,7 @@ public partial class PlantsViewModel : ViewModelBase
     [ObservableProperty] private string _searchText = "";
     
 //message box data
-    private readonly string _shortMessage = "Are you sure you want to delete this planting?";
+    private readonly string _shortMessage = "Are you sure you want to delete this plant?";
     private string _message;
     private string? _title = "Deletion Confirmation";
     
