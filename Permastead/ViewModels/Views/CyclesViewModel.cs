@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Avalonia.Controls.Converters;
+using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using LiveChartsCore;
 using LiveChartsCore.Kernel;
@@ -12,63 +13,60 @@ namespace Permastead.ViewModels.Views;
 
 public partial class  CyclesViewModel : ViewModelBase
 {
-    public double Value { get; set; } = 80;
-    public double Value2 { get; set; } = 10;
-    public double Value3 { get; set; } = 60;
+    [ObservableProperty] private double _birthdayValue1;
+    [ObservableProperty] private double _birthdayValue2;
+    [ObservableProperty] private double _birthdayValue3;
     
-    public double BirthdayValue1 { get; set; } = 0;
-    public double BirthdayValue2 { get; set; } = 0;
-    public double BirthdayValue3 { get; set; } = 0;
+    [ObservableProperty] private string _birthdayName1;
+    [ObservableProperty] private string _birthdayName2;
+    [ObservableProperty] private string _birthdayName3;
     
-    public string BirthdayName1 { get; set; } = "";
-    public string BirthdayName2 { get; set; } = "";
-    public string BirthdayName3 { get; set; } = "";
-
-    public bool BirthdayVisible1 { get; set; } = false;
-    public bool BirthdayVisible2 { get; set; } = false;
-    public bool BirthdayVisible3 { get; set; } = false;
+    [ObservableProperty] private bool _birthdayVisible1;
+    [ObservableProperty] private bool _birthdayVisible2;
+    [ObservableProperty] private bool _birthdayVisible3;
     
     private List<AnEvent> myEvents { get; set; } = new List<AnEvent>();
     
-    public double HolidayValue1 { get; set; } = 0;
-    public double HolidayValue2 { get; set; } = 0;
-    public double HolidayValue3 { get; set; } = 0;
+    [ObservableProperty] private double _holidayValue1;
+    [ObservableProperty] private double _holidayValue2;
+    [ObservableProperty] private double _holidayValue3;
     
-    public string HolidayName1 { get; set; } = "";
-    public string HolidayName2 { get; set; } = "";
-    public string HolidayName3 { get; set; } = "";
+    [ObservableProperty] private string _holidayName1;
+    [ObservableProperty] private string _holidayName2;
+    [ObservableProperty] private string _holidayName3;
     
-    public bool HolidayVisible1 { get; set; } = false;
-    public bool HolidayVisible2 { get; set; } = false;
-    public bool HolidayVisible3 { get; set; } = false;
+    [ObservableProperty] private bool _holidayVisible1;
+    [ObservableProperty] private bool _holidayVisible2;
+    [ObservableProperty] private bool _holidayVisible3;
     
     private List<AnEvent> myHolidays { get; set; } = new List<AnEvent>();
     
-    public double PlaceValue1 { get; set; } = 0;
-    public double PlaceValue2 { get; set; } = 0;
-    public double PlaceValue3 { get; set; } = 0;
+    [ObservableProperty] private double _placeValue1;
+    [ObservableProperty] private double _placeValue2;
+    [ObservableProperty] private double _placeValue3;
     
-    public string PlaceName1 { get; set; } = "";
-    public string PlaceName2 { get; set; } = "";
-    public string PlaceName3 { get; set; } = "";
+    [ObservableProperty] private string _placeName1;
+    [ObservableProperty] private string _placeName2;
+    [ObservableProperty] private string _placeName3;
     
-    public bool PlaceVisible1 { get; set; } = false;
-    public bool PlaceVisible2 { get; set; } = false;
-    public bool PlaceVisible3 { get; set; } = false;
+    [ObservableProperty] private bool _placeVisible1;
+    [ObservableProperty] private bool _placeVisible2;
+    [ObservableProperty] private bool _placeVisible3;
     
     private List<AnEvent> myPlaceEvents { get; set; } = new List<AnEvent>();
+
+    [ObservableProperty] private double _todoValue1;
+    [ObservableProperty] private double _todoValue2;
+    [ObservableProperty] private double _todoValue3;
     
-    public double TodoValue1 { get; set; } = 0;
-    public double TodoValue2 { get; set; } = 0;
-    public double TodoValue3 { get; set; } = 0;
+    [ObservableProperty] private string _todoName1;
+    [ObservableProperty] private string _todoName2;
+    [ObservableProperty] private string _todoName3;
     
-    public string TodoName1 { get; set; } = "";
-    public string TodoName2 { get; set; } = "";
-    public string TodoName3 { get; set; } = "";
+    [ObservableProperty] private bool _toDoVisible1;
+    [ObservableProperty] private bool _toDoVisible2;
+    [ObservableProperty] private bool _toDoVisible3;
     
-    public bool ToDoVisible1 { get; set; } = false;
-    public bool ToDoVisible2 { get; set; } = false;
-    public bool ToDoVisible3 { get; set; } = false;
     
     public string CurrentCycle { get; set; } = "";
     
