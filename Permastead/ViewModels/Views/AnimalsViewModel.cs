@@ -202,7 +202,7 @@ public partial class AnimalsViewModel : ViewModelBase
     }
     
     [RelayCommand]
-    public void AddRecord()
+    private void AddRecord()
     {
         var myAnimal = new Animal();
         myAnimal.Author = AppSession.Instance.CurrentUser;
@@ -221,6 +221,29 @@ public partial class AnimalsViewModel : ViewModelBase
         win.Height = 550;
         win.Opacity = 0.95;
         win.Title = "New Animal";
+        win.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+                
+        win.Show();
+    }
+    
+    [RelayCommand]
+    private void AddAnimalType()
+    {
+        var myAnimalType = new AnimalType();
+        myAnimalType.Author = AppSession.Instance.CurrentUser;
+        myAnimalType.StartDate = DateTime.Today;
+        myAnimalType.EndDate = DateTime.MaxValue;
+        
+        var vm = new AnimalTypeWindowViewModel(myAnimalType, this);
+            
+        var win = new AnimalTypeWindow();
+        win.DataContext = vm;
+        
+        win.Topmost = true;
+        win.Width = 500;
+        win.Height = 250;
+        win.Opacity = 0.95;
+        win.Title = "New Animal Type";
         win.WindowStartupLocation = WindowStartupLocation.CenterScreen;
                 
         win.Show();

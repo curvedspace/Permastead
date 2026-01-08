@@ -6,7 +6,7 @@ using AnimalTypeRepository = DataAccess.Local.AnimalTypeRepository;
 
 namespace Services;
 
-public class AnimalService
+public static class AnimalService
 {
     public static List<Animal> GetAllAnimals(ServiceMode mode)
     {
@@ -140,6 +140,39 @@ public class AnimalService
             else
             {
                 DataAccess.Server.AnimalRepository.Insert(item);
+            }
+        }
+
+        return rtnValue;
+        
+    }
+    
+    public static bool CommitAnimalTypeRecord(ServiceMode mode, AnimalType item)
+    {
+        bool rtnValue = false;
+        
+        if (item.Id > 0)
+        {
+            if (mode == ServiceMode.Local)
+            {
+                AnimalTypeRepository.Update(item);
+            }
+            else
+            {
+                DataAccess.Server.AnimalTypeRepository.Update(item);
+            }
+            
+        }
+        else
+        {
+            // insert new record
+            if (mode == ServiceMode.Local)
+            {
+                AnimalTypeRepository.Insert(item);
+            }
+            else
+            {
+                DataAccess.Server.AnimalTypeRepository.Insert(item);
             }
         }
 

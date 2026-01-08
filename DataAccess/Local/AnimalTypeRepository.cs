@@ -5,7 +5,7 @@ using Models;
 
 namespace DataAccess.Local;
 
-public class AnimalTypeRepository
+public static class AnimalTypeRepository
 {
     public static List<AnimalType> GetAll(string conn)
     {
@@ -32,6 +32,25 @@ public class AnimalTypeRepository
             {
                 string sqlQuery = "INSERT INTO AnimalType (Code, Description, CreationDate, StartDate, EndDate) " +
                                   "VALUES(@Code, @Description, CURRENT_DATE, @StartDate, @EndDate);";
+
+                return (db.Execute(sqlQuery, at) == 1);
+            }
+        }
+        catch
+        {
+            return false;
+        }
+    }
+    
+    public static bool Update(AnimalType at)
+    {
+        try
+        {
+            using (IDbConnection db = new SqliteConnection(DataConnection.GetLocalDataSource()))
+            {
+                string sqlQuery =
+                    "UPDATE AnimalType SET Code = @Code, Description = @Description, AuthorId = @AuthorId, StartDate = @StartDate, EndDate = @EndDate " +
+                    "WHERE Id = @Id;";
 
                 return (db.Execute(sqlQuery, at) == 1);
             }
