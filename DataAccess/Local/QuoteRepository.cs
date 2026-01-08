@@ -60,5 +60,25 @@ namespace DataAccess.Local
                 return false;
             }
         }
+        
+        public static DataTable GetAll(string connectionString)
+        {
+            var dt = new DataTable();
+            var sql = $"SELECT * FROM quote ";
+
+            using (IDbConnection connection = new SqliteConnection(connectionString))
+            {
+                connection.Open();
+
+                using (IDbCommand command = connection.CreateCommand())
+                {
+                    command.CommandText = sql;  
+                    var dr = command.ExecuteReader();
+                    dt.Load(dr);
+                }
+
+                return dt;
+            }
+        }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,7 +22,6 @@ namespace Services
         public static Quote GetRandomQuote(ServiceMode mode)
         {
             var rtnValue = new Quote();
-            var userFolder = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
 
             if (mode == ServiceMode.Local)
             {
@@ -32,6 +32,23 @@ namespace Services
                 rtnValue = DataAccess.Server.QuoteRepository.GetRandomQuote(DataConnection.GetServerConnectionString());
             }
             
+
+            return rtnValue;
+        }
+        
+        public static DataTable GetAllQuotes(ServiceMode mode)
+        {
+            var rtnValue = new DataTable();
+            
+
+            if (mode == ServiceMode.Local)
+            {
+                rtnValue = QuoteRepository.GetAll(DataConnection.GetLocalDataSource());
+            }
+            else
+            {
+                rtnValue = DataAccess.Server.QuoteRepository.GetAll(DataConnection.GetServerConnectionString());
+            }
 
             return rtnValue;
         }
