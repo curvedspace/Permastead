@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Avalonia.Controls;
 using CommunityToolkit.Mvvm.ComponentModel;
 
 using LiveChartsCore;
@@ -18,6 +19,8 @@ using CommunityToolkit.Mvvm.Input;
 using DataAccess;
 using LiveChartsCore.Measure;
 using Models;
+using Permastead.ViewModels.Dialogs;
+using Permastead.Views.Dialogs;
 using Services;
 using Ursa.Controls;
 
@@ -139,7 +142,20 @@ namespace Permastead.ViewModels.Views;
         [RelayCommand]
         private void AddQuote()
         {
+            var q = new Quote();
+            var win = new QuoteWindow();
+            var vm = new QuoteWindowViewModel(q, this);
             
+            win.DataContext = vm;
+        
+            win.Topmost = true;
+            win.Width = 800;
+            win.Height = 330;
+            win.Opacity = 0.95;
+            win.Title = "New Quote";
+            win.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+                
+            win.Show();
         }
         
         [RelayCommand]

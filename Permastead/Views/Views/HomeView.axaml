@@ -34,7 +34,7 @@
                        Text="{Binding QuoteViewModel.QuoteText}">
                 <TextBlock.ContextMenu>
                     <ContextMenu>
-                        <MenuItem Command="{Binding AddQuoteCommand}" Header="Add a New Quote..." IsEnabled="False">
+                        <MenuItem Command="{Binding AddQuoteCommand}" Header="Add a New Quote..." IsEnabled="True">
                             <MenuItem.Icon>
                                 <PathIcon Data="{StaticResource add_square_regular}"/>
                             </MenuItem.Icon>
