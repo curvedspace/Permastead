@@ -18,7 +18,7 @@ namespace DataAccess.Local
         {
             var q = new Quote();
 
-            var sql = $"SELECT description, authorname FROM quote WHERE rowid IN (SELECT rowid FROM quote " + 
+            var sql = $"SELECT id, description, authorname FROM quote WHERE rowid IN (SELECT rowid FROM quote " + 
                 "WHERE enddate > CURRENT_DATE ORDER BY RANDOM() LIMIT 1)";
 
             using (IDbConnection connection = new SqliteConnection(connectionString))
@@ -32,10 +32,9 @@ namespace DataAccess.Local
 
                     while (dr.Read())
                     {
-                       
-                        q.Description = dr[0].ToString()!;
-                        q.AuthorName = dr[1].ToString()!;
-
+                        q.Id = Convert.ToInt32(dr["id"]);
+                        q.Description = dr["description"].ToString()!;
+                        q.AuthorName = dr["authorname"].ToString()!;
                     }
                 }
 

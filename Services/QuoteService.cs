@@ -70,5 +70,22 @@ namespace Services
             return rtnValue;
         }
         
+        public static bool AddQuote(ServiceMode mode, Quote quote)
+        {
+            bool rtnValue;
+            
+
+            if (mode == ServiceMode.Local)
+            {
+                rtnValue = QuoteRepository.Insert(DataConnection.GetLocalDataSource(), quote);
+            }
+            else
+            {
+                rtnValue = DataAccess.Server.QuoteRepository.Insert(DataConnection.GetServerConnectionString(), quote);
+            }
+
+            return rtnValue;
+        }
+        
     }
 }

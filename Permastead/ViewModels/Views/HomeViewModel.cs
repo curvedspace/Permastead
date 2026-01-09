@@ -3,6 +3,7 @@ using System;
 using System.Collections.ObjectModel;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using CommunityToolkit.Mvvm.ComponentModel;
 
 using LiveChartsCore;
@@ -14,9 +15,11 @@ using LiveChartsCore.SkiaSharpView.VisualElements;
 using LiveChartsCore.Defaults;
 
 using CommunityToolkit.Mvvm.Input;
+using DataAccess;
 using LiveChartsCore.Measure;
 using Models;
 using Services;
+using Ursa.Controls;
 
 namespace Permastead.ViewModels.Views;
 
@@ -79,6 +82,8 @@ namespace Permastead.ViewModels.Views;
         [ObservableProperty] private string _CurrentDateDisplay = DateTime.Now.ToLongDateString();
 
         [ObservableProperty] private string _weatherForecast = "Weather Unknown";
+        
+        public WindowToastManager? ToastManager { get; set; }
 
         public ObservableValue PlantsValue { get; set; } = new ObservableValue(0);
         public ObservableValue StartersValue { get; set; } = new ObservableValue(0);
@@ -108,6 +113,68 @@ namespace Permastead.ViewModels.Views;
         [ObservableProperty] private long _totalHarvestedPlants;
         [ObservableProperty] private string _totalPlantStats;
         
+        //message box data
+        private readonly string _shortMessage = "Are you sure you want to remove this quote?";
+        private string _message;
+        private string? _title = "Deletion Confirmation";
+    
+        public ObservableCollection<MessageBoxIcon> Icons { get; set; }
+    
+        private MessageBoxIcon _selectedIcon;
+        public MessageBoxIcon SelectedIcon
+        {
+            get => _selectedIcon;
+            set => SetProperty(ref _selectedIcon, value);
+        }
+
+        private MessageBoxResult _result;
+        public MessageBoxResult Result
+        {
+            get => _result;
+            set => SetProperty(ref _result, value);
+        }
+    
+        public ICommand YesNoCommand { get; set; }
+
+        [RelayCommand]
+        private void AddQuote()
+        {
+            
+        }
+        
+        [RelayCommand]
+        private async void DeleteQuote()
+        {
+            var q = this.QuoteViewModel.Quote;
+
+            try
+            {
+                if (q != null)
+                {
+                    await OnYesNoAsync();
+
+                    if (Result == MessageBoxResult.Yes)
+                    {
+
+                        q.EndDate = DateTime.Today;
+                        if (QuoteService.DeleteQuote(AppSession.ServiceMode, q))
+                        {
+                            ToastManager?.Show(new Toast("Quote record has been removed."));
+                        }
+                        else
+                        {
+                            ToastManager?.Show(new Toast("Sorry, there was a problem removing the quote."));
+                        }
+                    }
+
+                }
+            }
+            finally
+            {
+                
+            }
+            
+        }
         
         public HomeViewModel()
         {
@@ -127,6 +194,13 @@ namespace Permastead.ViewModels.Views;
             
             RefreshData();
             GetQuote();
+            
+            YesNoCommand = new AsyncRelayCommand(OnYesNoAsync);
+            
+            Icons = new ObservableCollection<MessageBoxIcon>(
+                Enum.GetValues<MessageBoxIcon>());
+            SelectedIcon = MessageBoxIcon.Question;
+            _message = _shortMessage;
             
         }
 
@@ -368,5 +442,15 @@ namespace Permastead.ViewModels.Views;
             series.RelativeInnerRadius = 8;
         }
 
+        private async Task OnYesNoAsync()
+        {
+            await Show(MessageBoxButton.YesNo);
+        }
+    
+        private async Task Show(MessageBoxButton button)
+        {
+            Result = await MessageBox.ShowAsync(_message, _title, icon: SelectedIcon, button:button);
+        }
+        
     }
 

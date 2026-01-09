@@ -31,7 +31,25 @@
         <Grid Grid.Row="4" Grid.Column="1" Grid.ColumnDefinitions="*" Grid.RowDefinitions="*,*">
         <StackPanel Grid.ColumnSpan="1" VerticalAlignment="Center" Margin="50">
             <TextBlock HorizontalAlignment="Center" FontSize="32" VerticalAlignment="Center" TextWrapping="WrapWithOverflow"
-                       Text="{Binding QuoteViewModel.QuoteText}"></TextBlock>
+                       Text="{Binding QuoteViewModel.QuoteText}">
+                <TextBlock.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Command="{Binding AddQuoteCommand}" Header="Add a New Quote..." IsEnabled="False">
+                            <MenuItem.Icon>
+                                <PathIcon Data="{StaticResource add_square_regular}"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
+        
+                        <Separator></Separator>
+        
+                        <MenuItem IsEnabled="true" Command="{Binding DeleteQuoteCommand}" Header="Do Not Show This Quote Again...">
+                            <MenuItem.Icon>
+                                <PathIcon Data="{StaticResource delete_regular}"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
+                    </ContextMenu>
+                </TextBlock.ContextMenu>
+            </TextBlock>
         </StackPanel>
             <StackPanel Grid.Row="1" Grid.ColumnSpan="1" VerticalAlignment="Center" Margin="10,50,10,50">
                 <TextBlock HorizontalAlignment="Center" FontSize="18" VerticalAlignment="Bottom" TextWrapping="WrapWithOverflow"
