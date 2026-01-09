@@ -80,5 +80,22 @@ namespace DataAccess.Local
                 return dt;
             }
         }
+        
+        public static bool Delete(string connectionString, Quote quote)
+        {
+            try
+            {
+                using (IDbConnection db = new SqliteConnection(connectionString))
+                {
+                    string sqlQuery = "UPDATE Quote SET EndDate = @EndDate WHERE Id = @Id;";
+
+                    return (db.Execute(sqlQuery, quote) == 1);
+                }
+            }
+            catch
+            {
+                return false;
+            }
+        }
     }
 }

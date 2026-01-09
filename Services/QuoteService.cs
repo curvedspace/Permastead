@@ -52,5 +52,23 @@ namespace Services
 
             return rtnValue;
         }
+        
+        public static bool DeleteQuote(ServiceMode mode, Quote quote)
+        {
+            bool rtnValue;
+            
+
+            if (mode == ServiceMode.Local)
+            {
+                rtnValue = QuoteRepository.Delete(DataConnection.GetLocalDataSource(), quote);
+            }
+            else
+            {
+                rtnValue = DataAccess.Server.QuoteRepository.Delete(DataConnection.GetServerConnectionString(), quote);
+            }
+
+            return rtnValue;
+        }
+        
     }
 }

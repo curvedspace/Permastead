@@ -18,7 +18,7 @@ namespace DataAccess.Server
         {
             var q = new Quote();
 
-            var sql = $"SELECT description, authorname FROM quote ORDER BY RANDOM() LIMIT 1";
+            var sql = $"SELECT description, authorname FROM quote WHERE (enddate IS NULL OR enddate > CURRENT_DATE) ORDER BY RANDOM() LIMIT 1";
 
             using (IDbConnection connection = new NpgsqlConnection(connectionString))
             {
@@ -31,10 +31,8 @@ namespace DataAccess.Server
 
                     while (dr.Read())
                     {
-                       
                         q.Description = dr[0].ToString()!;
                         q.AuthorName = dr[1].ToString()!;
-
                     }
                 }
 
@@ -72,6 +70,23 @@ namespace DataAccess.Server
                         "VALUES(@Description,@AuthorName,CURRENT_DATE,@StartDate,@EndDate);";
 
                     return (db.Execute(sqlQuery, quote) ==1);
+                }
+            }
+            catch
+            {
+                return false;
+            }
+        }
+        
+        public static bool Delete(string connectionString, Quote quote)
+        {
+            try
+            {
+                using (IDbConnection db = new NpgsqlConnection(DataConnection.GetServerConnectionString()))
+                {
+                    string sqlQuery = "UPDATE Quote SET EndDate = @EndDate WHERE Id = @Id;";
+
+                    return (db.Execute(sqlQuery, quote) == 1);
                 }
             }
             catch
