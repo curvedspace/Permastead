@@ -297,6 +297,7 @@ namespace DataAccess.Server
 				EndDate TIMESTAMP,
 				Company VARCHAR (2000) NULL,
 				Email VARCHAR (200) NULL,
+				Address TEXT NULL,
 				Comment TEXT NULL,
 				Phone VARCHAR (200) NULL,
 				OnSite BOOLEAN

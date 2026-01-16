@@ -13,7 +13,6 @@ public class Person
 
     public string? LastName { get; set; }
     
-
     public string? Suffix { get; set; }
     
     public string? Company { get; set; }
@@ -23,12 +22,15 @@ public class Person
     public string? Phone { get; set; }
     
     public bool OnSite { get; set; }
+    
     public string? Comment { get; set; }
 
     public IList<PersonRole> Roles {get; set;}
 
     public IList<ContactInformation>? Contacts { get; set; }
 
+    public string Address { get; set; } = "";
+    
     public Address? MailingAddress { get; set; }
 
     public string FullName()
@@ -91,7 +93,7 @@ public class Person
 
         this.Contacts = new List<ContactInformation>();
 
-        this.MailingAddress = Address.None();
+        this.MailingAddress = Models.Address.None();
 
         this.CreationDate = DateTime.Now;
         this.StartDate = DateTime.Today;
@@ -110,7 +112,7 @@ public class Person
         {
             FirstName = "Anonymous",
             LastName = "Anonymous",
-            MailingAddress = Address.None()
+            MailingAddress = Models.Address.None()
         };
 
         return anon;
@@ -124,7 +126,7 @@ public class Person
             FirstName = "Gaia",
             LastName = "AI",
             OnSite = true,
-            MailingAddress = Address.None()
+            MailingAddress = Models.Address.None()
         };
 
         return gaia;

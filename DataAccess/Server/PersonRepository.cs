@@ -57,8 +57,8 @@ namespace DataAccess.Server
             {
                 using (IDbConnection db = new NpgsqlConnection(DataConnection.GetServerConnectionString()))
                 {
-                    string sqlQuery = "INSERT INTO Person (FirstName, LastName, CreationDate, StartDate, EndDate, Company, Email, Phone, OnSite, Comment) " +
-                                      "VALUES(@FirstName,@LastName,CURRENT_DATE,@StartDate,@EndDate,@Company,@Email,@Phone,@OnSite,@Comment);";
+                    string sqlQuery = "INSERT INTO Person (FirstName, LastName, CreationDate, StartDate, EndDate, Company, Email, Phone, OnSite, Address, Comment) " +
+                                      "VALUES(@FirstName,@LastName,CURRENT_DATE,@StartDate,@EndDate,@Company,@Email,@Phone,@OnSite,@Address,@Comment);";
 
                     return (db.Execute(sqlQuery, person) == 1);
                 }
@@ -79,7 +79,7 @@ namespace DataAccess.Server
                     {
                         string sqlQuery =
                             "UPDATE Person SET FirstName = @FirstName, StartDate = @StartDate, EndDate = @EndDate, LastName = @LastName, " +
-                            "Company = @Company, Email = @Email, Phone = @Phone, OnSite = @OnSite, Comment = @Comment " +
+                            "Company = @Company, Email = @Email, Phone = @Phone, OnSite = @OnSite, Address = @Address, Comment = @Comment " +
                             "WHERE Id = @Id;";
 
                         return (db.Execute(sqlQuery, person) == 1);
@@ -124,7 +124,7 @@ namespace DataAccess.Server
             Person person = new Person();
 
             var sql = "SELECT p.Id, p.FirstName, p.LastName, " +
-                      "p.CreationDate, p.StartDate, p.EndDate, p.Company, p.Email, p.Phone, p.OnSite, p.Comment " +
+                      "p.CreationDate, p.StartDate, p.EndDate, p.Company, p.Email, p.Phone, p.OnSite, p.Address, p.Comment " +
                       "FROM Person p  " +
                       "WHERE p.Id = @id ";
 
@@ -162,7 +162,8 @@ namespace DataAccess.Server
                             person.OnSite = Convert.ToBoolean(dr[9]);
                         }
                         
-                        person.Comment = dr[10].ToString();
+                        person.Address = dr[10].ToString();
+                        person.Comment = dr[11].ToString();
                     }
                 }
 

@@ -116,6 +116,8 @@ public partial class ContactsViewModel : ViewModelBase
                 new TextColumn<Person, string>
                     ("Phone", x => x.Phone),
                 new TextColumn<Person, string>
+                    ("Address", x => x.Address),
+                new TextColumn<Person, string>
                     ("Comment", x => x.Comment)
             },
         };
