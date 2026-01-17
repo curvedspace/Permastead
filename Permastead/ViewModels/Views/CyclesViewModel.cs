@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Avalonia.Controls.Converters;
+using Common;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using LiveChartsCore;
@@ -163,19 +164,19 @@ public partial class  CyclesViewModel : ViewModelBase
             if (myTodos.Count > 0)
             {
                 TodoValue1 = 30 - myTodos[0].DaysUntilDue;
-                TodoName1 = myTodos[0].Description!;
+                TodoName1 = TextUtils.GetSubstring(myTodos[0].Description!, 0, 25, true);
                 ToDoVisible1 = true;
             }
             if (myTodos.Count > 1)
             {
                 TodoValue2 = 30 - myTodos[1].DaysUntilDue;
-                TodoName2 = myTodos[1].Description!;
+                TodoName2 = TextUtils.GetSubstring(myTodos[1].Description!, 0, 25, true);
                 ToDoVisible2 = true;
             }
             if (myTodos.Count > 2)
             {
                 TodoValue3 = 30 - myTodos[2].DaysUntilDue;
-                TodoName3 = myTodos[2].Description!;
+                TodoName3 = TextUtils.GetSubstring(myTodos[2].Description!, 0, 25, true);
                 ToDoVisible3 = true;
             }
             
