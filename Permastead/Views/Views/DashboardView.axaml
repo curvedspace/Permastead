@@ -108,12 +108,13 @@
         <!--     LegendPosition="Bottom"> -->
         <!-- </lvc:CartesianChart> -->
         
-        <lvc:CartesianChart Background="#ff0d2644">
+        <lvc:CartesianChart x:Name="MyChart" Background="#ff0d2644">
         <lvc:CartesianChart.Series>
             <lvc:XamlColumnSeries SeriesName="ActSeries" Values="{Binding ActSeries}"/>
             <lvc:XamlColumnSeries SeriesName="ObsSeries" Values="{Binding ObsSeries}"/>
             <lvc:XamlColumnSeries SeriesName="PlantingsSeries" Values="{Binding PltSeries}"/>
             <lvc:XamlColumnSeries SeriesName="HarvestsSeries" Values="{Binding HrvSeries}"/>
+           
         </lvc:CartesianChart.Series>
         
             <!-- Labels="{Binding ChartLabels}" -->

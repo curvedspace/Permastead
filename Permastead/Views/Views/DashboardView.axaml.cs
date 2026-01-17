@@ -12,6 +12,10 @@ public partial class DashboardView : UserControl
     {
         InitializeComponent();
         DataContext = new DashboardViewModel();
+        
+        // set the xaxis here, it does not work from XAML for some reason
+        var vm = (DashboardViewModel)DataContext;
+        MyChart.XAxes = vm.XAxes;
     }
 
     private void SelectingItemsControl_OnSelectionChanged(object? sender, SelectionChangedEventArgs e)

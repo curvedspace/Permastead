@@ -56,29 +56,30 @@ public partial class DashboardViewModel : ViewModelBase
             Color = new SKColor(240, 240, 240)
         };
 
-    public string[] _chartLabels =
+    [ObservableProperty]
+    private string[] _chartLabels =
     [
         "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November",
         "December"
     ];
     
-    // public Axis[] XAxes { get; set; } =
-    // {
-    //     new Axis
-    //     {
-    //         Labels = new string[] { "January", "February", "March", "April", "May", "June", "July", "August","September","October","November","December" },
-    //         LabelsRotation = 0,
-    //         SeparatorsPaint = new SolidColorPaint(new SKColor(200, 200, 200)),
-    //         SeparatorsAtCenter = false,
-    //         TicksPaint = new SolidColorPaint(new SKColor(200, 200, 200)),
-    //         TicksAtCenter = true,
-    //         // By default the axis tries to optimize the number of 
-    //         // labels to fit the available space, 
-    //         // when you need to force the axis to show all the labels then you must: 
-    //         ForceStepToMin = true, 
-    //         MinStep = 1 
-    //     }
-    // };
+    public Axis[] XAxes { get; set; } =
+    {
+        new Axis
+        {
+            Labels = new string[] { "January", "February", "March", "April", "May", "June", "July", "August","September","October","November","December" },
+            LabelsRotation = 0,
+            SeparatorsPaint = new SolidColorPaint(new SKColor(200, 200, 200)),
+            SeparatorsAtCenter = false,
+            TicksPaint = new SolidColorPaint(new SKColor(200, 200, 200)),
+            TicksAtCenter = true,
+            // By default the axis tries to optimize the number of 
+            // labels to fit the available space, 
+            // when you need to force the axis to show all the labels then you must: 
+            ForceStepToMin = true, 
+            MinStep = 1 
+        }
+    };
     
     [ObservableProperty] private Observation _yearInReview;
     
@@ -342,12 +343,6 @@ public partial class DashboardViewModel : ViewModelBase
         }
         
         PlantingYears.Add("ALL");
-        
-        // ChartLabels =
-        // [
-        //     "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November",
-        //     "December"
-        // ];
 
         RefreshDataOnly();
         
@@ -371,50 +366,53 @@ public partial class DashboardViewModel : ViewModelBase
         var plantings = Services.PlantingsService.GetPlantings(AppSession.ServiceMode);
         var harvests = Services.HarvestService.GetAllHarvests(AppSession.ServiceMode);
 
-        var actionsByMonth = new Dictionary<int, double>();
-        var observationsByMonth = new Dictionary<int, double>();
-        var plantingsByMonth = new Dictionary<int, double>();
-        var harvestsByMonth = new Dictionary<int, double>();
+        var actionsByMonth = new Dictionary<string, double>();
+        var observationsByMonth = new Dictionary<string, double>();
+        var plantingsByMonth = new Dictionary<string, double>();
+        var harvestsByMonth = new Dictionary<string, double>();
         
         //set up the dictionaries
         for (int i = 1; i <= 12; i++)
         {
-            actionsByMonth.Add(i,0);
-            observationsByMonth.Add(i,0);
-            plantingsByMonth.Add(i,0);
-            harvestsByMonth.Add(i,0);
+            string month = new DateTime(DateTime.Now.Year, i, 1).ToString("MMMM");
+            
+            actionsByMonth.Add(month,0);
+            observationsByMonth.Add(month,0);
+            plantingsByMonth.Add(month,0);
+            harvestsByMonth.Add(month,0);
         }
         
         //tally up the actions and observations by month
         foreach (var a in actions)
         {
             if (a.CreationDate >= _plantingYearStartDate && a.CreationDate <= _plantingYearEndDate)
-                actionsByMonth[a.DueDate.Date.Month] += 1;
+                actionsByMonth[a.DueDate.Date.ToString("MMMM")] += 1;
         }
         
         foreach (var o in observations)
         {
             if (o.AsOfDate >= _plantingYearStartDate && o.AsOfDate <= _plantingYearEndDate)
-                observationsByMonth[o.AsOfDate.Date.Month] += 1;
+                observationsByMonth[o.AsOfDate.Date.ToString("MMMM")] += 1;
         }
         
         foreach (var o in plantings)
         {
             if (o.CreationDate >= _plantingYearStartDate && o.CreationDate <= _plantingYearEndDate)
-                plantingsByMonth[o.CreationDate.Date.Month] += 1;
+                plantingsByMonth[o.CreationDate.Date.ToString("MMMM")] += 1;
         }
         
         foreach (var o in harvests)
         {
             if (o.CreationDate >= _plantingYearStartDate && o.CreationDate <= _plantingYearEndDate)
-                harvestsByMonth[o.CreationDate.Date.Month] += 1;
+                harvestsByMonth[o.CreationDate.Date.ToString("MMMM")] += 1;
         }
 
         
         var actSeries = new ColumnSeries<double>();
         actSeries.Name = "Actions";
         actSeries.Values = actionsByMonth.Values;
-
+        actSeries.DataLabelsFormatter = point => $"{point.Coordinate.PrimaryValue} {point.Context.Series.Name}";
+        actSeries.ShowDataLabels = true;
         
         
         var obsSeries = new ColumnSeries<double>();
@@ -431,10 +429,13 @@ public partial class DashboardViewModel : ViewModelBase
 
         ActObsSeries = new[] { actSeries, obsSeries, pltSeries, hrvSeries };
         
+        
         ActSeries = actionsByMonth.Values.ToArray();
         ObsSeries = observationsByMonth.Values.ToArray();
         PltSeries = plantingsByMonth.Values.ToArray();
         HrvSeries = harvestsByMonth.Values.ToArray();
+        
+        
         
         OnPropertyChanged(nameof(ActObsSeries));
     }
