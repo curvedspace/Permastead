@@ -34,6 +34,10 @@ public class Animal
     
     public bool IsNotPet => !this.IsPet;
     
+    public string Tags { get; set; } = "";
+    
+    public List<string> TagList { get; set; } = new List<string>();
+    
     public string? Comment { get; set; }
     
     /// <summary>
@@ -78,6 +82,15 @@ public class Animal
             }
 
             return calculatedAge;
+        }
+    }
+    
+    public void SyncTags()
+    {
+        this.Tags = string.Empty;
+        foreach (var tag in this.TagList)
+        {
+            this.Tags += tag + " ";
         }
     }
 

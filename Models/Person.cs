@@ -23,6 +23,10 @@ public class Person
     
     public bool OnSite { get; set; }
     
+    public string Tags { get; set; } = "";
+    
+    public List<string> TagList { get; set; } = new List<string>();
+    
     public string? Comment { get; set; }
 
     public IList<PersonRole> Roles {get; set;}
@@ -84,6 +88,15 @@ public class Person
     public bool IsInTheFuture()
     {
         return !IsInThePast();
+    }
+    
+    public void SyncTags()
+    {
+        this.Tags = string.Empty;
+        foreach (var tag in this.TagList)
+        {
+            this.Tags += tag + " ";
+        }
     }
 
     public Person()

@@ -24,6 +24,10 @@ public class Inventory
     
     public string Notes { get; set; }
     
+    public string Tags { get; set; } = "";
+    
+    public List<string> TagList { get; set; } = new List<string>();
+    
     public DateTime LastUpdated { get; set; } = DateTime.UtcNow;
     
     public Person? Author { get; set; }
@@ -80,6 +84,15 @@ public class Inventory
     public bool IsInTheFuture()
     {
         return !IsInThePast();
+    }
+    
+    public void SyncTags()
+    {
+        this.Tags = string.Empty;
+        foreach (var tag in this.TagList)
+        {
+            this.Tags += tag + " ";
+        }
     }
 
     public Inventory()
