@@ -5,7 +5,7 @@ using Npgsql;
 
 namespace DataAccess.Server;
 
-public class AnimalRepository
+public static class AnimalRepository
 {
     public static List<Animal> GetAll(string connectionString)
     {
@@ -17,7 +17,7 @@ public class AnimalRepository
             var sql = "SELECT a.Id, a.Name, a.AnimalTypeId, at.Description AnimalTypeDesc, a.AuthorId, " +
                       "p.FirstName AuthorFirstName, p.LastName AuthorLastName, " +
                       "a.nickname, a.breed, a.birthday, " + 
-                      "a.StartDate, a.EndDate, a.comment, a.ispet " +
+                      "a.StartDate, a.EndDate, a.comment, a.ispet, a.tags " +
                       "FROM Animal a, AnimalType at, Person p  " +
                       "WHERE a.AnimalTypeId = at.Id " +
                       "AND a.AuthorId = p.Id " +
@@ -61,6 +61,14 @@ public class AnimalRepository
                         animal.Comment = dr[12].ToString();
                         
                         animal.IsPet = Convert.ToBoolean(dr[13].ToString());
+                        
+                        var tagText = dr[14].ToString()!.Trim();
+
+                        if (tagText != null && tagText.Length > 0)
+                        {
+                            animal.Tags = tagText.Trim();
+                            animal.TagList = tagText.Split(' ').ToList();
+                        }
 
                         myAnimals.Add(animal);
                     }
@@ -82,8 +90,8 @@ public class AnimalRepository
         {
             using (IDbConnection db = new NpgsqlConnection(DataConnection.GetServerConnectionString()))
             {
-                string sqlQuery = "INSERT INTO Animal (AnimalTypeId, Nickname, Name, Breed, AuthorId, Comment, Birthday, StartDate, EndDate, IsPet) " +
-                                  "VALUES(@AnimalTypeId, @Nickname, @Name, @Breed, @AuthorId, @Comment, @Birthday, @StartDate, @EndDate, @IsPet);";
+                string sqlQuery = "INSERT INTO Animal (AnimalTypeId, Nickname, Name, Breed, AuthorId, Comment, Birthday, StartDate, EndDate, IsPet, Tags) " +
+                                  "VALUES(@AnimalTypeId, @Nickname, @Name, @Breed, @AuthorId, @Comment, @Birthday, @StartDate, @EndDate, @IsPet, @Tags);";
         
                 return (db.Execute(sqlQuery, item) == 1);
             }
@@ -101,7 +109,7 @@ public class AnimalRepository
             using (IDbConnection db = new NpgsqlConnection(DataConnection.GetServerConnectionString()))
             {
                 string sqlQuery = "UPDATE Animal SET AnimalTypeId = @AnimalTypeId, Nickname = @Nickname, Name = @Name, Breed = @Breed, Birthday = @Birthday, " +
-                                  "StartDate = @StartDate, Comment = @Comment, AuthorId = @AuthorId, EndDate = @EndDate, IsPet = @IsPet " + 
+                                  "StartDate = @StartDate, Comment = @Comment, AuthorId = @AuthorId, EndDate = @EndDate, IsPet = @IsPet, Tags = @Tags " + 
                                   "WHERE Id = @Id;";
 
                 return (db.Execute(sqlQuery, item) == 1);

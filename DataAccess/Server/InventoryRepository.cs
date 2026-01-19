@@ -18,7 +18,7 @@ public static class InventoryRepository
             string sqlQuery =
                 "SELECT i.Id, i.Description, i.IGroup, i.IType, i.OriginalValue, i.CurrentValue, " +
                 "i.Brand, i.Notes, i.CreationDate, i.StartDate, i.EndDate, i.LastUpdated, i.AuthorId, p.FirstName, p.LastName,  " +
-                "i.Room, i.Quantity, i.ForSale " +
+                "i.Room, i.Quantity, i.ForSale, i.Tags " +
                 "FROM Inventory i, Person p " +
                 "WHERE i.AuthorId = p.Id ";
 
@@ -57,6 +57,14 @@ public static class InventoryRepository
                         inv.Quantity = Convert.ToInt64(dr[16].ToString());
                         
                         inv.ForSale = Convert.ToBoolean(dr[17].ToString());
+                        
+                        var tagText = dr[18].ToString()!.Trim();
+
+                        if (tagText != null && tagText.Length > 0)
+                        {
+                            inv.Tags = tagText.Trim();
+                            inv.TagList = tagText.Split(' ').ToList();
+                        }
 
                         myInventory.Add(inv);
                     }
@@ -80,7 +88,7 @@ public static class InventoryRepository
             string sqlQuery =
                 "SELECT i.Id, i.Description, i.IGroup, i.IType, i.OriginalValue, i.CurrentValue, " +
                 "i.Brand, i.Notes, i.CreationDate, i.StartDate, i.EndDate, i.LastUpdated, i.AuthorId, p.FirstName, p.LastName,  " +
-                "i.Room, i.Quantity, i.ForSale " +
+                "i.Room, i.Quantity, i.ForSale, i.Tags " +
                 "FROM Inventory i, Person p " +
                 "WHERE i.AuthorId = p.Id AND i.Id = @id ";
 
@@ -121,6 +129,14 @@ public static class InventoryRepository
                         inv.Quantity = Convert.ToInt64(dr[16].ToString());
                         
                         inv.ForSale = dr[17].ToString() == "1";
+                        
+                        var tagText = dr[18].ToString()!.Trim();
+
+                        if (tagText != null && tagText.Length > 0)
+                        {
+                            inv.Tags = tagText.Trim();
+                            inv.TagList = tagText.Split(' ').ToList();
+                        }
                         
                     }
                 }
@@ -401,9 +417,9 @@ public static class InventoryRepository
             using (IDbConnection db = new NpgsqlConnection(DataConnection.GetServerConnectionString()))
             {
                 string sqlQuery = "INSERT INTO Inventory (Description, StartDate, EndDate, CreationDate, IType, IGroup, AuthorId, OriginalValue," +
-                    "CurrentValue, Brand, Notes, Room, Quantity, ForSale, LastUpdated) " +
+                    "CurrentValue, Brand, Notes, Room, Quantity, ForSale, Tags, LastUpdated) " +
                     "VALUES(@Description, @StartDate, @EndDate, CURRENT_DATE, @InventoryType, @InventoryGroup, @AuthorId, @OriginalValue, @CurrentValue, " +
-                    "@Brand, @Notes, @Room, @Quantity, @ForSale, CURRENT_TIMESTAMP);";
+                    "@Brand, @Notes, @Room, @Quantity, @ForSale, @Tags, CURRENT_TIMESTAMP);";
 
                 return (db.Execute(sqlQuery, inventory) == 1);
             }
@@ -425,7 +441,7 @@ public static class InventoryRepository
                     string sqlQuery =
                         "UPDATE Inventory SET Description = @Description, StartDate = @StartDate, EndDate = @EndDate, IType = @InventoryType, " +
                         "IGroup = @InventoryGroup, AuthorId = @AuthorId, OriginalValue = @OriginalValue, CurrentValue = @CurrentValue, " +
-                        "Brand = @Brand, Notes = @Notes, Room = @Room, Quantity = @Quantity, ForSale = @ForSale, LastUpdated = CURRENT_TIMESTAMP " +
+                        "Brand = @Brand, Notes = @Notes, Room = @Room, Quantity = @Quantity, ForSale = @ForSale, Tags = @Tags, LastUpdated = CURRENT_TIMESTAMP " +
                         "WHERE Id = @Id;";
 
                     return (db.Execute(sqlQuery, inventory) == 1);

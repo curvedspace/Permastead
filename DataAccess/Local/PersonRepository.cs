@@ -51,8 +51,8 @@ namespace DataAccess.Local
             {
                 using (IDbConnection db = new SqliteConnection(DataConnection.GetLocalDataSource()))
                 {
-                    string sqlQuery = "INSERT INTO Person (FirstName, LastName, CreationDate, StartDate, EndDate, Company, Email, Phone, OnSite, Address, Comment) " +
-                                      "VALUES(@FirstName,@LastName,CURRENT_DATE,@StartDate,@EndDate,@Company,@Email,@Phone,@OnSite,@Address,@Comment);";
+                    string sqlQuery = "INSERT INTO Person (FirstName, LastName, CreationDate, StartDate, EndDate, Company, Email, Phone, OnSite, Address, Tags, Comment) " +
+                                      "VALUES(@FirstName,@LastName,CURRENT_DATE,@StartDate,@EndDate,@Company,@Email,@Phone,@OnSite,@Address,@Tags,@Comment);";
 
                     return (db.Execute(sqlQuery, person) == 1);
                 }
@@ -73,7 +73,7 @@ namespace DataAccess.Local
                     {
                         string sqlQuery =
                             "UPDATE Person SET FirstName = @FirstName, StartDate = @StartDate, EndDate = @EndDate, LastName = @LastName, " +
-                            "Company = @Company, Email = @Email, Phone = @Phone, OnSite = @OnSite, Address = @Address, Comment = @Comment " +
+                            "Company = @Company, Email = @Email, Phone = @Phone, OnSite = @OnSite, Address = @Address, Tags = @Tags, Comment = @Comment " +
                             "WHERE Id = @Id;";
 
                         return (db.Execute(sqlQuery, person) == 1);
@@ -118,7 +118,7 @@ namespace DataAccess.Local
             Person person = new Person();
 
             var sql = "SELECT p.Id, p.FirstName, p.LastName, " +
-                      "p.CreationDate, p.StartDate, p.EndDate, p.Company, p.Email, p.Phone, p.OnSite, p.Address, p.Comment " +
+                      "p.CreationDate, p.StartDate, p.EndDate, p.Company, p.Email, p.Phone, p.OnSite, p.Address, p.Tags, p.Comment " +
                       "FROM Person p  " +
                       "WHERE p.Id = @id ";
 
@@ -157,7 +157,16 @@ namespace DataAccess.Local
                         }
                         
                         person.Address = dr[10].ToString();
-                        person.Comment = dr[11].ToString();
+                        
+                        var tagText = dr[11].ToString()!.Trim();
+
+                        if (tagText != null && tagText.Length > 0)
+                        {
+                            person.Tags = tagText.Trim();
+                            person.TagList = tagText.Split(' ').ToList();
+                        }
+                        
+                        person.Comment = dr[12].ToString();
                     }
                 }
 
