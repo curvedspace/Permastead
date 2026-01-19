@@ -1,6 +1,7 @@
 using System;
 using System.Collections.ObjectModel;
 using System.Linq;
+using Avalonia.Controls;
 using CommunityToolkit.Mvvm.ComponentModel;
 using Models;
 using Permastead.ViewModels.Views;
@@ -14,6 +15,10 @@ namespace Permastead.ViewModels.Dialogs;
 
 public partial class InventoryWindowViewModel: ViewModelBase
 {
+    public ObservableCollection<TagData> Items { get; set; }
+    public ObservableCollection<TagData> SelectedItems { get; set; }
+    public AutoCompleteFilterPredicate<object> FilterPredicate { get; set; }
+    
     [ObservableProperty] 
     private ObservableCollection<string> _inventoryGroups;
     
