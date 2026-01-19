@@ -350,7 +350,8 @@ namespace DataAccess.Local
 				Address TEXT NULL,
 				Comment TEXT NULL,
 				Phone VARCHAR (200) NULL,		
-				OnSite BOOLEAN
+				OnSite BOOLEAN,
+				Tags TEXT
 			);
 
 			--TODO 
@@ -564,7 +565,8 @@ namespace DataAccess.Local
 				StartDate TIMESTAMP NOT NULL,
 				EndDate TIMESTAMP,
 				LastUpdated TIMESTAMP NOT NULL,
-				AuthorId INTEGER
+				AuthorId INTEGER,
+				Tags TEXT
 			);
 
 			-- INVENTORY OBSERVATION
@@ -593,7 +595,8 @@ namespace DataAccess.Local
 				EndDate TIMESTAMP NOT NULL,
 				IsPet BOOLEAN NOT NULL,
 				Comment TEXT NULL,
-				AuthorId INTEGER NULL
+				AuthorId INTEGER NULL,
+				Tags TEXT
 			);
 
 			-- ANIMAL TYPE
