@@ -996,10 +996,6 @@ namespace DataAccess.Local
             SettingsRepository.Insert("NOSTRPRIV","");
             
             #endregion
-	        
-            #region ImageGroup
-            
-            #endregion
 
             #region FeedSource
 
@@ -1266,7 +1262,31 @@ namespace DataAccess.Local
             p = new Plant { Author = new Person(1), Code = "ARNICA", Description = "Arnica", Family = "Asteraceae", Tags = "herb",  Comment = "Arnica is a genus of perennial, herbaceous plants in the sunflower family (Asteraceae). The genus name Arnica may be derived from the Greek arni, \"lamb\", in reference to the plants' soft, hairy leaves."};
             PlantRepository.Insert(p);
             
-            p = new Plant { Author = new Person(1), Code = "ARUGULA", Description = "Arugula" };
+            p = new Plant { Author = new Person(1), Code = "ARONIA", Description = "Aronia Bush", Family = "Rosaceae", Tags = "",  Comment = "Aronia is a genus of deciduous shrubs, the chokeberries, in the family Rosaceae native to eastern North America and most commonly found in wet woods and swamps."};
+            PlantRepository.Insert(p);
+            
+            p = new Plant { Author = new Person(1), Code = "ACHOKE", Description = "Artichoke", Family = "Asteraceae", Tags = "",  Comment = "The globe artichoke, also known by the names French artichoke and green artichoke in the U.S., is a variety of a species of thistle cultivated as food."};
+            PlantRepository.Insert(p);
+            
+            p = new Plant { Author = new Person(1), Code = "ARUGULA", Description = "Arugula", Family = "Brassicaceae", Tags = "",  Comment = "Rocket, eruca, or arugula is an edible annual plant in the family Brassicaceae used as a leaf vegetable for its fresh, tart, bitter, and peppery flavor."};
+            PlantRepository.Insert(p);
+            
+            p = new Plant { Author = new Person(1), Code = "ASHWG", Description = "Ashwagandha", Family = "Solanaceae", Tags = "herb nervine",  Comment = "Ashwagandha, also known as Withania somnifera, is a medicinal herb commonly used in traditional Ayurvedic medicine for its purported health benefits."};
+            PlantRepository.Insert(p);
+            
+            p = new Plant { Author = new Person(1), Code = "ASPARAGUS", Description = "Asparagus", Family = "Asparagaceae", Tags = "",  Comment = "Asparagus (Asparagus officinalis) is a perennial flowering plant native to Eurasia, widely cultivated for its edible young shoots, known as spears."};
+            PlantRepository.Insert(p);
+            
+            p = new Plant { Author = new Person(1), Code = "ASTRAG", Description = "Astragalus", Family = "Fabaceae", Tags = "herb",  Comment = "Astragalus is a large genus of over 3,000 species of herbs and small shrubs, belonging to the legume family Fabaceae."};
+            PlantRepository.Insert(p);
+            
+            p = new Plant { Author = new Person(1), Code = "AOLIVE", Description = "Autumn Olive", Family = "Elaeagnaceae", Tags = "nitrogen-fixer",  Comment = "Elaeagnus umbellata is known as Japanese silverberry, umbellata oleaster, autumn olive,autumn elaeagnus, spreading oleaster, autumnberry, or autumn berry."};
+            PlantRepository.Insert(p);
+            
+            p = new Plant { Author = new Person(1), Code = "BALLOONFLWR", Description = "Balloon Flower", Family = "Campanulaceae", Tags = "herb expectorant anti-inflammatory",  Comment = "In traditional medicine, particularly in Chinese and Japanese practices, the root of the balloon flower is used as a key herbal remedy."};
+            PlantRepository.Insert(p);
+            
+            p = new Plant { Author = new Person(1), Code = "BASIL", Description = "Basil", Family = "Lamiaceae", Tags = "herb aromatic",  Comment = "Basil, also called great basil, is a culinary herb of the family Lamiaceae (mints). It is a tender plant, and is used in cuisines worldwide. "};
             PlantRepository.Insert(p);
             
             p = new Plant { Author = new Person(1), Code = "UNK", Description = "Unknown" };
@@ -1308,9 +1328,6 @@ namespace DataAccess.Local
             p = new Plant { Author = new Person(1), Code = "YARROW", Description = "Yarrow", Tags = "herb bitter"};
             PlantRepository.Insert(p);
             
-            p = new Plant { Author = new Person(1), Code = "APPLE", Description = "Apple Tree", Tags = "tree" };
-            PlantRepository.Insert(p);
-            
             p = new Plant { Author = new Person(1), Code = "RASP", Description = "Raspberry" };
             PlantRepository.Insert(p);
             
@@ -1333,9 +1350,6 @@ namespace DataAccess.Local
             PlantRepository.Insert(p);
             
             p = new Plant { Author = new Person(1), Code = "ONION", Description = "Onion" };
-            PlantRepository.Insert(p);
-            
-            p = new Plant { Author = new Person(1), Code = "BASIL", Description = "Basil" };
             PlantRepository.Insert(p);
             
             p = new Plant { Author = new Person(1), Code = "STRAWBERRY", Description = "Strawberry" };
@@ -1504,6 +1518,9 @@ namespace DataAccess.Local
             freq = new Frequency() { Code = "D", Description = "Daily" };
             FrequencyRepository.Insert(freq);
             
+            freq = new Frequency() { Code = "O", Description = "Once" };
+            FrequencyRepository.Insert(freq);
+            
             #endregion
             
             #region EventTypes
@@ -1604,6 +1621,12 @@ namespace DataAccess.Local
             pType = new FoodPreservationType() { Description = "Tincture" };
             PreservationTypeRepository.Insert(pType);
             
+            pType = new FoodPreservationType() { Description = "Vinegar" };
+            PreservationTypeRepository.Insert(pType);
+            
+            pType = new FoodPreservationType() { Description = "Honey" };
+            PreservationTypeRepository.Insert(pType);
+            
             
             #endregion
             
@@ -1616,6 +1639,9 @@ namespace DataAccess.Local
             HarvestTypeRepository.Insert(harvestType);
             
             harvestType = new HarvestType() { Description = "Materials" };
+            HarvestTypeRepository.Insert(harvestType);
+            
+            harvestType = new HarvestType() { Description = "Energy" };
             HarvestTypeRepository.Insert(harvestType);
             
             harvestType = new HarvestType() { Description = "Other" };
