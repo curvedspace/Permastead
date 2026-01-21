@@ -34,7 +34,8 @@ public static class ScoreBoardService
             { AchievementType.SaveSeed, new Achievement() { Type = AchievementType.SaveSeed, InitialPoints = 50 } },
             { AchievementType.AddHarvest, new Achievement() { Type = AchievementType.AddHarvest, InitialPoints = 100 } },
             { AchievementType.AddProcedure, new Achievement() { Type = AchievementType.AddProcedure, InitialPoints = 100 } },
-            { AchievementType.AddPreservation, new Achievement() { Type = AchievementType.AddPreservation, InitialPoints = 100 } }
+            { AchievementType.AddPreservation, new Achievement() { Type = AchievementType.AddPreservation, InitialPoints = 100 } },
+            { AchievementType.AddPeople, new Achievement() { Type = AchievementType.AddPeople, InitialPoints = 10 } }
         };
 
         var obs = ObservationsService.GetObservationsForAllEntities(mode);
@@ -46,6 +47,7 @@ public static class ScoreBoardService
         var harvests = HarvestService.GetAllHarvests(mode);
         var preservations = FoodPreservationService.GetAll(mode);
         var procedures = ProceduresService.GetAllProcedures(mode);
+        var people = PersonService.GetAllPeople(mode);
 
         scoreBoard.Actions = todos.Count;
         scoreBoard.Observations = obs.Count;
@@ -55,6 +57,7 @@ public static class ScoreBoardService
         scoreBoard.Harvests = harvests.Count;
         scoreBoard.Procedures = procedures.Count;
         scoreBoard.Preservations = preservations.Count;
+        scoreBoard.People = people.Count;
 
         //iterate through data
        
@@ -125,6 +128,14 @@ public static class ScoreBoardService
         {
             preservationAchievement.Count += 1;
             scoreBoard.TotalScore += preservationAchievement.CurrentPoints;
+        }
+        
+        //people
+        var peopleAchievement = achievements[AchievementType.AddPeople];
+        foreach (var e in people)
+        {
+            peopleAchievement.Count += 1;
+            scoreBoard.TotalScore += peopleAchievement.CurrentPoints;
         }
 
         // bonus calculation - observations
@@ -210,6 +221,15 @@ public static class ScoreBoardService
         if (procedures.Count >= 10000) scoreBoard.TotalScore += 10000;
         
         //bonus computation - events
+        if (events.Count >= 10) scoreBoard.TotalScore += 10;
+        if (events.Count >= 25) scoreBoard.TotalScore += 25;
+        if (events.Count >= 50) scoreBoard.TotalScore += 50;
+        if (events.Count >= 100) scoreBoard.TotalScore += 100;
+        if (events.Count >= 500) scoreBoard.TotalScore += 500;
+        if (events.Count >= 1000) scoreBoard.TotalScore += 1000;
+        if (events.Count >= 10000) scoreBoard.TotalScore += 10000;
+        
+        //bonus computation - people
         if (events.Count >= 10) scoreBoard.TotalScore += 10;
         if (events.Count >= 25) scoreBoard.TotalScore += 25;
         if (events.Count >= 50) scoreBoard.TotalScore += 50;

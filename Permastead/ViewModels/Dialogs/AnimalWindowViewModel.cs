@@ -1,5 +1,7 @@
+using System;
 using System.Collections.ObjectModel;
 using System.Linq;
+using Avalonia.Controls;
 using CommunityToolkit.Mvvm.ComponentModel;
 using Models;
 using Permastead.ViewModels.Views;
@@ -11,6 +13,10 @@ namespace Permastead.ViewModels.Dialogs;
 
 public partial class AnimalWindowViewModel : ViewModelBase
 {
+    public ObservableCollection<TagData> Items { get; set; }
+    public ObservableCollection<TagData> SelectedItems { get; set; }
+    public AutoCompleteFilterPredicate<object> FilterPredicate { get; set; }
+    
     [ObservableProperty] 
     private Animal _currentItem;
     
@@ -26,17 +32,32 @@ public partial class AnimalWindowViewModel : ViewModelBase
     {
         bool rtnValue;
 
+        CurrentItem.TagList.Clear();
+        foreach (var tagData in SelectedItems)
+        {
+            CurrentItem.TagList.Add(tagData.TagText);
+        }
+        CurrentItem.SyncTags();
+        
         rtnValue = Services.AnimalService.CommitRecord(AppSession.ServiceMode, CurrentItem);
         
         OnPropertyChanged(nameof(_currentItem));
             
-        using (LogContext.PushProperty("HarvestWindowViewModel", this))
+        using (LogContext.PushProperty("AnimalWindowViewModel", this))
         {
-            Log.Information("Saved inventory item: " + CurrentItem.Name, rtnValue);
+            Log.Information("Saved animal: " + CurrentItem.Name, rtnValue);
         }
         
         ControlViewModel.RefreshDataOnly();
         
+    }
+    
+    private static bool Search(string? text, object? data)
+    {
+        if (text is null) return true;
+        
+        if (data is not TagData control) return false;
+        return control.TagText.Contains(text, StringComparison.InvariantCultureIgnoreCase);
     }
     
     public AnimalWindowViewModel()
@@ -48,6 +69,11 @@ public partial class AnimalWindowViewModel : ViewModelBase
 
         _animalTypes = new ObservableCollection<AnimalType>(AnimalService.GetAllAnimalTypes(AppSession.ServiceMode));
         _people = new ObservableCollection<Person>(PersonService.GetAllPeople(AppSession.ServiceMode));
+        
+        SelectedItems = new ObservableCollection<TagData>();
+        Items = new ObservableCollection<TagData>(Services.AnimalService.GetAllTags(AppSession.ServiceMode));
+            
+        FilterPredicate = Search;
     }
     
     public AnimalWindowViewModel(Animal item, AnimalsViewModel obsVm) : this()
@@ -61,6 +87,15 @@ public partial class AnimalWindowViewModel : ViewModelBase
         {
             if (CurrentItem.AnimalTypeId > 0) CurrentItem.Type = AnimalTypes.First(x => x.Id == CurrentItem.AnimalTypeId);
             CurrentItem.Author = People.First(x => x.Id == CurrentItem.Author.Id);
+            
+            foreach (var tagData in CurrentItem.TagList)
+            {
+                var td = new TagData
+                {
+                    TagText = tagData
+                };
+                SelectedItems.Add(td);
+            }
         }
         
     }

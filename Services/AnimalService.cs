@@ -39,6 +39,22 @@ public static class AnimalService
 
         return types;
     }
+    
+    public static List<TagData> GetAllTags(ServiceMode mode)
+    {
+        var tags = new List<TagData>();
+
+        if (mode == ServiceMode.Local)
+        {
+            tags = AnimalRepository.GetAllTags(DataConnection.GetLocalDataSource());
+        }
+        else
+        {
+            tags = DataAccess.Server.AnimalRepository.GetAllTags(DataConnection.GetServerConnectionString());
+        }
+
+        return tags;
+    }
 
     public static List<AnimalObservation> GetObservationsForAnimal(ServiceMode mode, long id)
     {

@@ -78,6 +78,53 @@ public static class AnimalRepository
             return myAnimals;
         }
     }
+    
+    public static List<TagData> GetAllTags(string connectionString)
+    {
+        var tags = new List<TagData>();
+        var sql = "SELECT p.tags " +
+                  "FROM Animal p  " + 
+                  "WHERE (p.EndDate is null OR p.EndDate > CURRENT_DATE+1) ";
+
+        var stringTags = new List<string>();
+            
+        using (IDbConnection connection = new SqliteConnection(connectionString))
+        {
+            connection.Open();
+
+            using (IDbCommand command = connection.CreateCommand())
+            {
+                command.CommandText = sql;
+                var dr = command.ExecuteReader();
+                    
+                while (dr.Read())
+                {
+                    if (dr[0].ToString()! != "")
+                    {
+                        var currentTags = dr[0].ToString()!.Trim().Split(' ').ToList();
+                        foreach (var tagData in currentTags)
+                        {
+                            if (!stringTags.Contains(tagData))
+                            {
+                                stringTags.Add(tagData);
+                            }
+                        }
+                    }
+                }
+            }
+
+            foreach (var stringTag in stringTags)
+            {
+                var td = new TagData
+                {
+                    TagText = stringTag
+                };
+                tags.Add(td);
+            }
+        }
+
+        return tags;
+    }
 
     public static bool InsertAnimalObservation(string connectionString, AnimalObservation obs)
     {

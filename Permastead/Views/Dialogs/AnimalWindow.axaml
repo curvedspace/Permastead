@@ -5,6 +5,8 @@
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="Permastead.Views.Dialogs.AnimalWindow"
         xmlns:vm="using:Permastead.ViewModels.Dialogs"
+        xmlns:u="https://irihi.tech/ursa"
+        xmlns:models="using:Models"
         x:DataType="vm:AnimalWindowViewModel"
         x:CompileBindings="True"
         Title="AnimalWindow">
@@ -56,6 +58,28 @@
 
         <Image Grid.Row="7" Grid.Column="0"  Margin="10" Width="32" Height="32" Source="/Assets/burro.png" />
 
+        <u:MultiAutoCompleteBox ToolTip.Tip = "Allows you to tag a plant with different characteristics." Grid.Row="8" Grid.Column="1" Grid.ColumnSpan="4" ItemsSource="{Binding Items}"
+                                Margin="20"
+                                Width="350"
+                                HorizontalAlignment="Left"
+                                InnerLeftContent="Tags"
+                                SelectedItems="{Binding SelectedItems}"
+                                ItemFilter="{Binding FilterPredicate}"
+                                FilterMode="Custom">
+            <u:MultiAutoCompleteBox.ItemTemplate>
+                <DataTemplate DataType="models:TagData">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding TagText}" VerticalAlignment="Center"/>
+                    </StackPanel>
+                </DataTemplate>
+            </u:MultiAutoCompleteBox.ItemTemplate>
+            <u:MultiAutoCompleteBox.SelectedItemTemplate>
+                <DataTemplate DataType="models:TagData">
+                    <TextBlock Text="{Binding TagText}" />
+                </DataTemplate>
+            </u:MultiAutoCompleteBox.SelectedItemTemplate>
+        </u:MultiAutoCompleteBox>
+        
         <StackPanel Grid.Row="7" Grid.Column="3" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,0,0">
             <CheckBox x:Name="OnSite" Margin="0,0,50,0" IsChecked="{Binding CurrentItem.IsPet}">Is Pet</CheckBox>
             <Button x:Name="SaveButton" Margin="10" Click="SaveButton_OnClick">Save</Button>

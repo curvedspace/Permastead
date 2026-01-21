@@ -126,9 +126,10 @@ public partial class AnimalsViewModel : ViewModelBase
                     (o, v) => o.IsPet = v,
                     options: new()
                     {
-                        CanUserResizeColumn = false, CanUserSortColumn = true
+                        CanUserResizeColumn = false, CanUserSortColumn = true,
                     }),
-                
+                new TextColumn<Animal, string>
+                    ("Tags", x => x.Tags),
                 new TextColumn<Animal, string>
                     ("Comment", x => x.Comment)
             },

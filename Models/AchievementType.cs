@@ -15,5 +15,6 @@ public enum AchievementType
     TagFixMistake,
     AddHarvest,
     AddPreservation,
-    AddProcedure
+    AddProcedure,
+    AddPeople
 }
