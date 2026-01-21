@@ -95,15 +95,20 @@ public partial class InventoryWindowViewModel: ViewModelBase
 
     public void SaveRecord()
     {
-        bool rtnValue;
+        CurrentItem.TagList.Clear();
+        foreach (var tagData in SelectedItems)
+        {
+            CurrentItem.TagList.Add(tagData.TagText);
+        }
+        CurrentItem.SyncTags();
+        
+        var rtnValue = Services.InventoryService.CommitRecord(AppSession.ServiceMode, CurrentItem);
 
-        rtnValue = Services.InventoryService.CommitRecord(AppSession.ServiceMode, _currentItem);
-
-        OnPropertyChanged(nameof(_currentItem));
+        OnPropertyChanged(nameof(CurrentItem));
 
         using (LogContext.PushProperty("PersonViewModel", this))
         {
-            Log.Information("Saved inventory item: " + _currentItem.Description, rtnValue);
+            Log.Information("Saved inventory item: " + CurrentItem.Description, rtnValue);
         }
 
         ControlViewModel.RefreshData();
