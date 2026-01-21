@@ -227,7 +227,7 @@ public partial class PlantingsView : UserControl
         Node currentNode = tree.SelectedItem as Node;
         
         // figure out what to do based on the node type
-        if (currentNode != null)
+        if (currentNode != null && currentNode.Id > 0)
         {
             switch (currentNode.Type)
             {

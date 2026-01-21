@@ -1,4 +1,5 @@
 using System.Collections.ObjectModel;
+using Avalonia.Controls;
 using CommunityToolkit.Mvvm.ComponentModel;
 using Models;
 using Permastead.ViewModels.Views;
@@ -10,6 +11,9 @@ namespace Permastead.ViewModels.Dialogs;
 
 public partial class PlantWindowViewModel : ViewModelBase
 {
+    public ObservableCollection<TagData> Items { get; set; }
+    public ObservableCollection<TagData> SelectedItems { get; set; }
+    public AutoCompleteFilterPredicate<object> FilterPredicate { get; set; }
     
     [ObservableProperty] 
     private long _plantingCount;
@@ -36,6 +40,20 @@ public partial class PlantWindowViewModel : ViewModelBase
     {
         _plant = plant;
         _controlViewModel = obsVm;
+        
+        SelectedItems = new ObservableCollection<TagData>();
+        
+        if (Plant != null)
+        {
+            foreach (var tagData in Plant.TagList)
+            {
+                var td = new TagData
+                {
+                    TagText = tagData
+                };
+                SelectedItems.Add(td);
+            }
+        }
 
         RefreshData();
     }
