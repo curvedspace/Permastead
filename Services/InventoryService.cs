@@ -4,7 +4,7 @@ using Models;
 
 namespace Services;
 
-public class InventoryService
+public static class InventoryService
 {
 
     public static List<Inventory> GetAllInventory(ServiceMode mode)
@@ -154,6 +154,22 @@ public class InventoryService
         return list;
     }
     
+    public static List<TagData> GetAllTags(ServiceMode mode)
+    {
+        var tags = new List<TagData>();
+
+        if (mode == ServiceMode.Local)
+        {
+            tags = InventoryRepository.GetAllTags(DataConnection.GetLocalDataSource());
+        }
+        else
+        {
+            tags = DataAccess.Server.InventoryRepository.GetAllTags(DataConnection.GetServerConnectionString());
+        }
+
+        return tags;
+    }
+    
     public static bool CommitRecord(ServiceMode mode, Inventory inventory)
     {
         bool rtnValue = false;
@@ -168,7 +184,6 @@ public class InventoryService
             {
                 DataAccess.Server.InventoryRepository.Update(inventory);
             }
-            
         }
         else
         {

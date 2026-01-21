@@ -55,6 +55,11 @@ public partial class InventoryWindowViewModel: ViewModelBase
             
             _currentItem = new Inventory();
             
+            SelectedItems = new ObservableCollection<TagData>();
+            Items = new ObservableCollection<TagData>(Services.InventoryService.GetAllTags(AppSession.ServiceMode));
+            
+            FilterPredicate = Search;
+            
         }
         catch (Exception ex)
         {
@@ -68,7 +73,24 @@ public partial class InventoryWindowViewModel: ViewModelBase
         ControlViewModel = obsVm;
         
         _currentItem.Author = _people.First(x => x.Id == inventory.Author.Id);
+        
+        foreach (var tagData in _currentItem.TagList)
+        {
+            var td = new TagData
+            {
+                TagText = tagData
+            };
+            SelectedItems.Add(td);
+        }
 
+    }
+    
+    private static bool Search(string? text, object? data)
+    {
+        if (text is null) return true;
+        
+        if (data is not TagData control) return false;
+        return control.TagText.Contains(text, StringComparison.InvariantCultureIgnoreCase);
     }
 
     public void SaveRecord()

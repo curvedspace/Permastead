@@ -1,3 +1,4 @@
+using System;
 using System.Collections.ObjectModel;
 using Avalonia.Controls;
 using CommunityToolkit.Mvvm.ComponentModel;
@@ -41,7 +42,9 @@ public partial class PlantWindowViewModel : ViewModelBase
         _plant = plant;
         _controlViewModel = obsVm;
         
+        Items = new ObservableCollection<TagData>(Services.PlantService.GetAllTags(AppSession.ServiceMode));
         SelectedItems = new ObservableCollection<TagData>();
+        FilterPredicate = Search;
         
         if (Plant != null)
         {
@@ -56,6 +59,14 @@ public partial class PlantWindowViewModel : ViewModelBase
         }
 
         RefreshData();
+    }
+    
+    private static bool Search(string? text, object? data)
+    {
+        if (text is null) return true;
+        
+        if (data is not TagData control) return false;
+        return control.TagText.Contains(text, StringComparison.InvariantCultureIgnoreCase);
     }
 
     public void SavePlant()
@@ -72,7 +83,7 @@ public partial class PlantWindowViewModel : ViewModelBase
             Log.Information("Saved planting: " + _plant.Description, rtnValue);
         }
         
-        ToastManager.Show(new Toast("Plant record (" + _plant.Description + ") has been updated."));
+        _controlViewModel.ToastManager.Show(new Toast("Plant record (" + _plant.Description + ") has been updated."));
         
         _controlViewModel.RefreshData();
         

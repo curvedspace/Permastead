@@ -6,6 +6,8 @@
         x:Class="Permastead.Views.Dialogs.InventoryWindow"
         x:DataType="vm:InventoryWindowViewModel"
         xmlns:vm="using:Permastead.ViewModels.Dialogs"
+        xmlns:u="https://irihi.tech/ursa"
+        xmlns:models="using:Models"
         Title="InventoryWindow">
   
   <!--This is design time only-->
@@ -92,6 +94,28 @@
                  Text="{Binding CurrentItem.Notes }" TextWrapping="Wrap" Margin="10,10,10,10"></TextBox>
         
         <Image Grid.Row="8" Grid.Column="0" HorizontalAlignment="Left" Margin="20,10,10,10" Width="32" Height="32" Source="/Assets/clipboard_invoice.png" />
+        
+        <u:MultiAutoCompleteBox ToolTip.Tip = "Allows you to tag a plant with different characteristics." Grid.Row="8" Grid.Column="1" Grid.ColumnSpan="4" ItemsSource="{Binding Items}"
+                                Margin="20"
+                                Width="400"
+                                HorizontalAlignment="Left"
+                                InnerLeftContent="Tags"
+                                SelectedItems="{Binding SelectedItems}"
+                                ItemFilter="{Binding FilterPredicate}"
+                                FilterMode="Custom">
+          <u:MultiAutoCompleteBox.ItemTemplate>
+            <DataTemplate DataType="models:TagData">
+              <StackPanel Orientation="Horizontal">
+                <TextBlock Text="{Binding TagText}" VerticalAlignment="Center"/>
+              </StackPanel>
+            </DataTemplate>
+          </u:MultiAutoCompleteBox.ItemTemplate>
+          <u:MultiAutoCompleteBox.SelectedItemTemplate>
+            <DataTemplate DataType="models:TagData">
+              <TextBlock Text="{Binding TagText}" />
+            </DataTemplate>
+          </u:MultiAutoCompleteBox.SelectedItemTemplate>
+        </u:MultiAutoCompleteBox>
         
         <StackPanel Grid.Row="8" Grid.Column="3" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,0,0">
           <Button x:Name="SaveButton" Margin="10" Click="SaveButton_OnClick">Save</Button>
