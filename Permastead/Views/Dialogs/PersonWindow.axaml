@@ -6,6 +6,8 @@
         xmlns:vm="using:Permastead.ViewModels.Dialogs"
         x:Class="Permastead.Views.Dialogs.PersonWindow"
         x:DataType="vm:PersonWindowViewModel"
+        xmlns:u="https://irihi.tech/ursa"
+        xmlns:models="using:Models"
         Icon="/Assets/outlook_new_meeting.png"
         Title="Person Window">
     
@@ -48,6 +50,28 @@
                  Text="{Binding Person.Comment}" Margin="10,10,10,10"></TextBox>
 
         <Image Grid.Row="8" Grid.Column="0"  Margin="10" Width="32" Height="32" Source="/Assets/contacts.png" />
+        
+        <u:MultiAutoCompleteBox ToolTip.Tip = "Allows you to tag a plant with different characteristics." Grid.Row="8" Grid.Column="1" Grid.ColumnSpan="4" ItemsSource="{Binding Items}"
+                                Margin="20"
+                                Width="300"
+                                HorizontalAlignment="Left"
+                                InnerLeftContent="Tags"
+                                SelectedItems="{Binding SelectedItems}"
+                                ItemFilter="{Binding FilterPredicate}"
+                                FilterMode="Custom">
+            <u:MultiAutoCompleteBox.ItemTemplate>
+                <DataTemplate DataType="models:TagData">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding TagText}" VerticalAlignment="Center"/>
+                    </StackPanel>
+                </DataTemplate>
+            </u:MultiAutoCompleteBox.ItemTemplate>
+            <u:MultiAutoCompleteBox.SelectedItemTemplate>
+                <DataTemplate DataType="models:TagData">
+                    <TextBlock Text="{Binding TagText}" />
+                </DataTemplate>
+            </u:MultiAutoCompleteBox.SelectedItemTemplate>
+        </u:MultiAutoCompleteBox>
 
         <StackPanel Grid.Row="8" Grid.Column="3" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,0,0">
             <CheckBox x:Name="OnSite" Margin="0,0,50,0" IsChecked="{Binding Person.OnSite}">Is Onsite</CheckBox>

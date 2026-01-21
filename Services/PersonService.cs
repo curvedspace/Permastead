@@ -55,6 +55,22 @@ public class PersonService
         return companies;
     }
     
+    public static List<TagData> GetAllTags(ServiceMode mode)
+    {
+        var tags = new List<TagData>();
+
+        if (mode == ServiceMode.Local)
+        {
+            tags = PersonRepository.GetAllTags(DataConnection.GetLocalDataSource());
+        }
+        else
+        {
+            tags = DataAccess.Server.PersonRepository.GetAllTags(DataConnection.GetServerConnectionString());
+        }
+
+        return tags;
+    }
+    
     public static Person GetPersonFromId(ServiceMode mode, long id) 
     {
         var person = new Person();
