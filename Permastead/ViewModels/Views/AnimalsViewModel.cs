@@ -85,6 +85,7 @@ public partial class AnimalsViewModel : ViewModelBase
                 if (animal.Name.ToLowerInvariant().Contains(caseAdjustedFilterText) ||
                     animal.NickName.ToLowerInvariant().Contains(caseAdjustedFilterText) ||
                     animal.Type.Description.ToLowerInvariant().Contains(caseAdjustedFilterText) ||
+                    animal.Tags.ToLowerInvariant().Contains(caseAdjustedFilterText) ||
                     animal.Comment.ToLowerInvariant().Contains(caseAdjustedFilterText))
                 {
                     if (CurrentOnly)

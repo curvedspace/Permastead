@@ -269,6 +269,7 @@ public partial class PlantsViewModel : ViewModelBase
             {
                 if (p.Description.ToLowerInvariant().Contains(caseAdjustedFilterText) ||
                     p.Comment.ToLowerInvariant().Contains(caseAdjustedFilterText) ||
+                    p.Tags.ToLowerInvariant().Contains(caseAdjustedFilterText) ||
                     p.Family.ToLowerInvariant().Contains(caseAdjustedFilterText))
                 {
                     _plants.Add(p);

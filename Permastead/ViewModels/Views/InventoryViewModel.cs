@@ -281,6 +281,7 @@ public partial class InventoryViewModel: ViewModelBase
                     inv.InventoryGroup!.ToLowerInvariant().Contains(caseAdjustedFilterText) ||
                     inv.Notes.ToLowerInvariant().Contains(caseAdjustedFilterText) ||
                     inv.Brand.ToLowerInvariant().Contains(caseAdjustedFilterText) ||
+                    inv.Tags.ToLowerInvariant().Contains(caseAdjustedFilterText) ||
                     inv.InventoryType.ToLowerInvariant().Contains(caseAdjustedFilterText))
                 {
                     if (_forSaleOnly)
@@ -342,6 +343,8 @@ public partial class InventoryViewModel: ViewModelBase
                 //     {
                 //         CanUserResizeColumn = false, CanUserSortColumn = true
                 //     }),
+                new TextColumn<Inventory, string>
+                    ("Tags", x => x.Tags),
                 new TextColumn<Inventory, string>
                     ("Notes", x => x.Notes)
             },
