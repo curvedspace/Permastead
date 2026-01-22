@@ -118,6 +118,8 @@ public partial class ContactsViewModel : ViewModelBase
                 new TextColumn<Person, string>
                     ("Address", x => x.Address),
                 new TextColumn<Person, string>
+                    ("Tags", x => x.Tags),
+                new TextColumn<Person, string>
                     ("Comment", x => x.Comment)
             },
         };
