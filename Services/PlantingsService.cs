@@ -345,6 +345,13 @@ public static class PlantingsService
                         harvestToDo.ToDoStatus.Id = 1;
                         harvestToDo.ToDoType.Id = 1;
                         
+                        //try to get the right to do type (gardening)
+                        var todoTypes = ToDoService.GetAllToDoTypes(mode);
+                        foreach (var todoType in todoTypes.Where(todoType => todoType.Description == "Gardening"))
+                        {
+                            harvestToDo.ToDoType = todoType;
+                        }
+                        
                         ToDoRepository.Insert(harvestToDo);
                     }
                 }
@@ -362,6 +369,13 @@ public static class PlantingsService
                         harvestToDo.StartDate = harvestToDo.DueDate;
                         harvestToDo.ToDoStatus.Id = 1;
                         harvestToDo.ToDoType.Id = 1;
+                        
+                        //try to get the right to do type (gardening)
+                        var todoTypes = ToDoService.GetAllToDoTypes(mode);
+                        foreach (var todoType in todoTypes.Where(todoType => todoType.Description == "Gardening"))
+                        {
+                            harvestToDo.ToDoType = todoType;
+                        }
                         
                         DataAccess.Server.ToDoRepository.Insert(harvestToDo);
                     }

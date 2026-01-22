@@ -5,7 +5,7 @@ using Models;
 
 namespace Services
 {
-    public class ToDoService
+    public static class ToDoService
     {
         public static List<ToDo> GetAllToDos(ServiceMode mode)
         {
