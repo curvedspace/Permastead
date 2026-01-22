@@ -1,7 +1,6 @@
 using DataAccess;
 using DataAccess.Local;
 using Models;
-using NBitcoin.Protocol;
 
 namespace Services;
 
@@ -334,10 +333,38 @@ public static class PlantingsService
                 if (mode == ServiceMode.Local)
                 {
                     PlantingsRepository.Insert(planting);
+                    
+                    //check to see if we need to create a harvest to do
+                    if (planting.CreateHarvestToDo)
+                    {
+                        var harvestToDo = new ToDo();
+                        harvestToDo.Assignee.Id = DataConnection.GetCurrentUserId();
+                        harvestToDo.Description = "Harvest " + planting.Description;
+                        harvestToDo.DueDate = DateTime.Today.AddDays(planting.DaysToHarvest);
+                        harvestToDo.StartDate = harvestToDo.DueDate;
+                        harvestToDo.ToDoStatus.Id = 1;
+                        harvestToDo.ToDoType.Id = 1;
+                        
+                        ToDoRepository.Insert(harvestToDo);
+                    }
                 }
                 else
                 {
                     DataAccess.Server.PlantingsRepository.Insert(planting);
+                    
+                    //check to see if we need to create a harvest to do
+                    if (planting.CreateHarvestToDo)
+                    {
+                        var harvestToDo = new ToDo();
+                        harvestToDo.Assignee.Id = DataConnection.GetCurrentUserId();
+                        harvestToDo.Description = "Harvest " + planting.Description;
+                        harvestToDo.DueDate = DateTime.Today.AddDays(planting.DaysToHarvest);
+                        harvestToDo.StartDate = harvestToDo.DueDate;
+                        harvestToDo.ToDoStatus.Id = 1;
+                        harvestToDo.ToDoType.Id = 1;
+                        
+                        DataAccess.Server.ToDoRepository.Insert(harvestToDo);
+                    }
                 }
             }
         }

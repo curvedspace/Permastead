@@ -25,6 +25,15 @@ public class Planting: CodeTable
     public PlantingState State { get; set; }
     
     public long PlantingStateId => this.State!.Id;
+    
+    public bool CreateHarvestToDo {get; set;} = false;
+
+    /// <summary>
+    /// Show an option to create a harvest to do but only if it is a new planting and we have a days to harvest value.
+    /// </summary>
+    public bool HarvestToDoOption => (DaysToHarvest > 0 && this.Id == 0);
+    
+    public int DaysToHarvest => this.SeedPacket.DaysToHarvest;
 
     public string Comment { get; set; } 
 

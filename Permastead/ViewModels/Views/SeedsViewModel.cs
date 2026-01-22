@@ -225,7 +225,7 @@ public partial class SeedsViewModel : ViewModelBase
         
             plantingWindow.Topmost = true;
             plantingWindow.Width = 900;
-            plantingWindow.Height = 500;
+            plantingWindow.Height = 550;
             plantingWindow.Opacity = 0.95;
             plantingWindow.Title = "Planting - " + planting.Description;
             

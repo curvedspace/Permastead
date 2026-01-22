@@ -70,8 +70,8 @@ public class ToDo
     {
         this.ToDoStatus = new ToDoStatus();
         this.ToDoType = new ToDoType();
-        this.Assigner = Person.Anonymous();
-        this.Assignee = Person.Anonymous();
+        this.Assigner = Person.Gaia();
+        this.Assignee = Person.Gaia();
 
         this.CreationDate = DateTime.Now;
         this.StartDate = DateTime.Now.Date;
