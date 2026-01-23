@@ -1271,7 +1271,7 @@ namespace DataAccess.Local
             p = new Plant { Author = new Person(1), Code = "ARUGULA", Description = "Arugula", Family = "Brassicaceae", Tags = "",  Comment = "Rocket, eruca, or arugula is an edible annual plant in the family Brassicaceae used as a leaf vegetable for its fresh, tart, bitter, and peppery flavor."};
             PlantRepository.Insert(p);
             
-            p = new Plant { Author = new Person(1), Code = "ASHWG", Description = "Ashwagandha", Family = "Solanaceae", Tags = "herb nervine",  Comment = "Ashwagandha, also known as Withania somnifera, is a medicinal herb commonly used in traditional Ayurvedic medicine for its purported health benefits."};
+            p = new Plant { Author = new Person(1), Code = "ASHWAG", Description = "Ashwagandha", Family = "Solanaceae", Tags = "herb nervine",  Comment = "Ashwagandha, also known as Withania somnifera, is a medicinal herb commonly used in traditional Ayurvedic medicine for its purported health benefits."};
             PlantRepository.Insert(p);
             
             p = new Plant { Author = new Person(1), Code = "ASPARAGUS", Description = "Asparagus", Family = "Asparagaceae", Tags = "",  Comment = "Asparagus (Asparagus officinalis) is a perennial flowering plant native to Eurasia, widely cultivated for its edible young shoots, known as spears."};
@@ -1289,82 +1289,556 @@ namespace DataAccess.Local
             p = new Plant { Author = new Person(1), Code = "BASIL", Description = "Basil", Family = "Lamiaceae", Tags = "herb aromatic",  Comment = "Basil, also called great basil, is a culinary herb of the family Lamiaceae (mints). It is a tender plant, and is used in cuisines worldwide. "};
             PlantRepository.Insert(p);
             
-            p = new Plant { Author = new Person(1), Code = "UNK", Description = "Unknown" };
-            PlantRepository.Insert(p);
-
-            p = new Plant { Author = new Person(1), Code = "PEPPER", Description = "Pepper", Family = "Solanaceae", Comment = "The terms bell pepper (US, Canada, Philippines), pepper or sweet pepper (UK, Ireland, Canada, South Africa, Zimbabwe), and capsicum (Australia, Bangladesh, India, Malaysia, New Zealand, Pakistan and Sri Lanka) are often used for any of the large bell-shaped peppers, regardless of their color. The fruit is simply referred to as a \"pepper\", or additionally by color (\"green pepper\" or red, yellow, orange, purple, brown, black)."};
-            PlantRepository.Insert(p);
-
-            p = new Plant { Author = new Person(1), Code = "POTATO", Description = "Potato" };
-            PlantRepository.Insert(p);
-
-            p = new Plant { Author = new Person(1), Code = "CORN", Description = "Corn" };
-            PlantRepository.Insert(p);
-
-            p = new Plant { Author = new Person(1), Code = "PEA", Description = "Pea" };
+            p = new Plant { Author = new Person(1), Code = "BAYBERRY", Description = "Bayberry", Family = "Myricaceae", Tags = "herb astringent anti-inflammatory",  Comment = "Bayberry is a native North American shrub known for its fragrant, aromatic leaves and waxy, blue-gray berries that persist through winter, providing food for birds and other wildlife."};
             PlantRepository.Insert(p);
             
-            p = new Plant { Author = new Person(1), Code = "BEAN", Description = "Bean" };
+            p = new Plant { Author = new Person(1), Code = "BEAN", Description = "Bean", Family = "Fabaceae", Tags = "nitrogen-fixer",  Comment = "A bean is the seed of several plants in the family Fabaceae, which are used as vegetables for human or animal food. "};
             PlantRepository.Insert(p);
 
-            p = new Plant { Author = new Person(1), Code = "PARSLEY", Description = "Parsley" };
+            p = new Plant { Author = new Person(1), Code = "BEARDT", Description = "Beardtongue", Family = "Plantaginaceae", Tags = "" };
             PlantRepository.Insert(p);
+            
+            p = new Plant { Author = new Person(1), Code = "BEEBALM", Description = "Bee Balm", Family = "Lamisceae", Tags = "herb" };
+            PlantRepository.Insert(p);
+            
+            p = new Plant { Author = new Person(1), Code = "BEECH", Description = "Beech Tree", Family = "Fagaceae", Tags = "" };
+            PlantRepository.Insert(p);
+            
+            p = new Plant { Author = new Person(1), Code = "BEET", Description = "Beet", Family = "Amaranthaceae", Tags = "" };
+            PlantRepository.Insert(p);
+            
+            p = new Plant { Author = new Person(1), Code = "BEGRASS", Description = "Blue Eyed Grass", Family = "Iridaceae", Tags = "" };
+            PlantRepository.Insert(p);
+            
+            p = new Plant { Author = new Person(1), Code = "BERGAMOT", Description = "Bergamot", Family = "Lamiaceae", Tags = "herb " };
+            PlantRepository.Insert(p);
+            
+            p = new Plant { Author = new Person(1), Code = "BESUSAN", Description = "Black Eyed Susan", Family = "Asteraceae", Tags = "" };
+            PlantRepository.Insert(p);
+            
+            p = new Plant { Author = new Person(1), Code = "BFBUSH", Description = "Butterfly Bush", Family = "Scrophulariaceae", Tags = "" };
+            PlantRepository.Insert(p);
+            
+            p = new Plant { Author = new Person(1), Code = "BLKBERRY", Description = "Blackberry", Family = "Rosaceae", Tags = "herb " };
+            PlantRepository.Insert(p);
+            
+            p = new Plant { Author = new Person(1), Code = "BLOCUST", Description = "Black Locust", Family = "Fabaceae", Tags = "tree " };
+            PlantRepository.Insert(p);
+            
+            p = new Plant { Author = new Person(1), Code = "BLUEBERRY", Description = "Blueberry", Family = "Ericaceae", Tags = "" };
+            PlantRepository.Insert(p);
+            
+            p = new Plant { Author = new Person(1), Code = "BMUSTARD", Description = "Black Mustard", Family = "Brassicaceae", Tags = "" };
+            PlantRepository.Insert(p);
+            
+            p = new Plant { Author = new Person(1), Code = "BONESET", Description = "Boneset", Family = "", Tags = "" };
+            PlantRepository.Insert(p);
+            
+			p = new Plant { Author = new Person(1), Code = "BORAGE", Description = "Borage", Family = "Boraginaceae", Tags = "" };
+			PlantRepository.Insert(p);
+			
+			p = new Plant { Author = new Person(1), Code = "BOXWOOD", Description = "Boxwood", Family = "Buxaceae", Tags = "" };
+			PlantRepository.Insert(p);
+			
+			p = new Plant { Author = new Person(1), Code = "BPEP", Description = "Bell Pepper", Family = "Solanaceae", Tags = "" };
+			PlantRepository.Insert(p);
+			
+			p = new Plant { Author = new Person(1), Code = "BSAUSAGE", Description = "Blue Sausage Fruit", Family = "Lardizabalaceae", Tags = "" };
+			PlantRepository.Insert(p);
+			
+			p = new Plant { Author = new Person(1), Code = "BUFFBERRY", Description = "Buffaloberry", Family = "Elaeagnaceae", Tags = "" };
+			PlantRepository.Insert(p);
+			
+			p = new Plant { Author = new Person(1), Code = "BUNCHBERRY", Description = "Bunchberry", Family = "Cornaceae", Tags = "" };
+			PlantRepository.Insert(p);
+			
+			p = new Plant { Author = new Person(1), Code = "BURDOCK", Description = "Burdock", Family = "Asteraceae", Tags = "herb alterative anti-inflammatory bitter hepatic nutritive tonic vulnerary" };
+			PlantRepository.Insert(p);
+			
+			p = new Plant { Author = new Person(1), Code = "BWALNUT", Description = "Black Walnut", Family = "Juglandaceae", Tags = "tree " };
+			PlantRepository.Insert(p);
+			
+			p = new Plant { Author = new Person(1), Code = "BWHEAT", Description = "Buckwheat", Family = "Polygonaceae", Tags = "" };
+			PlantRepository.Insert(p);
+			
+			p = new Plant { Author = new Person(1), Code = "CABBAGE", Description = "Cabbage", Family = "Brassicaceae", Tags = "" };
+			PlantRepository.Insert(p);
+			
+			p = new Plant { Author = new Person(1), Code = "CARROT", Description = "Carrot", Family = "Apiaceae", Tags = "" };
+			PlantRepository.Insert(p);
+			
+			p = new Plant { Author = new Person(1), Code = "CATMINT", Description = "Catmint", Family = "Lamiaceae", Tags = "herb " };
+			PlantRepository.Insert(p);
+			
+			p = new Plant { Author = new Person(1), Code = "CATNIP", Description = "Catnip", Family = "Lamiaceae", Tags = "herb antispasmodic aromatic bitter diaphoretic " };
+			PlantRepository.Insert(p);
+			
+			p = new Plant { Author = new Person(1), Code = "CAULI", Description = "Cauliflower", Family = "Brassicaceae", Tags = "" };
+			PlantRepository.Insert(p);
+			
+			p = new Plant { Author = new Person(1), Code = "CBINE", Description = "Columbine", Family = "Ranunculaceae", Tags = "" };
+			PlantRepository.Insert(p);
+			
+			p = new Plant { Author = new Person(1), Code = "CCAB1", Description = "Chinese Cabbage", Family = "Brassicaceae", Tags = "" };
+			PlantRepository.Insert(p);
+			
+			p = new Plant { Author = new Person(1), Code = "CFOOT", Description = "Catsfoot", Family = "Asteraceae", Tags = "herb astringent diuretic " };
+			PlantRepository.Insert(p);
+			
+			p = new Plant { Author = new Person(1), Code = "CHARD", Description = "Chard", Family = "Amaranthaceae", Tags = "" };
+			PlantRepository.Insert(p);
+			
+			p = new Plant { Author = new Person(1), Code = "CHERRY", Description = "Cherry ", Family = "Rosaceae", Tags = "tree " };
+			PlantRepository.Insert(p);
+			
+			p = new Plant { Author = new Person(1), Code = "CHERVIL", Description = "Chervil", Family = "Apiaceae", Tags = "" };
+			PlantRepository.Insert(p);
+			
+			p = new Plant { Author = new Person(1), Code = "CHICKWEED", Description = "Chickweed", Family = "Caryophyllaceae", Tags = "" };
+			PlantRepository.Insert(p);
+			
+			p = new Plant { Author = new Person(1), Code = "CHICORY", Description = "Chicory", Family = "Asteraceae", Tags = "" };
+			PlantRepository.Insert(p);
+			
+			p = new Plant { Author = new Person(1), Code = "CHIVE", Description = "Chives", Family = "Amaryllidaceae", Tags = "" };
+			PlantRepository.Insert(p);
+			
+			p = new Plant { Author = new Person(1), Code = "CHIVES", Description = "Garlic Chives", Family = "Amaryllidaceae", Tags = "" };
+			PlantRepository.Insert(p);
+			
+			p = new Plant { Author = new Person(1), Code = "CILANTRO", Description = "Cilantro", Family = "Apiaceae", Tags = "" };
+			PlantRepository.Insert(p);
+			
+			p = new Plant { Author = new Person(1), Code = "CLEAVERS", Description = "Cleavers", Family = "Rubiaceae", Tags = "herb astringent diuretic hepatic tonic vulnerary lymphatic " };
+			PlantRepository.Insert(p);
+			
+			p = new Plant { Author = new Person(1), Code = "CLOVER", Description = "Clover", Family = "Fabaceae", Tags = "alterative " };
+			PlantRepository.Insert(p);
+			
+			p = new Plant { Author = new Person(1), Code = "CMILE", Description = "Chamomile", Family = "Asteraceae", Tags = "herb " };
+			PlantRepository.Insert(p);
+			
+			p = new Plant { Author = new Person(1), Code = "CODO1", Description = "Codonopsis", Family = "Campanulaceae", Tags = "herb " };
+			PlantRepository.Insert(p);
+			
+			p = new Plant { Author = new Person(1), Code = "COMFREY", Description = "Comfrey", Family = "Boraginaceae", Tags = "herb anti-inflammatory astringent demulcent vulnerary " };
+			PlantRepository.Insert(p);
+			
+			p = new Plant { Author = new Person(1), Code = "CORN", Description = "Corn", Family = "Poaceae", Tags = "" };
+			PlantRepository.Insert(p);
+			
+			p = new Plant { Author = new Person(1), Code = "COSMOS", Description = "Cosmos", Family = "Asteraceae", Tags = "" };
+			PlantRepository.Insert(p);
+			
+			p = new Plant { Author = new Person(1), Code = "CPOPPY", Description = "California Poppy", Family = "Papaveraceae", Tags = "herb " };
+			PlantRepository.Insert(p);
+			
+			p = new Plant { Author = new Person(1), Code = "CRABAPPLE", Description = "Crabapple", Family = "Rosaceae", Tags = "tree " };
+			PlantRepository.Insert(p);
+			
+			p = new Plant { Author = new Person(1), Code = "CUCUMBER", Description = "Cucumber", Family = "Cucurbitaceae", Tags = "" };
+			PlantRepository.Insert(p);
+			
+			p = new Plant { Author = new Person(1), Code = "CURRANT", Description = "Currant", Family = "Ribes", Tags = "" };
+			PlantRepository.Insert(p);
+			
+			p = new Plant { Author = new Person(1), Code = "DAISY", Description = "Daisy", Family = "Asteraceae", Tags = "" };
+			PlantRepository.Insert(p);
+			
+			p = new Plant { Author = new Person(1), Code = "DANDE", Description = "Dandelion", Family = "Asteraceae", Tags = "herb bitter drying diuretic hepatic tonic nutritive alterative " };
+			PlantRepository.Insert(p);
+			
+			p = new Plant { Author = new Person(1), Code = "DELPH", Description = "Delphinium", Family = "Ranunculaceae", Tags = "" };
+			PlantRepository.Insert(p);
+			
+			p = new Plant { Author = new Person(1), Code = "DIANTHUS", Description = "Dianthus", Family = "Caryophyllaceae", Tags = "" };
+			PlantRepository.Insert(p);
+			
+			p = new Plant { Author = new Person(1), Code = "DILL", Description = "Dill", Family = "Apiaceae", Tags = "" };
+			PlantRepository.Insert(p);
+			
+			p = new Plant { Author = new Person(1), Code = "ECAMPANE", Description = "Elecampane", Family = "Asteraceae", Tags = "herb diaphoretic expectorant bitter " };
+			PlantRepository.Insert(p);
+			
+			p = new Plant { Author = new Person(1), Code = "ECHINACEA", Description = "Echinacea", Family = "Asteraceae", Tags = "herb " };
+			PlantRepository.Insert(p);
+			
+			p = new Plant { Author = new Person(1), Code = "ECNUT", Description = "Earth Chestnut", Family = "Apiaceae", Tags = "" };
+			PlantRepository.Insert(p);
+			
+			p = new Plant { Author = new Person(1), Code = "ELDBERRY", Description = "Elderberry", Family = "Adoxaceae", Tags = "herb " };
+			PlantRepository.Insert(p);
+			
+			p = new Plant { Author = new Person(1), Code = "ELM", Description = "Elm Tree", Family = "Ulmaceae", Tags = "" };
+			PlantRepository.Insert(p);
+			
+			p = new Plant { Author = new Person(1), Code = "EPRIM", Description = "Evening Primrose", Family = "Onagraceae", Tags = "herb anti-spasmodic bitter demulcent nutritive hepatic anti-inflammatory " };
+			PlantRepository.Insert(p);
+			
+			p = new Plant { Author = new Person(1), Code = "ERBUD", Description = "Eastern Redbud", Family = "Fabaceae", Tags = "nitrogen-fixer tree " };
+			PlantRepository.Insert(p);
+			
+			p = new Plant { Author = new Person(1), Code = "FENNEL", Description = "Fennel", Family = "Apiaceae", Tags = "herb carminative " };
+			PlantRepository.Insert(p);
+			
+			p = new Plant { Author = new Person(1), Code = "FEVERFEW", Description = "Feverfew", Family = "Asteraceae", Tags = "herb " };
+			PlantRepository.Insert(p);
+			
+			p = new Plant { Author = new Person(1), Code = "FINDIGO", Description = "False Indigo", Family = "Fabaceae", Tags = "" };
+			PlantRepository.Insert(p);
+			
+			p = new Plant { Author = new Person(1), Code = "FLAX", Description = "Flax", Family = "", Tags = "" };
+			PlantRepository.Insert(p);
+			
+			p = new Plant { Author = new Person(1), Code = "FOXGLOVE", Description = "Foxglove", Family = "Plantaginaceae", Tags = "" };
+			PlantRepository.Insert(p);
+			
+			p = new Plant { Author = new Person(1), Code = "FSORREL", Description = "French Sorrel", Family = "Polygonaceae", Tags = "" };
+			PlantRepository.Insert(p);
+			
+			p = new Plant { Author = new Person(1), Code = "GARLIC", Description = "Garlic", Family = "Amaryllidaceae", Tags = "herb warming alterative anti-septic anti-spasmodic carminative diaphoretic tonic vulnerary anthelmintic" };
+			PlantRepository.Insert(p);
+			
+			p = new Plant { Author = new Person(1), Code = "GBURDOCK", Description = "Greater Burdock", Family = "Asteraceae", Tags = "herb alterative anti-inflammatory bitter hepatic nutritive tonic vulnerary diuretic " };
+			PlantRepository.Insert(p);
+			
+			p = new Plant { Author = new Person(1), Code = "GCHERRY", Description = "Ground Cherry", Family = "Solanaceae", Tags = "" };
+			PlantRepository.Insert(p);
+			
+			p = new Plant { Author = new Person(1), Code = "GELDER", Description = "Ground Elder", Family = "", Tags = "" };
+			PlantRepository.Insert(p);
+			
+			p = new Plant { Author = new Person(1), Code = "GINGER", Description = "Ginger", Family = "Zingiberaceae", Tags = "herb emmenagogue sialagogue rubefacient galactagogue " };
+			PlantRepository.Insert(p);
+			
+			p = new Plant { Author = new Person(1), Code = "GINKGO", Description = "Ginkgo", Family = "Ginkgoaceae", Tags = "" };
+			PlantRepository.Insert(p);
+			
+			p = new Plant { Author = new Person(1), Code = "GINSENG", Description = "Ginseng", Family = "Araliaceae", Tags = "herb " };
+			PlantRepository.Insert(p);
+			
+			p = new Plant { Author = new Person(1), Code = "GKHENRY", Description = "Good King Henry", Family = "Amaranthaceae", Tags = "" };
+			PlantRepository.Insert(p);
+			
+			p = new Plant { Author = new Person(1), Code = "GKOLA", Description = "Gotu Kola", Family = "Apiaceae", Tags = "herb nervine warming " };
+			PlantRepository.Insert(p);
+			
+			p = new Plant { Author = new Person(1), Code = "GOJI", Description = "Goji Berry", Family = "Solanaceae", Tags = "herb nutritive " };
+			PlantRepository.Insert(p);
+			
+			p = new Plant { Author = new Person(1), Code = "GOOSEBERRY", Description = "Gooseberry", Family = "Grossulariaceae", Tags = "" };
+			PlantRepository.Insert(p);
+			
+			p = new Plant { Author = new Person(1), Code = "GOUMI", Description = "Goumi Berry", Family = "Elaeagnaceae", Tags = "" };
+			PlantRepository.Insert(p);
+			
+			p = new Plant { Author = new Person(1), Code = "GRAPE", Description = "Grapes", Family = "Vitaceae", Tags = "" };
+			PlantRepository.Insert(p);
+			
+			p = new Plant { Author = new Person(1), Code = "GROD", Description = "Goldenrod", Family = "Asteraceae", Tags = "herb bitter " };
+			PlantRepository.Insert(p);
+			
+			p = new Plant { Author = new Person(1), Code = "HARDYO", Description = "Hardy Orange", Family = "Rutaceae", Tags = "" };
+			PlantRepository.Insert(p);
+			
+			p = new Plant { Author = new Person(1), Code = "HASKAP", Description = "Haskap", Family = "Caprifoliaceae", Tags = "" };
+			PlantRepository.Insert(p);
+			
+			p = new Plant { Author = new Person(1), Code = "HAWTHORN", Description = "Hawthorn", Family = "Rosaceae", Tags = "tree " };
+			PlantRepository.Insert(p);
+			
+			p = new Plant { Author = new Person(1), Code = "HAZNUT", Description = "Hazelnut", Family = "Betulaceae", Tags = "tree " };
+			PlantRepository.Insert(p);
+			
+			p = new Plant { Author = new Person(1), Code = "HBASIL", Description = "Holy Basil", Family = "Lamiaceae", Tags = "herb warming " };
+			PlantRepository.Insert(p);
+			
+			p = new Plant { Author = new Person(1), Code = "HBVINE", Description = "Hummingbird Vine", Family = "Bignoniaceae", Tags = "" };
+			PlantRepository.Insert(p);
+			
+			p = new Plant { Author = new Person(1), Code = "HEARTNUT", Description = "Heartnut", Family = "Juglandaceae", Tags = "tree " };
+			PlantRepository.Insert(p);
+			
+			p = new Plant { Author = new Person(1), Code = "HHOCK", Description = "Hollyhock", Family = "Malvaceae", Tags = "" };
+			PlantRepository.Insert(p);
+			
+			p = new Plant { Author = new Person(1), Code = "HHOUND", Description = "Horehound", Family = "Lamiaceae", Tags = "herb " };
+			PlantRepository.Insert(p);
+			
+			p = new Plant { Author = new Person(1), Code = "HIBFLOWER1", Description = "Hibiscus Flower", Family = "Malvaceae", Tags = "" };
+			PlantRepository.Insert(p);
+			
+			p = new Plant { Author = new Person(1), Code = "HKIWI", Description = "Hardy Kiwi", Family = "Unknown", Tags = "" };
+			PlantRepository.Insert(p);
+			
+			p = new Plant { Author = new Person(1), Code = "HOCUST", Description = "Honey Locust", Family = "Fabaceae", Tags = "nitrogen-fixer tree " };
+			PlantRepository.Insert(p);
+			
+			p = new Plant { Author = new Person(1), Code = "HONF", Description = "Honesty Flower", Family = "Brassicaceae", Tags = "" };
+			PlantRepository.Insert(p);
+			
+			p = new Plant { Author = new Person(1), Code = "HOPS", Description = "Hops", Family = "Cannabaceae", Tags = "herb " };
+			PlantRepository.Insert(p);
+			
+			p = new Plant { Author = new Person(1), Code = "HOSTA", Description = "Hosta", Family = "Asparagaceae", Tags = "" };
+			PlantRepository.Insert(p);
+			
+			p = new Plant { Author = new Person(1), Code = "HRADISH", Description = "Horseradish", Family = "Brassicaceae", Tags = "herb bitter aromatic " };
+			PlantRepository.Insert(p);
+			
+			p = new Plant { Author = new Person(1), Code = "HTAIL", Description = "Horsetail", Family = "Equisetaceae", Tags = "herb astringent diuretic bitter " };
+			PlantRepository.Insert(p);
+			
+			p = new Plant { Author = new Person(1), Code = "HYACINTH", Description = "Hyacinth", Family = "Asparagaceae", Tags = "" };
+			PlantRepository.Insert(p);
+			
+			p = new Plant { Author = new Person(1), Code = "HYDR", Description = "Hydrangea", Family = "Hydrangeaceae", Tags = "" };
+			PlantRepository.Insert(p);
+			
+			p = new Plant { Author = new Person(1), Code = "HYSSOP", Description = "Hyssop", Family = "Lamiaceae", Tags = "herb " };
+			PlantRepository.Insert(p);
+			
+			p = new Plant { Author = new Person(1), Code = "IRIS", Description = "Iris", Family = "Iridaceae", Tags = "" };
+			PlantRepository.Insert(p);
+			
+			p = new Plant { Author = new Person(1), Code = "JINDIGO", Description = "Japanese Indigo", Family = "Polygonaceae", Tags = "" };
+			PlantRepository.Insert(p);
+			
+			p = new Plant { Author = new Person(1), Code = "JLADDER", Description = "Jacob's Ladder", Family = "Polemoniaceae", Tags = "" };
+			PlantRepository.Insert(p);
+			
+			p = new Plant { Author = new Person(1), Code = "JOSTAB", Description = "Jostaberry", Family = "Grossulariaceae", Tags = "" };
+			PlantRepository.Insert(p);
+			
+			p = new Plant { Author = new Person(1), Code = "KALE", Description = "Kale", Family = "Brassicaceae", Tags = "" };
+			PlantRepository.Insert(p);
+			
+			p = new Plant { Author = new Person(1), Code = "KOMATSUNA", Description = "Komatsuna", Family = "Brassicaceae", Tags = "" };
+			PlantRepository.Insert(p);
+			
+			p = new Plant { Author = new Person(1), Code = "LAVENDER", Description = "Lavender", Family = "Lamiaceae", Tags = "herb astringent aromatic bitter carminative " };
+			PlantRepository.Insert(p);
+			
+			p = new Plant { Author = new Person(1), Code = "LBALM", Description = "Lemon Balm", Family = "Lamiaceae", Tags = "" };
+			PlantRepository.Insert(p);
+			
+			p = new Plant { Author = new Person(1), Code = "LEAR", Description = "Lamb's Ear", Family = "Lamiaceae", Tags = "" };
+			PlantRepository.Insert(p);
+			
+			p = new Plant { Author = new Person(1), Code = "LEMGRASS", Description = "Lemongrass", Family = "Poaceae", Tags = "" };
+			PlantRepository.Insert(p);
+			
+			p = new Plant { Author = new Person(1), Code = "LETTUCE", Description = "Lettuce", Family = "Brassicaceae", Tags = "" };
+			PlantRepository.Insert(p);
+			
+			p = new Plant { Author = new Person(1), Code = "LEUCOJUM", Description = "Leucojum", Family = "Amaryllidaceae", Tags = "" };
+			PlantRepository.Insert(p);
+			
+			p = new Plant { Author = new Person(1), Code = "LILVALLEY", Description = "Lily of the Valley", Family = "Asparagaceae", Tags = "herb " };
+			PlantRepository.Insert(p);
+			
+			p = new Plant { Author = new Person(1), Code = "LILY", Description = "Lily", Family = "Liliaceae", Tags = "" };
+			PlantRepository.Insert(p);
+			
+			p = new Plant { Author = new Person(1), Code = "LIMEBALM", Description = "Lime Balm", Family = "Lamiaceae", Tags = "" };
+			PlantRepository.Insert(p);
+			
+			p = new Plant { Author = new Person(1), Code = "LINBERRY", Description = "Lingonberry", Family = "Sapindaceae", Tags = "" };
+			PlantRepository.Insert(p);
+			
+			p = new Plant { Author = new Person(1), Code = "LINDEN", Description = "Linden Tree", Family = "Malvaceae", Tags = "tree herb " };
+			PlantRepository.Insert(p);
+			
+			p = new Plant { Author = new Person(1), Code = "LKNAPWEED", Description = "Lesser Knapweed", Family = "Asteraceae", Tags = "" };
+			PlantRepository.Insert(p);
+			
+			p = new Plant { Author = new Person(1), Code = "LOVAGE", Description = "Lovage", Family = "Apiaceae", Tags = "" };
+			PlantRepository.Insert(p);
+			
+			p = new Plant { Author = new Person(1), Code = "LQUARTER", Description = "Lamb's Quarter", Family = "Amaranthaceae", Tags = "" };
+			PlantRepository.Insert(p);
+			
+			p = new Plant { Author = new Person(1), Code = "LUPINE", Description = "Lupine", Family = "Fabaceae", Tags = "" };
+			PlantRepository.Insert(p);
+			
+			p = new Plant { Author = new Person(1), Code = "MAPLE", Description = "Maple Tree", Family = "Sapindaceae", Tags = "" };
+			PlantRepository.Insert(p);
+			
+			p = new Plant { Author = new Person(1), Code = "MARIGOLD", Description = "Marigold", Family = "Asteraceae", Tags = "" };
+			PlantRepository.Insert(p);
+			
+			p = new Plant { Author = new Person(1), Code = "MARJORAM", Description = "Marjoram", Family = "Lamiaceae", Tags = "" };
+			PlantRepository.Insert(p);
+			
+			p = new Plant { Author = new Person(1), Code = "MELON", Description = "Melon", Family = "Cucurbitaceae", Tags = "" };
+			PlantRepository.Insert(p);
+			
+			p = new Plant { Author = new Person(1), Code = "MGLORY", Description = "Morning Glory", Family = "Convolvulaceae", Tags = "" };
+			PlantRepository.Insert(p);
+			
+			p = new Plant { Author = new Person(1), Code = "MILKWEED", Description = "Milkweed", Family = "Apocynaceae", Tags = "" };
+			PlantRepository.Insert(p);
+			
+			p = new Plant { Author = new Person(1), Code = "MINT", Description = "Mint", Family = "Lamiaceae", Tags = "herb " };
+			PlantRepository.Insert(p);
+			
+			p = new Plant { Author = new Person(1), Code = "MLAR", Description = "Medlar", Family = "Rosaceae", Tags = "" };
+			PlantRepository.Insert(p);
+			
+			p = new Plant { Author = new Person(1), Code = "MMALLOW", Description = "Marshmallow", Family = "Malvaceae", Tags = "herb cooling demulcent anti-inflammatory diuretic vulnerary " };
+			PlantRepository.Insert(p);
+			
+			p = new Plant { Author = new Person(1), Code = "MMINT", Description = "Mountain Mint", Family = "Lamiaceae", Tags = "herb diaphoretic antispasmodic carminative " };
+			PlantRepository.Insert(p);
+			
+			p = new Plant { Author = new Person(1), Code = "MTHISTLE", Description = "Milk Thistle", Family = "Asteraceae", Tags = "herb " };
+			PlantRepository.Insert(p);
+			
+			p = new Plant { Author = new Person(1), Code = "MUGWORT", Description = "Mugwort", Family = "Asteraceae", Tags = "herb bitter " };
+			PlantRepository.Insert(p);
 
-            p = new Plant { Author = new Person(1), Code = "OREGANO", Description = "Oregano", Tags = "herb"};
-            PlantRepository.Insert(p);
+			p = new Plant { Author = new Person(1), Code = "MULBTREE", Description = "Mulberry Tree", Family = "Moraceae", Tags = "tree " };
+			PlantRepository.Insert(p);
 
-            p = new Plant { Author = new Person(1), Code = "CATNIP", Description = "Catnip", Tags = "herb"};
-            PlantRepository.Insert(p);
+			p = new Plant { Author = new Person(1), Code = "MULLEIN", Description = "Mullein", Family = "Scrophulariaceae", Tags = "herb demulcent " };
+			PlantRepository.Insert(p);
 
-            p = new Plant { Author = new Person(1), Code = "SQUASH", Description = "Squash" };
-            PlantRepository.Insert(p);
+			p = new Plant { Author = new Person(1), Code = "MUSCARI", Description = "Muscari", Family = "Asparagaceae", Tags = "" };
+			PlantRepository.Insert(p);
 
-            p = new Plant { Author = new Person(1), Code = "MINT", Description = "Mint", Tags = "herb"};
-            PlantRepository.Insert(p);
+			p = new Plant { Author = new Person(1), Code = "MWORT", Description = "Motherwort", Family = "Lamiaceae", Tags = "herb cooling heart " };
+			PlantRepository.Insert(p);
 
-            p = new Plant { Author = new Person(1), Code = "CHIVE", Description = "Chives" };
-            PlantRepository.Insert(p);
+			p = new Plant { Author = new Person(1), Code = "NIGELLA", Description = "Nigella", Family = "Ranunculaceae", Tags = "" };
+			PlantRepository.Insert(p);
 
-            p = new Plant { Author = new Person(1), Code = "YARROW", Description = "Yarrow", Tags = "herb bitter"};
-            PlantRepository.Insert(p);
-            
-            p = new Plant { Author = new Person(1), Code = "RASP", Description = "Raspberry" };
-            PlantRepository.Insert(p);
-            
-            p = new Plant { Author = new Person(1), Code = "CHERRY", Description = "Cherry Tree", Tags = "tree" }; 
-            PlantRepository.Insert(p);
-            
-            p = new Plant { Author = new Person(1), Code = "RHUB", Description = "Rhubarb" };
-            PlantRepository.Insert(p);
-            
-            p = new Plant { Author = new Person(1), Code = "TOMATO", Description = "Tomato" };
-            PlantRepository.Insert(p);
-            
-            p = new Plant { Author = new Person(1), Code = "GARLIC", Description = "Garlic", Tags = "herb warming anthelmintic alterative anti-septic anti-spasmodic carminative diaphoretic tonic vulnerary"};
-            PlantRepository.Insert(p);
-            
-            p = new Plant { Author = new Person(1), Code = "CABBAGE", Description = "Cabbage" };
-            PlantRepository.Insert(p);
-            
-            p = new Plant { Author = new Person(1), Code = "LETTUCE", Description = "Lettuce" };
-            PlantRepository.Insert(p);
-            
-            p = new Plant { Author = new Person(1), Code = "ONION", Description = "Onion" };
-            PlantRepository.Insert(p);
-            
+			p = new Plant { Author = new Person(1), Code = "OAK", Description = "Oak Tree", Family = "Fagaceae", Tags = "tree herb " };
+			PlantRepository.Insert(p);
+
+			p = new Plant { Author = new Person(1), Code = "OAT", Description = "Oat", Family = "Poaceae", Tags = "herb " };
+			PlantRepository.Insert(p);
+
+			p = new Plant { Author = new Person(1), Code = "ONION", Description = "Onion", Family = "Amaryllidaceae", Tags = "" };
+			PlantRepository.Insert(p);
+
+			p = new Plant { Author = new Person(1), Code = "OREGANO", Description = "Oregano", Family = "", Tags = "" };
+			PlantRepository.Insert(p);
+
+			p = new Plant { Author = new Person(1), Code = "OSAGEO", Description = "Osage Orange", Family = "Moraceae", Tags = "" };
+			PlantRepository.Insert(p);
+
+			p = new Plant { Author = new Person(1), Code = "PARSLEY", Description = "Parsley", Family = "Apiaceae", Tags = "" };
+			PlantRepository.Insert(p);
+
+			p = new Plant { Author = new Person(1), Code = "PARSNIP", Description = "Parsnip", Family = "Apiaceae", Tags = "" };
+			PlantRepository.Insert(p);
+
+			p = new Plant { Author = new Person(1), Code = "PAWPAW", Description = "Pawpaw Tree", Family = "Annonaceae", Tags = "tree " };
+			PlantRepository.Insert(p);
+
+			p = new Plant { Author = new Person(1), Code = "PEA", Description = "Pea", Family = "Leguminosae", Tags = "nitrogen-fixer " };
+			PlantRepository.Insert(p);
+
+			p = new Plant { Author = new Person(1), Code = "PEACH", Description = "Peach Tree", Family = "Rosaceae", Tags = "" };
+			PlantRepository.Insert(p);
+
+			p = new Plant { Author = new Person(1), Code = "PEANUT", Description = "Peanut", Family = "Fabaceae", Tags = "" };
+			PlantRepository.Insert(p);
+
+			p = new Plant { Author = new Person(1), Code = "PEAR", Description = "Pear", Family = "Rosaceae", Tags = "" };
+			PlantRepository.Insert(p);
+
+			p = new Plant { Author = new Person(1), Code = "PEPPER", Description = "Pepper", Family = "Solanaceae", Tags = "" };
+			PlantRepository.Insert(p);
+
+			p = new Plant { Author = new Person(1), Code = "PEPPERMINT", Description = "Peppermint", Family = "Lamiaceae", Tags = "herb " };
+			PlantRepository.Insert(p);
+
+			p = new Plant { Author = new Person(1), Code = "PEYOTE", Description = "Peyote", Family = "", Tags = "" };
+			PlantRepository.Insert(p);
+
+			p = new Plant { Author = new Person(1), Code = "PINE", Description = "Pine", Family = "Pinaceae", Tags = "tree herb " };
+			PlantRepository.Insert(p);
+
+			p = new Plant { Author = new Person(1), Code = "PLANTAIN", Description = "Plantain", Family = "Plantaginaceae", Tags = "herb vulnerary anti-catarrhal " };
+			PlantRepository.Insert(p);
+
+			p = new Plant { Author = new Person(1), Code = "PLUM", Description = "Plum Tree", Family = "Rosaceae", Tags = "tree " };
+			PlantRepository.Insert(p);
+
+			p = new Plant { Author = new Person(1), Code = "POPPY", Description = "Poppy", Family = "Papaveraceae", Tags = "" };
+			PlantRepository.Insert(p);
+
+			p = new Plant { Author = new Person(1), Code = "POTATO", Description = "Potato", Family = "Solanaceae", Tags = "" };
+			PlantRepository.Insert(p);
+
+			p = new Plant { Author = new Person(1), Code = "PRINTREE", Description = "Princess Tree", Family = "Paulowniaceae", Tags = "" };
+			PlantRepository.Insert(p);
+
+			p = new Plant { Author = new Person(1), Code = "PRSM", Description = "Persimmon", Family = "Ebenaceae", Tags = "" };
+			PlantRepository.Insert(p);
+
+			p = new Plant { Author = new Person(1), Code = "PUMPKIN", Description = "Pumpkin", Family = "Cucurbitaceae", Tags = "" };
+			PlantRepository.Insert(p);
+
+			p = new Plant { Author = new Person(1), Code = "QALACE", Description = "Queen Anne's Lace", Family = "Apiaceae", Tags = "" };
+			PlantRepository.Insert(p);
+
+			p = new Plant { Author = new Person(1), Code = "RADISH", Description = "Radish", Family = "Brassicaceae", Tags = "" };
+			PlantRepository.Insert(p);
+
+			p = new Plant { Author = new Person(1), Code = "RASP", Description = "Raspberry", Family = "Rosaceae", Tags = "herb " };
+			PlantRepository.Insert(p);
+
+			p = new Plant { Author = new Person(1), Code = "RHODRN", Description = "Rhododendron", Family = "Ericaceae", Tags = "" };
+			PlantRepository.Insert(p);
+
+			p = new Plant { Author = new Person(1), Code = "RHUB", Description = "Rhubarb", Family = "Polygonaceae", Tags = "" };
+			PlantRepository.Insert(p);
+
+			p = new Plant { Author = new Person(1), Code = "RMARY", Description = "Rosemary", Family = "Lamiaceae", Tags = "herb " };
+			PlantRepository.Insert(p);
+
+			p = new Plant { Author = new Person(1), Code = "ROSARUG", Description = "Rosa Rugosa", Family = "Rosaceae", Tags = "herb " };
+			PlantRepository.Insert(p);
+
+			p = new Plant { Author = new Person(1), Code = "ROWAN", Description = "Rowan", Family = "Rosaceae", Tags = "tree herb " };
+			PlantRepository.Insert(p);
+
+			p = new Plant { Author = new Person(1), Code = "RROOT", Description = "Rhodiola", Family = "Crassulaceae", Tags = "adaptogen herb " };
+			PlantRepository.Insert(p);
+
+			p = new Plant { Author = new Person(1), Code = "RUE", Description = "Rue", Family = "Rutaceae", Tags = "herb " };
+			PlantRepository.Insert(p);
+
+			p = new Plant { Author = new Person(1), Code = "RUTAB", Description = "Rutabaga", Family = "Tithonia diversifolia", Tags = "" };
+			PlantRepository.Insert(p);
+
+			p = new Plant { Author = new Person(1), Code = "RWOOD", Description = "Redwood Tree", Family = "Cupressaceae", Tags = "" };
+			PlantRepository.Insert(p);
+
+			p = new Plant { Author = new Person(1), Code = "SAGE", Description = "Sage", Family = "Lamiaceae", Tags = "herb " };
+			PlantRepository.Insert(p);
+
+			p = new Plant { Author = new Person(1), Code = "SANISE1", Description = "Snow Anise", Family = "Lamiaceae", Tags = "" };
+			PlantRepository.Insert(p);
+
+			p = new Plant { Author = new Person(1), Code = "SASKBERRY", Description = "Saskatoon Berry", Family = "Rosaceae", Tags = "tree " };
+			PlantRepository.Insert(p);
+
+			p = new Plant { Author = new Person(1), Code = "SAVORY", Description = "Savory", Family = "Lamiaceae", Tags = "" };
+			PlantRepository.Insert(p);
+			
             p = new Plant { Author = new Person(1), Code = "STRAWBERRY", Description = "Strawberry" };
             PlantRepository.Insert(p);
             
-            p = new Plant { Author = new Person(1), Code = "DILL", Description = "Dill" };
-            PlantRepository.Insert(p);
-            
-            p = new Plant { Author = new Person(1), Code = "PUMPKIN", Description = "Pumpkin" };
-            PlantRepository.Insert(p);
-
-            p = new Plant { Author = new Person(1), Code = "CURRANT", Description = "Currant" };
+            p = new Plant { Author = new Person(1), Code = "UNK", Description = "Unknown" };
             PlantRepository.Insert(p);
             
             p = new Plant { Author = new Person(1), Code = "WWOOD", Description = "Wormwood", Family = "Asteraceae", Comment = "Wormwood is characterized by its aromatic, herbaceous, perennial nature and is known for its bitter taste and strong sage-like odor when crushed.", Tags = "herb bitter anthelmintic"};
+            PlantRepository.Insert(p);
+            
+            p = new Plant { Author = new Person(1), Code = "YARROW", Description = "Yarrow", Tags = "herb bitter"};
             PlantRepository.Insert(p);
             
             #endregion
