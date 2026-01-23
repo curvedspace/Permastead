@@ -25,9 +25,10 @@ namespace Permastead.ViewModels.Views;
 
 public partial class PlantsViewModel : ViewModelBase
 {
+    [ObservableProperty] private ObservableCollection<TagData> _items = new ObservableCollection<TagData>();
     
-    public ObservableCollection<TagData> Items { get; set; }
     public ObservableCollection<TagData> SelectedItems { get; set; }
+    
     public AutoCompleteFilterPredicate<object> FilterPredicate { get; set; }
     
     [ObservableProperty] 
@@ -53,7 +54,7 @@ public partial class PlantsViewModel : ViewModelBase
     
     [ObservableProperty] private string _searchText = "";
     
-//message box data
+    //message box data
     private readonly string _shortMessage = "Are you sure you want to delete this plant?";
     private string _message;
     private string? _title = "Deletion Confirmation";
@@ -310,6 +311,9 @@ public partial class PlantsViewModel : ViewModelBase
         }
         
         RefreshDataOnly();
+        
+        Items.Clear();
+        Items = new ObservableCollection<TagData>(Services.PlantService.GetAllTags(AppSession.ServiceMode));
         
     }
     

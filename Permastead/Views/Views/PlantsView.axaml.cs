@@ -1,4 +1,5 @@
 using System;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Runtime.InteropServices;
 using System.Xml.Schema;
@@ -99,7 +100,20 @@ public partial class PlantsView : UserControl
     {
         try
         {
+            //check for a new tag to be added in the search text
+            var newTag = Tags.SearchText;
+            
+            if (newTag != "")
+            {
+                // if there is a new tag to be added, add it to selected items before saving
+                var newTagModel = new TagData() { TagText =  newTag };
+                Tags.SelectedItems.Add(newTagModel);
+                
+            }
             _viewModel.SavePlant();
+            
+            Tags.Text = "";
+            
             _viewModel?.ToastManager.Show(new Toast("Plant record (" + _viewModel.CurrentPlant.Description + ") has been updated."));
             
         }
@@ -261,4 +275,5 @@ public partial class PlantsView : UserControl
             Console.WriteLine(exception);
         }
     }
+    
 }
