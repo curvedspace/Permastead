@@ -19,6 +19,8 @@ public partial class InventoryWindowViewModel: ViewModelBase
     public ObservableCollection<TagData> SelectedItems { get; set; }
     public AutoCompleteFilterPredicate<object> FilterPredicate { get; set; }
     
+    [ObservableProperty] private string _newTag;
+    
     [ObservableProperty] 
     private ObservableCollection<string> _inventoryGroups;
     
@@ -95,6 +97,14 @@ public partial class InventoryWindowViewModel: ViewModelBase
 
     public void SaveRecord()
     {
+        //check for a new tag to be added in the search text
+        if (NewTag != "")
+        {
+            // if there is a new tag to be added, add it to selected items before saving
+            var newTagModel = new TagData() { TagText =  NewTag }; 
+            SelectedItems.Add(newTagModel);
+        }
+        
         CurrentItem.TagList.Clear();
         foreach (var tagData in SelectedItems)
         {
@@ -114,6 +124,8 @@ public partial class InventoryWindowViewModel: ViewModelBase
         ControlViewModel.RefreshData();
         ControlViewModel.ToastManager?.Show(new Toast("Inventory has been updated."));
 
+        Items = new ObservableCollection<TagData>(Services.InventoryService.GetAllTags(AppSession.ServiceMode));
+        
         if (PreservationItem != null)
         {
             //set its end date to today to indicate that it has been moved to inventory

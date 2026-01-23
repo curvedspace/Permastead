@@ -100,6 +100,7 @@
                                 Width="400"
                                 HorizontalAlignment="Left"
                                 InnerLeftContent="Tags"
+                                Text="{Binding NewTag}"
                                 SelectedItems="{Binding SelectedItems}"
                                 ItemFilter="{Binding FilterPredicate}"
                                 FilterMode="Custom">

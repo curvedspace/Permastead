@@ -26,11 +26,21 @@ public partial class AnimalWindowViewModel : ViewModelBase
     [ObservableProperty] 
     private ObservableCollection<Person> _people;
     
+    [ObservableProperty] private string _newTag;
+    
     public AnimalsViewModel ControlViewModel { get; set;  } = new AnimalsViewModel();
     
     public void SaveRecord()
     {
         bool rtnValue;
+        
+        //check for a new tag to be added in the search text
+        if (NewTag != "")
+        {
+            // if there is a new tag to be added, add it to selected items before saving
+            var newTagModel = new TagData() { TagText =  NewTag }; 
+            SelectedItems.Add(newTagModel);
+        }
 
         CurrentItem.TagList.Clear();
         foreach (var tagData in SelectedItems)
@@ -49,6 +59,7 @@ public partial class AnimalWindowViewModel : ViewModelBase
         }
         
         ControlViewModel.RefreshDataOnly();
+        Items = new ObservableCollection<TagData>(Services.AnimalService.GetAllTags(AppSession.ServiceMode));
         
     }
     
