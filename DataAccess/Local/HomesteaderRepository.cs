@@ -1829,17 +1829,135 @@ namespace DataAccess.Local
 			p = new Plant { Author = new Person(1), Code = "SAVORY", Description = "Savory", Family = "Lamiaceae", Tags = "" };
 			PlantRepository.Insert(p);
 			
-            p = new Plant { Author = new Person(1), Code = "STRAWBERRY", Description = "Strawberry" };
+            p = new Plant { Author = new Person(1), Code = "SCHDRA", Description = "Schisandra", Family = "Schisandraceae", Tags = "" };
             PlantRepository.Insert(p);
-            
-            p = new Plant { Author = new Person(1), Code = "UNK", Description = "Unknown" };
-            PlantRepository.Insert(p);
-            
-            p = new Plant { Author = new Person(1), Code = "WWOOD", Description = "Wormwood", Family = "Asteraceae", Comment = "Wormwood is characterized by its aromatic, herbaceous, perennial nature and is known for its bitter taste and strong sage-like odor when crushed.", Tags = "herb bitter anthelmintic"};
-            PlantRepository.Insert(p);
-            
-            p = new Plant { Author = new Person(1), Code = "YARROW", Description = "Yarrow", Tags = "herb bitter"};
-            PlantRepository.Insert(p);
+
+			p = new Plant { Author = new Person(1), Code = "SCULLCAP", Description = "Scullcap", Family = "Lamiaceae", Tags = "" };
+			PlantRepository.Insert(p);
+
+			p = new Plant { Author = new Person(1), Code = "SEACEL", Description = "Sea Celery", Family = "Apiaceae", Tags = "" };
+			PlantRepository.Insert(p);
+
+			p = new Plant { Author = new Person(1), Code = "SHIIMUSH", Description = "Shiitake Mushroom", Family = "Omphalotaceae", Tags = "" };
+			PlantRepository.Insert(p);
+
+			p = new Plant { Author = new Person(1), Code = "SHISO", Description = "Shiso", Family = "Lamiaceae", Tags = "" };
+			PlantRepository.Insert(p);
+
+			p = new Plant { Author = new Person(1), Code = "SIBGENG", Description = "Siberian Ginseng", Family = "Araliaceae", Tags = "" };
+			PlantRepository.Insert(p);
+
+			p = new Plant { Author = new Person(1), Code = "SJWART", Description = "Saint John's Wort", Family = "Hypericaceae", Tags = "" };
+			PlantRepository.Insert(p);
+
+			p = new Plant { Author = new Person(1), Code = "SKIRRET", Description = "Skirret", Family = "Apiaceae", Tags = "" };
+			PlantRepository.Insert(p);
+
+			p = new Plant { Author = new Person(1), Code = "SNAPD", Description = "Snapdragon", Family = "Plantaginaceae", Tags = "" };
+			PlantRepository.Insert(p);
+
+			p = new Plant { Author = new Person(1), Code = "SNETTLE", Description = "Stinging Nettle", Family = " a form of contact dermatitis).", Tags = "" };
+			PlantRepository.Insert(p);
+
+			p = new Plant { Author = new Person(1), Code = "SOLSEAL", Description = "Solomon's seal", Family = "", Tags = "" };
+			PlantRepository.Insert(p);
+
+			p = new Plant { Author = new Person(1), Code = "Urticaceae", Description = "", Family = "0", Tags = "" };
+			PlantRepository.Insert(p);
+
+			p = new Plant { Author = new Person(1), Code = "SOLSEAL", Description = "Solomon's seal", Family = "Asparagaceae", Tags = "" };
+			PlantRepository.Insert(p);
+
+			p = new Plant { Author = new Person(1), Code = "SORREL", Description = "Sorrel", Family = "Polygonaceae", Tags = "" };
+			PlantRepository.Insert(p);
+
+			p = new Plant { Author = new Person(1), Code = "SPEA", Description = "Sweet Pea", Family = "Fabaceae", Tags = "" };
+			PlantRepository.Insert(p);
+
+			p = new Plant { Author = new Person(1), Code = "SPEARMINT", Description = "Spearmint", Family = "Lamiaceae", Tags = "" };
+			PlantRepository.Insert(p);
+
+			p = new Plant { Author = new Person(1), Code = "SPSHUB", Description = "Siberian Pea Shrub", Family = "Fabaceae", Tags = "" };
+			PlantRepository.Insert(p);
+
+			p = new Plant { Author = new Person(1), Code = "SQUILL", Description = "Squill ", Family = "Asparagaceae", Tags = "" };
+			PlantRepository.Insert(p);
+
+			p = new Plant { Author = new Person(1), Code = "STRAWBERRY", Description = "Strawberry", Family = "Rosaceae", Tags = "" };
+			PlantRepository.Insert(p);
+
+			p = new Plant { Author = new Person(1), Code = "SUMSQ", Description = "Summer Squash", Family = "Cucurbitaceae", Tags = "" };
+			PlantRepository.Insert(p);
+
+			p = new Plant { Author = new Person(1), Code = "SUNCHOKE", Description = "Sunchoke", Family = "Asteraceae", Tags = "" };
+			PlantRepository.Insert(p);
+
+			p = new Plant { Author = new Person(1), Code = "SUNFLOWER", Description = "Sunflower", Family = "Asteraceae", Tags = "" };
+			PlantRepository.Insert(p);
+
+			p = new Plant { Author = new Person(1), Code = "TARRAGON", Description = "Tarragon", Family = "Asteraceae", Tags = "" };
+			PlantRepository.Insert(p);
+
+			p = new Plant { Author = new Person(1), Code = "THYME", Description = "Thyme", Family = "Lamiaceae", Tags = "" };
+			PlantRepository.Insert(p);
+
+			p = new Plant { Author = new Person(1), Code = "TITH", Description = "Tithonia", Family = "Asteraceae", Tags = "" };
+			PlantRepository.Insert(p);
+
+			p = new Plant { Author = new Person(1), Code = "TOBCO", Description = "Tobacco", Family = "Solanaceae", Tags = "" };
+			PlantRepository.Insert(p);
+
+			p = new Plant { Author = new Person(1), Code = "TOMATO", Description = "Tomato", Family = "Solanaceae", Tags = "" };
+			PlantRepository.Insert(p);
+
+			p = new Plant { Author = new Person(1), Code = "TROCKET", Description = "Turkish Rocket", Family = "Brassicaceae", Tags = "" };
+			PlantRepository.Insert(p);
+
+			p = new Plant { Author = new Person(1), Code = "TUMERIC", Description = "Tumeric", Family = "Zingiberaceae", Tags = "" };
+			PlantRepository.Insert(p);
+
+			p = new Plant { Author = new Person(1), Code = "TURNIP", Description = "Turnip", Family = "Brassicaceae", Tags = "" };
+			PlantRepository.Insert(p);
+
+			p = new Plant { Author = new Person(1), Code = "UNK", Description = "Unknown", Family = "Unknown", Tags = "" };
+			PlantRepository.Insert(p);
+
+			p = new Plant { Author = new Person(1), Code = "USNEA", Description = "Usnea", Family = "Parmeliaceae", Tags = "" };
+			PlantRepository.Insert(p);
+
+			p = new Plant { Author = new Person(1), Code = "VALERIAN", Description = "Valerian", Family = "Caprifoliaceae", Tags = "" };
+			PlantRepository.Insert(p);
+
+			p = new Plant { Author = new Person(1), Code = "VERVAIN", Description = "Vervain", Family = "Verbenaceae", Tags = "" };
+			PlantRepository.Insert(p);
+
+			p = new Plant { Author = new Person(1), Code = "VIOLET", Description = "Violet Flower", Family = "Violaceae", Tags = "" };
+			PlantRepository.Insert(p);
+
+			p = new Plant { Author = new Person(1), Code = "WBETONY", Description = "Wood Betony", Family = "Unknown", Tags = "" };
+			PlantRepository.Insert(p);
+
+			p = new Plant { Author = new Person(1), Code = "WCRESS", Description = "Watercress", Family = "Brassicaceae", Tags = "" };
+			PlantRepository.Insert(p);
+
+			p = new Plant { Author = new Person(1), Code = "WHAZEL", Description = "Witch Hazel", Family = "Hamamelidaceae", Tags = "" };
+			PlantRepository.Insert(p);
+
+			p = new Plant { Author = new Person(1), Code = "WMELON", Description = "Watermelon", Family = "Cucurbitaceae", Tags = "" };
+			PlantRepository.Insert(p);
+
+			p = new Plant { Author = new Person(1), Code = "WSORREL", Description = "Wood Sorrel", Family = "Oxalidaceae", Tags = "" };
+			PlantRepository.Insert(p);
+
+			p = new Plant { Author = new Person(1), Code = "WSQUASH", Description = "Winter Squash", Family = "Cucurbitaceae", Tags = "" };
+			PlantRepository.Insert(p);
+
+			p = new Plant { Author = new Person(1), Code = "WWOOD", Description = "Wormwood", Family = "Asteraceae", Comment = "Wormwood is characterized by its aromatic, herbaceous, perennial nature and is known for its bitter taste and strong sage-like odor when crushed.", Tags = "herb bitter anthelmintic"};
+			PlantRepository.Insert(p);
+			
+			p = new Plant { Author = new Person(1), Code = "YARROW", Description = "Yarrow", Tags = "herb bitter"};
+			PlantRepository.Insert(p);
+			
             
             #endregion
 
