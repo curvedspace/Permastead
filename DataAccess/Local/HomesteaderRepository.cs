@@ -1667,7 +1667,7 @@ namespace DataAccess.Local
 			p = new Plant { Author = new Person(1), Code = "MARIGOLD", Description = "Marigold", Family = "Asteraceae", Tags = "" };
 			PlantRepository.Insert(p);
 			
-			p = new Plant { Author = new Person(1), Code = "MARJORAM", Description = "Marjoram", Family = "Lamiaceae", Tags = "" };
+			p = new Plant { Author = new Person(1), Code = "MARJORAM", Description = "Marjoram", Family = "Lamiaceae", Tags = "herb" };
 			PlantRepository.Insert(p);
 			
 			p = new Plant { Author = new Person(1), Code = "MELON", Description = "Melon", Family = "Cucurbitaceae", Tags = "" };
@@ -1829,10 +1829,10 @@ namespace DataAccess.Local
 			p = new Plant { Author = new Person(1), Code = "SAVORY", Description = "Savory", Family = "Lamiaceae", Tags = "" };
 			PlantRepository.Insert(p);
 			
-            p = new Plant { Author = new Person(1), Code = "SCHDRA", Description = "Schisandra", Family = "Schisandraceae", Tags = "" };
+            p = new Plant { Author = new Person(1), Code = "SCHDRA", Description = "Schisandra", Family = "Schisandraceae", Tags = "herb" };
             PlantRepository.Insert(p);
 
-			p = new Plant { Author = new Person(1), Code = "SCULLCAP", Description = "Scullcap", Family = "Lamiaceae", Tags = "" };
+			p = new Plant { Author = new Person(1), Code = "SCULLCAP", Description = "Scullcap", Family = "Lamiaceae", Tags = "herb" };
 			PlantRepository.Insert(p);
 
 			p = new Plant { Author = new Person(1), Code = "SEACEL", Description = "Sea Celery", Family = "Apiaceae", Tags = "" };
@@ -1841,13 +1841,13 @@ namespace DataAccess.Local
 			p = new Plant { Author = new Person(1), Code = "SHIIMUSH", Description = "Shiitake Mushroom", Family = "Omphalotaceae", Tags = "" };
 			PlantRepository.Insert(p);
 
-			p = new Plant { Author = new Person(1), Code = "SHISO", Description = "Shiso", Family = "Lamiaceae", Tags = "" };
+			p = new Plant { Author = new Person(1), Code = "SHISO", Description = "Shiso", Family = "Lamiaceae", Tags = "herb" };
 			PlantRepository.Insert(p);
 
-			p = new Plant { Author = new Person(1), Code = "SIBGENG", Description = "Siberian Ginseng", Family = "Araliaceae", Tags = "" };
+			p = new Plant { Author = new Person(1), Code = "SIBGENG", Description = "Siberian Ginseng", Family = "Araliaceae", Tags = "herb" };
 			PlantRepository.Insert(p);
 
-			p = new Plant { Author = new Person(1), Code = "SJWART", Description = "Saint John's Wort", Family = "Hypericaceae", Tags = "" };
+			p = new Plant { Author = new Person(1), Code = "SJWART", Description = "Saint John's Wort", Family = "Hypericaceae", Tags = "herb" };
 			PlantRepository.Insert(p);
 
 			p = new Plant { Author = new Person(1), Code = "SKIRRET", Description = "Skirret", Family = "Apiaceae", Tags = "" };
@@ -1856,16 +1856,10 @@ namespace DataAccess.Local
 			p = new Plant { Author = new Person(1), Code = "SNAPD", Description = "Snapdragon", Family = "Plantaginaceae", Tags = "" };
 			PlantRepository.Insert(p);
 
-			p = new Plant { Author = new Person(1), Code = "SNETTLE", Description = "Stinging Nettle", Family = " a form of contact dermatitis).", Tags = "" };
+			p = new Plant { Author = new Person(1), Code = "SNETTLE", Description = "Stinging Nettle", Family = " a form of contact dermatitis).", Tags = "herb nutritive" };
 			PlantRepository.Insert(p);
 
-			p = new Plant { Author = new Person(1), Code = "SOLSEAL", Description = "Solomon's seal", Family = "", Tags = "" };
-			PlantRepository.Insert(p);
-
-			p = new Plant { Author = new Person(1), Code = "Urticaceae", Description = "", Family = "0", Tags = "" };
-			PlantRepository.Insert(p);
-
-			p = new Plant { Author = new Person(1), Code = "SOLSEAL", Description = "Solomon's seal", Family = "Asparagaceae", Tags = "" };
+			p = new Plant { Author = new Person(1), Code = "SOLSEAL", Description = "Solomon's seal", Family = "Asparagaceae", Tags = "herb" };
 			PlantRepository.Insert(p);
 
 			p = new Plant { Author = new Person(1), Code = "SORREL", Description = "Sorrel", Family = "Polygonaceae", Tags = "" };
@@ -1874,7 +1868,7 @@ namespace DataAccess.Local
 			p = new Plant { Author = new Person(1), Code = "SPEA", Description = "Sweet Pea", Family = "Fabaceae", Tags = "" };
 			PlantRepository.Insert(p);
 
-			p = new Plant { Author = new Person(1), Code = "SPEARMINT", Description = "Spearmint", Family = "Lamiaceae", Tags = "" };
+			p = new Plant { Author = new Person(1), Code = "SPEARMINT", Description = "Spearmint", Family = "Lamiaceae", Tags = "herb" };
 			PlantRepository.Insert(p);
 
 			p = new Plant { Author = new Person(1), Code = "SPSHUB", Description = "Siberian Pea Shrub", Family = "Fabaceae", Tags = "" };
@@ -1895,10 +1889,10 @@ namespace DataAccess.Local
 			p = new Plant { Author = new Person(1), Code = "SUNFLOWER", Description = "Sunflower", Family = "Asteraceae", Tags = "" };
 			PlantRepository.Insert(p);
 
-			p = new Plant { Author = new Person(1), Code = "TARRAGON", Description = "Tarragon", Family = "Asteraceae", Tags = "" };
+			p = new Plant { Author = new Person(1), Code = "TARRAGON", Description = "Tarragon", Family = "Asteraceae", Tags = "herb" };
 			PlantRepository.Insert(p);
 
-			p = new Plant { Author = new Person(1), Code = "THYME", Description = "Thyme", Family = "Lamiaceae", Tags = "" };
+			p = new Plant { Author = new Person(1), Code = "THYME", Description = "Thyme", Family = "Lamiaceae", Tags = "herb" };
 			PlantRepository.Insert(p);
 
 			p = new Plant { Author = new Person(1), Code = "TITH", Description = "Tithonia", Family = "Asteraceae", Tags = "" };
@@ -1913,7 +1907,7 @@ namespace DataAccess.Local
 			p = new Plant { Author = new Person(1), Code = "TROCKET", Description = "Turkish Rocket", Family = "Brassicaceae", Tags = "" };
 			PlantRepository.Insert(p);
 
-			p = new Plant { Author = new Person(1), Code = "TUMERIC", Description = "Tumeric", Family = "Zingiberaceae", Tags = "" };
+			p = new Plant { Author = new Person(1), Code = "TUMERIC", Description = "Tumeric", Family = "Zingiberaceae", Tags = "herb" };
 			PlantRepository.Insert(p);
 
 			p = new Plant { Author = new Person(1), Code = "TURNIP", Description = "Turnip", Family = "Brassicaceae", Tags = "" };
@@ -1922,40 +1916,40 @@ namespace DataAccess.Local
 			p = new Plant { Author = new Person(1), Code = "UNK", Description = "Unknown", Family = "Unknown", Tags = "" };
 			PlantRepository.Insert(p);
 
-			p = new Plant { Author = new Person(1), Code = "USNEA", Description = "Usnea", Family = "Parmeliaceae", Tags = "" };
+			p = new Plant { Author = new Person(1), Code = "USNEA", Description = "Usnea", Family = "Parmeliaceae", Tags = "herb astringent vulnerary anti-inflammatory antispasmodic" , Comment = "Usnea is a genus of fruticose lichens in the large family Parmeliaceae. The genus, which currently contains roughly 130 species, was established by Michel Adanson in 1763. "};
 			PlantRepository.Insert(p);
 
-			p = new Plant { Author = new Person(1), Code = "VALERIAN", Description = "Valerian", Family = "Caprifoliaceae", Tags = "" };
+			p = new Plant { Author = new Person(1), Code = "VALERIAN", Description = "Valerian", Family = "Caprifoliaceae", Tags = "herb aromatic nervine antispasmodic carminative sedative anodyne", Comment = "Common Valerian Root is one of the most well known herbal sedatives. It is commonly found in calming and sleepy time teas. " };
 			PlantRepository.Insert(p);
 
-			p = new Plant { Author = new Person(1), Code = "VERVAIN", Description = "Vervain", Family = "Verbenaceae", Tags = "" };
+			p = new Plant { Author = new Person(1), Code = "VERVAIN", Description = "Vervain", Family = "Verbenaceae", Tags = "herb cooling diuretic diaphoretic bitter emetic emmenagogue" , Comment = "Verbena, also known as vervain or verveine, is a genus in the family Verbenaceae. It contains about 150 species of annual and perennial herbaceous or semi-woody flowering plants. "};
 			PlantRepository.Insert(p);
 
-			p = new Plant { Author = new Person(1), Code = "VIOLET", Description = "Violet Flower", Family = "Violaceae", Tags = "" };
+			p = new Plant { Author = new Person(1), Code = "VIOLET", Description = "Violet Flower", Family = "Violaceae", Tags = "herb cooling anti-inflammatory nutritive", Comment = "Viola tricolor is a common European wild flower, growing as an annual or short-lived perennial." };
 			PlantRepository.Insert(p);
 
-			p = new Plant { Author = new Person(1), Code = "WBETONY", Description = "Wood Betony", Family = "Unknown", Tags = "" };
+			p = new Plant { Author = new Person(1), Code = "WBETONY", Description = "Wood Betony", Family = "Unknown", Tags = "", Comment = "Betonica officinalis, common name betony is a species of flowering plant in the mint family Lamiaceae, native to Europe, western Asia, and northern Africa."};
 			PlantRepository.Insert(p);
 
-			p = new Plant { Author = new Person(1), Code = "WCRESS", Description = "Watercress", Family = "Brassicaceae", Tags = "" };
+			p = new Plant { Author = new Person(1), Code = "WCRESS", Description = "Watercress", Family = "Brassicaceae", Tags = "", Comment = "Watercress or yellowcress (Nasturtium officinale) is a species of aquatic flowering plant in the cabbage family Brassicaceae. Watercress is a rapidly growing perennial plant native to Europe and Asia." };
 			PlantRepository.Insert(p);
 
-			p = new Plant { Author = new Person(1), Code = "WHAZEL", Description = "Witch Hazel", Family = "Hamamelidaceae", Tags = "" };
+			p = new Plant { Author = new Person(1), Code = "WHAZEL", Description = "Witch Hazel", Family = "Hamamelidaceae", Tags = "herb astringent anti-inflammatory vulnerary", Comment = "The witch-hazels are deciduous shrubs or (rarely) small trees growing to 3 to 7.5 m tall, even more rarely to 12 m tall. " };
 			PlantRepository.Insert(p);
 
-			p = new Plant { Author = new Person(1), Code = "WMELON", Description = "Watermelon", Family = "Cucurbitaceae", Tags = "" };
+			p = new Plant { Author = new Person(1), Code = "WMELON", Description = "Watermelon", Family = "Cucurbitaceae", Tags = "", Comment = "Watermelon (Citrullus lanatus) is a flowering plant species of the Cucurbitaceae family and the name of its edible fruit. A scrambling and trailing vine-like plant, it is a highly cultivated fruit worldwide, with more than 1,000 varieties." };
 			PlantRepository.Insert(p);
 
-			p = new Plant { Author = new Person(1), Code = "WSORREL", Description = "Wood Sorrel", Family = "Oxalidaceae", Tags = "" };
+			p = new Plant { Author = new Person(1), Code = "WSORREL", Description = "Wood Sorrel", Family = "Oxalidaceae", Tags = "", Comment = "The Oxalidaceae, or wood sorrel family, are a small family of five genera of herbaceous plants, shrubs and small trees, with the great majority of the 570 species in the genus Oxalis (wood sorrels)."};
 			PlantRepository.Insert(p);
 
-			p = new Plant { Author = new Person(1), Code = "WSQUASH", Description = "Winter Squash", Family = "Cucurbitaceae", Tags = "" };
+			p = new Plant { Author = new Person(1), Code = "WSQUASH", Description = "Winter Squash", Family = "Cucurbitaceae", Tags = "", Comment = "Winter squash is an annual fruit representing several squash species within the genus Cucurbita. Late-growing, less symmetrical, odd-shaped, rough or warty varieties, small to medium in size, but with long-keeping qualities and hard rinds, are usually called winter squash. "};
 			PlantRepository.Insert(p);
 
 			p = new Plant { Author = new Person(1), Code = "WWOOD", Description = "Wormwood", Family = "Asteraceae", Comment = "Wormwood is characterized by its aromatic, herbaceous, perennial nature and is known for its bitter taste and strong sage-like odor when crushed.", Tags = "herb bitter anthelmintic"};
 			PlantRepository.Insert(p);
 			
-			p = new Plant { Author = new Person(1), Code = "YARROW", Description = "Yarrow", Tags = "herb bitter"};
+			p = new Plant { Author = new Person(1), Code = "YARROW", Description = "Yarrow", Tags = "herb bitter cooling amphoteric anti-septic astringent aromatic diaphoretic diuretic expectorant hepatic styptic vulnerary", Comment = "Achillea millefolium, or common yarrow, is a flowering plant in the family Asteraceae. Growing to 1 metre (3+1⁄2 feet) tall, it is characterized by small whitish flowers, a tall stem of fernlike leaves, and a pungent odor. "};
 			PlantRepository.Insert(p);
 			
             
