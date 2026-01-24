@@ -1,5 +1,7 @@
+using System.Net.Mime;
 using Avalonia;
 using Avalonia.Controls;
+using Avalonia.Input;
 using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml;
 using Permastead.ViewModels.Dialogs;
@@ -25,4 +27,5 @@ public partial class AnimalWindow : Window
     {
         this.Close();
     }
+    
 }

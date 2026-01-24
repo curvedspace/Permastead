@@ -1,6 +1,7 @@
 using System;
 using System.Collections.ObjectModel;
 using System.IO;
+using System.Linq;
 using System.Runtime.InteropServices;
 using System.Xml.Schema;
 using Avalonia;
@@ -102,14 +103,39 @@ public partial class PlantsView : UserControl
         {
             //check for a new tag to be added in the search text
             var newTag = Tags.SearchText;
-            
-            if (newTag != "")
+            if (!string.IsNullOrEmpty(newTag))
             {
                 // if there is a new tag to be added, add it to selected items before saving
-                var newTagModel = new TagData() { TagText =  newTag };
-                Tags.SelectedItems.Add(newTagModel);
+                var newTagModel = new TagData() { TagText =  newTag }; 
+            
+                // check to see if the newtag is the search text from the last selected item - if so, do not add it again
+                // only add if it a truly new tag
+                var si = Tags.SelectedItems;
+
+                if (si.Count > 0)
+                {
+                    var lastTag = (TagData)si[Tags.SelectedItems.Count-1];
+            
+                    if  (!lastTag.TagText.Contains(newTagModel.TagText, StringComparison.InvariantCultureIgnoreCase))
+                        Tags.SelectedItems.Add(newTagModel);
+                }
+                else
+                {
+                    Tags.SelectedItems.Add(newTagModel);
+                }
                 
             }
+            // //check for a new tag to be added in the search text
+            // var newTag = Tags.SearchText;
+            //
+            // if (newTag != "")
+            // {
+            //     // if there is a new tag to be added, add it to selected items before saving
+            //     var newTagModel = new TagData() { TagText =  newTag };
+            //     Tags.SelectedItems.Add(newTagModel);
+            //     
+            // }
+            
             _viewModel.SavePlant();
             
             Tags.Text = "";

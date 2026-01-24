@@ -1,5 +1,6 @@
 using System;
 using System.Collections.ObjectModel;
+using System.Linq;
 using Avalonia.Controls;
 using CommunityToolkit.Mvvm.ComponentModel;
 using Models;
@@ -59,11 +60,19 @@ public partial class PersonWindowViewModel : ViewModelBase
     public void SaveRecord()
     {
         //check for a new tag to be added in the search text
-        if (NewTag != "")
+        if (!string.IsNullOrEmpty(NewTag))
         {
             // if there is a new tag to be added, add it to selected items before saving
             var newTagModel = new TagData() { TagText =  NewTag }; 
-            SelectedItems.Add(newTagModel);
+            
+            // check to see if the newtag is the search text from the last selected item - if so, do not add it again
+            // only add if it a truly new tag
+            var lastTag = SelectedItems.LastOrDefault();
+            
+            if (lastTag == null)
+                SelectedItems.Add(newTagModel);
+            else if  (!lastTag.TagText.Contains(newTagModel.TagText, StringComparison.InvariantCultureIgnoreCase))
+                SelectedItems.Add(newTagModel);
         }
         
         Person.TagList.Clear();

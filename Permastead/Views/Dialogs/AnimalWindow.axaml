@@ -58,7 +58,7 @@
 
         <Image Grid.Row="7" Grid.Column="0"  Margin="10" Width="32" Height="32" Source="/Assets/burro.png" />
 
-        <u:MultiAutoCompleteBox ToolTip.Tip = "Allows you to tag a plant with different characteristics." Grid.Row="8" Grid.Column="1" Grid.ColumnSpan="4" ItemsSource="{Binding Items}"
+        <u:MultiAutoCompleteBox x:Name="Tags" ToolTip.Tip = "Allows you to tag a plant with different characteristics." Grid.Row="8" Grid.Column="1" Grid.ColumnSpan="4" ItemsSource="{Binding Items}"
                                 Margin="20"
                                 Width="350"
                                 HorizontalAlignment="Left"

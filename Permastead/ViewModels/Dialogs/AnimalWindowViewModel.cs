@@ -32,14 +32,20 @@ public partial class AnimalWindowViewModel : ViewModelBase
     
     public void SaveRecord()
     {
-        bool rtnValue;
-        
         //check for a new tag to be added in the search text
-        if (NewTag != "")
+        if (!string.IsNullOrEmpty(NewTag))
         {
             // if there is a new tag to be added, add it to selected items before saving
             var newTagModel = new TagData() { TagText =  NewTag }; 
-            SelectedItems.Add(newTagModel);
+            
+            // check to see if the newtag is the search text from the last selected item - if so, do not add it again
+            // only add if it a truly new tag
+            var lastTag = SelectedItems.LastOrDefault();
+            
+            if (lastTag == null)
+                SelectedItems.Add(newTagModel);
+            else if  (!lastTag.TagText.Contains(newTagModel.TagText, StringComparison.InvariantCultureIgnoreCase))
+                SelectedItems.Add(newTagModel);
         }
 
         CurrentItem.TagList.Clear();
@@ -49,7 +55,7 @@ public partial class AnimalWindowViewModel : ViewModelBase
         }
         CurrentItem.SyncTags();
         
-        rtnValue = Services.AnimalService.CommitRecord(AppSession.ServiceMode, CurrentItem);
+        var rtnValue = Services.AnimalService.CommitRecord(AppSession.ServiceMode, CurrentItem);
         
         OnPropertyChanged(nameof(_currentItem));
             
@@ -108,6 +114,5 @@ public partial class AnimalWindowViewModel : ViewModelBase
                 SelectedItems.Add(td);
             }
         }
-        
     }
 }
