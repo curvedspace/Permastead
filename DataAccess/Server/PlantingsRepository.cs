@@ -9,7 +9,7 @@ using Npgsql;
 
 namespace DataAccess.Server;
 
-public class PlantingsRepository
+public static class PlantingsRepository
 {
     public static List<Planting> GetAllPlantings(string connectionString, bool byPlantedDate = false)
     {

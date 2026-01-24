@@ -11,16 +11,67 @@ namespace DataAccess.Local
     {
         public static List<Person> GetAll(string conn, bool onsiteOnly = false)
         {
+            var rtnList = new List<Person>();
+            
             try
             {
                 using (IDbConnection db = new SqliteConnection(conn))
                 {
-                    string sqlQuery = "SELECT * FROM Person ORDER BY LastName";
-                    
-                    if (onsiteOnly) sqlQuery = "SELECT * FROM Person WHERE OnSite = 1 ORDER BY LastName";
+                    string sqlQuery =
+                        "SELECT p.Id, p.FirstName, p.LastName, p.CreationDate, p.StartDate, p.EndDate, p.Company, p.Email, p.Phone, p.OnSite, p.Address, p.Comment, p.Tags FROM Person p ORDER BY LastName;";
 
-                    return db.Query<Person>(sqlQuery).ToList();
+                    if (onsiteOnly)
+                        sqlQuery =
+                            "SELECT p.Id, p.FirstName, p.LastName, p.CreationDate, p.StartDate, p.EndDate, p.Company, p.Email, p.Phone, p.OnSite, p.Address, p.Comment, p.Tags FROM Person p WHERE OnSite is true ORDER BY LastName";
+
+                    db.Open();
+
+                    using (IDbCommand command = db.CreateCommand())
+                    {
+                        command.CommandText = sqlQuery;
+
+                        var dr = command.ExecuteReader();
+
+                        while (dr.Read())
+                        {
+                            var person = new Person();
+
+                            person.Id = Convert.ToInt64(dr[0].ToString());
+                            person.FirstName = dr[1].ToString();
+                            person.LastName = dr[2].ToString();
+                            person.CreationDate = Convert.ToDateTime(dr[3].ToString());
+                            person.StartDate = Convert.ToDateTime(dr[4].ToString());
+                            person.EndDate = Convert.ToDateTime(dr[5].ToString());
+                            person.Company = dr[6].ToString();
+                            person.Email = dr[7].ToString();
+                            person.Phone = dr[8].ToString();
+
+                            if (string.IsNullOrEmpty(dr[9].ToString()))
+                            {
+                                person.OnSite = false;
+                            }
+                            else
+                            {
+                                person.OnSite = Convert.ToBoolean(dr[9]);
+                            }
+
+                            person.Address = dr[10].ToString();
+                            person.Comment = dr[11].ToString();
+
+                            var tagText = dr[12].ToString()!.Trim();
+
+                            if (tagText != null && tagText.Length > 0)
+                            {
+                                person.Tags = tagText.Trim();
+                                person.TagList = tagText.Split(' ').ToList();
+                            }
+
+                            rtnList.Add(person);
+                        }
+                    }
                 }
+                
+                return rtnList;
             }
             catch
             {

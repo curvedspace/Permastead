@@ -8,7 +8,7 @@ using Models;
 
 namespace DataAccess.Local;
 
-public class PlantingsRepository
+public static class PlantingsRepository
 {
     public static List<Planting> GetAllPlantings(string connectionString, bool byPlantedDate = false)
     {
