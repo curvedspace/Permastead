@@ -25,6 +25,16 @@ public partial class DashboardView : UserControl
         {
             var vm = (DashboardViewModel)DataContext;
             vm.RefreshDataOnly();
+
+            if (vm.PlantingYear == "ALL")
+            {
+                YearInReviewLabel.Content = "All Years";
+;            }
+            else
+            {
+                YearInReviewLabel.Content = "Year In Review: " + vm.PlantingYear;
+            }
+            
         }
         catch (Exception exception)
         {

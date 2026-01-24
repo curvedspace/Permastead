@@ -48,7 +48,7 @@
         </Grid>
         
         <Grid Grid.Column= "1" Grid.Row="1" ColumnDefinitions="*" RowDefinitions="Auto,*,Auto">
-            <Label Grid.Column="0" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="10">Year In Review</Label>
+            <Label x:Name="YearInReviewLabel" Grid.Column="0" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="10" Content="Year In Review" ></Label>
             <!-- <lvc:PieChart Grid.Column="0" Grid.Row="1" -->
             <!--     Series="{Binding Series}" -->
             <!--     InitialRotation="-90" -->
