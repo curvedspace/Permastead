@@ -1,5 +1,7 @@
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -252,7 +254,7 @@ public partial class PlantsViewModel : ViewModelBase
         long successCount = 0;
         foreach (var planting in Plantings)
         {
-            if (planting.IsActive) successCount++;   
+            if (planting.State.Code != "DEAD") successCount++;   
         }
 
         if (PlantingsCount > 0 ) SuccessRate = 100.0 * ((double)successCount / (double)PlantingsCount);
@@ -268,20 +270,23 @@ public partial class PlantsViewModel : ViewModelBase
         
         
         var sb = new StringBuilder();
-
+        var obs = new List<PlantingObservation>();
+        
         foreach (var pt in Plantings)
         {
-            var obs = PlantingsService.GetObservationsForPlanting(AppSession.ServiceMode, pt.Id);
-
-            foreach (var o in obs)
-            {
-                sb.AppendLine(o.AsOfDate.ToShortDateString() + ": " + o.Planting.Bed.Code + " | " +
-                              o.Planting.Description);
-                sb.AppendLine(o.Comment);
-                sb.AppendLine();
-            }
+            obs.AddRange(PlantingsService.GetObservationsForPlanting(AppSession.ServiceMode, pt.Id));
         }
 
+        obs = obs.OrderByDescending(x=> x.AsOfDate).ToList();
+        
+        foreach (var o in obs)
+        {
+            sb.AppendLine(o.AsOfDate.ToShortDateString() + ": (" + o.Planting.Bed.Code + ") " + o.Planting.Bed.Description + " | " +
+                          o.Planting.Description);
+            sb.AppendLine(o.Comment);
+            sb.AppendLine();
+        }
+        
         CurrentObservations = sb.ToString();
 
     }

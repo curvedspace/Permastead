@@ -238,7 +238,7 @@
                 <TextBlock Grid.Row="0" Grid.Column="2" Text="{Binding CurrentPlant.Id }" MaxWidth="100" Margin="20,35,20,20"></TextBlock>
                 
                 <Label Grid.Row="0" Margin="20,35,20,20" Grid.Column="3">Code:</Label>
-                <TextBox Grid.Row="0" Grid.Column="4" Text="{Binding CurrentPlant.Code }" Width="100" Margin="20,35,20,35"></TextBox>
+                <TextBox Grid.Row="0" Grid.Column="4" Text="{Binding CurrentPlant.Code }" Width="120" Margin="20,35,20,35"></TextBox>
                 
                 <TextBlock Grid.Row="1" Grid.Column="1" Margin="20,35,20,20">Seeds:</TextBlock>
                 <TextBox Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="1"  Text="{Binding SeedsCount }" Margin="20,30,20,35"></TextBox>
@@ -296,18 +296,19 @@
     
         <Grid Grid.Row="3" ColumnDefinitions="*,*" RowDefinitions="Auto,*,Auto"  Margin="0">
             
-            <Border Grid.Column="0" Grid.Row="1" BorderBrush="{DynamicResource TextControlBorderBrush}"
-                    BorderThickness="2"
-                    CornerRadius="3"
-                    Padding="10" Margin="20">
-                <ScrollViewer>
+            <!-- <Border Grid.Column="0" Grid.Row="1" BorderBrush="{DynamicResource TextControlBorderBrush}" -->
+            <!--         BorderThickness="2" -->
+            <!--         CornerRadius="3" -->
+            <!--         Padding="10" Margin="20"> -->
+                <ScrollViewer Grid.Column="0" Grid.Row="1">
                     
                     <Grid RowDefinitions="Auto,*">
-                        <Label Grid.Row="0" Grid.Column="5" Margin="20,3,20,5">Observations: </Label>
+                        <Label Grid.Row="0" Grid.Column="5" Margin="20,3,20,5">Comments: </Label>
                         <TextBox Grid.Row="1" Grid.Column="5"  Margin="20"
                                  TextWrapping="Wrap" 
-                                 IsReadOnly="True"
-                                 Text="{Binding CurrentObservations}"></TextBox>
+                                 AcceptsReturn="True" 
+                                 IsReadOnly="False"
+                                 Text="{Binding CurrentPlant.Comment}"></TextBox>
                     </Grid>
                     
                     <!-- <StackPanel Margin="5"> -->
@@ -333,7 +334,7 @@
                     <!--     </ItemsControl> -->
                     <!-- </StackPanel> -->
                 </ScrollViewer>
-            </Border>
+            <!-- </Border> -->
             
             <!-- <TextBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="1" Margin="20" -->
             <!--          AcceptsReturn="True" TextWrapping="Wrap"  -->
@@ -368,17 +369,18 @@
             <!-- -->
             <!-- </Border> -->
             
-            <Border Grid.Column="1" Grid.Row="1" BorderBrush="{DynamicResource TextControlBorderBrush}"
-                    BorderThickness="2"
-                    CornerRadius="3"
-                    Padding="10" Margin="20">
-                <ScrollViewer>
+            <!-- <Border Grid.Column="1" Grid.Row="1" BorderBrush="{DynamicResource TextControlBorderBrush}" -->
+            <!--         BorderThickness="2" -->
+            <!--         CornerRadius="3" -->
+            <!--         Padding="10" Margin="20"> -->
+                <ScrollViewer Grid.Column="1" Grid.Row="1">
                     
                     <Grid RowDefinitions="Auto,*">
-                        <Label Grid.Row="0" Grid.Column="5" Margin="20,3,20,5">Comment: </Label>
+                        <Label Grid.Row="0" Grid.Column="5" Margin="20,3,20,5">Observations: </Label>
                         <TextBox Grid.Row="1" Grid.Column="5"  Margin="20"
-                                 AcceptsReturn="True" TextWrapping="Wrap" 
-                                 Text="{Binding CurrentPlant.Comment}"></TextBox>
+                                 TextWrapping="Wrap" 
+                                 IsReadOnly="True"
+                                 Text="{Binding CurrentObservations}"></TextBox>
                     </Grid>
                     
                     <!-- <StackPanel Margin="5"> -->
@@ -404,7 +406,7 @@
                     <!--     </ItemsControl> -->
                     <!-- </StackPanel> -->
                 </ScrollViewer>
-            </Border>
+            <!-- </Border> -->
         </Grid>
     
         <Grid Grid.Row="4" ColumnDefinitions="Auto,*,Auto">

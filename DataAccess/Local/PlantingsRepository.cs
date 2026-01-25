@@ -455,11 +455,12 @@ public static class PlantingsRepository
             PlantingObservation o;
 
             var sql = "SELECT o.Comment, o.CreationDate, o.StartDate, o.EndDate, o.CommentTypeId, " +
-                      "ct.Description, o.AuthorId, p.FirstName, p.LastName, o.Id, o.PlantingId, pg.Description " +
-                      "FROM PlantingObservation o, CommentType ct, Person p, Planting pg " +
+                      "ct.Description, o.AuthorId, p.FirstName, p.LastName, o.Id, o.PlantingId, pg.Description, gb.Code, gb.Description " +
+                      "FROM PlantingObservation o, CommentType ct, Person p, Planting pg, GardenBed gb " +
                       "WHERE ct.Id = o.CommentTypeId " +
                       "AND o.PlantingId = pg.Id " +
                       "AND o.PlantingId = @Id " +
+                      "AND pg.GardenBedId = gb.Id " +
                       "AND p.Id = o.AuthorId ORDER BY o.Id DESC";
 
             using (SqliteConnection connection = new SqliteConnection(connectionString))
@@ -494,6 +495,9 @@ public static class PlantingsRepository
                         o.Id = Convert.ToInt64(dr[9].ToString());
                         o.Planting.Id = Convert.ToInt64(dr[10].ToString());
                         o.Planting.Description = dr[11].ToString();
+                        
+                        o.Planting.Bed.Code = dr[12].ToString();
+                        o.Planting.Bed.Description = dr[13].ToString();
                         
                         o.AsOfDate = o.CreationDate;
 
