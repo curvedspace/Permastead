@@ -51,6 +51,12 @@ public partial class WeatherViewModel : ViewModelBase
     [ObservableProperty] 
     private double[] _precipSeries; 
     
+    [ObservableProperty] 
+    private double[] _windKphSeries; 
+    
+    [ObservableProperty] 
+    private double[] _humiditySeries; 
+    
 
     public ObservableCollection<WeatherModel.Weather> WeatherForecastItems { get; set; } =
         new ObservableCollection<WeatherModel.Weather>();
@@ -88,6 +94,8 @@ public partial class WeatherViewModel : ViewModelBase
                 try
                 {
                     var results = await ws.UpdateWeather(city);
+                    
+                    // get the current weather
                     WeatherForecast = "Current Weather " + " as of " + results.ObservationTime + " for " + city.Name + ", " + city.Country + ": " + 
                                       results.WeatherStateAlias + 
                                       ", Cloud Cover: " + results.CloudCover + 
@@ -111,11 +119,14 @@ public partial class WeatherViewModel : ViewModelBase
                     MoonSet = ws.ModelRoot!.weather[0].astronomy[0].moonset;
                     MoonIllumination = ws.ModelRoot!.weather[0].astronomy[0].moon_illumination;
 
+                    // get the three day forecast
                     WeatherForecastItems = new ObservableCollection<WeatherModel.Weather>(ws.ModelRoot.weather);
 
                     var tempCSeriesList = new List<double>();
                     var feelsLikeCSeriesList = new List<double>();
                     var precipSeriesList = new List<double>();
+                    var humiditySeriesList = new List<double>();
+                    var windSeriesList = new List<double>();
                         
                     if (WeatherForecastItems.Count > 2)
                     {
@@ -129,6 +140,8 @@ public partial class WeatherViewModel : ViewModelBase
                             tempCSeriesList.Add(Convert.ToDouble(h.tempC));
                             feelsLikeCSeriesList.Add(Convert.ToDouble(h.FeelsLikeC));
                             precipSeriesList.Add(Convert.ToDouble(h.precipMM));
+                            humiditySeriesList.Add(Convert.ToDouble(h.humidity));
+                            windSeriesList.Add(Convert.ToDouble(h.windspeedKmph));
                         }
                         
                         Date2 = WeatherForecastItems[1].date;
@@ -141,6 +154,8 @@ public partial class WeatherViewModel : ViewModelBase
                             tempCSeriesList.Add(Convert.ToDouble(h.tempC));
                             feelsLikeCSeriesList.Add(Convert.ToDouble(h.FeelsLikeC));
                             precipSeriesList.Add(Convert.ToDouble(h.precipMM));
+                            humiditySeriesList.Add(Convert.ToDouble(h.humidity));
+                            windSeriesList.Add(Convert.ToDouble(h.windspeedKmph));
                         }
                     
                         Date3 = WeatherForecastItems[2].date;
@@ -153,11 +168,15 @@ public partial class WeatherViewModel : ViewModelBase
                             tempCSeriesList.Add(Convert.ToDouble(h.tempC));
                             feelsLikeCSeriesList.Add(Convert.ToDouble(h.FeelsLikeC));
                             precipSeriesList.Add(Convert.ToDouble(h.precipMM));
+                            humiditySeriesList.Add(Convert.ToDouble(h.humidity));
+                            windSeriesList.Add(Convert.ToDouble(h.windspeedKmph));
                         }
                         
                         TempCSeries = tempCSeriesList.ToArray();
                         FeelsLikeCSeries = feelsLikeCSeriesList.ToArray();
                         PrecipSeries = precipSeriesList.ToArray();
+                        HumiditySeries = humiditySeriesList.ToArray();
+                        WindKphSeries = windSeriesList.ToArray();
                     }
                     
                     

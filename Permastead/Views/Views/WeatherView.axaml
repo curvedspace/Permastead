@@ -166,6 +166,18 @@
                         Fill="{x:Null}"
                         GeometrySize="0"
                         LineSmoothness="1"/>
+                    <lvc:XamlLineSeries
+                        SeriesName="Wind Speed"
+                        Values="{Binding WindKphSeries}"
+                        Fill="{x:Null}"
+                        GeometrySize="0"
+                        LineSmoothness="1"/>
+                    <lvc:XamlLineSeries
+                        SeriesName="Humidity"
+                        Values="{Binding HumiditySeries}"
+                        Fill="{x:Null}"
+                        GeometrySize="0"
+                        LineSmoothness="1"/>
                     
                 </lvc:CartesianChart.Series>
                 
