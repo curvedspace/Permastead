@@ -97,11 +97,19 @@
         <Label Grid.Row="6" Grid.Column="2" Margin="10">Species: </Label>
         <TextBox Grid.Row="6" Grid.Column="3" IsReadOnly="True" Margin="10" Text="{Binding Planting.SeedPacket.Species}"></TextBox>
         
-        <Label Grid.Row="7" Grid.Column="0" Margin="10">DTH: </Label>
+        <Label Grid.Row="7" Grid.Column="0" Margin="10,13,10,10">DTH: </Label>
         <TextBox Grid.Row="7" Grid.Column="1" IsReadOnly="True" Margin="10" Text="{Binding Planting.DaysToHarvest}"></TextBox>
         
-        <Label Grid.Row="7" Grid.Column="2" IsVisible="{Binding Planting.HarvestToDoOption}" Margin="10">Harvest ToDo: </Label>
-        <CheckBox Grid.Row="7" Grid.Column="3" IsVisible="{Binding Planting.HarvestToDoOption}" Margin="10"  IsChecked="{Binding Planting.CreateHarvestToDo}"></CheckBox>
+        <Label Grid.Row="7" Grid.Column="2" 
+               IsVisible="{Binding Planting.HarvestToDoOption}" 
+               ToolTip.Tip = "Selecting this will create an associated to-do record for harvesting this planting."
+               Margin="10,13,10,10">Harvest ToDo:
+        </Label>
+        
+        <CheckBox Grid.Row="7" Grid.Column="3" 
+                  IsVisible="{Binding Planting.HarvestToDoOption}" Margin="10"  
+                  IsChecked="{Binding Planting.CreateHarvestToDo}">
+        </CheckBox>
         
         <TextBlock Grid.Row="8" Grid.Column="0" Margin="10">Comment:</TextBlock>
         <TextBox Grid.Row="8" Grid.Column="1" Grid.ColumnSpan="3" 
@@ -109,7 +117,12 @@
         
         <Image Grid.Row="9" Grid.Column="0"  Margin="20" Width="32" Height="32" Source="/Assets/leaf_plant.png" />
         <Button Grid.Row="9" Grid.Column="1"  x:Name="TerminateButton" Margin="10" IsVisible="False" Click="TerminateButton_OnClick">Terminate</Button>
-        <Button Grid.Row="9" Grid.Column="2" x:Name="HarvestButton" Margin="10,0,20,0" IsVisible="False" Click="HarvestButton_OnClick">Harvest</Button>
+        <Button Grid.Row="9" Grid.Column="2" 
+                x:Name="HarvestButton" 
+                Margin="10,0,20,0" 
+                IsVisible="False"
+                Click="HarvestButton_OnClick">Harvest
+        </Button>
         
         <StackPanel Grid.Row="9" Grid.Column="3" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,0,0">
           <Button x:Name="SaveButton" Margin="10" Click="SaveButton_OnClick">Save</Button>

@@ -2,15 +2,21 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             mc:Ignorable="d" d:DesignWidth="1000" d:DesignHeight="450"
              xmlns:vm="using:Permastead.ViewModels.Views"
+             xmlns:lvc="using:LiveChartsCore.SkiaSharpView.Avalonia"
              x:DataType="vm:WeatherViewModel" 
              x:Class="Permastead.Views.Views.WeatherView">
     
-    <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
+    <UserControl.DataContext>
+        <vm:WeatherViewModel/>
+    </UserControl.DataContext>
+    
+    <Grid RowDefinitions="Auto,Auto,*" ColumnDefinitions="*">
+    <!-- <StackPanel Orientation="Vertical" HorizontalAlignment="Center"> -->
         
         <TextBlock TextAlignment="Center" FontSize="36" Padding="10" Text="{Binding WeatherLocation}"></TextBlock>
-        <WrapPanel HorizontalAlignment="Center" Margin="10">
+        <WrapPanel Grid.Row="1" HorizontalAlignment="Center" Margin="10">
             <Border BorderBrush="White" CornerRadius="5" BorderThickness="2" Padding="25" Margin="10">
                 <StackPanel Orientation="Vertical">
                     <StackPanel Orientation="Horizontal" Margin="5">
@@ -71,84 +77,186 @@
                     </StackPanel>
             </StackPanel>
             </Border>
+            
+            <Border BorderBrush="White" CornerRadius="5" BorderThickness="2" Padding="25" Margin="10">
+                <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                
+                    <TextBlock  Margin="0,0,0,5" Text="{Binding Date1}"/>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                        <Label>Avg: </Label>
+                        <TextBlock Margin="5 2"
+                                   Text="{Binding  AvgtempC1 }"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                        <Label>High: </Label>
+                        <TextBlock Margin="2" Text="{Binding MaxtempC1}"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                        <Label>Low: </Label>
+                        <TextBlock Margin="2" Text="{Binding MintempC1}"/>
+                    </StackPanel>
+                                
+                </StackPanel>
+            </Border>
+            
+            <Border BorderBrush="White" CornerRadius="5" BorderThickness="2" Padding="25" Margin="10">
+                <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                
+                    <TextBlock  Margin="0,0,0,5" Text="{Binding Date2}"/>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                        <Label>Avg: </Label>
+                        <TextBlock Margin="5 2"
+                                   Text="{Binding  AvgtempC2 }"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                        <Label>High: </Label>
+                        <TextBlock Margin="2" Text="{Binding MaxtempC2}"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                        <Label>Low: </Label>
+                        <TextBlock Margin="2" Text="{Binding MintempC2}"/>
+                    </StackPanel>
+                                
+                </StackPanel>
+            </Border>
+            
+            <Border BorderBrush="White" CornerRadius="5" BorderThickness="2" Padding="25" Margin="10">
+                <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                
+                    <TextBlock  Margin="0,0,0,5" Text="{Binding Date3}"/>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                        <Label>Avg: </Label>
+                        <TextBlock Margin="5 2"
+                                   Text="{Binding  AvgtempC3 }"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                        <Label>High: </Label>
+                        <TextBlock Margin="2" Text="{Binding MaxtempC3}"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                        <Label>Low: </Label>
+                        <TextBlock Margin="2" Text="{Binding MintempC3}"/>
+                    </StackPanel>
+                                
+                </StackPanel>
+            </Border>
+            
         </WrapPanel>
+        
+        <Grid Grid.Row="2" ColumnDefinitions="*" RowDefinitions="Auto,*">
+            <TextBlock TextAlignment="Center" Margin="0 5" FontSize="28">Three Day Forecast</TextBlock>
+            
+            <lvc:CartesianChart x:Name="WeatherChart" Margin="50" Grid.Row="1" Background="#ff0d2644">
+                <lvc:CartesianChart.Series>
+                    <lvc:XamlLineSeries
+                        SeriesName="Temperature"
+                        Values="{Binding TempCSeries}"
+                        Fill="{x:Null}"
+                        GeometrySize="0"
+                        LineSmoothness="0"/>
+                    <lvc:XamlLineSeries
+                        SeriesName="Feels Like"
+                        Values="{Binding FeelsLikeCSeries}"
+                        Fill="{x:Null}"
+                        GeometrySize="0"
+                        LineSmoothness="0"/>
+                    <lvc:XamlLineSeries
+                        SeriesName="Precipitation"
+                        Values="{Binding PrecipSeries}"
+                        Fill="{x:Null}"
+                        GeometrySize="0"
+                        LineSmoothness="1"/>
+                    
+                </lvc:CartesianChart.Series>
+                
+                <lvc:CartesianChart.XAxes>
+                    <lvc:XamlAxis
+                        AxisName="Three Hour Increments"
+                        MinStep="8"
+                        />
+                </lvc:CartesianChart.XAxes>
+                
+            </lvc:CartesianChart>
+        </Grid>
         
         <!-- <TextBlock FontSize="24" Text="{Binding WeatherForecast}" TextAlignment="Center"></TextBlock> -->
         
-        <TextBlock TextAlignment="Center" Margin="0 5">Forecast</TextBlock>
-            <ScrollViewer>
-            <ItemsControl ItemsSource="{Binding WeatherForecastItems}" >
-            <ItemsControl.ItemTemplate>
-                <DataTemplate>
-                    <WrapPanel Orientation="Horizontal">
-                        
-                        <Border Margin="0,0,0,0"
-                                CornerRadius="5"
-                                BorderBrush="Gray" BorderThickness="1"
-                                Padding="2">
-                            <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                
-                                <TextBlock  Margin="0,0,0,5" Text="{Binding date}"/>
-                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                    <Label>Avg: </Label>
-                                    <TextBlock Margin="5 2"
-                                               Text="{Binding  avgtempC }"/>
-                                </StackPanel>
-                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                    <Label>High: </Label>
-                                    <TextBlock Margin="2" Text="{Binding maxtempC}"/>
-                                </StackPanel>
-                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                    <Label>Low: </Label>
-                                    <TextBlock Margin="2" Text="{Binding mintempC}"/>
-                                </StackPanel>
-                                
-                            </StackPanel>
-                        </Border>
-                        
-                            
-                        <ItemsControl ItemsSource="{Binding  hourly}" >
-                            <ItemsControl.ItemTemplate>
-                                <DataTemplate>
-                                    <Border Margin="0,0,0,0"
-                                            CornerRadius="5"
-                                            BorderBrush="Gray" BorderThickness="0"
-                                            Padding="2">
-                                        <StackPanel Orientation="Horizontal">
-                                            
-                                            <TextBlock Margin="5,2" Text="{Binding DisplayTime}"/>
-                                            
-                                            <Label>Temp: </Label>
-                                            <TextBlock Margin="5 2" FontWeight="Bold" Text="{Binding  tempC }"/>
-                                            <Label>Precipitation: </Label>
-                                            <TextBlock Margin="5 2" FontWeight="Bold" Text="{Binding   precipMM }"/>
-                                            <Label>Visibility: </Label>
-                                            <TextBlock Margin="5 2" FontWeight="Bold" Text="{Binding  visibility }"/>
-                                            <Label>Wind Gusts: </Label>
-                                            <TextBlock Margin="5 2" FontWeight="Bold" Text="{Binding  WindGustKmph }"/>
-                                            
-                                            <Label>Wind Speed: </Label>
-                                            <TextBlock Margin="5 2" FontWeight="Bold" Text="{Binding  windspeedKmph }"/>
-                                            
-                                            <Label>Feels Like: </Label>
-                                            <TextBlock Margin="5 2" FontWeight="Bold" Text="{Binding  FeelsLikeC  }"/>
-                                            
-                                            <Label>Conditions: </Label>
-                                            <TextBlock Margin="5 2" FontWeight="Bold" Text="{Binding  Conditions  }"/>
-                                            
-                                        </StackPanel>
-                                    </Border>
-                                </DataTemplate>
-                            </ItemsControl.ItemTemplate>
-                        </ItemsControl>
-                        
-                        
-                        </WrapPanel>
-                    
-                    
-                </DataTemplate>
-            </ItemsControl.ItemTemplate>
-        </ItemsControl>
-            </ScrollViewer>
-    </StackPanel>
+        <!-- start -->
+        <!-- <TextBlock TextAlignment="Center" Margin="0 5">Forecast</TextBlock> -->
+        <!--     <ScrollViewer> -->
+        <!--     <ItemsControl ItemsSource="{Binding WeatherForecastItems}" > -->
+        <!--     <ItemsControl.ItemTemplate> -->
+        <!--         <DataTemplate> -->
+        <!--             <WrapPanel Orientation="Horizontal"> -->
+        <!--                  -->
+        <!--                 <Border Margin="0,0,0,0" -->
+        <!--                         CornerRadius="5" -->
+        <!--                         BorderBrush="Gray" BorderThickness="1" -->
+        <!--                         Padding="2"> -->
+        <!--                     <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center"> -->
+        <!--                          -->
+        <!--                         <TextBlock  Margin="0,0,0,5" Text="{Binding date}"/> -->
+        <!--                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center"> -->
+        <!--                             <Label>Avg: </Label> -->
+        <!--                             <TextBlock Margin="5 2" -->
+        <!--                                        Text="{Binding  avgtempC }"/> -->
+        <!--                         </StackPanel> -->
+        <!--                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center"> -->
+        <!--                             <Label>High: </Label> -->
+        <!--                             <TextBlock Margin="2" Text="{Binding maxtempC}"/> -->
+        <!--                         </StackPanel> -->
+        <!--                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center"> -->
+        <!--                             <Label>Low: </Label> -->
+        <!--                             <TextBlock Margin="2" Text="{Binding mintempC}"/> -->
+        <!--                         </StackPanel> -->
+        <!--                          -->
+        <!--                     </StackPanel> -->
+        <!--                 </Border> -->
+        <!--                  -->
+        <!--                      -->
+        <!--                 <ItemsControl ItemsSource="{Binding  hourly}" > -->
+        <!--                     <ItemsControl.ItemTemplate> -->
+        <!--                         <DataTemplate> -->
+        <!--                             <Border Margin="0,0,0,0" -->
+        <!--                                     CornerRadius="5" -->
+        <!--                                     BorderBrush="Gray" BorderThickness="0" -->
+        <!--                                     Padding="2"> -->
+        <!--                                 <StackPanel Orientation="Horizontal"> -->
+        <!--                                      -->
+        <!--                                     <TextBlock Margin="5,2" Text="{Binding DisplayTime}"/> -->
+        <!--                                      -->
+        <!--                                     <Label>Temp: </Label> -->
+        <!--                                     <TextBlock Margin="5 2" FontWeight="Bold" Text="{Binding  tempC }"/> -->
+        <!--                                     <Label>Precipitation: </Label> -->
+        <!--                                     <TextBlock Margin="5 2" FontWeight="Bold" Text="{Binding   precipMM }"/> -->
+        <!--                                     <Label>Visibility: </Label> -->
+        <!--                                     <TextBlock Margin="5 2" FontWeight="Bold" Text="{Binding  visibility }"/> -->
+        <!--                                     <Label>Wind Gusts: </Label> -->
+        <!--                                     <TextBlock Margin="5 2" FontWeight="Bold" Text="{Binding  WindGustKmph }"/> -->
+        <!--                                      -->
+        <!--                                     <Label>Wind Speed: </Label> -->
+        <!--                                     <TextBlock Margin="5 2" FontWeight="Bold" Text="{Binding  windspeedKmph }"/> -->
+        <!--                                      -->
+        <!--                                     <Label>Feels Like: </Label> -->
+        <!--                                     <TextBlock Margin="5 2" FontWeight="Bold" Text="{Binding  FeelsLikeC  }"/> -->
+        <!--                                      -->
+        <!--                                     <Label>Conditions: </Label> -->
+        <!--                                     <TextBlock Margin="5 2" FontWeight="Bold" Text="{Binding  Conditions  }"/> -->
+        <!--                                      -->
+        <!--                                 </StackPanel> -->
+        <!--                             </Border> -->
+        <!--                         </DataTemplate> -->
+        <!--                     </ItemsControl.ItemTemplate> -->
+        <!--                 </ItemsControl> -->
+        <!--                  -->
+        <!--                 </WrapPanel> -->
+        <!--              -->
+        <!--         </DataTemplate> -->
+        <!--     </ItemsControl.ItemTemplate> -->
+        <!-- </ItemsControl> -->
+        <!--     </ScrollViewer> -->
+        <!-- end -->
+        
+    <!-- </StackPanel> -->
+    </Grid>
 </UserControl>
