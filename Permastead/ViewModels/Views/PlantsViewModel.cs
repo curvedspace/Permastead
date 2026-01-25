@@ -1,5 +1,6 @@
 using System;
 using System.Collections.ObjectModel;
+using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
@@ -51,6 +52,14 @@ public partial class PlantsViewModel : ViewModelBase
     
     [ObservableProperty] 
     private long _plantsCount;
+
+    [ObservableProperty] private long _plantingsCount;
+
+    [ObservableProperty] private long _seedsCount;
+
+    [ObservableProperty] private double _successRate;
+
+    [ObservableProperty] private string _currentObservations;
     
     [ObservableProperty] private string _searchText = "";
     
@@ -235,10 +244,18 @@ public partial class PlantsViewModel : ViewModelBase
         
         //look up image, if available, for this plant
         Picture = PlantService.GetPlantImage(CurrentPlant);
+
+        SeedsCount = SeedPackets.Count;
+        PlantingsCount = Plantings.Count;
         
-        Tags.Clear();
-        Tags.Add("herb");
-        Tags.Add("bitter");
+        // calc the success rate
+        long successCount = 0;
+        foreach (var planting in Plantings)
+        {
+            if (planting.IsActive) successCount++;   
+        }
+
+        if (PlantingsCount > 0 ) SuccessRate = 100.0 * ((double)successCount / (double)PlantingsCount);
 
         if (SelectedItems != null)
         {
@@ -248,6 +265,24 @@ public partial class PlantsViewModel : ViewModelBase
                 SelectedItems.Add( new TagData { TagText = tag } );
             }
         }
+        
+        
+        var sb = new StringBuilder();
+
+        foreach (var pt in Plantings)
+        {
+            var obs = PlantingsService.GetObservationsForPlanting(AppSession.ServiceMode, pt.Id);
+
+            foreach (var o in obs)
+            {
+                sb.AppendLine(o.AsOfDate.ToShortDateString() + ": " + o.Planting.Bed.Code + " | " +
+                              o.Planting.Description);
+                sb.AppendLine(o.Comment);
+                sb.AppendLine();
+            }
+        }
+
+        CurrentObservations = sb.ToString();
 
     }
     
