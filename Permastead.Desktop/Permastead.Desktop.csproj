@@ -8,8 +8,8 @@
     <BuiltInComInteropSupport>true</BuiltInComInteropSupport>
     <ApplicationManifest>app.manifest</ApplicationManifest>
     <StartupObject></StartupObject>
-    <AssemblyVersion>0.3.0</AssemblyVersion>
-    <FileVersion>0.3.0</FileVersion>
+    <AssemblyVersion>0.3.1</AssemblyVersion>
+    <FileVersion>0.3.1</FileVersion>
     <Version>0.0.3</Version>
     <PublishSingleFile>true</PublishSingleFile>
     <ApplicationIcon>..\Permastead\Assets\permastead.ico</ApplicationIcon>
