@@ -2055,7 +2055,7 @@ namespace DataAccess.Local
 
             #region Observations
 
-            var obs = new Observation { Author = new Person(1), AsOfDate = DateTime.Today, Comment = "Permastead is currently in early alpha. Welcome to the journey.", CommentType = new CommentType(2) };
+            var obs = new Observation { Author = new Person(1), AsOfDate = DateTime.Today, Comment = "Permastead is currently in beta testing. Welcome to the journey.", CommentType = new CommentType(2) };
             ObservationRepository.Insert(DataConnection.GetLocalDataSource(), obs);
 
             #endregion
