@@ -31,6 +31,12 @@ public partial class ContactsViewModel : ViewModelBase
     [ObservableProperty] 
     private bool _showObservations;
     
+    [ObservableProperty]
+    private string _searchText = "";
+    
+    [ObservableProperty] 
+    private bool _onsiteOnly = false;
+    
     [ObservableProperty] private PersonObservation _currentObservation = new PersonObservation();
 
     public FlatTreeDataGridSource<Person> PersonSource { get; set; }
@@ -90,16 +96,50 @@ public partial class ContactsViewModel : ViewModelBase
         }
     }
     
-    public void RefreshDataOnly()
+    public void RefreshDataOnly(string filterText = "")
     {
         var myPeople = Services.PersonService.GetAllPeople(AppSession.ServiceMode);
+        var caseAdjustedFilterText = filterText.Trim().ToLowerInvariant();
 
         _people.Clear();
         foreach (var p in myPeople)
         {
-            _people.Add(p);
+            
+            if (string.IsNullOrEmpty(caseAdjustedFilterText))
+            {
+                if (OnsiteOnly)
+                {
+                    if (p.OnSite)  _people.Add(p);
+                }
+                else
+                {
+                    _people.Add(p);
+                }
+            }
+            else
+            {
+                if (p.FirstName.ToLowerInvariant().Contains(caseAdjustedFilterText) ||
+                    p.LastName.ToLowerInvariant().Contains(caseAdjustedFilterText) ||
+                    p.Company.ToLowerInvariant().Contains(caseAdjustedFilterText) ||
+                    p.Address.ToLowerInvariant().Contains(caseAdjustedFilterText) ||
+                    p.Tags.ToLowerInvariant().Contains(caseAdjustedFilterText) ||
+                    p.Comment.ToLowerInvariant().Contains(caseAdjustedFilterText))
+                {
+                    if (OnsiteOnly)
+                    {
+                        if (p.OnSite) _people.Add(p);
+                    }
+                    else
+                    {
+                        _people.Add(p);
+                    }
+                }
+            }
+            
             if (CurrentPerson == null) CurrentPerson = p;
+            
         }
+        
         
         PersonSource = new FlatTreeDataGridSource<Person>(_people)
         {
@@ -125,6 +165,13 @@ public partial class ContactsViewModel : ViewModelBase
         };
 
         PeopleCount = _people.Count;
+    }
+    
+    [RelayCommand]
+    private void ClearSearch()
+    {
+        SearchText = "";
+        RefreshDataOnly(SearchText);
     }
     
     [RelayCommand]

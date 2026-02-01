@@ -3,7 +3,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:materialIcons="clr-namespace:Material.Icons.Avalonia;assembly=Material.Icons.Avalonia"
-             mc:Ignorable="d" d:DesignWidth="1000" d:DesignHeight="450"
+             mc:Ignorable="d" d:DesignWidth="1200" d:DesignHeight="450"
              xmlns:vm="using:Permastead.ViewModels.Views"
              xmlns:model="using:Models"
              x:DataType="vm:ContactsViewModel"
@@ -15,8 +15,17 @@
             <TextBlock FontWeight="Bold" Margin="20,24,20,20">People</TextBlock>
             <Button Command="{Binding RefreshDataCommand}" x:Name="Refresh" HorizontalAlignment="Right" Margin="10,0">Refresh</Button> 
             <Button Tapped="Add_OnTapped" x:Name="Add" HorizontalAlignment="Right" Margin="0,0">Add</Button> 
-            <ToggleButton x:Name="ShowObservations" IsChecked="{Binding ShowObservations}" HorizontalAlignment="Right" Margin="20,0">Show Observations</ToggleButton> 
-            <TextBlock Name="EventsCount" Text="{Binding PeopleCount , StringFormat='{}{0} total'}" Margin="20,24,20,20"></TextBlock>
+            <Label Margin="25,24,0,20">Search:</Label>
+            <TextBox x:Name="SearchBox" Text="{Binding SearchText }" Watermark="Enter search text" Width="200" 
+                     Margin="20,20,20,20" KeyDown="SearchBox_OnKeyDown" ></TextBox>
+            <Button Command="{Binding ClearSearchCommand}" Margin="5,20,20,20">Clear</Button>
+            <ToggleButton x:Name="ShowObservations" IsChecked="{Binding ShowObservations}" HorizontalAlignment="Right"
+                          Margin="30,0">Show Observations</ToggleButton>
+            <CheckBox Name="CurrentOnly" Command="{Binding RefreshDataCommand}" IsChecked="{Binding OnsiteOnly, Mode=TwoWay}"
+                      Margin="0">Onsite Only</CheckBox>
+            <TextBlock Name="AnimalCount" Text="{Binding PeopleCount, StringFormat='{}{0} total'}" Margin="20,28,20,20"></TextBlock>
+            <!-- <ToggleButton x:Name="ShowObservations" IsChecked="{Binding ShowObservations}" HorizontalAlignment="Right" Margin="20,0">Show Observations</ToggleButton>  -->
+            <!-- <TextBlock Name="EventsCount" Text="{Binding PeopleCount , StringFormat='{}{0} total'}" Margin="20,24,20,20"></TextBlock> -->
         </WrapPanel>
         
         <TreeDataGrid Grid.Column="0" x:Name = "TreeDataGrid" Grid.Row="1" Margin="10" 
