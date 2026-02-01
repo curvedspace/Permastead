@@ -257,7 +257,10 @@ public partial class PlantsViewModel : ViewModelBase
             if (planting.State.Code != "DEAD") successCount++;   
         }
 
-        if (PlantingsCount > 0 ) SuccessRate = 100.0 * ((double)successCount / (double)PlantingsCount);
+        if (PlantingsCount > 0)
+            SuccessRate = 100.0 * ((double)successCount / (double)PlantingsCount);
+        else
+            SuccessRate = 0.0;
 
         if (SelectedItems != null)
         {
