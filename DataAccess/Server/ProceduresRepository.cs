@@ -7,7 +7,7 @@ using Npgsql;
 
 namespace DataAccess.Server;
 
-public class ProceduresRepository
+public static class ProceduresRepository
 {
     public static List<StandardOperatingProcedure> GetAll(string connectionString)
     {
@@ -19,7 +19,7 @@ public class ProceduresRepository
 
             var sql = "SELECT p.Id, p.Category, p.Name, p.Content, p.AuthorId, p1.FirstName, p1.LastName, p.LastUpdated, p.CreationDate, p.EndDate " +
                       "FROM Procedure p, Person p1 " +
-                      "WHERE p.AuthorId = p1.Id " +
+                      "WHERE p.AuthorId = p1.Id AND p.EndDate > CURRENT_DATE " +
                       "ORDER BY p.Category, p.Name ASC";
 
             using (IDbConnection connection = new NpgsqlConnection(connectionString))
@@ -274,6 +274,23 @@ public class ProceduresRepository
             else
             {
                 return false;
+            }
+        }
+        catch
+        {
+            return false;
+        }
+    }
+    
+    public static bool Delete(StandardOperatingProcedure sop)
+    {
+        try
+        {
+            using (IDbConnection db = new NpgsqlConnection(DataConnection.GetServerConnectionString()))
+            {
+                string sqlQuery = "UPDATE Procedure SET EndDate = @EndDate WHERE Id = @Id;";
+
+                return (db.Execute(sqlQuery, sop) == 1);
             }
         }
         catch

@@ -4,7 +4,7 @@ using Models;
 
 namespace Services;
 
-public class ProceduresService
+public static class ProceduresService
 {
     public static List<StandardOperatingProcedure> GetAllProcedures(ServiceMode mode)
     {
@@ -66,6 +66,25 @@ public class ProceduresService
             }
         }
         
+        return rtnValue;
+    }
+    
+    public static bool DeleteRecord(ServiceMode mode, StandardOperatingProcedure sop)
+    {
+        bool rtnValue;
+        
+        // make end date today, then update the record in the database
+        sop.EndDate = DateTime.Today;
+        
+        if (mode == ServiceMode.Local)
+        {
+            rtnValue = ProceduresRepository.Delete(sop);
+        }
+        else
+        {
+            rtnValue = DataAccess.Server.ProceduresRepository.Delete(sop);
+        }
+
         return rtnValue;
     }
 }

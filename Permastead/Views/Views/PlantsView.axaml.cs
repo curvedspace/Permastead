@@ -203,11 +203,11 @@ public partial class PlantsView : UserControl
                 var image = Image.Load(files[0].Path.AbsolutePath);
                 if (isWindows)
                 {
-                    image.Mutate(x => x.Resize(400, 400));  //for windows, use 4x3 instead
+                    image.Mutate(x => x.Resize(400, 300));  //for windows, use 4x3 instead
                 }
                 else
                 {
-                    image.Mutate(x => x.Resize(400, 400));  //for windows, use 4x3 instead
+                    image.Mutate(x => x.Resize(300, 400));  //for windows, use 4x3 instead
                 }
 
                 float angle = 0;

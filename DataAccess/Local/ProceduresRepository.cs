@@ -281,5 +281,22 @@ public class ProceduresRepository
             return false;
         }
     }
+    
+    public static bool Delete(StandardOperatingProcedure sop)
+    {
+        try
+        {
+            using (IDbConnection db = new SqliteConnection(DataConnection.GetServerConnectionString()))
+            {
+                string sqlQuery = "UPDATE Procedure SET EndDate = @EndDate WHERE Id = @Id;";
+
+                return (db.Execute(sqlQuery, sop) == 1);
+            }
+        }
+        catch
+        {
+            return false;
+        }
+    }
 }
 

@@ -45,7 +45,20 @@
                                     </Border>
                                 </DataTemplate>
                             </ListBox.ItemTemplate>
+                            
+                            <ListBox.ContextMenu>
+                                <ContextMenu>
+        
+                                    <MenuItem IsEnabled="true" Command="{Binding DeleteProcedureCommand}" Header="Remove Procedure From List...">
+                                        <MenuItem.Icon>
+                                            <PathIcon Data="{StaticResource delete_regular}"/>
+                                        </MenuItem.Icon>
+                                    </MenuItem>
+        
+                                </ContextMenu>
+                            </ListBox.ContextMenu>
                         </ListBox>
+                        
                     </ScrollViewer>
                     
                 </SplitView.Pane>

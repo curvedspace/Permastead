@@ -99,7 +99,7 @@ public partial class PlantsViewModel : ViewModelBase
     [RelayCommand]
     private async void DeletePlant()
     {
-        bool rtnValue;
+        bool rtnValue = false;
 
         try
         {
