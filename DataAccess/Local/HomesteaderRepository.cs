@@ -1292,136 +1292,133 @@ namespace DataAccess.Local
             p = new Plant { Author = new Person(1), Code = "BAYBERRY", Description = "Bayberry", Family = "Myricaceae", Tags = "herb astringent anti-inflammatory",  Comment = "Bayberry is a native North American shrub known for its fragrant, aromatic leaves and waxy, blue-gray berries that persist through winter, providing food for birds and other wildlife."};
             PlantRepository.Insert(p);
             
-            p = new Plant { Author = new Person(1), Code = "BEAN", Description = "Bean", Family = "Fabaceae", Tags = "nitrogen-fixer",  Comment = "A bean is the seed of several plants in the family Fabaceae, which are used as vegetables for human or animal food. "};
+            p = new Plant { Author = new Person(1), Code = "BEAN", Description = "Bean", Family = "Fabaceae", Tags = "nitrogen-fixer", Comment = "A bean is the seed of several plants in the family Fabaceae, which are used as vegetables for human or animal food. "};
             PlantRepository.Insert(p);
 
-            p = new Plant { Author = new Person(1), Code = "BEARDT", Description = "Beardtongue", Family = "Plantaginaceae", Tags = "" };
+            p = new Plant { Author = new Person(1), Code = "BEARDT", Description = "Beardtongue", Family = "Plantaginaceae", Tags = "", Comment = "Penstemon, the beardtongues, is a large genus of roughly 280 species of flowering plants native to North America from northern Canada to Central America. It is the largest genus of flowering plants endemic to North America. "};
             PlantRepository.Insert(p);
             
-            p = new Plant { Author = new Person(1), Code = "BEEBALM", Description = "Bee Balm", Family = "Lamisceae", Tags = "herb" };
+            p = new Plant { Author = new Person(1), Code = "BEEBALM", Description = "Bee Balm", Family = "Lamisceae", Tags = "herb", Comment = "Monarda is a genus of flowering plants in the mint family, Lamiaceae. The genus is endemic to North America. Common names include bergamot, bee balm, horsemint, and oswego tea, the first being inspired by the fragrance of the leaves, which is reminiscent of bergamot orange (Citrus bergamia)." };
             PlantRepository.Insert(p);
             
-            p = new Plant { Author = new Person(1), Code = "BEECH", Description = "Beech Tree", Family = "Fagaceae", Tags = "" };
+            p = new Plant { Author = new Person(1), Code = "BEECH", Description = "Beech Tree", Family = "Fagaceae", Tags = "tree", Comment = "The beech tree, belonging to the genus Fagus, is a deciduous tree native to temperate and subtropical regions of Eurasia and North America, with 14 accepted species divided into two subgenera: Englerianae and Fagus." };
             PlantRepository.Insert(p);
             
-            p = new Plant { Author = new Person(1), Code = "BEET", Description = "Beet", Family = "Amaranthaceae", Tags = "" };
+            p = new Plant { Author = new Person(1), Code = "BEET", Description = "Beet", Family = "Amaranthaceae", Tags = "", Comment = "The beetroot (British English) or beet (North American English) is the taproot portion of a Beta vulgaris subsp. vulgaris plant in the Conditiva Group. "};
             PlantRepository.Insert(p);
             
-            p = new Plant { Author = new Person(1), Code = "BEGRASS", Description = "Blue Eyed Grass", Family = "Iridaceae", Tags = "" };
+            p = new Plant { Author = new Person(1), Code = "BEGRASS", Description = "Blue Eyed Grass", Family = "Iridaceae", Tags = "", Comment = "Blue-eyed grass is a common name for plants in the genus Sisyrinchium, which belongs to the iris family (Iridaceae)."};
             PlantRepository.Insert(p);
             
-            p = new Plant { Author = new Person(1), Code = "BERGAMOT", Description = "Bergamot", Family = "Lamiaceae", Tags = "herb " };
+            p = new Plant { Author = new Person(1), Code = "BERGAMOT", Description = "Bergamot", Family = "Lamiaceae", Tags = "herb ", Comment = "Monarda fistulosa, the wild bergamot or bee balm, is a wildflower in the mint family Lamiaceae, widespread and abundant as a native plant in much of North America."};
             PlantRepository.Insert(p);
             
-            p = new Plant { Author = new Person(1), Code = "BESUSAN", Description = "Black Eyed Susan", Family = "Asteraceae", Tags = "" };
+            p = new Plant { Author = new Person(1), Code = "BESUSAN", Description = "Black Eyed Susan", Family = "Asteraceae", Tags = "", Comment = "Rudbeckia hirta, commonly called black-eyed Susan, is a North American flowering plant in the family Asteraceae, native to Eastern and Central North America and naturalized in the Western part of the continent as well as in China. "};
             PlantRepository.Insert(p);
             
-            p = new Plant { Author = new Person(1), Code = "BFBUSH", Description = "Butterfly Bush", Family = "Scrophulariaceae", Tags = "" };
+            p = new Plant { Author = new Person(1), Code = "BFBUSH", Description = "Butterfly Bush", Family = "Scrophulariaceae", Tags = "", Comment = "Buddleja, also historically given as Buddlea is a genus comprising over 140 species of flowering plants endemic to Asia, Africa, and the Americas."};
             PlantRepository.Insert(p);
             
-            p = new Plant { Author = new Person(1), Code = "BLKBERRY", Description = "Blackberry", Family = "Rosaceae", Tags = "herb " };
+            p = new Plant { Author = new Person(1), Code = "BLKBERRY", Description = "Blackberry", Family = "Rosaceae", Tags = "herb ", Comment = "The blackberry is an edible fruit produced by many species in the genus Rubus in the family Rosaceae, hybrids among these species within the subgenus Rubus, and hybrids between the subgenera Rubus and Idaeobatus. "};
             PlantRepository.Insert(p);
             
-            p = new Plant { Author = new Person(1), Code = "BLOCUST", Description = "Black Locust", Family = "Fabaceae", Tags = "tree " };
+            p = new Plant { Author = new Person(1), Code = "BLOCUST", Description = "Black Locust", Family = "Fabaceae", Tags = "tree ", Comment = "Robinia pseudoacacia, commonly known in its native territory as black locust, is a medium-sized hardwood deciduous tree, belonging to the tribe Robinieae of the legume family Fabaceae."};
             PlantRepository.Insert(p);
             
-            p = new Plant { Author = new Person(1), Code = "BLUEBERRY", Description = "Blueberry", Family = "Ericaceae", Tags = "" };
+            p = new Plant { Author = new Person(1), Code = "BLUEBERRY", Description = "Blueberry", Family = "Ericaceae", Tags = "", Comment = "Blueberry is a widely distributed and widespread group of perennial flowering plant with blue or purple berries. "};
             PlantRepository.Insert(p);
             
-            p = new Plant { Author = new Person(1), Code = "BMUSTARD", Description = "Black Mustard", Family = "Brassicaceae", Tags = "" };
+            p = new Plant { Author = new Person(1), Code = "BMUSTARD", Description = "Black Mustard", Family = "Brassicaceae", Tags = "", Comment = "Rhamphospermum nigrum, black mustard, is an annual plant native to cooler regions of North Africa, temperate regions of Europe, and parts of Asia."};
             PlantRepository.Insert(p);
             
-            p = new Plant { Author = new Person(1), Code = "BONESET", Description = "Boneset", Family = "", Tags = "" };
+            p = new Plant { Author = new Person(1), Code = "BONESET", Description = "Boneset", Family = "", Tags = "", Comment = "Eupatorium perfoliatum, known as common boneset or just boneset, is a North American perennial plant in the family Asteraceae. It is a common native to the Eastern United States and Canada, widespread from Nova Scotia to Florida, west as far as Texas, Nebraska, the Dakotas, and Manitoba. "};
             PlantRepository.Insert(p);
             
-			p = new Plant { Author = new Person(1), Code = "BORAGE", Description = "Borage", Family = "Boraginaceae", Tags = "" };
+			p = new Plant { Author = new Person(1), Code = "BORAGE", Description = "Borage", Family = "Boraginaceae", Tags = "", Comment = "Borage is such a sensuous plant with its delicate blue flowers - so beautiful to the eyes, surprisingly refreshing to taste, and so very light in the heart!"};
 			PlantRepository.Insert(p);
 			
-			p = new Plant { Author = new Person(1), Code = "BOXWOOD", Description = "Boxwood", Family = "Buxaceae", Tags = "" };
+			p = new Plant { Author = new Person(1), Code = "BOXWOOD", Description = "Boxwood", Family = "Buxaceae", Tags = "", Comment = "The boxes are native to western and southern Europe, southwest, southern and eastern Asia, Africa, Madagascar, northernmost South America, Central America, Mexico and the Caribbean, with the majority of species being tropical or subtropical; only the European and some Asian species are frost-tolerant. "};
 			PlantRepository.Insert(p);
 			
-			p = new Plant { Author = new Person(1), Code = "BPEP", Description = "Bell Pepper", Family = "Solanaceae", Tags = "" };
+			p = new Plant { Author = new Person(1), Code = "BSAUSAGE", Description = "Blue Sausage Fruit", Family = "Lardizabalaceae", Tags = "", Comment = "Blue Sausage Fruit is a very unique flowering shrub, growing 13-15 feet tall. Its yellowish-green flowers transform into 6 inch long blue pods, with edible flesh. "};
 			PlantRepository.Insert(p);
 			
-			p = new Plant { Author = new Person(1), Code = "BSAUSAGE", Description = "Blue Sausage Fruit", Family = "Lardizabalaceae", Tags = "" };
+			p = new Plant { Author = new Person(1), Code = "BUFFBERRY", Description = "Buffaloberry", Family = "Elaeagnaceae", Tags = "", Comment = "Buffalo berries, scientifically known as Shepherdia, belong to the Elaeagnaceae family. They are native to northern and western North America and are characterized by their dark red berries with white dots, which are rough to the touch and have a rather bitter taste."};
 			PlantRepository.Insert(p);
 			
-			p = new Plant { Author = new Person(1), Code = "BUFFBERRY", Description = "Buffaloberry", Family = "Elaeagnaceae", Tags = "" };
+			p = new Plant { Author = new Person(1), Code = "BUNCHBERRY", Description = "Bunchberry", Family = "Cornaceae", Tags = "", Comment = "The Cornaceae, the dogwood family, are a cosmopolitan family of flowering plants in the order Cornales. "};
 			PlantRepository.Insert(p);
 			
-			p = new Plant { Author = new Person(1), Code = "BUNCHBERRY", Description = "Bunchberry", Family = "Cornaceae", Tags = "" };
+			p = new Plant { Author = new Person(1), Code = "BURDOCK", Description = "Burdock", Family = "Asteraceae", Tags = "herb alterative anti-inflammatory bitter hepatic nutritive tonic vulnerary", Comment = "Arctium lappa, commonly called greater burdock, gobō, edible burdock, lappa, beggar's buttons, thorny burr, or happy major is a Eurasian species of plants in the family Asteraceae, cultivated in gardens for its root used as a vegetable."};
 			PlantRepository.Insert(p);
 			
-			p = new Plant { Author = new Person(1), Code = "BURDOCK", Description = "Burdock", Family = "Asteraceae", Tags = "herb alterative anti-inflammatory bitter hepatic nutritive tonic vulnerary" };
+			p = new Plant { Author = new Person(1), Code = "BWALNUT", Description = "Black Walnut", Family = "Juglandaceae", Tags = "tree ", Comment = "The black walnut tree (Juglans nigra) is native to central and eastern North America and is valued for its wood and edible nuts. "};
 			PlantRepository.Insert(p);
 			
-			p = new Plant { Author = new Person(1), Code = "BWALNUT", Description = "Black Walnut", Family = "Juglandaceae", Tags = "tree " };
+			p = new Plant { Author = new Person(1), Code = "BWHEAT", Description = "Buckwheat", Family = "Polygonaceae", Tags = "", Comment = "Buckwheat is a flowering plant in the knotweed family Polygonaceae cultivated for its grain-like seeds and as a cover crop."};
 			PlantRepository.Insert(p);
 			
-			p = new Plant { Author = new Person(1), Code = "BWHEAT", Description = "Buckwheat", Family = "Polygonaceae", Tags = "" };
+			p = new Plant { Author = new Person(1), Code = "CABBAGE", Description = "Cabbage", Family = "Brassicaceae", Tags = "", Comment = "Cabbage, comprising several cultivars of Brassica oleracea, is a leafy green, red (purple), or white (pale green) biennial plant grown as an annual vegetable crop for its dense-leaved heads."};
 			PlantRepository.Insert(p);
 			
-			p = new Plant { Author = new Person(1), Code = "CABBAGE", Description = "Cabbage", Family = "Brassicaceae", Tags = "" };
+			p = new Plant { Author = new Person(1), Code = "CARROT", Description = "Carrot", Family = "Apiaceae", Tags = "", Comment = "The carrot is a root vegetable, typically orange in color, though heirloom variants including purple, black, red, white, and yellow cultivars exist, all of which are domesticated forms of the wild carrot, Daucus carota, native to Europe and Southwestern Asia. "};
 			PlantRepository.Insert(p);
 			
-			p = new Plant { Author = new Person(1), Code = "CARROT", Description = "Carrot", Family = "Apiaceae", Tags = "" };
+			p = new Plant { Author = new Person(1), Code = "CATMINT", Description = "Catmint", Family = "Lamiaceae", Tags = "herb ", Comment = "Nepeta nepetella, common name lesser cat-mint, is a low-growing species of catnip belonging to the family Lamiaceae."};
 			PlantRepository.Insert(p);
 			
-			p = new Plant { Author = new Person(1), Code = "CATMINT", Description = "Catmint", Family = "Lamiaceae", Tags = "herb " };
+			p = new Plant { Author = new Person(1), Code = "CATNIP", Description = "Catnip", Family = "Lamiaceae", Tags = "herb antispasmodic aromatic bitter diaphoretic ", Comment = "Nepeta cataria, commonly known as catnip and catmint, is a species of the genus Nepeta in the mint family, native to southern and eastern Europe, the Middle East, and Central Asia."};
 			PlantRepository.Insert(p);
 			
-			p = new Plant { Author = new Person(1), Code = "CATNIP", Description = "Catnip", Family = "Lamiaceae", Tags = "herb antispasmodic aromatic bitter diaphoretic " };
+			p = new Plant { Author = new Person(1), Code = "CAULI", Description = "Cauliflower", Family = "Brassicaceae", Tags = "" , Comment = "Cauliflower is one of several vegetables cultivated from the species Brassica oleracea in the genus Brassica, which is in the Brassicaceae (or mustard) family."};
 			PlantRepository.Insert(p);
 			
-			p = new Plant { Author = new Person(1), Code = "CAULI", Description = "Cauliflower", Family = "Brassicaceae", Tags = "" };
+			p = new Plant { Author = new Person(1), Code = "CBINE", Description = "Columbine", Family = "Ranunculaceae", Tags = "", Comment = "Aquilegia (common names: granny's bonnet, columbine) is a genus of about 130 species of perennial plants that are found in meadows, woodlands, and at higher elevations throughout the Northern Hemisphere, known for the spurred petals of their flowers."};
 			PlantRepository.Insert(p);
 			
-			p = new Plant { Author = new Person(1), Code = "CBINE", Description = "Columbine", Family = "Ranunculaceae", Tags = "" };
+			p = new Plant { Author = new Person(1), Code = "CHICAB", Description = "Chinese Cabbage", Family = "Brassicaceae", Tags = "", Comment = "Chinese cabbage (Brassica rapa, subspecies pekinensis and chinensis) is either of two cultivar groups of leaf vegetables often used in Chinese cuisine: the Pekinensis Group (napa cabbage) and the Chinensis Group (bok choy)."};
 			PlantRepository.Insert(p);
 			
-			p = new Plant { Author = new Person(1), Code = "CCAB1", Description = "Chinese Cabbage", Family = "Brassicaceae", Tags = "" };
+			p = new Plant { Author = new Person(1), Code = "CFOOT", Description = "Catsfoot", Family = "Asteraceae", Tags = "herb astringent diuretic ", Comment = "Antennaria dioica is an evergreen, herbaceous perennial plant growing to 10–20 cm tall, with a rosette of basal spoon-shaped leaves 4 cm long, and 1 cm broad at their broadest near the apex; and smaller leaves arranged spirally up the flowering stems. "};
 			PlantRepository.Insert(p);
 			
-			p = new Plant { Author = new Person(1), Code = "CFOOT", Description = "Catsfoot", Family = "Asteraceae", Tags = "herb astringent diuretic " };
+			p = new Plant { Author = new Person(1), Code = "CHARD", Description = "Chard", Family = "Amaranthaceae", Tags = "", Comment = "Chard is a green leafy vegetable."};
 			PlantRepository.Insert(p);
 			
-			p = new Plant { Author = new Person(1), Code = "CHARD", Description = "Chard", Family = "Amaranthaceae", Tags = "" };
+			p = new Plant { Author = new Person(1), Code = "CHERRY", Description = "Cherry ", Family = "Rosaceae", Tags = "tree ", Comment = "A cherry is the fruit of many plants of the genus Prunus, and is a fleshy drupe (stone fruit)."};
 			PlantRepository.Insert(p);
 			
-			p = new Plant { Author = new Person(1), Code = "CHERRY", Description = "Cherry ", Family = "Rosaceae", Tags = "tree " };
+			p = new Plant { Author = new Person(1), Code = "CHERVIL", Description = "Chervil", Family = "Apiaceae", Tags = "", Comment = "Chervil, sometimes called French parsley or garden chervil (to distinguish it from similar plants also called chervil), is a delicate annual herb related to parsley."};
 			PlantRepository.Insert(p);
 			
-			p = new Plant { Author = new Person(1), Code = "CHERVIL", Description = "Chervil", Family = "Apiaceae", Tags = "" };
+			p = new Plant { Author = new Person(1), Code = "CHICKWEED", Description = "Chickweed", Family = "Caryophyllaceae", Tags = "", Comment = "Stellaria media, chickweed, is an annual flowering plant in the family Caryophyllaceae."};
 			PlantRepository.Insert(p);
 			
-			p = new Plant { Author = new Person(1), Code = "CHICKWEED", Description = "Chickweed", Family = "Caryophyllaceae", Tags = "" };
+			p = new Plant { Author = new Person(1), Code = "CHICORY", Description = "Chicory", Family = "Asteraceae", Tags = "herb ", Comment = "Common chicory (Cichorium intybus) is a somewhat woody, perennial herbaceous plant of the family Asteraceae, usually with bright blue flowers, rarely white or pink."};
 			PlantRepository.Insert(p);
 			
-			p = new Plant { Author = new Person(1), Code = "CHICORY", Description = "Chicory", Family = "Asteraceae", Tags = "" };
+			p = new Plant { Author = new Person(1), Code = "CHIVE", Description = "Chives", Family = "Amaryllidaceae", Tags = "herb ", Comment = "Chives, scientific name Allium schoenoprasum, is a species of flowering plant in the family Amaryllidaceae. A perennial plant, A. schoenoprasum is widespread in nature across much of Eurasia and North America. "};
 			PlantRepository.Insert(p);
 			
-			p = new Plant { Author = new Person(1), Code = "CHIVE", Description = "Chives", Family = "Amaryllidaceae", Tags = "" };
+			p = new Plant { Author = new Person(1), Code = "GCHIVE", Description = "Garlic Chives", Family = "Amaryllidaceae", Tags = "herb ", Comment = "Garlic chives have been widely cultivated for centuries in East Asia for their culinary value."};
 			PlantRepository.Insert(p);
 			
-			p = new Plant { Author = new Person(1), Code = "CHIVES", Description = "Garlic Chives", Family = "Amaryllidaceae", Tags = "" };
+			p = new Plant { Author = new Person(1), Code = "CILANTRO", Description = "Cilantro", Family = "Apiaceae", Tags = "herb ", Comment = "Coriander, also known as cilantro is an annual herb in the family Apiaceae."};
 			PlantRepository.Insert(p);
 			
-			p = new Plant { Author = new Person(1), Code = "CILANTRO", Description = "Cilantro", Family = "Apiaceae", Tags = "" };
+			p = new Plant { Author = new Person(1), Code = "CLEAVERS", Description = "Cleavers", Family = "Rubiaceae", Tags = "herb astringent diuretic hepatic tonic vulnerary lymphatic ", Comment = "Cleavers, scientifically known as Galium aparine, is an annual, herbaceous plant in the Rubiaceae family, commonly found in temperate regions across Europe, Northern Africa, Asia, and North America."};
 			PlantRepository.Insert(p);
 			
-			p = new Plant { Author = new Person(1), Code = "CLEAVERS", Description = "Cleavers", Family = "Rubiaceae", Tags = "herb astringent diuretic hepatic tonic vulnerary lymphatic " };
+			p = new Plant { Author = new Person(1), Code = "CLOVER", Description = "Clover", Family = "Fabaceae", Tags = "alterative ", Comment = "Clovers, also called trefoils, are plants of the genus Trifolium (from Latin tres 'three' and folium 'leaf'), consisting of about 300 species of flowering plants in the legume family Fabaceae originating in Europe. "};
 			PlantRepository.Insert(p);
 			
-			p = new Plant { Author = new Person(1), Code = "CLOVER", Description = "Clover", Family = "Fabaceae", Tags = "alterative " };
+			p = new Plant { Author = new Person(1), Code = "CMILE", Description = "Chamomile", Family = "Asteraceae", Tags = "herb ", Comment = "Chamomile (American English) or camomile (British English; see spelling differences) is the common name for several daisy-like plants of the family Asteraceae. "};
 			PlantRepository.Insert(p);
 			
-			p = new Plant { Author = new Person(1), Code = "CMILE", Description = "Chamomile", Family = "Asteraceae", Tags = "herb " };
+			p = new Plant { Author = new Person(1), Code = "CODON", Description = "Codonopsis", Family = "Campanulaceae", Tags = "herb ", Comment = "Codonopsis is a genus of flowering plant in the family Campanulaceae."};
 			PlantRepository.Insert(p);
 			
-			p = new Plant { Author = new Person(1), Code = "CODO1", Description = "Codonopsis", Family = "Campanulaceae", Tags = "herb " };
-			PlantRepository.Insert(p);
-			
-			p = new Plant { Author = new Person(1), Code = "COMFREY", Description = "Comfrey", Family = "Boraginaceae", Tags = "herb anti-inflammatory astringent demulcent vulnerary " };
+			p = new Plant { Author = new Person(1), Code = "COMFREY", Description = "Comfrey", Family = "Boraginaceae", Tags = "herb anti-inflammatory astringent demulcent vulnerary ", Comment = "Symphytum is a genus of flowering plants in the borage family, Boraginaceae, known by the common name comfrey, from the Latin confervere to 'heal' or literally to 'boil together', referring to uses in ancient traditional medicine."};
 			PlantRepository.Insert(p);
 			
 			p = new Plant { Author = new Person(1), Code = "CORN", Description = "Corn", Family = "Poaceae", Tags = "" };
