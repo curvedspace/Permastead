@@ -2,7 +2,7 @@
 using System.Data;
 using System.Collections.Generic;
 using System.Text;
-
+using Common;
 using Dapper;
 
 using Microsoft.Data.Sqlite;
@@ -99,6 +99,45 @@ namespace DataAccess.Server
             {
                 return new List<string>();
             }
+        }
+        
+        public static List<SearchResult> GetSearchResults(string connectionString, string searchText)
+        {
+            var results = new List<SearchResult>();
+
+            var sql = "SELECT i.Id, CONCAT(i.firstname,' ',i.lastname) as Description, " +
+                      "i.CreationDate, i.EndDate  " +
+                      "FROM Person i " +
+                      "WHERE lower(i.firstname) LIKE '%" + searchText.ToLowerInvariant() + "%' OR lower(i.lastname) LIKE '%" + searchText.ToLowerInvariant() + "%' " +
+                      "ORDER BY i.CreationDate DESC";
+
+            using (IDbConnection connection = new NpgsqlConnection(connectionString))
+            {
+                connection.Open();
+
+                using (IDbCommand command = connection.CreateCommand())
+                {
+                    command.CommandText = sql;
+                    var dr = command.ExecuteReader();
+
+                    while (dr.Read())
+                    {
+                        var result = new SearchResult();
+                        result.AsOfDate = Convert.ToDateTime(dr[2].ToString());
+                        result.IsCurrent = true;
+                        result.Entity.Id = Convert.ToInt64(dr[0].ToString());
+                        result.Entity.Name = "Person";
+                        result.SubType = "Name";
+                        result.FieldName = "Name";
+                        result.SearchText = TextUtils.GetSubstring(dr[1].ToString()!, 0, DataConnection.SearchTextLength, true);
+
+                        results.Add(result);
+                    }
+                }
+            }
+
+            return results;
+
         }
         
         public static List<TagData> GetAllTags(string connectionString)
