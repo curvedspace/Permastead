@@ -177,6 +177,23 @@ public partial class FinderView : UserControl
 
                         obsWindow.Show();
                         break;
+                    
+                    
+                    case "Person": 
+                        var p = PersonService.GetPersonFromId(AppSession.ServiceMode, aRecord.Entity.Id);
+                        var pvm = new PersonWindowViewModel(p, new ContactsViewModel());
+                        var personWindow = new PersonWindow();
+                        personWindow.DataContext = pvm;
+
+                        personWindow.Topmost = true;
+                        personWindow.Width = 550;
+                        personWindow.Height = 350;
+                        personWindow.Opacity = 0.9;
+                        personWindow.Title = "Person";
+                        personWindow.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+
+                        personWindow.Show();
+                        break;
                        
                 }
             }
