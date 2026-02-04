@@ -1421,496 +1421,496 @@ namespace DataAccess.Local
 			p = new Plant { Author = new Person(1), Code = "COMFREY", Description = "Comfrey", Family = "Boraginaceae", Tags = "herb anti-inflammatory astringent demulcent vulnerary ", Comment = "Symphytum is a genus of flowering plants in the borage family, Boraginaceae, known by the common name comfrey, from the Latin confervere to 'heal' or literally to 'boil together', referring to uses in ancient traditional medicine."};
 			PlantRepository.Insert(p);
 			
-			p = new Plant { Author = new Person(1), Code = "CORN", Description = "Corn", Family = "Poaceae", Tags = "" };
+			p = new Plant { Author = new Person(1), Code = "CORN", Description = "Corn", Family = "Poaceae", Tags = "", Comment = "Cereal grain cultivated worldwide, used as food, animal feed, and industrial product." };
 			PlantRepository.Insert(p);
-			
-			p = new Plant { Author = new Person(1), Code = "COSMOS", Description = "Cosmos", Family = "Asteraceae", Tags = "" };
+
+			p = new Plant { Author = new Person(1), Code = "COSMOS", Description = "Cosmos", Family = "Asteraceae", Tags = "", Comment = "Annual flowering plant with daisy-like blooms in various colors, attracts pollinators." };
+			PlantRepository.Insert(p);
+
+			p = new Plant { Author = new Person(1), Code = "CPOPPY", Description = "California Poppy", Family = "Papaveraceae", Tags = "herb ", Comment = "State flower of California, produces bright orange flowers, used in herbal medicine." };
 			PlantRepository.Insert(p);
-			
-			p = new Plant { Author = new Person(1), Code = "CPOPPY", Description = "California Poppy", Family = "Papaveraceae", Tags = "herb " };
+
+			p = new Plant { Author = new Person(1), Code = "CRABAPPLE", Description = "Crabapple", Family = "Rosaceae", Tags = "tree ", Comment = "Small ornamental tree producing tart fruit, used in jellies and traditional medicine." };
 			PlantRepository.Insert(p);
-			
-			p = new Plant { Author = new Person(1), Code = "CRABAPPLE", Description = "Crabapple", Family = "Rosaceae", Tags = "tree " };
+
+			p = new Plant { Author = new Person(1), Code = "CUCUMBER", Description = "Cucumber", Family = "Cucurbitaceae", Tags = "", Comment = "Warm-season vine producing crisp edible fruits, used in salads and pickling." };
 			PlantRepository.Insert(p);
-			
-			p = new Plant { Author = new Person(1), Code = "CUCUMBER", Description = "Cucumber", Family = "Cucurbitaceae", Tags = "" };
+
+			p = new Plant { Author = new Person(1), Code = "CURRANT", Description = "Currant", Family = "Ribes", Tags = "", Comment = "Deciduous shrub producing small berries, rich in vitamin C and antioxidants." };
 			PlantRepository.Insert(p);
-			
-			p = new Plant { Author = new Person(1), Code = "CURRANT", Description = "Currant", Family = "Ribes", Tags = "" };
+
+			p = new Plant { Author = new Person(1), Code = "DAISY", Description = "Daisy", Family = "Asteraceae", Tags = "", Comment = "Common wildflower with white petals and yellow center, used in herbal teas." };
 			PlantRepository.Insert(p);
-			
-			p = new Plant { Author = new Person(1), Code = "DAISY", Description = "Daisy", Family = "Asteraceae", Tags = "" };
+
+			p = new Plant { Author = new Person(1), Code = "DANDE", Description = "Dandelion", Family = "Asteraceae", Tags = "herb bitter drying diuretic hepatic tonic nutritive alterative ", Comment = "All parts used medicinally, roots for liver support, leaves as diuretic" };
 			PlantRepository.Insert(p);
-			
-			p = new Plant { Author = new Person(1), Code = "DANDE", Description = "Dandelion", Family = "Asteraceae", Tags = "herb bitter drying diuretic hepatic tonic nutritive alterative " };
+
+			p = new Plant { Author = new Person(1), Code = "DELPH", Description = "Delphinium", Family = "Ranunculaceae", Tags = "", Comment = "Tall flowering plant with blue or purple spikes, toxic if ingested" };
 			PlantRepository.Insert(p);
-			
-			p = new Plant { Author = new Person(1), Code = "DELPH", Description = "Delphinium", Family = "Ranunculaceae", Tags = "" };
+
+			p = new Plant { Author = new Person(1), Code = "DIANTHUS", Description = "Dianthus", Family = "Caryophyllaceae", Tags = "", Comment = "Perennial with fragrant pink or white flowers, used in potpourri and traditional medicine" };
 			PlantRepository.Insert(p);
-			
-			p = new Plant { Author = new Person(1), Code = "DIANTHUS", Description = "Dianthus", Family = "Caryophyllaceae", Tags = "" };
+
+			p = new Plant { Author = new Person(1), Code = "DILL", Description = "Dill", Family = "Apiaceae", Tags = "", Comment = "Annual herb with feathery leaves, used in cooking and for digestive support" };
 			PlantRepository.Insert(p);
-			
-			p = new Plant { Author = new Person(1), Code = "DILL", Description = "Dill", Family = "Apiaceae", Tags = "" };
+
+			p = new Plant { Author = new Person(1), Code = "ECAMPANE", Description = "Elecampane", Family = "Asteraceae", Tags = "herb diaphoretic expectorant bitter ", Comment = "Root used for respiratory support, especially for coughs and bronchitis" };
 			PlantRepository.Insert(p);
-			
-			p = new Plant { Author = new Person(1), Code = "ECAMPANE", Description = "Elecampane", Family = "Asteraceae", Tags = "herb diaphoretic expectorant bitter " };
+
+			p = new Plant { Author = new Person(1), Code = "ECHINACEA", Description = "Echinacea", Family = "Asteraceae", Tags = "herb ", Comment = "Native North American herb used to support immune function and wound healing" };
 			PlantRepository.Insert(p);
-			
-			p = new Plant { Author = new Person(1), Code = "ECHINACEA", Description = "Echinacea", Family = "Asteraceae", Tags = "herb " };
+
+			p = new Plant { Author = new Person(1), Code = "ECNUT", Description = "Earth Chestnut", Family = "Apiaceae", Tags = "", Comment = "Wild edible plant with chestnut-like flavor, root used as food and medicine" };
 			PlantRepository.Insert(p);
-			
-			p = new Plant { Author = new Person(1), Code = "ECNUT", Description = "Earth Chestnut", Family = "Apiaceae", Tags = "" };
+
+			p = new Plant { Author = new Person(1), Code = "ELDBERRY", Description = "Elderberry", Family = "Adoxaceae", Tags = "herb ", Comment = "Shrub with dark berries used in syrups and supplements for immune support" };
 			PlantRepository.Insert(p);
-			
-			p = new Plant { Author = new Person(1), Code = "ELDBERRY", Description = "Elderberry", Family = "Adoxaceae", Tags = "herb " };
+
+			p = new Plant { Author = new Person(1), Code = "ELM", Description = "Elm Tree", Family = "Ulmaceae", Tags = "", Comment = "Large deciduous tree historically important for timber, now threatened by Dutch elm disease" };
 			PlantRepository.Insert(p);
-			
-			p = new Plant { Author = new Person(1), Code = "ELM", Description = "Elm Tree", Family = "Ulmaceae", Tags = "" };
+
+			p = new Plant { Author = new Person(1), Code = "EPRIM", Description = "Evening Primrose", Family = "Onagraceae", Tags = "herb anti-spasmodic bitter demulcent nutritive hepatic anti-inflammatory ", Comment = "Seed oil rich in gamma-linolenic acid (GLA), used for hormonal balance" };
 			PlantRepository.Insert(p);
-			
-			p = new Plant { Author = new Person(1), Code = "EPRIM", Description = "Evening Primrose", Family = "Onagraceae", Tags = "herb anti-spasmodic bitter demulcent nutritive hepatic anti-inflammatory " };
+
+			p = new Plant { Author = new Person(1), Code = "ERBUD", Description = "Eastern Redbud", Family = "Fabaceae", Tags = "nitrogen-fixer tree ", Comment = "Small ornamental tree with pink flowers in spring, fixes nitrogen in soil" };
 			PlantRepository.Insert(p);
-			
-			p = new Plant { Author = new Person(1), Code = "ERBUD", Description = "Eastern Redbud", Family = "Fabaceae", Tags = "nitrogen-fixer tree " };
+
+			p = new Plant { Author = new Person(1), Code = "FENNEL", Description = "Fennel", Family = "Apiaceae", Tags = "herb carminative ", Comment = "Anise-flavored herb used in cooking and for digestive relief" };
 			PlantRepository.Insert(p);
-			
-			p = new Plant { Author = new Person(1), Code = "FENNEL", Description = "Fennel", Family = "Apiaceae", Tags = "herb carminative " };
+
+			p = new Plant { Author = new Person(1), Code = "FEVERFEW", Description = "Feverfew", Family = "Asteraceae", Tags = "herb ", Comment = "Traditional herb used for migraine prevention and anti-inflammatory support" };
 			PlantRepository.Insert(p);
-			
-			p = new Plant { Author = new Person(1), Code = "FEVERFEW", Description = "Feverfew", Family = "Asteraceae", Tags = "herb " };
+
+			p = new Plant { Author = new Person(1), Code = "FINDIGO", Description = "False Indigo", Family = "Fabaceae", Tags = "", Comment = "Perennial shrub with blue flowers, historically used as blue dye and medicine" };
 			PlantRepository.Insert(p);
-			
-			p = new Plant { Author = new Person(1), Code = "FINDIGO", Description = "False Indigo", Family = "Fabaceae", Tags = "" };
+
+			p = new Plant { Author = new Person(1), Code = "FLAX", Description = "Flax", Family = "Linaceae", Tags = "", Comment = "Annual plant producing seeds and fiber, used for oil and textiles." };
 			PlantRepository.Insert(p);
-			
-			p = new Plant { Author = new Person(1), Code = "FLAX", Description = "Flax", Family = "", Tags = "" };
+
+			p = new Plant { Author = new Person(1), Code = "FOXGLOVE", Description = "Foxglove", Family = "Plantaginaceae", Tags = "", Comment = "Toxic plant with tall spikes of tubular flowers, source of digitalis for heart medicine." };
 			PlantRepository.Insert(p);
-			
-			p = new Plant { Author = new Person(1), Code = "FOXGLOVE", Description = "Foxglove", Family = "Plantaginaceae", Tags = "" };
+
+			p = new Plant { Author = new Person(1), Code = "FSORREL", Description = "French Sorrel", Family = "Polygonaceae", Tags = "", Comment = "Perennial with sour-tasting leaves, rich in vitamin C and used in salads." };
 			PlantRepository.Insert(p);
-			
-			p = new Plant { Author = new Person(1), Code = "FSORREL", Description = "French Sorrel", Family = "Polygonaceae", Tags = "" };
+
+			p = new Plant { Author = new Person(1), Code = "GARLIC", Description = "Garlic", Family = "Amaryllidaceae", Tags = "herb warming alterative anti-septic anti-spasmodic carminative diaphoretic tonic vulnerary anthelmintic ", Comment = "Allium species with strong flavor, used for cardiovascular and immune support" };
 			PlantRepository.Insert(p);
-			
-			p = new Plant { Author = new Person(1), Code = "GARLIC", Description = "Garlic", Family = "Amaryllidaceae", Tags = "herb warming alterative anti-septic anti-spasmodic carminative diaphoretic tonic vulnerary anthelmintic" };
+
+			p = new Plant { Author = new Person(1), Code = "GBURDOCK", Description = "Greater Burdock", Family = "Asteraceae", Tags = "herb alterative anti-inflammatory bitter hepatic nutritive tonic vulnerary diuretic ", Comment = "Root used for skin conditions and detoxification, rich in inulin" };
 			PlantRepository.Insert(p);
-			
-			p = new Plant { Author = new Person(1), Code = "GBURDOCK", Description = "Greater Burdock", Family = "Asteraceae", Tags = "herb alterative anti-inflammatory bitter hepatic nutritive tonic vulnerary diuretic " };
+
+			p = new Plant { Author = new Person(1), Code = "GCHERRY", Description = "Ground Cherry", Family = "Solanaceae", Tags = "", Comment = "Small fruiting plant with edible golden berries, rich in antioxidants" };
 			PlantRepository.Insert(p);
-			
-			p = new Plant { Author = new Person(1), Code = "GCHERRY", Description = "Ground Cherry", Family = "Solanaceae", Tags = "" };
+
+			p = new Plant { Author = new Person(1), Code = "GELDER", Description = "Ground Elder", Family = "Apiaceae", Tags = "herb", Comment = "Wild plant with large leaves, sometimes confused with deadly nightshade." };
 			PlantRepository.Insert(p);
-			
-			p = new Plant { Author = new Person(1), Code = "GELDER", Description = "Ground Elder", Family = "", Tags = "" };
+
+			p = new Plant { Author = new Person(1), Code = "GINGER", Description = "Ginger", Family = "Zingiberaceae", Tags = "herb emmenagogue sialagogue rubefacient galactagogue ", Comment = "Rhizome used for nausea, inflammation, and digestive support" };
 			PlantRepository.Insert(p);
-			
-			p = new Plant { Author = new Person(1), Code = "GINGER", Description = "Ginger", Family = "Zingiberaceae", Tags = "herb emmenagogue sialagogue rubefacient galactagogue " };
+
+			p = new Plant { Author = new Person(1), Code = "GINKGO", Description = "Ginkgo", Family = "Ginkgoaceae", Tags = "", Comment = "Ancient tree species with fan-shaped leaves, used for cognitive support" };
 			PlantRepository.Insert(p);
-			
-			p = new Plant { Author = new Person(1), Code = "GINKGO", Description = "Ginkgo", Family = "Ginkgoaceae", Tags = "" };
+
+			p = new Plant { Author = new Person(1), Code = "GINSENG", Description = "Ginseng", Family = "Araliaceae", Tags = "herb ", Comment = "Adaptogenic root used to support energy, stress resilience, and mental clarity" };
 			PlantRepository.Insert(p);
-			
-			p = new Plant { Author = new Person(1), Code = "GINSENG", Description = "Ginseng", Family = "Araliaceae", Tags = "herb " };
+
+			p = new Plant { Author = new Person(1), Code = "GKHENRY", Description = "Good King Henry", Family = "Amaranthaceae", Tags = "", Comment = "Wild edible plant with tender leaves, rich in vitamins and minerals" };
 			PlantRepository.Insert(p);
-			
-			p = new Plant { Author = new Person(1), Code = "GKHENRY", Description = "Good King Henry", Family = "Amaranthaceae", Tags = "" };
+
+			p = new Plant { Author = new Person(1), Code = "GKOLA", Description = "Gotu Kola", Family = "Apiaceae", Tags = "herb nervine warming ", Comment = "Climbing herb used for cognitive function and wound healing" };
 			PlantRepository.Insert(p);
-			
-			p = new Plant { Author = new Person(1), Code = "GKOLA", Description = "Gotu Kola", Family = "Apiaceae", Tags = "herb nervine warming " };
+
+			p = new Plant { Author = new Person(1), Code = "GOJI", Description = "Goji Berry", Family = "Solanaceae", Tags = "herb nutritive ", Comment = "Fruit rich in antioxidants, traditionally used in Chinese medicine" };
 			PlantRepository.Insert(p);
-			
-			p = new Plant { Author = new Person(1), Code = "GOJI", Description = "Goji Berry", Family = "Solanaceae", Tags = "herb nutritive " };
+
+			p = new Plant { Author = new Person(1), Code = "GOOSEBERRY", Description = "Gooseberry", Family = "Grossulariaceae", Tags = "", Comment = "Shrub producing tart berries, used in jams and traditional medicine" };
 			PlantRepository.Insert(p);
-			
-			p = new Plant { Author = new Person(1), Code = "GOOSEBERRY", Description = "Gooseberry", Family = "Grossulariaceae", Tags = "" };
+
+			p = new Plant { Author = new Person(1), Code = "GOUMI", Description = "Goumi Berry", Family = "Elaeagnaceae", Tags = "", Comment = "Shrub with sweet-tart berries rich in vitamin C and antioxidants" };
 			PlantRepository.Insert(p);
-			
-			p = new Plant { Author = new Person(1), Code = "GOUMI", Description = "Goumi Berry", Family = "Elaeagnaceae", Tags = "" };
+
+			p = new Plant { Author = new Person(1), Code = "GRAPE", Description = "Grapes", Family = "Vitaceae", Tags = "", Comment = "Fruit from vine, used for wine, juice, and dried forms like raisins" };
 			PlantRepository.Insert(p);
-			
-			p = new Plant { Author = new Person(1), Code = "GRAPE", Description = "Grapes", Family = "Vitaceae", Tags = "" };
+
+			p = new Plant { Author = new Person(1), Code = "GROD", Description = "Goldenrod", Family = "Asteraceae", Tags = "herb bitter ", Comment = "Native plant with yellow flowers, traditionally used for urinary and respiratory support" };
 			PlantRepository.Insert(p);
-			
-			p = new Plant { Author = new Person(1), Code = "GROD", Description = "Goldenrod", Family = "Asteraceae", Tags = "herb bitter " };
+
+			p = new Plant { Author = new Person(1), Code = "HARDYO", Description = "Hardy Orange", Family = "Rutaceae", Tags = "", Comment = "Shrub with fragrant white flowers and orange fruit, used in traditional medicine" };
 			PlantRepository.Insert(p);
-			
-			p = new Plant { Author = new Person(1), Code = "HARDYO", Description = "Hardy Orange", Family = "Rutaceae", Tags = "" };
+
+			p = new Plant { Author = new Person(1), Code = "HASKAP", Description = "Haskap", Family = "Caprifoliaceae", Tags = "", Comment = "Shrub with blue-black berries rich in antioxidants and vitamin C" };
 			PlantRepository.Insert(p);
-			
-			p = new Plant { Author = new Person(1), Code = "HASKAP", Description = "Haskap", Family = "Caprifoliaceae", Tags = "" };
+
+			p = new Plant { Author = new Person(1), Code = "HAWTHORN", Description = "Hawthorn", Family = "Rosaceae", Tags = "tree ", Comment = "Shrub with red berries, used for cardiovascular support and calming" };
 			PlantRepository.Insert(p);
-			
-			p = new Plant { Author = new Person(1), Code = "HAWTHORN", Description = "Hawthorn", Family = "Rosaceae", Tags = "tree " };
+
+			p = new Plant { Author = new Person(1), Code = "HAZNUT", Description = "Hazelnut", Family = "Betulaceae", Tags = "tree ", Comment = "Deciduous tree producing edible nuts, used in cooking and traditional medicine" };
 			PlantRepository.Insert(p);
-			
-			p = new Plant { Author = new Person(1), Code = "HAZNUT", Description = "Hazelnut", Family = "Betulaceae", Tags = "tree " };
+
+			p = new Plant { Author = new Person(1), Code = "HBASIL", Description = "Holy Basil", Family = "Lamiaceae", Tags = "herb warming ", Comment = "Adaptogenic herb used for stress support and immune function" };
 			PlantRepository.Insert(p);
-			
-			p = new Plant { Author = new Person(1), Code = "HBASIL", Description = "Holy Basil", Family = "Lamiaceae", Tags = "herb warming " };
+
+			p = new Plant { Author = new Person(1), Code = "HBVINE", Description = "Hummingbird Vine", Family = "Bignoniaceae", Tags = "", Comment = "Climbing plant with tubular red flowers, attracts hummingbirds" };
 			PlantRepository.Insert(p);
-			
-			p = new Plant { Author = new Person(1), Code = "HBVINE", Description = "Hummingbird Vine", Family = "Bignoniaceae", Tags = "" };
+
+			p = new Plant { Author = new Person(1), Code = "HEARTNUT", Description = "Heartnut", Family = "Juglandaceae", Tags = "tree ", Comment = "Cultivated variety of walnut with sweet, easy-to-crack nuts" };
 			PlantRepository.Insert(p);
-			
-			p = new Plant { Author = new Person(1), Code = "HEARTNUT", Description = "Heartnut", Family = "Juglandaceae", Tags = "tree " };
+
+			p = new Plant { Author = new Person(1), Code = "HHOCK", Description = "Hollyhock", Family = "Malvaceae", Tags = "", Comment = "Tall flowering plant with showy blooms, used in traditional medicine and gardens" };
 			PlantRepository.Insert(p);
-			
-			p = new Plant { Author = new Person(1), Code = "HHOCK", Description = "Hollyhock", Family = "Malvaceae", Tags = "" };
+
+			p = new Plant { Author = new Person(1), Code = "HHOUND", Description = "Horehound", Family = "Lamiaceae", Tags = "herb ", Comment = "Perennial herb with bitter leaves, used for coughs and respiratory support" };
 			PlantRepository.Insert(p);
-			
-			p = new Plant { Author = new Person(1), Code = "HHOUND", Description = "Horehound", Family = "Lamiaceae", Tags = "herb " };
+
+			p = new Plant { Author = new Person(1), Code = "HIBFLOWER1", Description = "Hibiscus Flower", Family = "Malvaceae", Tags = "", Comment = "Tropical plant with large flowers, used in teas and traditional medicine" };
 			PlantRepository.Insert(p);
-			
-			p = new Plant { Author = new Person(1), Code = "HIBFLOWER1", Description = "Hibiscus Flower", Family = "Malvaceae", Tags = "" };
+
+			p = new Plant { Author = new Person(1), Code = "HKIWI", Description = "Hardy Kiwi", Family = "Actinidiaceae", Tags = "", Comment = "Climbing vine producing small sweet kiwi fruits, cold-hardy variety" };
 			PlantRepository.Insert(p);
-			
-			p = new Plant { Author = new Person(1), Code = "HKIWI", Description = "Hardy Kiwi", Family = "Unknown", Tags = "" };
+
+			p = new Plant { Author = new Person(1), Code = "HOCUST", Description = "Honey Locust", Family = "Fabaceae", Tags = "nitrogen-fixer tree ", Comment = "Large tree with thorny branches, produces edible pods and fixes nitrogen" };
 			PlantRepository.Insert(p);
-			
-			p = new Plant { Author = new Person(1), Code = "HOCUST", Description = "Honey Locust", Family = "Fabaceae", Tags = "nitrogen-fixer tree " };
+
+			p = new Plant { Author = new Person(1), Code = "HONF", Description = "Honesty Flower", Family = "Brassicaceae", Tags = "", Comment = "Annual plant with silvery seed pods, used in dried flower arrangements" };
 			PlantRepository.Insert(p);
-			
-			p = new Plant { Author = new Person(1), Code = "HONF", Description = "Honesty Flower", Family = "Brassicaceae", Tags = "" };
+
+			p = new Plant { Author = new Person(1), Code = "HOPS", Description = "Hops", Family = "Cannabaceae", Tags = "herb ", Comment = "Climbing plant with cone-like flowers, used in beer brewing and herbal medicine" };
 			PlantRepository.Insert(p);
-			
-			p = new Plant { Author = new Person(1), Code = "HOPS", Description = "Hops", Family = "Cannabaceae", Tags = "herb " };
+
+			p = new Plant { Author = new Person(1), Code = "HOSTA", Description = "Hosta", Family = "Asparagaceae", Tags = "", Comment = "Ornamental plant with large foliage, used in shade gardens" };
 			PlantRepository.Insert(p);
-			
-			p = new Plant { Author = new Person(1), Code = "HOSTA", Description = "Hosta", Family = "Asparagaceae", Tags = "" };
+
+			p = new Plant { Author = new Person(1), Code = "HRADISH", Description = "Horseradish", Family = "Brassicaceae", Tags = "herb bitter aromatic ", Comment = "Root with pungent flavor, used as condiment and for respiratory support" };
 			PlantRepository.Insert(p);
-			
-			p = new Plant { Author = new Person(1), Code = "HRADISH", Description = "Horseradish", Family = "Brassicaceae", Tags = "herb bitter aromatic " };
+
+			p = new Plant { Author = new Person(1), Code = "HTAIL", Description = "Horsetail", Family = "Equisetaceae", Tags = "herb astringent diuretic bitter ", Comment = "Ancient plant with high silica content, used for skin and urinary support" };
 			PlantRepository.Insert(p);
-			
-			p = new Plant { Author = new Person(1), Code = "HTAIL", Description = "Horsetail", Family = "Equisetaceae", Tags = "herb astringent diuretic bitter " };
+
+			p = new Plant { Author = new Person(1), Code = "HYACINTH", Description = "Hyacinth", Family = "Asparagaceae", Tags = "", Comment = "Bulbous plant with fragrant flowers, used in perfumery and ornamental gardening" };
 			PlantRepository.Insert(p);
-			
-			p = new Plant { Author = new Person(1), Code = "HYACINTH", Description = "Hyacinth", Family = "Asparagaceae", Tags = "" };
+
+			p = new Plant { Author = new Person(1), Code = "HYDR", Description = "Hydrangea", Family = "Hydrangeaceae", Tags = "", Comment = "Ornamental shrub with large flower clusters, used in landscaping and floral arrangements" };
 			PlantRepository.Insert(p);
-			
-			p = new Plant { Author = new Person(1), Code = "HYDR", Description = "Hydrangea", Family = "Hydrangeaceae", Tags = "" };
+
+			p = new Plant { Author = new Person(1), Code = "HYSSOP", Description = "Hyssop", Family = "Lamiaceae", Tags = "herb ", Comment = "Aromatic herb used for respiratory support and digestive issues" };
 			PlantRepository.Insert(p);
-			
-			p = new Plant { Author = new Person(1), Code = "HYSSOP", Description = "Hyssop", Family = "Lamiaceae", Tags = "herb " };
+
+			p = new Plant { Author = new Person(1), Code = "IRIS", Description = "Iris", Family = "Iridaceae", Tags = "", Comment = "Perennial with showy flowers, rhizomes used in traditional medicine" };
 			PlantRepository.Insert(p);
-			
-			p = new Plant { Author = new Person(1), Code = "IRIS", Description = "Iris", Family = "Iridaceae", Tags = "" };
+
+			p = new Plant { Author = new Person(1), Code = "JINDIGO", Description = "Japanese Indigo", Family = "Polygonaceae", Tags = "", Comment = "Herb used for dye and traditional medicine, rich in antioxidants" };
 			PlantRepository.Insert(p);
-			
-			p = new Plant { Author = new Person(1), Code = "JINDIGO", Description = "Japanese Indigo", Family = "Polygonaceae", Tags = "" };
+
+			p = new Plant { Author = new Person(1), Code = "JLADDER", Description = "Jacob's Ladder", Family = "Polemoniaceae", Tags = "", Comment = "Perennial with delicate white flowers, used in traditional medicine" };
 			PlantRepository.Insert(p);
-			
-			p = new Plant { Author = new Person(1), Code = "JLADDER", Description = "Jacob's Ladder", Family = "Polemoniaceae", Tags = "" };
+
+			p = new Plant { Author = new Person(1), Code = "JOSTAB", Description = "Jostaberry", Family = "Grossulariaceae", Tags = "", Comment = "Hybrid of blackcurrant and redcurrant, producing tart berries" };
 			PlantRepository.Insert(p);
-			
-			p = new Plant { Author = new Person(1), Code = "JOSTAB", Description = "Jostaberry", Family = "Grossulariaceae", Tags = "" };
+
+			p = new Plant { Author = new Person(1), Code = "KALE", Description = "Kale", Family = "Brassicaceae", Tags = "", Comment = "Leafy green vegetable rich in vitamins and antioxidants, used in cooking" };
 			PlantRepository.Insert(p);
-			
-			p = new Plant { Author = new Person(1), Code = "KALE", Description = "Kale", Family = "Brassicaceae", Tags = "" };
+
+			p = new Plant { Author = new Person(1), Code = "KOMATSUNA", Description = "Komatsuna", Family = "Brassicaceae", Tags = "", Comment = "Leafy green vegetable similar to spinach, used in Asian cuisine" };
 			PlantRepository.Insert(p);
-			
-			p = new Plant { Author = new Person(1), Code = "KOMATSUNA", Description = "Komatsuna", Family = "Brassicaceae", Tags = "" };
+
+			p = new Plant { Author = new Person(1), Code = "LAVENDER", Description = "Lavender", Family = "Lamiaceae", Tags = "herb astringent aromatic bitter carminative ", Comment = "Aromatic herb used for calming, sleep support, and skin care" };
 			PlantRepository.Insert(p);
-			
-			p = new Plant { Author = new Person(1), Code = "LAVENDER", Description = "Lavender", Family = "Lamiaceae", Tags = "herb astringent aromatic bitter carminative " };
+
+			p = new Plant { Author = new Person(1), Code = "LBALM", Description = "Lemon Balm", Family = "Lamiaceae", Tags = "", Comment = "Aromatic herb used for calming, digestive support, and sleep" };
 			PlantRepository.Insert(p);
-			
-			p = new Plant { Author = new Person(1), Code = "LBALM", Description = "Lemon Balm", Family = "Lamiaceae", Tags = "" };
+
+			p = new Plant { Author = new Person(1), Code = "LEAR", Description = "Lamb's Ear", Family = "Lamiaceae", Tags = "", Comment = "Soft, fuzzy-leaved plant used in gardens and traditional medicine" };
 			PlantRepository.Insert(p);
-			
-			p = new Plant { Author = new Person(1), Code = "LEAR", Description = "Lamb's Ear", Family = "Lamiaceae", Tags = "" };
+
+			p = new Plant { Author = new Person(1), Code = "LEMGRASS", Description = "Lemongrass", Family = "Poaceae", Tags = "", Comment = "Aromatic grass used in cooking and for digestive and calming support" };
 			PlantRepository.Insert(p);
-			
-			p = new Plant { Author = new Person(1), Code = "LEMGRASS", Description = "Lemongrass", Family = "Poaceae", Tags = "" };
+
+			p = new Plant { Author = new Person(1), Code = "LETTUCE", Description = "Lettuce", Family = "Brassicaceae", Tags = "", Comment = "Leafy green vegetable used in salads and sandwiches" };
 			PlantRepository.Insert(p);
-			
-			p = new Plant { Author = new Person(1), Code = "LETTUCE", Description = "Lettuce", Family = "Brassicaceae", Tags = "" };
+
+			p = new Plant { Author = new Person(1), Code = "LEUCOJUM", Description = "Leucojum", Family = "Amaryllidaceae", Tags = "", Comment = "Bulbous plant with white flowers, toxic if ingested" };
 			PlantRepository.Insert(p);
-			
-			p = new Plant { Author = new Person(1), Code = "LEUCOJUM", Description = "Leucojum", Family = "Amaryllidaceae", Tags = "" };
+
+			p = new Plant { Author = new Person(1), Code = "LILVALLEY", Description = "Lily of the Valley", Family = "Asparagaceae", Tags = "herb ", Comment = "Perennial with fragrant white flowers, toxic but used in traditional medicine" };
 			PlantRepository.Insert(p);
-			
-			p = new Plant { Author = new Person(1), Code = "LILVALLEY", Description = "Lily of the Valley", Family = "Asparagaceae", Tags = "herb " };
+
+			p = new Plant { Author = new Person(1), Code = "LILY", Description = "Lily", Family = "Liliaceae", Tags = "", Comment = "Ornamental plant with large flowers, some species are toxic" };
 			PlantRepository.Insert(p);
-			
-			p = new Plant { Author = new Person(1), Code = "LILY", Description = "Lily", Family = "Liliaceae", Tags = "" };
+
+			p = new Plant { Author = new Person(1), Code = "LIMEBALM", Description = "Lime Balm", Family = "Lamiaceae", Tags = "", Comment = "Aromatic herb used for calming, digestive support, and sleep" };
 			PlantRepository.Insert(p);
-			
-			p = new Plant { Author = new Person(1), Code = "LIMEBALM", Description = "Lime Balm", Family = "Lamiaceae", Tags = "" };
+
+			p = new Plant { Author = new Person(1), Code = "LINBERRY", Description = "Lingonberry", Family = "Ericaceae", Tags = "", Comment = "Shrub with tart red berries, used in jams and traditional medicine" };
 			PlantRepository.Insert(p);
-			
-			p = new Plant { Author = new Person(1), Code = "LINBERRY", Description = "Lingonberry", Family = "Sapindaceae", Tags = "" };
+
+			p = new Plant { Author = new Person(1), Code = "LINDEN", Description = "Linden Tree", Family = "Malvaceae", Tags = "tree herb ", Comment = "Deciduous tree with fragrant flowers used for calming and respiratory support" };
 			PlantRepository.Insert(p);
-			
-			p = new Plant { Author = new Person(1), Code = "LINDEN", Description = "Linden Tree", Family = "Malvaceae", Tags = "tree herb " };
+
+			p = new Plant { Author = new Person(1), Code = "LKNAPWEED", Description = "Lesser Knapweed", Family = "Asteraceae", Tags = "", Comment = "Perennial with purple flower heads, used in traditional medicine" };
 			PlantRepository.Insert(p);
-			
-			p = new Plant { Author = new Person(1), Code = "LKNAPWEED", Description = "Lesser Knapweed", Family = "Asteraceae", Tags = "" };
+
+			p = new Plant { Author = new Person(1), Code = "LOVAGE", Description = "Lovage", Family = "Apiaceae", Tags = "", Comment = "Herb with celery-like flavor, used in cooking and for digestive support" };
 			PlantRepository.Insert(p);
-			
-			p = new Plant { Author = new Person(1), Code = "LOVAGE", Description = "Lovage", Family = "Apiaceae", Tags = "" };
+
+			p = new Plant { Author = new Person(1), Code = "LQUARTER", Description = "Lamb's Quarter", Family = "Amaranthaceae", Tags = "", Comment = "Wild edible plant with tender leaves, rich in vitamins and minerals" };
 			PlantRepository.Insert(p);
-			
-			p = new Plant { Author = new Person(1), Code = "LQUARTER", Description = "Lamb's Quarter", Family = "Amaranthaceae", Tags = "" };
+
+			p = new Plant { Author = new Person(1), Code = "LUPINE", Description = "Lupine", Family = "Fabaceae", Tags = "", Comment = "Perennial with colorful flower spikes, fixes nitrogen in soil" };
 			PlantRepository.Insert(p);
-			
-			p = new Plant { Author = new Person(1), Code = "LUPINE", Description = "Lupine", Family = "Fabaceae", Tags = "" };
+
+			p = new Plant { Author = new Person(1), Code = "MAPLE", Description = "Maple Tree", Family = "Sapindaceae", Tags = "", Comment = "Deciduous tree known for colorful fall foliage and sweet sap used to make maple syrup" };
 			PlantRepository.Insert(p);
-			
-			p = new Plant { Author = new Person(1), Code = "MAPLE", Description = "Maple Tree", Family = "Sapindaceae", Tags = "" };
+
+			p = new Plant { Author = new Person(1), Code = "MARIGOLD", Description = "Marigold", Family = "Asteraceae", Tags = "", Comment = "Bright orange or yellow flowering annual used as ornamental and companion plant" };
 			PlantRepository.Insert(p);
-			
-			p = new Plant { Author = new Person(1), Code = "MARIGOLD", Description = "Marigold", Family = "Asteraceae", Tags = "" };
+
+			p = new Plant { Author = new Person(1), Code = "MARJORAM", Description = "Marjoram", Family = "Lamiaceae", Tags = "herb", Comment = "Sweet aromatic herb similar to oregano, used in Mediterranean cuisine and herbal medicine" };
 			PlantRepository.Insert(p);
-			
-			p = new Plant { Author = new Person(1), Code = "MARJORAM", Description = "Marjoram", Family = "Lamiaceae", Tags = "herb" };
+
+			p = new Plant { Author = new Person(1), Code = "MELON", Description = "Melon", Family = "Cucurbitaceae", Tags = "", Comment = "Sweet fleshy fruit including cantaloupe, honeydew, and watermelon varieties" };
 			PlantRepository.Insert(p);
-			
-			p = new Plant { Author = new Person(1), Code = "MELON", Description = "Melon", Family = "Cucurbitaceae", Tags = "" };
+
+			p = new Plant { Author = new Person(1), Code = "MGLORY", Description = "Morning Glory", Family = "Convolvulaceae", Tags = "", Comment = "Fast-growing climbing vine with trumpet-shaped flowers that open in the morning" };
 			PlantRepository.Insert(p);
-			
-			p = new Plant { Author = new Person(1), Code = "MGLORY", Description = "Morning Glory", Family = "Convolvulaceae", Tags = "" };
+
+			p = new Plant { Author = new Person(1), Code = "MILKWEED", Description = "Milkweed", Family = "Apocynaceae", Tags = "", Comment = "Native perennial with milky sap, essential host plant for monarch butterflies" };
 			PlantRepository.Insert(p);
-			
-			p = new Plant { Author = new Person(1), Code = "MILKWEED", Description = "Milkweed", Family = "Apocynaceae", Tags = "" };
+
+			p = new Plant { Author = new Person(1), Code = "MINT", Description = "Mint", Family = "Lamiaceae", Tags = "herb ", Comment = "Aromatic perennial herb with refreshing flavor, spreads vigorously and used in teas and cooking" };
 			PlantRepository.Insert(p);
-			
-			p = new Plant { Author = new Person(1), Code = "MINT", Description = "Mint", Family = "Lamiaceae", Tags = "herb " };
+
+			p = new Plant { Author = new Person(1), Code = "MLAR", Description = "Medlar", Family = "Rosaceae", Tags = "", Comment = "Small deciduous tree producing brown fruits eaten when bletted (partially decayed)" };
 			PlantRepository.Insert(p);
-			
-			p = new Plant { Author = new Person(1), Code = "MLAR", Description = "Medlar", Family = "Rosaceae", Tags = "" };
+
+			p = new Plant { Author = new Person(1), Code = "MMALLOW", Description = "Marshmallow", Family = "Malvaceae", Tags = "herb cooling demulcent anti-inflammatory diuretic vulnerary ", Comment = "Mucilaginous herb with soothing properties, root traditionally used to make confection and in herbal medicine" };
 			PlantRepository.Insert(p);
-			
-			p = new Plant { Author = new Person(1), Code = "MMALLOW", Description = "Marshmallow", Family = "Malvaceae", Tags = "herb cooling demulcent anti-inflammatory diuretic vulnerary " };
+
+			p = new Plant { Author = new Person(1), Code = "MMINT", Description = "Mountain Mint", Family = "Lamiaceae", Tags = "herb diaphoretic antispasmodic carminative ", Comment = "Native aromatic herb with minty scent, attracts beneficial insects and used medicinally" };
 			PlantRepository.Insert(p);
-			
-			p = new Plant { Author = new Person(1), Code = "MMINT", Description = "Mountain Mint", Family = "Lamiaceae", Tags = "herb diaphoretic antispasmodic carminative " };
+
+			p = new Plant { Author = new Person(1), Code = "MTHISTLE", Description = "Milk Thistle", Family = "Asteraceae", Tags = "herb ", Comment = "Spiny plant with purple flowers, seeds used for liver support in herbal medicine" };
 			PlantRepository.Insert(p);
-			
-			p = new Plant { Author = new Person(1), Code = "MTHISTLE", Description = "Milk Thistle", Family = "Asteraceae", Tags = "herb " };
+
+			p = new Plant { Author = new Person(1), Code = "MUGWORT", Description = "Mugwort", Family = "Asteraceae", Tags = "herb bitter ", Comment = "Aromatic perennial with silvery leaves, used in traditional medicine and as culinary herb" };
 			PlantRepository.Insert(p);
-			
-			p = new Plant { Author = new Person(1), Code = "MUGWORT", Description = "Mugwort", Family = "Asteraceae", Tags = "herb bitter " };
+
+			p = new Plant { Author = new Person(1), Code = "MULBTREE", Description = "Mulberry Tree", Family = "Moraceae", Tags = "tree ", Comment = "Deciduous tree producing sweet edible berries, leaves used to feed silkworms" };
 			PlantRepository.Insert(p);
 
-			p = new Plant { Author = new Person(1), Code = "MULBTREE", Description = "Mulberry Tree", Family = "Moraceae", Tags = "tree " };
+			p = new Plant { Author = new Person(1), Code = "MULLEIN", Description = "Mullein", Family = "Scrophulariaceae", Tags = "herb demulcent ", Comment = "Tall biennial with fuzzy leaves and yellow flower spike, used for respiratory support" };
 			PlantRepository.Insert(p);
 
-			p = new Plant { Author = new Person(1), Code = "MULLEIN", Description = "Mullein", Family = "Scrophulariaceae", Tags = "herb demulcent " };
+			p = new Plant { Author = new Person(1), Code = "MUSCARI", Description = "Muscari", Family = "Asparagaceae", Tags = "", Comment = "Small spring bulb with clusters of blue grape-like flowers, also called grape hyacinth" };
 			PlantRepository.Insert(p);
 
-			p = new Plant { Author = new Person(1), Code = "MUSCARI", Description = "Muscari", Family = "Asparagaceae", Tags = "" };
+			p = new Plant { Author = new Person(1), Code = "MWORT", Description = "Motherwort", Family = "Lamiaceae", Tags = "herb cooling heart ", Comment = "Perennial herb traditionally used for heart health and calming nervous system" };
 			PlantRepository.Insert(p);
 
-			p = new Plant { Author = new Person(1), Code = "MWORT", Description = "Motherwort", Family = "Lamiaceae", Tags = "herb cooling heart " };
+			p = new Plant { Author = new Person(1), Code = "NIGELLA", Description = "Nigella", Family = "Ranunculaceae", Tags = "", Comment = "Annual plant with delicate flowers and black seeds (black cumin) used as spice and medicine" };
 			PlantRepository.Insert(p);
 
-			p = new Plant { Author = new Person(1), Code = "NIGELLA", Description = "Nigella", Family = "Ranunculaceae", Tags = "" };
+			p = new Plant { Author = new Person(1), Code = "OAK", Description = "Oak Tree", Family = "Fagaceae", Tags = "tree herb ", Comment = "Large deciduous or evergreen tree with acorns, bark used medicinally for astringent properties" };
 			PlantRepository.Insert(p);
 
-			p = new Plant { Author = new Person(1), Code = "OAK", Description = "Oak Tree", Family = "Fagaceae", Tags = "tree herb " };
+			p = new Plant { Author = new Person(1), Code = "OAT", Description = "Oat", Family = "Poaceae", Tags = "herb ", Comment = "Cereal grain used for food and animal feed, milky oat tops used as nervine tonic" };
 			PlantRepository.Insert(p);
 
-			p = new Plant { Author = new Person(1), Code = "OAT", Description = "Oat", Family = "Poaceae", Tags = "herb " };
+			p = new Plant { Author = new Person(1), Code = "ONION", Description = "Onion", Family = "Amaryllidaceae", Tags = "", Comment = "Bulbous vegetable with pungent flavor and aroma, fundamental ingredient in cooking worldwide" };
 			PlantRepository.Insert(p);
 
-			p = new Plant { Author = new Person(1), Code = "ONION", Description = "Onion", Family = "Amaryllidaceae", Tags = "" };
+			p = new Plant { Author = new Person(1), Code = "OREGANO", Description = "Oregano", Family = "Lamiaceae", Tags = "", Comment = "Aromatic perennial herb with robust flavor, essential in Italian and Mediterranean cuisine" };
 			PlantRepository.Insert(p);
 
-			p = new Plant { Author = new Person(1), Code = "OREGANO", Description = "Oregano", Family = "", Tags = "" };
+			p = new Plant { Author = new Person(1), Code = "OSAGEO", Description = "Osage Orange", Family = "Moraceae", Tags = "", Comment = "Thorny tree producing large green brain-like fruits, wood prized for fence posts and bows" };
 			PlantRepository.Insert(p);
 
-			p = new Plant { Author = new Person(1), Code = "OSAGEO", Description = "Osage Orange", Family = "Moraceae", Tags = "" };
+			p = new Plant { Author = new Person(1), Code = "PARSLEY", Description = "Parsley", Family = "Apiaceae", Tags = "", Comment = "Biennial herb with bright green leaves used as garnish and flavoring in cooking" };
 			PlantRepository.Insert(p);
 
-			p = new Plant { Author = new Person(1), Code = "PARSLEY", Description = "Parsley", Family = "Apiaceae", Tags = "" };
+			p = new Plant { Author = new Person(1), Code = "PARSNIP", Description = "Parsnip", Family = "Apiaceae", Tags = "", Comment = "Root vegetable with sweet nutty flavor, similar to carrot but cream-colored" };
 			PlantRepository.Insert(p);
 
-			p = new Plant { Author = new Person(1), Code = "PARSNIP", Description = "Parsnip", Family = "Apiaceae", Tags = "" };
+			p = new Plant { Author = new Person(1), Code = "PAWPAW", Description = "Pawpaw Tree", Family = "Annonaceae", Tags = "tree ", Comment = "Native North American tree producing large tropical-tasting fruit with custard-like texture" };
 			PlantRepository.Insert(p);
 
-			p = new Plant { Author = new Person(1), Code = "PAWPAW", Description = "Pawpaw Tree", Family = "Annonaceae", Tags = "tree " };
+			p = new Plant { Author = new Person(1), Code = "PEA", Description = "Pea", Family = "Leguminosae", Tags = "nitrogen-fixer ", Comment = "Cool-season legume with edible pods and seeds, fixes nitrogen in soil" };
 			PlantRepository.Insert(p);
 
-			p = new Plant { Author = new Person(1), Code = "PEA", Description = "Pea", Family = "Leguminosae", Tags = "nitrogen-fixer " };
+			p = new Plant { Author = new Person(1), Code = "PEACH", Description = "Peach Tree", Family = "Rosaceae", Tags = "", Comment = "Deciduous fruit tree producing fuzzy-skinned sweet stone fruits" };
 			PlantRepository.Insert(p);
 
-			p = new Plant { Author = new Person(1), Code = "PEACH", Description = "Peach Tree", Family = "Rosaceae", Tags = "" };
+			p = new Plant { Author = new Person(1), Code = "PEANUT", Description = "Peanut", Family = "Fabaceae", Tags = "", Comment = "Legume that develops pods underground, seeds used for oil and protein-rich food" };
 			PlantRepository.Insert(p);
 
-			p = new Plant { Author = new Person(1), Code = "PEANUT", Description = "Peanut", Family = "Fabaceae", Tags = "" };
+			p = new Plant { Author = new Person(1), Code = "PEAR", Description = "Pear", Family = "Rosaceae", Tags = "", Comment = "Deciduous tree producing sweet bell-shaped fruits with grainy texture" };
 			PlantRepository.Insert(p);
 
-			p = new Plant { Author = new Person(1), Code = "PEAR", Description = "Pear", Family = "Rosaceae", Tags = "" };
+			p = new Plant { Author = new Person(1), Code = "PEPPER", Description = "Pepper", Family = "Solanaceae", Tags = "", Comment = "Warm-season vegetable producing sweet or hot fruits in various colors and sizes" };
 			PlantRepository.Insert(p);
 
-			p = new Plant { Author = new Person(1), Code = "PEPPER", Description = "Pepper", Family = "Solanaceae", Tags = "" };
+			p = new Plant { Author = new Person(1), Code = "PEPPERMINT", Description = "Peppermint", Family = "Lamiaceae", Tags = "herb ", Comment = "Aromatic hybrid mint with cooling menthol flavor, used in teas, candies, and medicine" };
 			PlantRepository.Insert(p);
 
-			p = new Plant { Author = new Person(1), Code = "PEPPERMINT", Description = "Peppermint", Family = "Lamiaceae", Tags = "herb " };
+			p = new Plant { Author = new Person(1), Code = "PEYOTE", Description = "Peyote", Family = "Cactaceae", Tags = "", Comment = "Small spineless cactus containing psychoactive alkaloids, used in Native American ceremonies" };
 			PlantRepository.Insert(p);
 
-			p = new Plant { Author = new Person(1), Code = "PEYOTE", Description = "Peyote", Family = "", Tags = "" };
+			p = new Plant { Author = new Person(1), Code = "PINE", Description = "Pine", Family = "Pinaceae", Tags = "tree herb ", Comment = "Evergreen conifer with needle-like leaves, needles and resin used medicinally" };
 			PlantRepository.Insert(p);
 
-			p = new Plant { Author = new Person(1), Code = "PINE", Description = "Pine", Family = "Pinaceae", Tags = "tree herb " };
+			p = new Plant { Author = new Person(1), Code = "PLANTAIN", Description = "Plantain", Family = "Plantaginaceae", Tags = "herb vulnerary anti-catarrhal ", Comment = "Common lawn weed with oval leaves, used topically for wounds and stings" };
 			PlantRepository.Insert(p);
 
-			p = new Plant { Author = new Person(1), Code = "PLANTAIN", Description = "Plantain", Family = "Plantaginaceae", Tags = "herb vulnerary anti-catarrhal " };
+			p = new Plant { Author = new Person(1), Code = "PLUM", Description = "Plum Tree", Family = "Rosaceae", Tags = "tree ", Comment = "Deciduous fruit tree producing smooth-skinned sweet or tart stone fruits" };
 			PlantRepository.Insert(p);
 
-			p = new Plant { Author = new Person(1), Code = "PLUM", Description = "Plum Tree", Family = "Rosaceae", Tags = "tree " };
+			p = new Plant { Author = new Person(1), Code = "POPPY", Description = "Poppy", Family = "Papaveraceae", Tags = "", Comment = "Annual or perennial with showy flowers, some species produce opium alkaloids" };
 			PlantRepository.Insert(p);
 
-			p = new Plant { Author = new Person(1), Code = "POPPY", Description = "Poppy", Family = "Papaveraceae", Tags = "" };
+			p = new Plant { Author = new Person(1), Code = "POTATO", Description = "Potato", Family = "Solanaceae", Tags = "", Comment = "Tuberous crop plant producing starchy edible underground tubers, staple food worldwide" };
 			PlantRepository.Insert(p);
 
-			p = new Plant { Author = new Person(1), Code = "POTATO", Description = "Potato", Family = "Solanaceae", Tags = "" };
+			p = new Plant { Author = new Person(1), Code = "PRINTREE", Description = "Princess Tree", Family = "Paulowniaceae", Tags = "", Comment = "Fast-growing deciduous tree with large leaves and purple flowers, also called Paulownia" };
 			PlantRepository.Insert(p);
 
-			p = new Plant { Author = new Person(1), Code = "PRINTREE", Description = "Princess Tree", Family = "Paulowniaceae", Tags = "" };
+			p = new Plant { Author = new Person(1), Code = "PRSM", Description = "Persimmon", Family = "Ebenaceae", Tags = "", Comment = "Deciduous tree producing sweet orange fruits that must ripen fully to avoid astringency" };
 			PlantRepository.Insert(p);
 
-			p = new Plant { Author = new Person(1), Code = "PRSM", Description = "Persimmon", Family = "Ebenaceae", Tags = "" };
+			p = new Plant { Author = new Person(1), Code = "PUMPKIN", Description = "Pumpkin", Family = "Cucurbitaceae", Tags = "", Comment = "Large orange winter squash with edible flesh and seeds, popular for autumn decoration" };
 			PlantRepository.Insert(p);
 
-			p = new Plant { Author = new Person(1), Code = "PUMPKIN", Description = "Pumpkin", Family = "Cucurbitaceae", Tags = "" };
+			p = new Plant { Author = new Person(1), Code = "QALACE", Description = "Queen Anne's Lace", Family = "Apiaceae", Tags = "", Comment = "Wild carrot with white lacy flower clusters, edible root but easily confused with toxic lookalikes" };
 			PlantRepository.Insert(p);
 
-			p = new Plant { Author = new Person(1), Code = "QALACE", Description = "Queen Anne's Lace", Family = "Apiaceae", Tags = "" };
+			p = new Plant { Author = new Person(1), Code = "RADISH", Description = "Radish", Family = "Brassicaceae", Tags = "", Comment = "Fast-growing root vegetable with crisp peppery flavor, available in many colors and sizes" };
 			PlantRepository.Insert(p);
 
-			p = new Plant { Author = new Person(1), Code = "RADISH", Description = "Radish", Family = "Brassicaceae", Tags = "" };
+			p = new Plant { Author = new Person(1), Code = "RASP", Description = "Raspberry", Family = "Rosaceae", Tags = "herb ", Comment = "Thorny perennial producing sweet red berries, leaves used as herbal tea for women's health" };
 			PlantRepository.Insert(p);
 
-			p = new Plant { Author = new Person(1), Code = "RASP", Description = "Raspberry", Family = "Rosaceae", Tags = "herb " };
+			p = new Plant { Author = new Person(1), Code = "RHODRN", Description = "Rhododendron", Family = "Ericaceae", Tags = "", Comment = "Evergreen or deciduous shrub with showy flower clusters, many species are toxic" };
 			PlantRepository.Insert(p);
 
-			p = new Plant { Author = new Person(1), Code = "RHODRN", Description = "Rhododendron", Family = "Ericaceae", Tags = "" };
+			p = new Plant { Author = new Person(1), Code = "RHUB", Description = "Rhubarb", Family = "Polygonaceae", Tags = "", Comment = "Perennial with tart edible stalks used in cooking, leaves are toxic due to oxalic acid" };
 			PlantRepository.Insert(p);
 
-			p = new Plant { Author = new Person(1), Code = "RHUB", Description = "Rhubarb", Family = "Polygonaceae", Tags = "" };
+			p = new Plant { Author = new Person(1), Code = "RMARY", Description = "Rosemary", Family = "Lamiaceae", Tags = "herb ", Comment = "Evergreen aromatic shrub with needle-like leaves, used in cooking and for memory support" };
 			PlantRepository.Insert(p);
 
-			p = new Plant { Author = new Person(1), Code = "RMARY", Description = "Rosemary", Family = "Lamiaceae", Tags = "herb " };
+			p = new Plant { Author = new Person(1), Code = "ROSARUG", Description = "Rosa Rugosa", Family = "Rosaceae", Tags = "herb ", Comment = "Hardy rose species with fragrant flowers and large vitamin C-rich hips used medicinally" };
 			PlantRepository.Insert(p);
 
-			p = new Plant { Author = new Person(1), Code = "ROSARUG", Description = "Rosa Rugosa", Family = "Rosaceae", Tags = "herb " };
+			p = new Plant { Author = new Person(1), Code = "ROWAN", Description = "Rowan", Family = "Rosaceae", Tags = "tree herb ", Comment = "Small tree with white flowers and red berries, also called mountain ash, berries used in preserves" };
 			PlantRepository.Insert(p);
 
-			p = new Plant { Author = new Person(1), Code = "ROWAN", Description = "Rowan", Family = "Rosaceae", Tags = "tree herb " };
+			p = new Plant { Author = new Person(1), Code = "RROOT", Description = "Rhodiola", Family = "Crassulaceae", Tags = "adaptogen herb ", Comment = "Arctic root plant used as adaptogen for stress, energy, and mental performance" };
 			PlantRepository.Insert(p);
 
-			p = new Plant { Author = new Person(1), Code = "RROOT", Description = "Rhodiola", Family = "Crassulaceae", Tags = "adaptogen herb " };
+			p = new Plant { Author = new Person(1), Code = "RUE", Description = "Rue", Family = "Rutaceae", Tags = "herb ", Comment = "Bitter aromatic herb with blue-green leaves, used historically in medicine but can cause skin sensitivity" };
 			PlantRepository.Insert(p);
 
-			p = new Plant { Author = new Person(1), Code = "RUE", Description = "Rue", Family = "Rutaceae", Tags = "herb " };
+			p = new Plant { Author = new Person(1), Code = "RUTAB", Description = "Rutabaga", Family = "Brassicaceae", Tags = "", Comment = "Root vegetable cross between turnip and cabbage with yellow flesh and sweet flavor" };
 			PlantRepository.Insert(p);
 
-			p = new Plant { Author = new Person(1), Code = "RUTAB", Description = "Rutabaga", Family = "Tithonia diversifolia", Tags = "" };
+			p = new Plant { Author = new Person(1), Code = "RWOOD", Description = "Redwood Tree", Family = "Cupressaceae", Tags = "", Comment = "Massive evergreen conifer among tallest trees on earth, native to California coast" };
 			PlantRepository.Insert(p);
 
-			p = new Plant { Author = new Person(1), Code = "RWOOD", Description = "Redwood Tree", Family = "Cupressaceae", Tags = "" };
+			p = new Plant { Author = new Person(1), Code = "SAGE", Description = "Sage", Family = "Lamiaceae", Tags = "herb ", Comment = "Aromatic perennial herb with gray-green leaves used in cooking and herbal medicine" };
 			PlantRepository.Insert(p);
 
-			p = new Plant { Author = new Person(1), Code = "SAGE", Description = "Sage", Family = "Lamiaceae", Tags = "herb " };
+			p = new Plant { Author = new Person(1), Code = "SANISE1", Description = "Snow Anise", Family = "Lamiaceae", Tags = "", Comment = "Aromatic herb with anise-flavored leaves, tolerant of cold climates" };
 			PlantRepository.Insert(p);
 
-			p = new Plant { Author = new Person(1), Code = "SANISE1", Description = "Snow Anise", Family = "Lamiaceae", Tags = "" };
+			p = new Plant { Author = new Person(1), Code = "SASKBERRY", Description = "Saskatoon Berry", Family = "Rosaceae", Tags = "tree ", Comment = "Deciduous shrub native to North America producing sweet purple berries similar to blueberries" };
 			PlantRepository.Insert(p);
 
-			p = new Plant { Author = new Person(1), Code = "SASKBERRY", Description = "Saskatoon Berry", Family = "Rosaceae", Tags = "tree " };
+			p = new Plant { Author = new Person(1), Code = "SAVORY", Description = "Savory", Family = "Lamiaceae", Tags = "", Comment = "Aromatic herb with peppery flavor used in cooking, available in summer and winter varieties" };
 			PlantRepository.Insert(p);
 
-			p = new Plant { Author = new Person(1), Code = "SAVORY", Description = "Savory", Family = "Lamiaceae", Tags = "" };
+			p = new Plant { Author = new Person(1), Code = "SCHDRA", Description = "Schisandra", Family = "Schisandraceae", Tags = "herb", Comment = "Woody vine producing red berries with five flavors, used in traditional Chinese medicine" };
 			PlantRepository.Insert(p);
-			
-            p = new Plant { Author = new Person(1), Code = "SCHDRA", Description = "Schisandra", Family = "Schisandraceae", Tags = "herb" };
-            PlantRepository.Insert(p);
 
-			p = new Plant { Author = new Person(1), Code = "SCULLCAP", Description = "Scullcap", Family = "Lamiaceae", Tags = "herb" };
+			p = new Plant { Author = new Person(1), Code = "SCULLCAP", Description = "Scullcap", Family = "Lamiaceae", Tags = "herb", Comment = "Perennial herb with blue flowers traditionally used for calming and nervous system support" };
 			PlantRepository.Insert(p);
 
-			p = new Plant { Author = new Person(1), Code = "SEACEL", Description = "Sea Celery", Family = "Apiaceae", Tags = "" };
+			p = new Plant { Author = new Person(1), Code = "SEACEL", Description = "Sea Celery", Family = "Apiaceae", Tags = "", Comment = "Coastal plant with celery-like flavor, grows in salt marshes and used as wild vegetable" };
 			PlantRepository.Insert(p);
 
-			p = new Plant { Author = new Person(1), Code = "SHIIMUSH", Description = "Shiitake Mushroom", Family = "Omphalotaceae", Tags = "" };
+			p = new Plant { Author = new Person(1), Code = "SHIIMUSH", Description = "Shiitake Mushroom", Family = "Omphalotaceae", Tags = "", Comment = "Edible fungus native to East Asia with rich umami flavor, widely cultivated for culinary use" };
 			PlantRepository.Insert(p);
 
-			p = new Plant { Author = new Person(1), Code = "SHISO", Description = "Shiso", Family = "Lamiaceae", Tags = "herb" };
+			p = new Plant { Author = new Person(1), Code = "SHISO", Description = "Shiso", Family = "Lamiaceae", Tags = "herb", Comment = "Japanese aromatic herb with purple or green leaves, used in Asian cuisine and garnishes" };
 			PlantRepository.Insert(p);
 
-			p = new Plant { Author = new Person(1), Code = "SIBGENG", Description = "Siberian Ginseng", Family = "Araliaceae", Tags = "herb" };
+			p = new Plant { Author = new Person(1), Code = "SIBGENG", Description = "Siberian Ginseng", Family = "Araliaceae", Tags = "herb", Comment = "Adaptogenic shrub with spiny stems, root used in herbal medicine for energy and stress support" };
 			PlantRepository.Insert(p);
 
-			p = new Plant { Author = new Person(1), Code = "SJWART", Description = "Saint John's Wort", Family = "Hypericaceae", Tags = "herb" };
+			p = new Plant { Author = new Person(1), Code = "SJWART", Description = "Saint John's Wort", Family = "Hypericaceae", Tags = "herb", Comment = "Flowering plant with yellow blooms traditionally used for mood support and wound healing" };
 			PlantRepository.Insert(p);
 
-			p = new Plant { Author = new Person(1), Code = "SKIRRET", Description = "Skirret", Family = "Apiaceae", Tags = "" };
+			p = new Plant { Author = new Person(1), Code = "SKIRRET", Description = "Skirret", Family = "Apiaceae", Tags = "", Comment = "Perennial root vegetable with sweet-tasting white roots, historically popular in European cuisine" };
 			PlantRepository.Insert(p);
 
-			p = new Plant { Author = new Person(1), Code = "SNAPD", Description = "Snapdragon", Family = "Plantaginaceae", Tags = "" };
+			p = new Plant { Author = new Person(1), Code = "SNAPD", Description = "Snapdragon", Family = "Plantaginaceae", Tags = "", Comment = "Colorful ornamental flower with distinctive snap-like blooms in various colors" };
 			PlantRepository.Insert(p);
 
-			p = new Plant { Author = new Person(1), Code = "SNETTLE", Description = "Stinging Nettle", Family = " a form of contact dermatitis).", Tags = "herb nutritive" };
+			p = new Plant { Author = new Person(1), Code = "SNETTLE", Description = "Stinging Nettle", Family = "Urticaceae", Tags = "herb nutritive", Comment = "Perennial plant with stinging hairs, highly nutritious and used as food and herbal medicine" };
 			PlantRepository.Insert(p);
 
-			p = new Plant { Author = new Person(1), Code = "SOLSEAL", Description = "Solomon's seal", Family = "Asparagaceae", Tags = "herb" };
+			p = new Plant { Author = new Person(1), Code = "SOLSEAL", Description = "Solomon's seal", Family = "Asparagaceae", Tags = "herb", Comment = "Woodland perennial with arching stems and white bell-shaped flowers, root used in herbal medicine" };
 			PlantRepository.Insert(p);
 
-			p = new Plant { Author = new Person(1), Code = "SORREL", Description = "Sorrel", Family = "Polygonaceae", Tags = "" };
+			p = new Plant { Author = new Person(1), Code = "SORREL", Description = "Sorrel", Family = "Polygonaceae", Tags = "", Comment = "Leafy green vegetable with tart, lemony flavor due to oxalic acid content" };
 			PlantRepository.Insert(p);
 
-			p = new Plant { Author = new Person(1), Code = "SPEA", Description = "Sweet Pea", Family = "Fabaceae", Tags = "" };
+			p = new Plant { Author = new Person(1), Code = "SPEA", Description = "Sweet Pea", Family = "Fabaceae", Tags = "", Comment = "Climbing annual plant with fragrant colorful flowers, grown as ornamental" };
 			PlantRepository.Insert(p);
 
-			p = new Plant { Author = new Person(1), Code = "SPEARMINT", Description = "Spearmint", Family = "Lamiaceae", Tags = "herb" };
+			p = new Plant { Author = new Person(1), Code = "SPEARMINT", Description = "Spearmint", Family = "Lamiaceae", Tags = "herb", Comment = "Aromatic perennial mint with sweet flavor, widely used in teas, cooking, and confections" };
 			PlantRepository.Insert(p);
 
-			p = new Plant { Author = new Person(1), Code = "SPSHUB", Description = "Siberian Pea Shrub", Family = "Fabaceae", Tags = "" };
+			p = new Plant { Author = new Person(1), Code = "SPSHUB", Description = "Siberian Pea Shrub", Family = "Fabaceae", Tags = "", Comment = "Hardy nitrogen-fixing shrub with edible pea-like seeds, tolerant of extreme cold" };
 			PlantRepository.Insert(p);
 
-			p = new Plant { Author = new Person(1), Code = "SQUILL", Description = "Squill ", Family = "Asparagaceae", Tags = "" };
+			p = new Plant { Author = new Person(1), Code = "SQUILL", Description = "Squill ", Family = "Asparagaceae", Tags = "", Comment = "Bulbous plant with blue or white flowers, some species used medicinally and as rodenticide" };
 			PlantRepository.Insert(p);
 
-			p = new Plant { Author = new Person(1), Code = "STRAWBERRY", Description = "Strawberry", Family = "Rosaceae", Tags = "" };
+			p = new Plant { Author = new Person(1), Code = "STRAWBERRY", Description = "Strawberry", Family = "Rosaceae", Tags = "", Comment = "Low-growing perennial producing sweet red fruits, widely cultivated worldwide" };
 			PlantRepository.Insert(p);
 
-			p = new Plant { Author = new Person(1), Code = "SUMSQ", Description = "Summer Squash", Family = "Cucurbitaceae", Tags = "" };
+			p = new Plant { Author = new Person(1), Code = "SUMSQ", Description = "Summer Squash", Family = "Cucurbitaceae", Tags = "", Comment = "Fast-growing warm-season vegetable harvested immature, includes zucchini and yellow squash varieties" };
 			PlantRepository.Insert(p);
 
-			p = new Plant { Author = new Person(1), Code = "SUNCHOKE", Description = "Sunchoke", Family = "Asteraceae", Tags = "" };
+			p = new Plant { Author = new Person(1), Code = "SUNCHOKE", Description = "Sunchoke", Family = "Asteraceae", Tags = "", Comment = "Perennial sunflower producing edible tubers with nutty flavor, also called Jerusalem artichoke" };
 			PlantRepository.Insert(p);
 
-			p = new Plant { Author = new Person(1), Code = "SUNFLOWER", Description = "Sunflower", Family = "Asteraceae", Tags = "" };
+			p = new Plant { Author = new Person(1), Code = "SUNFLOWER", Description = "Sunflower", Family = "Asteraceae", Tags = "", Comment = "Tall annual plant with large yellow flower heads, cultivated for seeds and oil production" };
 			PlantRepository.Insert(p);
 
-			p = new Plant { Author = new Person(1), Code = "TARRAGON", Description = "Tarragon", Family = "Asteraceae", Tags = "herb" };
+			p = new Plant { Author = new Person(1), Code = "TARRAGON", Description = "Tarragon", Family = "Asteraceae", Tags = "herb", Comment = "Aromatic perennial herb with anise-like flavor, essential in French cuisine" };
 			PlantRepository.Insert(p);
 
-			p = new Plant { Author = new Person(1), Code = "THYME", Description = "Thyme", Family = "Lamiaceae", Tags = "herb" };
+			p = new Plant { Author = new Person(1), Code = "THYME", Description = "Thyme", Family = "Lamiaceae", Tags = "herb", Comment = "Aromatic herb with small leaves used in cooking and traditional medicine." };
 			PlantRepository.Insert(p);
 
-			p = new Plant { Author = new Person(1), Code = "TITH", Description = "Tithonia", Family = "Asteraceae", Tags = "" };
+			p = new Plant { Author = new Person(1), Code = "TITH", Description = "Tithonia", Family = "Asteraceae", Tags = "", Comment = "Mexican sunflower with bright orange-red flowers, often used as ornamental plant." };
 			PlantRepository.Insert(p);
 
-			p = new Plant { Author = new Person(1), Code = "TOBCO", Description = "Tobacco", Family = "Solanaceae", Tags = "" };
+			p = new Plant { Author = new Person(1), Code = "TOBCO", Description = "Tobacco", Family = "Solanaceae", Tags = "", Comment = "Commercial crop plant cultivated for its leaves which are processed for smoking and other uses." };
 			PlantRepository.Insert(p);
 
-			p = new Plant { Author = new Person(1), Code = "TOMATO", Description = "Tomato", Family = "Solanaceae", Tags = "" };
+			p = new Plant { Author = new Person(1), Code = "TOMATO", Description = "Tomato", Family = "Solanaceae", Tags = "", Comment = "Popular fruit vegetable with red, juicy fruits widely used in cooking worldwide." };
 			PlantRepository.Insert(p);
 
-			p = new Plant { Author = new Person(1), Code = "TROCKET", Description = "Turkish Rocket", Family = "Brassicaceae", Tags = "" };
+			p = new Plant { Author = new Person(1), Code = "TROCKET", Description = "Turkish Rocket", Family = "Brassicaceae", Tags = "", Comment = "Leafy green vegetable with peppery flavor, similar to arugula." };
 			PlantRepository.Insert(p);
 
-			p = new Plant { Author = new Person(1), Code = "TUMERIC", Description = "Tumeric", Family = "Zingiberaceae", Tags = "herb" };
+			p = new Plant { Author = new Person(1), Code = "TUMERIC", Description = "Tumeric", Family = "Zingiberaceae", Tags = "herb", Comment = "Rhizomatous herbaceous plant with bright yellow-orange root used as spice and natural dye." };
 			PlantRepository.Insert(p);
 
-			p = new Plant { Author = new Person(1), Code = "TURNIP", Description = "Turnip", Family = "Brassicaceae", Tags = "" };
+			p = new Plant { Author = new Person(1), Code = "TURNIP", Description = "Turnip", Family = "Brassicaceae", Tags = "", Comment = "Root vegetable with white flesh and purple-tinged skin, used in cooking." };
 			PlantRepository.Insert(p);
 
-			p = new Plant { Author = new Person(1), Code = "UNK", Description = "Unknown", Family = "Unknown", Tags = "" };
+			p = new Plant { Author = new Person(1), Code = "UNK", Description = "Unknown", Family = "Unknown", Tags = "", Comment = "A plant that you cannot identify."};
 			PlantRepository.Insert(p);
 
 			p = new Plant { Author = new Person(1), Code = "USNEA", Description = "Usnea", Family = "Parmeliaceae", Tags = "herb astringent vulnerary anti-inflammatory antispasmodic" , Comment = "Usnea is a genus of fruticose lichens in the large family Parmeliaceae. The genus, which currently contains roughly 130 species, was established by Michel Adanson in 1763. "};
