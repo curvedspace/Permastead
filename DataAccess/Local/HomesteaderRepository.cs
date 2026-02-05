@@ -1442,22 +1442,22 @@ namespace DataAccess.Local
 			p = new Plant { Author = new Person(1), Code = "DAISY", Description = "Daisy", Family = "Asteraceae", Tags = "", Comment = "Common wildflower with white petals and yellow center, used in herbal teas." };
 			PlantRepository.Insert(p);
 
-			p = new Plant { Author = new Person(1), Code = "DANDE", Description = "Dandelion", Family = "Asteraceae", Tags = "herb bitter drying diuretic hepatic tonic nutritive alterative ", Comment = "All parts used medicinally, roots for liver support, leaves as diuretic" };
+			p = new Plant { Author = new Person(1), Code = "DANDE", Description = "Dandelion", Family = "Asteraceae", Tags = "herb bitter drying diuretic hepatic tonic nutritive alterative ", Comment = "All parts used medicinally, roots for liver support, leaves as diuretic." };
 			PlantRepository.Insert(p);
 
-			p = new Plant { Author = new Person(1), Code = "DELPH", Description = "Delphinium", Family = "Ranunculaceae", Tags = "", Comment = "Tall flowering plant with blue or purple spikes, toxic if ingested" };
+			p = new Plant { Author = new Person(1), Code = "DELPH", Description = "Delphinium", Family = "Ranunculaceae", Tags = "", Comment = "Tall flowering plant with blue or purple spikes, toxic if ingested." };
 			PlantRepository.Insert(p);
 
-			p = new Plant { Author = new Person(1), Code = "DIANTHUS", Description = "Dianthus", Family = "Caryophyllaceae", Tags = "", Comment = "Perennial with fragrant pink or white flowers, used in potpourri and traditional medicine" };
+			p = new Plant { Author = new Person(1), Code = "DIANTHUS", Description = "Dianthus", Family = "Caryophyllaceae", Tags = "", Comment = "Perennial with fragrant pink or white flowers, used in potpourri and traditional medicine." };
 			PlantRepository.Insert(p);
 
-			p = new Plant { Author = new Person(1), Code = "DILL", Description = "Dill", Family = "Apiaceae", Tags = "", Comment = "Annual herb with feathery leaves, used in cooking and for digestive support" };
+			p = new Plant { Author = new Person(1), Code = "DILL", Description = "Dill", Family = "Apiaceae", Tags = "", Comment = "Annual herb with feathery leaves, used in cooking and for digestive support." };
 			PlantRepository.Insert(p);
 
-			p = new Plant { Author = new Person(1), Code = "ECAMPANE", Description = "Elecampane", Family = "Asteraceae", Tags = "herb diaphoretic expectorant bitter ", Comment = "Root used for respiratory support, especially for coughs and bronchitis" };
+			p = new Plant { Author = new Person(1), Code = "ECAMPANE", Description = "Elecampane", Family = "Asteraceae", Tags = "herb diaphoretic expectorant bitter ", Comment = "Root used for respiratory support, especially for coughs and bronchitis." };
 			PlantRepository.Insert(p);
 
-			p = new Plant { Author = new Person(1), Code = "ECHINACEA", Description = "Echinacea", Family = "Asteraceae", Tags = "herb ", Comment = "Native North American herb used to support immune function and wound healing" };
+			p = new Plant { Author = new Person(1), Code = "ECHINACEA", Description = "Echinacea", Family = "Asteraceae", Tags = "herb ", Comment = "Native North American herb used to support immune function and wound healing." };
 			PlantRepository.Insert(p);
 
 			p = new Plant { Author = new Person(1), Code = "ECNUT", Description = "Earth Chestnut", Family = "Apiaceae", Tags = "", Comment = "Wild edible plant with chestnut-like flavor, root used as food and medicine" };
