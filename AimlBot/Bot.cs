@@ -8,7 +8,8 @@ using System.Text;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Reflection;
 using System.Net.Mail;
-
+using System.Runtime.CompilerServices;
+using System.Xml.Serialization;
 using AIMLbot.Utils;
 
 namespace AIMLbot
@@ -930,10 +931,10 @@ namespace AIMLbot
                 fi.Delete();
             }
 
-            FileStream saveFile = File.Create(path);
-            BinaryFormatter bf = new BinaryFormatter();
-            bf.Serialize(saveFile, this.Graphmaster);
-            saveFile.Close();
+            // FileStream saveFile = File.Create(path);
+            // XmlSerializer bf = new XmlSerializer();
+            // bf.Serialize(saveFile, this.Graphmaster);
+            // saveFile.Close();
         }
 
         /// <summary>
@@ -942,10 +943,10 @@ namespace AIMLbot
         /// <param name="path">the path to the dump file</param>
         public void loadFromBinaryFile(string path)
         {
-            FileStream loadFile = File.OpenRead(path);
-            BinaryFormatter bf = new BinaryFormatter();
-            this.Graphmaster = (Node)bf.Deserialize(loadFile);
-            loadFile.Close();
+            // FileStream loadFile = File.OpenRead(path);
+            // XmlSerializer bf = new XmlSerializer();
+            // this.Graphmaster = (Node)bf.Deserialize(loadFile);
+            // loadFile.Close();
         }
 
         #endregion
