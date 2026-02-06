@@ -82,8 +82,11 @@ public partial class PlantWindowViewModel : ViewModelBase
             if (_plant.Id == 0) _plant.Author = AppSession.Instance.CurrentUser;
             Log.Information("Saved planting: " + _plant.Description, rtnValue);
         }
-        
-        _controlViewModel.ToastManager.Show(new Toast("Plant record (" + _plant.Description + ") has been updated."));
+
+        if (_controlViewModel.ToastManager != null)
+        {
+            _controlViewModel.ToastManager.Show(new Toast("Plant record (" + _plant.Description + ") has been updated."));
+        }
         
         _controlViewModel.RefreshData();
         
