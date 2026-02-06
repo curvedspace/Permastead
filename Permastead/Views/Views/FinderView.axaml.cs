@@ -186,8 +186,8 @@ public partial class FinderView : UserControl
                         personWindow.DataContext = pvm;
 
                         personWindow.Topmost = true;
-                        personWindow.Width = 550;
-                        personWindow.Height = 350;
+                        personWindow.Width = 800;
+                        personWindow.Height = 550;
                         personWindow.Opacity = 0.9;
                         personWindow.Title = "Person";
                         personWindow.WindowStartupLocation = WindowStartupLocation.CenterOwner;
