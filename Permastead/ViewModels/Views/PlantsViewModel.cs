@@ -277,6 +277,7 @@ public partial class PlantsViewModel : ViewModelBase
         
         foreach (var pt in Plantings)
         {
+            obs.Add(new PlantingObservation() { AsOfDate = pt.StartDate, Planting = pt, Comment = "PLANTING: " + pt.SeedPacket.Vendor.Description + " : " + pt.Comment });
             obs.AddRange(PlantingsService.GetObservationsForPlanting(AppSession.ServiceMode, pt.Id));
         }
 
