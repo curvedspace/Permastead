@@ -19,6 +19,8 @@ public class SeedPacket
     public bool IsPlanted { get; set; } = false;
 
     public int DaysToHarvest { get; set; }
+    
+    public string? FullDescription => Description + " : " + StartDate.ToShortDateString() + " (" + Vendor.Description + ", " + StarterType.Description + ", " + Code + ")";
 
     public Seasonality? Seasonality { get; set; }
     

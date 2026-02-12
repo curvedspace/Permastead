@@ -93,7 +93,6 @@ public partial class PlantsView : UserControl
         catch (Exception exception)
         {
             Console.WriteLine(exception);
-            
         }
     }
 

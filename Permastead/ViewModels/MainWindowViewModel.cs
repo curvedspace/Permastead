@@ -38,6 +38,7 @@ namespace Permastead.ViewModels
             new ProceduresViewModel(),
             new PlantsViewModel(),
             new SeedsViewModel(),
+            new PlannerViewModel(),
             new PlantingsViewModel(),
             new AnimalsViewModel(),
             new HarvestsViewModel(),
@@ -126,6 +127,9 @@ namespace Permastead.ViewModels
         
         [RelayCommand]
         private void OpenDataView()  =>  SetupView(ToolbarViews.Data);
+        
+        [RelayCommand]
+        private void OpenPlannerView()  =>  SetupView(ToolbarViews.Planner);
 
        
         [RelayCommand]
@@ -190,6 +194,7 @@ namespace Permastead.ViewModels
         Procedures,
         Plants,
         Seeds,
+        Planner,
         Plantings,
         Animals,
         Harvests,

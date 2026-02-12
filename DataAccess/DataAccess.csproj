@@ -7,7 +7,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="Avalonia" Version="11.3.11" />
+      <PackageReference Include="Avalonia" Version="11.3.12" />
       <PackageReference Include="Dapper" Version="2.1.66" />
       <PackageReference Include="Microsoft.Data.Sqlite" Version="10.0.2" />
       <PackageReference Include="Nostr.Client" Version="2.1.0" />

@@ -225,6 +225,7 @@ public class SeedPacketRepository
                     "FROM SeedPacket sp, Vendor v, Person p, Plant p2, Seasonality s, StarterType st " +
                     "WHERE sp.PlantId = p2.Id AND sp.VendorId = v.Id AND s.Id = sp.SeasonalityId AND sp.AuthorId = p.Id AND s.Id = sp.SeasonalityId " + 
                     "AND sp.StarterTypeId = st.Id AND sp.PlantId = @id " +
+                    "AND sp.EndDate >= CURRENT_DATE " +
                     "ORDER BY p2.Description";
 
         using (IDbConnection connection = new NpgsqlConnection(connectionString))

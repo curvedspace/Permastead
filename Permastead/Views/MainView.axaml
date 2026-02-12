@@ -51,6 +51,9 @@
                     <Button Name="SeedsButton" ToolTip.Tip="Starters " Margin="0,0,0,0" Command="{Binding OpenSeedsViewCommand}">
                         <Image Width="16" Height="16" Source="/Assets/bean.png" />
                     </Button>
+                    <Button Name="PlannerButton" ToolTip.Tip="Planner " Margin="0,0,0,0" Command="{Binding OpenPlannerViewCommand}">
+                        <Image Width="16" Height="16" Source="/Assets/pencil_ruler.png" />
+                    </Button>
                     <Button Name="PlantingsButton" ToolTip.Tip="Plantings " Margin="0,0,0,0" Command="{Binding OpenPlantingsViewCommand}">
                         <Image Width="16" Height="16" Source="/Assets/leaf_plant.png" />
                     </Button>
@@ -90,9 +93,9 @@
                     <!-- <Button Name="DataButton" ToolTip.Tip="Data Administration"  Command="{Binding OpenDataViewCommand}"> -->
                     <!--     <Image Width="16" Height="16" Source="/Assets/database_blue.png" /> -->
                     <!-- </Button> -->
-                    <ToggleButton IsChecked="{Binding GaiaOpen}" Name="GaiaButton" ToolTip.Tip="Gaia AI Chatbot"  Command="{Binding OpenGaiaViewCommand} ">
-                        <Image Width="16" Height="16" Source="/Assets/earth_night.png" />
-                    </ToggleButton>
+                    <!-- <ToggleButton IsChecked="{Binding GaiaOpen}" Name="GaiaButton" ToolTip.Tip="Gaia AI Chatbot"  Command="{Binding OpenGaiaViewCommand} "> -->
+                    <!--     <Image Width="16" Height="16" Source="/Assets/earth_night.png" /> -->
+                    <!-- </ToggleButton> -->
                 </StackPanel>
             </Grid>
      

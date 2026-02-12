@@ -1,0 +1,181 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             xmlns:vm="using:Permastead.ViewModels.Views"
+             x:DataType="vm:PlannerViewModel"
+             x:CompileBindings="True"
+             x:Class="Permastead.Views.Views.PlannerView">
+    
+    <!--This is design time only-->
+    <Design.DataContext>
+        <vm:PlannerViewModel/>
+    </Design.DataContext>
+    
+    <Grid ColumnDefinitions="*,Auto" RowDefinitions="Auto,*">
+        <StackPanel>
+            <WrapPanel>
+                <Image Margin="20" Width="24" Height="24" Source="/Assets/pencil_ruler.png" />
+                <TextBlock FontWeight="Bold" Margin="20,26,20,20">Planner</TextBlock>
+                <!-- <Separator MaxWidth="5"></Separator> -->
+                <Button  x:Name="Refresh" HorizontalAlignment="Right" Margin="10,0">Refresh</Button> 
+                
+                <!-- <Button Command="{Binding AddRecordCommand}" x:Name="Add" HorizontalAlignment="Right" Margin="0,20">Add</Button>  -->
+                <!-- <SplitButton x:Name="AddButton" Content="Add"> -->
+                <!--     <SplitButton.Flyout> -->
+                <!--         <MenuFlyout Placement="Bottom"> -->
+                <!--             <MenuItem Header="Animal..." /> -->
+                <!--             <Separator/> -->
+                <!--             ~1~ <MenuItem Header="Plant..." Click="NewPlantMenuItem_OnClick"/> @1@ -->
+                <!--             ~1~ <MenuItem Header="Starter " Click="NewStarterMenuItem_OnClick"/> @1@ -->
+                <!--             <MenuItem Header="Animal Type... "  /> -->
+                <!--         </MenuFlyout> -->
+                <!--     </SplitButton.Flyout> -->
+                <!-- </SplitButton> -->
+                
+            </WrapPanel>
+        </StackPanel>
+        
+        <!-- the planner grid -->
+        <Grid Grid.Row="1" Grid.Column="0" ColumnDefinitions="*,*,2*,*,*,2*,Auto" RowDefinitions="Auto,*">
+            <Grid Grid.Column="0" Grid.Row="1" RowDefinitions="Auto,*">
+                <TextBlock HorizontalAlignment="Center" >Locations</TextBlock>
+                <Panel Grid.Row="1">
+                    <Border Grid.Row="1" BorderBrush="{DynamicResource TextControlBorderBrush}"
+                            BorderThickness="2"
+                            CornerRadius="3"
+                            Padding="10" Margin="10,0,10,10">
+                    
+                        <ScrollViewer >
+                        
+                        <ListBox ItemsSource="{Binding Beds}">
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <Border CornerRadius="4">
+                                        <TextBlock TextWrapping="Wrap" Text="{Binding Description}"></TextBlock>
+                                    </Border>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+                               
+                        </ScrollViewer>
+                    </Border>
+                </Panel>
+            </Grid>
+            
+            <Grid Grid.Column="1" Grid.Row="1" RowDefinitions="Auto,*">
+                <TextBlock HorizontalAlignment="Center" >Plants</TextBlock>
+                <Panel Grid.Row="1">
+                    <Border Grid.Row="1" BorderBrush="{DynamicResource TextControlBorderBrush}"
+                            BorderThickness="2"
+                            CornerRadius="3"
+                            Padding="10" Margin="10,0,10,10">
+                    
+                        <ScrollViewer >
+                        
+                            <ListBox x:Name = "PlantsListBox" Tapped="PlantsListBox_OnTapped" ItemsSource="{Binding Plants}">
+                                <ListBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <Border CornerRadius="4">
+                                            <TextBlock TextWrapping="Wrap" Text="{Binding Description}"></TextBlock>
+                                        </Border>
+                                    </DataTemplate>
+                                </ListBox.ItemTemplate>
+                            </ListBox>
+                               
+                        </ScrollViewer>
+                    </Border>
+                </Panel>
+            </Grid>
+            
+            <Grid Grid.Column="2" Grid.Row="1" RowDefinitions="Auto,*">
+                <TextBlock HorizontalAlignment="Center" >Starters</TextBlock>
+                <Panel Grid.Row="1">
+                    <Border Grid.Row="1" BorderBrush="{DynamicResource TextControlBorderBrush}"
+                            BorderThickness="2"
+                            CornerRadius="3"
+                            Padding="10" Margin="10,0,10,10">
+                    
+                        <ScrollViewer >
+                        
+                            <ListBox ItemsSource="{Binding SeedPackets}">
+                                <ListBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <Border CornerRadius="4">
+                                            <TextBlock TextWrapping="Wrap" Text="{Binding FullDescription}"></TextBlock>
+                                        </Border>
+                                    </DataTemplate>
+                                </ListBox.ItemTemplate>
+                            </ListBox>
+                               
+                        </ScrollViewer>
+                    </Border>
+                </Panel>
+            </Grid>
+            
+            <Grid Grid.Column="3" Grid.Row="1" RowDefinitions="Auto,*">
+                <TextBlock HorizontalAlignment="Center" >Planting States</TextBlock>
+                <Panel Grid.Row="1">
+                    <Border Grid.Row="1" BorderBrush="{DynamicResource TextControlBorderBrush}"
+                            BorderThickness="2"
+                            CornerRadius="3"
+                            Padding="10" Margin="10,0,10,10">
+                    
+                        <ScrollViewer >
+                        
+                            <ListBox ItemsSource="{Binding States}">
+                                <ListBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <Border CornerRadius="4">
+                                            <TextBlock TextWrapping="Wrap" Text="{Binding Description}"></TextBlock>
+                                        </Border>
+                                    </DataTemplate>
+                                </ListBox.ItemTemplate>
+                            </ListBox>
+                               
+                        </ScrollViewer>
+                    </Border>
+                </Panel>
+            </Grid>
+            
+            <!-- <Border Grid.Column="2" Grid.Row="1" BorderBrush="{DynamicResource TextControlBorderBrush}" -->
+            <!--         BorderThickness="2" -->
+            <!--         CornerRadius="3" -->
+            <!--         Padding="10" Margin="10,0,10,10"> -->
+            <!--     <TextBlock HorizontalAlignment="Center">Starts</TextBlock> -->
+            <!-- </Border> -->
+            
+            <!-- <Border Grid.Column="3" Grid.Row="1" BorderBrush="{DynamicResource TextControlBorderBrush}" -->
+            <!--         BorderThickness="2" -->
+            <!--         CornerRadius="3" -->
+            <!--         Padding="10" Margin="10,0,10,10"> -->
+            <!--     <TextBlock HorizontalAlignment="Center">State</TextBlock> -->
+            <!-- </Border> -->
+            
+            <StackPanel Grid.Column="4" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <TextBlock HorizontalAlignment="Center" Margin="20">Date</TextBlock>
+                <DatePicker MonthVisible="True">
+                </DatePicker>
+                <Button HorizontalAlignment="Center" Margin="20">--></Button>
+            </StackPanel>
+            
+            <Border Grid.Column="5" Grid.Row="1" BorderBrush="{DynamicResource TextControlBorderBrush}"
+                    BorderThickness="2"
+                    CornerRadius="3"
+                    Padding="10" Margin="10,0,10,10">
+                <TextBlock HorizontalAlignment="Center">Plantings</TextBlock>
+            </Border>
+            
+            <StackPanel Grid.Column="6" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <Button HorizontalAlignment="Center" Margin="20">Clear</Button>
+                <Button HorizontalAlignment="Center" Margin="20">Create</Button>
+                <Button HorizontalAlignment="Center" Margin="20">Save</Button>
+            </StackPanel>
+            
+            
+        </Grid>
+        
+    </Grid>
+            
+</UserControl>
