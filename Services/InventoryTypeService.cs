@@ -18,7 +18,7 @@ public class InventoryTypeService
         {
             myList = DataAccess.Server.InventoryTypeRepository.GetAll(DataConnection.GetServerConnectionString());
         }
-
+        
         return myList;
     }
     

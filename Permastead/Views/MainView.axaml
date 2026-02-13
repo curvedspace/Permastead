@@ -20,6 +20,9 @@
                     <Button Name="HomeButton" ToolTip.Tip="Home " Command="{Binding OpenHomeViewCommand}">
                         <Image Width="16" Height="16" Source="/Assets/house_one.png" />
                     </Button>
+                    <Button Name="AlertsButton" ToolTip.Tip="Alerts " Command="{Binding OpenAlertsViewCommand}">
+                        <Image Width="16" Height="16" Source="/Assets/error.png" />
+                    </Button>
                     <Button Name="DashboardButton" ToolTip.Tip="Dashboard " Command="{Binding OpenDashboardViewCommand}">
                         <Image Width="16" Height="16" Source="/Assets/statistics.png" />
                     </Button>

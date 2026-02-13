@@ -2,6 +2,7 @@
 using System;
 using System.Collections.ObjectModel;
 using System.Collections.Generic;
+using System.Runtime.InteropServices.JavaScript;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Avalonia.Controls;
@@ -426,6 +427,13 @@ namespace Permastead.ViewModels.Views;
                     var results = await ws.UpdateWeather(city);
                     WeatherForecast = "Current Weather " + " as of " + results.ObservationTime + " for " + city.Name + ", " + city.Country + ": " + results.WeatherStateAlias + ", Temperature: " + results.Temperature + ", Humidity: " + results.Humidity;
                     Console.WriteLine(WeatherForecast);
+                    var alert = new AlertItem() 
+                    {
+                        Code = "WEATHER", Description = "Current Temperature",
+                        Comment = "Temperature: " + results.Temperature
+                    };
+                    
+                    AppSession.Instance.Alerts.TryAdd(alert.Id, alert);
                 }
                 catch (Exception e)
                 {

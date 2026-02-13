@@ -28,6 +28,7 @@ namespace Permastead.ViewModels
         private ViewModelBase[] Views =
         {
             new HomeViewModel(),
+            new AlertsViewModel(),
             new DashboardViewModel(),
             new ConnectionsViewModel(),
             new CyclesViewModel(),
@@ -70,6 +71,10 @@ namespace Permastead.ViewModels
             vm?.RefreshData();
 
         }
+        
+         
+        [RelayCommand]
+        private void OpenAlertsView() =>  SetupView(ToolbarViews.Alerts);
         
         [RelayCommand]
         private void OpenDashboardView() =>  SetupView(ToolbarViews.Dashboard);
@@ -184,6 +189,7 @@ namespace Permastead.ViewModels
     public enum ToolbarViews
     {
         Home,
+        Alerts,
         Dashboard,
         Connections,
         Cycles,

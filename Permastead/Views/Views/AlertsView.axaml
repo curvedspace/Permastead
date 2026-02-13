@@ -1,0 +1,49 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             xmlns:vm="using:Permastead.ViewModels.Views"
+             x:DataType="vm:AlertsViewModel" 
+             x:Class="Permastead.Views.Views.AlertsView">
+    
+    <Design.DataContext>
+        <vm:AlertsViewModel />
+    </Design.DataContext>
+    
+    <Grid RowDefinitions="Auto, *">
+        <StackPanel>
+            <WrapPanel>
+                <Image Margin="20" Width="24" Height="24" Source="/Assets/error.png" />
+                <TextBlock FontWeight="Bold" Margin="20,26,20,20">Alerts</TextBlock>
+                <!-- <Separator MaxWidth="5"></Separator> -->
+                <Button Command="{Binding RefreshDataCommand}" x:Name="Refresh" HorizontalAlignment="Right" Margin="10,0">Refresh</Button> 
+                
+                <Label Margin="25,24,0,20">Search:</Label>
+                <!-- <TextBox x:Name="SearchBox" Text="{Binding SearchText }" Watermark="Enter search text" Width="200"  -->
+                <!--          Margin="20,20,20,20" KeyDown="SearchBox_OnKeyDown" ></TextBox> -->
+                <!-- <Button Command="{Binding ClearSearchCommand}" Margin="5,20,20,20">Clear</Button> -->
+                <!-- <ToggleButton x:Name="ShowObservations" IsChecked="{Binding ShowObservations}" HorizontalAlignment="Right" -->
+                <!--               Margin="30,0">Show Observations</ToggleButton> -->
+                <!-- <CheckBox Name="CurrentOnly" Command="{Binding RefreshDataCommand}" IsChecked="{Binding CurrentOnly, Mode=TwoWay}" -->
+                <!--           Margin="0">Current Only</CheckBox> -->
+                <TextBlock Name="AnimalCount" Text="{Binding Alerts.Count, StringFormat='{}{0} total'}" Margin="20,27,20,20"></TextBlock>
+            </WrapPanel>
+        </StackPanel>
+        
+        <DataGrid
+            ItemsSource="{Binding Alerts, Mode=TwoWay} "
+            AutoGenerateColumns="False"
+            Margin="20"
+            Grid.Row="1">
+            <DataGrid.Columns>
+                <DataGridDatePickerColumn Header="Date" Binding="{Binding AsOfDate}" Width="220" />
+                <DataGridTextColumn Header="Code" Binding="{Binding Code}" Width="100" />
+                <DataGridTextColumn Header="Description" Binding="{Binding Description}" Width="250" />
+                <DataGridTextColumn Header="Comment" Binding="{Binding Comment}" Width="*" />
+            </DataGrid.Columns>
+        </DataGrid>
+        
+    </Grid>
+    
+</UserControl>

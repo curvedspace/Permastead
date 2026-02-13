@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using Models;
 using Services;
 
@@ -13,6 +14,8 @@ namespace Permastead
         public ScoreBoard CurrentScoreboard = new ScoreBoard();
 
         public Person CurrentUser = new Person();
+        
+        public ConcurrentDictionary<Guid, AlertItem> Alerts = new ConcurrentDictionary<Guid, AlertItem>();
         
         private AppSession()
         {
