@@ -139,6 +139,13 @@ public partial class ToDoViewModel : ViewModelBase
                 RefreshToDo();
                 
                 ToastManager?.Show(new Toast("TODO has been resolved."));
+                
+                var alert = new AlertItem() 
+                {
+                    Code = "TODO", Description = "Resolved",
+                    Comment = CurrentItem.Description
+                };
+                AppSession.Instance.Alerts.TryAdd(alert.Id, alert);
             }
         }
 
