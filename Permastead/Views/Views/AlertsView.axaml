@@ -38,6 +38,7 @@
             Grid.Row="1">
             <DataGrid.Columns>
                 <DataGridDatePickerColumn Header="Date" Binding="{Binding AsOfDate}" Width="220" />
+                <DataGridTextColumn Header="Type" Binding="{Binding Type}" Width="100" />
                 <DataGridTextColumn Header="Code" Binding="{Binding Code}" Width="100" />
                 <DataGridTextColumn Header="Description" Binding="{Binding Description}" Width="250" />
                 <DataGridTextColumn Header="Comment" Binding="{Binding Comment}" Width="*" />

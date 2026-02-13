@@ -3,6 +3,8 @@ namespace Models;
 public class AlertItem
 {
     public Guid Id { get; set; } = Guid.NewGuid();
+    
+    public AlertType Type { get; set; } = AlertType.Info;
 
     public DateTime AsOfDate { get; set; } = DateTime.Now;
 
@@ -24,4 +26,11 @@ public class AlertItem
         Comment = comment;
     }
     
+}
+
+public enum AlertType 
+{
+    Info,
+    Warning,
+    Action
 }
