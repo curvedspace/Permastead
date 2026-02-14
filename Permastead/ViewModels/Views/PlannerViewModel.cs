@@ -4,8 +4,8 @@ using System.Collections.ObjectModel;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Models;
-using NBitcoin.BuilderExtensions;
 using Services;
+using Ursa.Controls;
 
 namespace Permastead.ViewModels.Views;
 
@@ -47,7 +47,11 @@ public partial class PlannerViewModel : ViewModelBase
 
     [ObservableProperty] 
     private bool _showInputs;
+
+    public bool EnablePlantingAdd = true;
     
+    public WindowToastManager? ToastManager { get; set; }
+
     [RelayCommand]
     private void ClearPlantings()
     {
@@ -61,6 +65,8 @@ public partial class PlannerViewModel : ViewModelBase
         {
             PlantingsService.CommitRecord(AppSession.ServiceMode, planting);
         }
+        
+        ToastManager?.Show(new Toast("Saved the currently staged plantings."));
     }
     
     [RelayCommand]
@@ -95,22 +101,32 @@ public partial class PlannerViewModel : ViewModelBase
     [RelayCommand]
     private void CreatePlanting()
     {
-        var newPlanting = new Planting();
+        //check to make sure we have all the data points we need
+        if (CurrentLocation != null && CurrentPlant != null && CurrentStarter != null && CurrentState != null)
+        {
+            var newPlanting = new Planting();
 
-        newPlanting.Plant = CurrentPlant;
+            newPlanting.Plant = CurrentPlant;
         
-        newPlanting.IsPlanted = false;
-        newPlanting.IsStaged = true;
+            newPlanting.IsPlanted = false;
+            newPlanting.IsStaged = true;
         
-        newPlanting.Bed = CurrentLocation;
-        newPlanting.SeedPacket = CurrentStarter;
-        newPlanting.State = CurrentState;
-        newPlanting.Author = AppSession.Instance.CurrentUser;
-        newPlanting.Description = CurrentPlant.Description;
-        newPlanting.Code = CurrentStarter.Code;
-        newPlanting.StartDate = PlantingDate;
+            newPlanting.Bed = CurrentLocation;
+            newPlanting.SeedPacket = CurrentStarter;
+            newPlanting.State = CurrentState;
+            newPlanting.Author = AppSession.Instance.CurrentUser;
+            newPlanting.Description = CurrentPlant.Description;
+            newPlanting.Code = CurrentStarter.Code;
+            newPlanting.StartDate = PlantingDate;
         
-        Plantings.Add(newPlanting);
+            Plantings.Add(newPlanting);
+            
+            ToastManager?.Show(new Toast("Planting staged."));
+        }
+        else
+        {
+            ToastManager?.Show(new Toast("All values need to be selected before creating a planting."));
+        }
 
     }
     
@@ -134,6 +150,8 @@ public partial class PlannerViewModel : ViewModelBase
             
             // now get staging area data again 
             Plantings = new ObservableCollection<Planting>(PlantingsService.GetPlantings(AppSession.ServiceMode).FindAll(x => x.IsStaged));
+            
+            ToastManager?.Show(new Toast("Staged planting now marked as planted."));
         }
 
     }
@@ -160,6 +178,8 @@ public partial class PlannerViewModel : ViewModelBase
             
             // now get staging area data again 
             Plantings = new ObservableCollection<Planting>(PlantingsService.GetPlantings(AppSession.ServiceMode).FindAll(x => x.IsStaged));
+            
+            ToastManager?.Show(new Toast("Staged planting has been removed."));
         }
     }
 
