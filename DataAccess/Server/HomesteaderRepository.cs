@@ -601,6 +601,8 @@ namespace DataAccess.Server
 				YieldRating INTEGER,
 				AuthorId INTEGER,
 				Comment TEXT,
+				IsPlanted BOOLEAN,
+				IsStaged BOOLEAN,
 				PlantingStateId INTEGER
 			);
 

@@ -117,6 +117,8 @@ public class Planting: CodeTable
         this.Author = Person.Anonymous();
         this.Bed = new GardenBed();
         this.Comment = string.Empty;
+        this.IsPlanted = false;
+        this.IsStaged = false;
     }
 
     public Planting Clone(Planting planting)

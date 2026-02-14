@@ -720,6 +720,8 @@ namespace DataAccess.Local
 				PlantingStateId INTEGER,
 				YieldRating INTEGER,
 				AuthorId INTEGER,
+				IsPlanted BOOLEAN,
+				IsStaged BOOLEAN,
 				Comment TEXT
 			);
 
