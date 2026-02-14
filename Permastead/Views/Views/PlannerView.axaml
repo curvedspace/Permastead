@@ -19,27 +19,14 @@
                 <Image Margin="20" Width="24" Height="24" Source="/Assets/pencil_ruler.png" />
                 <TextBlock FontWeight="Bold" Margin="20,26,20,20">Planner</TextBlock>
                 <!-- <Separator MaxWidth="5"></Separator> -->
-                <Button  x:Name="Refresh" HorizontalAlignment="Right" Margin="10,0">Refresh</Button> 
-                
-                <!-- <Button Command="{Binding AddRecordCommand}" x:Name="Add" HorizontalAlignment="Right" Margin="0,20">Add</Button>  -->
-                <!-- <SplitButton x:Name="AddButton" Content="Add"> -->
-                <!--     <SplitButton.Flyout> -->
-                <!--         <MenuFlyout Placement="Bottom"> -->
-                <!--             <MenuItem Header="Animal..." /> -->
-                <!--             <Separator/> -->
-                <!--             ~1~ <MenuItem Header="Plant..." Click="NewPlantMenuItem_OnClick"/> @1@ -->
-                <!--             ~1~ <MenuItem Header="Starter " Click="NewStarterMenuItem_OnClick"/> @1@ -->
-                <!--             <MenuItem Header="Animal Type... "  /> -->
-                <!--         </MenuFlyout> -->
-                <!--     </SplitButton.Flyout> -->
-                <!-- </SplitButton> -->
-                
+                <Button  x:Name="Refresh" Command="{Binding RefreshDataCommand}" HorizontalAlignment="Right" Margin="10,0">Refresh</Button> 
+                <ToggleButton  x:Name="HideInputsButton" IsChecked="{Binding ShowInputs}" HorizontalAlignment="Right" Margin="10,0">Show Inputs</ToggleButton> 
             </WrapPanel>
         </StackPanel>
         
         <!-- the planner grid -->
-        <Grid Grid.Row="1" Grid.Column="0" ColumnDefinitions="*,*,2*,*,*,2*,Auto" RowDefinitions="Auto,*">
-            <Grid Grid.Column="0" Grid.Row="1" RowDefinitions="Auto,*">
+        <Grid Grid.Row="1" Grid.Column="0" ColumnDefinitions="2*,*,2*,*,Auto,4*,Auto" RowDefinitions="Auto,*">
+            <Grid Grid.Column="0" Grid.Row="1" RowDefinitions="Auto,*" IsVisible="{Binding ShowInputs}">
                 <TextBlock HorizontalAlignment="Center" >Locations</TextBlock>
                 <Panel Grid.Row="1">
                     <Border Grid.Row="1" BorderBrush="{DynamicResource TextControlBorderBrush}"
@@ -49,7 +36,8 @@
                     
                         <ScrollViewer >
                         
-                        <ListBox ItemsSource="{Binding Beds}">
+                        <ListBox ItemsSource="{Binding Beds}" 
+                                 SelectedItem="{Binding CurrentLocation}">
                             <ListBox.ItemTemplate>
                                 <DataTemplate>
                                     <Border CornerRadius="4">
@@ -64,7 +52,7 @@
                 </Panel>
             </Grid>
             
-            <Grid Grid.Column="1" Grid.Row="1" RowDefinitions="Auto,*">
+            <Grid Grid.Column="1" Grid.Row="1" RowDefinitions="Auto,*" IsVisible="{Binding ShowInputs}">
                 <TextBlock HorizontalAlignment="Center" >Plants</TextBlock>
                 <Panel Grid.Row="1">
                     <Border Grid.Row="1" BorderBrush="{DynamicResource TextControlBorderBrush}"
@@ -74,7 +62,10 @@
                     
                         <ScrollViewer >
                         
-                            <ListBox x:Name = "PlantsListBox" Tapped="PlantsListBox_OnTapped" ItemsSource="{Binding Plants}">
+                            <ListBox x:Name = "PlantsListBox" 
+                                     Tapped="PlantsListBox_OnTapped" 
+                                     SelectedItem="{Binding CurrentPlant}"
+                                     ItemsSource="{Binding Plants}">
                                 <ListBox.ItemTemplate>
                                     <DataTemplate>
                                         <Border CornerRadius="4">
@@ -89,7 +80,7 @@
                 </Panel>
             </Grid>
             
-            <Grid Grid.Column="2" Grid.Row="1" RowDefinitions="Auto,*">
+            <Grid Grid.Column="2" Grid.Row="1" RowDefinitions="Auto,*" IsVisible="{Binding ShowInputs}">
                 <TextBlock HorizontalAlignment="Center" >Starters</TextBlock>
                 <Panel Grid.Row="1">
                     <Border Grid.Row="1" BorderBrush="{DynamicResource TextControlBorderBrush}"
@@ -99,7 +90,8 @@
                     
                         <ScrollViewer >
                         
-                            <ListBox ItemsSource="{Binding SeedPackets}">
+                            <ListBox ItemsSource="{Binding SeedPackets}"
+                                     SelectedItem="{Binding CurrentStarter}">
                                 <ListBox.ItemTemplate>
                                     <DataTemplate>
                                         <Border CornerRadius="4">
@@ -114,7 +106,7 @@
                 </Panel>
             </Grid>
             
-            <Grid Grid.Column="3" Grid.Row="1" RowDefinitions="Auto,*">
+            <Grid Grid.Column="3" Grid.Row="1" RowDefinitions="Auto,*" IsVisible="{Binding ShowInputs}">
                 <TextBlock HorizontalAlignment="Center" >Planting States</TextBlock>
                 <Panel Grid.Row="1">
                     <Border Grid.Row="1" BorderBrush="{DynamicResource TextControlBorderBrush}"
@@ -124,7 +116,8 @@
                     
                         <ScrollViewer >
                         
-                            <ListBox ItemsSource="{Binding States}">
+                            <ListBox ItemsSource="{Binding States}"
+                                     SelectedItem="{Binding CurrentState}">
                                 <ListBox.ItemTemplate>
                                     <DataTemplate>
                                         <Border CornerRadius="4">
@@ -155,22 +148,47 @@
             
             <StackPanel Grid.Column="4" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center">
                 <TextBlock HorizontalAlignment="Center" Margin="20">Date</TextBlock>
-                <DatePicker MonthVisible="True">
-                </DatePicker>
-                <Button HorizontalAlignment="Center" Margin="20">--></Button>
+                <CalendarDatePicker SelectedDate="{Binding PlantingDate, Mode=TwoWay}">
+                </CalendarDatePicker>
+                <Button HorizontalAlignment="Center" Margin="20" 
+                        Command="{Binding CreatePlantingCommand}">-->
+                </Button>
             </StackPanel>
             
-            <Border Grid.Column="5" Grid.Row="1" BorderBrush="{DynamicResource TextControlBorderBrush}"
-                    BorderThickness="2"
-                    CornerRadius="3"
-                    Padding="10" Margin="10,0,10,10">
-                <TextBlock HorizontalAlignment="Center">Plantings</TextBlock>
-            </Border>
+            <Grid Grid.Column="5" Grid.Row="1" RowDefinitions="Auto,*">
+                <TextBlock HorizontalAlignment="Center" >Plantings</TextBlock>
+                <Panel Grid.Row="1">
+                    <Border Grid.Row="1" BorderBrush="{DynamicResource TextControlBorderBrush}"
+                            BorderThickness="2"
+                            CornerRadius="3"
+                            Padding="10" Margin="10,0,10,10">
+                    
+                        <ScrollViewer >
+                        
+                            <DataGrid
+                                ItemsSource="{Binding Plantings, Mode=TwoWay} "
+                                AutoGenerateColumns="False"
+                                Margin="20"
+                                Grid.Row="1">
+                                <DataGrid.Columns>
+                                    <DataGridCheckBoxColumn Header="Planted?" Binding="{Binding IsPlanted}"></DataGridCheckBoxColumn>
+                                    <DataGridDatePickerColumn Header="Planting Date" Binding="{Binding StartDate}" Width="220" />
+                                    <DataGridTextColumn Header="Plant" Binding="{Binding Plant.Description}" Width="100" />
+                                    <DataGridTextColumn Header="Location" Binding="{Binding Bed.Description}" Width="200" />
+                                    <DataGridTextColumn Header="State" Binding="{Binding State.Description}" Width="100" />
+                                    <DataGridTextColumn Header="Comment" Binding="{Binding Comment}" Width="*" />
+                                </DataGrid.Columns>
+                            </DataGrid>
+                               
+                        </ScrollViewer>
+                    </Border>
+                </Panel>
+            </Grid>
             
             <StackPanel Grid.Column="6" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center">
-                <Button HorizontalAlignment="Center" Margin="20">Clear</Button>
+                <Button Command="{Binding ClearPlantingsCommand}" HorizontalAlignment="Center" Margin="20">Clear</Button>
                 <Button HorizontalAlignment="Center" Margin="20">Create</Button>
-                <Button HorizontalAlignment="Center" Margin="20">Save</Button>
+                <Button Command="{Binding SavePlantingsCommand}" HorizontalAlignment="Center" Margin="20">Save</Button>
             </StackPanel>
             
             

@@ -42,6 +42,10 @@ public class Planting: CodeTable
     public long AuthorId => this.Author!.Id;
 
     public string StartDateString => this.StartDate.ToShortDateString();
+    
+    public bool IsStaged {get; set;} = false;
+    
+    public bool IsPlanted {get; set;} = false;
 
     public string Age
     {
