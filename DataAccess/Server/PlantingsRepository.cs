@@ -21,7 +21,7 @@ public static class PlantingsRepository
                   "gb.Id, gb.Code as gbcode, gb.Description as gbdesc,  " +
                   "sp.Id , sp.DaysToHarvest, sp.Description as PacketDesc,  " +
                   "v.Id, v.Code, v.Description as VendorDesc, p.EndDate, p.YieldRating, ps.Id, ps.Code, ps.Description, " +
-                  "s.Id, s.Code, s.Description " +
+                  "s.Id, s.Code, s.Description, p.IsPlanted, p.IsStaged " +
                   "FROM Planting p, Person p2, Plant p3, GardenBed gb, SeedPacket sp, Vendor v, PlantingState ps, Seasonality s  " +
                   "WHERE p.AuthorId = p2.Id AND p.GardenBedId = gb.Id  " +
                   "AND p.PlantId = p3.Id AND p.PlantingStateId = ps.Id " +
@@ -91,6 +91,9 @@ public static class PlantingsRepository
                         planting.SeedPacket.Seasonality.Description = dr[26].ToString();
                     }
 
+                    planting.IsPlanted = Convert.ToBoolean(dr[27].ToString());
+                    planting.IsStaged = Convert.ToBoolean(dr[28].ToString());
+                    
                     plantings.Add(planting);
                 }
             }
@@ -108,7 +111,8 @@ public static class PlantingsRepository
                   "p.CreationDate, p.StartDate, p2.Id, p2.FirstName, p2.LastName, p.Comment,  " +
                   "gb.Id, gb.Code as gbcode, gb.Description as gbdesc,  " +
                   "sp.Id , sp.DaysToHarvest, sp.Description as PacketDesc,  " +
-                  "v.Id, v.Code, v.Description as VendorDesc, p.EndDate, p.YieldRating, ps.Id, ps.Code, ps.Description " +
+                  "v.Id, v.Code, v.Description as VendorDesc, p.EndDate, p.YieldRating, ps.Id, ps.Code, ps.Description, " +
+                  "p.IsPlanted, p.IsStaged " +
                   "FROM Planting p, Person p2, Plant p3, GardenBed gb, SeedPacket sp, Vendor v, PlantingState ps  " +
                   "WHERE p.AuthorId = p2.Id AND p.GardenBedId = gb.Id  " +
                   "AND p.PlantId = p3.Id AND p.PlantingStateId = ps.Id " +
@@ -166,6 +170,9 @@ public static class PlantingsRepository
                     planting.State.Code = dr[22].ToString();
                     planting.State.Description = dr[23].ToString();
                     
+                    planting.IsPlanted = Convert.ToBoolean(dr[24].ToString());
+                    planting.IsStaged = Convert.ToBoolean(dr[25].ToString());
+                    
                     plantings.Add(planting);
                 }
             }
@@ -182,7 +189,8 @@ public static class PlantingsRepository
         "p.CreationDate, p.StartDate, p2.Id, p2.FirstName, p2.LastName, p.Comment,  " +
         "gb.Id, gb.Code as gbcode, gb.Description as gbdesc,  " +
         "sp.Id , sp.DaysToHarvest, sp.Description as PacketDesc,  " +
-        "v.Id, v.Code, v.Description as VendorDesc, p.EndDate, p.YieldRating , ps.Id, ps.Code, ps.Description " + 
+        "v.Id, v.Code, v.Description as VendorDesc, p.EndDate, p.YieldRating , ps.Id, ps.Code, ps.Description, " +
+        "p.IsPlanted, p.IsStaged " +
         "FROM Planting p, Person p2, Plant p3, GardenBed gb, SeedPacket sp, Vendor v , PlantingState ps  " + 
         "WHERE p.AuthorId = p2.Id AND p.GardenBedId = gb.Id  " +
         "AND p.PlantId = p3.Id AND p.PlantingStateId = ps.Id " + 
@@ -236,6 +244,9 @@ public static class PlantingsRepository
                     planting.State.Id = Convert.ToInt64(dr[21].ToString());
                     planting.State.Code = dr[22].ToString();
                     planting.State.Description = dr[23].ToString();
+                    
+                    planting.IsPlanted = Convert.ToBoolean(dr[24].ToString());
+                    planting.IsStaged = Convert.ToBoolean(dr[25].ToString());
 
                 }
             }
@@ -280,8 +291,8 @@ public static class PlantingsRepository
         {
             using (IDbConnection db = new NpgsqlConnection(DataConnection.GetServerConnectionString()))
             {
-                string sqlQuery = "INSERT INTO Planting (Description, PlantId, SeedPacketId, GardenBedId, StartDate, EndDate, CreationDate, YieldRating, AuthorId, PlantingStateId, Comment) " +
-                    "VALUES(@Description, @PlantId, @SeedPacketId, @BedId, @StartDate, @EndDate, CURRENT_DATE, @YieldRating, @AuthorId, @PlantingStateId, @Comment);";
+                string sqlQuery = "INSERT INTO Planting (Description, PlantId, SeedPacketId, GardenBedId, StartDate, EndDate, CreationDate, YieldRating, AuthorId, PlantingStateId, Comment, IsStaged, IsPlanted) " +
+                    "VALUES(@Description, @PlantId, @SeedPacketId, @BedId, @StartDate, @EndDate, CURRENT_DATE, @YieldRating, @AuthorId, @PlantingStateId, @Comment, @IsStaged, @IsPlanted);";
 
                 return (db.Execute(sqlQuery, planting) == 1);
             }
@@ -303,7 +314,7 @@ public static class PlantingsRepository
                     string sqlQuery =
                         "UPDATE Planting SET Description = @Description, StartDate = @StartDate, EndDate = @EndDate, PlantId = @PlantId, " +
                         "SeedPacketId = @SeedPacketId, GardenBedId = @BedId, AuthorId = @AuthorId, YieldRating = @YieldRating, PlantingStateId = @PlantingStateId, " +
-                        "Comment = @Comment " +
+                        "Comment = @Comment, IsStaged = @IsStaged, IsPlanted = @IsPlanted " +
                         "WHERE Id = @Id;";
 
                     return (db.Execute(sqlQuery, planting) == 1);

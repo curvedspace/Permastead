@@ -40,6 +40,9 @@ public partial class PlannerViewModel : ViewModelBase
     [ObservableProperty]
     private SeedPacket _currentStarter;
     
+    [ObservableProperty]
+    private Planting _currentPlanting;
+    
     public DateTime PlantingDate { get; set; }
 
     [ObservableProperty] 
@@ -48,7 +51,7 @@ public partial class PlannerViewModel : ViewModelBase
     [RelayCommand]
     private void ClearPlantings()
     {
-        Plantings.Clear();
+        Plantings = new ObservableCollection<Planting>(PlantingsService.GetPlantings(AppSession.ServiceMode).FindAll(x => x.IsStaged));
     }
     
     [RelayCommand]
@@ -64,6 +67,12 @@ public partial class PlannerViewModel : ViewModelBase
     private void RefreshData()
     {
         RefreshDataOnly();
+        
+        CurrentPlant = Plants.FirstOrDefault();
+        CurrentLocation = Beds.FirstOrDefault();
+        CurrentState = States.FirstOrDefault( x => x.Code == "IP");
+            
+        UpdateSeedPackets();
     }
     
     [RelayCommand]
@@ -78,6 +87,9 @@ public partial class PlannerViewModel : ViewModelBase
         SeedPackets = new ObservableCollection<SeedPacket>(Services.PlantingsService.GetSeedPackets(AppSession.ServiceMode, false).FindAll(x => x.EndDate > DateTime.Now));
         Plants = new ObservableCollection<Plant>(Services.PlantingsService.GetPlants(AppSession.ServiceMode));
         States = new ObservableCollection<PlantingState>(PlantingsService.GetPlantingStates(AppSession.ServiceMode));
+        
+        // get just the staged plantings
+        Plantings = new ObservableCollection<Planting>(PlantingsService.GetPlantings(AppSession.ServiceMode).FindAll(x => x.IsStaged));
     }
 
     [RelayCommand]
@@ -86,8 +98,10 @@ public partial class PlannerViewModel : ViewModelBase
         var newPlanting = new Planting();
 
         newPlanting.Plant = CurrentPlant;
+        
         newPlanting.IsPlanted = false;
         newPlanting.IsStaged = true;
+        
         newPlanting.Bed = CurrentLocation;
         newPlanting.SeedPacket = CurrentStarter;
         newPlanting.State = CurrentState;
@@ -99,6 +113,55 @@ public partial class PlannerViewModel : ViewModelBase
         Plantings.Add(newPlanting);
 
     }
+    
+    [RelayCommand]
+    private void PlantCurrentPlanting()
+    {
+        if (CurrentPlanting != null)
+        {
+            CurrentPlanting.IsPlanted = true;
+            CurrentPlanting.IsStaged = false;
+            PlantingsService.CommitRecord(AppSession.ServiceMode, CurrentPlanting);
+            
+            Console.WriteLine("Planted Planting " + CurrentPlanting.Description);
+
+            var alert = new AlertItem()
+            {
+                Code = "PLANTING", Description = "Added from Staging",
+                Comment = CurrentPlanting.Description + ", " + CurrentPlanting.Bed.Description
+            };
+            AppSession.Instance.Alerts.TryAdd(alert.Id, alert);
+            
+            // now get staging area data again 
+            Plantings = new ObservableCollection<Planting>(PlantingsService.GetPlantings(AppSession.ServiceMode).FindAll(x => x.IsStaged));
+        }
+
+    }
+
+    [RelayCommand]
+    private void RemovePlanting()
+    {
+        if (CurrentPlanting != null)
+        {
+            Console.WriteLine("Removing Planting " + CurrentPlanting.Description);
+            
+            // also remove from database if stored
+            if (!CurrentPlanting.IsTransient)
+            {
+                PlantingsService.DeleteRecord(AppSession.ServiceMode, CurrentPlanting);
+            }
+            
+            var alert = new AlertItem()
+            {
+                Code = "PLANTING", Description = "Removed from database",
+                Comment = "ID: " + CurrentPlanting.Id + " : " + CurrentPlanting.Description + ", " + CurrentPlanting.Bed.Description
+            };
+            AppSession.Instance.Alerts.TryAdd(alert.Id, alert);
+            
+            // now get staging area data again 
+            Plantings = new ObservableCollection<Planting>(PlantingsService.GetPlantings(AppSession.ServiceMode).FindAll(x => x.IsStaged));
+        }
+    }
 
     public PlannerViewModel()
     {
@@ -108,7 +171,7 @@ public partial class PlannerViewModel : ViewModelBase
             
             PlantingDate = DateTime.Today;
             RefreshData();
-            CurrentPlant = Plants.FirstOrDefault();
+            
         }
         catch (Exception e)
         {

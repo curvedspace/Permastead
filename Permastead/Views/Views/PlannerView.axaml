@@ -156,7 +156,7 @@
             </StackPanel>
             
             <Grid Grid.Column="5" Grid.Row="1" RowDefinitions="Auto,*">
-                <TextBlock HorizontalAlignment="Center" >Plantings</TextBlock>
+                <TextBlock HorizontalAlignment="Center" >Planting Staging Area</TextBlock>
                 <Panel Grid.Row="1">
                     <Border Grid.Row="1" BorderBrush="{DynamicResource TextControlBorderBrush}"
                             BorderThickness="2"
@@ -168,6 +168,7 @@
                             <DataGrid
                                 ItemsSource="{Binding Plantings, Mode=TwoWay} "
                                 AutoGenerateColumns="False"
+                                SelectedItem="{Binding CurrentPlanting}"
                                 Margin="20"
                                 Grid.Row="1">
                                 <DataGrid.Columns>
@@ -178,6 +179,23 @@
                                     <DataGridTextColumn Header="State" Binding="{Binding State.Description}" Width="100" />
                                     <DataGridTextColumn Header="Comment" Binding="{Binding Comment}" Width="*" />
                                 </DataGrid.Columns>
+                                <DataGrid.ContextMenu>
+                                    <ContextMenu>
+                                        <MenuItem Header="Plant..." Command="{Binding PlantCurrentPlantingCommand}">
+                                            <MenuItem.Icon>
+                                                <PathIcon Data="{StaticResource add_square_regular}"/>
+                                            </MenuItem.Icon>
+                                        </MenuItem>
+                                        
+                                        <Separator></Separator>
+                                        
+                                        <MenuItem Header="Remove..." Command="{Binding RemovePlantingCommand}">
+                                            <MenuItem.Icon>
+                                                <PathIcon Data="{StaticResource delete_regular}"/>
+                                            </MenuItem.Icon>
+                                        </MenuItem>
+                                    </ContextMenu>
+                                </DataGrid.ContextMenu>
                             </DataGrid>
                                
                         </ScrollViewer>
@@ -186,9 +204,8 @@
             </Grid>
             
             <StackPanel Grid.Column="6" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center">
-                <Button Command="{Binding ClearPlantingsCommand}" HorizontalAlignment="Center" Margin="20">Clear</Button>
-                <Button HorizontalAlignment="Center" Margin="20">Create</Button>
                 <Button Command="{Binding SavePlantingsCommand}" HorizontalAlignment="Center" Margin="20">Save</Button>
+                <Button Command="{Binding ClearPlantingsCommand}" HorizontalAlignment="Center" Margin="20">Clear</Button>
             </StackPanel>
             
             
