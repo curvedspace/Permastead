@@ -188,17 +188,33 @@ public static class PlantingsService
         return seedPackets;
     }
     
-    public static List<Plant> GetPlants(ServiceMode mode)
+    public static List<Plant> GetPlants(ServiceMode mode, bool withStartersOnly = false)
     {
         var plants = new List<Plant>();
 
         if (mode == ServiceMode.Local)
         {
-            plants = PlantRepository.GetPlants(DataConnection.GetLocalDataSource());
+            if (withStartersOnly)
+            {
+                plants = PlantRepository.GetPlantsWithStarters(DataConnection.GetLocalDataSource());
+            }
+            else
+            {
+                plants = PlantRepository.GetPlants(DataConnection.GetLocalDataSource());
+            }
+           
         }
         else
         {
-            plants = DataAccess.Server.PlantRepository.GetPlants(DataConnection.GetServerConnectionString());
+            if (withStartersOnly)
+            {
+                plants = DataAccess.Server.PlantRepository.GetPlantsWithStarters(DataConnection.GetServerConnectionString());
+            }
+            else
+            {
+                plants = DataAccess.Server.PlantRepository.GetPlants(DataConnection.GetServerConnectionString());
+            }
+            
         }
 
         return plants;

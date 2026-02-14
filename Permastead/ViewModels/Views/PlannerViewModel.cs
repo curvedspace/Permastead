@@ -91,7 +91,7 @@ public partial class PlannerViewModel : ViewModelBase
     {
         Beds = new ObservableCollection<GardenBed>(Services.PlantingsService.GetGardenBeds(AppSession.ServiceMode));
         SeedPackets = new ObservableCollection<SeedPacket>(Services.PlantingsService.GetSeedPackets(AppSession.ServiceMode, false).FindAll(x => x.EndDate > DateTime.Now));
-        Plants = new ObservableCollection<Plant>(Services.PlantingsService.GetPlants(AppSession.ServiceMode));
+        Plants = new ObservableCollection<Plant>(Services.PlantingsService.GetPlants(AppSession.ServiceMode, withStartersOnly:true));
         States = new ObservableCollection<PlantingState>(PlantingsService.GetPlantingStates(AppSession.ServiceMode));
         
         // get just the staged plantings

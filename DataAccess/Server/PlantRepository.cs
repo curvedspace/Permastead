@@ -67,6 +67,64 @@ namespace DataAccess.Server
                 return myPlants;
             }
         }
+        
+        public static List<Plant> GetPlantsWithStarters(string connectionString)
+        {
+            var myPlants = new List<Plant>();
+            Plant plant;
+
+            var sql = "SELECT DISTINCT p.Description, p.Comment, p.Family, p.Url, p.CreationDate, p.StartDate, p.EndDate, p.AuthorId, " + 
+                "per.FirstName, per.LastName, p.Id, p.code, p.tags " +
+                "FROM Plant p, Person per, Seedpacket s " +  
+                "WHERE per.Id = p.AuthorId " +
+                "AND s.PlantId = p.id AND s.EndDate > CURRENT_DATE " +
+                "AND (p.EndDate is null OR p.EndDate > CURRENT_DATE+1) ORDER BY p.Description ASC";
+
+            using (IDbConnection connection = new NpgsqlConnection(connectionString))
+            {
+                connection.Open();
+
+                using (IDbCommand command = connection.CreateCommand())
+                {
+                    command.CommandText = sql;
+                    var dr = command.ExecuteReader();
+
+                    while (dr.Read())
+                    {
+                        plant = new Plant();
+
+                        plant.Description = dr[0].ToString()!;
+                        plant.Comment = dr[1].ToString()!;
+                        plant.Family = dr[2].ToString()!;
+                        plant.Url = dr[3].ToString()!;
+
+                        plant.CreationDate = Convert.ToDateTime(dr[4].ToString());
+                        plant.StartDate = Convert.ToDateTime(dr[5].ToString());
+                        plant.EndDate = Convert.ToDateTime(dr[6].ToString());
+
+                        plant.Author = new Person();
+                        plant.Author.Id = Convert.ToInt64(dr[7].ToString());
+                        plant.Author.FirstName = dr[8].ToString();
+                        plant.Author.LastName = dr[9].ToString();
+
+                        plant.Id = Convert.ToInt64(dr[10].ToString());
+                        plant.Code = dr[11].ToString()!;
+                        
+                        var tagText = dr[12].ToString()!.Trim();
+
+                        if (tagText != null && tagText.Length > 0)
+                        {
+                            plant.Tags = tagText.Trim();
+                            plant.TagList = tagText.Split(' ').ToList();
+                        }
+
+                        myPlants.Add(plant);
+                    }
+                }
+
+                return myPlants;
+            }
+        }
 
         public static List<SearchResult> GetSearchResults(string connectionString, string searchText)
         {
