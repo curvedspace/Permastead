@@ -73,10 +73,18 @@ namespace Permastead.ViewModels
             vm?.RefreshData();
 
         }
-        
-         
+
+
         [RelayCommand]
-        private void OpenAlertsView() =>  SetupView(ToolbarViews.Alerts);
+        private void OpenAlertsView()
+        {
+            SetupView(ToolbarViews.Alerts);
+
+            var vm = CurrentView as AlertsViewModel;
+            
+            // when we click on Home, refresh the data
+            vm?.RefreshDataCommand.Execute(null);
+        }
         
         [RelayCommand]
         private void OpenDashboardView() =>  SetupView(ToolbarViews.Dashboard);
