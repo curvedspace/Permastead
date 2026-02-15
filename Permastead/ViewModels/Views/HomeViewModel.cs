@@ -433,7 +433,7 @@ namespace Permastead.ViewModels.Views;
                         Comment = "Temperature: " + results.Temperature
                     };
                     
-                    AppSession.Instance.Alerts.TryAdd(alert.Id, alert);
+                    AppSession.Instance.AlertManager.AddAlert(alert);
                 }
                 catch (Exception e)
                 {

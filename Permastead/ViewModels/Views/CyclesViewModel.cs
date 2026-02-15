@@ -194,6 +194,14 @@ public partial class  CyclesViewModel : ViewModelBase
         if (currentEvents is { Count: > 0 })
         {
             CurrentCycle = "Current: " + currentEvents[0].Description.ToString();
+            
+            var alert = new AlertItem()
+            {
+                Code = "CYCLE", Description = "Today is a holiday",
+                Comment = currentEvents[0].Description.ToString()
+            };
+                
+            AppSession.Instance.AlertManager.AddAlertIfNotFound(alert);
         }
         else
         {

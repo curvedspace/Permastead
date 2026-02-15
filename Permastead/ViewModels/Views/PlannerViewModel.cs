@@ -146,7 +146,7 @@ public partial class PlannerViewModel : ViewModelBase
                 Code = "PLANTING", Description = "Added from Staging",
                 Comment = CurrentPlanting.Description + ", " + CurrentPlanting.Bed.Description
             };
-            AppSession.Instance.Alerts.TryAdd(alert.Id, alert);
+            AppSession.Instance.AlertManager.AddAlert(alert);
             
             // now get staging area data again 
             Plantings = new ObservableCollection<Planting>(PlantingsService.GetPlantings(AppSession.ServiceMode).FindAll(x => x.IsStaged));
@@ -174,7 +174,7 @@ public partial class PlannerViewModel : ViewModelBase
                 Code = "PLANTING", Description = "Removed from database",
                 Comment = "ID: " + CurrentPlanting.Id + " : " + CurrentPlanting.Description + ", " + CurrentPlanting.Bed.Description
             };
-            AppSession.Instance.Alerts.TryAdd(alert.Id, alert);
+            AppSession.Instance.AlertManager.AddAlert(alert);
             
             // now get staging area data again 
             Plantings = new ObservableCollection<Planting>(PlantingsService.GetPlantings(AppSession.ServiceMode).FindAll(x => x.IsStaged));

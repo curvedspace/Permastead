@@ -16,7 +16,7 @@ public partial class AlertsViewModel : ViewModelBase
     private void RefreshData()
     {
         Alerts.Clear();
-        Alerts = new ObservableCollection<AlertItem>(AppSession.Instance.Alerts.Values);
+        Alerts = new ObservableCollection<AlertItem>(AppSession.Instance.AlertManager.Alerts.Values);
     }
 
     public AlertsViewModel()

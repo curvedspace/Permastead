@@ -15,7 +15,9 @@ namespace Permastead
 
         public Person CurrentUser = new Person();
         
-        public ConcurrentDictionary<Guid, AlertItem> Alerts = new ConcurrentDictionary<Guid, AlertItem>();
+        // public ConcurrentDictionary<Guid, AlertItem> Alerts = new ConcurrentDictionary<Guid, AlertItem>();
+        
+        public AlertManager AlertManager = new AlertManager();
         
         private AppSession()
         {

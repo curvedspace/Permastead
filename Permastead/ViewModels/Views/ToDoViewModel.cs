@@ -145,7 +145,7 @@ public partial class ToDoViewModel : ViewModelBase
                     Code = "TODO", Description = "Resolved",
                     Comment = CurrentItem.Description
                 };
-                AppSession.Instance.Alerts.TryAdd(alert.Id, alert);
+                AppSession.Instance.AlertManager.AddAlert(alert);
             }
         }
 
@@ -200,6 +200,18 @@ public partial class ToDoViewModel : ViewModelBase
             Todos.Add(todo);
             if (todo.ToDoStatus.Description != "Complete") ActiveToDos = ActiveToDos + 1;
             ToDoCount = Todos.Count;
+
+            if (todo.DaysUntilDue < 2)
+            {
+                var alert = new AlertItem()
+                {
+                    Code = "TODO", Description = "Action Due in " + todo.DaysUntilDue +  " day(s).",
+                    Comment = todo.Description
+                };
+                
+                AppSession.Instance.AlertManager.AddAlertIfNotFound(alert);
+                    
+            }
         }
         
         var centered = new TextColumnOptions<ToDo>

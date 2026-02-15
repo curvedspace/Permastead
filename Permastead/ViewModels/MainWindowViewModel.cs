@@ -174,7 +174,7 @@ namespace Permastead.ViewModels
             CurrentView = Views[(int)view];
             CurrentViewName = view.ToString(); 
             
-            AlertCount = AppSession.Instance.Alerts.Count;
+            AlertCount = AppSession.Instance.AlertManager.Count;
             LevelProgress = ScoreBoard.LevelProgress *  100;
         }
 
@@ -189,6 +189,7 @@ namespace Permastead.ViewModels
             GaiaWindow = new GaiaWindow();
             
             LevelProgress = ScoreBoard.LevelProgress *  100;
+            AlertCount = AppSession.Instance.AlertManager.Count;
         }
         
      }
