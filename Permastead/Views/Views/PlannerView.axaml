@@ -169,6 +169,7 @@
                                 ItemsSource="{Binding Plantings, Mode=TwoWay} "
                                 AutoGenerateColumns="False"
                                 SelectedItem="{Binding CurrentPlanting}"
+                                CanUserResizeColumns="True"
                                 Margin="20"
                                 Grid.Row="1">
                                 <DataGrid.Columns>

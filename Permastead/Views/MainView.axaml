@@ -7,6 +7,7 @@
              mc:Ignorable="d"
              d:DesignWidth="1700" d:DesignHeight="1000"
              x:DataType="vm:MainWindowViewModel" 
+             xmlns:u="https://irihi.tech/ursa"
              FontFamily="avares://Avalonia.Fonts.Inter/Assets#Inter">
   <Design.DataContext>
     <vm:MainWindowViewModel />
@@ -20,9 +21,7 @@
                     <Button Name="HomeButton" ToolTip.Tip="Home " Command="{Binding OpenHomeViewCommand}">
                         <Image Width="16" Height="16" Source="/Assets/house_one.png" />
                     </Button>
-                    <Button Name="AlertsButton" ToolTip.Tip="Alerts " Command="{Binding OpenAlertsViewCommand}">
-                        <Image Width="16" Height="16" Source="/Assets/error.png" />
-                    </Button>
+                    
                     <Button Name="DashboardButton" ToolTip.Tip="Dashboard " Command="{Binding OpenDashboardViewCommand}">
                         <Image Width="16" Height="16" Source="/Assets/statistics.png" />
                     </Button>
@@ -82,6 +81,11 @@
                     <Button Name="WeatherButton" ToolTip.Tip="Weather" Margin="20,0,0,0" Command="{Binding OpenWeatherViewCommand}">
                         <Image Width="16" Height="16" Source="/Assets/weather_clouds.png" />
                     </Button>
+                    <u:Badge Header="{Binding AlertCount}" Classes="Tertiary" Height="5">
+                        <Button Name="AlertsButton" ToolTip.Tip="Alerts " Height="28" Margin="20,0,0,0"  Command="{Binding OpenAlertsViewCommand}">
+                            <Image Width="16" Height="16" Source="/Assets/error.png" />
+                        </Button>
+                    </u:Badge>
                     
                 </StackPanel>
                 

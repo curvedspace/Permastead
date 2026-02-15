@@ -50,8 +50,10 @@ namespace Permastead.ViewModels
             new SettingsViewModel(),
             new DataViewModel()
         };
-        
-        public decimal LevelProgress {get => _scoreBoard.LevelProgress *  100;}
+
+        [ObservableProperty] private decimal _levelProgress;
+
+        [ObservableProperty] private int _alertCount;
 
         [ObservableProperty] 
         private ViewModelBase _currentView;
@@ -170,7 +172,10 @@ namespace Permastead.ViewModels
         private void SetupView(ToolbarViews view)
         {
             CurrentView = Views[(int)view];
-            CurrentViewName = view.ToString();
+            CurrentViewName = view.ToString(); 
+            
+            AlertCount = AppSession.Instance.Alerts.Count;
+            LevelProgress = ScoreBoard.LevelProgress *  100;
         }
 
         public MainWindowViewModel()
@@ -182,6 +187,8 @@ namespace Permastead.ViewModels
             ScoreBoard = AppSession.Instance.CurrentScoreboard;
             
             GaiaWindow = new GaiaWindow();
+            
+            LevelProgress = ScoreBoard.LevelProgress *  100;
         }
         
      }
