@@ -197,8 +197,8 @@ public partial class  CyclesViewModel : ViewModelBase
             
             var alert = new AlertItem()
             {
-                Code = "CYCLE", Description = "Today is a holiday",
-                Comment = currentEvents[0].Description.ToString()
+                Code = "CYCLE", Description = "Current holiday",
+                Comment = currentEvents[0].Description.ToString() + " (" + currentEvents[0].EventStartDate.ToShortDateString() + ")"
             };
                 
             AppSession.Instance.AlertManager.AddAlertIfNotFound(alert);

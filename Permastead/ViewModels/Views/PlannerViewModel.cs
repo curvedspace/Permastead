@@ -94,6 +94,10 @@ public partial class PlannerViewModel : ViewModelBase
         Plants = new ObservableCollection<Plant>(Services.PlantingsService.GetPlants(AppSession.ServiceMode, withStartersOnly:true));
         States = new ObservableCollection<PlantingState>(PlantingsService.GetPlantingStates(AppSession.ServiceMode));
         
+    }
+
+    public void RefreshPlantings()
+    {
         // get just the staged plantings
         Plantings = new ObservableCollection<Planting>(PlantingsService.GetPlantings(AppSession.ServiceMode).FindAll(x => x.IsStaged));
     }
@@ -191,7 +195,8 @@ public partial class PlannerViewModel : ViewModelBase
             
             PlantingDate = DateTime.Today;
             RefreshData();
-            
+            RefreshPlantings();
+
         }
         catch (Exception e)
         {
