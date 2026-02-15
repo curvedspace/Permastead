@@ -170,15 +170,18 @@
                                 AutoGenerateColumns="False"
                                 SelectedItem="{Binding CurrentPlanting}"
                                 CanUserResizeColumns="True"
+                                HorizontalScrollBarVisibility="Auto"
+                                VerticalScrollBarVisibility="Auto"
                                 Margin="20"
                                 Grid.Row="1">
                                 <DataGrid.Columns>
                                     <DataGridCheckBoxColumn Header="Planted?" Binding="{Binding IsPlanted}"></DataGridCheckBoxColumn>
-                                    <DataGridDatePickerColumn Header="Planting Date" Binding="{Binding StartDate}" Width="220" />
-                                    <DataGridTextColumn Header="Plant" Binding="{Binding Plant.Description}" Width="100" />
-                                    <DataGridTextColumn Header="Location" Binding="{Binding Bed.Description}" Width="200" />
+                                    <DataGridDatePickerColumn Header="Planting Date" Binding="{Binding StartDateString}" Width="120" />
+                                    <DataGridTextColumn Header="Plant" Binding="{Binding Plant.Description}" Width="150" />
+                                    <DataGridTextColumn Header="Description" Binding="{Binding SeedPacket.Description}" Width="250" />
+                                    <DataGridTextColumn Header="Location" Binding="{Binding Bed.Description}" Width="250" />
                                     <DataGridTextColumn Header="State" Binding="{Binding State.Description}" Width="100" />
-                                    <DataGridTextColumn Header="Comment" Binding="{Binding Comment}" Width="*" />
+                                    <DataGridTextColumn Header="Comment" Binding="{Binding Comment}" Width="300" />
                                 </DataGrid.Columns>
                                 <DataGrid.ContextMenu>
                                     <ContextMenu>
