@@ -664,21 +664,21 @@ namespace DataAccess.Local
 			DROP TABLE IF EXISTS SeedPacket;
 			CREATE TABLE IF NOT EXISTS SeedPacket(
 				Id INTEGER PRIMARY KEY,
-				Code TEXT,
 				Description TEXT NOT NULL,
 				Instructions TEXT,
 				DaysToHarvest INTEGER,
 				CreationDate TIMESTAMP,
 				StartDate TIMESTAMP NOT NULL,
 				EndDate TIMESTAMP,
-				Generations INTEGER,
-				SeasonalityId INTEGER,
-				PacketCount INTEGER,
-				Exchange BOOLEAN,
-				Species TEXT,
 				PlantId INTEGER,
 				VendorId INTEGER,
 				AuthorId INTEGER,
+				Code TEXT,
+				Generations INTEGER,				
+				SeasonalityId INTEGER,
+				Species TEXT,
+				PacketCount INTEGER,
+				Exchange BOOLEAN,		
 				StarterTypeId INTEGER
 			);
 

@@ -701,7 +701,7 @@ public static class DbMigrationService
         {
             using (IDbConnection connection = new SqliteConnection(localConnectionString))
             {
-                var sql = "SELECT * FROM SeedPacket;";
+                var sql = "SELECT id,description,instructions,daystoharvest,creationdate,startdate,enddate,plantid,vendorid,authorid,code,generations,seasonalityid,species,packetcount,exchange,startertypeid FROM SeedPacket;";
                 connection.Open();
 
                 using (IDbCommand command = connection.CreateCommand())
@@ -711,7 +711,7 @@ public static class DbMigrationService
 
                     while (dr.Read())
                     {
-                        var pgSql = @"INSERT INTO SeedPacket (description,instructions,daystoharvest,creationdate,startdate,enddate,plantid,vendorid,authorid,code,generations,seasonalityid,species) VALUES(" + 
+                        var pgSql = @"INSERT INTO SeedPacket (description,instructions,daystoharvest,creationdate,startdate,enddate,plantid,vendorid,authorid,code,generations,seasonalityid,species,packetcount,exchange,startertypeid) VALUES(" + 
                                     ConvertToText(dr,1) + "," +
                                     ConvertToText(dr,2) + "," +
                                     ConvertToNumeric(dr,3) + "," +
@@ -724,7 +724,10 @@ public static class DbMigrationService
                                     ConvertToText(dr,10) + "," +
                                     ConvertToNumeric(dr,11) + "," +
                                     ConvertToNumeric(dr,12) + "," +
-                                    ConvertToText(dr,13) + 
+                                    ConvertToText(dr,13) + "," +
+                                    ConvertToNumeric(dr,14) + "," +
+                                    ConvertToNumeric(dr,15) + "," +
+                                    ConvertToNumeric(dr,16) + 
                                     ")";
                         Console.WriteLine(pgSql);
                         RunServerSql(serverConnectionString, pgSql);
