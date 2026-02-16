@@ -20,7 +20,7 @@
                 <TextBlock FontWeight="Bold" Margin="20,26,20,20">Planner</TextBlock>
                 <!-- <Separator MaxWidth="5"></Separator> -->
                 <Button  x:Name="Refresh" Command="{Binding RefreshDataCommand}" HorizontalAlignment="Right" Margin="10,0">Refresh</Button> 
-                <ToggleButton  x:Name="HideInputsButton" IsChecked="{Binding ShowInputs}" HorizontalAlignment="Right" Margin="10,0">Show Inputs</ToggleButton> 
+                <ToggleButton x:Name="HideInputsButton" IsVisible="False" IsChecked="{Binding ShowInputs}" HorizontalAlignment="Right" Margin="10,0">Show Inputs</ToggleButton> 
             </WrapPanel>
         </StackPanel>
         
