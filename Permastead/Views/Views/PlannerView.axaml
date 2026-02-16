@@ -25,7 +25,7 @@
         </StackPanel>
         
         <!-- the planner grid -->
-        <Grid Grid.Row="1" Grid.Column="0" ColumnDefinitions="2*,*,2*,*,Auto,4*,Auto" RowDefinitions="Auto,*">
+        <Grid Grid.Row="1" Grid.Column="0" ColumnDefinitions="1.5*,1.5*,2*,*,Auto,6*,Auto" RowDefinitions="Auto,*">
             <Grid Grid.Column="0" Grid.Row="1" RowDefinitions="Auto,*" IsVisible="{Binding ShowInputs}">
                 <TextBlock HorizontalAlignment="Center" >Locations</TextBlock>
                 <Panel Grid.Row="1">

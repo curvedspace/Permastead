@@ -208,6 +208,11 @@ public partial class ToDoViewModel : ViewModelBase
                     Code = "TODO", Description = "Action Due in " + todo.DaysUntilDue +  " day(s).",
                     Comment = todo.Description
                 };
+
+                if (todo.DaysUntilDue < 4)
+                    alert.Type = AlertType.Warning;
+                if (todo.DaysUntilDue < 1)
+                    alert.Type = AlertType.Action;
                 
                 AppSession.Instance.AlertManager.AddAlertIfNotFound(alert);
                     
