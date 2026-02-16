@@ -427,13 +427,13 @@ namespace Permastead.ViewModels.Views;
                     var results = await ws.UpdateWeather(city);
                     WeatherForecast = "Current Weather " + " as of " + results.ObservationTime + " for " + city.Name + ", " + city.Country + ": " + results.WeatherStateAlias + ", Temperature: " + results.Temperature + ", Humidity: " + results.Humidity;
                     Console.WriteLine(WeatherForecast);
+                    
                     var alert = new AlertItem() 
                     {
                         Code = "WEATHER", Description = "Current Temperature",
                         Comment = "Temperature: " + results.Temperature
                     };
-                    
-                    AppSession.Instance.AlertManager.AddAlert(alert);
+                    AppSession.Instance.AlertManager.AddAlertIfNotFound(alert);
                 }
                 catch (Exception e)
                 {
