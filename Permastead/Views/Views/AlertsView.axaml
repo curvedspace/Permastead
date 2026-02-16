@@ -5,11 +5,19 @@
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              xmlns:vm="using:Permastead.ViewModels.Views"
              x:DataType="vm:AlertsViewModel" 
+             xmlns:converters="clr-namespace:Permastead.Converters"
              x:Class="Permastead.Views.Views.AlertsView">
     
     <Design.DataContext>
         <vm:AlertsViewModel />
     </Design.DataContext>
+    
+    <UserControl.Resources>
+        <converters:AlertConverter x:Key="AlertsConverter" />
+        <!-- <ControlTheme x:Key="GdpCell" TargetType="DataGridCell" BasedOn="{StaticResource {x:Type DataGridCell}}" x:DataType="models:Country"> -->
+        <!--     <Setter Property="Background" Value="{Binding Path=GDP, Mode=OneWay, Converter={StaticResource GDPConverter}}" /> -->
+        <!-- </ControlTheme> -->
+    </UserControl.Resources>
     
     <Grid RowDefinitions="Auto, *">
         <StackPanel>
