@@ -1468,7 +1468,7 @@ public static class DbMigrationService
         {
             using (IDbConnection connection = new NpgsqlConnection(serverConnectionString))
             {
-                var sql = "SELECT * FROM Inventory;";
+                var sql = "SELECT id,description,igroup,itype,originalvalue,currentvalue,quantity,forsale,brand,notes,room,creationdate,startdate,enddate,lastupdated,authorid,tags FROM Inventory;";
                 connection.Open();
 
                 using (IDbCommand command = connection.CreateCommand())
@@ -1480,20 +1480,21 @@ public static class DbMigrationService
                     {
                         var pgSql = @"INSERT INTO Inventory VALUES(" + dr[0].ToString() + "," +
                                     ConvertToText(dr,1) + "," +
-                                    ConvertToNumeric(dr,2) + "," +
-                                    ConvertToNumeric(dr,3) + "," +
+                                    ConvertToText(dr,2) + "," +
+                                    ConvertToText(dr,3) + "," +
                                     ConvertToNumeric(dr,4) + "," +
                                     ConvertToNumeric(dr,5) + "," +
-                                    ConvertToText(dr,6) + "," +
-                                    ConvertToText(dr,7) + "," +
+                                    ConvertToNumeric(dr,6) + "," +
+                                    ConvertToNumeric(dr,7) + "," +
                                     ConvertToText(dr,8) + "," +
                                     ConvertToText(dr,9) + "," +
-                                    ConvertToDateTime(dr,10) + "," +
-                                    ConvertToText(dr,11) + "," +
-                                    ConvertToNumeric(dr,12) + "," +
-                                    ConvertToText(dr,13) + "," +
-                                    ConvertToNumeric(dr,14) + "," +
-                                    ConvertToBoolean(dr,15) + 
+                                    ConvertToText(dr,10) + "," +
+                                    ConvertToDateTime(dr,11) + "," +
+                                    ConvertToDateTime(dr,12) + "," +
+                                    ConvertToDateTime(dr,13) + "," +
+                                    ConvertToDateTime(dr,14) + "," +
+                                    ConvertToNumeric(dr,15) + "," +
+                                    ConvertToText(dr,16) +
                                     ")";
                         Console.WriteLine(pgSql);
                         RunLocalSql(localConnectionString, pgSql);
