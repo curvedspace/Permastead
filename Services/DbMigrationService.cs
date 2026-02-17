@@ -1582,7 +1582,7 @@ public static class DbMigrationService
         {
             using (IDbConnection connection = new NpgsqlConnection(serverConnectionString))
             {
-                var sql = "SELECT * FROM Person;";
+                var sql = "SELECT id,firstname,lastname,creationdate,startdate,enddate,company,email,address,comment,phone,onsite,tags FROM Person;";
                 connection.Open();
 
                 using (IDbCommand command = connection.CreateCommand())
@@ -1602,7 +1602,9 @@ public static class DbMigrationService
                                     ConvertToText(dr,7) + "," +
                                     ConvertToText(dr,8) + "," +
                                     ConvertToText(dr,9) + "," +
-                                    (dr[10].ToString()=="1") + //boolean conversion
+                                    ConvertToText(dr,10) + "," +
+                                    (dr[11].ToString()=="1") + "," + //boolean conversion
+                                    ConvertToText(dr,12)  +
                                     ")";
                         Console.WriteLine(pgSql);
                         RunLocalSql(localConnectionString, pgSql);
