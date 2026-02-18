@@ -15,7 +15,6 @@ public partial class AlertsViewModel : ViewModelBase
     [RelayCommand]
     private void RefreshData()
     {
-        Alerts.Clear();
         Alerts = new ObservableCollection<AlertItem>(AppSession.Instance.AlertManager.Alerts.Values);
     }
 
