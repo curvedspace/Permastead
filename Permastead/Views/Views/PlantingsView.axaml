@@ -33,7 +33,7 @@
       </SplitButton>
       
       <Label Margin="25,24,0,20">Search:</Label>
-      <TextBox x:Name="SearchBox" Text="{Binding SearchText}" Watermark="Enter search text" Width="200" Margin="20,20,20,20" KeyDown="SearchBox_OnKeyDown" TextChanged="TextBox_OnTextChanged"></TextBox>
+      <TextBox x:Name="SearchBox" Text="{Binding SearchText}" Watermark="Enter search text" Width="200" Margin="20,20,20,20" KeyDown="SearchBox_OnKeyDown" ></TextBox>
       <Button Command="{Binding ClearSearchCommand}" Margin="5,20,20,20">Clear</Button>
       
       <ToggleButton x:Name="ShowObservations" IsChecked="{Binding ShowObservations}" HorizontalAlignment="Right" Margin="20,0">Show Observations</ToggleButton> 
