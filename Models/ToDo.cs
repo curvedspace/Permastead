@@ -18,7 +18,7 @@ public class ToDo
         
     public string DisplayDueDate => this.DueDate.ToShortDateString();
 
-    public long DaysUntilDue => new TimeSpan(DueDate.Ticks - DateTime.Now.Ticks).Days;
+    public long DaysUntilDue => new TimeSpan(DueDate.Ticks - DateTime.Now.Ticks).Days + 1;
 
     public int PercentDone { get; set; }
 
