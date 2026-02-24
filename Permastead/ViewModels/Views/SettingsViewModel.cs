@@ -2,13 +2,19 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices;
+using Avalonia.Controls.Selection;
+using Avalonia.Media.Imaging;
+using Avalonia.Platform;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using DataAccess;
 using DataAccess.Local;
 using Models;
 using Services;
+using Ursa.Controls;
 
 namespace Permastead.ViewModels.Views;
 
@@ -37,6 +43,13 @@ public partial class SettingsViewModel : ViewModelBase
     [ObservableProperty] private string _nostrPublicKey;
     
     [ObservableProperty] private string _nostrPrivateKey;
+
+    [ObservableProperty] private string _propertyImage;
+    
+    [ObservableProperty]
+    private Bitmap _propertyPicture; 
+    
+    public WindowToastManager? ToastManager { get; set; }
 
     public bool InServerMode
     {
@@ -133,9 +146,53 @@ public partial class SettingsViewModel : ViewModelBase
             Console.WriteLine(e);
         }
 
+        var newLocation = "/Assets/permaculture_plan.jpg";
+        
+        AssetLoader.GetAssets(new Uri("avares://Permastead"),null);
+        
+        
+        var userFolder = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
+        var isWindows = System.Runtime.InteropServices.RuntimeInformation.IsOSPlatform(OSPlatform.Windows);
+        
+        if (isWindows)
+        {
+            newLocation = userFolder + @"\.config\permastead\images\properties\" + HomesteadName + ".png";
+            
+        }
+        else
+        {
+            newLocation = userFolder + @"/.config/permastead/images/properties/" + HomesteadName + ".png";
+            
+        }
+
+        
+        // Open reading stream from the first file.
+        FileInfo nfi = new FileInfo(newLocation);
+
+        if (nfi.Exists)
+        {
+
+            using var stream = nfi.OpenRead();
+            {
+                Bitmap pic = new Bitmap(stream);
+
+                if (pic != null)
+                {
+                    PropertyPicture = pic;
+                    ToastManager?.Show(new Toast("Image has been added for " + HomesteadName +
+                                                    "."));
+                }
+            }
+        }
+        else
+        {
+            PropertyPicture = new Bitmap(AssetLoader.Open(new Uri("avares://Permastead/Assets/permaculture_plan.jpg"), null));
+        }
+        
+        
         //_cities = new ObservableCollection<City>(settingsService.GetCities().Values);
         //Console.WriteLine("cities has been loaded");
-        
+
     }
     
     #endregion
