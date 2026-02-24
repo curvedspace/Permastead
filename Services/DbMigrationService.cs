@@ -1697,7 +1697,7 @@ public static class DbMigrationService
         {
             using (IDbConnection connection = new NpgsqlConnection(serverConnectionString))
             {
-                var sql = "SELECT * FROM Planting;";
+                var sql = "SELECT id,description,plantid,seedpacketid,gardenbedid,creationdate,startdate,enddate,plantingstateid,yieldrating,authorid,isplanted,isstaged,comment  FROM Planting;";
                 connection.Open();
 
                 using (IDbCommand command = connection.CreateCommand())
@@ -1718,8 +1718,10 @@ public static class DbMigrationService
                                     ConvertToDateTime(dr,7) + "," +
                                     ConvertToNumeric(dr,8) + "," +
                                     ConvertToNumeric(dr,9) + "," +
-                                    ConvertToText(dr,10) + "," +
-                                    ConvertToNumeric(dr,11) + 
+                                    ConvertToNumeric(dr,10) + "," +
+                                    ConvertToBoolean(dr,11) + "," +
+                                    ConvertToNumeric(dr,12) + "," +
+                                    ConvertToText(dr,13) + 
                                     ")";
                         Console.WriteLine(pgSql);
                         RunLocalSql(localConnectionString, pgSql);
