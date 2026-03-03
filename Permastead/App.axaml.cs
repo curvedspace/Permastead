@@ -48,6 +48,9 @@ public partial class App : Application
                     .AddDefaultTheme()  
             
         ); 
+        
+        // check for existance of config sub folders
+        
     }
 
     public override void OnFrameworkInitializationCompleted()

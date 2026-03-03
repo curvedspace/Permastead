@@ -12,6 +12,7 @@ using Avalonia.Markup.Xaml;
 using Avalonia.Media.Imaging;
 using Avalonia.Platform;
 using Avalonia.Platform.Storage;
+using Common;
 using DataAccess.Server;
 using Models;
 using Permastead.ViewModels.Dialogs;
@@ -228,13 +229,15 @@ public partial class PlantsView : UserControl
                     if (isWindows)
                     {
                         newLocation = userFolder + @"\.config\permastead\images\plants\" + vm.CurrentPlant.Id + ".png";
-                        //fi.CopyTo(newLocation);
+                        FileUtils.DirectoryExists(userFolder + @"\.config\permastead\images", true);
+                        FileUtils.DirectoryExists(userFolder + @"\.config\permastead\images\plants", true);
                         image.SaveAsPng(newLocation);
                     }
                     else
                     {
                         newLocation = userFolder + @"/.config/permastead/images/plants/" + vm.CurrentPlant.Id + ".png";
-                        //fi.CopyTo(newLocation);
+                        FileUtils.DirectoryExists(userFolder + @"/.config/permastead/images", true);
+                        FileUtils.DirectoryExists(userFolder + @"/.config/permastead/images/plants", true);
                         image.SaveAsPng(newLocation);
                     }
 

@@ -166,6 +166,7 @@ public partial class  CyclesViewModel : ViewModelBase
                 TodoValue1 = 30 - myTodos[0].DaysUntilDue;
                 TodoName1 = TextUtils.GetSubstring(myTodos[0].Description!, 0, 25, true);
                 ToDoVisible1 = true;
+                if (TodoValue1 < 0) TodoValue1 = 0;
             }
             if (myTodos.Count > 1)
             {
