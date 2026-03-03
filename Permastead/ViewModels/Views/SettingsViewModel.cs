@@ -8,6 +8,7 @@ using System.Runtime.InteropServices;
 using Avalonia.Controls.Selection;
 using Avalonia.Media.Imaging;
 using Avalonia.Platform;
+using Common;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using DataAccess;
@@ -157,12 +158,14 @@ public partial class SettingsViewModel : ViewModelBase
         if (isWindows)
         {
             newLocation = userFolder + @"\.config\permastead\images\properties\" + HomesteadName + ".png";
-            
+            FileUtils.DirectoryExists(userFolder + @"\.config\permastead\images", true);
+            FileUtils.DirectoryExists(userFolder + @"\.config\permastead\images\properties", true);
         }
         else
         {
             newLocation = userFolder + @"/.config/permastead/images/properties/" + HomesteadName + ".png";
-            
+            FileUtils.DirectoryExists(userFolder + @"/.config/permastead/images", true);
+            FileUtils.DirectoryExists(userFolder + @"/.config/permastead/images/properties", true);
         }
 
         
