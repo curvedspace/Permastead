@@ -10,6 +10,8 @@ namespace Permastead
         public static ServiceMode ServiceMode { get; set; }
 
         public GaiaService GaiaService;
+        
+        public WeatherDescriptor WeatherDescriptor;
 
         public ScoreBoard CurrentScoreboard = new ScoreBoard();
 

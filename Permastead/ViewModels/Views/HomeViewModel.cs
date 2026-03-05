@@ -434,6 +434,8 @@ namespace Permastead.ViewModels.Views;
                         Comment = "Temperature: " + results.Temperature
                     };
                     AppSession.Instance.AlertManager.AddAlertIfNotFound(alert);
+
+                    AppSession.Instance.WeatherDescriptor = results;
                 }
                 catch (Exception e)
                 {

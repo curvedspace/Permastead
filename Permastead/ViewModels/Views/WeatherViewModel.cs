@@ -93,7 +93,9 @@ public partial class WeatherViewModel : ViewModelBase
 
                 try
                 {
-                    var results = await ws.UpdateWeather(city);
+                    var results = AppSession.Instance.WeatherDescriptor;
+                    
+                    if (results == null)  results = await ws.UpdateWeather(city);
                     
                     // get the current weather
                     WeatherForecast = "Current Weather " + " as of " + results.ObservationTime + " for " + city.Name + ", " + city.Country + ": " + 
@@ -102,7 +104,7 @@ public partial class WeatherViewModel : ViewModelBase
                                       ", Temperature: " + results.Temperature + 
                                       ", Humidity: " + results.Humidity +
                                       ", Moon Phase: " + results.MoonPhase;
-
+                    
                     WeatherTimestamp = results.ObservationTime.ToString(CultureInfo.CurrentCulture);
                     WeatherLocation = "Current weather for " + city.Name + ", " + city.Country;
                     Temperature = results.Temperature.ToString(CultureInfo.CurrentCulture);
@@ -111,17 +113,17 @@ public partial class WeatherViewModel : ViewModelBase
                     MoonPhase = results.MoonPhase.ToString(CultureInfo.CurrentCulture);
                     WeatherStatus = results.WeatherStateAlias.ToString(CultureInfo.CurrentCulture);
                     Precipitation = ws.ModelRoot!.current_condition[0].precipMM;
-                
+                    
                     SunRise = ws.ModelRoot!.weather[0].astronomy[0].sunrise;
                     SunSet = ws.ModelRoot!.weather[0].astronomy[0].sunset;
-                
+                    
                     MoonRise = ws.ModelRoot!.weather[0].astronomy[0].moonrise;
                     MoonSet = ws.ModelRoot!.weather[0].astronomy[0].moonset;
                     MoonIllumination = ws.ModelRoot!.weather[0].astronomy[0].moon_illumination;
-
+                    
                     // get the three day forecast
                     WeatherForecastItems = new ObservableCollection<WeatherModel.Weather>(ws.ModelRoot.weather);
-
+                    
                     var tempCSeriesList = new List<double>();
                     var feelsLikeCSeriesList = new List<double>();
                     var precipSeriesList = new List<double>();
