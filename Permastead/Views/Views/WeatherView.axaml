@@ -12,10 +12,19 @@
         <vm:WeatherViewModel/>
     </UserControl.DataContext>
     
-    <Grid RowDefinitions="Auto,Auto,*" ColumnDefinitions="*">
+    <Grid RowDefinitions="Auto,Auto,Auto,*" ColumnDefinitions="*">
     <!-- <StackPanel Orientation="Vertical" HorizontalAlignment="Center"> -->
+    <StackPanel>
+        <WrapPanel>
+            <Image Margin="20" Width="24" Height="24" Source="/Assets/weather_clouds.png" />
+            <TextBlock FontWeight="Bold" Margin="20,26,20,20">Weather</TextBlock>
+            <!-- <Separator MaxWidth="5"></Separator> -->
+            <Button Command="{Binding RefreshDataCommand}" x:Name="Refresh" HorizontalAlignment="Right" Margin="10,0">Refresh</Button> 
+            <TextBlock Margin="20,26,20,20" Text="{Binding WeatherLocation}"/>
+        </WrapPanel>
+    </StackPanel>
         
-        <TextBlock TextAlignment="Center" FontSize="36" Padding="10" Text="{Binding WeatherLocation}"></TextBlock>
+        <!-- <TextBlock Grid.Row="1" TextAlignment="Center" FontSize="36" Padding="10" Text="{Binding WeatherLocation}"></TextBlock> -->
         <WrapPanel Grid.Row="1" HorizontalAlignment="Center" Margin="10">
             <Border BorderBrush="White" CornerRadius="5" BorderThickness="2" Padding="25" Margin="10">
                 <StackPanel Orientation="Vertical">
@@ -143,7 +152,7 @@
             
         </WrapPanel>
         
-        <Grid Grid.Row="2" ColumnDefinitions="*" RowDefinitions="Auto,*">
+        <Grid Grid.Row="3" ColumnDefinitions="*" RowDefinitions="Auto,*">
             <TextBlock TextAlignment="Center" Margin="0 5" FontSize="28">Three Day Forecast</TextBlock>
             
             <lvc:CartesianChart x:Name="WeatherChart" Margin="50" Grid.Row="1" Background="#ff0d2644">

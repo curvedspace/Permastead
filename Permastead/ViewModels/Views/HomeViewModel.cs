@@ -412,6 +412,7 @@ namespace Permastead.ViewModels.Views;
         async void GetWeatherAsync()
         {
             var ws = new Services.WeatherService();
+            
             //var city = new City("Halifax", "Canada", 44.6475, -63.5906, "CA");
             
             //get location from settings
@@ -435,6 +436,7 @@ namespace Permastead.ViewModels.Views;
                     };
                     AppSession.Instance.AlertManager.AddAlertIfNotFound(alert);
 
+                    AppSession.Instance.WeatherService = ws;
                     AppSession.Instance.WeatherDescriptor = results;
                 }
                 catch (Exception e)

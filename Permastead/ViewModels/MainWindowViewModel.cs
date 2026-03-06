@@ -133,9 +133,14 @@ namespace Permastead.ViewModels
         
         [RelayCommand]
         private void OpenPeopleView() =>  SetupView(ToolbarViews.People);
-        
+
         [RelayCommand]
-        private void OpenWeatherView()  =>  SetupView(ToolbarViews.Weather);
+        private void OpenWeatherView()
+        {
+            // create a new view model so the weather gets updated
+            Views[(int)ToolbarViews.Weather] = new WeatherViewModel();
+            SetupView(ToolbarViews.Weather);
+        }
         
         [RelayCommand]
         private void OpenSettingsView()  =>  SetupView(ToolbarViews.Settings);

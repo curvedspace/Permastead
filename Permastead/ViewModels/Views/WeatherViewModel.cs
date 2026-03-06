@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Globalization;
 using System.Threading.Tasks;
 using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using Models;
 using Services;
 
@@ -55,13 +56,11 @@ public partial class WeatherViewModel : ViewModelBase
     private double[] _windKphSeries; 
     
     [ObservableProperty] 
-    private double[] _humiditySeries; 
-    
+    private double[] _humiditySeries;
 
-    public ObservableCollection<WeatherModel.Weather> WeatherForecastItems { get; set; } =
-        new ObservableCollection<WeatherModel.Weather>();
-    
-    public WeatherViewModel()
+
+    [RelayCommand]
+    private void RefreshData()
     {
         try
         {
@@ -76,12 +75,126 @@ public partial class WeatherViewModel : ViewModelBase
         }
     }
     
+    public ObservableCollection<WeatherModel.Weather> WeatherForecastItems { get; set; } =
+        new ObservableCollection<WeatherModel.Weather>();
+    
+    public WeatherViewModel()
+    {
+        // if we have current weather data, show that by default
+        UpdateWithCurrentWeather();
+    }
+
+    private void UpdateWithCurrentWeather()
+    {
+        var results = AppSession.Instance.WeatherDescriptor;
+        var ws = AppSession.Instance.WeatherService;
+        City city;
+        
+        //get location from settings
+        var location = SettingsService.GetSettingsForCode("LOC", AppSession.ServiceMode);
+        var ctry = SettingsService.GetSettingsForCode("CTRY", AppSession.ServiceMode);
+
+        if (!string.IsNullOrEmpty(location) && !string.IsNullOrEmpty(ctry) && results != null)
+        {
+            city = new City(location, ctry, 0, 0, "");
+            // get the current weather
+            WeatherForecast = "Current Weather " + " as of " + results.ObservationTime + " for " + city.Name + ", " +
+                              city.Country + ": " +
+                              results.WeatherStateAlias +
+                              ", Cloud Cover: " + results.CloudCover +
+                              ", Temperature: " + results.Temperature +
+                              ", Humidity: " + results.Humidity +
+                              ", Moon Phase: " + results.MoonPhase;
+
+            WeatherTimestamp = results.ObservationTime.ToString(CultureInfo.CurrentCulture);
+            WeatherLocation = "Current weather for " + city.Name + ", " + city.Country;
+            Temperature = results.Temperature.ToString(CultureInfo.CurrentCulture);
+            Humidity = results.Humidity.ToString(CultureInfo.CurrentCulture);
+            CloudClover = results.CloudCover.ToString(CultureInfo.CurrentCulture);
+            MoonPhase = results.MoonPhase.ToString(CultureInfo.CurrentCulture);
+            WeatherStatus = results.WeatherStateAlias.ToString(CultureInfo.CurrentCulture);
+
+            Precipitation = ws.ModelRoot!.current_condition[0].precipMM;
+
+            SunRise = ws.ModelRoot!.weather[0].astronomy[0].sunrise;
+            SunSet = ws.ModelRoot!.weather[0].astronomy[0].sunset;
+
+            MoonRise = ws.ModelRoot!.weather[0].astronomy[0].moonrise;
+            MoonSet = ws.ModelRoot!.weather[0].astronomy[0].moonset;
+            MoonIllumination = ws.ModelRoot!.weather[0].astronomy[0].moon_illumination;
+
+            // get the three day forecast
+            WeatherForecastItems = new ObservableCollection<WeatherModel.Weather>(ws.ModelRoot.weather);
+
+            var tempCSeriesList = new List<double>();
+            var feelsLikeCSeriesList = new List<double>();
+            var precipSeriesList = new List<double>();
+            var humiditySeriesList = new List<double>();
+            var windSeriesList = new List<double>();
+
+            if (WeatherForecastItems.Count > 2)
+            {
+                Date1 = WeatherForecastItems[0].date;
+                AvgtempC1 = WeatherForecastItems[0].avgtempC;
+                MaxtempC1 = WeatherForecastItems[0].maxtempC;
+                MintempC1 = WeatherForecastItems[0].mintempC;
+
+                foreach (var h in WeatherForecastItems[0].hourly)
+                {
+                    tempCSeriesList.Add(Convert.ToDouble(h.tempC));
+                    feelsLikeCSeriesList.Add(Convert.ToDouble(h.FeelsLikeC));
+                    precipSeriesList.Add(Convert.ToDouble(h.precipMM));
+                    humiditySeriesList.Add(Convert.ToDouble(h.humidity));
+                    windSeriesList.Add(Convert.ToDouble(h.windspeedKmph));
+                }
+
+                Date2 = WeatherForecastItems[1].date;
+                AvgtempC2 = WeatherForecastItems[1].avgtempC;
+                MaxtempC2 = WeatherForecastItems[1].maxtempC;
+                MintempC2 = WeatherForecastItems[1].mintempC;
+
+                foreach (var h in WeatherForecastItems[1].hourly)
+                {
+                    tempCSeriesList.Add(Convert.ToDouble(h.tempC));
+                    feelsLikeCSeriesList.Add(Convert.ToDouble(h.FeelsLikeC));
+                    precipSeriesList.Add(Convert.ToDouble(h.precipMM));
+                    humiditySeriesList.Add(Convert.ToDouble(h.humidity));
+                    windSeriesList.Add(Convert.ToDouble(h.windspeedKmph));
+                }
+
+                Date3 = WeatherForecastItems[2].date;
+                AvgtempC3 = WeatherForecastItems[2].avgtempC;
+                MaxtempC3 = WeatherForecastItems[2].maxtempC;
+                MintempC3 = WeatherForecastItems[2].mintempC;
+
+                foreach (var h in WeatherForecastItems[2].hourly)
+                {
+                    tempCSeriesList.Add(Convert.ToDouble(h.tempC));
+                    feelsLikeCSeriesList.Add(Convert.ToDouble(h.FeelsLikeC));
+                    precipSeriesList.Add(Convert.ToDouble(h.precipMM));
+                    humiditySeriesList.Add(Convert.ToDouble(h.humidity));
+                    windSeriesList.Add(Convert.ToDouble(h.windspeedKmph));
+                }
+
+                TempCSeries = tempCSeriesList.ToArray();
+                FeelsLikeCSeries = feelsLikeCSeriesList.ToArray();
+                PrecipSeries = precipSeriesList.ToArray();
+                HumiditySeries = humiditySeriesList.ToArray();
+                WindKphSeries = windSeriesList.ToArray();
+            }
+            
+        }
+        
+
+    }
+
     async void GetWeatherAsync()
     {
         try
         {
-            var ws = new Services.WeatherService();
-            //var city = new City("Halifax", "Canada", 44.6475, -63.5906, "CA");
+            WeatherLocation = "Getting weather data...";
+            
+            var ws = new WeatherService(); // AppSession.Instance.WeatherService;
             
             //get location from settings
             var location = SettingsService.GetSettingsForCode("LOC", AppSession.ServiceMode);
@@ -93,101 +206,105 @@ public partial class WeatherViewModel : ViewModelBase
 
                 try
                 {
-                    var results = AppSession.Instance.WeatherDescriptor;
-                    
-                    if (results == null)  results = await ws.UpdateWeather(city);
-                    
-                    // get the current weather
-                    WeatherForecast = "Current Weather " + " as of " + results.ObservationTime + " for " + city.Name + ", " + city.Country + ": " + 
-                                      results.WeatherStateAlias + 
-                                      ", Cloud Cover: " + results.CloudCover + 
-                                      ", Temperature: " + results.Temperature + 
-                                      ", Humidity: " + results.Humidity +
-                                      ", Moon Phase: " + results.MoonPhase;
-                    
-                    WeatherTimestamp = results.ObservationTime.ToString(CultureInfo.CurrentCulture);
-                    WeatherLocation = "Current weather for " + city.Name + ", " + city.Country;
-                    Temperature = results.Temperature.ToString(CultureInfo.CurrentCulture);
-                    Humidity = results.Humidity.ToString(CultureInfo.CurrentCulture);
-                    CloudClover = results.CloudCover.ToString(CultureInfo.CurrentCulture);
-                    MoonPhase = results.MoonPhase.ToString(CultureInfo.CurrentCulture);
-                    WeatherStatus = results.WeatherStateAlias.ToString(CultureInfo.CurrentCulture);
-                    Precipitation = ws.ModelRoot!.current_condition[0].precipMM;
-                    
-                    SunRise = ws.ModelRoot!.weather[0].astronomy[0].sunrise;
-                    SunSet = ws.ModelRoot!.weather[0].astronomy[0].sunset;
-                    
-                    MoonRise = ws.ModelRoot!.weather[0].astronomy[0].moonrise;
-                    MoonSet = ws.ModelRoot!.weather[0].astronomy[0].moonset;
-                    MoonIllumination = ws.ModelRoot!.weather[0].astronomy[0].moon_illumination;
-                    
-                    // get the three day forecast
-                    WeatherForecastItems = new ObservableCollection<WeatherModel.Weather>(ws.ModelRoot.weather);
-                    
-                    var tempCSeriesList = new List<double>();
-                    var feelsLikeCSeriesList = new List<double>();
-                    var precipSeriesList = new List<double>();
-                    var humiditySeriesList = new List<double>();
-                    var windSeriesList = new List<double>();
-                        
-                    if (WeatherForecastItems.Count > 2)
-                    {
-                        Date1 = WeatherForecastItems[0].date;
-                        AvgtempC1 = WeatherForecastItems[0].avgtempC;
-                        MaxtempC1 = WeatherForecastItems[0].maxtempC;
-                        MintempC1 = WeatherForecastItems[0].mintempC;
-                        
-                        foreach (var h in WeatherForecastItems[0].hourly)
-                        {
-                            tempCSeriesList.Add(Convert.ToDouble(h.tempC));
-                            feelsLikeCSeriesList.Add(Convert.ToDouble(h.FeelsLikeC));
-                            precipSeriesList.Add(Convert.ToDouble(h.precipMM));
-                            humiditySeriesList.Add(Convert.ToDouble(h.humidity));
-                            windSeriesList.Add(Convert.ToDouble(h.windspeedKmph));
-                        }
-                        
-                        Date2 = WeatherForecastItems[1].date;
-                        AvgtempC2 = WeatherForecastItems[1].avgtempC;
-                        MaxtempC2 = WeatherForecastItems[1].maxtempC;
-                        MintempC2 = WeatherForecastItems[1].mintempC;
-                        
-                        foreach (var h in WeatherForecastItems[1].hourly)
-                        {
-                            tempCSeriesList.Add(Convert.ToDouble(h.tempC));
-                            feelsLikeCSeriesList.Add(Convert.ToDouble(h.FeelsLikeC));
-                            precipSeriesList.Add(Convert.ToDouble(h.precipMM));
-                            humiditySeriesList.Add(Convert.ToDouble(h.humidity));
-                            windSeriesList.Add(Convert.ToDouble(h.windspeedKmph));
-                        }
-                    
-                        Date3 = WeatherForecastItems[2].date;
-                        AvgtempC3 = WeatherForecastItems[2].avgtempC;
-                        MaxtempC3 = WeatherForecastItems[2].maxtempC;
-                        MintempC3 = WeatherForecastItems[2].mintempC;
-                        
-                        foreach (var h in WeatherForecastItems[2].hourly)
-                        {
-                            tempCSeriesList.Add(Convert.ToDouble(h.tempC));
-                            feelsLikeCSeriesList.Add(Convert.ToDouble(h.FeelsLikeC));
-                            precipSeriesList.Add(Convert.ToDouble(h.precipMM));
-                            humiditySeriesList.Add(Convert.ToDouble(h.humidity));
-                            windSeriesList.Add(Convert.ToDouble(h.windspeedKmph));
-                        }
-                        
-                        TempCSeries = tempCSeriesList.ToArray();
-                        FeelsLikeCSeries = feelsLikeCSeriesList.ToArray();
-                        PrecipSeries = precipSeriesList.ToArray();
-                        HumiditySeries = humiditySeriesList.ToArray();
-                        WindKphSeries = windSeriesList.ToArray();
-                    }
-                    
                     
 
+                    if (ws != null)
+                    {
+
+                        var results = await ws.UpdateWeather(city);
+                        // get the current weather
+                        WeatherForecast = "Current Weather " + " as of " + results.ObservationTime + " for " + city.Name + ", " + city.Country + ": " + 
+                                          results.WeatherStateAlias + 
+                                          ", Cloud Cover: " + results.CloudCover + 
+                                          ", Temperature: " + results.Temperature + 
+                                          ", Humidity: " + results.Humidity +
+                                          ", Moon Phase: " + results.MoonPhase;
+                        
+                        WeatherTimestamp = results.ObservationTime.ToString(CultureInfo.CurrentCulture);
+                        WeatherLocation = "Current weather for " + city.Name + ", " + city.Country;
+                        Temperature = results.Temperature.ToString(CultureInfo.CurrentCulture);
+                        Humidity = results.Humidity.ToString(CultureInfo.CurrentCulture);
+                        CloudClover = results.CloudCover.ToString(CultureInfo.CurrentCulture);
+                        MoonPhase = results.MoonPhase.ToString(CultureInfo.CurrentCulture);
+                        WeatherStatus = results.WeatherStateAlias.ToString(CultureInfo.CurrentCulture);
+                        
+                        Precipitation = ws.ModelRoot!.current_condition[0].precipMM;
+                        
+                        SunRise = ws.ModelRoot!.weather[0].astronomy[0].sunrise;
+                        SunSet = ws.ModelRoot!.weather[0].astronomy[0].sunset;
+                        
+                        MoonRise = ws.ModelRoot!.weather[0].astronomy[0].moonrise;
+                        MoonSet = ws.ModelRoot!.weather[0].astronomy[0].moonset;
+                        MoonIllumination = ws.ModelRoot!.weather[0].astronomy[0].moon_illumination;
+                        
+                        // get the three day forecast
+                        WeatherForecastItems = new ObservableCollection<WeatherModel.Weather>(ws.ModelRoot.weather);
+                        
+                        var tempCSeriesList = new List<double>();
+                        var feelsLikeCSeriesList = new List<double>();
+                        var precipSeriesList = new List<double>();
+                        var humiditySeriesList = new List<double>();
+                        var windSeriesList = new List<double>();
+                            
+                        if (WeatherForecastItems.Count > 2)
+                        {
+                            Date1 = WeatherForecastItems[0].date;
+                            AvgtempC1 = WeatherForecastItems[0].avgtempC;
+                            MaxtempC1 = WeatherForecastItems[0].maxtempC;
+                            MintempC1 = WeatherForecastItems[0].mintempC;
+                            
+                            foreach (var h in WeatherForecastItems[0].hourly)
+                            {
+                                tempCSeriesList.Add(Convert.ToDouble(h.tempC));
+                                feelsLikeCSeriesList.Add(Convert.ToDouble(h.FeelsLikeC));
+                                precipSeriesList.Add(Convert.ToDouble(h.precipMM));
+                                humiditySeriesList.Add(Convert.ToDouble(h.humidity));
+                                windSeriesList.Add(Convert.ToDouble(h.windspeedKmph));
+                            }
+                            
+                            Date2 = WeatherForecastItems[1].date;
+                            AvgtempC2 = WeatherForecastItems[1].avgtempC;
+                            MaxtempC2 = WeatherForecastItems[1].maxtempC;
+                            MintempC2 = WeatherForecastItems[1].mintempC;
+                            
+                            foreach (var h in WeatherForecastItems[1].hourly)
+                            {
+                                tempCSeriesList.Add(Convert.ToDouble(h.tempC));
+                                feelsLikeCSeriesList.Add(Convert.ToDouble(h.FeelsLikeC));
+                                precipSeriesList.Add(Convert.ToDouble(h.precipMM));
+                                humiditySeriesList.Add(Convert.ToDouble(h.humidity));
+                                windSeriesList.Add(Convert.ToDouble(h.windspeedKmph));
+                            }
+                        
+                            Date3 = WeatherForecastItems[2].date;
+                            AvgtempC3 = WeatherForecastItems[2].avgtempC;
+                            MaxtempC3 = WeatherForecastItems[2].maxtempC;
+                            MintempC3 = WeatherForecastItems[2].mintempC;
+                            
+                            foreach (var h in WeatherForecastItems[2].hourly)
+                            {
+                                tempCSeriesList.Add(Convert.ToDouble(h.tempC));
+                                feelsLikeCSeriesList.Add(Convert.ToDouble(h.FeelsLikeC));
+                                precipSeriesList.Add(Convert.ToDouble(h.precipMM));
+                                humiditySeriesList.Add(Convert.ToDouble(h.humidity));
+                                windSeriesList.Add(Convert.ToDouble(h.windspeedKmph));
+                            }
+                            
+                            TempCSeries = tempCSeriesList.ToArray();
+                            FeelsLikeCSeries = feelsLikeCSeriesList.ToArray();
+                            PrecipSeries = precipSeriesList.ToArray();
+                            HumiditySeries = humiditySeriesList.ToArray();
+                            WindKphSeries = windSeriesList.ToArray();
+                        }
+                    
+                    }
+                    
                 }
                 catch (Exception e)
                 {
                     Console.WriteLine(e);
                     WeatherForecast = "Unable to get weather data.";
+                    WeatherLocation = "";
                 }
             }
             else

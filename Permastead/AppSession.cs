@@ -11,6 +11,8 @@ namespace Permastead
 
         public GaiaService GaiaService;
         
+        public WeatherService WeatherService;
+        
         public WeatherDescriptor WeatherDescriptor;
 
         public ScoreBoard CurrentScoreboard = new ScoreBoard();
