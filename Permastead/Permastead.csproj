@@ -15,7 +15,6 @@
 
   <ItemGroup>
     <PackageReference Include="Avalonia" Version="11.3.12" />
-    <PackageReference Include="Avalonia.Controls.TreeDataGrid" Version="11.1.1" />
     <PackageReference Include="Avalonia.Themes.Fluent" Version="11.3.12" />
     <PackageReference Include="Avalonia.Fonts.Inter" Version="11.3.12" />
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
@@ -31,6 +30,7 @@
     <PackageReference Include="Semi.Avalonia" Version="11.3.7.2" />
     <PackageReference Include="Semi.Avalonia.ProDataGrid" Version="11.3.9-beta.1" />
     <PackageReference Include="SixLabors.ImageSharp" Version="3.1.12" />
+    <PackageReference Include="TreeDataGrid" Version="11.3.12.1" />
   </ItemGroup>
 
   <ItemGroup>
