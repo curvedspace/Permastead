@@ -2,6 +2,7 @@
 using Models;
 using Newtonsoft.Json;
 using System.Drawing;
+using Newtonsoft.Json.Linq;
 
 namespace Services;
 
@@ -75,9 +76,12 @@ public class WeatherService : IWeatherService, IDisposable
         var response = await _client.GetAsync(url);
         response.EnsureSuccessStatusCode();
         var json = await response.Content.ReadAsStringAsync();
-
-        //ContextManager.Context.Logger.Info("Command update image is executed");
+        
         Console.WriteLine(json);
+        
+        // strip out the top level called data
+        var topLevel = JObject.Parse(json);
+        json = JObject.Parse(topLevel["data"].ToString()).ToString(Formatting.None);
         
         ModelRoot = JsonConvert.DeserializeObject<WeatherModel.Root>(json);
         

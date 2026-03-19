@@ -114,75 +114,79 @@ public partial class WeatherViewModel : ViewModelBase
             MoonPhase = results.MoonPhase.ToString(CultureInfo.CurrentCulture);
             WeatherStatus = results.WeatherStateAlias.ToString(CultureInfo.CurrentCulture);
 
-            Precipitation = ws.ModelRoot!.current_condition[0].precipMM;
-
-            SunRise = ws.ModelRoot!.weather[0].astronomy[0].sunrise;
-            SunSet = ws.ModelRoot!.weather[0].astronomy[0].sunset;
-
-            MoonRise = ws.ModelRoot!.weather[0].astronomy[0].moonrise;
-            MoonSet = ws.ModelRoot!.weather[0].astronomy[0].moonset;
-            MoonIllumination = ws.ModelRoot!.weather[0].astronomy[0].moon_illumination;
-
-            // get the three day forecast
-            WeatherForecastItems = new ObservableCollection<WeatherModel.Weather>(ws.ModelRoot.weather);
-
-            var tempCSeriesList = new List<double>();
-            var feelsLikeCSeriesList = new List<double>();
-            var precipSeriesList = new List<double>();
-            var humiditySeriesList = new List<double>();
-            var windSeriesList = new List<double>();
-
-            if (WeatherForecastItems.Count > 2)
+            if (ws.ModelRoot!.current_condition != null)
             {
-                Date1 = WeatherForecastItems[0].date;
-                AvgtempC1 = WeatherForecastItems[0].avgtempC;
-                MaxtempC1 = WeatherForecastItems[0].maxtempC;
-                MintempC1 = WeatherForecastItems[0].mintempC;
+                Precipitation = ws.ModelRoot!.current_condition[0].precipMM;
 
-                foreach (var h in WeatherForecastItems[0].hourly)
+                SunRise = ws.ModelRoot!.weather[0].astronomy[0].sunrise;
+                SunSet = ws.ModelRoot!.weather[0].astronomy[0].sunset;
+
+                MoonRise = ws.ModelRoot!.weather[0].astronomy[0].moonrise;
+                MoonSet = ws.ModelRoot!.weather[0].astronomy[0].moonset;
+                MoonIllumination = ws.ModelRoot!.weather[0].astronomy[0].moon_illumination;
+
+
+                // get the three day forecast
+                WeatherForecastItems = new ObservableCollection<WeatherModel.Weather>(ws.ModelRoot.weather);
+
+                var tempCSeriesList = new List<double>();
+                var feelsLikeCSeriesList = new List<double>();
+                var precipSeriesList = new List<double>();
+                var humiditySeriesList = new List<double>();
+                var windSeriesList = new List<double>();
+
+                if (WeatherForecastItems.Count > 2)
                 {
-                    tempCSeriesList.Add(Convert.ToDouble(h.tempC));
-                    feelsLikeCSeriesList.Add(Convert.ToDouble(h.FeelsLikeC));
-                    precipSeriesList.Add(Convert.ToDouble(h.precipMM));
-                    humiditySeriesList.Add(Convert.ToDouble(h.humidity));
-                    windSeriesList.Add(Convert.ToDouble(h.windspeedKmph));
+                    Date1 = WeatherForecastItems[0].date;
+                    AvgtempC1 = WeatherForecastItems[0].avgtempC;
+                    MaxtempC1 = WeatherForecastItems[0].maxtempC;
+                    MintempC1 = WeatherForecastItems[0].mintempC;
+
+                    foreach (var h in WeatherForecastItems[0].hourly)
+                    {
+                        tempCSeriesList.Add(Convert.ToDouble(h.tempC));
+                        feelsLikeCSeriesList.Add(Convert.ToDouble(h.FeelsLikeC));
+                        precipSeriesList.Add(Convert.ToDouble(h.precipMM));
+                        humiditySeriesList.Add(Convert.ToDouble(h.humidity));
+                        windSeriesList.Add(Convert.ToDouble(h.windspeedKmph));
+                    }
+
+                    Date2 = WeatherForecastItems[1].date;
+                    AvgtempC2 = WeatherForecastItems[1].avgtempC;
+                    MaxtempC2 = WeatherForecastItems[1].maxtempC;
+                    MintempC2 = WeatherForecastItems[1].mintempC;
+
+                    foreach (var h in WeatherForecastItems[1].hourly)
+                    {
+                        tempCSeriesList.Add(Convert.ToDouble(h.tempC));
+                        feelsLikeCSeriesList.Add(Convert.ToDouble(h.FeelsLikeC));
+                        precipSeriesList.Add(Convert.ToDouble(h.precipMM));
+                        humiditySeriesList.Add(Convert.ToDouble(h.humidity));
+                        windSeriesList.Add(Convert.ToDouble(h.windspeedKmph));
+                    }
+
+                    Date3 = WeatherForecastItems[2].date;
+                    AvgtempC3 = WeatherForecastItems[2].avgtempC;
+                    MaxtempC3 = WeatherForecastItems[2].maxtempC;
+                    MintempC3 = WeatherForecastItems[2].mintempC;
+
+                    foreach (var h in WeatherForecastItems[2].hourly)
+                    {
+                        tempCSeriesList.Add(Convert.ToDouble(h.tempC));
+                        feelsLikeCSeriesList.Add(Convert.ToDouble(h.FeelsLikeC));
+                        precipSeriesList.Add(Convert.ToDouble(h.precipMM));
+                        humiditySeriesList.Add(Convert.ToDouble(h.humidity));
+                        windSeriesList.Add(Convert.ToDouble(h.windspeedKmph));
+                    }
+
+                    TempCSeries = tempCSeriesList.ToArray();
+                    FeelsLikeCSeries = feelsLikeCSeriesList.ToArray();
+                    PrecipSeries = precipSeriesList.ToArray();
+                    HumiditySeries = humiditySeriesList.ToArray();
+                    WindKphSeries = windSeriesList.ToArray();
                 }
-
-                Date2 = WeatherForecastItems[1].date;
-                AvgtempC2 = WeatherForecastItems[1].avgtempC;
-                MaxtempC2 = WeatherForecastItems[1].maxtempC;
-                MintempC2 = WeatherForecastItems[1].mintempC;
-
-                foreach (var h in WeatherForecastItems[1].hourly)
-                {
-                    tempCSeriesList.Add(Convert.ToDouble(h.tempC));
-                    feelsLikeCSeriesList.Add(Convert.ToDouble(h.FeelsLikeC));
-                    precipSeriesList.Add(Convert.ToDouble(h.precipMM));
-                    humiditySeriesList.Add(Convert.ToDouble(h.humidity));
-                    windSeriesList.Add(Convert.ToDouble(h.windspeedKmph));
-                }
-
-                Date3 = WeatherForecastItems[2].date;
-                AvgtempC3 = WeatherForecastItems[2].avgtempC;
-                MaxtempC3 = WeatherForecastItems[2].maxtempC;
-                MintempC3 = WeatherForecastItems[2].mintempC;
-
-                foreach (var h in WeatherForecastItems[2].hourly)
-                {
-                    tempCSeriesList.Add(Convert.ToDouble(h.tempC));
-                    feelsLikeCSeriesList.Add(Convert.ToDouble(h.FeelsLikeC));
-                    precipSeriesList.Add(Convert.ToDouble(h.precipMM));
-                    humiditySeriesList.Add(Convert.ToDouble(h.humidity));
-                    windSeriesList.Add(Convert.ToDouble(h.windspeedKmph));
-                }
-
-                TempCSeries = tempCSeriesList.ToArray();
-                FeelsLikeCSeries = feelsLikeCSeriesList.ToArray();
-                PrecipSeries = precipSeriesList.ToArray();
-                HumiditySeries = humiditySeriesList.ToArray();
-                WindKphSeries = windSeriesList.ToArray();
             }
-            
+
         }
         
 
