@@ -81,7 +81,7 @@ public class WeatherService : IWeatherService, IDisposable
         
         // strip out the top level called data
         var topLevel = JObject.Parse(json);
-        json = JObject.Parse(topLevel["data"].ToString()).ToString(Formatting.None);
+        //json = JObject.Parse(topLevel["data"].ToString()).ToString(Formatting.None);
         
         ModelRoot = JsonConvert.DeserializeObject<WeatherModel.Root>(json);
         
