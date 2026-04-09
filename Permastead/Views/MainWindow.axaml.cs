@@ -20,7 +20,7 @@ public partial class MainWindow : Window
                          File.GetLastWriteTime(Assembly.GetExecutingAssembly().Location).ToString("yyyy-MM-dd");
 
 #if DEBUG
-            this.AttachDevTools();
+            //this.AttachDevTools();
 #endif
             
         }
