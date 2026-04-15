@@ -201,7 +201,7 @@ public partial class ToDoViewModel : ViewModelBase
             if (todo.ToDoStatus.Description != "Complete") ActiveToDos = ActiveToDos + 1;
             ToDoCount = Todos.Count;
 
-            if (todo.DaysUntilDue < 2)
+            if (todo.DaysUntilDue < 2 && todo.DaysUntilDue > -1 && todo.ToDoStatus.Description != "Complete")
             {
                 var alert = new AlertItem()
                 {
