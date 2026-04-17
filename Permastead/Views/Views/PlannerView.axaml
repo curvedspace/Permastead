@@ -176,7 +176,7 @@
                                 Grid.Row="1">
                                 <DataGrid.Columns>
                                     <DataGridCheckBoxColumn Header="Planted?" Binding="{Binding IsPlanted}"></DataGridCheckBoxColumn>
-                                    <DataGridDatePickerColumn Header="Planting Date" Binding="{Binding StartDateString}" Width="120" />
+                                    <DataGridDatePickerColumn Header="Planting Date" Binding="{Binding StartDateString}" Width="120" IsReadOnly="False" />
                                     <DataGridTextColumn Header="Plant" Binding="{Binding Plant.Description}" Width="150" />
                                     <DataGridTextColumn Header="Description" Binding="{Binding SeedPacket.Description}" Width="250" />
                                     <DataGridTextColumn Header="Location" Binding="{Binding Bed.Description}" Width="250" />
