@@ -145,7 +145,8 @@ public partial class DashboardViewModel : ViewModelBase
 
         if (PlantingYear == "ALL")
         {
-            YearInReview = new Observation();
+            //YearInReview = new Observation();
+            YearInReview = ObservationsService.GetCurrentYearInReview(AppSession.ServiceMode, Convert.ToInt32("1970"));
         }
         else
         {

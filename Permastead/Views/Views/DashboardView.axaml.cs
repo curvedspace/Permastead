@@ -28,7 +28,7 @@ public partial class DashboardView : UserControl
 
             if (vm.PlantingYear == "ALL")
             {
-                YearInReviewLabel.Content = "All Years";
+                YearInReviewLabel.Content = "Overall Vision";
 ;            }
             else
             {
