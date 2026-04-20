@@ -3,6 +3,8 @@ Local-first desktop software for managing a homestead or permaculture installati
 
 Latest Release - [v0.4.0](https://github.com/curvedspace/Permastead/releases/tag/v0.4.0-beta)
 
+- Home - shows a summary of your last 30 days of activity and a daily quote.
+- Dashboard - shows a yearly view of your summary activity.
 - Observations - these allow you to journal your observations on your property over time.
 - Actions - this is essentially a TODO list that helps keep track of what needs to be done.
 - Events - events are cyclical and can either be informational, or trigger TODOs in your Actions view.
@@ -15,6 +17,8 @@ Latest Release - [v0.4.0](https://github.com/curvedspace/Permastead/releases/tag
 - Animals - tracks your pets and/or livestock
 - Harvests - tracks your harvests over time
 - Preservation - this tracks the food you have preserved by freezing, fermenting, etc.
+- Weather - if your location is set in Settings, it will show the three day weather forecast.
+- Settings - shows your base map and settings information.
 
 
 
