@@ -985,6 +985,10 @@ namespace DataAccess.Local
             q = new Quote { Description = "Time discovers truth.", AuthorName = "Seneca" };
             QuoteRepository.Insert(DataConnection.GetLocalDataSource(), q);
             
+            q = new Quote { Description = "I came to agriculture through architecture. Designing with plants, there’s a certain artistry to it.", AuthorName = "Andrew Millison" };
+            QuoteRepository.Insert(DataConnection.GetLocalDataSource(), q);
+            
+            
             #endregion
             
             #region Settings
