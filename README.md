@@ -11,7 +11,7 @@ Latest Release - [v0.4.0](https://github.com/curvedspace/Permastead/releases/tag
 - Procedures - stores documentation on procedures for the homestead, various chores, equipment maintenance, recipes, etc.
 - Inventory - this tracks what you have available on the homestead and where it is located
 - People - a list of contacts and their info.
-- Plants - a plant database
+- Plants - a plant database and materia medica
 - Starters view - this shows your current seed inventory and other plant starts like root cuttings or saplings.
 - Plantings View - this show your plantings, both current and historical.
 - Animals - tracks your pets and/or livestock
