@@ -34,7 +34,7 @@ public class WeatherDescriptorJsonConverter : Newtonsoft.Json.JsonConverter
         var uvIndex = mainToken.SelectToken("current_condition[0].uvIndex")?.Value<int>() ??
                       throw new JsonSerializationException("No uvIndex property");
         
-        var obsTime = mainToken.SelectToken("current_condition[0].localObsDateTime")?.Value<DateTime>() ??
+        var obsTime = mainToken.SelectToken("current_condition[0].observation_time")?.Value<DateTime>() ??
                       throw new JsonSerializationException("No observation time property");
 
         // var moonPhase = ""; 
