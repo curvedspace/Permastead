@@ -108,6 +108,8 @@ public partial class PreservationViewModel : ViewModelBase
                 new TextColumn<FoodPreservation, string>
                     ("Harvest Type", x => x.PreservationType!.Description),
                 new TextColumn<FoodPreservation, long>
+                    ("Days", x => x.DaysInProgress, GridLength.Auto,centered),
+                new TextColumn<FoodPreservation, long>
                     ("Measurement", x => x.Measurement, GridLength.Auto,centered),
                 new TextColumn<FoodPreservation, string>
                     ("Units", x => x.Units.Description),

@@ -51,6 +51,8 @@ public class FoodPreservation
     
     public string LastUpdatedDateString => this.LastUpdatedDate.ToShortDateString();
     
+    public long DaysInProgress => new TimeSpan(DateTime.Now.Ticks - StartDate.Ticks ).Days + 1;
+    
     public Person? Author { get; set; }
     
     public long AuthorId 
