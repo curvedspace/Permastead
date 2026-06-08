@@ -35,6 +35,7 @@ public class Program
             var appBuilder = AppBuilder.Configure<App>()
                 .UsePlatformDetect()
                 .WithInterFont()
+                .WithDeveloperTools()
                 .LogToTrace();
             
             //create logging 
