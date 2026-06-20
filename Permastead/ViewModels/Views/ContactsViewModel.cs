@@ -192,16 +192,21 @@ public partial class ContactsViewModel : ViewModelBase
             CurrentObservation.Person = CurrentPerson;
             CurrentObservation.AsOfDate = DateTime.Today;
             CurrentObservation.CommentType!.Id = 2;
-            
-            PersonService.AddPersonObservation(AppSession.ServiceMode, CurrentObservation);
-            
-            PeopleObservations =
-                new ObservableCollection<PersonObservation>(
-                    Services.PersonService.GetObservationsForPerson(AppSession.ServiceMode, CurrentPerson.Id));
+
+            if (CurrentObservation.Comment != string.Empty)
+            {
+
+                PersonService.AddPersonObservation(AppSession.ServiceMode, CurrentObservation);
+
+                PeopleObservations =
+                    new ObservableCollection<PersonObservation>(
+                        Services.PersonService.GetObservationsForPerson(AppSession.ServiceMode, CurrentPerson.Id));
+                
+                ToastManager?.Show(new Toast("Observation saved!"));
+            }
 
             CurrentObservation = new PersonObservation();
-            
-            ToastManager?.Show(new Toast("Observation saved!"));
+           
         }
         catch (Exception e)
         {

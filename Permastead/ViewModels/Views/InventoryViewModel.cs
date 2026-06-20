@@ -183,13 +183,19 @@ public partial class InventoryViewModel: ViewModelBase
             CurrentObservation.Inventory = CurrentItem;
             CurrentObservation.AsOfDate = DateTime.Today;
             CurrentObservation.CommentType!.Id = 9;
-            
-            InventoryService.AddInventoryObservation(AppSession.ServiceMode, CurrentObservation);
-            
-            InventoryObservations =
-                new ObservableCollection<InventoryObservation>(
-                    Services.InventoryService.GetObservationsForInventoryItem(AppSession.ServiceMode, CurrentItem.Id));
 
+            if (CurrentObservation.Comment != string.Empty)
+            {
+
+                InventoryService.AddInventoryObservation(AppSession.ServiceMode, CurrentObservation);
+
+                InventoryObservations =
+                    new ObservableCollection<InventoryObservation>(
+                        Services.InventoryService.GetObservationsForInventoryItem(AppSession.ServiceMode,
+                            CurrentItem.Id));
+
+            }
+            
             CurrentObservation = new InventoryObservation();
         }
         catch (Exception e)

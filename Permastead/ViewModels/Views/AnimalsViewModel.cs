@@ -161,11 +161,16 @@ public partial class AnimalsViewModel : ViewModelBase
             CurrentObservation.Animal = CurrentItem;
             CurrentObservation.AsOfDate = DateTime.Today;
             CurrentObservation.CommentType!.Id = 4;
-            
-            AnimalService.AddAnimalObservation(AppSession.ServiceMode, CurrentObservation);
-            
-            AnimalObservations =
-                new ObservableCollection<AnimalObservation>(Services.AnimalService.GetObservationsForAnimal(AppSession.ServiceMode, CurrentItem.Id));
+
+            if (CurrentObservation.Comment != string.Empty)
+            {
+                AnimalService.AddAnimalObservation(AppSession.ServiceMode, CurrentObservation);
+
+                AnimalObservations =
+                    new ObservableCollection<AnimalObservation>(
+                        Services.AnimalService.GetObservationsForAnimal(AppSession.ServiceMode, CurrentItem.Id));
+
+            }
 
             CurrentObservation = new AnimalObservation();
         }

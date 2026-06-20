@@ -374,12 +374,17 @@ public partial class PlantingsViewModel : ViewModelBase
             CurrentObservation.Planting = CurrentItem;
             CurrentObservation.AsOfDate = DateTime.Today;
             CurrentObservation.CommentType!.Id = 7;
+
+            if (CurrentObservation.Comment != string.Empty)
+            {
+
+                PlantingsService.AddPlantingObservation(AppSession.ServiceMode, CurrentObservation);
+
+                PlantingObservations =
+                    new ObservableCollection<PlantingObservation>(
+                        Services.PlantingsService.GetObservationsForPlanting(AppSession.ServiceMode, CurrentItem.Id));
+            }
             
-            PlantingsService.AddPlantingObservation(AppSession.ServiceMode, CurrentObservation);
-            
-            PlantingObservations =
-                new ObservableCollection<PlantingObservation>(
-                    Services.PlantingsService.GetObservationsForPlanting(AppSession.ServiceMode, CurrentItem.Id));
 
             CurrentObservation = new PlantingObservation();
         }

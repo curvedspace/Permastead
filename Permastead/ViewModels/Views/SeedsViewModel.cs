@@ -160,12 +160,16 @@ public partial class SeedsViewModel : ViewModelBase
             CurrentObservation.SeedPacket = CurrentItem;
             CurrentObservation.AsOfDate = DateTime.Today;
             CurrentObservation.CommentType!.Id = 5;
-            
-            SeedPacketService.AddObservation(AppSession.ServiceMode, CurrentObservation);
-            
-            SeedPacketObservations =
-                new ObservableCollection<SeedPacketObservation>(
-                    Services.SeedPacketService.GetObservationsForSeedPacket(AppSession.ServiceMode, CurrentItem.Id));
+
+            if (CurrentObservation.Comment != string.Empty)
+            {
+                SeedPacketService.AddObservation(AppSession.ServiceMode, CurrentObservation);
+
+                SeedPacketObservations =
+                    new ObservableCollection<SeedPacketObservation>(
+                        Services.SeedPacketService.GetObservationsForSeedPacket(AppSession.ServiceMode,
+                            CurrentItem.Id));
+            }
 
             CurrentObservation = new SeedPacketObservation();
         }
