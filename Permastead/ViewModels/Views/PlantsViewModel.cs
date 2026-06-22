@@ -183,7 +183,7 @@ public partial class PlantsViewModel : ViewModelBase
             
             win.DataContext = vm;
             
-            win.Title = "New Planting: " + CurrentPlant!.Description;
+            win.Title = "New Planting: " + CurrentPlant.Description;
             win.Topmost = true;
             win.Width = 800;
             win.Height = 550;
