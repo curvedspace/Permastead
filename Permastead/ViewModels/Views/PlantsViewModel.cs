@@ -229,6 +229,8 @@ public partial class PlantsViewModel : ViewModelBase
         _message = _shortMessage;
         
         FilterPredicate = Search;
+        
+        if (CurrentPlant != null) GetMetaData();
     }
     
     private static bool Search(string? text, object? data)
