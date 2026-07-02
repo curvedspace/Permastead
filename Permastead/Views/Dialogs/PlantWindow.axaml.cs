@@ -44,4 +44,5 @@ public partial class PlantWindow : Window
         
         Close();
     }
+    
 }
