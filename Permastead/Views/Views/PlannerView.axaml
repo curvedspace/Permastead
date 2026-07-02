@@ -176,7 +176,7 @@
                                 Grid.Row="1">
                                 <DataGrid.Columns>
                                     <DataGridCheckBoxColumn Header="Planted?" Binding="{Binding IsPlanted}"></DataGridCheckBoxColumn>
-                                    <DataGridDatePickerColumn Header="Planting Date" Binding="{Binding StartDateString}" Width="120" IsReadOnly="False" />
+                                    <DataGridDatePickerColumn Header="Planting Date" Binding="{Binding StartDateString}" Width="120" IsReadOnly="True" />
                                     <DataGridTextColumn Header="Plant" Binding="{Binding Plant.Description}" Width="150" />
                                     <DataGridTextColumn Header="Description" Binding="{Binding SeedPacket.Description}" Width="250" />
                                     <DataGridTextColumn Header="Location" Binding="{Binding Bed.Description}" Width="250" />
@@ -188,6 +188,12 @@
                                         <MenuItem Header="Plant..." Command="{Binding PlantCurrentPlantingCommand}">
                                             <MenuItem.Icon>
                                                 <PathIcon Data="{StaticResource add_square_regular}"/>
+                                            </MenuItem.Icon>
+                                        </MenuItem>
+                                        
+                                        <MenuItem Header="Edit..." Command="{Binding EditPlantingCommand}">
+                                            <MenuItem.Icon>
+                                                <PathIcon Data="{StaticResource edit_settings_regular}"/>
                                             </MenuItem.Icon>
                                         </MenuItem>
                                         

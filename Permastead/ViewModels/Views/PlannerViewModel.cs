@@ -1,9 +1,12 @@
 using System;
 using System.Linq;
 using System.Collections.ObjectModel;
+using Avalonia.Controls;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Models;
+using Permastead.ViewModels.Dialogs;
+using Permastead.Views.Dialogs;
 using Services;
 using Ursa.Controls;
 
@@ -52,6 +55,32 @@ public partial class PlannerViewModel : ViewModelBase
     
     public WindowToastManager? ToastManager { get; set; }
 
+    [RelayCommand]
+    private void EditPlanting()
+    {
+        // open the selected planting in a window for viewing/editing
+        var plantingWindow = new PlantingWindow();
+        
+        //get the selected row in the list
+        var current = _currentPlanting;
+        if (current != null)
+        {
+            var vm = new PlantingWindowViewModel(current, null);
+            vm.ControlViewModel = new PlantingsViewModel();
+            vm.ControlViewModel.CurrentItem = _currentPlanting;
+
+            plantingWindow.DataContext = vm;
+
+            plantingWindow.Topmost = true;
+            plantingWindow.Width = 875;
+            plantingWindow.Height = 600;
+            plantingWindow.Opacity = 0.95;
+            plantingWindow.Title = "Planting - " + current.Description;
+            plantingWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+            plantingWindow.Show();
+        }
+    }
+    
     [RelayCommand]
     private void ClearPlantings()
     {
