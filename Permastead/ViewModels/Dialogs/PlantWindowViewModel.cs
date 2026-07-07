@@ -75,12 +75,17 @@ public partial class PlantWindowViewModel : ViewModelBase
 
         _plant.TagList.Clear();
 
-        foreach (var tagData in SelectedItems)
+        if (SelectedItems != null)
         {
-            _plant.TagList.Add(tagData.TagText);
-        }
             
-        _plant.SyncTags();
+            foreach (var tagData in SelectedItems)
+            {
+                _plant.TagList.Add(tagData.TagText);
+            }
+                
+            _plant.SyncTags();
+        
+        }
         rtnValue = Services.PlantService.CommitRecord(AppSession.ServiceMode, _plant);
         
         OnPropertyChanged(nameof(_plant));
