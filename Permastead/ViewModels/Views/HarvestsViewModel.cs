@@ -180,6 +180,7 @@ public partial class HarvestsViewModel : ViewModelBase
                 pres.Author = AppSession.Instance.CurrentUser;
                 pres.Name = current.Description;
                 pres.StartDate = DateTime.Today;
+                pres.Harvest = CurrentItem;
                 
                 var pvm = new PreservationViewModel();
                 pvm.CurrentItem = pres;
