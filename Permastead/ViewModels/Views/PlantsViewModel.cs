@@ -243,6 +243,7 @@ public partial class PlantsViewModel : ViewModelBase
 
     public void GetMetaData()
     {
+        //get both the plantings and starters, combine into a history
         SeedPackets = new ObservableCollection<SeedPacket>(Services.PlantingsService.GetSeedPacketForPlant(AppSession.ServiceMode, CurrentPlant.Id));
         Plantings = new ObservableCollection<Planting>(Services.PlantingsService.GetPlantingsForPlant(AppSession.ServiceMode, CurrentPlant.Id));
         
@@ -275,20 +276,30 @@ public partial class PlantsViewModel : ViewModelBase
         
         
         var sb = new StringBuilder();
-        var obs = new List<PlantingObservation>();
+        var plantHistories = new List<PlantHistory>();
         
         foreach (var pt in Plantings)
         {
-            obs.Add(new PlantingObservation() { AsOfDate = pt.StartDate, Planting = pt, Comment = " -> PLANTING: " + pt.SeedPacket.Vendor.Description + " : " + pt.Comment });
-            obs.AddRange(PlantingsService.GetObservationsForPlanting(AppSession.ServiceMode, pt.Id));
+            plantHistories.Add(new PlantHistory() { AsOfDate = pt.StartDate, Header = " -> PLANTING: " + pt.SeedPacket.Vendor.Description + " : " + pt.Bed.Description + " : " + pt.Description, Comment = pt.Comment });
+            var obs = PlantingsService.GetObservationsForPlanting(AppSession.ServiceMode, pt.Id);
+            
+            foreach (var ob in obs)
+            {
+                plantHistories.Add(new PlantHistory() {AsOfDate = ob.AsOfDate, Header = ob.Planting.Description +": " + ob.Planting.Bed.Description, Comment = ob.Comment });
+            }
+            
+        }
+        
+        foreach (var seedPacket in SeedPackets)
+        {
+            plantHistories.Add(new PlantHistory() { AsOfDate = seedPacket.StartDate, Header = seedPacket.StarterType.Description + ": " + seedPacket.Vendor.Description, Comment = seedPacket.Description});
         }
 
-        obs = obs.OrderByDescending(x=> x.AsOfDate).ToList();
+        plantHistories = plantHistories.OrderByDescending(x=> x.AsOfDate).ToList();
         
-        foreach (var o in obs)
+        foreach (var o in plantHistories)
         {
-            sb.AppendLine(o.AsOfDate.ToShortDateString() + ": (" + o.Planting.Bed.Code + ") " + o.Planting.Bed.Description + " | " +
-                          o.Planting.Description);
+            sb.AppendLine(o.AsOfDate.ToShortDateString() + ": " + o.Header);
             sb.AppendLine(o.Comment);
             sb.AppendLine();
         }
@@ -374,4 +385,11 @@ public partial class PlantsViewModel : ViewModelBase
         Result = await MessageBox.ShowAsync(_message, _title, icon: SelectedIcon, button:button);
     }
     
+}
+
+public class PlantHistory
+{
+    public DateTime AsOfDate { get; set; }
+    public string Header { get; set; }
+    public string Comment { get; set; }
 }
