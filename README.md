@@ -1,7 +1,7 @@
 # Permastead
 Local-first desktop software for managing a homestead or permaculture installation. It features observations, actions, events and inventory as well as the ability to track your plantings and seed saving over time. WARNING: this is beta software and may have breaking changes yet to come. For a more detailed introduction to the application, check out the [wiki](https://github.com/curvedspace/Permastead/wiki).
 
-Latest Release - [v0.4.0](https://github.com/curvedspace/Permastead/releases/tag/v0.4.0-beta)
+Latest Release - [v0.5.0](https://github.com/curvedspace/Permastead/releases/tag/v0.5.0-beta)
 
 - Home - shows a summary of your last 30 days of activity and a daily quote.
 - Dashboard - shows a yearly view of your summary activity.
