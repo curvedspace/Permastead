@@ -1463,6 +1463,40 @@ public static class DbMigrationService
             Console.WriteLine(e);
         }
         
+        // MeasurementType
+        try
+        {
+            using (IDbConnection connection = new NpgsqlConnection(serverConnectionString))
+            {
+                var sql = "SELECT * FROM MeasurementType;";
+                connection.Open();
+
+                using (IDbCommand command = connection.CreateCommand())
+                {
+                    command.CommandText = sql;
+                    var dr = command.ExecuteReader();
+
+                    while (dr.Read())
+                    {
+                        var pgSql = @"INSERT INTO MeasurementType VALUES(" + dr[0].ToString() + "," +
+                                    ConvertToText(dr,1) + "," +
+                                    ConvertToText(dr,2) + "," +
+                                    ConvertToDateTime(dr,3) + "," +
+                                    ConvertToDateTime(dr,4) + "," +
+                                    ConvertToDateTime(dr,5) + "," +
+                                    ConvertToNumeric(dr,6) +
+                                    ")";
+                        Console.WriteLine(pgSql);
+                        RunLocalSql(localConnectionString, pgSql);
+                    }
+                }
+            }
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+        }
+        
         // Inventory
         try
         {
