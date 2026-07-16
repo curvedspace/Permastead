@@ -113,8 +113,8 @@ public static class DbMigrationService
                     {
                         var pgSql = @"INSERT INTO EventType (description,creationdate,startdate,enddate) VALUES(" + 
                                     "'" + dr[1].ToString() + "'," +
-                                    "'" + dr[2].ToString() + "'," +
-                                    "'" + dr[3].ToString() + "'," +
+                                    ConvertToDateTime(dr,2) +
+                                    ConvertToDateTime(dr,3) +
                                     ConvertToDateTime(dr,4) +
                                     ")";
                         Console.WriteLine(pgSql);
@@ -1099,8 +1099,8 @@ public static class DbMigrationService
                         var pgSql = @"INSERT INTO CommentType VALUES(" + dr[0].ToString() + "," +
                                     "'" + dr[1].ToString() + "'," +
                                     "'" + dr[2].ToString() + "'," +
-                                    "'" + dr[3].ToString() + "'," +
-                                    "'" + dr[4].ToString() + "'," +
+                                    ConvertToDateTime(dr,3) + "," +
+                                    ConvertToDateTime(dr,4) + "," +
                                     ConvertToDateTime(dr,5) + "," +
                                     dr[6].ToString() + 
                                     ")";
@@ -1135,14 +1135,14 @@ public static class DbMigrationService
                                     dr[2].ToString() + "," +
                                     dr[3].ToString() + "," +
                                     dr[4].ToString() + "," +
-                                    "'" + dr[5].ToString() + "'," +
-                                    "'" + dr[6].ToString() + "'," +
+                                    ConvertToDateTime(dr,5) + "," +
+                                    ConvertToDateTime(dr,6) + "," +
                                     ConvertToDateTime(dr,7) + "," +
                                     dr[8].ToString() + "," +
                                     ConvertToBoolean(dr,9) + "," +
                                     dr[10].ToString() + "," +
-                                    "'" + dr[11].ToString() + "'," +
-                                    "'" + dr[12].ToString() + "'," +
+                                    ConvertToDateTime(dr,11) + "," +
+                                    ConvertToDateTime(dr,12) + "," +
                                     ConvertToDateTime(dr,13) + "," +
                                     ConvertToDateTime(dr,14) + 
                                     ")";
@@ -1174,8 +1174,8 @@ public static class DbMigrationService
                     {
                         var pgSql = @"INSERT INTO EventType VALUES(" + dr[0].ToString() + "," +
                                     "'" + dr[1].ToString() + "'," +
-                                    "'" + dr[2].ToString() + "'," +
-                                    "'" + dr[3].ToString() + "'," +
+                                    ConvertToDateTime(dr,2) + "," +
+                                    ConvertToDateTime(dr,3) + "," +
                                     ConvertToDateTime(dr,4) +
                                     ")";
                         Console.WriteLine(pgSql);
@@ -1207,8 +1207,8 @@ public static class DbMigrationService
                         var pgSql = @"INSERT INTO FeedSource VALUES(" + dr[0].ToString() + "," +
                                     "'" + dr[1].ToString() + "'," +
                                     "'" + dr[2].ToString() + "'," +
-                                    "'" + dr[3].ToString() + "'," +
-                                    "'" + dr[4].ToString() + "'," +
+                                    ConvertToDateTime(dr,3) + "," +
+                                    ConvertToDateTime(dr,4) + "," +
                                     ConvertToDateTime(dr,5) +
                                     ")";
                         Console.WriteLine(pgSql);
@@ -1241,8 +1241,8 @@ public static class DbMigrationService
                                     "'" + dr[1].ToString() + "'," +
                                     "'" + dr[2].ToString() + "'," +
                                     dr[3].ToString() + "," +
-                                    "'" + dr[4].ToString() + "'," +
-                                    "'" + dr[5].ToString() + "'," +
+                                    ConvertToDateTime(dr,4) + "," +
+                                    ConvertToDateTime(dr,5) + "," +
                                     ConvertToDateTime(dr,6) +
                                     ")";
                         Console.WriteLine(pgSql);
@@ -1278,8 +1278,8 @@ public static class DbMigrationService
                                     dr[4].ToString() + "," +
                                     dr[5].ToString() + "," +
                                     dr[6].ToString() + "," +
-                                    ConvertToText(dr,7) + "," +
-                                    ConvertToText(dr,8) + "," +
+                                    ConvertToDateTime(dr,7) + "," +
+                                    ConvertToDateTime(dr,8) + "," +
                                     ConvertToDateTime(dr,9) +
                                     ")";
                         Console.WriteLine(pgSql);
@@ -1312,8 +1312,8 @@ public static class DbMigrationService
                                     ConvertToText(dr,1) + "," +
                                     ConvertToText(dr,2) + "," +
                                     dr[3].ToString() + "," +
-                                    "'" + dr[4].ToString() + "'," +
-                                    "'" + dr[5].ToString() + "'," +
+                                    ConvertToDateTime(dr,4) + "," +
+                                    ConvertToDateTime(dr,5) + "," +
                                     ConvertToDateTime(dr,6) +
                                     ")";
                         Console.WriteLine(pgSql);
@@ -1414,8 +1414,8 @@ public static class DbMigrationService
                     {
                         var pgSql = @"INSERT INTO InventoryGroup VALUES(" + dr[0].ToString() + "," +
                                     ConvertToText(dr,1) + "," +
-                                    ConvertToText(dr,2) + "," +
-                                    ConvertToText(dr,3) + "," +
+                                    ConvertToDateTime(dr,2) + "," +
+                                    ConvertToDateTime(dr,3) + "," +
                                     ConvertToDateTime(dr,4) + "," +
                                     ConvertToNumeric(dr,5) +
                                     ")";
@@ -1447,8 +1447,8 @@ public static class DbMigrationService
                     {
                         var pgSql = @"INSERT INTO InventoryType VALUES(" + dr[0].ToString() + "," +
                                     ConvertToText(dr,1) + "," +
-                                    ConvertToText(dr,2) + "," +
-                                    ConvertToText(dr,3) + "," +
+                                    ConvertToDateTime(dr,2) + "," +
+                                    ConvertToDateTime(dr,3) + "," +
                                     ConvertToDateTime(dr,4) + "," +
                                     ConvertToNumeric(dr,5) +
                                     ")";
@@ -1560,8 +1560,8 @@ public static class DbMigrationService
                         var pgSql = @"INSERT INTO Observation " + 
                                     "(comment,creationdate,startdate,enddate,commenttypeid,authorid)  VALUES(" + 
                                     ConvertToText(dr,1) + "," +
-                                    ConvertToText(dr,2) + "," +
-                                    ConvertToText(dr,3) + "," +
+                                    ConvertToDateTime(dr,2) + "," +
+                                    ConvertToDateTime(dr,3) + "," +
                                     ConvertToDateTime(dr,4) + "," +
                                     ConvertToNumeric(dr,5) + "," +
                                     ConvertToNumeric(dr,6) +
@@ -1635,8 +1635,8 @@ public static class DbMigrationService
                         var pgSql = @"INSERT INTO PersonObservation VALUES(" + dr[0].ToString() + "," +
                                     ConvertToNumeric(dr,1) + "," +
                                     ConvertToText(dr,2) + "," +
-                                    ConvertToText(dr,3) + "," +
-                                    ConvertToText(dr,4) + "," +
+                                    ConvertToDateTime(dr,3) + "," +
+                                    ConvertToDateTime(dr,4) + "," +
                                     ConvertToDateTime(dr,5) + "," +
                                     ConvertToNumeric(dr,6) + "," +
                                     ConvertToNumeric(dr,7) + 
@@ -1671,9 +1671,9 @@ public static class DbMigrationService
                                     ConvertToNumeric(dr,0) + "," +
                                     ConvertToText(dr,1) + "," +
                                     ConvertToText(dr,2) + "," +
-                                    ConvertToText(dr,3) + "," +
+                                    ConvertToDateTime(dr,3) + "," +
                                     ConvertToDateTime(dr,4) + "," +
-                                    ConvertToText(dr,5) + "," +
+                                    ConvertToDateTime(dr,5) + "," +
                                     ConvertToText(dr,6) + "," +
                                     ConvertToText(dr,7) + "," +
                                     ConvertToText(dr,8) + "," +
@@ -1995,8 +1995,8 @@ public static class DbMigrationService
                         var pgSql = @"INSERT INTO Seasonality VALUES(" + dr[0].ToString() + "," +
                                     ConvertToText(dr,1) + "," +
                                     ConvertToText(dr,2) + "," +
-                                    ConvertToText(dr,3) + "," +
-                                    ConvertToText(dr,4) + "," +
+                                    ConvertToDateTime(dr,3) + "," +
+                                    ConvertToDateTime(dr,4) + "," +
                                     ConvertToDateTime(dr,5) + "," +
                                     ConvertToNumeric(dr,6) + 
                                     ")";
@@ -2108,8 +2108,8 @@ public static class DbMigrationService
                         var pgSql = @"INSERT INTO Settings VALUES(" + 
                                     ConvertToText(dr,0) + "," +
                                     ConvertToText(dr,1) + "," +
-                                    ConvertToText(dr,2) + "," +
-                                    ConvertToText(dr,3) + 
+                                    ConvertToDateTime(dr,2) + "," +
+                                    ConvertToDateTime(dr,3) + 
                                     ")";
                         Console.WriteLine(pgSql);
                         RunLocalSql(localConnectionString, pgSql);
@@ -2176,12 +2176,12 @@ public static class DbMigrationService
                                     ConvertToNumeric(dr,2) + "," +
                                     ConvertToNumeric(dr,3) + "," +
                                     ConvertToNumeric(dr,4) + "," +
-                                    ConvertToText(dr,5) + "," +
-                                    ConvertToText(dr,6) + "," +
+                                    ConvertToDateTime(dr,5) + "," +
+                                    ConvertToDateTime(dr,6) + "," +
                                     ConvertToNumeric(dr,7) + "," +
-                                    ConvertToText(dr,8) + "," +
+                                    ConvertToDateTime(dr,8) + "," +
                                     ConvertToNumeric(dr,9) + "," +
-                                    ConvertToText(dr,10) +  
+                                    ConvertToDateTime(dr,10) +  
                                     ")";
                         Console.WriteLine(pgSql);
                         RunLocalSql(localConnectionString, pgSql);
@@ -2211,8 +2211,8 @@ public static class DbMigrationService
                     {
                         var pgSql = @"INSERT INTO ToDoStatus VALUES(" + dr[0].ToString() + "," +
                                     ConvertToText(dr,1) + "," +
-                                    ConvertToText(dr,2) + "," +
-                                    ConvertToText(dr,3) + "," +
+                                    ConvertToDateTime(dr,2) + "," +
+                                    ConvertToDateTime(dr,3) + "," +
                                     ConvertToDateTime(dr,4) +
                                     ")";
                         Console.WriteLine(pgSql);
@@ -2243,8 +2243,8 @@ public static class DbMigrationService
                     {
                         var pgSql = @"INSERT INTO ToDoType VALUES(" + dr[0].ToString() + "," +
                                     ConvertToText(dr,1) + "," +
-                                    ConvertToText(dr,2) + "," +
-                                    ConvertToText(dr,3) + "," +
+                                    ConvertToDateTime(dr,2) + "," +
+                                    ConvertToDateTime(dr,3) + "," +
                                     ConvertToDateTime(dr,4) +
                                     ")";
                         Console.WriteLine(pgSql);
@@ -2277,8 +2277,8 @@ public static class DbMigrationService
                                     ConvertToText(dr,1) + "," +
                                     ConvertToText(dr,2) + "," +
                                     ConvertToNumeric(dr,3) + "," +
-                                    ConvertToText(dr,4) + "," +
-                                    ConvertToText(dr,5) + "," +
+                                    ConvertToDateTime(dr,4) + "," +
+                                    ConvertToDateTime(dr,5) + "," +
                                     ConvertToDateTime(dr,6) +
                                     ")";
                         Console.WriteLine(pgSql);

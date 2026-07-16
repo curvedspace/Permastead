@@ -786,9 +786,9 @@ namespace DataAccess.Local
 			DROP TABLE IF EXISTS Harvest;
 			CREATE TABLE Harvest (
 				Id INTEGER PRIMARY KEY,
-				Description text NOT NULL,
 				HarvestTypeId INTEGER NOT NULL,
 				HarvestEntityId INTEGER NOT NULL,
+				Description text NOT NULL,
 				Measurement INTEGER NOT NULL,
 				MeasurementTypeId INTEGER NOT NULL,
 				Comment text NULL,
