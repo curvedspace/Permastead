@@ -338,8 +338,26 @@ public static class ScoreBoardService
                         if (!ToDoService.DoesToDoExist(mode, e.Description))
                         {
                             var t = new ToDo();
-                            t.Assignee = new Person(1);
-                            t.Assigner = new Person(1);
+
+                            // check for an assignee / assigner from the event. Use default if none found
+                            if (e.AssigneeId == 0)
+                            {
+                                t.Assignee = new Person(1);
+                            }
+                            else
+                            {
+                                t.Assignee = e.Assignee;
+                            }
+                            
+                            if (e.AssignerId == 0)
+                            {
+                                t.Assigner = new Person(1);
+                            }
+                            else
+                            {
+                                t.Assigner = e.Assigner;
+                            }
+                            
                             t.Description = e.Description;
                             t.CreationDate = DateTime.Now;
                             t.DueDate = e.NextDate.AddDays(e.WarningDays);

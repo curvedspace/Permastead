@@ -1,4 +1,5 @@
 ﻿
+using System.ComponentModel;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 
@@ -185,7 +186,66 @@ namespace Permastead.ViewModels
         private void SetupView(ToolbarViews view)
         {
             CurrentView = Views[(int)view];
-            CurrentViewName = view.ToString(); 
+            var current = view.ToString();
+
+            switch (current)
+            {
+                case "Home":
+                    CurrentViewName = "Home - details on the past 30 days";
+                    break;
+                case "Actions":
+                    CurrentViewName = "Actions - your current TODO list";
+                    break;
+                case "Planner":
+                    CurrentViewName = "Planner - plan your gardens ahead of time";
+                    break;
+                case "Observations":
+                    CurrentViewName = "Observations - your own journal";
+                    break;
+                case "Procedures":
+                    CurrentViewName = "Procedures - store instructions, procedures, other text data";
+                    break;
+                case "Weather":
+                    CurrentViewName = "Weather - local weather forecast from wttr";
+                    break;
+                case "People":
+                    CurrentViewName = "People - contact data for your network";
+                    break;
+                case "Cycles":
+                    CurrentViewName = "Cycles - a visual representation of time cycles ";
+                    break;
+                case "Dashboard":
+                    CurrentViewName = "Dashboard - visual representation of yearly data ";
+                    break;
+                case "Plants":
+                    CurrentViewName = "Plants - your own plant database ";
+                    break;
+                case "Plantings":
+                    CurrentViewName = "Plantings - what you have planted and where ";
+                    break;
+                case "Seeds":
+                    CurrentViewName = "Starters - seeds and purchased plants ";
+                    break;
+                case "Animals":
+                    CurrentViewName = "Animals - livestock and pets ";
+                    break;
+                case "Harvests":
+                    CurrentViewName = "Harvests - what you have harvested and when ";
+                    break;
+                case "Preservations":
+                    CurrentViewName = "Preservations - food and medicine preservations ";
+                    break;
+                case "Inventory":
+                    CurrentViewName = "Inventory - a list of what you currently own ";
+                    break;
+                case "Finder":
+                    CurrentViewName = "Finder - search for keywords in your data ";
+                    break;
+                default:
+                    CurrentViewName = current;
+                    break;
+            }
+            
             
             AlertCount = AppSession.Instance.AlertManager.Count;
             LevelProgress = ScoreBoard.LevelProgress *  100;
