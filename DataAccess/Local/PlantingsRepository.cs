@@ -383,20 +383,16 @@ public static class PlantingsRepository
     {
         var rtnValue = false;
 
-        var sql = "UPDATE PlantingObservation SET Comment = @Comment  " +
-                  "WHERE  id = @Id; ";
+        var sqlQuery = "UPDATE PlantingObservation SET Comment = @Comment  " +
+                       "WHERE  id = @Id; ";
 
         using (var connection = new SqliteConnection(connectionString))
         {
             connection.Open();
 
-            using (var command = connection.CreateCommand())
+            using (IDbConnection db = new SqliteConnection(DataConnection.GetLocalDataSource()))
             {
-                command.CommandText = sql;
-                command.Parameters.AddWithValue(":id", obs.Id);
-                command.Parameters.AddWithValue(":comment", obs.Comment);
-
-                rtnValue = (command.ExecuteNonQuery() == 1);
+                return (db.Execute(sqlQuery, obs) == 1);
             }
         }
 
