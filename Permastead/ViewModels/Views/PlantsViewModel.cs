@@ -65,6 +65,8 @@ public partial class PlantsViewModel : ViewModelBase
     
     [ObservableProperty] private string _searchText = "";
     
+    [ObservableProperty] private string _locations = "N/A";
+    
     //message box data
     private readonly string _shortMessage = "Are you sure you want to delete this plant?";
     private string _message;
@@ -255,11 +257,33 @@ public partial class PlantsViewModel : ViewModelBase
         
         // calc the success rate
         long successCount = 0;
+        var plantLocations = new List<string>();
+        
         foreach (var planting in Plantings)
         {
             if (planting.State.Code != "DEAD") successCount++;   
+            
+            // build locations string
+            var locationDescription = planting.Bed.Description + " (" + planting.StartDate.ToShortDateString() + ")";
+            if (!plantLocations.Contains(locationDescription) && planting.Bed.Description != "" & planting.IsActive)
+            {
+                plantLocations.Add(locationDescription);
+            }
         }
 
+        Locations = "None  ";
+        if (plantLocations.Count > 0)
+        {
+            Locations = "";
+            foreach (var loc in plantLocations)
+                Locations = Locations + loc + ", ";
+        }
+
+        if (Locations.Length > 3)
+        {
+            Locations = Locations.Substring(0, Locations.Length - 2);
+        }
+        
         if (PlantingsCount > 0)
             SuccessRate = 100.0 * ((double)successCount / (double)PlantingsCount);
         else
