@@ -2,7 +2,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="500"
+        mc:Ignorable="d" d:DesignWidth="850" d:DesignHeight="500"
         xmlns:vm="using:Permastead.ViewModels.Dialogs"
         x:Class="Permastead.Views.Dialogs.PlantingWizard"
         x:DataType="vm:PlantingWizardViewModel"
@@ -31,7 +31,7 @@
         <CalendarDatePicker Grid.Row="0" Grid.Column="3" Margin="10" Name = "StartDate" SelectedDate="{Binding CurrentPlanting.StartDate, Mode=TwoWay}">
         </CalendarDatePicker>
         
-        <TextBlock Grid.Row="1" Grid.Column="0" Margin="10,10,10,10">Description:</TextBlock>
+        <TextBlock Grid.Row="1" Grid.Column="0" Margin="10,15,10,10">Description:</TextBlock>
         <TextBox Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" Text="{Binding ControlViewModel.CurrentItem.Description}" Margin="10,10,10,10"></TextBox>
         
         <TextBlock Grid.Row="2" Grid.Column="0" Margin="15">Plant:</TextBlock>

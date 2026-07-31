@@ -70,7 +70,7 @@ public partial class PlantingWizard : Window
         {
             vm.CurrentPlanting.Plant = vm.CurrentPlant;
             vm.CurrentPlanting.SeedPacket.Code = vm.CurrentPlant.Code;
-            vm.CurrentPlanting.SeedPacket.Description = vm.CurrentPlant.Description;
+            vm.CurrentPlanting.SeedPacket.Description = vm.ControlViewModel.CurrentItem.Description;
             vm.CurrentPlanting.SeedPacket.StartDate = DateTime.UtcNow;
             vm.CurrentPlanting.SeedPacket.EndDate = DateTime.MaxValue;
             vm.CurrentPlanting.SeedPacket.Author.Id = AppSession.Instance.CurrentUser.Id;
@@ -140,6 +140,9 @@ public partial class PlantingWizard : Window
                 }
             }
         }
+        
+        //give the planting the name from the user's input
+        vm.CurrentPlanting.Description = vm.ControlViewModel.CurrentItem.Description;
         
         //finally commit the planting record
         Services.PlantingsService.CommitRecord(AppSession.ServiceMode, vm.CurrentPlanting);
