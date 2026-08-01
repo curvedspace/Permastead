@@ -42,6 +42,9 @@ public partial class InventoryViewModel: ViewModelBase
     [ObservableProperty] 
     private bool _showObservations;
     
+    [ObservableProperty] 
+    private bool _activeOnly = true;
+    
     [ObservableProperty]
     private string _searchText = "";
     
@@ -272,13 +275,27 @@ public partial class InventoryViewModel: ViewModelBase
             
             if (string.IsNullOrEmpty(caseAdjustedFilterText))
             {
-                if (_forSaleOnly)
+                if (ActiveOnly)
                 {
-                    if (inv.ForSale) _inventory.Add(inv);
+                    if (_forSaleOnly && inv.Quantity > 0)
+                    {
+                        if (inv.ForSale) _inventory.Add(inv);
+                    }
+                    else
+                    {
+                        if (inv.Quantity > 0) _inventory.Add(inv);
+                    }
                 }
                 else
                 {
-                    _inventory.Add(inv);
+                    if (_forSaleOnly)
+                    {
+                        if (inv.ForSale) _inventory.Add(inv);
+                    }
+                    else
+                    { 
+                        _inventory.Add(inv);
+                    }
                 }
             }
             else
@@ -290,13 +307,27 @@ public partial class InventoryViewModel: ViewModelBase
                     inv.Tags.ToLowerInvariant().Contains(caseAdjustedFilterText) ||
                     inv.InventoryType.ToLowerInvariant().Contains(caseAdjustedFilterText))
                 {
-                    if (_forSaleOnly)
+                    if (ActiveOnly)
                     {
-                        if (inv.ForSale) _inventory.Add(inv);
+                        if (_forSaleOnly && inv.Quantity > 0)
+                        {
+                            if (inv.ForSale) _inventory.Add(inv);
+                        }
+                        else
+                        {
+                            if (inv.Quantity > 0)_inventory.Add(inv);
+                        }
                     }
                     else
                     {
-                        _inventory.Add(inv);
+                        if (_forSaleOnly)
+                        {
+                            if (inv.ForSale) _inventory.Add(inv);
+                        }
+                        else
+                        {
+                            _inventory.Add(inv);
+                        }
                     }
                 }
             }
