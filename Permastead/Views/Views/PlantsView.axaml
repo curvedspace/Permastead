@@ -243,24 +243,24 @@
                 <TextBlock Grid.Row="0" Grid.Column="5" Margin="20,55,20,20">Description:</TextBlock>
                 <TextBox Grid.Row="0" Grid.Column="6" Grid.ColumnSpan="3"  Text="{Binding CurrentPlant.Description }" Margin="20,45,20,35"></TextBox>
                 
-                <TextBlock Grid.Row="1" Grid.Column="1" Margin="20,35,10,10">Seeds:</TextBlock>
-                <TextBlock Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="1"  Text="{Binding SeedsCount }" Margin="20,35,20,35"></TextBlock>
+                <TextBlock Grid.Row="2" Grid.Column="1" Margin="20,35,10,10">Seeds:</TextBlock>
+                <TextBlock Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="1"  Text="{Binding SeedsCount }" Margin="20,35,20,35"></TextBlock>
     
-                <Label Grid.Row="1" Grid.Column="3" Margin="20,35,10,10">Plantings: </Label>
-                <TextBlock Grid.Row="1" Grid.Column="4" Grid.ColumnSpan="1" Margin="20,37,20,35" Text="{Binding PlantingsCount}"></TextBlock>
+                <Label Grid.Row="2" Grid.Column="3" Margin="20,35,10,10">Plantings: </Label>
+                <TextBlock Grid.Row="2" Grid.Column="4" Grid.ColumnSpan="1" Margin="20,37,20,35" Text="{Binding PlantingsCount}"></TextBlock>
                 
                 <Label Grid.Row="1" Grid.Column="5" Margin="20,35,10,10">Family: </Label>
                 <TextBox Grid.Row="1" Grid.Column="6" Grid.ColumnSpan="3" Margin="20,35,20,35" Text="{Binding CurrentPlant.Family}"></TextBox>
                 
-                <Label Grid.Row="2" Grid.Column="1" Margin="20,25,20,20">Start Date:</Label>
-                <CalendarDatePicker Grid.Row="2" Grid.Column="2" Name = "EndDate" Margin="20,20,20,20" SelectedDate="{Binding CurrentPlant.StartDate, Mode=TwoWay}">
+                <Label Grid.Row="1" Grid.Column="1" Margin="20,35,20,20">Start Date:</Label>
+                <CalendarDatePicker Grid.Row="1" Grid.Column="2" Name = "EndDate" Margin="20,20,20,20" SelectedDate="{Binding CurrentPlant.StartDate, Mode=TwoWay}">
                 </CalendarDatePicker>
     
-                <Label Grid.Row="2" Grid.Column="3" Margin="20,25,20,20">End Date:</Label>
-                <CalendarDatePicker Grid.Row="2" Grid.Column="4" Name = "LastTrigger" Margin="10" SelectedDate="{Binding CurrentPlant.EndDate, Mode=TwoWay}">
+                <Label Grid.Row="1" Grid.Column="3" Margin="20,35,20,20">End Date:</Label>
+                <CalendarDatePicker Grid.Row="1" Grid.Column="4" Name = "LastTrigger" Margin="10" SelectedDate="{Binding CurrentPlant.EndDate, Mode=TwoWay}">
                 </CalendarDatePicker>
                 
-                <Label Grid.Row="2" Grid.Column="5" Margin="20,25,02,20">Success Rate: </Label>
+                <Label Grid.Row="2" Grid.Column="5" Margin="20,35,02,20">Success Rate: </Label>
                 <ProgressBar Grid.Row="2" Grid.Column="6" Grid.ColumnSpan="5" Margin="30" Value="{Binding SuccessRate}" ShowProgressText="True">
                 </ProgressBar>
     
