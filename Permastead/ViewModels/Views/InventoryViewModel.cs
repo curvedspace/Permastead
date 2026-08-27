@@ -264,7 +264,7 @@ public partial class InventoryViewModel: ViewModelBase
         InventoryGroups = new ObservableCollection<InventoryGroup>(Services.InventoryGroupService.GetAllInventoryGroups(AppSession.ServiceMode));
         InventoryTypes = new ObservableCollection<InventoryType>(Services.InventoryTypeService.GetAllInventoryTypes(AppSession.ServiceMode));
         
-        var invList = Services.InventoryService.GetAllInventory(AppSession.ServiceMode);
+        var invList = Services.InventoryService.GetAllInventory(AppSession.ServiceMode).OrderByDescending(x => x.StartDate);
         var caseAdjustedFilterText = filterText.Trim().ToLowerInvariant();
 
         foreach (var inv in invList)
