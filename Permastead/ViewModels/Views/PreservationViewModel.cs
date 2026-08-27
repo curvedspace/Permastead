@@ -115,6 +115,8 @@ public partial class PreservationViewModel : ViewModelBase
                     ("Units", x => x.Units.Description),
                 new TextColumn<FoodPreservation, string>
                     ("End Date", x => x.EndDateString),
+                new TextColumn<FoodPreservation, long>
+                    ("Days Left", x => x.DaysLeft, GridLength.Auto,centered),
                 new TextColumn<FoodPreservation, string>
                     ("Author", x => x.Author!.FullName()),
                 new TextColumn<FoodPreservation, string>
