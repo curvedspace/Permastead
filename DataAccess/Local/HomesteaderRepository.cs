@@ -988,6 +988,8 @@ namespace DataAccess.Local
             q = new Quote { Description = "I came to agriculture through architecture. Designing with plants, there’s a certain artistry to it.", AuthorName = "Andrew Millison" };
             QuoteRepository.Insert(DataConnection.GetLocalDataSource(), q);
             
+            q = new Quote { Description = "If you take one step towards nature, nature will take ten steps toward you.", AuthorName = "Stephan Sobkowiak" };
+            QuoteRepository.Insert(DataConnection.GetLocalDataSource(), q);
             
             #endregion
             
