@@ -2171,6 +2171,9 @@ namespace DataAccess.Local
             st = new StarterType() { Code = "SAPL", Description = "Sapling" };
             StarterTypeRepository.Insert(st);
             
+            st = new StarterType() { Code = "VOL", Description = "Volunteer" };
+            StarterTypeRepository.Insert(st);
+            
             #endregion
             
             #region AnimalTypes
