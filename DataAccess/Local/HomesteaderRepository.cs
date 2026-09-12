@@ -991,6 +991,21 @@ namespace DataAccess.Local
             q = new Quote { Description = "If you take one step towards nature, nature will take ten steps toward you.", AuthorName = "Stephan Sobkowiak" };
             QuoteRepository.Insert(DataConnection.GetLocalDataSource(), q);
             
+            q = new Quote { Description = "The best fighter is never angry.", AuthorName = "Lao Tzu" };
+            QuoteRepository.Insert(DataConnection.GetLocalDataSource(), q);
+            
+            q = new Quote { Description = "Nature does not hurry, yet everything is accomplished.", AuthorName = "Lao Tzu" };
+            QuoteRepository.Insert(DataConnection.GetLocalDataSource(), q);
+            
+            q = new Quote { Description = "Act without expectation.", AuthorName = "Lao Tzu" };
+            QuoteRepository.Insert(DataConnection.GetLocalDataSource(), q);
+            
+            q = new Quote { Description = "Knowledge is a treasure, but practice is the key to it.", AuthorName = "Lao Tzu" };
+            QuoteRepository.Insert(DataConnection.GetLocalDataSource(), q);
+            
+            q = new Quote { Description = "I have just three things to teach: simplicity, patience, compassion. These three are your greatest treasures.", AuthorName = "Lao Tzu" };
+            QuoteRepository.Insert(DataConnection.GetLocalDataSource(), q);
+            
             #endregion
             
             #region Settings
