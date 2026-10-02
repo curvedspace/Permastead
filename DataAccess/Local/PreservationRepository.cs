@@ -157,7 +157,7 @@ public class PreservationRepository
             {
                 string sqlQuery = "UPDATE Preservation SET Description = :description, StartDate = :startDate, EndDate = :endDate, Measurement = :measurement, Rating = :rating, " +
                                   "MeasurementTypeId = :measurementTypeId, Comment = :comment, AuthorId = :authorId, HarvestId = :harvestId, PreservationTypeId = :preservationTypeId, " + 
-                                  "PreservationStatusId = :preservationStatusId, " + 
+                                  "PreservationStatusId = :preservationStatusId " + 
                                   "WHERE Id = :id;";
 
                 connection.Open();
