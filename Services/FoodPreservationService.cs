@@ -38,6 +38,22 @@ public class FoodPreservationService
         return items;
     }
     
+    public static List<PreservationStatus> GetAllPreservationStatuses(ServiceMode mode)
+    {
+        var items = new List<PreservationStatus>();
+
+        if (mode == ServiceMode.Local)
+        {
+            items = DataAccess.Local.PreservationStatusRepository.GetAll(DataConnection.GetLocalDataSource());
+        }
+        else
+        {
+            items = DataAccess.Server.PreservationStatusRepository.GetAll(DataConnection.GetServerConnectionString());
+        }
+
+        return items;
+    }
+    
     public static bool CommitRecord(ServiceMode mode, FoodPreservation item)
     {
         bool rtnValue = false;

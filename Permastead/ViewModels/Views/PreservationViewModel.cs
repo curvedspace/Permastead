@@ -106,7 +106,9 @@ public partial class PreservationViewModel : ViewModelBase
                 new TextColumn<FoodPreservation, string>
                     ("Harvest", x => x.Harvest.Description),
                 new TextColumn<FoodPreservation, string>
-                    ("Harvest Type", x => x.PreservationType!.Description),
+                    ("Type", x => x.PreservationType!.Description),
+                new TextColumn<FoodPreservation, string>
+                    ("Status", x => x.PreservationStatus!.Description),
                 new TextColumn<FoodPreservation, long>
                     ("Days", x => x.DaysInProgress, GridLength.Auto,centered),
                 new TextColumn<FoodPreservation, long>
@@ -117,6 +119,8 @@ public partial class PreservationViewModel : ViewModelBase
                     ("End Date", x => x.EndDateString),
                 new TextColumn<FoodPreservation, long>
                     ("Days Left", x => x.DaysLeft, GridLength.Auto,centered),
+                new TextColumn<FoodPreservation, decimal>
+                    ("Rating", x => x.Rating),
                 new TextColumn<FoodPreservation, string>
                     ("Author", x => x.Author!.FullName()),
                 new TextColumn<FoodPreservation, string>
@@ -184,7 +188,7 @@ public partial class PreservationViewModel : ViewModelBase
 
             preservationWindow.Topmost = true;
             preservationWindow.Width = 800;
-            preservationWindow.Height = 500;
+            preservationWindow.Height = 550;
             preservationWindow.Opacity = 0.95;
             preservationWindow.Title = "Preservation - " + current.Name;
             preservationWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;
@@ -214,7 +218,7 @@ public partial class PreservationViewModel : ViewModelBase
 
             preservationWindow.Topmost = true;
             preservationWindow.Width = 800;
-            preservationWindow.Height = 500;
+            preservationWindow.Height = 550;
             preservationWindow.Opacity = 0.95;
             preservationWindow.Title = "New Preservation";
             preservationWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;

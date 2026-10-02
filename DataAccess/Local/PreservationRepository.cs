@@ -16,19 +16,21 @@ public class PreservationRepository
 
             string sqlQuery = "select p.id, p.description, p.creationdate, p.startdate, p.enddate, p.rating, p.measurement, " +
             "p.measurementtypeid, m.code, m.description, p.comment, p.preservationtypeid,  " +
-            "pt.description, p.authorid, p2.firstname, p2.lastname, p.harvestid, h.description  " +
-            "from preservation p, preservationtype pt, measurementtype m, person p2, harvest h  " +
+            "pt.description, p.authorid, p2.firstname, p2.lastname, p.harvestid, h.description, p.preservationstatusid, ps.description " +
+            "from preservation p, preservationtype pt, measurementtype m, person p2, harvest h, preservationstatus ps  " +
             "where p.measurementtypeid = m.id  " +
             "and p.preservationtypeid = pt.id  " +
+            "and p.preservationstatusid = ps.id  " +
             "and p.authorid = p2.id  " +
             "and p.harvestid = h.id  " +
             "union  " +
             "select p.id, p.description, p.creationdate, p.startdate, p.enddate, p.rating, p.measurement,  " +
             "p.measurementtypeid, m.code, m.description, p.comment, p.preservationtypeid,  " +
-            "pt.description, p.authorid, p2.firstname, p2.lastname, p.harvestid, 'Unavailable'  " +
-            "from preservation p, preservationtype pt, measurementtype m, person p2  " +
+            "pt.description, p.authorid, p2.firstname, p2.lastname, p.harvestid, 'Unavailable', p.preservationstatusid, ps.description  " +
+            "from preservation p, preservationtype pt, measurementtype m, person p2, preservationstatus ps  " +
             "where p.measurementtypeid = m.id  " +
             "and p.preservationtypeid = pt.id  " +
+            "and p.preservationstatusid = ps.id  " +
             "and p.authorid = p2.id  " +
             "and (p.harvestid is null or p.harvestid = 0)";
 
@@ -83,6 +85,12 @@ public class PreservationRepository
                         
                         item.Harvest.Description = dr[17].ToString();
                         
+                        if (item.PreservationStatus != null)
+                        {
+                            item.PreservationStatus.Id = Convert.ToInt64(dr[18].ToString());
+                            item.PreservationStatus.Description = dr[19].ToString()!;
+                        }
+                        
                         foodPreservations.Add(item);
                     }
                 }
@@ -105,8 +113,8 @@ public class PreservationRepository
             
             using (var connection = new SqliteConnection(connectionString))
             {
-                string sqlQuery = "INSERT INTO Preservation (PreservationTypeId, HarvestId, Description, Measurement, Rating, MeasurementTypeId, Comment, AuthorId, CreationDate, StartDate, EndDate) " +
-                                  "VALUES(:preservationTypeId, :harvestId, :description, :measurement, :rating, :measurementTypeId, :comment, :authorId, CURRENT_DATE, :startDate, :endDate);";
+                string sqlQuery = "INSERT INTO Preservation (PreservationTypeId, PreservationStatusId, HarvestId, Description, Measurement, Rating, MeasurementTypeId, Comment, AuthorId, CreationDate, StartDate, EndDate) " +
+                                  "VALUES(:preservationTypeId, :preservationStatusId, :harvestId, :description, :measurement, :rating, :measurementTypeId, :comment, :authorId, CURRENT_DATE, :startDate, :endDate);";
         
                 connection.Open();
 
@@ -123,6 +131,7 @@ public class PreservationRepository
                     command.Parameters.AddWithValue(":comment", item.Comment);
                     command.Parameters.AddWithValue(":authorId", item.Author!.Id);
                     command.Parameters.AddWithValue(":harvestId", item.HarvestId);
+                    command.Parameters.AddWithValue(":preservationStatusId", item.PreservationStatusId);
                     command.Parameters.AddWithValue(":preservationTypeId", item.PreservationTypeId);
                     
                     rtnValue = (command.ExecuteNonQuery() == 1);
@@ -147,7 +156,8 @@ public class PreservationRepository
             using (var connection = new SqliteConnection(connectionString))
             {
                 string sqlQuery = "UPDATE Preservation SET Description = :description, StartDate = :startDate, EndDate = :endDate, Measurement = :measurement, Rating = :rating, " +
-                                  "MeasurementTypeId = :measurementTypeId, Comment = :comment, AuthorId = :authorId, HarvestId = :harvestId, PreservationTypeId = :preservationTypeId " + 
+                                  "MeasurementTypeId = :measurementTypeId, Comment = :comment, AuthorId = :authorId, HarvestId = :harvestId, PreservationTypeId = :preservationTypeId, " + 
+                                  "PreservationStatusId = :preservationStatusId, " + 
                                   "WHERE Id = :id;";
 
                 connection.Open();
@@ -166,6 +176,7 @@ public class PreservationRepository
                     command.Parameters.AddWithValue(":authorId", item.Author!.Id);
                     command.Parameters.AddWithValue(":harvestId", item.HarvestId);
                     command.Parameters.AddWithValue(":preservationTypeId", item.PreservationTypeId);
+                    command.Parameters.AddWithValue(":preservationStatusId", item.PreservationStatusId);
                     command.Parameters.AddWithValue(":id", item.Id);
                     
                     rtnValue = (command.ExecuteNonQuery() == 1);

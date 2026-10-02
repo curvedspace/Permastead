@@ -263,7 +263,6 @@ public static class InventoryRepository
         try
         {
             var brands = new List<string>();
-            Inventory inv;
 
             string sqlQuery =
                 "SELECT DISTINCT(i.Brand) " +

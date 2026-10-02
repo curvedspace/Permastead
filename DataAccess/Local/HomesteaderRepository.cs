@@ -751,6 +751,15 @@ namespace DataAccess.Local
 				AuthorId INTEGER
 			);
 
+			--PRESERVATION STATUS
+			DROP TABLE IF EXISTS PreservationStatus;
+			CREATE TABLE IF NOT EXISTS PreservationStatus(
+				Id INTEGER PRIMARY KEY,
+				Description VARCHAR (2000) NOT NULL,
+				CreationDate TIMESTAMP,
+				StartDate TIMESTAMP NOT NULL,
+				EndDate TIMESTAMP
+			);
 
 			-- PRESERVATION OBSERVATION
 			DROP TABLE IF EXISTS PreservationObservation;
@@ -2236,6 +2245,18 @@ namespace DataAccess.Local
             pType = new FoodPreservationType() { Description = "Honey" };
             PreservationTypeRepository.Insert(pType);
             
+            #endregion
+            
+            #region PreservationStatus
+            
+            var pStatus = new PreservationStatus() { Description = "In Progress" };
+            PreservationStatusRepository.Insert(pStatus);
+            
+            pStatus = new PreservationStatus() { Description = "Abandoned" };
+            PreservationStatusRepository.Insert(pStatus);
+            
+            pStatus = new PreservationStatus() { Description = "Complete" };
+            PreservationStatusRepository.Insert(pStatus);
             
             #endregion
             

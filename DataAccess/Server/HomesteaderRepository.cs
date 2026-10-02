@@ -632,6 +632,16 @@ namespace DataAccess.Server
 				AuthorId INTEGER
 			);
 
+			--PRESERVATION STATUS
+			DROP TABLE IF EXISTS PreservationStatus;
+			CREATE TABLE IF NOT EXISTS PreservationStatus(
+				Id INTEGER PRIMARY KEY,
+				Description VARCHAR (2000) NOT NULL,
+				CreationDate TIMESTAMP,
+				StartDate TIMESTAMP NOT NULL,
+				EndDate TIMESTAMP
+			);
+
             -- ANIMAL
 			DROP TABLE IF EXISTS Animal;
 			CREATE TABLE IF NOT EXISTS Animal (

@@ -6,7 +6,7 @@ using Npgsql;
 
 namespace DataAccess.Server;
 
-public class PreservationRepository
+public static class PreservationRepository
 {
     public static List<FoodPreservation> GetAll(string conn)
     {
@@ -17,19 +17,21 @@ public class PreservationRepository
 
             string sqlQuery = "select p.id, p.description, p.creationdate, p.startdate, p.enddate, p.rating, p.measurement, " +
             "p.measurementtypeid, m.code, m.description, p.comment, p.preservationtypeid,  " +
-            "pt.description, p.authorid, p2.firstname, p2.lastname, p.harvestid, h.description  " +
-            "from preservation p, preservationtype pt, measurementtype m, person p2, harvest h  " +
+            "pt.description, p.authorid, p2.firstname, p2.lastname, p.harvestid, h.description, p.preservationstatusid, ps.description  " +
+            "from preservation p, preservationtype pt, measurementtype m, person p2, harvest h, preservationstatus ps  " +
             "where p.measurementtypeid = m.id  " +
             "and p.preservationtypeid = pt.id  " +
+            "and p.preservationstatusid = ps.id  " +
             "and p.authorid = p2.id  " +
             "and p.harvestid = h.id  " +
             "union  " +
             "select p.id, p.description, p.creationdate, p.startdate, p.enddate, p.rating, p.measurement,  " +
             "p.measurementtypeid, m.code, m.description, p.comment, p.preservationtypeid,  " +
-            "pt.description, p.authorid, p2.firstname, p2.lastname, p.harvestid, 'Unavailable'  " +
-            "from preservation p, preservationtype pt, measurementtype m, person p2  " +
+            "pt.description, p.authorid, p2.firstname, p2.lastname, p.harvestid, 'Unavailable', p.preservationstatusid, ps.description  " +
+            "from preservation p, preservationtype pt, measurementtype m, person p2, preservationstatus ps  " +
             "where p.measurementtypeid = m.id  " +
             "and p.preservationtypeid = pt.id  " +
+            "and p.preservationstatusid = ps.id  " +
             "and p.authorid = p2.id  " +
             "and (p.harvestid is null or p.harvestid = 0)";
 
@@ -83,6 +85,17 @@ public class PreservationRepository
                         }
                         
                         item.Harvest.Description = dr[17].ToString();
+                        
+                        if (dr[18] != DBNull.Value)
+                        {
+                            item.PreservationStatus.Id = Convert.ToInt64(dr[18].ToString());
+                        }
+                        else
+                        {
+                            item.PreservationStatus.Id = 0;
+                        }
+                        
+                        item.PreservationStatus.Description = dr[19].ToString();
                         
                         foodPreservations.Add(item);
                     }

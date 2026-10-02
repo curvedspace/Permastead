@@ -8,6 +8,10 @@ public class FoodPreservation
     
     public FoodPreservationType? PreservationType { get; set; }
     
+    public PreservationStatus? PreservationStatus { get; set; }
+    
+    public double RatingValue {get ; set;} = 0;
+    
     public long PreservationTypeId 
     { 
         get
@@ -23,11 +27,26 @@ public class FoodPreservation
         } 
     }
     
+    public long PreservationStatusId 
+    { 
+        get
+        {
+            if (PreservationStatus != null)
+            {
+                return PreservationStatus.Id;
+            }
+            else
+            {
+                return 0;
+            }
+        } 
+    }
+    
     public Harvest Harvest { get; set; }
     
     public long HarvestId => this.Harvest.Id;
     
-    public long Rating { get; set; }
+    public decimal Rating { get; set; }
     
     public long Measurement { get; set; }
     
@@ -85,6 +104,7 @@ public class FoodPreservation
         this.CreationDate = DateTime.Now;
         this.Units = new MeasurementUnit();
         this.PreservationType = new FoodPreservationType();
+        this.PreservationStatus = new PreservationStatus();
         this.Author = Person.Anonymous();
         this.Harvest = new Harvest();
         

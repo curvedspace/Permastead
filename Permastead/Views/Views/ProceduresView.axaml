@@ -79,7 +79,7 @@
                     <TextBox Text="{Binding CurrentItem.Content}"
                              Margin="20"
                              FontSize="24"
-                             Watermark="Enter the procedure text."
+                             PlaceholderText="Enter the procedure text."
                              TextWrapping="WrapWithOverflow"
                              AcceptsReturn="True"
                              AcceptsTab="True"

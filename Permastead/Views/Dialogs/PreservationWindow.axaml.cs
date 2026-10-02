@@ -3,6 +3,7 @@ using Avalonia.Controls;
 using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml;
 using Permastead.ViewModels.Dialogs;
+using Ursa.Controls;
 
 namespace Permastead.Views.Dialogs;
 
