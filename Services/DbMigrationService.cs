@@ -1862,7 +1862,8 @@ public static class DbMigrationService
                                     ConvertToNumeric(dr,8) + "," +
                                     ConvertToNumeric(dr,9) + "," +
                                     ConvertToText(dr,10) + "," +
-                                    ConvertToNumeric(dr,11) +
+                                    ConvertToNumeric(dr,11) + "," +
+                                    ConvertToNumeric(dr,12) +
                                     ")";
                         Console.WriteLine(pgSql);
                         RunLocalSql(localConnectionString, pgSql);

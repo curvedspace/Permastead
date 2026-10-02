@@ -788,7 +788,8 @@ namespace DataAccess.Local
 				AuthorId INTEGER NULL,
 				PreservationTypeId INTEGER NOT NULL,
 				Comment text NULL,
-				HarvestId INTEGER NULL
+				HarvestId INTEGER NULL,
+				PreservationStatusId INTEGER NOT NULL
 			);
 
 			-- HARVEST
