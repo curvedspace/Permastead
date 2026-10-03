@@ -8,6 +8,7 @@ using System.Windows.Input;
 using Avalonia.Controls;
 using Avalonia.Controls.Models.TreeDataGrid;
 using Avalonia.Controls.Selection;
+using Avalonia.Media;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Microsoft.Extensions.DependencyInjection.Extensions;
@@ -291,6 +292,12 @@ public partial class PlantingsViewModel : ViewModelBase
 
         PlantingCount = Plantings.Count;
         
+        var centered = new TextColumnOptions<Planting>
+        {
+            TextTrimming = TextTrimming.None,
+            TextWrapping = TextWrapping.Wrap, TextAlignment = TextAlignment.Center
+        };
+        
         PlantingsSource = new FlatTreeDataGridSource<Planting>(Plantings)
         {
             Columns =
@@ -306,11 +313,11 @@ public partial class PlantingsViewModel : ViewModelBase
                 new TextColumn<Planting, string>
                     ("Type", x => x.Plant.Description),
                 new TextColumn<Planting, decimal>
-                    ("Yield", x => x.YieldRating),
+                    ("Yield", x => x.YieldRating, GridLength.Auto,centered),
                 new TextColumn<Planting, string>
                     ("Age", x => x.Age),
                 new TextColumn<Planting, decimal>
-                    ("DTM", x => x.SeedPacket.DaysToHarvest),
+                    ("DTM", x => x.SeedPacket.DaysToHarvest, GridLength.Auto,centered),
                 new TextColumn<Planting, string>
                     ("Location", x => x.Bed.Code),
                 new TextColumn<Planting, string>

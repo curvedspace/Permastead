@@ -120,7 +120,7 @@ public partial class PreservationViewModel : ViewModelBase
                 new TextColumn<FoodPreservation, long>
                     ("Days Left", x => x.DaysLeft, GridLength.Auto,centered),
                 new TextColumn<FoodPreservation, decimal>
-                    ("Rating", x => x.Rating),
+                    ("Rating", x => x.Rating, GridLength.Auto,centered),
                 new TextColumn<FoodPreservation, string>
                     ("Author", x => x.Author!.FullName()),
                 new TextColumn<FoodPreservation, string>
