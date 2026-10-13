@@ -138,6 +138,7 @@ public partial class InventoryWindowViewModel: ViewModelBase
         {
             //set its end date to today to indicate that it has been moved to inventory
             PreservationItem.EndDate = DateTime.Now;
+            PreservationItem.PreservationStatus.Id = 3; //complete
             FoodPreservationService.CommitRecord(AppSession.ServiceMode, PreservationItem);
         }
     }
