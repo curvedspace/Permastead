@@ -36,6 +36,8 @@ public partial class DashboardViewModel : ViewModelBase
     [ObservableProperty] 
     private double[] _hrvSeries;
 
+    [ObservableProperty] private string _plantingSuccessRate = "Planting Success Rate";
+
     public IEnumerable<ISeries> Series { get; set; } 
 
     public IEnumerable<ISeries> PlantBreakdownSeries { get; set; } 
@@ -111,6 +113,8 @@ public partial class DashboardViewModel : ViewModelBase
         
     private DateTime _plantingYearEndDate;
     
+    public decimal PlantingSuccessPercentage => SuccessfulPlantings == 0 ? 0m : 100m * (decimal)(SuccessfulPlantings) /
+                                                                     (decimal)(SuccessfulPlantings + DeadPlantings);
     
     [RelayCommand]
     private void RefreshData()

@@ -16,6 +16,8 @@ public partial class DashboardView : UserControl
         // set the xaxis here, it does not work from XAML for some reason
         var vm = (DashboardViewModel)DataContext;
         MyChart.XAxes = vm.XAxes;
+        
+        SuccessRate.Content = "Planting Success Rate: " +  vm.PlantingSuccessPercentage.ToString("N2") + "%";
     }
 
     private void SelectingItemsControl_OnSelectionChanged(object? sender, SelectionChangedEventArgs e)
@@ -34,6 +36,8 @@ public partial class DashboardView : UserControl
             {
                 YearInReviewLabel.Content = "Year In Review: " + vm.PlantingYear;
             }
+            
+            SuccessRate.Content = "Planting Success Rate: " +  vm.PlantingSuccessPercentage.ToString("N2") + "%";
             
         }
         catch (Exception exception)

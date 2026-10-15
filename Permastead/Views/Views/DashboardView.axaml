@@ -30,7 +30,7 @@
         
         <!-- <StackPanel> -->
         <Grid Grid.Column="0" Grid.Row="1" ColumnDefinitions="*" RowDefinitions="Auto,*">
-            <Label Grid.Column="0" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="10">Planting Success Rate</Label>
+            <Label x:Name="SuccessRate" Grid.Column="0" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="10" Content="Planting Success Rate"></Label>
             <!-- <lvc:PieChart Grid.Column="0" Grid.Row="1" -->
             <!--               Series="{Binding PlantingSuccessSeries}" -->
             <!--               MinValue="0" -->
