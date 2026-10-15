@@ -113,8 +113,8 @@ public partial class DashboardViewModel : ViewModelBase
         
     private DateTime _plantingYearEndDate;
     
-    public decimal PlantingSuccessPercentage => SuccessfulPlantings == 0 ? 0m : 100m * (decimal)(SuccessfulPlantings) /
-                                                                     (decimal)(SuccessfulPlantings + DeadPlantings);
+    public decimal PlantingSuccessPercentage => SuccessfulPlantings == 0 ? 0m : 100m * (decimal)(SuccessfulPlantings + TotalHarvestedPlants) /
+                                                                     (decimal)(SuccessfulPlantings + DeadPlantings + TotalHarvestedPlants);
     
     [RelayCommand]
     private void RefreshData()
