@@ -119,8 +119,8 @@ public static class PreservationRepository
             
             using (var connection = new NpgsqlConnection(connectionString))
             {
-                string sqlQuery = "INSERT INTO Preservation (PreservationTypeId, HarvestId, Description, Measurement, Rating, MeasurementTypeId, Comment, AuthorId, CreationDate, StartDate, EndDate) " +
-                                  "VALUES(:preservationTypeId, :harvestId, :description, :measurement, :rating, :measurementTypeId, :comment, :authorId, CURRENT_DATE, :startDate, :endDate);";
+                string sqlQuery = "INSERT INTO Preservation (PreservationTypeId, PreservationStatusId, HarvestId, Description, Measurement, Rating, MeasurementTypeId, Comment, AuthorId, CreationDate, StartDate, EndDate) " +
+                                  "VALUES(:preservationTypeId, :preservationStatusId, :harvestId, :description, :measurement, :rating, :measurementTypeId, :comment, :authorId, CURRENT_DATE, :startDate, :endDate);";
         
                 connection.Open();
 
@@ -137,6 +137,7 @@ public static class PreservationRepository
                     command.Parameters.AddWithValue(":comment", item.Comment);
                     command.Parameters.AddWithValue(":authorId", item.Author!.Id);
                     command.Parameters.AddWithValue(":harvestId", item.HarvestId);
+                    command.Parameters.AddWithValue(":preservationStatusId", item.PreservationStatusId);
                     command.Parameters.AddWithValue(":preservationTypeId", item.PreservationTypeId);
                     
                     rtnValue = (command.ExecuteNonQuery() == 1);
@@ -161,7 +162,8 @@ public static class PreservationRepository
             using (var connection = new NpgsqlConnection(connectionString))
             {
                 string sqlQuery = "UPDATE Preservation SET Description = :description, StartDate = :startDate, EndDate = :endDate, Measurement = :measurement, Rating = :rating, " +
-                                  "MeasurementTypeId = :measurementTypeId, Comment = :comment, AuthorId = :authorId, HarvestId = :harvestId, PreservationTypeId = :preservationTypeId " + 
+                                  "MeasurementTypeId = :measurementTypeId, Comment = :comment, AuthorId = :authorId, HarvestId = :harvestId, PreservationTypeId = :preservationTypeId, " + 
+                                  "PreservationStatusId = :preservationStatusId " + 
                                   "WHERE Id = :id;";
 
                 connection.Open();
@@ -180,6 +182,7 @@ public static class PreservationRepository
                     command.Parameters.AddWithValue(":authorId", item.Author!.Id);
                     command.Parameters.AddWithValue(":harvestId", item.HarvestId);
                     command.Parameters.AddWithValue(":preservationTypeId", item.PreservationTypeId);
+                    command.Parameters.AddWithValue(":preservationStatusId", item.PreservationStatusId);
                     command.Parameters.AddWithValue(":id", item.Id);
                     
                     rtnValue = (command.ExecuteNonQuery() == 1);
