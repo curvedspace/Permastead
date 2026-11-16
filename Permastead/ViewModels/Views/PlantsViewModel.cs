@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,7 +11,7 @@ using System.Windows.Input;
 using Avalonia.Controls;
 using Avalonia.Platform;
 using Avalonia.Media.Imaging;
-
+using Common;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 
@@ -54,6 +56,9 @@ public partial class PlantsViewModel : ViewModelBase
     
     [ObservableProperty] 
     private long _plantsCount;
+    
+    [ObservableProperty] 
+    private long _totalPlantsCount;
 
     [ObservableProperty] private long _plantingsCount;
 
@@ -62,6 +67,8 @@ public partial class PlantsViewModel : ViewModelBase
     [ObservableProperty] private double _successRate;
 
     [ObservableProperty] private string _currentObservations;
+    
+    [ObservableProperty] private double _imageCoverage;
     
     [ObservableProperty] private string _searchText = "";
     
@@ -337,6 +344,7 @@ public partial class PlantsViewModel : ViewModelBase
         var myPlants = Services.PlantService.GetAllPlants(AppSession.ServiceMode);
         var caseAdjustedFilterText = filterText.Trim().ToLowerInvariant();
 
+        TotalPlantsCount = myPlants.Count;
         Plants.Clear();
         
         foreach (var p in myPlants)
@@ -363,6 +371,24 @@ public partial class PlantsViewModel : ViewModelBase
         PlantsCount = _plants.Count;
         if (CurrentPlant != null) GetMetaData();
 
+        CheckImageCoverage();
+
+    }
+
+    public void CheckImageCoverage()
+    {
+        //check the image coverage
+        var userFolder = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
+
+        if (FileUtils.DirectoryExists(userFolder + @"/.config/permastead/images/plants", false) && TotalPlantsCount > 0)
+        {
+            int count = Directory.GetFiles(userFolder + @"/.config/permastead/images/plants/").Length;
+            ImageCoverage = 100.0 * ((double)count / (double)TotalPlantsCount);
+        }
+        else
+        {
+            ImageCoverage = 0.0;
+        }
     }
 
     public void SavePlant()

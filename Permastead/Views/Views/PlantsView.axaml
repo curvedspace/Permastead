@@ -162,6 +162,11 @@
             <TextBlock Name="PlantCount" 
                        ToolTip.Tip = "The current number of active plants in the database." 
                        Text="{Binding PlantsCount , StringFormat='{}{0} total'}" Margin="20,30,20,20"></TextBlock>
+            <TextBlock Name="ImageCoverageText" 
+                       ToolTip.Tip = "The current number of active plants with an image." 
+                       Text=" Image coverage:" Margin="20,30,20,20"></TextBlock>
+            <TextBlock Name="ImageCoveragePct" 
+                       Text="{Binding ImageCoverage, StringFormat='{}{0:N2} %'}" Margin="0,30,20,20"></TextBlock>
         </WrapPanel>
     
         <!-- Panel for the view -->

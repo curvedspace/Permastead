@@ -259,6 +259,8 @@ public partial class PlantsView : UserControl
                             vm.ToastManager?.Show(new Toast("Image has been added for " + vm.CurrentPlant.Description + "."));
                         }
                     }
+                    
+                    vm.CheckImageCoverage();
                 }
             }
         }
